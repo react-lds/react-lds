@@ -1,5 +1,7 @@
 .DS_Store
 
 node_modules
-build/
-lib/*.js
+dist/*
+!dist/.git-keep
+lib/*
+!lib/.git-keep

@@ -1,10 +1,12 @@
 var path = require('path');
 
 module.exports = {
-  entry: "./misc/demo/app/main.js",
+  entry: "./src/main.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "demo.js"
+    path: path.resolve(__dirname, "lib"),
+    filename: "react-lds.js",
+    library: 'react-lds',
+    libraryTarget: 'commonjs2'
   },
   module: {
     loaders: [
@@ -15,14 +17,10 @@ module.exports = {
         query: {
           presets: ['react', 'es2015']
         }
-      },
-      {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
       }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.scss']
+    extensions: ['', '.js']
   }
 }

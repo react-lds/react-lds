@@ -1,5 +1,5 @@
 import React from "react";
-import { PageHeader } from "react-lds";
+import { PageHeader } from "../../../src/main";
 
 const PageHeaders = () => {
   return (
