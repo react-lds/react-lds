@@ -1,7 +1,13 @@
 var path = require('path');
 
 module.exports = {
-  entry: "./misc/demo/app/main.js",
+  devtool: 'eval',
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
+    './misc/demo/app/main.js',
+  ],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "demo.js"
@@ -11,10 +17,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
+        loaders: ['babel'],
       },
       {
         test: /\.scss$/,
