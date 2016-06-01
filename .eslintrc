@@ -2,5 +2,11 @@
   "extends": "airbnb",
   "env": {
     "jest": true,
+  },
+  "rules": {
+    "max-len": [2, 120, 2, {
+      "ignoreUrls": true,
+      "ignoreComments": false
+    }]
   }
 }
