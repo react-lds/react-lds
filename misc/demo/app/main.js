@@ -1,43 +1,25 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Router, Route, browserHistory } from "react-router";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import Navigation from "./navigation";
-import PageHeaders from "./pageHeaders";
+import DemoApp from './DemoApp';
 
 require('./main.scss');
 
-class DemoApp extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  getChildContext() {
-    return {
-      assetBasePath: ''
-    }
-  }
-
-  render() {
-    return(
-      <div>
-        <header className="site-banner" role="banner"></header>
-        <main className="site-main" role="main">{this.props.children}</main>
-        <Navigation />
-      </div>
-    );
-  }
-}
-
-DemoApp.childContextTypes = {
-  assetBasePath: React.PropTypes.string
-};
+const rootEl = document.getElementById('app');
 
 ReactDOM.render(
-  <Router history={browserHistory}>
-    <Route path="/" component={DemoApp}>
-      <Route path="/page-headers" component={PageHeaders}/>
-    </Route>
-  </Router>,
-  document.getElementById('app')
+  <DemoApp />, rootEl
 );
+
+if (module.hot) {
+  module.hot.accept('./DemoApp', () => {
+    // If you use Webpack 2 in ES modules mode, you can
+    // use <App /> here rather than require() a <NextApp />.
+    // eslint-disable-next-line
+    const NextApp = require('./DemoApp').default;
+    ReactDOM.render(
+      <NextApp />,
+      rootEl
+    );
+  });
+}
