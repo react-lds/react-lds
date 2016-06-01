@@ -1,21 +1,16 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 
-import Navigation from "./Navigation";
+import Navigation from './Navigation';
 
 class Page extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   getChildContext() {
     return {
-      assetBasePath: ''
-    }
+      assetBasePath: '',
+    };
   }
 
   render() {
-    return(
+    return (
       <div>
         <header className="site-banner" role="banner"></header>
         <main className="site-main" role="main">{this.props.children}</main>
@@ -25,8 +20,12 @@ class Page extends React.Component {
   }
 }
 
+Page.propTypes = {
+  children: React.PropTypes.element.isRequired,
+};
+
 Page.childContextTypes = {
-  assetBasePath: React.PropTypes.string
+  assetBasePath: React.PropTypes.string,
 };
 
 

@@ -15,9 +15,10 @@ if (module.hot) {
   module.hot.accept('./DemoApp', () => {
     // If you use Webpack 2 in ES modules mode, you can
     // use <App /> here rather than require() a <NextApp />.
+    // eslint-disable-next-line
     const NextApp = require('./DemoApp').default;
     ReactDOM.render(
-      <DemoApp />,
+      <NextApp />,
       rootEl
     );
   });

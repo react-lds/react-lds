@@ -1,9 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router'
+import React from 'react';
+import { Link } from 'react-router';
 
 const NavLink = (props, context) => {
-  let isActive = context.router.isActive(props.to, true),
-      className = isActive ? "slds-list__item slds-is-selected slds-is-active" : "slds-list__item"
+  const isActive = context.router.isActive(props.to, true);
+  const className =
+    isActive ? 'slds-list__item slds-is-selected slds-is-active' : 'slds-list__item';
 
   return (
     <li className={className}>
@@ -16,8 +17,13 @@ const NavLink = (props, context) => {
   );
 };
 
+NavLink.propTypes = {
+  to: React.PropTypes.string.isRequired,
+  label: React.PropTypes.string.isRequired,
+};
+
 NavLink.contextTypes = {
-  router: React.PropTypes.object
-}
+  router: React.PropTypes.object,
+};
 
 export default NavLink;

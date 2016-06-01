@@ -1,16 +1,17 @@
 import React from 'react';
-import classnames from 'classnames';
 
-const Icon = ({category, icon}, {assetBasePath}) => {
-  return (
-    <svg aria-hidden="true" className={`slds-icon slds-icon--large slds-icon-${category}-${icon}`}>
-      <use xlinkHref={`${assetBasePath}/assets/icons/${category}-sprite/svg/symbols.svg#${icon}`}></use>
-    </svg>
-  );
-}
+const Icon = ({ category, icon }, { assetBasePath }) =>
+  <svg aria-hidden="true" className={`slds-icon slds-icon--large slds-icon-${category}-${icon}`}>
+    <use xlinkHref={`${assetBasePath}/assets/icons/${category}-sprite/svg/symbols.svg#${icon}`} />
+  </svg>;
+
+Icon.propTypes = {
+  category: React.PropTypes.string.isRequired,
+  icon: React.PropTypes.string.isRequired,
+};
 
 Icon.contextTypes = {
-  assetBasePath: React.PropTypes.string.isRequired
+  assetBasePath: React.PropTypes.string.isRequired,
 };
 
 export default Icon;

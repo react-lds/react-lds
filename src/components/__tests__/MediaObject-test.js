@@ -10,7 +10,7 @@ describe('<MediaObject />', () => {
   });
 
   it('renders the figure', () => {
-    const wrapper = shallow(<MediaObject figure={<div className="foo"/>} />);
+    const wrapper = shallow(<MediaObject figure={<div className="foo" />} />);
     expect(wrapper.find('.slds-media__figure').contains(<div className="foo" />)).toBeTruthy();
   });
 
