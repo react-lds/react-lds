@@ -4,7 +4,7 @@ import { MediaObject, MediaObjectBody, MediaObjectFigure } from './MediaObject';
 import Icon from './Icon';
 
 const PageHeaderBase = ({ title, info }) => {
-  const icon = <Icon category="standard" icon="opportunity" />;
+  const icon = <IconSVG sprite="standard" icon="opportunity" />;
 
   return (
     <div className="slds-page-header" role="banner">
