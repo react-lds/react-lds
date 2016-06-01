@@ -7,8 +7,8 @@ const MediaObject = ({ figure, children }) =>
   </div>;
 
 MediaObject.propTypes = {
-  figure: React.PropTypes.element.isRequired,
-  children: React.PropTypes.arrayOf(React.PropTypes.element.isRequired),
+  figure: React.PropTypes.element,
+  children: React.PropTypes.node,
 };
 
 export default MediaObject;
