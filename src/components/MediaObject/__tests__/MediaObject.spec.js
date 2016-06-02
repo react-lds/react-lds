@@ -38,6 +38,17 @@ describe('<MediaObject />', () => {
     expect(wrapper.find(`.${context.cssPrefix}media__figure--reverse`).length).toBe(1);
   });
 
+  it('should accept a left and right figure simultaniously', () => {
+    const wrapper = shallow(
+      <MediaObject figureLeft={<div className="foo" />} figureRight={<div className="foo" />}>
+        <div className="foo" />
+      </MediaObject>,
+      { context }
+    );
+    expect(wrapper.find(`.${context.cssPrefix}media__figure`).length).toBe(2);
+    expect(wrapper.find(`.${context.cssPrefix}media__figure--reverse`).length).toBe(1);
+  });
+
   // Test flavors
   const flavors = [
     { name: 'center', expectedClass: `${context.cssPrefix}media--center` },
@@ -51,6 +62,7 @@ describe('<MediaObject />', () => {
   flavors.forEach((flavor) => {
     const flavorName = flavor.name;
 
+    it(`should assign the right modifier-class to '${flavor.name}`, () => {
       const wrapper = shallow(<MediaObject flavor={`${flavorName}`} />, { context });
       flavor.expectedClass.split(/\s+/).forEach(c => {
         expect(wrapper.hasClass(c)).toBeTruthy();
