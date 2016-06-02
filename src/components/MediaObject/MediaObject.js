@@ -6,7 +6,7 @@ import { prefix, getClassesWithFlavors, CustomPropTypes } from '../../util';
  * Renders a figure with an optional className
  */
 
-class Component extends React.Component {
+class MediaObject extends React.Component {
   renderFigure(figure, className) {
     if (!figure) {
       return null;
@@ -35,16 +35,16 @@ class Component extends React.Component {
   }
 }
 
-Component.contextTypes = {
+MediaObject.contextTypes = {
   cssPrefix: React.PropTypes.string,
 };
 
 
-Component.propTypes = {
+MediaObject.propTypes = {
   children: React.PropTypes.node,
   figureLeft: React.PropTypes.node,
   figureRight: React.PropTypes.node,
   flavor: CustomPropTypes.flavor('center', 'responsive'),
 };
 
-export default Component;
+export default MediaObject;
