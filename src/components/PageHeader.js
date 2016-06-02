@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { MediaObject, MediaObjectBody, MediaObjectFigure } from './MediaObject';
-import Icon from './Icon';
+import { IconSVG } from './Icon';
 
 const PageHeaderBase = ({ title, info }) => {
-  const icon = <Icon category="standard" icon="opportunity" />;
+  const icon = <IconSVG sprite="standard" icon="opportunity" background="standard-opportunity" size="large" />;
 
   return (
     <div className="slds-page-header" role="banner">

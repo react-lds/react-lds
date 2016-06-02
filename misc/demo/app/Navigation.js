@@ -20,7 +20,7 @@ const Navigation = () =>
         <NavLink to="feeds" label="Feeds" />
         <NavLink to="forms" label="Forms" />
         <NavLink to="grid-system" label="Grid System" />
-        <NavLink to="icons" label="Icons" />
+        <NavLink to="/icons" label="Icons" />
         <NavLink to="images" label="Images" />
         <NavLink to="lookups" label="Lookups" />
         <NavLink to="media-objects" label="Media Objects" />
