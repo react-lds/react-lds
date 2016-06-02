@@ -18,7 +18,7 @@ describe('<MediaObject />', () => {
     expect(wrapper.find(`.${context.cssPrefix}media__body`).length).toBe(1);
   });
 
-  it('accept children into its __body', () => {
+  it('should accept children into its __body', () => {
     const wrapper = shallow(<MediaObject><div className="foo" /></MediaObject>, { context });
     expect(wrapper.find(`.${context.cssPrefix}media__body`).contains(<div className="foo" />)).toBeTruthy();
   });
@@ -33,7 +33,7 @@ describe('<MediaObject />', () => {
     expect(wrapper.find(`.${context.cssPrefix}media__figure`).contains(<div className="foo" />)).toBeTruthy();
   });
 
-  it('should add --reverse modifier to right figure', () => {
+  it('should add --reverse modifier to the right figure', () => {
     const wrapper = shallow(<MediaObject figureRight={<div className="foo" />} />, { context });
     expect(wrapper.find(`.${context.cssPrefix}media__figure--reverse`).length).toBe(1);
   });
@@ -51,7 +51,6 @@ describe('<MediaObject />', () => {
   flavors.forEach((flavor) => {
     const flavorName = flavor.name;
 
-    it(`'s flavor '${flavor.name} should have the right modifier-class`, () => {
       const wrapper = shallow(<MediaObject flavor={`${flavorName}`} />, { context });
       flavor.expectedClass.split(/\s+/).forEach(c => {
         expect(wrapper.hasClass(c)).toBeTruthy();
