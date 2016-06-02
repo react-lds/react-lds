@@ -10,9 +10,8 @@ const MediaObjects = () => {
 
   return (
     <div>
-      <MediaObject figureLeft={<div className="foo"></div>} />
       <MediaObject figureLeft={icon}>{sampleText}</MediaObject>
-      <MediaObject flavor="responsive-center" figureLeft={icon}>{sampleText}</MediaObject>
+      <MediaObject flavor="responsive" figureLeft={icon}>{sampleText}</MediaObject>
     </div>
   );
 };
