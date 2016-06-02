@@ -5,42 +5,68 @@ import { shallow } from 'enzyme';
 import MediaObject from '../MediaObject';
 
 describe('<MediaObject />', () => {
-  it('has `slds-media`-class', () => {
-    const wrapper = shallow(<MediaObject />);
-    expect(wrapper.hasClass('slds-media')).toBeTruthy();
+  const context = { cssPrefix: 'slds-' };
+
+  // Test Component basics
+  it('should have the right component class', () => {
+    const wrapper = shallow(<MediaObject />, { context });
+    expect(wrapper.hasClass(`${context.cssPrefix}media`)).toBeTruthy();
   });
 
-  it('accepts reverse-modifier', () => {
-    const wrapper = shallow(<MediaObject reverse />);
-    expect(wrapper.hasClass('slds-media--reverse')).toBeTruthy();
+  it('should render a __body', () => {
+    const wrapper = shallow(<MediaObject />, { context });
+    expect(wrapper.find(`.${context.cssPrefix}media__body`).length).toBe(1);
   });
 
-  it('accepts responsive-modifier', () => {
-    const wrapper = shallow(<MediaObject responsive />);
-    expect(wrapper.hasClass('slds-media--responsive')).toBeTruthy();
+  it('should accept children into its __body', () => {
+    const wrapper = shallow(<MediaObject><div className="foo" /></MediaObject>, { context });
+    expect(wrapper.find(`.${context.cssPrefix}media__body`).contains(<div className="foo" />)).toBeTruthy();
   });
 
-  it('accepts center-modifier', () => {
-    const wrapper = shallow(<MediaObject center />);
-    expect(wrapper.hasClass('slds-media--center')).toBeTruthy();
+  it('should accept a left figure', () => {
+    const wrapper = shallow(<MediaObject figureLeft={<div className="foo" />} />, { context });
+    expect(wrapper.find(`.${context.cssPrefix}media__figure`).contains(<div className="foo" />)).toBeTruthy();
   });
 
-  it('accepts multiple modifiers', () => {
-    const wrapper = shallow(<MediaObject center responsive reverse />);
-    expect(wrapper.hasClass('slds-media--center')).toBeTruthy();
-    expect(wrapper.hasClass('slds-media--responsive')).toBeTruthy();
-    expect(wrapper.hasClass('slds-media--reverse')).toBeTruthy();
+  it('should accept a right figure', () => {
+    const wrapper = shallow(<MediaObject figureRight={<div className="foo" />} />, { context });
+    expect(wrapper.find(`.${context.cssPrefix}media__figure`).contains(<div className="foo" />)).toBeTruthy();
   });
 
-  it('does not have modifiers by default', () => {
-    const wrapper = shallow(<MediaObject />);
-    expect(wrapper.hasClass('slds-media--center')).toBeFalsy();
-    expect(wrapper.hasClass('slds-media--responsive')).toBeFalsy();
-    expect(wrapper.hasClass('slds-media--reverse')).toBeFalsy();
+  it('should add --reverse modifier to the right figure', () => {
+    const wrapper = shallow(<MediaObject figureRight={<div className="foo" />} />, { context });
+    expect(wrapper.find(`.${context.cssPrefix}media__figure--reverse`).length).toBe(1);
   });
 
-  it('renders children', () => {
-    const wrapper = shallow(<MediaObject><div className="foo"></div></MediaObject>);
-    expect(wrapper.contains(<div className="foo"></div>)).toBeTruthy();
+  it('should accept a left and right figure simultaniously', () => {
+    const wrapper = shallow(
+      <MediaObject figureLeft={<div className="foo" />} figureRight={<div className="foo" />}>
+        <div className="foo" />
+      </MediaObject>,
+      { context }
+    );
+    expect(wrapper.find(`.${context.cssPrefix}media__figure`).length).toBe(2);
+    expect(wrapper.find(`.${context.cssPrefix}media__figure--reverse`).length).toBe(1);
+  });
+
+  // Test flavors
+  const flavors = [
+    { name: 'center', expectedClass: `${context.cssPrefix}media--center` },
+    { name: 'responsive', expectedClass: `${context.cssPrefix}media--responsive` },
+    {
+      name: 'responsive-center',
+      expectedClass: `${context.cssPrefix}media--responsive ${context.cssPrefix}media--center`,
+    },
+  ];
+
+  flavors.forEach((flavor) => {
+    const flavorName = flavor.name;
+
+    it(`should assign the right modifier-class to '${flavor.name}`, () => {
+      const wrapper = shallow(<MediaObject flavor={`${flavorName}`} />, { context });
+      flavor.expectedClass.split(/\s+/).forEach(c => {
+        expect(wrapper.hasClass(c)).toBeTruthy();
+      });
+    });
   });
 });
