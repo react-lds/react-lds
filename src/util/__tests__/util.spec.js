@@ -1,16 +1,17 @@
 
 import { getClassesWithFlavors, prefix } from '../';
-import { cssPrefix } from '../../global';
 
 describe('prefix()', () => {
+  const context = { cssPrefix: 'slds-' };
+
   it('should prefix a single class', () => {
-    const foo = prefix('foo');
-    expect(foo).toBe(`${cssPrefix}foo`);
+    const foo = prefix('foo', context.cssPrefix);
+    expect(foo).toBe(`${context.cssPrefix}foo`);
   });
 
   it('should prefix multiple classes', () => {
-    const foo = prefix('foo bar');
-    expect(foo).toBe(`${cssPrefix}foo ${cssPrefix}bar`);
+    const foo = prefix('foo bar', context.cssPrefix);
+    expect(foo).toBe(`${context.cssPrefix}foo ${context.cssPrefix}bar`);
   });
 });
 

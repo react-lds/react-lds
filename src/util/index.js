@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { cssPrefix } from '../global';
 
 /**
  * Takes a baseClass and a list of flavors and outputs a className-string
@@ -18,7 +17,7 @@ export function getClassesWithFlavors(flavor, baseClass) {
 /**
  * Prefixes each class in a className-string with the global css-prefix
  */
-export function prefix(className) {
+export function prefix(className, cssPrefix) {
   return typeof className === 'string' ? className.split(/\s+/).map(c => `${cssPrefix}${c}`).join(' ') : className;
 }
 
