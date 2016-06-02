@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, MediaObject, MediaObjectBody, MediaObjectFigure } from '../../../src/main';
+import { Icon, MediaObject } from '../../../src/main';
 
 const MediaObjects = () => {
   const icon = <Icon category="standard" icon="opportunity" />;
@@ -10,14 +10,9 @@ const MediaObjects = () => {
 
   return (
     <div>
-      <MediaObject>
-        <MediaObjectFigure>{icon}</MediaObjectFigure>
-        <MediaObjectBody>{sampleText}</MediaObjectBody>
-      </MediaObject>
-      <MediaObject responsive>
-        <MediaObjectFigure>{icon}</MediaObjectFigure>
-        <MediaObjectBody>{sampleText}</MediaObjectBody>
-      </MediaObject>
+      <MediaObject figureLeft={<div className="foo"></div>} />
+      <MediaObject figureLeft={icon}>{sampleText}</MediaObject>
+      <MediaObject flavor="responsive-center" figureLeft={icon}>{sampleText}</MediaObject>
     </div>
   );
 };
