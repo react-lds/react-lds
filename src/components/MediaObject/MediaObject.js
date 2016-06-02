@@ -1,33 +1,50 @@
 import React from 'react';
-import { getModifier } from './util';
+import classNames from 'classnames';
+import { prefix, getClassesWithFlavors, CustomPropTypes } from '../../util';
 
-const MediaObject = ({ center, responsive, reverse, children }) => {
-  const baseClass = 'slds-media';
-  const classes = [baseClass];
+/**
+ * Renders a figure with an optional className
+ */
 
-  if (center) {
-    const modifier = getModifier(baseClass, 'center');
-    classes.push(modifier);
+class MediaObject extends React.Component {
+  renderFigure(figure, className) {
+    if (!figure) {
+      return null;
+    }
+    const classes = classNames('media__figure', className);
+
+    return (
+      <div className={prefix(classes, this.context.cssPrefix)}>
+        {figure}
+      </div>
+    );
   }
 
-  if (responsive) {
-    const modifier = getModifier(baseClass, 'responsive');
-    classes.push(modifier);
-  }
+  render() {
+    const { flavor, figureLeft, figureRight, children } = this.props;
+    const baseClass = 'media';
+    const classes = getClassesWithFlavors(flavor, baseClass);
 
-  if (reverse) {
-    const modifier = getModifier(baseClass, 'reverse');
-    classes.push(modifier);
+    return (
+      <div className={prefix(classes, this.context.cssPrefix)}>
+        {this.renderFigure(figureLeft)}
+        <div className={prefix('media__body', this.context.cssPrefix)}>{children}</div>
+        {this.renderFigure(figureRight, 'media__figure--reverse')}
+      </div>
+    );
   }
+}
 
-  return <div className={classes.join(' ')}>{children}</div>;
+MediaObject.contextTypes = {
+  cssPrefix: React.PropTypes.string,
 };
+
 
 MediaObject.propTypes = {
   children: React.PropTypes.node,
-  center: React.PropTypes.bool,
-  responsive: React.PropTypes.bool,
-  reverse: React.PropTypes.bool,
+  figureLeft: React.PropTypes.node,
+  figureRight: React.PropTypes.node,
+  flavor: CustomPropTypes.flavor('center', 'responsive'),
 };
 
 export default MediaObject;
