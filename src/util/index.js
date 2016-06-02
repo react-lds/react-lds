@@ -3,7 +3,7 @@ import classNames from 'classnames';
 /**
  * Takes a baseClass and a list of flavors and outputs a className-string
  */
-export function getClassesWithFlavors(flavor, baseClass) {
+export function getClassesWithFlavors(flavor, baseClass, ...additionalClasses) {
   if (typeof baseClass !== 'string') {
     throw new Error('"baseClass" must be a string');
   }
@@ -11,7 +11,7 @@ export function getClassesWithFlavors(flavor, baseClass) {
   const hasFlavor = typeof flavor !== 'undefined' && typeof flavor === 'string';
   const flavors = hasFlavor ? flavor.split('-').map(f => `${baseClass}--${f}`) : null;
 
-  return classNames(baseClass, flavors);
+  return classNames(baseClass, flavors, ...additionalClasses);
 }
 
 /**

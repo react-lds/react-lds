@@ -32,4 +32,9 @@ describe('getClassesWithFlavors()', () => {
     const flavor = getClassesWithFlavors('foo-bar-baz', base);
     expect(flavor).toBe(`${base} ${base}--foo ${base}--bar ${base}--baz`);
   });
+
+  it('should accepts multiple classes as rest-parameter', () => {
+    const flavor = getClassesWithFlavors('foo-bar-baz', base, 'custom-class-1', 'custom-class-2');
+    expect(flavor).toBe(`${base} ${base}--foo ${base}--bar ${base}--baz custom-class-1 custom-class-2`);
+  });
 });
