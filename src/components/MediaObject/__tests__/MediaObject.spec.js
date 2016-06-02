@@ -15,7 +15,7 @@ describe('<MediaObject />', () => {
 
   it('should render a __body', () => {
     const wrapper = shallow(<MediaObject />, { context });
-    expect(wrapper.find(`.${context.cssPrefix}media__body`)).toBeTruthy();
+    expect(wrapper.find(`.${context.cssPrefix}media__body`).length).toBe(1);
   });
 
   it('accept children into its __body', () => {
@@ -35,7 +35,7 @@ describe('<MediaObject />', () => {
 
   it('should add --reverse modifier to right figure', () => {
     const wrapper = shallow(<MediaObject figureRight={<div className="foo" />} />, { context });
-    expect(wrapper.find(`.${context.cssPrefix}media__figure--reverse`)).toBeTruthy();
+    expect(wrapper.find(`.${context.cssPrefix}media__figure--reverse`).length).toBe(1);
   });
 
   // Test flavors
