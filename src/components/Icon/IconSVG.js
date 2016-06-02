@@ -6,7 +6,7 @@ import { iconName } from './util';
 const IconSVG = ({ sprite, icon, background, size }, { assetBasePath }) => {
   const classes = {
     'slds-icon': true,
-    [`slds-icon-${sprite}-${iconName(sprite, icon)}`]: !!background,
+    [`slds-icon-${background}`]: !!background,
     [`slds-icon--${size}`]: !!size,
   };
 
