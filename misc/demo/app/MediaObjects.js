@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon, MediaObject } from '../../../src/main';
 
 const MediaObjects = () => {
-  const icon = <Icon category="standard" icon="opportunity" />;
+  const icon = <Icon sprite="standard" icon="opportunity" />;
   const sampleText = (
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat minus molestias reprehenderit consequuntur
     sapiente. Modi veritatis totam accusantium numquam assumenda.</p>

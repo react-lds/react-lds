@@ -1,5 +1,4 @@
-
-import { getClassesWithFlavors, prefix } from '../';
+import { getFlavorClasses, prefix } from '../';
 
 describe('prefix()', () => {
   const context = { cssPrefix: 'slds-' };
@@ -15,26 +14,31 @@ describe('prefix()', () => {
   });
 });
 
-describe('getClassesWithFlavors()', () => {
+describe('getFlavorClasses()', () => {
   const base = 'base';
+  const validFlavors = [
+    'foo',
+    'bar',
+  ];
 
-  it('should return base when flavor is undefined', () => {
-    const flavor = getClassesWithFlavors(undefined, base);
-    expect(flavor).toBe(`${base}`);
+  it('returns an array of flavor className', () => {
+    expect(
+      getFlavorClasses(base, { foo: true, bar: true }, validFlavors)
+    ).toEqual([
+      `${base}--foo`,
+      `${base}--bar`,
+    ]);
   });
 
-  it('should transform a single flavor', () => {
-    const flavor = getClassesWithFlavors('bar', base);
-    expect(flavor).toBe(`${base} ${base}--bar`);
+  it('does not render other boolean props as flavors', () => {
+    expect(
+      getFlavorClasses(base, { foo: true, someProp: true }, validFlavors)
+    ).toEqual([`${base}--foo`]);
   });
 
-  it('should transform multiple flavors', () => {
-    const flavor = getClassesWithFlavors('foo-bar-baz', base);
-    expect(flavor).toBe(`${base} ${base}--foo ${base}--bar ${base}--baz`);
-  });
-
-  it('should accepts multiple classes as rest-parameter', () => {
-    const flavor = getClassesWithFlavors('foo-bar-baz', base, 'custom-class-1', 'custom-class-2');
-    expect(flavor).toBe(`${base} ${base}--foo ${base}--bar ${base}--baz custom-class-1 custom-class-2`);
+  it('omits falsy flavors', () => {
+    expect(
+      getFlavorClasses(base, { foo: true, bar: false }, validFlavors)
+    ).toEqual([`${base}--foo`]);
   });
 });

@@ -1,17 +1,17 @@
-import classNames from 'classnames';
-
 /**
- * Takes a baseClass and a list of flavors and outputs a className-string
+ * Takes a baseClass and the props of a component to return an array of flavor classNames
  */
-export function getClassesWithFlavors(flavor, baseClass, ...additionalClasses) {
+export function getFlavorClasses(baseClass, props, validFlavors) {
   if (typeof baseClass !== 'string') {
     throw new Error('"baseClass" must be a string');
   }
 
-  const hasFlavor = typeof flavor !== 'undefined' && typeof flavor === 'string';
-  const flavors = hasFlavor ? flavor.split('-').map(f => `${baseClass}--${f}`) : null;
+  const flavors = Object.keys(props)
+    .filter(flavor => validFlavors.includes(flavor))
+    .filter(flavor => props[flavor])
+    .map(flavor => `${baseClass}--${flavor}`);
 
-  return classNames(baseClass, flavors, ...additionalClasses);
+  return flavors;
 }
 
 /**
@@ -27,26 +27,18 @@ export function prefix(className, cssPrefix) {
 
 export const CustomPropTypes = {
   /* Checks if all passed flavors are allowed */
-  flavor(...args) {
-    const validFlavors = args;
-
+  flavor(validFlavors) {
     return function validateFlavors(props, propName, componentName) {
       const flavor = props[propName];
 
-      if (typeof flavor !== 'undefined' && typeof flavor !== 'string') {
-        return new Error(`${propName} must be a string`);
+      if (typeof flavor !== 'undefined' && typeof flavor !== 'boolean') {
+        return new Error(`${propName} must be a boolean`);
       }
 
-      if (typeof flavor === 'string') {
-        const flavors = flavor.split('-');
-
-        const invalidFlavors = flavors.filter(f => !validFlavors.includes(f));
-
-        if (invalidFlavors.length > 0) {
-          return new Error(`
-            "${invalidFlavors[0]}" is not a valid ${componentName} flavor.
-          `);
-        }
+      if (typeof flavor === 'boolean' && !validFlavors.includes(propName)) {
+        return new Error(`
+          "${propName}" is not a valid ${componentName} flavor.
+        `);
       }
 
       return null;
@@ -54,8 +46,16 @@ export const CustomPropTypes = {
   },
 };
 
+export function flavorPropTypes(component) {
+  const propTypes = {};
+  component.validFlavors.forEach(flavor => {
+    propTypes[flavor] = CustomPropTypes.flavor(component.validFlavors);
+  });
+  return propTypes;
+}
+
 export default {
   CustomPropTypes,
-  getClassesWithFlavors,
+  getFlavorClasses,
   prefix,
 };
