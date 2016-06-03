@@ -50,23 +50,14 @@ describe('<MediaObject />', () => {
   });
 
   // Test flavors
-  const flavors = [
-    { name: 'center', expectedClass: `${context.cssPrefix}media--center` },
-    { name: 'responsive', expectedClass: `${context.cssPrefix}media--responsive` },
-    {
-      name: 'responsive-center',
-      expectedClass: `${context.cssPrefix}media--responsive ${context.cssPrefix}media--center`,
-    },
-  ];
-
-  flavors.forEach((flavor) => {
-    const flavorName = flavor.name;
-
-    it(`should assign the right modifier-class to '${flavor.name}`, () => {
-      const wrapper = shallow(<MediaObject flavor={`${flavorName}`} />, { context });
-      flavor.expectedClass.split(/\s+/).forEach(c => {
-        expect(wrapper.hasClass(c)).toBeTruthy();
-      });
+  it('should assign the right modifier-class to each flavor', () => {
+    const wrapper = shallow(<MediaObject />, { context });
+    const validFlavors = MediaObject.validFlavors;
+    validFlavors.forEach((flavor) => {
+      const nextProps = Object.assign({}, wrapper.props, { [`${flavor}`]: true });
+      wrapper.setProps(nextProps);
+      const expectedClass = `${context.cssPrefix}media--${flavor}`;
+      expect(wrapper.hasClass(expectedClass)).toBeTruthy();
     });
   });
 });

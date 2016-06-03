@@ -1,19 +1,6 @@
-import classNames from 'classnames';
-
 /**
- * Takes a baseClass and a list of flavors and outputs a className-string
+ * Takes a baseClass and the props of a component to return an array of flavor classNames
  */
-export function getClassesWithFlavors(flavor, baseClass, ...additionalClasses) {
-  if (typeof baseClass !== 'string') {
-    throw new Error('"baseClass" must be a string');
-  }
-
-  const hasFlavor = typeof flavor !== 'undefined' && typeof flavor === 'string';
-  const flavors = hasFlavor ? flavor.split('-').map(f => `${baseClass}--${f}`) : null;
-
-  return classNames(baseClass, flavors, ...additionalClasses);
-}
-
 export function getFlavorClasses(baseClass, props, validFlavors) {
   if (typeof baseClass !== 'string') {
     throw new Error('"baseClass" must be a string');
@@ -69,6 +56,6 @@ export function flavorPropTypes(component) {
 
 export default {
   CustomPropTypes,
-  getClassesWithFlavors,
+  getFlavorClasses,
   prefix,
 };

@@ -5,3 +5,5 @@ dist/*
 !dist/.git-keep
 lib/*
 !lib/.git-keep
+
+*.sublime-workspace
