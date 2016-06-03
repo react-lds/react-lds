@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { prefix, getClassesWithFlavors, CustomPropTypes } from '../../util';
+import { prefix, flavorPropTypes, getFlavorClasses } from '../../util';
 
 /**
  * Renders a figure with an optional className
@@ -21,9 +21,11 @@ class MediaObject extends React.Component {
   }
 
   render() {
-    const { flavor, figureLeft, figureRight, children } = this.props;
+    const { figureLeft, figureRight, children } = this.props;
+
     const baseClass = 'media';
-    const classes = getClassesWithFlavors(flavor, baseClass);
+    const flavorClasses = getFlavorClasses(baseClass, this.props, MediaObject.validFlavors);
+    const classes = classNames(baseClass, flavorClasses);
 
     return (
       <div className={prefix(classes, this.context.cssPrefix)}>
@@ -35,16 +37,22 @@ class MediaObject extends React.Component {
   }
 }
 
+MediaObject.validFlavors = [
+  'center',
+  'responsive',
+];
+
 MediaObject.contextTypes = {
   cssPrefix: React.PropTypes.string,
 };
 
-
-MediaObject.propTypes = {
-  children: React.PropTypes.node,
-  figureLeft: React.PropTypes.node,
-  figureRight: React.PropTypes.node,
-  flavor: CustomPropTypes.flavor('center', 'responsive'),
-};
+MediaObject.propTypes = Object.assign(
+  flavorPropTypes(MediaObject),
+  {
+    children: React.PropTypes.node,
+    figureLeft: React.PropTypes.node,
+    figureRight: React.PropTypes.node,
+  }
+);
 
 export default MediaObject;
