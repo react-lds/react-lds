@@ -3,11 +3,11 @@ import classNames from 'classnames';
 import { prefix, getThemeClassName, CustomPropTypes } from '../../util';
 
 const Box = (props, context) => {
-  const classes = classNames(
+  const classes = [
     'box',
     getThemeClassName(props.theme),
-    { [`box--${props.size}`]: !!props.size }
-  );
+    { [`box--${props.size}`]: !!props.size },
+  ];
 
   return (
     <div className={prefix(classNames(classes), context.cssPrefix)}>
@@ -22,7 +22,7 @@ Box.contextTypes = {
 
 Box.propTypes = Object.assign(
   {
-    size: React.PropTypes.string,
+    size: React.PropTypes.oneOf(['x-small', 'small']),
     theme: CustomPropTypes.theme,
     children: React.PropTypes.node,
   }

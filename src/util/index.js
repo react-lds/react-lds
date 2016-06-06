@@ -16,6 +16,23 @@ export function getFlavorClasses(baseClass, props, validFlavors) {
   return flavors;
 }
 
+export function getClassesFromProps(props, includesArray, regex) {
+  const classes = [];
+  let filtered = Object.keys(props);
+
+  if (typeof includesArray !== 'undefined') {
+    filtered = filtered.filter(prop => includesArray.includes(prop));
+  }
+
+  if (typeof regex !== 'undefined') {
+    filtered = filtered.filter(prop => regex.test(prop));
+  }
+
+  filtered.forEach(prop => classes.push({ [`${prop}`]: !!props[prop] }));
+
+  return classes;
+}
+
 /**
  * Prefixes each class in a className-string with the global css-prefix
  */
@@ -24,6 +41,7 @@ export function prefix(className, cssPrefix, additionalClasses = undefined) {
 
   if (typeof className === 'string') {
     prefixed = className
+      .trim()
       .split(/\s+/)
       .map(c => `${cssPrefix}${c}`)
       .join(' ');
@@ -100,11 +118,32 @@ export function flavorPropTypes(component) {
   return propTypes;
 }
 
+export function responsivePropTypes(baseName, modifiers, propType, options = {}) {
+  if (typeof propType !== 'function') {
+    throw new Error('The propType must be a function.');
+  }
+
+  const { addBase = false } = options;
+  const propTypes = {};
+
+  if (addBase) {
+    propTypes[baseName] = propType;
+  }
+
+  modifiers.forEach(modifier => {
+    propTypes[`${modifier}-${baseName}`] = propType;
+  });
+
+  return propTypes;
+}
+
 export default {
   CustomPropTypes,
   getFlavorClasses,
+  getClassesFromProps,
   prefix,
   validThemes,
   getThemeClassName,
   flavorPropTypes,
+  responsivePropTypes,
 };

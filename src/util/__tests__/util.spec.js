@@ -1,4 +1,7 @@
-import { getFlavorClasses, prefix } from '../';
+import React from 'react';
+import { responsivePropTypes, getFlavorClasses, prefix } from '../';
+
+jest.unmock('../');
 
 describe('prefix()', () => {
   const context = { cssPrefix: 'slds-' };
@@ -22,6 +25,11 @@ describe('prefix()', () => {
 
   it('is robust against undefined additional classes', () => {
     const classes = prefix('foo', context.cssPrefix, undefined);
+    expect(classes).toEqual(`${context.cssPrefix}foo`);
+  });
+
+  it('needs to trim a string before applying prefixes', () => {
+    const classes = prefix('foo ', context.cssPrefix);
     expect(classes).toEqual(`${context.cssPrefix}foo`);
   });
 });
@@ -52,5 +60,25 @@ describe('getFlavorClasses()', () => {
     expect(
       getFlavorClasses(base, { foo: true, bar: false }, validFlavors)
     ).toEqual([`${base}--foo`]);
+  });
+});
+
+describe('responsivePropTypes()', () => {
+  it('generates an object with all nedded propType validations', () => {
+    expect(
+      responsivePropTypes('foo', ['small', 'medium', 'large'], React.PropTypes.bool)
+    ).toEqual({
+      'small-foo': React.PropTypes.bool,
+      'medium-foo': React.PropTypes.bool,
+      'large-foo': React.PropTypes.bool,
+    });
+  });
+
+  it('fails for if propType is not a valid function', () => {
+    expect(() => {
+      responsivePropTypes('foo', ['bla'], undefined);
+    }).toThrow(
+      new Error('The propType must be a function.')
+    );
   });
 });
