@@ -21,6 +21,24 @@ export function prefix(className, cssPrefix) {
   return typeof className === 'string' ? className.split(/\s+/).map(c => `${cssPrefix}${c}`).join(' ') : className;
 }
 
+const themeNames = [
+  'default',
+  'shade',
+  'inverse',
+  'alt-inverse',
+  'info',
+  'success',
+  'warning',
+  'error',
+  'offline',
+];
+
+export const validThemes = themeNames.concat(themeNames.map(themeName => `${themeName} texture`));
+
+export function getThemeClassName(theme) {
+  return /\stexture/.test(theme) ? `theme--${theme.split(' ')[0]} theme--alert-texture` : `theme--${theme}`;
+}
+
 /**
  * Custom Prop Types
  */
@@ -44,6 +62,21 @@ export const CustomPropTypes = {
       return null;
     };
   },
+  theme: function validateTheme(props, propName, componentName) {
+    const theme = props[propName];
+
+    if (typeof theme !== 'undefined' && typeof theme !== 'string') {
+      return new Error(`${propName} must be a string`);
+    }
+
+    if (typeof theme === 'string' && !validThemes.includes(theme)) {
+      return new Error(`
+        "${theme}" is not a valid ${componentName} theme.
+      `);
+    }
+
+    return null;
+  },
 };
 
 export function flavorPropTypes(component) {
@@ -58,4 +91,7 @@ export default {
   CustomPropTypes,
   getFlavorClasses,
   prefix,
+  validThemes,
+  getThemeClassName,
+  flavorPropTypes,
 };

@@ -1,3 +1,4 @@
+import Box from './components/Box';
 import MediaObject from './components/MediaObject';
 import PageHeader from './components/PageHeader';
 import Icon from './components/Icon';
@@ -6,6 +7,7 @@ import Badge from './components/Badge';
 import { Grid, Column } from './components/Grid';
 
 export {
+  Box,
   Icon,
   MediaObject,
   PageHeader,
