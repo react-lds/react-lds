@@ -1,5 +1,5 @@
 import React from 'react';
-import { MediaObject } from '../../../src/main';
+import { MediaObject } from 'react-lds';
 
 require('./masthead.scss');
 

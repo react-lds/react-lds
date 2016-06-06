@@ -46,6 +46,25 @@ MediaObject.contextTypes = {
   cssPrefix: React.PropTypes.string,
 };
 
+MediaObject.propTypes = {
+  /**
+   * This renders childs
+  */
+  children: React.PropTypes.node,
+  /**
+   * set true to center
+  */
+  center: React.PropTypes.bool,
+  /**
+   * set true to make component responsive
+  */
+  responsive: React.PropTypes.bool,
+  /**
+   * set true to reverse display order
+   */
+  reverse: React.PropTypes.bool,
+};
+
 MediaObject.propTypes = Object.assign(
   flavorPropTypes(MediaObject),
   {

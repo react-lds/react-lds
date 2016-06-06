@@ -2,11 +2,10 @@ import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 
 import Page from './Page';
-
 import GridSystem from './GridSystem';
-import Icons from './Icons';
-import MediaObjects from './MediaObjects';
-import PageHeaders from './PageHeaders';
+import PageHeader from './pages/PageHeader';
+import Icons from './pages/Icon';
+import MediaObject from './pages/MediaObject';
 import Buttons from './Buttons';
 import Badges from './Badges';
 
@@ -19,6 +18,8 @@ const DemoApp = () =>
       <Route path="/page-headers" component={PageHeaders} />
       <Route path="/buttons" component={Buttons} />
       <Route path="/badges" component={Badges} />
+      <Route path="/page-headers" component={PageHeader} />
+      <Route path="/media-objects" component={MediaObject} />
     </Route>
   </Router>;
 

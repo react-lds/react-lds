@@ -1,7 +1,7 @@
 import React from 'react';
-import { Icon, MediaObject } from '../../../src/main';
+import { MediaObject, Icon } from 'react-lds';
 
-const MediaObjects = () => {
+const MediaObjectExampleResponsive = () => {
   const icon = <Icon sprite="standard" icon="opportunity" />;
   const sampleText = (
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat minus molestias reprehenderit consequuntur
@@ -10,10 +10,9 @@ const MediaObjects = () => {
 
   return (
     <div>
-      <MediaObject figureLeft={icon}>{sampleText}</MediaObject>
       <MediaObject flavor="responsive" figureLeft={icon}>{sampleText}</MediaObject>
     </div>
   );
 };
 
-export default MediaObjects;
+export default MediaObjectExampleResponsive;

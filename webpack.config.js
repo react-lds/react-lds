@@ -9,7 +9,7 @@ module.exports = {
     './misc/demo/app/main.js',
   ],
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, 'dist'),
     filename: "demo.js"
   },
   module: {
@@ -20,12 +20,21 @@ module.exports = {
         loaders: ['babel'],
       },
       {
+        test: /\.css$/,
+        loaders: ['style', 'css'],
+      },
+      {
+        test: /\.json$/,
+        loaders: ['json'],
+      },
+      {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass']
       }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.scss']
+    extensions: ['', '.js', '.scss'],
+    alias: { 'react-lds': path.resolve(__dirname, 'src')},
   }
 }

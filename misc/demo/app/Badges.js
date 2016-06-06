@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge } from '../../../src/main';
+import { Badge } from 'react-lds';
 
 import Masthead from './Masthead';
 import HeaderIcon from './HeaderIcon';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ButtonIcon } from '../../../src/main';
+import { Button, ButtonIcon } from 'react-lds';
 
 import Masthead from './Masthead';
 import HeaderIcon from './HeaderIcon';

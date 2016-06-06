@@ -7,6 +7,15 @@
     "max-len": [2, 120, 2, {
       "ignoreUrls": true,
       "ignoreComments": false
-    }]
+    }],
+    "global-require": "off",
+    "import/no-duplicates": "off"
+  },
+  settings: {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      }
+    }
   }
 }
