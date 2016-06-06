@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 /**
  * Takes a baseClass and the props of a component to return an array of flavor classNames
  */
@@ -17,8 +19,19 @@ export function getFlavorClasses(baseClass, props, validFlavors) {
 /**
  * Prefixes each class in a className-string with the global css-prefix
  */
-export function prefix(className, cssPrefix) {
-  return typeof className === 'string' ? className.split(/\s+/).map(c => `${cssPrefix}${c}`).join(' ') : className;
+export function prefix(className, cssPrefix, additionalClasses = undefined) {
+  let prefixed = className;
+
+  if (typeof className === 'string') {
+    prefixed = className
+      .split(/\s+/)
+      .map(c => `${cssPrefix}${c}`)
+      .join(' ');
+  }
+
+  prefixed = additionalClasses !== undefined ? classNames(prefixed, additionalClasses) : prefixed;
+
+  return prefixed;
 }
 
 const themeNames = [

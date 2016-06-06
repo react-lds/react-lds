@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { prefix, flavorPropTypes, getFlavorClasses } from '../../util';
 
-const Grid = (props, context) => {
+const Grid = (props, { cssPrefix }) => {
   const baseClass = 'grid';
   const classes = [
     baseClass,
@@ -10,7 +10,7 @@ const Grid = (props, context) => {
   ];
 
   return (
-    <div className={prefix(classNames(classes), context.cssPrefix)}>
+    <div className={prefix(classNames(classes), cssPrefix, props.className)}>
       {props.children}
     </div>
   );

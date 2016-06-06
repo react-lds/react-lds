@@ -12,6 +12,18 @@ describe('prefix()', () => {
     const foo = prefix('foo bar', context.cssPrefix);
     expect(foo).toBe(`${context.cssPrefix}foo ${context.cssPrefix}bar`);
   });
+
+  it('supports additional non-prefixed classes', () => {
+    const classes = prefix('foo bar', context.cssPrefix, 'wub-test');
+    expect(classes).toEqual(
+      `${context.cssPrefix}foo ${context.cssPrefix}bar wub-test`
+    );
+  });
+
+  it('is robust against undefined additional classes', () => {
+    const classes = prefix('foo', context.cssPrefix, undefined);
+    expect(classes).toEqual(`${context.cssPrefix}foo`);
+  });
 });
 
 describe('getFlavorClasses()', () => {
