@@ -7,3 +7,4 @@ lib/*
 !lib/.git-keep
 
 *.sublime-workspace
+npm-debug.log
