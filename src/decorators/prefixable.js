@@ -29,7 +29,7 @@ const prefixable = (Component) => {
   const PrefixedComponent = (props, context) => {
     const injection = Object.assign({}, props);
 
-    injection.prefix = (sldsClasses, originalProps) =>
+    injection.prefix = (sldsClasses = [], originalProps) =>
       prefixClasses(context.cssPrefix, sldsClasses, originalProps);
 
     return (
@@ -49,6 +49,7 @@ const prefixable = (Component) => {
   PrefixedComponent.propTypes = Object.assign({}, Component.propTypes, {
     className: React.PropTypes.string,
     sldsClasses: React.PropTypes.array,
+    prefix: React.PropTypes.func,
   });
 
   /**

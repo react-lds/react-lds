@@ -1,23 +1,17 @@
 import React from 'react';
-import classNames from 'classnames';
-import { prefix, flavorPropTypes, responsivePropTypes, getFlavorClasses, getClassesFromProps } from '../../util';
+import { prefixable, flavorable, variationable } from '../../decorators';
 
-const Grid = (props, { cssPrefix }) => {
-  const baseClass = 'grid';
-  const classes = [
-    baseClass,
-    getFlavorClasses(baseClass, props, Grid.validFlavors),
-    getClassesFromProps(props, Object.keys(Grid.propTypes), /wrap/),
-  ];
+const Grid = (props) => {
+  const sldsClasses = ['grid'];
 
   return (
-    <div className={prefix(classNames(classes), cssPrefix, props.className)}>
+    <div className={props.prefix(sldsClasses, props)}>
       {props.children}
     </div>
   );
 };
 
-Grid.validFlavors = [
+Grid.flavors = [
   'frame',
   'vertical',
   'reverse',
@@ -34,17 +28,17 @@ Grid.validFlavors = [
   'pull-padded-large',
 ];
 
-Grid.contextTypes = {
-  cssPrefix: React.PropTypes.string,
-};
+Grid.variations = [
+  { wrap: ['small', 'medium', 'large'] },
+  { nowrap: ['small', 'medium', 'large'] },
+];
 
-Grid.propTypes = Object.assign(
-  flavorPropTypes(Grid),
-  responsivePropTypes('wrap', ['small', 'medium', 'large'], React.PropTypes.bool, { addBase: true }),
-  responsivePropTypes('nowrap', ['small', 'medium', 'large'], React.PropTypes.bool, { addBase: true }),
-  {
-    children: React.PropTypes.node,
-  }
+Grid.propTypes = Object.assign({}, {
+  children: React.PropTypes.node,
+});
+
+export default prefixable(
+  variationable(
+    flavorable(Grid, 'grid')
+  )
 );
-
-export default Grid;
