@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-function prefixClasses(cssPrefix, sldsClasses = [], props) {
+function prefixClasses(cssPrefix = '', sldsClasses = [], props) {
   let prefixed = '';
 
   const existingSlds = props.sldsClasses || [];
