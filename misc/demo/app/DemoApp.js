@@ -6,8 +6,8 @@ import GridSystem from './GridSystem';
 import PageHeader from './pages/PageHeader';
 import Icons from './pages/Icon';
 import MediaObject from './pages/MediaObject';
-import Buttons from './Buttons';
-import Badges from './Badges';
+import Buttons from './pages/Button';
+import Badges from './pages/Badge';
 
 const DemoApp = () =>
   <Router history={browserHistory}>
