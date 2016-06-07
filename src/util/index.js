@@ -52,24 +52,6 @@ export function prefix(className, cssPrefix, additionalClasses = undefined) {
   return prefixed;
 }
 
-const themeNames = [
-  'default',
-  'shade',
-  'inverse',
-  'alt-inverse',
-  'info',
-  'success',
-  'warning',
-  'error',
-  'offline',
-];
-
-export const validThemes = themeNames.concat(themeNames.map(themeName => `${themeName} texture`));
-
-export function getThemeClassName(theme) {
-  return /\stexture/.test(theme) ? `theme--${theme.split(' ')[0]} theme--alert-texture` : `theme--${theme}`;
-}
-
 /**
  * Custom Prop Types
  */
@@ -93,29 +75,14 @@ export const CustomPropTypes = {
       return null;
     };
   },
-  theme: function validateTheme(props, propName, componentName) {
-    const theme = props[propName];
-
-    if (typeof theme !== 'undefined' && typeof theme !== 'string') {
-      return new Error(`${propName} must be a string`);
-    }
-
-    if (typeof theme === 'string' && !validThemes.includes(theme)) {
-      return new Error(`
-        "${theme}" is not a valid ${componentName} theme.
-      `);
-    }
-
-    return null;
-  },
 };
 
 export function flavorPropTypes(component) {
-  const propTypes = {};
-  component.validFlavors.forEach(flavor => {
+  return component.validFlavors.reduce((propTypes, flavor) => {
+    // eslint-disable-next-line no-param-reassign
     propTypes[flavor] = CustomPropTypes.flavor(component.validFlavors);
-  });
-  return propTypes;
+    return propTypes;
+  }, {});
 }
 
 export function responsivePropTypes(baseName, modifiers, propType, options = {}) {
@@ -124,15 +91,15 @@ export function responsivePropTypes(baseName, modifiers, propType, options = {})
   }
 
   const { addBase = false } = options;
-  const propTypes = {};
+  const propTypes = modifiers.reduce((o, modifier) => {
+    // eslint-disable-next-line no-param-reassign
+    o[`${modifier}-${baseName}`] = propType;
+    return o;
+  }, {});
 
   if (addBase) {
     propTypes[baseName] = propType;
   }
-
-  modifiers.forEach(modifier => {
-    propTypes[`${modifier}-${baseName}`] = propType;
-  });
 
   return propTypes;
 }
@@ -142,8 +109,6 @@ export default {
   getFlavorClasses,
   getClassesFromProps,
   prefix,
-  validThemes,
-  getThemeClassName,
   flavorPropTypes,
   responsivePropTypes,
 };

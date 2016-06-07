@@ -1,6 +1,6 @@
 import React from 'react';
-import classNames from 'classnames';
-import { prefix, flavorPropTypes, getFlavorClasses, getClassesFromProps } from '../../util';
+import { flavorPropTypes, getFlavorClasses, getClassesFromProps } from '../../util';
+import { prefixable, sizeable } from '../../decorators';
 
 const customModifiers = [
   'has-flexi-truncate',
@@ -18,9 +18,9 @@ customModifiers.forEach(propType => {
   customModifiersValidations[propType] = React.PropTypes.bool;
 });
 
-const Column = (props, context) => {
+const Column = (props) => {
   const baseClass = 'col';
-  const classes = [
+  const sldsClasses = [
     baseClass,
     getFlavorClasses(baseClass, props, Column.validFlavors),
     getClassesFromProps(props, customModifiers),
@@ -28,7 +28,7 @@ const Column = (props, context) => {
   ];
 
   return (
-    <div className={prefix(classNames(classes), context.cssPrefix)}>
+    <div className={props.prefix(sldsClasses, props)}>
       {props.children}
     </div>
   );
@@ -48,10 +48,6 @@ Column.validFlavors = [
   'rule-bottom',
 ];
 
-Column.contextTypes = {
-  cssPrefix: React.PropTypes.string,
-};
-
 Column.propTypes = Object.assign(
   flavorPropTypes(Column),
   customModifiersValidations,
@@ -61,4 +57,4 @@ Column.propTypes = Object.assign(
   }
 );
 
-export default Column;
+export default prefixable(sizeable(Column));
