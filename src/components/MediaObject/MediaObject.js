@@ -5,7 +5,7 @@ import { prefixable, flavorable } from '../../decorators';
  * Renders a figure with an optional className
  */
 
-class MediaObject extends React.Component {
+export class MediaObject extends React.Component {
   renderFigure(figure, className) {
     if (!figure) {
       return null;
@@ -41,14 +41,23 @@ MediaObject.flavors = [
 
 
 MediaObject.propTypes = {
+  /**
+   * the prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func,
+  /**
+   * main content
+   */
   children: React.PropTypes.node,
-};
-
-MediaObject.propTypes = Object.assign({}, {
-  children: React.PropTypes.node,
+  /**
+   * left image/figure
+   */
   figureLeft: React.PropTypes.node,
+  /**
+   * right image/figure, both left and right can be used together
+   */
   figureRight: React.PropTypes.node,
-});
+};
 
 export default prefixable(
   flavorable(MediaObject, 'media')
