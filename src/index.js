@@ -5,6 +5,7 @@ import Icon from './components/Icon';
 import { Button, ButtonIcon } from './components/Button';
 import Badge from './components/Badge';
 import { Grid, Column } from './components/Grid';
+import { Breadcrumb } from './components/Breadcrumb';
 
 export {
   Box,
@@ -16,4 +17,5 @@ export {
   Badge,
   Grid,
   Column,
+  Breadcrumb,
 };

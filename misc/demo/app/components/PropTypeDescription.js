@@ -111,35 +111,37 @@ const PropTypeDescription = ({ code, header }) => {
 
   const componentInfo = parse(code);
 
-  Object.keys(componentInfo.props).forEach((key) => {
-    if ({}.hasOwnProperty.call(componentInfo.props, key)) {
-      let workingKey = key;
-      const prop = componentInfo.props[workingKey];
+  if (componentInfo.props) {
+    Object.keys(componentInfo.props).forEach((key) => {
+      if ({}.hasOwnProperty.call(componentInfo.props, key)) {
+        let workingKey = key;
+        const prop = componentInfo.props[workingKey];
 
-      const description = generateDescription(prop.required, prop.description, prop.type);
+        const description = generateDescription(prop.required, prop.description, prop.type);
 
-      if (description === null) return;
+        if (description === null) return;
 
-      let defaultValue = '';
+        let defaultValue = '';
 
-      if (prop.defaultValue) {
-        defaultValue = prop.defaultValue.value.replace(/\n/g, '');
-      }
-
-      if (prop.required) {
-        workingKey = `<span style="color: #31a148">${workingKey} \*</span>`;
-        requiredProps += 1;
-      }
-
-      if (prop.type.name === 'custom') {
-        if (getDeprecatedInfo(prop.type)) {
-          workingKey = `~~${workingKey}~~`;
+        if (prop.defaultValue) {
+          defaultValue = prop.defaultValue.value.replace(/\n/g, '');
         }
-      }
 
-      text += `| ${workingKey} | ${generatePropType(prop.type)} | ${defaultValue} | ${description} |\n`;
-    }
-  });
+        if (prop.required) {
+          workingKey = `<span style="color: #31a148">${workingKey} \*</span>`;
+          requiredProps += 1;
+        }
+
+        if (prop.type.name === 'custom') {
+          if (getDeprecatedInfo(prop.type)) {
+            workingKey = `~~${workingKey}~~`;
+          }
+        }
+
+        text += `| ${workingKey} | ${generatePropType(prop.type)} | ${defaultValue} | ${description} |\n`;
+      }
+    });
+  }
 
   let requiredPropFootnote = '';
   if (requiredProps === 1) {
