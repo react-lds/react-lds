@@ -8,6 +8,7 @@ import Icons from './pages/Icon';
 import MediaObject from './pages/MediaObject';
 import Buttons from './pages/Button';
 import Badges from './pages/Badge';
+import Breadcrumb from './pages/Breadcrumb';
 
 const DemoApp = () =>
   <Router history={browserHistory}>
@@ -18,6 +19,7 @@ const DemoApp = () =>
       <Route path="/badges" component={Badges} />
       <Route path="/page-headers" component={PageHeader} />
       <Route path="/media-objects" component={MediaObject} />
+      <Route path="/breadcrumbs" component={Breadcrumb} />
     </Route>
   </Router>;
 
