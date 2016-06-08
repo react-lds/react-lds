@@ -42,9 +42,9 @@ export class ModalHeader extends React.Component {
     return (
       <div className={this.props.prefix(sldsClasses, this.props)}>
         {!this.props.uncloseable ? this.getCloseButton() : null}
+        {this.props.children}
         {this.props.title ? this.getTitle() : null}
         {this.props.tagline ? this.getTagline() : null}
-        {this.props.children}
       </div>
     );
   }
@@ -60,11 +60,11 @@ ModalHeader.propTypes = {
    */
   children: React.PropTypes.node,
   /**
-   * the heading id. gets passed down from <Modal>
+   * the heading id. gets passed down from `Modal`
    */
   label: React.PropTypes.string,
   /**
-   * renders a prompt header. Gets passed down from <Modal prompt>
+   * renders a prompt header. Gets passed down from `Modal prompt`
    */
   prompt: React.PropTypes.bool,
   /**
@@ -76,7 +76,7 @@ ModalHeader.propTypes = {
    */
   title: React.PropTypes.string,
   /**
-   * hides the close-button (gets passed down from <Modal prompt>)
+   * hides the close-button (gets passed down from `Modal prompt`)
    */
   uncloseable: React.PropTypes.bool,
 };

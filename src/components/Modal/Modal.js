@@ -23,14 +23,14 @@ export const Modal = (props) => {
   ];
 
   const childrenWithProps = [...children].map((child, i) => {
-    const childName = child.type.displayName;
+    const childName = !!child ? child.type.displayName : null;
 
     if (childName === 'ModalHeader') {
       return React.cloneElement(child, {
         key: i,
         label,
         prompt,
-        uncloseable: prompt,
+        uncloseable: child.props.uncloseable !== undefined ? child.props.uncloseable : prompt,
       });
     }
 
@@ -76,7 +76,7 @@ Modal.propTypes = {
    */
   description: React.PropTypes.string,
   /**
-   * whether a container is a dialog (optional when <Modal prompt>). Needed for PromptForTouch and ModalPrompt
+   * whether a container is a dialog (optional when `<Modal prompt>`). Needed for PromptForTouch and ModalPrompt
    */
   dialog: React.PropTypes.bool,
   /**

@@ -34,6 +34,7 @@ Button.propTypes = {
   variation: React.PropTypes.oneOf([
     'neutral',
     'brand',
+    'destructive',
     'icon-border-filled',
     'icon-container',
     'icon-inverse',
