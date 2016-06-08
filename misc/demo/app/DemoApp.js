@@ -9,6 +9,7 @@ import MediaObject from './pages/MediaObject';
 import Buttons from './pages/Button';
 import Badges from './pages/Badge';
 import Breadcrumb from './pages/Breadcrumb';
+import Spinners from './pages/Spinners';
 
 const DemoApp = () =>
   <Router history={browserHistory}>
@@ -20,6 +21,7 @@ const DemoApp = () =>
       <Route path="/page-headers" component={PageHeader} />
       <Route path="/media-objects" component={MediaObject} />
       <Route path="/breadcrumbs" component={Breadcrumb} />
+      <Route path="/spinners" component={Spinners} />
     </Route>
   </Router>;
 
