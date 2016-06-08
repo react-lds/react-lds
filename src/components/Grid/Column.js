@@ -46,7 +46,7 @@ Column.propTypes = Object.assign({}, {
 export default prefixable(
   sizeable(
     variationable(
-      flavorable(Column, 'grid')
+      flavorable(Column, 'col')
     )
   )
 );

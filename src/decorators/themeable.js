@@ -46,13 +46,15 @@ const themeable = (Component) => {
   const displayName = Component.displayName || Component.name;
 
   const ThemedComponent = (props) => {
+    const newProps = Object.assign({}, props);
     const existingSlds = props.sldsClasses || [];
-    const classes = [...new Set(
+
+    newProps.sldsClasses = [...new Set(
       getThemeClassName(props.theme).concat(existingSlds)
     )];
 
     return (
-      <Component sldsClasses={classes} {...props} />
+      <Component {...newProps} />
     );
   };
 

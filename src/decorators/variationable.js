@@ -8,17 +8,45 @@ function getVariationClasses(props, validVariations) {
   return variations;
 }
 
+function getValidVariations(definition) {
+  const validVariations = definition.reduce((propTypes, variation) => {
+    if (typeof variation === 'string') {
+      // eslint-disable-next-line no-param-reassign
+      propTypes[variation] = React.PropTypes.bool;
+    } else {
+      const variationName = Object.keys(variation)[0];
+      const responsives = variation[variationName];
+
+      // eslint-disable-next-line no-param-reassign
+      propTypes[variationName] = React.PropTypes.bool;
+
+      responsives.forEach((responsive) => {
+        // eslint-disable-next-line no-param-reassign
+        propTypes[`${responsive}-${variationName}`] = React.PropTypes.bool;
+      });
+    }
+    return propTypes;
+  }, {});
+
+  return validVariations;
+}
+
 const variationable = (Component) => {
   const displayName = Component.displayName || Component.name;
 
   const VariationComponent = (props) => {
+    const newProps = Object.assign({}, props);
     const existingSlds = props.sldsClasses || [];
-    const classes = [...new Set(
-      getVariationClasses(props, Object.keys(Component.propTypes)).concat(existingSlds)
+
+    newProps.sldsClasses = [...new Set(
+      getVariationClasses(
+        props,
+        Object.keys(getValidVariations(Component.variations))
+      ).concat(existingSlds)
     )];
 
     return (
-      <Component sldsClasses={classes} {...props} />
+      <Component {...newProps} />
     );
   };
 
@@ -27,24 +55,7 @@ const variationable = (Component) => {
   VariationComponent.propTypes = Object.assign(
     {},
     Component.propTypes,
-    Component.variations.reduce((propTypes, variation) => {
-      if (typeof variation === 'string') {
-        // eslint-disable-next-line no-param-reassign
-        propTypes[variation] = React.PropTypes.bool;
-      } else {
-        const variationName = Object.keys(variation)[0];
-        const responsives = variation[variationName];
-
-        // eslint-disable-next-line no-param-reassign
-        propTypes[variationName] = React.PropTypes.bool;
-
-        responsives.forEach((responsive) => {
-          // eslint-disable-next-line no-param-reassign
-          propTypes[`${responsive}-${variationName}`] = React.PropTypes.bool;
-        });
-      }
-      return propTypes;
-    }, {})
+    getValidVariations(Component.variations)
   );
 
   if (Component.flavors) {

@@ -35,13 +35,15 @@ const flavorable = (Component, baseClass) => {
   const displayName = Component.displayName || Component.name;
 
   const FlavoredComponent = (props) => {
+    const newProps = Object.assign({}, props);
     const existingSlds = props.sldsClasses || [];
-    const classes = [...new Set(
+
+    newProps.sldsClasses = [...new Set(
       getFlavorClasses(baseClass, props, Component.flavors).concat(existingSlds)
     )];
 
     return (
-      <Component sldsClasses={classes} {...props} />
+      <Component {...newProps} />
     );
   };
 
