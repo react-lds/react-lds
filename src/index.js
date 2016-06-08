@@ -4,7 +4,7 @@ import PageHeader from './components/PageHeader';
 import Icon from './components/Icon';
 import { Button, ButtonIcon } from './components/Button';
 import Badge from './components/Badge';
-import { Grid, Column } from './components/Grid';
+import { Grid, Column, Container } from './components/Grid';
 import { Breadcrumb } from './components/Breadcrumb';
 
 export {
@@ -17,5 +17,6 @@ export {
   Badge,
   Grid,
   Column,
+  Container,
   Breadcrumb,
 };

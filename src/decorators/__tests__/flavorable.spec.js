@@ -22,6 +22,11 @@ describe('flavorable()', () => {
     expect(wrapper.prop('sldsClasses')).toEqual(['apple--strawberry']);
   });
 
+  it('adds multiple flavors', () => {
+    const wrapper = shallow(<FlavorableDummyComponent strawberry cherry />);
+    expect(wrapper.prop('sldsClasses')).toEqual(['apple--strawberry', 'apple--cherry']);
+  });
+
   it('does not add invalid flavors', () => {
     const wrapper = shallow(<FlavorableDummyComponent blueberry />);
     expect(wrapper.prop('sldsClasses')).toEqual([]);
