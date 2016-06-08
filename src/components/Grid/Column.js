@@ -1,29 +1,9 @@
 import React from 'react';
-import { flavorPropTypes, getFlavorClasses, getClassesFromProps } from '../../util';
-import { prefixable, sizeable } from '../../decorators';
-
-const customModifiers = [
-  'has-flexi-truncate',
-  'no-flex',
-  'no-space',
-  'grow',
-  'grow-none',
-  'shrink',
-  'shrink-none',
-];
-
-const customModifiersValidations = {};
-
-customModifiers.forEach(propType => {
-  customModifiersValidations[propType] = React.PropTypes.bool;
-});
+import { prefixable, sizeable, flavorable, variationable } from '../../decorators';
 
 const Column = (props) => {
-  const baseClass = 'col';
   const sldsClasses = [
-    baseClass,
-    getFlavorClasses(baseClass, props, Column.validFlavors),
-    getClassesFromProps(props, customModifiers),
+    'col',
     { [`align-${props.align}`]: !!props.align },
   ];
 
@@ -34,7 +14,7 @@ const Column = (props) => {
   );
 };
 
-Column.validFlavors = [
+Column.flavors = [
   'padded',
   'padded-medium',
   'padded-large',
@@ -48,13 +28,25 @@ Column.validFlavors = [
   'rule-bottom',
 ];
 
-Column.propTypes = Object.assign(
-  flavorPropTypes(Column),
-  customModifiersValidations,
-  {
-    align: React.PropTypes.oneOf(['top', 'middle', 'bottom']),
-    children: React.PropTypes.node,
-  }
-);
+Column.variations = [
+  'has-flexi-truncate',
+  'no-flex',
+  'no-space',
+  'grow',
+  'grow-none',
+  'shrink',
+  'shrink-none',
+];
 
-export default prefixable(sizeable(Column));
+Column.propTypes = Object.assign({}, {
+  align: React.PropTypes.oneOf(['top', 'middle', 'bottom']),
+  children: React.PropTypes.node,
+});
+
+export default prefixable(
+  sizeable(
+    variationable(
+      flavorable(Column, 'col')
+    )
+  )
+);

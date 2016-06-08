@@ -1,20 +1,20 @@
 import React from 'react';
-import classNames from 'classnames';
-import { prefix, flavorPropTypes, getFlavorClasses } from '../../util';
+import { prefixable, flavorable } from '../../decorators';
 
 /**
  * Renders a figure with an optional className
  */
 
-class MediaObject extends React.Component {
+export class MediaObject extends React.Component {
   renderFigure(figure, className) {
     if (!figure) {
       return null;
     }
-    const classes = classNames('media__figure', className);
+
+    const sldsClasses = ['media__figure', className].filter(x => !!x);
 
     return (
-      <div className={prefix(classes, this.context.cssPrefix)}>
+      <div className={this.props.prefix(sldsClasses, this.props)}>
         {figure}
       </div>
     );
@@ -22,56 +22,43 @@ class MediaObject extends React.Component {
 
   render() {
     const { figureLeft, figureRight, children } = this.props;
-
-    const baseClass = 'media';
-    const flavorClasses = getFlavorClasses(baseClass, this.props, MediaObject.validFlavors);
-    const classes = classNames(baseClass, flavorClasses);
+    const sldsClasses = ['media'];
 
     return (
-      <div className={prefix(classes, this.context.cssPrefix)}>
+      <div className={this.props.prefix(sldsClasses, this.props)}>
         {this.renderFigure(figureLeft)}
-        <div className={prefix('media__body', this.context.cssPrefix)}>{children}</div>
+        <div className={this.props.prefix(['media__body'], this.props)}>{children}</div>
         {this.renderFigure(figureRight, 'media__figure--reverse')}
       </div>
     );
   }
 }
 
-MediaObject.validFlavors = [
+MediaObject.flavors = [
   'center',
   'responsive',
 ];
 
-MediaObject.contextTypes = {
-  cssPrefix: React.PropTypes.string,
-};
 
 MediaObject.propTypes = {
   /**
-   * This renders childs
-  */
+   * the prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func,
+  /**
+   * main content
+   */
   children: React.PropTypes.node,
   /**
-   * set true to center
-  */
-  center: React.PropTypes.bool,
-  /**
-   * set true to make component responsive
-  */
-  responsive: React.PropTypes.bool,
-  /**
-   * set true to reverse display order
+   * left image/figure
    */
-  reverse: React.PropTypes.bool,
+  figureLeft: React.PropTypes.node,
+  /**
+   * right image/figure, both left and right can be used together
+   */
+  figureRight: React.PropTypes.node,
 };
 
-MediaObject.propTypes = Object.assign(
-  flavorPropTypes(MediaObject),
-  {
-    children: React.PropTypes.node,
-    figureLeft: React.PropTypes.node,
-    figureRight: React.PropTypes.node,
-  }
+export default prefixable(
+  flavorable(MediaObject, 'media')
 );
-
-export default MediaObject;

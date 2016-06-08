@@ -9,7 +9,7 @@ const ExampleAutomatic = () =>
         <Box theme="shade">col</Box>
       </Column>
       <Column>
-        <Box className="pb-test" theme="shade">col2</Box>
+        <Box className="pb-test" theme="shade">col</Box>
       </Column>
     </Grid>
 

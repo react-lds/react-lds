@@ -58,14 +58,15 @@ const sizeable = (Component) => {
   const displayName = Component.displayName || Component.name;
 
   const SizeableComponent = (props) => {
+    const newProps = Object.assign({}, props);
     const existingSlds = props.sldsClasses || [];
 
-    const classes = [...new Set(
+    newProps.sldsClasses = [...new Set(
       getSizeClassNames(props).concat(existingSlds)
     )];
 
     return (
-      <Component sldsClasses={classes} {...props} />
+      <Component {...newProps} />
     );
   };
 

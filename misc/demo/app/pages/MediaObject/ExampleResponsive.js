@@ -10,7 +10,7 @@ const MediaObjectExampleResponsive = () => {
 
   return (
     <div>
-      <MediaObject flavor="responsive" figureLeft={icon}>{sampleText}</MediaObject>
+      <MediaObject responsive figureLeft={icon}>{sampleText}</MediaObject>
     </div>
   );
 };
