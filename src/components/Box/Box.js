@@ -12,11 +12,10 @@ const Box = (props) => {
   );
 };
 
-Box.propTypes = Object.assign(
-  {
-    size: React.PropTypes.oneOf(['x-small', 'small']),
-    children: React.PropTypes.node,
-  }
-);
+Box.propTypes = {
+  size: React.PropTypes.oneOf(['x-small', 'small']),
+  prefix: React.PropTypes.func,
+  children: React.PropTypes.node,
+};
 
 export default prefixable(themeable(Box));
