@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 
 import Page from './Page';
+import DataTable from './pages/DataTable';
 import GridSystem from './pages/GridSystem';
 import PageHeader from './pages/PageHeader';
 import Icons from './pages/Icon';
@@ -14,6 +15,7 @@ import Spinners from './pages/Spinners';
 const DemoApp = () =>
   <Router history={browserHistory}>
     <Route path="/" component={Page}>
+      <Route path="/data-tables" component={DataTable} />
       <Route path="/grid-system" component={GridSystem} />
       <Route path="/icons" component={Icons} />
       <Route path="/buttons" component={Buttons} />

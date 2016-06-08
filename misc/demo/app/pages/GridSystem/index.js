@@ -9,7 +9,7 @@ import exampleAutomaticCode from '!raw!./ExampleAutomatic';
 import ExampleManual from './ExampleManual';
 import exampleManualCode from '!raw!./ExampleManual';
 import ExampleContainers from './ExampleContainers';
-import ExampleContainersCode from '!raw!./ExampleContainers';
+import exampleContainersCode from '!raw!./ExampleContainers';
 
 const GridSystem = () =>
   <div>
@@ -35,7 +35,7 @@ const GridSystem = () =>
       <section className="slds-m-bottom--xx-large slds-p-top--x-large">
         <CodeExample
           title="Containers"
-          code={ExampleContainersCode}
+          code={exampleContainersCode}
         />
         <ExampleContainers />
       </section>

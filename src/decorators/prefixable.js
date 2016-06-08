@@ -12,11 +12,15 @@ function prefixClasses(cssPrefix = '', sldsClasses = [], props = {}) {
     )]
   );
 
-  prefixed = classes
-    .trim()
-    .split(/\s+/)
-    .map(c => `${cssPrefix}${c}`)
-    .join(' ');
+  if (classes !== '') {
+    prefixed = classes
+      .trim()
+      .split(/\s+/)
+      .map(c => `${cssPrefix}${c}`)
+      .join(' ');
+  } else {
+    prefixed = classes;
+  }
 
   prefixed = props.className !== undefined ? classNames(prefixed, props.className) : prefixed;
 
