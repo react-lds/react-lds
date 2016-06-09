@@ -1,17 +1,15 @@
 import React from 'react';
 import IconSVG from '../Icon/IconSVG';
 
-import classNames from 'classnames';
-
 const ButtonIcon = ({ sprite, icon, position, size }) => {
-  const classes = {
-    'slds-button__icon': true,
-    [`slds-button__icon--${position}`]: !!position,
-    [`slds-button__icon--${size}`]: size,
-  };
+  const classes = [
+    'button__icon',
+    { [`button__icon--${position}`]: !!position },
+    { [`button__icon--${size}`]: size },
+  ];
 
   return (
-    <IconSVG sprite={sprite} icon={icon} cssClasses={classNames(classes)} />
+    <IconSVG sprite={sprite} icon={icon} cssClasses={classes} />
   );
 };
 
