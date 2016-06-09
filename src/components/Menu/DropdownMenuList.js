@@ -2,8 +2,6 @@ import React from 'react';
 
 import prefixable from './../../decorators/prefixable';
 
-import { DropdownMenuListItem } from 'react-lds';
-
 export const DropdownMenuList = ({ prefix, header, height, heightIcon, children }) => {
   const renderHeader = () => {
     if (header) {
@@ -35,7 +33,7 @@ export const DropdownMenuList = ({ prefix, header, height, heightIcon, children 
 
 DropdownMenuList.propTypes = {
   prefix: React.PropTypes.func,
-  children: React.PropTypes.instanceOf(DropdownMenuListItem),
+  children: React.PropTypes.arrayOf(React.PropTypes.element),
   /**
    * Optional Header for this list. Mostly useful is multiple
    * DropdownMenuListtItems are in use

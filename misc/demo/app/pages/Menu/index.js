@@ -14,10 +14,13 @@ import ExampleNubbin from './ExampleNubbin';
 import exampleNubbinCode from '!raw!./ExampleNubbin';
 import ExampleHeight from './ExampleHeight';
 import exampleHeightCode from '!raw!./ExampleHeight';
+import ExamplePicklist from './ExamplePicklist';
+import examplePicklistCode from '!raw!./ExamplePicklist';
 
 import dropdownMenuCode from '!raw!react-lds/components/Menu/DropdownMenu';
 import dropdownMenuListCode from '!raw!react-lds/components/Menu/DropdownMenuList';
 import dropdownMenuListItemCode from '!raw!react-lds/components/Menu/DropdownMenuListItem';
+import picklistCode from '!raw!react-lds/components/Menu/Picklist';
 
 const MenuPage = () =>
   <div>
@@ -67,9 +70,19 @@ const MenuPage = () =>
       <ExampleHeight />
     </div>
 
+    <div className="slds-p-around--xx-large">
+      <CodeExample
+        title="Picklist and Multipicklist"
+        description="Picklists only need fixed data structure to render."
+        code={examplePicklistCode}
+      />
+      <ExamplePicklist />
+    </div>
+
     <PropTypeDescription code={dropdownMenuCode} header="### DropdownMenu Properties" />
     <PropTypeDescription code={dropdownMenuListCode} header="### DropdownMenuList Properties" />
     <PropTypeDescription code={dropdownMenuListItemCode} header="### DropdownMenuListItem Properties" />
+    <PropTypeDescription code={picklistCode} header="### Picklist Properties" />
   </div>;
 
 export default MenuPage;

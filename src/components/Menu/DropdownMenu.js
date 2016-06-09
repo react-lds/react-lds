@@ -8,10 +8,11 @@ export class DropdownMenu extends React.Component {
   constructor(props) {
     super(props);
     this.classes = ['dropdown-trigger', 'dropdown-trigger--click'];
-    this.state = { open: false };
+    this.state = { open: this.props.isOpen };
 
     this.toggle = this.toggle.bind(this);
     this.getClasses = this.getClasses.bind(this);
+    this.button = this.button.bind(this);
 
     this.dropdownClasses = [
       'dropdown',
@@ -21,30 +22,40 @@ export class DropdownMenu extends React.Component {
       { 'dropdown--bottom': this.props.position.startsWith('bottom') },
       { [`nubbin--${this.props.position}`]: this.props.nubbin },
     ];
-
-    this.button = (
-      <Button onClick={this.toggle} variation={this.props.button.noBorder ? 'icon-container' : 'icon-border-filled'}>
-        <ButtonIcon sprite={this.props.button.sprite} icon={this.props.button.icon} />
-      </Button>
-    );
   }
+
   getClasses() {
-    if (!this.state.open) {
+    if (!this.props.isOpen && !this.state.open) {
       return this.classes;
     }
 
     return [...this.classes, 'is-open'];
   }
+
+  button() {
+    if (this.props.button) {
+      return (
+        <Button onClick={this.toggle} variation={this.props.button.noBorder ? 'icon-container' : 'icon-border-filled'}>
+          <ButtonIcon sprite={this.props.button.sprite} icon={this.props.button.icon} />
+        </Button>
+      );
+    }
+
+    return this.props.customButton;
+  }
+
   toggle() {
     this.setState({ open: !this.state.open });
   }
+
   handleClickOutside() {
     this.setState({ open: false });
   }
+
   render() {
     return (
       <div className={this.props.prefix(this.getClasses())}>
-        {this.button}
+        {this.button()}
         <div className={this.props.prefix(this.dropdownClasses)}>
           {this.props.children}
         </div>
@@ -53,19 +64,39 @@ export class DropdownMenu extends React.Component {
   }
 }
 
+DropdownMenu.defaultProps = {
+  isOpen: false,
+};
+
 DropdownMenu.propTypes = {
   /**
    * One DropdownMenuList or many of them
    */
   children: React.PropTypes.node.isRequired,
   /**
+   * force open or closed state, is needed when using a custom button
+   */
+  isOpen: React.PropTypes.bool,
+  /**
    * The button that triggers the dropdown menu
+   * ```
+   * {
+   *    icon: 'settings',
+   *    sprite: 'utility',
+   *    noBorder: true,
+   * }
+   * ```
    */
   button: React.PropTypes.shape({
     icon: React.PropTypes.string.isRequired,
     sprite: React.PropTypes.string.isRequired,
     noBorder: React.PropTypes.bool,
-  }).isRequired,
+  }),
+  /**
+   * Fully customizable dropdown trigger button, use this instead of the button
+   * shape if needed
+   */
+  customButton: React.PropTypes.element,
   /**
    * prefix function from prefixable HOC
    */
