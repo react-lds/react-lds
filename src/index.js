@@ -8,6 +8,7 @@ import Badge from './components/Badge';
 import { Grid, Column, Container } from './components/Grid';
 import { Breadcrumb } from './components/Breadcrumb';
 import { Spinner } from './components/Spinner';
+import { DropdownMenu, DropdownMenuList, DropdownMenuListItem } from './components/Menu';
 
 export {
   Box,
@@ -26,4 +27,7 @@ export {
   Table,
   Row,
   Cell,
+  DropdownMenu,
+  DropdownMenuList,
+  DropdownMenuListItem,
 };

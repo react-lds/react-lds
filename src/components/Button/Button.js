@@ -1,16 +1,16 @@
 import React from 'react';
 
-import classNames from 'classnames';
+import prefixable from './../../decorators/prefixable';
 
-const Button = ({ variation, title, disabled, children, icon }) => {
-  const classes = {
-    'slds-button': true,
-    'slds-button--icon': icon,
-    [`slds-button--${variation}`]: variation,
-  };
+export const Button = ({ prefix, onClick, variation, title, disabled, children, icon }) => {
+  const classes = [
+    'button',
+    { 'button--icon': icon },
+    { [`button--${variation}`]: variation },
+  ];
 
   return (
-    <button className={classNames(classes)} disabled={disabled}>
+    <button onClick={onClick} className={prefix(classes)} disabled={disabled}>
       {(children && children.props.position === 'right') ? title : null}
       {!children ? title : children}
       {(children && children.props.position === 'left') ? title : null}
@@ -19,11 +19,19 @@ const Button = ({ variation, title, disabled, children, icon }) => {
 };
 
 Button.propTypes = {
-  variation: React.PropTypes.oneOf(['neutral', 'brand']),
+  /**
+   * Prefix from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
+  /**
+   * onClick handler to trigger an action
+   */
+  onClick: React.PropTypes.func,
+  variation: React.PropTypes.oneOf(['neutral', 'brand', 'icon-border-filled', 'icon-container']),
   title: React.PropTypes.string,
   disabled: React.PropTypes.bool,
   icon: React.PropTypes.bool,
   children: React.PropTypes.element,
 };
 
-export default Button;
+export default prefixable(Button);
