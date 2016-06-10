@@ -4,7 +4,7 @@ import sortable from './sortable';
 import truncatable from './truncatable';
 import resizable from './resizable';
 
-const Cell = (props) => {
+export const Cell = (props) => {
   const {
     prefix,
     scope,
@@ -50,10 +50,25 @@ Cell.variations = [
 ];
 
 Cell.propTypes = {
-  scope: React.PropTypes.string,
+  /**
+   * only th cells have a scope. Header cells have a col scope, and leading body cells can have a row scope.
+   */
+  scope: React.PropTypes.oneOf(['col', 'row']),
+  /**
+   * the prefix function from the prefixable HOC
+   */
   prefix: React.PropTypes.func,
+  /**
+   * main content
+   */
   children: React.PropTypes.node,
+  /**
+   * Override for the cell title attribute
+   */
   title: React.PropTypes.string,
+  /**
+   * data label for accessibility
+   */
   dataLabel: React.PropTypes.string,
 };
 

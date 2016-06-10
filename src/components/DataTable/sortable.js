@@ -63,7 +63,7 @@ const sortable = (Cell) => {
   };
 
   SortableCell.propTypes = Object.assign({}, Cell.propTypes, {
-    scope: React.PropTypes.string,
+    scope: React.PropTypes.oneOf(['col', 'row']),
     prefix: React.PropTypes.func,
     sortableAssistiveText: React.PropTypes.string,
     sortDirection: React.PropTypes.string,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { prefixable, flavorable, variationable } from '../../decorators';
 
-const Grid = (props) => {
+export const Grid = (props) => {
   const sldsClasses = ['grid'];
 
   return (
@@ -33,9 +33,16 @@ Grid.variations = [
   { nowrap: ['small', 'medium', 'large'] },
 ];
 
-Grid.propTypes = Object.assign({}, {
+Grid.propTypes = {
+  /**
+   * the prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func,
+  /**
+   * main content
+   */
   children: React.PropTypes.node,
-});
+};
 
 export default prefixable(
   variationable(

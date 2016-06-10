@@ -3,11 +3,16 @@ import React from 'react';
 import Masthead from './../../Masthead';
 import HeaderIcon from './../../HeaderIcon';
 import CodeExample from './../../components/CodeExample';
+import PropTypeDescription from './../../components/PropTypeDescription';
 
 import ExampleBasic from './ExampleBasic';
 import exampleBasicCode from '!raw!./ExampleBasic';
 import ExampleAdvanced from './ExampleAdvanced';
 import exampleAdvancedCode from '!raw!./ExampleAdvanced';
+
+import tableCode from '!raw!react-lds/components/DataTable/Table';
+import rowCode from '!raw!react-lds/components/DataTable/Row';
+import cellCode from '!raw!react-lds/components/DataTable/Cell';
 
 const DataTable = () =>
   <div>
@@ -29,8 +34,16 @@ const DataTable = () =>
         />
         <ExampleAdvanced />
       </section>
-
     </div>
+
+    <h2 className="slds-text-heading--medium">Table</h2>
+    <PropTypeDescription code={tableCode} />
+
+    <h2 className="slds-text-heading--medium">Row</h2>
+    <PropTypeDescription code={rowCode} />
+
+    <h2 className="slds-text-heading--medium">Cell</h2>
+    <PropTypeDescription code={cellCode} />
   </div>;
 
 export default DataTable;

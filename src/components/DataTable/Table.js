@@ -1,7 +1,7 @@
 import React from 'react';
 import { prefixable, flavorable, variationable } from '../../decorators';
 
-const Table = (props) => {
+export const Table = (props) => {
   const { prefix, children } = props;
 
   return (
@@ -24,7 +24,13 @@ Table.variations = [
 ];
 
 Table.propTypes = {
+  /**
+   * the prefix function from the prefixable HOC
+   */
   prefix: React.PropTypes.func,
+  /**
+   * main content
+   */
   children: React.PropTypes.node,
 };
 

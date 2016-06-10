@@ -72,7 +72,7 @@ const resizable = (Cell) => {
   }
 
   ResizeableCell.propTypes = Object.assign({}, Cell.propTypes, {
-    scope: React.PropTypes.string,
+    scope: React.PropTypes.oneOf(['col', 'row']),
     prefix: React.PropTypes.func,
     resizableAssistiveText: React.PropTypes.string,
     'is-resizable': React.PropTypes.bool,

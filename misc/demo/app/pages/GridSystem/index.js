@@ -3,6 +3,7 @@ import React from 'react';
 import Masthead from './../../Masthead';
 import HeaderIcon from './../../HeaderIcon';
 import CodeExample from './../../components/CodeExample';
+import PropTypeDescription from './../../components/PropTypeDescription';
 
 import ExampleAutomatic from './ExampleAutomatic';
 import exampleAutomaticCode from '!raw!./ExampleAutomatic';
@@ -10,6 +11,9 @@ import ExampleManual from './ExampleManual';
 import exampleManualCode from '!raw!./ExampleManual';
 import ExampleContainers from './ExampleContainers';
 import exampleContainersCode from '!raw!./ExampleContainers';
+
+import gridCode from '!raw!react-lds/components/Grid/Grid';
+import columnCode from '!raw!react-lds/components/Grid/Column';
 
 const GridSystem = () =>
   <div>
@@ -40,6 +44,12 @@ const GridSystem = () =>
         <ExampleContainers />
       </section>
     </div>
+
+    <h2 className="slds-text-heading--medium">Grid</h2>
+    <PropTypeDescription code={gridCode} />
+
+    <h2 className="slds-text-heading--medium">Column</h2>
+    <PropTypeDescription code={columnCode} />
   </div>;
 
 export default GridSystem;

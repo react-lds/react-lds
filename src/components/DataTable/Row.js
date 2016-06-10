@@ -1,7 +1,7 @@
 import React from 'react';
 import { prefixable, variationable } from '../../decorators';
 
-const Row = (props) => {
+export const Row = (props) => {
   const { head, prefix, children } = props;
   const sldsClasses = head ? ['text-heading--label'] : [];
 
@@ -18,8 +18,17 @@ Row.variations = [
 ];
 
 Row.propTypes = {
+  /**
+   * the prefix function from the prefixable HOC
+   */
   prefix: React.PropTypes.func,
+  /**
+   * main content
+   */
   children: React.PropTypes.node,
+  /**
+   * adds classes for header rows
+   */
   head: React.PropTypes.bool,
 };
 
