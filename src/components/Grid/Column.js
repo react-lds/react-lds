@@ -1,7 +1,7 @@
 import React from 'react';
 import { prefixable, sizeable, flavorable, variationable } from '../../decorators';
 
-const Column = (props) => {
+export const Column = (props) => {
   const sldsClasses = [
     'col',
     { [`align-${props.align}`]: !!props.align },
@@ -38,10 +38,20 @@ Column.variations = [
   'shrink-none',
 ];
 
-Column.propTypes = Object.assign({}, {
+Column.propTypes = {
+  /**
+   * Columns align on the main axis
+   */
   align: React.PropTypes.oneOf(['top', 'middle', 'bottom']),
+  /**
+   * the prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func,
+  /**
+   * main content
+   */
   children: React.PropTypes.node,
-});
+};
 
 export default prefixable(
   sizeable(

@@ -19,4 +19,17 @@ describe('prefixable', () => {
     expect(comp.find('div').hasClass('unicorn-foo')).toBeTruthy();
     expect(comp.find('div').hasClass('unicorn-bar')).toBeTruthy();
   });
+
+  it('does not prefix anything if sldsClasses is empty', () => {
+    const EmptyDummy = (props) =>
+      // eslint-disable-next-line react/prop-types
+      <div className={props.prefix([], props)}>
+        it works
+      </div>;
+
+    const PrefixedEmptyDummy = prefixable(EmptyDummy);
+
+    const comp = mount(<PrefixedEmptyDummy />, { context });
+    expect(comp.html()).toEqual('<div class="">it works</div>');
+  });
 });
