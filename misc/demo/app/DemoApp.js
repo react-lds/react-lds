@@ -7,6 +7,7 @@ import GridSystem from './pages/GridSystem';
 import PageHeader from './pages/PageHeader';
 import Icons from './pages/Icon';
 import MediaObject from './pages/MediaObject';
+import Modals from './pages/Modals';
 import Buttons from './pages/Button';
 import Badges from './pages/Badge';
 import Breadcrumb from './pages/Breadcrumb';
@@ -28,6 +29,7 @@ const DemoApp = () =>
       <Route path="/spinners" component={Spinners} />
       <Route path="/menus" component={Menu} />
       <Route path="/images" component={Images} />
+      <Route path="/modals" component={Modals} />
     </Route>
   </Router>;
 

@@ -3,6 +3,7 @@ import { Table, Row, Cell } from './components/DataTable';
 import MediaObject from './components/MediaObject';
 import PageHeader from './components/PageHeader';
 import { Icon, IconSVG } from './components/Icon';
+import { Backdrop, Modal, ModalContent, ModalHeader, ModalFooter } from './components/Modal';
 import { Button, ButtonIcon } from './components/Button';
 import Badge from './components/Badge';
 import { Grid, Column, Container } from './components/Grid';
@@ -33,4 +34,9 @@ export {
   DropdownMenuListItem,
   Picklist,
   Avatar,
+  Backdrop,
+  Modal,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
 };
