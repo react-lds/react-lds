@@ -9,6 +9,7 @@ import { Grid, Column, Container } from './components/Grid';
 import { Breadcrumb } from './components/Breadcrumb';
 import { Spinner } from './components/Spinner';
 import { DropdownMenu, DropdownMenuList, DropdownMenuListItem, Picklist } from './components/Menu';
+import Avatar from './components/Images';
 
 export {
   Box,
@@ -31,4 +32,5 @@ export {
   DropdownMenuList,
   DropdownMenuListItem,
   Picklist,
+  Avatar,
 };

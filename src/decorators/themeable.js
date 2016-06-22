@@ -69,6 +69,10 @@ const themeable = (Component) => {
     theme: themePropType,
   });
 
+  if (Component.contextTypes) {
+    ThemedComponent.contextTypes = Component.contextTypes;
+  }
+
   return ThemedComponent;
 };
 

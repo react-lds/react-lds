@@ -88,6 +88,11 @@ const sizeable = (Component) => {
     }, {})
   );
 
+  if (Component.contextTypes) {
+    SizeableComponent.contextTypes = Component.contextTypes;
+  }
+
+
   return SizeableComponent;
 };
 
