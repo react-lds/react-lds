@@ -11,6 +11,7 @@ import Buttons from './pages/Button';
 import Badges from './pages/Badge';
 import Breadcrumb from './pages/Breadcrumb';
 import Spinners from './pages/Spinners';
+import Menu from './pages/Menu';
 
 const DemoApp = () =>
   <Router history={browserHistory}>
@@ -24,6 +25,7 @@ const DemoApp = () =>
       <Route path="/media-objects" component={MediaObject} />
       <Route path="/breadcrumbs" component={Breadcrumb} />
       <Route path="/spinners" component={Spinners} />
+      <Route path="/menus" component={Menu} />
     </Route>
   </Router>;
 
