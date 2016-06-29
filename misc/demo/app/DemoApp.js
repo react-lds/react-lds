@@ -12,6 +12,7 @@ import Badges from './pages/Badge';
 import Breadcrumb from './pages/Breadcrumb';
 import Spinners from './pages/Spinners';
 import Menu from './pages/Menu';
+import Images from './pages/Images';
 
 const DemoApp = () =>
   <Router history={browserHistory}>
@@ -26,6 +27,7 @@ const DemoApp = () =>
       <Route path="/breadcrumbs" component={Breadcrumb} />
       <Route path="/spinners" component={Spinners} />
       <Route path="/menus" component={Menu} />
+      <Route path="/images" component={Images} />
     </Route>
   </Router>;
 

@@ -62,6 +62,10 @@ const variationable = (Component) => {
     VariationComponent.flavors = Component.flavors;
   }
 
+  if (Component.contextTypes) {
+    VariationComponent.contextTypes = Component.contextTypes;
+  }
+
   return VariationComponent;
 };
 

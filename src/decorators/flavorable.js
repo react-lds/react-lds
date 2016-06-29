@@ -63,6 +63,10 @@ const flavorable = (Component, baseClass) => {
     FlavoredComponent.variations = Component.variations;
   }
 
+  if (Component.contextTypes) {
+    FlavoredComponent.contextTypes = Component.contextTypes;
+  }
+
   return FlavoredComponent;
 };
 
