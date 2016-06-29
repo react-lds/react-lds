@@ -16,6 +16,7 @@ import Spinners from './pages/Spinners';
 import Menu from './pages/Menu';
 import Images from './pages/Images';
 import Notifications from './pages/Notifications';
+import Tabs from './pages/Tab';
 
 const DemoApp = () =>
   <Router history={browserHistory}>
@@ -34,6 +35,7 @@ const DemoApp = () =>
       <Route path="/images" component={Images} />
       <Route path="/modals" component={Modals} />
       <Route path="/notifications" component={Notifications} />
+      <Route path="/tabs" component={Tabs} />
     </Route>
   </Router>;
 
