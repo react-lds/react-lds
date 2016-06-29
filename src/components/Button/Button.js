@@ -2,7 +2,9 @@ import React from 'react';
 
 import prefixable from './../../decorators/prefixable';
 
-export const Button = ({ prefix, onClick, variation, title, disabled, children, icon, isPicklistLabel }) => {
+export const Button = (props) => {
+  const { prefix, onClick, variation, title, disabled, children, icon, isPicklistLabel } = props;
+
   const classes = [
     'button',
     { 'button--icon': icon },
@@ -11,7 +13,7 @@ export const Button = ({ prefix, onClick, variation, title, disabled, children, 
   ];
 
   return (
-    <button onClick={onClick} className={prefix(classes)} disabled={disabled}>
+    <button onClick={onClick} className={prefix(classes, props)} disabled={disabled}>
       {(children && children.props && children.props.position === 'right') ? title : null}
       {!children ? title : children}
       {(children && children.props && children.props.position === 'left') ? title : null}
@@ -28,7 +30,7 @@ Button.propTypes = {
    * onClick handler to trigger an action
    */
   onClick: React.PropTypes.func,
-  variation: React.PropTypes.oneOf(['neutral', 'brand', 'icon-border-filled', 'icon-container']),
+  variation: React.PropTypes.oneOf(['neutral', 'brand', 'icon-border-filled', 'icon-container', 'icon-inverse']),
   title: React.PropTypes.string,
   disabled: React.PropTypes.bool,
   /**
