@@ -9,6 +9,7 @@ import Icons from './pages/Icon';
 import MediaObject from './pages/MediaObject';
 import Modals from './pages/Modals';
 import Buttons from './pages/Button';
+import ButtonGroups from './pages/ButtonGroup';
 import Badges from './pages/Badge';
 import Breadcrumb from './pages/Breadcrumb';
 import Spinners from './pages/Spinners';
@@ -22,6 +23,7 @@ const DemoApp = () =>
       <Route path="/grid-system" component={GridSystem} />
       <Route path="/icons" component={Icons} />
       <Route path="/buttons" component={Buttons} />
+      <Route path="/button-groups" component={ButtonGroups} />
       <Route path="/badges" component={Badges} />
       <Route path="/page-headers" component={PageHeader} />
       <Route path="/media-objects" component={MediaObject} />

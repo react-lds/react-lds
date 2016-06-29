@@ -5,6 +5,7 @@ import PageHeader from './components/PageHeader';
 import { Icon, IconSVG } from './components/Icon';
 import { Backdrop, Modal, ModalContent, ModalHeader, ModalFooter } from './components/Modal';
 import { Button, ButtonIcon } from './components/Button';
+import { ButtonGroup } from './components/ButtonGroup';
 import Badge from './components/Badge';
 import { Grid, Column, Container } from './components/Grid';
 import { Breadcrumb } from './components/Breadcrumb';
@@ -19,6 +20,7 @@ export {
   MediaObject,
   PageHeader,
   Button,
+  ButtonGroup,
   ButtonIcon,
   Badge,
   Grid,

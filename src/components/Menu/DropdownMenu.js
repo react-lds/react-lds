@@ -7,7 +7,11 @@ import { Button, ButtonIcon } from 'react-lds';
 export class DropdownMenu extends React.Component {
   constructor(props) {
     super(props);
-    this.classes = ['dropdown-trigger', 'dropdown-trigger--click'];
+    this.classes = [
+      'dropdown-trigger',
+      'dropdown-trigger--click',
+      { 'button--last': this.props.last },
+    ];
     this.state = { open: this.props.isOpen };
 
     this.toggle = this.toggle.bind(this);
@@ -113,6 +117,11 @@ DropdownMenu.propTypes = {
    * displays the nubbin at the correct position if true, hidden per default
    */
   nubbin: React.PropTypes.bool,
+  /**
+   * indicates that this is the last element inside a button group and renders
+   * the required css class
+   */
+  last: React.PropTypes.bool,
 };
 
 DropdownMenu.defaultProps = {
