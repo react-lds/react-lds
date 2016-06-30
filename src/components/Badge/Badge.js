@@ -1,21 +1,20 @@
 import React from 'react';
+import { prefixable, themeable } from '../../decorators';
 
-import classNames from 'classnames';
-
-const Badge = ({ variation, label }) => {
-  const classes = {
-    'slds-badge': true,
-    [`slds-theme--${variation}`]: variation,
-  };
-
-  return (
-    <span className={classNames(classes)}>{label}</span>
-  );
-};
+export const Badge = (props) =>
+  <span className={props.prefix(['badge'], props)}>{props.label}</span>;
 
 Badge.propTypes = {
-  variation: React.PropTypes.oneOf(['default', 'shade', 'inverse']),
+  /**
+   * the prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func,
+  /**
+   * the badge label
+   */
   label: React.PropTypes.string.isRequired,
 };
 
-export default Badge;
+export default prefixable(
+  themeable(Badge)
+);
