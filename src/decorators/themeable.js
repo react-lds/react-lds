@@ -35,7 +35,7 @@ function getThemeClassName(theme) {
 
   if (/\stexture/.test(theme)) {
     classes = [`theme--${theme.split(' ')[0]}`, 'theme--alert-texture'];
-  } else {
+  } else if (theme !== undefined) {
     classes = [`theme--${theme}`];
   }
 

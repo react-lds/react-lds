@@ -15,6 +15,7 @@ import Breadcrumb from './pages/Breadcrumb';
 import Spinners from './pages/Spinners';
 import Menu from './pages/Menu';
 import Images from './pages/Images';
+import Notifications from './pages/Notifications';
 
 const DemoApp = () =>
   <Router history={browserHistory}>
@@ -32,6 +33,7 @@ const DemoApp = () =>
       <Route path="/menus" component={Menu} />
       <Route path="/images" component={Images} />
       <Route path="/modals" component={Modals} />
+      <Route path="/notifications" component={Notifications} />
     </Route>
   </Router>;
 

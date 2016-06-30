@@ -76,30 +76,30 @@ const Modals = () =>
       <ExampleDirectional />
     </div>
 
-    <div className="slds-p-around--xx-large">
-      <h2 className="slds-text-heading--medium">Modal</h2>
-      <PropTypeDescription code={modalCode} />
-    </div>
+    <PropTypeDescription
+      code={modalCode}
+      header="### Modal"
+    />
 
-    <div className="slds-p-around--xx-large">
-      <h2 className="slds-text-heading--medium">Modal Header</h2>
-      <PropTypeDescription code={modalHeaderCode} />
-    </div>
+    <PropTypeDescription
+      code={modalHeaderCode}
+      header="### Modal Header"
+    />
 
-    <div className="slds-p-around--xx-large">
-      <h2 className="slds-text-heading--medium">Modal Content</h2>
-      <PropTypeDescription code={modalContentCode} />
-    </div>
+    <PropTypeDescription
+      code={modalContentCode}
+      header="### Modal Content"
+    />
 
-    <div className="slds-p-around--xx-large">
-      <h2 className="slds-text-heading--medium">Modal Footer</h2>
-      <PropTypeDescription code={modalFooterCode} />
-    </div>
+    <PropTypeDescription
+      code={modalFooterCode}
+      header="### Modal Footer"
+    />
 
-    <div className="slds-p-around--xx-large">
-      <h2 className="slds-text-heading--medium">Backdrop</h2>
-      <PropTypeDescription code={backdropCode} />
-    </div>
+    <PropTypeDescription
+      code={backdropCode}
+      header="### Backdrop"
+    />
   </div>;
 
 export default Modals;
