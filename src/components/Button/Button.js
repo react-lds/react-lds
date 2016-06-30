@@ -39,6 +39,7 @@ Button.propTypes = {
     'icon-container',
     'icon-inverse',
     'icon-border',
+    'icon-bare',
   ]),
   title: React.PropTypes.string,
   disabled: React.PropTypes.bool,
