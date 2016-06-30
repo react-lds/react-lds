@@ -1,11 +1,4 @@
-import DropdownMenu from './DropdownMenu';
-import DropdownMenuList from './DropdownMenuList';
-import DropdownMenuListItem from './DropdownMenuListItem';
-import Picklist from './Picklist';
-
-export {
-  DropdownMenu,
-  DropdownMenuList,
-  DropdownMenuListItem,
-  Picklist,
-};
+export DropdownMenu from './DropdownMenu';
+export DropdownMenuList from './DropdownMenuList';
+export DropdownMenuListItem from './DropdownMenuListItem';
+export Picklist from './Picklist';

@@ -1,5 +1,1 @@
-import uniqueId from './uniqueId';
-
-export {
-  uniqueId,
-};
+export uniqueId from './uniqueId';

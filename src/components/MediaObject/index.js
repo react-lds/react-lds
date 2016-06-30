@@ -1,3 +1,1 @@
-import MediaObject from './MediaObject';
-
-export default MediaObject;
+export MediaObject from './MediaObject';

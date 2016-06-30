@@ -1,9 +1,3 @@
-import PageHeaderBase from './PageHeaderBase';
-import RecordHome from './RecordHome';
-import ObjectHome from './ObjectHome';
-
-export {
-  PageHeaderBase,
-  RecordHome,
-  ObjectHome,
-};
+export PageHeaderBase from './PageHeaderBase';
+export RecordHome from './RecordHome';
+export ObjectHome from './ObjectHome';

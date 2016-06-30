@@ -1,5 +1,1 @@
-import Spinner from './Spinner';
-
-export {
-  Spinner,
-};
+export Spinner from './Spinner';

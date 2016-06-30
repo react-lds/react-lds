@@ -1,7 +1,2 @@
-import Icon from './Icon';
-import IconSVG from './IconSVG';
-
-export {
-  Icon,
-  IconSVG,
-};
+export Icon from './Icon';
+export IconSVG from './IconSVG';

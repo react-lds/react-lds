@@ -1,9 +1,3 @@
-import Grid from './Grid';
-import Column from './Column';
-import Container from './Container';
-
-export {
-  Grid,
-  Column,
-  Container,
-};
+export Grid from './Grid';
+export Column from './Column';
+export Container from './Container';
