@@ -1,9 +1,11 @@
 import React from 'react';
-import { PageHeader } from 'react-lds';
+import { PageHeaderBase } from 'react-lds';
 
 const NormalExample = () =>
-  <PageHeader
-    title="Rohde Corp - 80,000 Widgets" info="Mark Jaeckal • Unlimited Customer • 11/13/15"
+  <PageHeaderBase
+    title="Rohde Corp - 80,000 Widgets"
+    info="Mark Jaeckal • Unlimited Customer • 11/13/15"
+    icon={{ icon: 'opportunity', sprite: 'standard' }}
   />;
 
 export default NormalExample;

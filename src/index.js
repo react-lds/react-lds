@@ -1,7 +1,7 @@
 import Box from './components/Box';
 import { Table, Row, Cell } from './components/DataTable';
 import MediaObject from './components/MediaObject';
-import PageHeader from './components/PageHeader';
+import { PageHeaderBase, RecordHome, ObjectHome } from './components/PageHeader';
 import { Icon, IconSVG } from './components/Icon';
 import { Backdrop, Modal, ModalContent, ModalHeader, ModalFooter } from './components/Modal';
 import { Button, ButtonIcon } from './components/Button';
@@ -23,7 +23,9 @@ export {
   Notification,
   Prompt,
   PromptForTouch,
-  PageHeader,
+  PageHeaderBase,
+  RecordHome,
+  ObjectHome,
   Button,
   ButtonGroup,
   ButtonIcon,
