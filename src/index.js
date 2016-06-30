@@ -6,6 +6,7 @@ import { Icon, IconSVG } from './components/Icon';
 import { Backdrop, Modal, ModalContent, ModalHeader, ModalFooter } from './components/Modal';
 import { Button, ButtonIcon } from './components/Button';
 import { ButtonGroup } from './components/ButtonGroup';
+import { Tab } from './components/Tab';
 import Badge from './components/Badge';
 import { Grid, Column, Container } from './components/Grid';
 import { Breadcrumb } from './components/Breadcrumb';
@@ -45,4 +46,5 @@ export {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Tab,
 };
