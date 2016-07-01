@@ -6,8 +6,14 @@ import Modal from '../Modal';
 import ModalHeader from '../ModalHeader';
 
 describe('<Modal>', () => {
+  const context = { assetBasePath: '/assets' };
+  const childContextTypes = {
+    assetBasePath: React.PropTypes.string,
+  };
+  const options = { context, childContextTypes };
+
   it('should render the correct markup', () => {
-    const wrapper = mount(<Modal><div className="foo" /></Modal>);
+    const wrapper = mount(<Modal><div className="foo" /></Modal>, options);
     expect(wrapper.find('.modal').find('.modal__container').length).toBe(1);
 
     const modalProps = wrapper.find('.modal').props();
@@ -16,7 +22,7 @@ describe('<Modal>', () => {
   });
 
   it('should be openable', () => {
-    const wrapper = mount(<Modal open><div className="foo" /></Modal>);
+    const wrapper = mount(<Modal open><div className="foo" /></Modal>, options);
     expect(wrapper.find('.modal').hasClass('fade-in-open')).toBeTruthy();
     expect(wrapper.find('.modal').props()['aria-hidden']).toBe('false');
   });
@@ -26,7 +32,7 @@ describe('<Modal>', () => {
       <Modal label="foo" description="bar">
         <ModalHeader />
         <div className="foo" />
-      </Modal>
+      </Modal>, options
     );
 
     const modalProps = wrapper.find('.modal').props();
@@ -42,7 +48,7 @@ describe('<Modal>', () => {
 
   it('should accept a dialog', () => {
     const wrapper = mount(
-      <Modal dialog><div className="foo" /></Modal>
+      <Modal dialog><div className="foo" /></Modal>, options
     );
     const modalContainerProps = wrapper.find('.modal__container').props();
     expect(modalContainerProps.tabIndex).toBe('0');
@@ -54,7 +60,7 @@ describe('<Modal>', () => {
       <Modal prompt>
         <ModalHeader />
         <div className="foo" />
-      </Modal>
+      </Modal>, options
     );
     expect(wrapper.find('.modal').props().role).toBe('alertdialog');
 
