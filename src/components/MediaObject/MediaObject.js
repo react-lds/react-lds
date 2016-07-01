@@ -11,10 +11,8 @@ export class MediaObject extends React.Component {
       return null;
     }
 
-    const sldsClasses = ['media__figure', className].filter(x => !!x);
-
     return (
-      <div className={this.props.prefix(sldsClasses, this.props)}>
+      <div className={this.props.prefix(['media__figure', className])}>
         {figure}
       </div>
     );
@@ -27,7 +25,7 @@ export class MediaObject extends React.Component {
     return (
       <div className={this.props.prefix(sldsClasses, this.props)}>
         {this.renderFigure(figureLeft)}
-        <div className={this.props.prefix(['media__body'], this.props)}>{children}</div>
+        <div className={this.props.prefix(['media__body'])}>{children}</div>
         {this.renderFigure(figureRight, 'media__figure--reverse')}
       </div>
     );

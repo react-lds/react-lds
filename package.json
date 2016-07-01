@@ -31,7 +31,7 @@
     "react-click-outside": "^2.1.0"
   },
   "devDependencies": {
-    "@salesforce-ux/design-system": "2.0.1",
+    "@salesforce-ux/design-system": "2.0.2",
     "babel-core": "^6.9.1",
     "babel-eslint": "^6.0.4",
     "babel-jest": "^12.1.0",
