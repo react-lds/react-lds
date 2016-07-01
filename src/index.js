@@ -14,6 +14,7 @@ import { Spinner } from './components/Spinner';
 import { DropdownMenu, DropdownMenuList, DropdownMenuListItem, Picklist } from './components/Menu';
 import Avatar from './components/Images';
 import { Notification, Prompt, PromptForTouch } from './components/Notifications';
+import { Card } from './components/Card';
 
 export {
   Box,
@@ -49,4 +50,5 @@ export {
   ModalFooter,
   ModalHeader,
   Tab,
+  Card,
 };
