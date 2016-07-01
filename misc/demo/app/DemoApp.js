@@ -17,6 +17,7 @@ import Menu from './pages/Menu';
 import Images from './pages/Images';
 import Notifications from './pages/Notifications';
 import Tabs from './pages/Tab';
+import Cards from './pages/Card';
 
 const DemoApp = () =>
   <Router history={browserHistory}>
@@ -36,6 +37,7 @@ const DemoApp = () =>
       <Route path="/modals" component={Modals} />
       <Route path="/notifications" component={Notifications} />
       <Route path="/tabs" component={Tabs} />
+      <Route path="/cards" component={Cards} />
     </Route>
   </Router>;
 
