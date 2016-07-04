@@ -18,6 +18,7 @@ import Images from './pages/Images';
 import Notifications from './pages/Notifications';
 import Tabs from './pages/Tab';
 import Cards from './pages/Card';
+import Forms from './pages/Form';
 
 const DemoApp = () =>
   <Router history={browserHistory}>
@@ -38,6 +39,7 @@ const DemoApp = () =>
       <Route path="/notifications" component={Notifications} />
       <Route path="/tabs" component={Tabs} />
       <Route path="/cards" component={Cards} />
+      <Route path="/forms" component={Forms} />
     </Route>
   </Router>;
 
