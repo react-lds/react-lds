@@ -1,9 +1,3 @@
-import Notification from './Notification';
-import Prompt from './Prompt';
-import PromptForTouch from './PromptForTouch';
-
-export {
-  Notification,
-  Prompt,
-  PromptForTouch,
-};
+export Notification from './Notification';
+export Prompt from './Prompt';
+export PromptForTouch from './PromptForTouch';

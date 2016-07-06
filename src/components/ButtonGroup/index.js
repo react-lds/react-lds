@@ -1,5 +1,1 @@
-import ButtonGroup from './ButtonGroup';
-
-export {
-  ButtonGroup,
-};
+export ButtonGroup from './ButtonGroup';
