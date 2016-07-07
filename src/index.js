@@ -15,3 +15,4 @@ export * from './components/Notifications';
 export * from './components/PageHeader';
 export * from './components/Tab';
 export * from './components/Spinner';
+export * from './decorators';

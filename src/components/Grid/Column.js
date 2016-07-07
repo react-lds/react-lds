@@ -1,5 +1,6 @@
 import React from 'react';
-import { prefixable, sizeable, flavorable, variationable } from '../../decorators';
+import { prefixable, flavorable, variationable } from '../../decorators';
+import sizeable from './sizeable';
 
 export const Column = (props) => {
   const sldsClasses = [
