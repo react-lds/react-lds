@@ -3,11 +3,21 @@
 @import "../../../node_modules/@salesforce-ux/design-system/scss/vendor/deprecate";
 @import "../../../node_modules/@salesforce-ux/design-system/scss/dependencies/index";
 
-$height-banner: 0rem;
+$height-banner:       0rem;
 $height-banner-badge: 0rem;
-$width-sidebar: 15rem;
+$width-sidebar:       15rem;
 
-$site-font-size-xx-large: 1.5rem;
-$site-font-size-xxx-large: 3rem;
-$site-square-masthead-image: 6rem;
+$site-font-size-small:        0.75rem;
+$site-font-size-medium:       0.875rem;
+$site-font-size-large:        1.125rem;
+$site-font-size-x-large:      1.25rem;
+$site-font-size-xx-large:     1.5rem;
+$site-font-size-xxx-large:    3rem;
+$site-square-masthead-image:  6rem;
 $site-height-masthead-header: 11.25rem;
+
+// Text Colors
+$site-color-text-default:         #5876a3;
+$site-color-text-strong:          #16325c;
+$site-color-text-weak-inverse:    #a8b8d0;
+$site-color-text-heading-callout: #5c2fda;

@@ -1,30 +1,45 @@
 import React from 'react';
 
+import { Grid, Column } from 'react-lds';
+
 import Masthead from './../../Masthead';
 import HeaderIcon from './../../HeaderIcon';
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
+import PageNavigationElement from './../../components/PageNavigationElement';
+import PageNavigationMenu from './../../components/PageNavigationMenu';
+import PageNavigation from './../../components/PageNavigation';
 
-import ExampleInput from './ExampleInput';
-import exampleInputCode from '!raw!./ExampleInput';
-
-import inputCode from '!raw!react-lds/components/Form/Input';
-
-const DataTable = () =>
+const Forms = ({ children }) =>
   <div>
     <Masthead figure={<HeaderIcon />} title="Forms" />
-    <div className="slds-p-around--xx-large">
+    <Grid>
+      <Column size-of="1-1" large-size-of="5-6">
+        {children}
+      </Column>
 
-      <section className="slds-m-bottom--xx-large slds-p-top--x-large">
-        <CodeExample
-          title="Input"
-          code={exampleInputCode}
-        />
-        <ExampleInput />
-      </section>
-
-    </div>
-    <PropTypeDescription code={inputCode} header="### Input" />
+      <Column size-of="1-1" large-size-of="1-6">
+        <PageNavigation>
+          <PageNavigationMenu title="Input" to="/forms/input">
+            <PageNavigationElement to="/forms/input/default">Default</PageNavigationElement>
+            <PageNavigationElement to="/forms/input/icon-left">With icon to the left</PageNavigationElement>
+            <PageNavigationElement to="/forms/input/icon-right">With icon to the right</PageNavigationElement>
+            <PageNavigationElement to="/forms/input/icon-left-right">
+              With icon to the left and right
+            </PageNavigationElement>
+            <PageNavigationElement to="/forms/input/required">Required</PageNavigationElement>
+            <PageNavigationElement to="/forms/input/disabled">Disabled</PageNavigationElement>
+            <PageNavigationElement to="/forms/input/error">Error</PageNavigationElement>
+            <PageNavigationElement to="forms/input/error-icon">Error with icon</PageNavigationElement>
+          </PageNavigationMenu>
+          <PageNavigationMenu title="Textarea" to="/forms/textarea" />
+          <PageNavigationMenu title="Radio" to="/forms/radio" />
+        </PageNavigation>
+      </Column>
+    </Grid>
   </div>;
 
-export default DataTable;
+
+Forms.propTypes = {
+  children: React.PropTypes.node,
+};
+
+export default Forms;

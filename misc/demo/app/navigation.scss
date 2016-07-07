@@ -107,3 +107,194 @@
     }
   }
 }
+
+// Defaults for site menu jump links list
+.site-menu--jump-links {
+  padding-top: 24px;
+
+  .icon__svg {
+    display: none;
+  }
+
+  // Deal with open states
+  .#{$css-prefix}is-open {
+
+    .site-states {
+      display: block;
+    }
+
+    .icon__svg {
+      opacity: 1;
+      transform: rotate(0deg);
+    }
+  }
+}
+
+// Nested list for variant states
+.site-states {
+
+  a {
+    padding: {
+      top: $spacing-x-small;
+      bottom: $spacing-x-small;
+      left: $spacing-x-large;
+    }
+  }
+}
+
+// Large Overrides
+@include mq-large-min {
+
+  .site-main-content {
+    margin: {
+      top: -$spacing-xx-large;
+      bottom: -$spacing-xx-large;
+    }
+    padding: {
+      top: $spacing-xx-large;
+      right: $spacing-xx-large;
+      bottom: $spacing-xx-large * 2;
+    }
+  }
+
+  // Component nav container
+  .site-menu--jump-links_container {
+    width: 16.667%;
+  }
+
+  // List of jump menu items
+  .site-menu--jump-links {
+    @include scrollbar($track: $color-background-alt);
+    overflow-x: hidden;
+    z-index: $z-index-default;
+
+    // Label at the top of jump menu items
+    .site-text-heading--label {
+      padding-left: $spacing-large;
+    }
+
+    // Links
+    a {
+      display: flex;
+      padding: $spacing-x-small $spacing-x-small $spacing-x-small $spacing-large;
+      line-height: 1.28571428571429;
+      color: $color-text-default;
+
+      &:hover {
+        background-color: rgba($color-background, 0.5);
+      }
+    }
+
+    // When component variant is selected
+    .#{$css-prefix}is-selected {
+      background-color: $color-background;
+
+      a:hover {
+        background-color: darken($color-background, 2.5);
+      }
+    }
+
+    .icon__svg {
+      @include square($square-icon-x-small-content);
+      display: inline-block;
+      opacity: 0.5;
+      transform: rotate(-90deg);
+    }
+  }
+
+  // Nested list for variant states
+  .site-states {
+    display: none;
+
+    a {
+      padding-left: $spacing-x-large;
+    }
+
+    .#{$css-prefix}is-active a {
+      color: $color-text-tab-label-selected;
+      background-color: $color-background-alt-2;
+    }
+  }
+}
+
+[class*="site-text-heading"],
+p,
+blockquote,
+figure,
+ul,
+ol,
+dl,
+table {
+  margin-bottom: $spacing-medium;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+[class*="site-text-heading"] {
+  margin-top: $spacing-xx-large;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-heading;
+  color: $site-color-text-strong;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  .site-code--content + .#{$css-prefix}container--medium &:first-child {
+    margin-top: $spacing-xx-large;
+  }
+}
+
+.site-text-heading--large {
+  font-size: $site-font-size-x-large;
+
+  .#{$css-prefix}select {
+    font-size: $site-font-size-medium;
+  }
+}
+
+.site-text-heading--medium {
+  font-size: $site-font-size-large;
+}
+
+[class*="text-heading--label"],
+.#{$css-prefix}max-medium-table--stacked-horizontal td:before {
+  font-size: $site-font-size-small;
+  text-transform: uppercase;
+}
+
+.site-text-heading--label-weak-large {
+  margin-bottom: 0;
+  font-size: $site-font-size-medium;
+  letter-spacing: 0.0625rem;
+
+  .grid-card & {
+    padding-top: $spacing-medium;
+  }
+}
+
+.site-text-heading--label {
+
+  &,
+  thead & th {
+    font-weight: $font-weight-bold;
+  }
+}
+
+.site-text-heading--callout {
+  color: $site-color-text-heading-callout;
+}
+
+.site-text-introduction {
+  margin-bottom: $spacing-x-large + $spacing-medium;
+  font: {
+    size: $font-size-large;
+    weight: $font-weight-light;
+  }
+
+  & + & {
+    margin-top: -$spacing-large;
+  }
+}
