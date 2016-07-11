@@ -3,7 +3,7 @@ import React from 'react';
 import prefixable from './../../decorators/prefixable';
 import enhanceWithClickOutside from 'react-click-outside';
 
-import { Grid, Column, DropdownMenu } from 'react-lds';
+import { Grid, Column, DropdownMenu } from '../../index';
 
 export class ObjectHome extends React.Component {
   constructor(props) {

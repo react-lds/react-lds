@@ -2,7 +2,7 @@ import React from 'react';
 
 import prefixable from '../../decorators/prefixable';
 
-import { Grid, MediaObject, Icon } from 'react-lds';
+import { Grid, MediaObject, Icon } from '../../index';
 
 export const Card = ({ prefix, icon, sprite, header, headerRight, body, footer }) =>
   <div className={prefix(['card'])}>

@@ -2,7 +2,7 @@ import React from 'react';
 import enhanceWithClickOutside from 'react-click-outside';
 
 import prefixable from './../../decorators/prefixable';
-import { Button, ButtonIcon } from 'react-lds';
+import { Button, ButtonIcon } from '../../index';
 
 export class DropdownMenu extends React.Component {
   constructor(props) {

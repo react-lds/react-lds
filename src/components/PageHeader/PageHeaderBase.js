@@ -1,7 +1,7 @@
 import React from 'react';
 
 import prefixable from './../../decorators/prefixable';
-import { IconSVG, MediaObject } from 'react-lds';
+import { IconSVG, MediaObject } from '../../index';
 
 export const PageHeaderBase = ({ prefix, title, info, icon }) => {
   const iconRendered = <IconSVG sprite={icon.sprite} icon={icon.icon} />;

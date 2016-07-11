@@ -1,7 +1,7 @@
 import React from 'react';
 
 import prefixable from './../../decorators/prefixable';
-import { IconSVG } from 'react-lds';
+import { IconSVG } from '../../index';
 
 export const DropdownMenuListItem = ({
   prefix,
