@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from 'react-lds';
+import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from '../../index';
 
 const Prompt = (props) => (
   <div>

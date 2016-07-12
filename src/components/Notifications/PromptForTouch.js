@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, ModalHeader, ModalContent, Backdrop } from 'react-lds';
+import { Modal, ModalHeader, ModalContent, Backdrop } from '../../index';
 
 const header = (title, tagline, headerIcon) => {
   const hasHeader = !!title || !!tagline || !!headerIcon;

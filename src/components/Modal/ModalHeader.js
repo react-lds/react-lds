@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ButtonIcon } from 'react-lds';
+import { Button, ButtonIcon } from '../../index';
 import { prefixable } from '../../decorators';
 
 export class ModalHeader extends React.Component {

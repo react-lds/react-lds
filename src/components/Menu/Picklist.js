@@ -1,7 +1,7 @@
 import React from 'react';
 import enhanceWithClickOutside from 'react-click-outside';
 
-import { DropdownMenu, DropdownMenuList, DropdownMenuListItem, Button, IconSVG } from 'react-lds';
+import { DropdownMenu, DropdownMenuList, DropdownMenuListItem, Button, IconSVG } from '../../index';
 
 export class Picklist extends React.Component {
   constructor(props) {

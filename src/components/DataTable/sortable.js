@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconSVG } from 'react-lds';
+import { IconSVG } from '../../index';
 
 function assistiveText(prefix, title) {
   return <span className={prefix(['assistive-text'])}>{title}</span>;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import prefixable from './../../decorators/prefixable';
 
-import { Grid, Column, MediaObject, IconSVG } from 'react-lds';
+import { Grid, Column, MediaObject, IconSVG } from '../../index';
 
 export const RecordHome = ({ prefix, icon, title, recordType, headerButtons, detailItems = [] }) => {
   const iconRendered = <IconSVG sprite={icon.sprite} icon={icon.icon} />;
