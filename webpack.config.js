@@ -1,10 +1,11 @@
 var path = require('path');
+var port = process.env.PORT || 8080
 
 module.exports = {
   devtool: 'eval',
   entry: [
     'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:8080',
+    `webpack-dev-server/client?http://localhost:${port}`,
     'webpack/hot/only-dev-server',
     './misc/demo/app/main.js',
   ],
