@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "test-watch": "jest --watch=all",
-    "start": "mkdir -p dist && cp misc/demo/index.html dist/ && cp -r node_modules/@salesforce-ux/design-system/assets dist/ && webpack-dev-server --content-base dist/ --progress --colors --hot --history-api-fallback",
+    "start": "WEBPACK_PORT=${PORT:-8080} && mkdir -p dist && cp misc/demo/index.html dist/ && cp -r node_modules/@salesforce-ux/design-system/assets dist/ && webpack-dev-server --content-base dist/ --progress --colors --port $WEBPACK_PORT --hot --history-api-fallback",
     "build": "webpack --config webpack.production.config.js -p",
     "lint": "eslint src misc"
   },
