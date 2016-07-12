@@ -1,7 +1,7 @@
 import React from 'react';
 import { prefixable } from '../../decorators';
 
-import { IconSVG, Button, ButtonIcon } from 'react-lds';
+import { IconSVG, Button, ButtonIcon } from '../../index';
 
 export const Input = ({
   prefix,
