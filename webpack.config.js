@@ -1,11 +1,9 @@
-var path = require('path');
-var port = process.env.PORT || 8080
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   devtool: 'eval',
   entry: [
-    'react-hot-loader/patch',
-    `webpack-dev-server/client?http://localhost:${port}`,
     'webpack/hot/only-dev-server',
     './misc/demo/app/main.js',
   ],
@@ -13,6 +11,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: "demo.js"
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
   module: {
     loaders: [
       {
