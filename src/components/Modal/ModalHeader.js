@@ -6,7 +6,7 @@ export class ModalHeader extends React.Component {
   getCloseButton() {
     return (
       <Button sldsClasses={['modal__close']} variation="icon-inverse" size="large">
-        <ButtonIcon sprite="action" icon="close" />
+        <ButtonIcon sprite="action" icon="close" size="large" />
         <span className={this.props.prefix(['assistive-text'])}>Close</span>
       </Button>
     );

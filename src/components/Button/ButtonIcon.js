@@ -9,7 +9,7 @@ const ButtonIcon = ({ sprite, icon, position, size }) => {
   ];
 
   return (
-    <IconSVG sprite={sprite} icon={icon} sldsClasses={classes} fill={false} />
+    <IconSVG sprite={sprite} icon={icon} sldsClasses={classes} fill={false} background={false} />
   );
 };
 

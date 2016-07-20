@@ -6,12 +6,12 @@ import { iconName } from './util';
 const IconSVG = (props, { assetBasePath }) => {
   const { prefix, sprite, icon, background, size, fill } = props;
   let backgroundClass = background;
-  if (!backgroundClass) {
+  if (backgroundClass === undefined || backgroundClass === true) {
     backgroundClass = `${sprite}-${icon}`;
   }
   const sldsClasses = [
     { icon: fill },
-    `icon-${backgroundClass}`,
+    { [`icon-${backgroundClass}`]: !!backgroundClass },
     { [`icon--${size}`]: !!size },
   ];
 
@@ -36,9 +36,9 @@ IconSVG.propTypes = {
    */
   icon: React.PropTypes.string.isRequired,
   /**
-   * optional, set this if you want to override the default background class
+   * optional, set this if you want to override the default background class. set to false to not set a background
    */
-  background: React.PropTypes.string,
+  background: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
   /**
    * size of the icon
   */
