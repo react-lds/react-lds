@@ -30,7 +30,13 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/input/error">Error</PageNavigationElement>
             <PageNavigationElement to="forms/input/error-icon">Error with icon</PageNavigationElement>
           </PageNavigationMenu>
-          <PageNavigationMenu title="Textarea" to="/forms/textarea" />
+          <PageNavigationMenu title="Textarea" to="/forms/textarea">
+            <PageNavigationElement to="/forms/textarea/default">Default</PageNavigationElement>
+            <PageNavigationElement to="/forms/textarea/required">Required</PageNavigationElement>
+            <PageNavigationElement to="/forms/textarea/error">Error</PageNavigationElement>
+            <PageNavigationElement to="/forms/textarea/disabled">Disabled</PageNavigationElement>
+            <PageNavigationElement to="/forms/textarea/readonly">Read-Only</PageNavigationElement>
+          </PageNavigationMenu>
           <PageNavigationMenu title="Radio" to="/forms/radio" />
         </PageNavigation>
       </Column>

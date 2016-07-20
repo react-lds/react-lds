@@ -20,7 +20,7 @@ import Tabs from './pages/Tab';
 import Cards from './pages/Card';
 import Forms from './pages/Form';
 import InputVariants from './pages/Form/Input';
-import Textarea from './pages/Form/Textarea';
+import TextareaVariants from './pages/Form/Textarea';
 import Radio from './pages/Form/Radio';
 
 const DemoApp = () =>
@@ -48,7 +48,10 @@ const DemoApp = () =>
           <IndexRedirect to="default" />
           <Route path=":exampleId" component={InputVariants} />
         </Route>
-        <Route path="textarea" component={Textarea} />
+        <Route path="textarea">
+          <IndexRedirect to="default" />
+          <Route path=":exampleId" component={TextareaVariants} />
+        </Route>
         <Route path="radio" component={Radio} />
       </Route>
     </Route>
