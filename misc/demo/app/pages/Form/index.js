@@ -38,6 +38,13 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/textarea/readonly">Read-Only</PageNavigationElement>
           </PageNavigationMenu>
           <PageNavigationMenu title="Radio" to="/forms/radio" />
+          <PageNavigationMenu title="Select" to="/forms/select">
+            <PageNavigationElement to="/forms/select/default">Default</PageNavigationElement>
+            <PageNavigationElement to="/forms/select/required">Required</PageNavigationElement>
+            <PageNavigationElement to="/forms/select/error">Error</PageNavigationElement>
+            <PageNavigationElement to="/forms/select/disabled">Disabled</PageNavigationElement>
+            <PageNavigationElement to="/forms/select/multiple">Multiple Selection</PageNavigationElement>
+          </PageNavigationMenu>
         </PageNavigation>
       </Column>
     </Grid>
