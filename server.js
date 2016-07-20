@@ -24,5 +24,5 @@ server.listen(port, 'localhost', err => {
   }
 
   // eslint-disable-next-line
-  return console.log('Listening at http://localhost:3000/');
+  return console.log(`Listening at http://localhost:${port}/`);
 });
