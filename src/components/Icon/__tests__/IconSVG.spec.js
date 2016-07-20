@@ -21,4 +21,9 @@ describe('<IconSVG />', () => {
     const icon = mount(<IconSVG sprite="standard" icon="account" background="custom-custom89" />, { context });
     expect(icon.find('svg').hasClass('slds-icon-custom-custom89')).toBeTruthy();
   });
+
+  it('can display an icon without a background color', () => {
+    const icon = mount(<IconSVG sprite="standard" icon="account" background={false} />, { context });
+    expect(icon.find('svg').hasClass('slds-icon-standard-account')).toBeFalsy();
+  });
 });
