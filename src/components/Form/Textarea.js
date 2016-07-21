@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+  FormElement,
+  FormElementControl,
+  FormElementLabel,
+  FormElementError,
+} from '../../';
 import { prefixable } from '../../decorators';
 
 export const Textarea = (props) => {
@@ -14,18 +20,7 @@ export const Textarea = (props) => {
     readOnly,
   } = props;
 
-  const formElementClasses = [
-    'form-element',
-    { 'is-required': required },
-    { 'has-error': !!error },
-  ];
-
-  const formLabelClasses = [
-    'form-element__label',
-  ];
-
-  const formControlClasses = [
-    'form-element__control',
+  const formElementControlClasses = [
     { 'has-divider--bottom': readOnly },
   ];
 
@@ -50,44 +45,14 @@ export const Textarea = (props) => {
     );
   };
 
-  const renderError = () => {
-    if (error) {
-      return (
-        <div className={prefix(['form-element__help'])}>{error}</div>
-      );
-    }
-
-    return null;
-  };
-
-  const renderRequired = () => {
-    if (required) {
-      return (
-        <abbr className={prefix(['required'])} title="required">*</abbr>
-      );
-    }
-
-    return null;
-  };
-
-  const renderLabel = () => {
-    const LabelElement = readOnly ? 'span' : 'label';
-
-    return (
-      <LabelElement className={prefix(formLabelClasses, props)} htmlFor={readOnly ? null : id}>
-        {renderRequired()}{label}
-      </LabelElement>
-    );
-  };
-
   return (
-    <div className={prefix(formElementClasses, props)}>
-      {renderLabel()}
-      <div className={prefix(formControlClasses, props)}>
+    <FormElement required={required} error={error}>
+      <FormElementLabel label={label} id={id} required={required} />
+      <FormElementControl sldsClasses={formElementControlClasses}>
         {renderContent()}
-      </div>
-      {renderError()}
-    </div>
+      </FormElementControl>
+      <FormElementError error={error} />
+    </FormElement>
   );
 };
 
@@ -128,7 +93,6 @@ Textarea.propTypes = {
    * render a static textarea-output instead
    */
   readOnly: React.PropTypes.bool,
-
 };
 
 export default prefixable(Textarea);

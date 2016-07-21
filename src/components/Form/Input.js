@@ -1,33 +1,39 @@
 import React from 'react';
+import {
+  FormElement,
+  FormElementControl,
+  FormElementLabel,
+  FormElementError,
+  IconSVG,
+  Button,
+  ButtonIcon,
+} from '../../';
 import { prefixable } from '../../decorators';
 
-import { IconSVG, Button, ButtonIcon } from '../../index';
+export const Input = (props) => {
+  const {
+    prefix,
+    id,
+    value,
+    label,
+    placeholder,
+    type,
+    iconLeft,
+    iconRight,
+    iconRightOnClick,
+    onChange,
+    required,
+    disabled,
+    error,
+    errorIcon,
+  } = props;
 
-export const Input = ({
-  prefix,
-  id,
-  value,
-  label,
-  placeholder,
-  type,
-  iconLeft,
-  iconRight,
-  iconRightOnClick,
-  onChange,
-  required,
-  disabled,
-  error,
-  errorIcon,
-}) => {
-  const renderRequired = () => {
-    if (required) {
-      return (
-        <abbr className={prefix(['required'])} title="required">*</abbr>
-      );
-    }
-
-    return null;
-  };
+  const formElementControlClasses = [
+    { 'input-has-icon': iconLeft || iconRight || (error && errorIcon) },
+    { 'input-has-icon--right': iconRight && !iconLeft },
+    { 'input-has-icon--left': ((error && errorIcon) || iconLeft) && !iconRight },
+    { 'input-has-icon--left-right': iconLeft && iconRight },
+  ];
 
   const renderIconLeft = () => {
     let iconName = iconLeft;
@@ -74,38 +80,10 @@ export const Input = ({
     return null;
   };
 
-  const renderError = () => {
-    if (error) {
-      return (
-        <div className={prefix(['form-element__help'])}>{error}</div>
-      );
-    }
-
-    return null;
-  };
-
-  const formElementClasses = [
-    'form-element',
-    { 'is-required': required },
-    { 'has-error': error },
-  ];
-
-  const formElementControlClasses = [
-    'form-element__control',
-    { 'input-has-icon': iconLeft || iconRight || (error && errorIcon) },
-    { 'input-has-icon--right': iconRight && !iconLeft },
-    { 'input-has-icon--left': ((error && errorIcon) || iconLeft) && !iconRight },
-    { 'input-has-icon--left-right': iconLeft && iconRight },
-  ];
-
-
   return (
-    <div className={prefix(formElementClasses)}>
-      <label className={prefix(['form-element__label'])} htmlFor={id}>
-        {renderRequired()}
-        {label}
-      </label>
-      <div className={prefix(formElementControlClasses)}>
+    <FormElement required={required} error={error}>
+      <FormElementLabel label={label} id={id} required={required} />
+      <FormElementControl sldsClasses={formElementControlClasses}>
         {renderIconLeft()}
         {renderIconRight()}
         <input
@@ -118,9 +96,9 @@ export const Input = ({
           required={required}
           disabled={disabled}
         />
-      </div>
-      {renderError()}
-    </div>
+      </FormElementControl>
+      <FormElementError error={error} />
+    </FormElement>
   );
 };
 
