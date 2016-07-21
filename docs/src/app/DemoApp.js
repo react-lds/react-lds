@@ -14,6 +14,7 @@ import Badges from './pages/Badge';
 import Breadcrumb from './pages/Breadcrumb';
 import Spinners from './pages/Spinners';
 import Menu from './pages/Menu';
+import Lookups from './pages/Lookups';
 import Images from './pages/Images';
 import Notifications from './pages/Notifications';
 import Tabs from './pages/Tab';
@@ -43,6 +44,7 @@ const DemoApp = () =>
       <Route path="notifications" component={Notifications} />
       <Route path="tabs" component={Tabs} />
       <Route path="cards" component={Cards} />
+      <Route path="lookups" component={Lookups} />
       <Route path="forms" component={Forms}>
         <IndexRedirect to="input" />
         <Route path="input">
