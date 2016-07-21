@@ -44,8 +44,8 @@ export const Textarea = (props) => {
         id={id}
         onChange={onChange}
         placeholder={placeholder}
-        disabled={disabled ? '' : null}
-        required={required ? '' : null}
+        disabled={disabled}
+        required={required}
       ></textarea>
     );
   };

@@ -20,6 +20,7 @@ import Tabs from './pages/Tab';
 import Cards from './pages/Card';
 import Forms from './pages/Form';
 import InputVariants from './pages/Form/Input';
+import SelectVariants from './pages/Form/Select';
 import TextareaVariants from './pages/Form/Textarea';
 import Radio from './pages/Form/Radio';
 
@@ -53,6 +54,10 @@ const DemoApp = () =>
           <Route path=":exampleId" component={TextareaVariants} />
         </Route>
         <Route path="radio" component={Radio} />
+        <Route path="select">
+          <IndexRedirect to="default" />
+          <Route path=":exampleId" component={SelectVariants} />
+        </Route>
       </Route>
     </Route>
   </Router>;
