@@ -10,7 +10,7 @@ const compiler = webpack(config);
 
 const server = new WebPackDevServer(compiler, {
   compress: true,
-  contentBase: path.resolve(__dirname, 'dist'),
+  contentBase: path.resolve(__dirname, 'src'),
   historyApiFallback: true,
   hot: true,
   quiet: false,

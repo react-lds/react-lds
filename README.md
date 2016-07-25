@@ -2,9 +2,19 @@
 
 ## Development
 
-To get a hot reloading local dev environment running:
+To get a hot reloading local dev environment running, please [read the installation guide](docs/README.md) in the `docs` folder
 
-1. `npm install`
-2. Start webpack-dev-server with `npm start`
-3. `open http://localhost:8080/`
-4. You can change the default webpack port with e.g. `PORT=9000 npm start`
+## Publish
+
+- Adjust version in `package.json`
+- Write `CHANGELOG.md`
+- Build package and publish it
+    ```sh
+    npm run prebuild && npm run build
+    cd build
+    npm publish
+    ```
+
+## Credits
+
+The module structure and build scripts are copied from [material-ui](https://github.com/callemall/material-ui)
