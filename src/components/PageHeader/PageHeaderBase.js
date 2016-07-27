@@ -8,7 +8,7 @@ export const PageHeaderBase = ({ prefix, title, info, icon }) => {
 
   return (
     <div className={prefix(['page-header'])} role="banner">
-      <MediaObject figureLeft={iconRendered} className={prefix(['media--center'])}>
+      <MediaObject figureLeft={iconRendered} center>
         <p className={prefix(['page-header__title', 'truncate', 'align-middle'])} title={title}>
           {title}
         </p>

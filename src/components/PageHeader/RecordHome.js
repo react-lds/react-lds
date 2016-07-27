@@ -6,12 +6,23 @@ import { Grid, Column, MediaObject, IconSVG } from '../../index';
 
 export const RecordHome = ({ prefix, icon, title, recordType, headerButtons, detailItems = [] }) => {
   const iconRendered = <IconSVG sprite={icon.sprite} icon={icon.icon} />;
-  const detailItemsRendered = detailItems.map((item, index) =>
-    <li className={prefix(['page-header__detail-block'])} key={`${item.title}-${index}`}>
-      <p className={prefix(['text-heading--label-normal', 'truncate', 'm-bottom--xx-small'])}>{item.title}</p>
-      <p className={prefix(['text-body--regular', 'truncate'])}>{item.content}</p>
-    </li>
-  );
+  let detailRow;
+
+  if (detailItems.length > 0) {
+    const detailItemsRendered = detailItems.map((item, index) =>
+      <li className={prefix(['page-header__detail-block'])} key={`${item.title}-${index}`}>
+        <p className={prefix(['text-heading--label-normal', 'truncate', 'm-bottom--xx-small'])}>{item.title}</p>
+        <p className={prefix(['text-body--regular', 'truncate'])}>{item.content}</p>
+      </li>
+    );
+    detailRow = (
+      <ul className={prefix(['grid', 'page-header__detail-row'])}>
+        {detailItemsRendered}
+      </ul>
+    );
+  } else {
+    detailRow = '';
+  }
 
   return (
     <div className={prefix(['page-header'])} role="banner">
@@ -30,9 +41,7 @@ export const RecordHome = ({ prefix, icon, title, recordType, headerButtons, det
           {headerButtons}
         </Column>
       </Grid>
-      <ul className={prefix(['grid', 'page-header__detail-row'])}>
-        {detailItemsRendered}
-      </ul>
+      {detailRow}
     </div>
   );
 };

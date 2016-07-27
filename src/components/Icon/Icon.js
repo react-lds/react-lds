@@ -18,7 +18,7 @@ export const Icon = (props) => {
 
   return (
     <WrapperElement className={prefix(sldsClasses, props)} title={title}>
-      <IconSVG sprite={sprite} icon={icon} size={size} />
+      <IconSVG sprite={sprite} icon={icon} size={size} background={background} />
       <span className={prefix(['assistive-text'])}>{title}</span>
     </WrapperElement>
   );
