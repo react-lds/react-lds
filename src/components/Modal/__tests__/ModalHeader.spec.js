@@ -40,7 +40,8 @@ describe('<ModalHeader>', () => {
 
   it('should render in error-theme if it is a prompt', () => {
     const wrapper = mount(<ModalHeader prompt />, options);
-    expect(wrapper.find('.modal__header').hasClass('theme--error theme--alert-texture')).toBeTruthy();
+    expect(wrapper.find('.modal__header').hasClass('theme--error')).toBeTruthy();
+    expect(wrapper.find('.modal__header').hasClass('theme--alert-texture')).toBeTruthy();
   });
 
   it('should hide the close button if it is uncloseable', () => {
