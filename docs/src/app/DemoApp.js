@@ -1,50 +1,40 @@
 import React from 'react';
 import { Router, Route, IndexRedirect, browserHistory } from 'react-router';
 
-import Page from './Page';
-import DataTable from './pages/DataTable';
-import GridSystem from './pages/GridSystem';
-import PageHeader from './pages/PageHeader';
-import Icons from './pages/Icon';
-import MediaObject from './pages/MediaObject';
-import Modals from './pages/Modals';
-import Buttons from './pages/Button';
-import ButtonGroups from './pages/ButtonGroup';
 import Badges from './pages/Badge';
 import Breadcrumb from './pages/Breadcrumb';
-import Spinners from './pages/Spinners';
-import Menu from './pages/Menu';
-import Lookups from './pages/Lookups';
-import Images from './pages/Images';
-import Notifications from './pages/Notifications';
-import Tabs from './pages/Tab';
+import ButtonGroups from './pages/ButtonGroup';
+import Buttons from './pages/Button';
 import Cards from './pages/Card';
+import DataTable from './pages/DataTable';
 import Forms from './pages/Form';
+import GridSystem from './pages/GridSystem';
+import Icons from './pages/Icon';
+import Images from './pages/Images';
 import InputVariants from './pages/Form/Input';
-import SelectVariants from './pages/Form/Select';
-import TextareaVariants from './pages/Form/Textarea';
+import Lookups from './pages/Lookups';
+import MediaObject from './pages/MediaObject';
+import Menu from './pages/Menu';
+import Modals from './pages/Modals';
+import Notifications from './pages/Notifications';
+import Page from './Page';
+import PageHeader from './pages/PageHeader';
+import Pills from './pages/Pills';
 import Radio from './pages/Form/Radio';
+import SelectVariants from './pages/Form/Select';
+import Spinners from './pages/Spinners';
+import Tabs from './pages/Tab';
+import TextareaVariants from './pages/Form/Textarea';
 
 const DemoApp = () =>
   <Router history={browserHistory}>
     <Route path="/" component={Page}>
-      <Route path="data-tables" component={DataTable} />
-      <Route path="grid-system" component={GridSystem} />
-      <Route path="icons" component={Icons} />
-      <Route path="buttons" component={Buttons} />
-      <Route path="button-groups" component={ButtonGroups} />
       <Route path="badges" component={Badges} />
-      <Route path="page-headers" component={PageHeader} />
-      <Route path="media-objects" component={MediaObject} />
       <Route path="breadcrumbs" component={Breadcrumb} />
-      <Route path="spinners" component={Spinners} />
-      <Route path="menus" component={Menu} />
-      <Route path="images" component={Images} />
-      <Route path="modals" component={Modals} />
-      <Route path="notifications" component={Notifications} />
-      <Route path="tabs" component={Tabs} />
+      <Route path="button-groups" component={ButtonGroups} />
+      <Route path="buttons" component={Buttons} />
       <Route path="cards" component={Cards} />
-      <Route path="lookups" component={Lookups} />
+      <Route path="data-tables" component={DataTable} />
       <Route path="forms" component={Forms}>
         <IndexRedirect to="input" />
         <Route path="input">
@@ -61,6 +51,18 @@ const DemoApp = () =>
           <Route path=":exampleId" component={SelectVariants} />
         </Route>
       </Route>
+      <Route path="grid-system" component={GridSystem} />
+      <Route path="icons" component={Icons} />
+      <Route path="images" component={Images} />
+      <Route path="lookups" component={Lookups} />
+      <Route path="media-objects" component={MediaObject} />
+      <Route path="menus" component={Menu} />
+      <Route path="modals" component={Modals} />
+      <Route path="notifications" component={Notifications} />
+      <Route path="page-headers" component={PageHeader} />
+      <Route path="pills" component={Pills} />
+      <Route path="spinners" component={Spinners} />
+      <Route path="tabs" component={Tabs} />
     </Route>
   </Router>;
 
