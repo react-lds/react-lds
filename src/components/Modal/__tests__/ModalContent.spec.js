@@ -7,8 +7,8 @@ import ModalContent from '../ModalContent';
 describe('<ModalContent>', () => {
   it('should render the correct markup', () => {
     const wrapper = mount(<ModalContent><div className="foo">bar</div></ModalContent>);
-    expect(wrapper.find('.modal__content').hasClass('p-vertical--large p-horizontal--x-large'))
-      .toBeTruthy();
+    expect(wrapper.find('.modal__content').hasClass('p-vertical--large')).toBeTruthy();
+    expect(wrapper.find('.modal__content').hasClass('p-horizontal--x-large')).toBeTruthy();
   });
 
   it('should accept children', () => {

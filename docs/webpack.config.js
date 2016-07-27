@@ -15,7 +15,7 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new CopyWebpackPlugin([
-      { from: 'node_modules/@salesforce-ux/design-system/assets/icons', to: 'assets/icons' },
+      { from: 'node_modules/@salesforce-ux/design-system/assets', to: 'assets' },
     ]),
   ],
   module: {
@@ -43,6 +43,7 @@ module.exports = {
       },
     ],
   },
+  resolveLoader: { root: path.join(__dirname, "node_modules") },
   resolve: {
     extensions: ['', '.js', '.scss'],
     alias: {
