@@ -1,11 +1,15 @@
 import React from 'react';
-import { prefixable } from '../../decorators';
+import { flavorable, prefixable } from '../../decorators';
 
-export const PillContainer = ({ children, prefix }) => (
-  <div className={prefix(['pill_container'])}>
+export const PillContainer = ({ children, prefix, onClick }) => (
+  <div className={prefix(['pill_container'])} onClick={onClick}>
     {children}
   </div>
 );
+
+PillContainer.flavors = [
+  'bare',
+];
 
 PillContainer.propTypes = {
   /**
@@ -16,6 +20,9 @@ PillContainer.propTypes = {
    * the pill passed into the component
    */
   children: React.PropTypes.node.isRequired,
+  onClick: React.PropTypes.func,
 };
 
-export default prefixable(PillContainer);
+export default prefixable(
+  flavorable(PillContainer, 'pill_container')
+);

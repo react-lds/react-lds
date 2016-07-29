@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, ButtonIcon } from '../Button';
-import { prefixable } from '../../decorators';
+import { prefixable, flavorable } from '../../decorators';
 
 
 export const Pill = (props) => {
-  const { icon, label, portrait, prefix, title, url } = props;
+  const { icon, label, onClose, portrait, prefix, title, url } = props;
 
   const isLinked = !!url;
   const LabelElement = isLinked ? 'a' : 'span';
@@ -26,19 +26,23 @@ export const Pill = (props) => {
   };
 
   return (
-    <span className={prefix(['pill'])}>
+    <span className={prefix(['pill'], props)}>
       {getIcon()}
       {getPortrait()}
       <LabelElement href={isLinked ? url : null} className={prefix(['pill__label'])} title={title}>
         {label}
       </LabelElement>
-      <Button sldsClasses={['pill__remove']} icon>
+      <Button onClick={onClose} sldsClasses={['pill__remove']} icon>
         <ButtonIcon sprite="utility" icon="close" />
         <span className={prefix(['assistive-text'])}>Remove</span>
       </Button>
     </span>
   );
 };
+
+Pill.flavors = [
+  'bare',
+];
 
 Pill.propTypes = {
   /**
@@ -65,6 +69,12 @@ Pill.propTypes = {
    * optional image that gets '.pill__icon'
    */
   portrait: React.PropTypes.node,
+  /**
+   * function called when pill is closed
+   */
+  onClose: React.PropTypes.func,
 };
 
-export default prefixable(Pill);
+export default prefixable(
+  flavorable(Pill, 'pill')
+);

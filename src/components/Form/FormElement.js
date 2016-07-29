@@ -12,7 +12,13 @@ export const FormElement = (props) => {
   ];
 
   return (
-    <div className={prefix(sldsClasses, props)}>{children}</div>
+    <div
+      className={prefix(sldsClasses, props)}
+      data-scope={props['data-scope']}
+      data-select={props['data-select']}
+    >
+      {children}
+    </div>
   );
 };
 
@@ -33,6 +39,14 @@ FormElement.propTypes = {
    * sets the form-element required
    */
   required: React.PropTypes.bool,
+  /**
+   * sets the data-scope attribute
+   */
+  'data-scope': React.PropTypes.string,
+  /**
+   * sets the data-select
+   */
+  'data-select': React.PropTypes.string,
 };
 
 export default prefixable(FormElement);

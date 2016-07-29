@@ -9,7 +9,7 @@ export * from './components/Form';
 export * from './components/Grid';
 export * from './components/Icon';
 export * from './components/Images';
-export * from './components/Lookups';
+export * from './components/Lookup';
 export * from './components/MediaObject';
 export * from './components/Menu';
 export * from './components/Modal';
