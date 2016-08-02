@@ -9,6 +9,7 @@ To get a hot reloading local dev environment running, please [read the installat
 - Adjust version in `package.json`
 - Write `CHANGELOG.md`
 - Build package and publish it
+
     ```sh
     npm run prebuild && npm run build
     cd build
