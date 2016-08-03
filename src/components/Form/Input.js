@@ -1,33 +1,34 @@
 import React from 'react';
+import {
+  Button,
+  ButtonIcon,
+  IconSVG,
+  FormElement,
+  FormElementControl,
+  FormElementLabel,
+  FormElementError,
+} from '../../';
+
 import { prefixable } from '../../decorators';
 
-import { IconSVG, Button, ButtonIcon } from '../../index';
-
-export const Input = ({
-  prefix,
-  id,
-  value,
-  label,
-  placeholder,
-  type,
-  iconLeft,
-  iconRight,
-  iconRightOnClick,
-  onChange,
-  required,
-  disabled,
-  error,
-  errorIcon,
-}) => {
-  const renderRequired = () => {
-    if (required) {
-      return (
-        <abbr className={prefix(['required'])} title="required">*</abbr>
-      );
-    }
-
-    return null;
-  };
+const InputEl = (props) => {
+  const {
+    disabled,
+    error,
+    errorIcon,
+    iconLeft,
+    iconRight,
+    iconRightOnClick,
+    id,
+    onChange,
+    onFocus,
+    placeholder,
+    prefix,
+    required,
+    role,
+    type,
+    value,
+  } = props;
 
   const renderIconLeft = () => {
     let iconName = iconLeft;
@@ -74,57 +75,60 @@ export const Input = ({
     return null;
   };
 
-  const renderError = () => {
-    if (error) {
-      return (
-        <div className={prefix(['form-element__help'])}>{error}</div>
-      );
-    }
-
-    return null;
-  };
-
-  const formElementClasses = [
-    'form-element',
-    { 'is-required': required },
-    { 'has-error': error },
-  ];
-
-  const formElementControlClasses = [
-    'form-element__control',
-    { 'input-has-icon': iconLeft || iconRight || (error && errorIcon) },
-    { 'input-has-icon--right': iconRight && !iconLeft },
-    { 'input-has-icon--left': ((error && errorIcon) || iconLeft) && !iconRight },
-    { 'input-has-icon--left-right': iconLeft && iconRight },
-  ];
-
-
   return (
-    <div className={prefix(formElementClasses)}>
-      <label className={prefix(['form-element__label'])} htmlFor={id}>
-        {renderRequired()}
-        {label}
-      </label>
-      <div className={prefix(formElementControlClasses)}>
-        {renderIconLeft()}
-        {renderIconRight()}
-        <input
-          id={id}
-          value={value}
-          className={prefix(['input'])}
-          type={type}
-          placeholder={placeholder}
-          onChange={onChange}
-          required={required}
-          disabled={disabled}
-        />
-      </div>
-      {renderError()}
-    </div>
+    <span>
+      {renderIconLeft()}
+      {renderIconRight()}
+      <input
+        aria-expanded={props['aria-expanded']}
+        aria-activedescendant={props['aria-activedescendant']}
+        className={prefix(['input'])}
+        disabled={disabled}
+        id={id}
+        onChange={onChange}
+        onFocus={onFocus}
+        placeholder={placeholder}
+        required={required}
+        role={role}
+        type={type}
+        value={value}
+      />
+    </span>
   );
 };
 
-Input.propTypes = {
+export const InputRaw = prefixable(InputEl);
+
+export const Input = (props) => {
+  const {
+    id,
+    label,
+    iconLeft,
+    iconRight,
+    required,
+    error,
+    errorIcon,
+  } = props;
+
+  const hasIconLeft = !!iconLeft || (error && errorIcon);
+  const hasIconRight = !!iconRight;
+
+  return (
+    <FormElement required={required} error={error}>
+      <FormElementLabel label={label} id={id} required={required} />
+      <FormElementControl hasIconLeft={hasIconLeft} hasIconRight={hasIconRight}>
+        <InputEl {...props} />
+      </FormElementControl>
+      <FormElementError error={error} />
+    </FormElement>
+  );
+};
+
+const propDefaults = {
+  type: 'text',
+};
+
+const propTypes = {
   /**
    * the prefix function from the prefixable HOC
    */
@@ -133,6 +137,10 @@ Input.propTypes = {
    * input onChange handler
    */
   onChange: React.PropTypes.func,
+  /**
+   * input onFocus handler
+   */
+  onFocus: React.PropTypes.func,
   /**
    * id of the input tag element
    */
@@ -144,7 +152,7 @@ Input.propTypes = {
   /**
    * label
    */
-  label: React.PropTypes.string.isRequired,
+  label: React.PropTypes.string,
   /**
    * placeholder for the input
    */
@@ -153,6 +161,10 @@ Input.propTypes = {
    * sets the field required
    */
   required: React.PropTypes.bool,
+  /**
+   * sets the input field role
+   */
+  role: React.PropTypes.string,
   /**
    * disables the field
    */
@@ -182,10 +194,20 @@ Input.propTypes = {
    * onClick handler for the right icon
    */
   iconRightOnClick: React.PropTypes.func,
+  /**
+   * adds the aria-expanded label
+   */
+  'aria-expanded': React.PropTypes.bool,
+  /**
+   * adds the aria-activedescendant label
+   */
+  'aria-activedescendant': React.PropTypes.string,
 };
 
-Input.propDefaults = {
-  type: 'text',
-};
+InputEl.propDefaults = propDefaults;
+InputEl.propTypes = propTypes;
+
+Input.propDefaults = propDefaults;
+Input.propTypes = propTypes;
 
 export default prefixable(Input);

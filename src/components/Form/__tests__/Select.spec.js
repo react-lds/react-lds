@@ -33,11 +33,6 @@ describe('<Select />', () => {
     select.simulate('change', event);
   });
 
-  it('renders the label', () => {
-    expect(mounted.find('div.form-element label').text()).toEqual(props.label);
-    expect(mounted.find(`label[htmlFor="${props.id}"]`).length).toBe(1);
-  });
-
   it('renders children', () => {
     expect(mounted.find('option').length).toBe(2);
   });
@@ -46,17 +41,8 @@ describe('<Select />', () => {
     expect(mounted.find('.select_container select').length).toBe(1);
   });
 
-  it('renders errors', () => {
-    const error = 'something went wrong';
-    mounted.setProps({ error });
-    expect(mounted.find('div.form-element__help').text()).toEqual(error);
-    expect(mounted.find('div.form-element').hasClass('has-error')).toBeTruthy();
-  });
-
   it('renders required', () => {
     mounted.setProps({ required: true });
-    expect(mounted.find('.form-element').hasClass('is-required')).toBeTruthy();
-    expect(mounted.find('.form-element__label abbr.required').length).toBe(1);
     expect(mounted.find('select').props().required).toBeTruthy();
   });
 

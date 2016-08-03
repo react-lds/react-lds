@@ -1,5 +1,10 @@
-
 import React from 'react';
+import {
+  FormElement,
+  FormElementControl,
+  FormElementLabel,
+  FormElementError,
+} from '../../';
 import { prefixable } from '../../decorators';
 
 export const Select = (props) => {
@@ -14,32 +19,6 @@ export const Select = (props) => {
     prefix,
     required,
   } = props;
-
-  const formElementClasses = [
-    'form-element',
-    { 'is-required': required },
-    { 'has-error': !!error },
-  ];
-
-  const renderError = () => {
-    if (error) {
-      return (
-        <div className={prefix(['form-element__help'])}>{error}</div>
-      );
-    }
-
-    return null;
-  };
-
-  const renderRequired = () => {
-    if (required) {
-      return (
-        <abbr className={prefix(['required'])} title="required">*</abbr>
-      );
-    }
-
-    return null;
-  };
 
   const renderSelect = () => {
     const select = (
@@ -63,16 +42,13 @@ export const Select = (props) => {
   };
 
   return (
-    <div className={prefix(formElementClasses)}>
-      <label className={prefix(['form-element__label'])} htmlFor={id}>
-        {renderRequired()}
-        {label}
-      </label>
-      <div className={prefix(['form-element__control'])}>
+    <FormElement required={required} error={error}>
+      <FormElementLabel label={label} id={id} required={required} />
+      <FormElementControl>
         {renderSelect()}
-      </div>
-      {renderError()}
-    </div>
+      </FormElementControl>
+      <FormElementError error={error} />
+    </FormElement>
   );
 };
 
