@@ -20,6 +20,7 @@ export class Lookup extends React.Component {
     super(props);
 
     this.state = {
+      searchTerm: '',
       highlighted: null,
       open: false,
       loaded: [],
@@ -46,16 +47,18 @@ export class Lookup extends React.Component {
     this.closeList();
   }
 
-  handleLoad() {
-    Promise.resolve(this.props.load())
+  handleLoad(searchTerm) {
+    const param = typeof searchTerm === 'string' ? searchTerm : this.state.searchTerm;
+    Promise.resolve(this.props.load(param))
       .then((data) => {
         this.setState({ loaded: data });
       });
   }
 
-  handleInputChange() {
+  handleInputChange(event) {
+    this.setState({ searchTerm: event.target.value });
     if (this.props.loadOnChange) {
-      this.handleLoad();
+      this.handleLoad(event.target.value);
     }
   }
 
@@ -83,7 +86,13 @@ export class Lookup extends React.Component {
   }
 
   openList() {
-    if (!this.state.open) {
+    // single selection
+    if (!this.state.open && !this.props.multi && this.state.selected.length < 1) {
+      this.toggleList(true);
+    }
+
+    // multi selection
+    if (!this.state.open && this.props.multi) {
       this.toggleList(true);
     }
   }
@@ -116,29 +125,66 @@ export class Lookup extends React.Component {
 
   // Elements
   input() {
+    // hide single select
+    if (!this.props.multi && !this.state.open && this.state.selected.length > 0) {
+      return null;
+    }
+
+    // hide multi select
+    if (this.props.multi && !this.state.open && this.state.selected.length > 0) {
+      return null;
+    }
+
     const handleInputChange = this.handleInputChange.bind(this);
     const handleInputFocus = this.handleInputFocus.bind(this);
 
+    if (this.props.emailLayout) {
+      return (
+        <FormElementControl hasIconRight>
+          <input
+            className={this.props.prefix(['input--bare', 'input--height'])}
+            id={this.props.id}
+            type="text"
+            onChange={handleInputChange}
+            onFocus={handleInputFocus}
+            value={this.state.searchTerm}
+            ref={(input) => { if (input && this.state.open) { input.focus(); } }}
+          />
+        </FormElementControl>
+      );
+    }
+
     return (
-      <InputRaw
-        aria-activedescendant={this.state.highlighted}
-        aria-expanded={this.state.open}
-        iconRight="search"
-        id={this.props.id}
-        onChange={handleInputChange}
-        onFocus={handleInputFocus}
-        placeholder={this.props.placeholder}
-        role="combobox"
-      />
+      <FormElementControl hasIconRight>
+        <InputRaw
+          aria-activedescendant={this.state.highlighted}
+          aria-expanded={this.state.open}
+          iconRight="search"
+          value={this.state.searchTerm}
+          id={this.props.id}
+          onChange={handleInputChange}
+          onFocus={handleInputFocus}
+          placeholder={this.props.placeholder}
+          role="combobox"
+          isFocused={this.state.open}
+        />
+      </FormElementControl>
     );
   }
 
   selections() {
+    if (this.state.selected.length < 1) {
+      return null;
+    }
+
     const onClick = this.openList.bind(this);
 
     const selectionPills = this.state.selected.map((item, i) => {
       const sldsClasses = this.props.multi ? null : ['size--1-of-1'];
-      const onClose = this.removeSelection.bind(this, item);
+      const onClose = (e) => {
+        e.stopPropagation();
+        return this.removeSelection.bind(this, item)();
+      };
       const icon = (<Icon sprite="standard" icon={item.objectType} />);
       return (
         <Pill
@@ -154,7 +200,7 @@ export class Lookup extends React.Component {
     });
 
     return (
-      <PillContainer onClick={onClick}>{selectionPills}</PillContainer>
+      <PillContainer bare={this.props.emailLayout} onClick={onClick}>{selectionPills}</PillContainer>
     );
   }
 
@@ -226,6 +272,7 @@ export class Lookup extends React.Component {
   }
 
   render() {
+    const prefix = this.props.prefix;
     const sldsClasses = [
       'lookup',
       { 'is-open': this.state.open },
@@ -233,12 +280,26 @@ export class Lookup extends React.Component {
 
     const scope = this.props.multi ? null : 'single';
 
+    if (this.props.emailLayout) {
+      return (
+        <div className={prefix(['grid', 'grow', 'p-horizontal--small'])}>
+          <label className={prefix(['email-composer__label', 'align-middle'])} htmlFor={this.props.id}>
+            {this.props.inputLabel}
+          </label>
+          <FormElement sldsClasses={sldsClasses} data-select={scope} data-scope={scope}>
+            {this.input()}
+            {this.selections()}
+            {this.lookupList()}
+          </FormElement>
+        </div>
+      );
+    }
+
     return (
       <FormElement sldsClasses={sldsClasses} data-select={scope} data-scope={scope}>
         <FormElementLabel id={this.props.id} label={this.props.inputLabel} />
-        <FormElementControl hasIconRight>
-          {this.controls()}
-        </FormElementControl>
+        {this.input()}
+        {this.selections()}
         {this.lookupList()}
       </FormElement>
     );
@@ -310,6 +371,11 @@ Lookup.propTypes = {
    * onFocus cb for the input in lookup. gets passed the event
    */
   onFocus: React.PropTypes.func,
+  /**
+   * renders a different layour without borders (bare) for email docked
+   * composer
+   */
+  emailLayout: React.PropTypes.bool,
   /**
    * placeholder for the input field in lookup
    */
