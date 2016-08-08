@@ -8,6 +8,11 @@ import { mount } from 'enzyme';
 describe('<PillContainer />', () => {
   let props = {};
   let mounted = null;
+  const context = { assetBasePath: '/assets' };
+  const childContextTypes = {
+    assetBasePath: React.PropTypes.string,
+  };
+  const options = { context, childContextTypes };
 
   beforeEach(() => {
     props = {
@@ -15,7 +20,7 @@ describe('<PillContainer />', () => {
       label: 'A label',
     };
     mounted = mount(
-      <Pill {...props} />
+      <Pill {...props} />, options
     );
   });
 
@@ -47,7 +52,7 @@ describe('<PillContainer />', () => {
   });
 
   it('should render an icon', () => {
-    const icon = (<Icon icon="foo" sprite="bar" />);
+    const icon = (<Icon icon="delete" sprite="utility" />);
     mounted.setProps({ icon });
     expect(mounted.find('.pill__icon_container').length).toBe(1);
   });
