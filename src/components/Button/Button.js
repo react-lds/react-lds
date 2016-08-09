@@ -3,7 +3,7 @@ import React from 'react';
 import prefixable from './../../decorators/prefixable';
 
 export const Button = (props) => {
-  const { prefix, onClick, variation, title, disabled, children, icon, isPicklistLabel, selected } = props;
+  const { prefix, onClick, variation, title, disabled, children, icon, isPicklistLabel, selected, value } = props;
 
   const classes = [
     'button',
@@ -14,7 +14,7 @@ export const Button = (props) => {
   ];
 
   return (
-    <button onClick={onClick} className={prefix(classes, props)} disabled={disabled}>
+    <button onClick={onClick} className={prefix(classes, props)} disabled={disabled} value={value}>
       {(children && children.props && children.props.position === 'right') ? title : null}
       {!children ? title : children}
       {(children && children.props && children.props.position === 'left') ? title : null}
@@ -53,6 +53,10 @@ Button.propTypes = {
    * renders the button with is-selected class
    */
   selected: React.PropTypes.bool,
+  /**
+   * adds optional value tag to the button
+   */
+  value: React.PropTypes.string,
 };
 
 export default prefixable(Button);

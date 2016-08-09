@@ -17,7 +17,7 @@
     "test-watch": "jest --watch=all",
     "build": "npm run build:babel && npm run build:copy-files",
     "build:babel": "babel ./src --ignore *.spec.js --out-dir ./build",
-    "build:copy-files": "babel-node ./copy-files.js",
+    "build:copy-files": "babel-node ./copy-files.js && cp ./src/styles.css ./build/",
     "prebuild": "rm -rf ./build",
     "lint": "eslint src"
   },
@@ -44,6 +44,7 @@
   "dependencies": {
     "classnames": "2.2.5",
     "lodash.throttle": "^4.1.0",
+    "quill": "1.0.0-beta.9",
     "react-click-outside": "2.1.0"
   },
   "devDependencies": {

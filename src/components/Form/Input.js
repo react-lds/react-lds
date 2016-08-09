@@ -28,6 +28,7 @@ const InputEl = (props) => {
     role,
     type,
     value,
+    isFocused,
   } = props;
 
   const renderIconLeft = () => {
@@ -92,6 +93,7 @@ const InputEl = (props) => {
         role={role}
         type={type}
         value={value}
+        ref={(input) => { if (input && isFocused) { input.focus(); } }}
       />
     </span>
   );
@@ -202,6 +204,10 @@ const propTypes = {
    * adds the aria-activedescendant label
    */
   'aria-activedescendant': React.PropTypes.string,
+  /**
+   * set focus after rendering
+   */
+  isFocused: React.PropTypes.bool,
 };
 
 InputEl.propDefaults = propDefaults;

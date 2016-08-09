@@ -1,11 +1,15 @@
 import React from 'react';
 import { flavorable, prefixable } from '../../decorators';
 
-export const PillContainer = ({ children, prefix, onClick }) => (
-  <div className={prefix(['pill_container'])} onClick={onClick}>
-    {children}
-  </div>
-);
+export const PillContainer = (props) => {
+  const { children, prefix, onClick } = props;
+
+  return (
+    <div className={prefix(['pill_container'], props)} onClick={onClick}>
+      {children}
+    </div>
+  );
+};
 
 PillContainer.flavors = [
   'bare',
