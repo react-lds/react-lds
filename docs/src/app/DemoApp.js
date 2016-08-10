@@ -26,6 +26,7 @@ import Spinners from './pages/Spinners';
 import Tabs from './pages/Tab';
 import TextareaVariants from './pages/Form/Textarea';
 import DockedComposer from './pages/DockedComposer';
+import DockedComposerVariants from './pages/DockedComposer/Email';
 
 const DemoApp = () =>
   <Router history={browserHistory}>
@@ -64,7 +65,13 @@ const DemoApp = () =>
       <Route path="pills" component={Pills} />
       <Route path="spinners" component={Spinners} />
       <Route path="tabs" component={Tabs} />
-      <Route path="docked-composer" component={DockedComposer} />
+      <Route path="docked-composer" component={DockedComposer}>
+        <IndexRedirect to="email" />
+        <Route path="email">
+          <IndexRedirect to="default" />
+          <Route path=":exampleId" component={DockedComposerVariants} />
+        </Route>
+      </Route>
     </Route>
   </Router>;
 

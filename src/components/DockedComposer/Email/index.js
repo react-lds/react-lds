@@ -103,6 +103,18 @@ export class Email extends React.Component {
     );
   }
 
+  renderAdditionalLookup() {
+    if (this.props.additionalLookup) {
+      return (
+        <Grid className={this.props.prefix(['shrink-none'])}>
+          {this.props.additionalLookup}
+        </Grid>
+      );
+    }
+
+    return null;
+  }
+
   renderFooterButtons() {
     return this.props.footerButtons.map((button) =>
       <Button key={button.key} onClick={button.onClick} variation="icon-container" icon>
@@ -184,6 +196,7 @@ export class Email extends React.Component {
               onChange={this.onChangeRecipients('bcc')}
             />
           </Grid>
+          {this.renderAdditionalLookup()}
           <label
             className={this.props.prefix(['assistive-text'])}
             htmlFor={`${this.props.id}-subject`}
@@ -199,7 +212,10 @@ export class Email extends React.Component {
           />
 
           <div ref={this.addToolbar}>
-            <Toolbar />
+            <Toolbar
+              buttonGroupRight={this.props.toolbarButtonGroupRight}
+              buttonGroupLeft={this.props.toolbarButtonGroupLeft}
+            />
           </div>
           <Rte
             toolbar={this.state.toolbarElem}
@@ -300,6 +316,18 @@ Email.propTypes = {
    * Help text displayed in lookup directive
    */
   loadRecipientsLabel: React.PropTypes.string,
+  /**
+   * additional lookup component that will be displayed below recipient lookups
+   */
+  additionalLookup: React.PropTypes.node,
+  /**
+   * Optional Toolbar ButtonGroup content on the right side
+   */
+  toolbarButtonGroupRight: React.PropTypes.node,
+  /**
+   * Optional Toolbar ButtonGroup content on the left side
+   */
+  toolbarButtonGroupLeft: React.PropTypes.node,
   /**
    * prefixable function
    */

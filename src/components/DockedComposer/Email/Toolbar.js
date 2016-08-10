@@ -7,11 +7,12 @@ import { Grid } from './../../Grid';
 
 // At some point, the toolbar should be configurable and also support fonts and
 // font sizes.
-const Toolbar = ({ prefix }) =>
+const Toolbar = ({ prefix, buttonGroupRight, buttonGroupLeft }) =>
   <div
     className={prefix(['docked-composer__toolbar', 'shrink-none', 'grid', 'grid--align-spread'])}
   >
     <Grid>
+      {buttonGroupLeft ? <ButtonGroup>{buttonGroupLeft}</ButtonGroup> : null}
       <ButtonGroup>
         <Button icon variation="icon-border-filled" className="ql-bold">
           <ButtonIcon sprite="utility" icon="bold" />
@@ -39,10 +40,19 @@ const Toolbar = ({ prefix }) =>
           <ButtonIcon sprite="utility" icon="right_align_text" />
         </Button>
       </ButtonGroup>
+      {buttonGroupRight ? <ButtonGroup>{buttonGroupRight}</ButtonGroup> : null}
     </Grid>
   </div>;
 
 Toolbar.propTypes = {
+  /**
+   * Optional ButtonGroup content on the right side
+   */
+  buttonGroupRight: React.PropTypes.node,
+  /**
+   * Optional ButtonGroup content on the left side
+   */
+  buttonGroupLeft: React.PropTypes.node,
   /**
    * prefixable function
    */

@@ -1,30 +1,33 @@
 import React from 'react';
+import { Grid, Column } from 'react-lds';
 
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
 import Masthead from './../../Masthead';
 import HeaderIcon from './../../HeaderIcon';
+import PageNavigationElement from './../../components/PageNavigationElement';
+import PageNavigationMenu from './../../components/PageNavigationMenu';
+import PageNavigation from './../../components/PageNavigation';
 
-import ExampleEmail from './ExampleEmail';
-import exampleEmailCode from '!raw!./ExampleEmail';
-
-import emailCode from '!raw!react-lds/components/DockedComposer/Email';
-
-const DockedComposer = () =>
+const DockedComposer = ({ children }) =>
   <div>
     <Masthead figure={<HeaderIcon />} title="Docked Composer" />
-    <div className="slds-p-around--xx-large">
-      <section className="slds-m-bottom--xx-large slds-p-top--x-large">
-        <CodeExample
-          title="Email"
-          code={exampleEmailCode}
-        />
-        <ExampleEmail />
-      </section>
-    </div>
+    <Grid>
+      <Column size-of="1-1" large-size-of="5-6">
+        {children}
+      </Column>
 
-    <PropTypeDescription code={emailCode} header="### Email" />
+      <Column size-of="1-1" large-size-of="1-6">
+        <PageNavigation>
+          <PageNavigationMenu title="Email" to="/docked-composer/email">
+            <PageNavigationElement to="/docked-composer/email/default">Default</PageNavigationElement>
+            <PageNavigationElement to="/docked-composer/email/extended">Extended Toolbar/Fields</PageNavigationElement>
+          </PageNavigationMenu>
+        </PageNavigation>
+      </Column>
+    </Grid>
   </div>;
 
+DockedComposer.propTypes = {
+  children: React.PropTypes.node,
+};
 
 export default DockedComposer;
