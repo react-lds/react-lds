@@ -42,6 +42,17 @@ export class Lookup extends React.Component {
     }
   }
 
+  /**
+   * use standard sprite and if custom icon is used, custom sprite
+   */
+  getSprite(objectType = '') {
+    if (objectType.startsWith('custom')) {
+      return 'custom';
+    }
+
+    return 'standard';
+  }
+
   // Event Handlers
   handleClickOutside() {
     this.closeList();
@@ -185,7 +196,7 @@ export class Lookup extends React.Component {
         e.stopPropagation();
         return this.removeSelection.bind(this, item)();
       };
-      const icon = (<Icon sprite="standard" icon={item.objectType} />);
+      const icon = (<Icon sprite={this.getSprite(item.objectType)} icon={item.objectType} />);
       return (
         <Pill
           key={i}
@@ -230,7 +241,7 @@ export class Lookup extends React.Component {
     return (
       <li onClick={addSelection} onMouseOver={highlightSelection} key={i}>
         <a className={this.props.prefix(sldsClasses)} role="option">
-          <IconSVG sprite="standard" icon={item.objectType} />
+          <IconSVG sprite={this.getSprite(item.objectType)} icon={item.objectType} />
           <div className={this.props.prefix(['media__body'])}>
             <div className={this.props.prefix(['lookup__result-text'])}>{item.label}</div>
             {renderMeta()}
