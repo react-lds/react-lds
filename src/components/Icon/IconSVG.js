@@ -1,7 +1,6 @@
 import React from 'react';
 
 import prefixable from './../../decorators/prefixable';
-import { iconName } from './util';
 
 const IconSVG = (props, { assetBasePath }) => {
   const { prefix, sprite, icon, background, size, fill } = props;
@@ -17,7 +16,7 @@ const IconSVG = (props, { assetBasePath }) => {
 
   return (
     <svg aria-hidden="true" className={prefix(sldsClasses, props)}>
-      <use xlinkHref={`${assetBasePath}/assets/icons/${sprite}-sprite/svg/symbols.svg#${iconName(sprite, icon)}`} />
+      <use xlinkHref={`${assetBasePath}/assets/icons/${sprite}-sprite/svg/symbols.svg#${icon}`} />
     </svg>
   );
 };
