@@ -39,7 +39,11 @@ export class DropdownMenu extends React.Component {
   button() {
     if (this.props.button) {
       return (
-        <Button onClick={this.toggle} variation={this.props.button.noBorder ? 'icon-container' : 'icon-border-filled'}>
+        <Button
+          onClick={this.toggle}
+          variation={this.props.button.noBorder ? 'icon-container' : 'icon-border-filled'}
+          disabled={this.props.disabled}
+        >
           <ButtonIcon sprite={this.props.button.sprite} icon={this.props.button.icon} />
         </Button>
       );
@@ -122,6 +126,10 @@ DropdownMenu.propTypes = {
    * the required css class
    */
   last: React.PropTypes.bool,
+  /**
+   * menu button in disabled state
+   */
+  disabled: React.PropTypes.bool,
 };
 
 DropdownMenu.defaultProps = {
