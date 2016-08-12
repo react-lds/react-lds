@@ -5,7 +5,7 @@ import DemoApp from './DemoApp';
 
 require('@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.css');
 require('./main.scss');
-require('./../../../src/styles.css');
+require('react-lds/styles.css');
 
 const rootEl = document.getElementById('app');
 

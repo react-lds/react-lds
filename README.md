@@ -2,7 +2,23 @@
 
 ## Development
 
-To get a hot reloading local dev environment running, please [read the installation guide](docs/README.md) in the `docs` folder
+`npm install` and `npm start`. Happy hacking!
+
+You can change the port with the `PORT=` environment variable. Hot reloading
+also works whenever a file was changed.
+
+## Styling
+Some components needed additional styles. If you use them, also include our
+provided `styles.css` inside the `dist` folder.
+
+- `<Email />` Component from Docked-Composer
+
+## Develop and embed into a react project
+`npm link` in this folder. After you changed stuff, run `npm build` to update
+the files inside the `build` folder, because that's the entry point for
+external react applications.
+
+In your react app: `npm link react-lds`.
 
 ## Publish
 
@@ -12,10 +28,5 @@ To get a hot reloading local dev environment running, please [read the installat
 
     ```sh
     npm run prebuild && npm run build
-    cd build
     npm publish
     ```
-
-## Credits
-
-The module structure and build scripts are copied from [material-ui](https://github.com/callemall/material-ui)
