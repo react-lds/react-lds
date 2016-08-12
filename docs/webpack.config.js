@@ -6,7 +6,7 @@ module.exports = {
   devtool: 'eval',
   entry: [
     'webpack/hot/only-dev-server',
-    './src/app/main.js',
+    path.resolve(__dirname, './src/app/main.js'),
   ],
   output: {
     path: path.resolve(__dirname, 'src'),
@@ -43,7 +43,7 @@ module.exports = {
       },
     ],
   },
-  resolveLoader: { root: path.join(__dirname, "node_modules") },
+  resolveLoader: { root: path.join(__dirname, './../node_modules') },
   resolve: {
     extensions: ['', '.js', '.scss'],
     alias: {
