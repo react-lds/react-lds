@@ -4,17 +4,30 @@ import React from 'react';
 import { mount } from 'enzyme';
 import ModalHeader from '../ModalHeader';
 
-describe('<ModalHeader>', () => {
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = {
-    assetBasePath: React.PropTypes.string,
-  };
+describe('<ModalHeader />', () => {
+  let mounted = null;
+  let props = {};
 
+  const context = { assetBasePath: '/assets' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string };
   const options = { context, childContextTypes };
 
-  it('should render a close-button by default', () => {
-    const wrapper = mount(<ModalHeader title="foo" />, options);
-    expect(wrapper.find('.button.modal__close').length).toBe(1);
+  beforeEach(() => {
+    props = {
+      label: 'foo',
+      title: 'bar',
+      tagline: 'baz',
+    };
+
+    mounted = mount(
+      <ModalHeader {...props}>
+        <div className="foobar" />
+      </ModalHeader>,
+      options);
+  });
+
+  it('renders a close-button by default', () => {
+    expect(mounted.find('.button.modal__close').length).toBe(1);
   });
 
   it('onClickClose triggers when close buttin was clicked', () => {
@@ -24,35 +37,32 @@ describe('<ModalHeader>', () => {
     expect(closeCallback).toBeCalled();
   });
 
-  it('should render title and tagline', () => {
-    const wrapper = mount(<ModalHeader title="foo" tagline="bar" />, options);
-    expect(wrapper.find('h2').first().text()).toBe('foo');
-    expect(wrapper.find('p.m-top--x-small').first().text()).toBe('bar');
+  it('renders title and tagline', () => {
+    expect(mounted.find('h2').first().text()).toBe(props.title);
+    expect(mounted.find('p.m-top--x-small').first().text()).toBe(props.tagline);
   });
 
-  it('should render children', () => {
-    const wrapper = mount(<ModalHeader><div className="foobar" /></ModalHeader>, options);
-    expect(wrapper.find('.foobar').length).toBe(1);
+  it('renders children', () => {
+    expect(mounted.find('.foobar').length).toBe(1);
   });
 
-  it('should add --empty if the header is empty', () => {
-    const wrapper = mount(<ModalHeader />, options);
-    expect(wrapper.find('.modal__header').hasClass('modal__header--empty')).toBeTruthy();
+  it('renders empty headers', () => {
+    mounted.setProps({ title: undefined, tagline: undefined, children: undefined });
+    expect(mounted.find('.modal__header').hasClass('modal__header--empty')).toBeTruthy();
   });
 
-  it('should render a title-ID when there is a title', () => {
-    const wrapper = mount(<ModalHeader title="foo" label="bar" />, options);
-    expect(wrapper.find('#bar').first().text()).toBe('foo');
+  it('renders a title-ID when there is a title', () => {
+    expect(mounted.find(`#${props.label}`).first().text()).toBe(props.title);
   });
 
-  it('should render in error-theme if it is a prompt', () => {
-    const wrapper = mount(<ModalHeader prompt />, options);
-    expect(wrapper.find('.modal__header').hasClass('theme--error')).toBeTruthy();
-    expect(wrapper.find('.modal__header').hasClass('theme--alert-texture')).toBeTruthy();
+  it('renders in error-theme if it is a prompt', () => {
+    mounted.setProps({ prompt: true });
+    expect(mounted.find('.modal__header').hasClass('theme--error')).toBeTruthy();
+    expect(mounted.find('.modal__header').hasClass('theme--alert-texture')).toBeTruthy();
   });
 
-  it('should hide the close button if it is uncloseable', () => {
-    const wrapper = mount(<ModalHeader uncloseable />, options);
-    expect(wrapper.find('.button.modal__close').length).toBe(0);
+  it('hides the close button if it is uncloseable', () => {
+    mounted.setProps({ uncloseable: true });
+    expect(mounted.find('.button.modal__close').length).toBe(0);
   });
 });

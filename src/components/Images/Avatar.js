@@ -12,7 +12,7 @@ export const Avatar = (props, { assetBasePath }) => {
 
   return (
     <span className={prefix(sldsClasses, props)}>
-      {!!src ? <img src={`${assetBasePath}${src}`} alt={alt} /> : null}
+      {!!src ? <img src={`${assetBasePath}/${src}`} alt={alt} /> : null}
     </span>
   );
 };

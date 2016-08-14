@@ -4,19 +4,23 @@ import React from 'react';
 import { mount } from 'enzyme';
 import ModalFooter from '../ModalFooter';
 
-describe('<ModalFooter>', () => {
-  it('should render the correct markup', () => {
-    const wrapper = mount(<ModalFooter><div className="foo">bar</div></ModalFooter>);
-    expect(wrapper.find('.modal__footer').length).toBe(1);
+describe('<ModalFooter />', () => {
+  let mounted = null;
+
+  beforeEach(() => {
+    mounted = mount(<ModalFooter><div className="foo">bar</div></ModalFooter>);
   });
 
-  it('should accept children', () => {
-    const wrapper = mount(<ModalFooter><div className="foo">bar</div></ModalFooter>);
-    expect(wrapper.find('.foo').length).toBe(1);
+  it('renders the corre markup', () => {
+    expect(mounted.find('.modal__footer').length).toBe(1);
   });
 
-  it('should allow the default-theme to be applied', () => {
-    const wrapper = mount(<ModalFooter default><div className="foo">bar</div></ModalFooter>);
-    expect(wrapper.find('.theme--default').length).toBe(1);
+  it('renders children', () => {
+    expect(mounted.find('.foo').length).toBe(1);
+  });
+
+  it('applies the default theme', () => {
+    mounted.setProps({ default: true });
+    expect(mounted.find('.theme--default').length).toBe(1);
   });
 });

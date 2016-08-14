@@ -14,10 +14,7 @@ describe('<FormElementLabel />', () => {
       label: 'Input Label',
     };
 
-    mounted = mount(
-      <FormElementLabel {...props} />,
-      { context: { assetBasePath: '/' }, childContextTypes: { assetBasePath: React.PropTypes.string } }
-    );
+    mounted = mount(<FormElementLabel {...props} />);
   });
 
   it('renders the for-attribute', () => {

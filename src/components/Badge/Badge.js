@@ -1,7 +1,7 @@
 import React from 'react';
 import { prefixable, themeable } from '../../decorators';
 
-export const Badge = (props) =>
+export const Badge = props =>
   <span className={props.prefix(['badge'], props)}>{props.label}</span>;
 
 Badge.propTypes = {

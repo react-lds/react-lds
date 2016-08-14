@@ -14,11 +14,11 @@ describe('<PillContainer />', () => {
     );
   });
 
-  it('should have the right class', () => {
+  it('renders the correct markup', () => {
     expect(mounted.find('.pill_container').length).toEqual(1);
   });
 
-  it('should accept children', () => {
+  it('renders children', () => {
     expect(mounted.find('.foo').length).toEqual(1);
   });
 });

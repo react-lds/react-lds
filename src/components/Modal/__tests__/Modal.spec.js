@@ -5,39 +5,40 @@ import { mount } from 'enzyme';
 import Modal from '../Modal';
 import ModalHeader from '../ModalHeader';
 
-describe('<Modal>', () => {
+describe('<Modal />', () => {
+  let mounted = null;
+
   const context = { assetBasePath: '/assets' };
-  const childContextTypes = {
-    assetBasePath: React.PropTypes.string,
-  };
+  const childContextTypes = { assetBasePath: React.PropTypes.string };
   const options = { context, childContextTypes };
 
-  it('should render the correct markup', () => {
-    const wrapper = mount(<Modal><div className="foo" /></Modal>, options);
-    expect(wrapper.find('.modal').find('.modal__container').length).toBe(1);
+  beforeEach(() => {
+    mounted = mount(
+      <Modal>
+        <ModalHeader />
+        <div className="foo" />
+      </Modal>, options);
+  });
 
-    const modalProps = wrapper.find('.modal').props();
+  it('renders the correct markup', () => {
+    expect(mounted.find('.modal').find('.modal__container').length).toBe(1);
+
+    const modalProps = mounted.find('.modal').props();
     expect(modalProps.role).toBe('dialog');
     expect(modalProps['aria-hidden']).toBe('true');
   });
 
-  it('should be openable', () => {
-    const wrapper = mount(<Modal open><div className="foo" /></Modal>, options);
-    expect(wrapper.find('.modal').hasClass('fade-in-open')).toBeTruthy();
-    expect(wrapper.find('.modal').props()['aria-hidden']).toBe('false');
+  it('renders opened', () => {
+    mounted.setProps({ open: true });
+    expect(mounted.find('.modal').hasClass('fade-in-open')).toBeTruthy();
+    expect(mounted.find('.modal').props()['aria-hidden']).toBe('false');
   });
 
-  it('should accept and pass label and description', () => {
-    const wrapper = mount(
-      <Modal label="foo" description="bar">
-        <ModalHeader />
-        <div className="foo" />
-      </Modal>, options
-    );
-
-    const modalProps = wrapper.find('.modal').props();
-    const modalContainerProps = wrapper.find('.modal__container').props();
-    const modalHeaderProps = wrapper.find(ModalHeader).first().props();
+  it('renders and passes label and description', () => {
+    mounted.setProps({ label: 'foo', description: 'bar' });
+    const modalProps = mounted.find('.modal').props();
+    const modalContainerProps = mounted.find('.modal__container').props();
+    const modalHeaderProps = mounted.find(ModalHeader).first().props();
 
     expect(modalProps['aria-labelledby']).toBe('foo');
     expect(modalProps['aria-describedby']).toBe('bar');
@@ -46,26 +47,20 @@ describe('<Modal>', () => {
     expect(modalHeaderProps.prompt).toBeFalsy();
   });
 
-  it('should accept a dialog', () => {
-    const wrapper = mount(
-      <Modal dialog><div className="foo" /></Modal>, options
-    );
-    const modalContainerProps = wrapper.find('.modal__container').props();
+  it('renders as a dialog', () => {
+    mounted.setProps({ dialog: true });
+
+    const modalContainerProps = mounted.find('.modal__container').props();
     expect(modalContainerProps.tabIndex).toBe('0');
     expect(modalContainerProps.role).toBe('document');
   });
 
-  it('should accept and pass prompt', () => {
-    const wrapper = mount(
-      <Modal prompt>
-        <ModalHeader />
-        <div className="foo" />
-      </Modal>, options
-    );
-    expect(wrapper.find('.modal').props().role).toBe('alertdialog');
+  it('renders and passes prompt', () => {
+    mounted.setProps({ prompt: true });
+    expect(mounted.find('.modal').props().role).toBe('alertdialog');
 
-    const modalHeaderProps = wrapper.find(ModalHeader).first().props();
-    const modalContainerProps = wrapper.find('.modal__container').props();
+    const modalHeaderProps = mounted.find(ModalHeader).first().props();
+    const modalContainerProps = mounted.find('.modal__container').props();
     expect(modalContainerProps.tabIndex).toBe('0');
     expect(modalContainerProps.role).toBe('document');
 

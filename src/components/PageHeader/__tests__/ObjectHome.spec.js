@@ -5,12 +5,11 @@ import { mount } from 'enzyme';
 import ObjectHome from '../ObjectHome';
 
 describe('<ObjectHome />', () => {
-  const childContextTypes = {
-    assetBasePath: React.PropTypes.string,
-  };
-  const context = { assetBasePath: '/assets' };
-  const options = { context, childContextTypes };
   let mounted;
+
+  const context = { assetBasePath: '/assets' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const options = { context, childContextTypes };
 
   beforeEach(() => {
     mounted = mount(
@@ -25,7 +24,7 @@ describe('<ObjectHome />', () => {
     options);
   });
 
-  it('click on the headline opens the menu', () => {
+  it('opens the menu on headline click', () => {
     const headline = mounted.find('h1').first();
     const dropdown = mounted.find('div.dropdown-trigger').first();
     expect(dropdown.hasClass('is-open')).toBeFalsy();

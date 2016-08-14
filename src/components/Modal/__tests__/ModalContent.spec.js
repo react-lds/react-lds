@@ -4,20 +4,24 @@ import React from 'react';
 import { mount } from 'enzyme';
 import ModalContent from '../ModalContent';
 
-describe('<ModalContent>', () => {
-  it('should render the correct markup', () => {
-    const wrapper = mount(<ModalContent><div className="foo">bar</div></ModalContent>);
-    expect(wrapper.find('.modal__content').hasClass('p-vertical--large')).toBeTruthy();
-    expect(wrapper.find('.modal__content').hasClass('p-horizontal--x-large')).toBeTruthy();
+describe('<ModalContent />', () => {
+  let mounted = null;
+
+  beforeEach(() => {
+    mounted = mount(<ModalContent><div className="foo">bar</div></ModalContent>);
   });
 
-  it('should accept children', () => {
-    const wrapper = mount(<ModalContent><div className="foo">bar</div></ModalContent>);
-    expect(wrapper.find('.foo').length).toBe(1);
+  it('renders the correct markup', () => {
+    expect(mounted.find('.modal__content').hasClass('p-vertical--large')).toBeTruthy();
+    expect(mounted.find('.modal__content').hasClass('p-horizontal--x-large')).toBeTruthy();
   });
 
-  it('should allow to be turned into a menu', () => {
-    const wrapper = mount(<ModalContent menu><div className="foo">bar</div></ModalContent>);
-    expect(wrapper.find('.modal__menu').length).toBe(1);
+  it('renders children', () => {
+    expect(mounted.find('.foo').length).toBe(1);
+  });
+
+  it('renders as a menu', () => {
+    mounted.setProps({ menu: true });
+    expect(mounted.find('.modal__menu').length).toBe(1);
   });
 });
