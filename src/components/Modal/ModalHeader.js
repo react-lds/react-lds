@@ -52,19 +52,15 @@ export class ModalHeader extends React.Component {
 
 ModalHeader.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * the modal content
+   * modal header content
    */
   children: React.PropTypes.node,
   /**
-   * the heading id. gets passed down from `Modal`
+   * heading id (gets passed down from `Modal prompt`)
    */
   label: React.PropTypes.string,
   /**
-   * renders a prompt header. Gets passed down from `Modal prompt`
+   * render header as a prompt header (gets passed down from `Modal prompt`)
    */
   prompt: React.PropTypes.bool,
   /**
@@ -79,6 +75,10 @@ ModalHeader.propTypes = {
    * hides the close-button (gets passed down from `Modal prompt`)
    */
   uncloseable: React.PropTypes.bool,
+  /**
+   * prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(ModalHeader);

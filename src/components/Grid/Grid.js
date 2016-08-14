@@ -35,13 +35,13 @@ Grid.variations = [
 
 Grid.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * main content
+   * grid content
    */
   children: React.PropTypes.node,
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(

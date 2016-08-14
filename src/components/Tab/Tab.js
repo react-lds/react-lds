@@ -79,21 +79,21 @@ export class Tab extends React.Component {
 
 Tab.propTypes = {
   /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * scoped has a border around the tabs
-   */
-  variation: React.PropTypes.oneOf(['default', 'scoped']),
-  /**
-   * Array with tab contents
+   * array of tabs
    */
   tabs: React.PropTypes.arrayOf(React.PropTypes.shape({
     title: React.PropTypes.string.isRequired,
     id: React.PropTypes.string.isRequired,
     content: React.PropTypes.node.isRequired,
   })).isRequired,
+  /**
+   * scoped has a border around the tab
+   */
+  variation: React.PropTypes.oneOf(['default', 'scoped']),
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 Tab.defaultProps = {

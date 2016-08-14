@@ -43,25 +43,25 @@ Cell.variations = [
 
 Cell.propTypes = {
   /**
-   * only th cells have a scope. Header cells have a col scope, and leading body cells can have a row scope.
-   */
-  scope: React.PropTypes.oneOf(['col', 'row']),
-  /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * main content
+   * cell content
    */
   children: React.PropTypes.node,
-  /**
-   * Override for the cell title attribute
-   */
-  title: React.PropTypes.string,
   /**
    * data label for accessibility
    */
   dataLabel: React.PropTypes.string,
+  /**
+   * only `th` cells have a scope. Header cells have a col scope, and leading body cells can have a row scope
+   */
+  scope: React.PropTypes.oneOf(['col', 'row']),
+  /**
+   * overrides the cell's title attribute
+   */
+  title: React.PropTypes.string,
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(

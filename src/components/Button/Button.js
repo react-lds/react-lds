@@ -24,13 +24,40 @@ export const Button = (props) => {
 
 Button.propTypes = {
   /**
-   * Prefix from prefixable HOC
+   * button content
    */
-  prefix: React.PropTypes.func.isRequired,
+  children: React.PropTypes.node,
+  /**
+   * disables the button
+   */
+  disabled: React.PropTypes.bool,
+  /**
+   * button icons
+   */
+  icon: React.PropTypes.bool,
+  /**
+   * adds the picklist__label class
+   */
+  isPicklistLabel: React.PropTypes.bool,
   /**
    * onClick handler to trigger an action
    */
   onClick: React.PropTypes.func,
+  /**
+   * adds the is-selected class
+   */
+  selected: React.PropTypes.bool,
+  /**
+   * button title
+   */
+  title: React.PropTypes.string,
+  /**
+   * adds optional value tag to the button
+   */
+  value: React.PropTypes.string,
+  /**
+   * button variation
+   */
   variation: React.PropTypes.oneOf([
     'neutral',
     'brand',
@@ -41,22 +68,10 @@ Button.propTypes = {
     'icon-border',
     'icon-bare',
   ]),
-  title: React.PropTypes.string,
-  disabled: React.PropTypes.bool,
   /**
-   * adds the picklist__label class
+   * prefix function from prefixable HOC
    */
-  isPicklistLabel: React.PropTypes.bool,
-  icon: React.PropTypes.bool,
-  children: React.PropTypes.node,
-  /**
-   * renders the button with is-selected class
-   */
-  selected: React.PropTypes.bool,
-  /**
-   * adds optional value tag to the button
-   */
-  value: React.PropTypes.string,
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(Button);

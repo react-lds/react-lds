@@ -1,7 +1,7 @@
 import React from 'react';
 
-import CodeExample from './../../../components/CodeExample';
-import PropTypeDescription from './../../../components/PropTypeDescription';
+import CodeExample from '../../../components/CodeExample';
+import PropTypeDescription from '../../../components/PropTypeDescription';
 
 import ExampleEmail from './ExampleEmail';
 import exampleEmailCode from '!raw!./ExampleEmail';

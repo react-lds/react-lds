@@ -30,9 +30,21 @@ export const Card = ({ prefix, icon, sprite, header, headerRight, body, footer }
 
 Card.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+   * card body, could be a table for example
    */
-  prefix: React.PropTypes.func.isRequired,
+  body: React.PropTypes.node,
+  /**
+   * footer in the bottom right corner
+   */
+  footer: React.PropTypes.node,
+  /**
+   * card header
+   */
+  header: React.PropTypes.string.isRequired,
+  /**
+   * top right corner of the card, can be used for a Button for example
+   */
+  headerRight: React.PropTypes.node,
   /**
    * icon name
    */
@@ -42,21 +54,9 @@ Card.propTypes = {
    */
   sprite: React.PropTypes.string.isRequired,
   /**
-   * the header
+   * prefix function from prefixable HOC
    */
-  header: React.PropTypes.string.isRequired,
-  /**
-   * Top right corner of the card, can be used for a Button for example
-   */
-  headerRight: React.PropTypes.node,
-  /**
-   * Body, could be a table for example
-   */
-  body: React.PropTypes.node,
-  /**
-   * Footer in the bottom right corner
-   */
-  footer: React.PropTypes.node,
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(Card);

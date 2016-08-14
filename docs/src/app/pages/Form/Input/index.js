@@ -1,6 +1,8 @@
 import React from 'react';
 
-import CodeExample from './../../../components/CodeExample';
+import CodeExample from '../../../components/CodeExample';
+import PropTypeDescription from '../../../components/PropTypeDescription';
+
 import ExampleDefault from './ExampleDefault';
 import exampleDefaultCode from '!raw!./ExampleDefault';
 import ExampleIconLeft from './ExampleIconLeft';
@@ -18,7 +20,6 @@ import exampleErrorCode from '!raw!./ExampleError';
 import ExampleErrorIcon from './ExampleErrorIcon';
 import exampleErrorIconCode from '!raw!./ExampleErrorIcon';
 
-import PropTypeDescription from './../../../components/PropTypeDescription';
 import inputCode from '!raw!react-lds/components/Form/Input';
 
 const mapId = (id) => {

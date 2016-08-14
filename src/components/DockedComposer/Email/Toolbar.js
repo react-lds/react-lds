@@ -46,17 +46,17 @@ const Toolbar = ({ prefix, buttonGroupRight, buttonGroupLeft }) =>
 
 Toolbar.propTypes = {
   /**
-   * Optional ButtonGroup content on the right side
-   */
-  buttonGroupRight: React.PropTypes.node,
-  /**
-   * Optional ButtonGroup content on the left side
+   * optional ButtonGroup content on the left side
    */
   buttonGroupLeft: React.PropTypes.node,
   /**
-   * prefixable function
+   * optional ButtonGroup content on the right side
    */
-  prefix: React.PropTypes.func,
+  buttonGroupRight: React.PropTypes.node,
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(Toolbar);

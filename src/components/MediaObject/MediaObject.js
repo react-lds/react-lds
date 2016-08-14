@@ -40,21 +40,21 @@ MediaObject.flavors = [
 
 MediaObject.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * main content
+   * mediaObject content
    */
   children: React.PropTypes.node,
   /**
-   * left image/figure
+   * renders a figure on the left side of the media object
    */
   figureLeft: React.PropTypes.node,
   /**
-   * right image/figure, both left and right can be used together
+   * renders a figure on the right side of the media object
    */
   figureRight: React.PropTypes.node,
+  /**
+   * prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(

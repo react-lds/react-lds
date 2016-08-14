@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import MarkdownElement from './../MarkdownElement';
+import MarkdownElement from '../MarkdownElement';
 import CodeBlockTitle from './CodeBlockTitle';
 
 const styles = {

@@ -20,21 +20,21 @@ export const FormElementControl = (props) => {
 
 FormElementControl.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+   * control element(s)
    */
-  prefix: React.PropTypes.func,
+  children: React.PropTypes.node,
   /**
-   * the control element(s)
-   */
-  children: React.PropTypes.node.isRequired,
-  /**
-   * whether the input has an left icon
+   * set this to true if the form element has a left icon
    */
   hasIconLeft: React.PropTypes.bool,
   /**
-   * whether the input has a right icon
+   * set this to true if the form element has a right icon
    */
   hasIconRight: React.PropTypes.bool,
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(FormElementControl);

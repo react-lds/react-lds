@@ -1,7 +1,7 @@
 import React from 'react';
 import { MediaObject } from 'react-lds';
 
-require('./masthead.scss');
+require('./index.scss');
 
 const Masthead = ({ title, figure }) =>
   <header className="site-masthead slds-grid slds-wrap">

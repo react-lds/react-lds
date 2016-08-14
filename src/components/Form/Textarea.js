@@ -58,41 +58,41 @@ export const Textarea = (props) => {
 
 Textarea.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+  * adds disabled attribute to the textarea
    */
-  prefix: React.PropTypes.func.isRequired,
+  disabled: React.PropTypes.bool,
   /**
-   * input onChange handler
+  * renders an error for the textarea
    */
-  onChange: React.PropTypes.func,
+  error: React.PropTypes.string,
   /**
-   * id of the textarea tag element
+   * id of the textarea
    */
   id: React.PropTypes.string.isRequired,
+  /**
+   * label for the textarea
+   */
+  label: React.PropTypes.string.isRequired,
+  /**
+   * onChange handler for the textarea
+   */
+  onChange: React.PropTypes.func,
   /**
    * textarea placeholder
    */
   placeholder: React.PropTypes.string.isRequired,
   /**
-   * label
+   * renders a static textarea output instead
    */
-  label: React.PropTypes.string.isRequired,
+  readOnly: React.PropTypes.bool,
   /**
-   * sets the field required
+   * adds required attribute to the textarea
    */
   required: React.PropTypes.bool,
   /**
-   * disables the field
+   * prefix function from prefixable HOC
    */
-  disabled: React.PropTypes.bool,
-  /**
-   * if set, this error message will be shown
-   */
-  error: React.PropTypes.string,
-  /**
-   * render a static textarea-output instead
-   */
-  readOnly: React.PropTypes.bool,
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(Textarea);

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
+import CodeExample from '../../components/CodeExample';
+import PropTypeDescription from '../../components/PropTypeDescription';
+import Masthead from '../../components/MastHead';
+import HeaderIcon from '../../components/HeaderIcon';
 
 import ExampleAlertNormal from './ExampleAlertNormal';
 import exampleAlertNormalCode from '!raw!./ExampleAlertNormal';
@@ -37,7 +37,6 @@ import examplePromptTouchTaglineCode from '!raw!./ExamplePromptTouchTagline';
 import ExamplePromptTouchIcon from './ExamplePromptTouchIcon';
 import examplePromptTouchIconCode from '!raw!./ExamplePromptTouchIcon';
 
-
 import ExampleModalToast from './ExampleModalToast';
 import exampleModalToastCode from '!raw!./ExampleModalToast';
 
@@ -45,7 +44,7 @@ import promptCode from '!raw!react-lds/components/Notifications/Prompt';
 import promptForTouchCode from '!raw!react-lds/components/Notifications/PromptForTouch';
 import notificationCode from '!raw!react-lds/components/Notifications/Notification';
 
-require('./notifications.scss');
+require('./index.scss');
 
 const Notifications = () => (
   <div>

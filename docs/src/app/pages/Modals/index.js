@@ -1,9 +1,10 @@
 import React from 'react';
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
 
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
+import CodeExample from '../../components/CodeExample';
+import PropTypeDescription from '../../components/PropTypeDescription';
+import Masthead from '../../components/MastHead';
+import HeaderIcon from '../../components/HeaderIcon';
+
 import modalCode from '!raw!react-lds/components/Modal/Modal';
 import modalHeaderCode from '!raw!react-lds/components/Modal/ModalHeader';
 import modalFooterCode from '!raw!react-lds/components/Modal/ModalFooter';
@@ -23,7 +24,7 @@ import exampleNoFooterCode from '!raw!./ExampleNoFooter';
 import ExampleDirectional from './ExampleDirectional';
 import exampleDirectionalCode from '!raw!./ExampleDirectional';
 
-require('./modals.scss');
+require('./index.scss');
 
 const Modals = () =>
   <div>

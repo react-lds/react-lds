@@ -69,15 +69,10 @@ export const DropdownMenuListItem = ({
 };
 
 DropdownMenuListItem.propTypes = {
-  prefix: React.PropTypes.func,
   /**
    * The content of a menu item, this is just a string
    */
   children: React.PropTypes.string.isRequired,
-  /**
-   * onClick handler
-   */
-  onClick: React.PropTypes.func,
   /**
    * set to true if a divider should appear above this list item
    */
@@ -96,6 +91,10 @@ DropdownMenuListItem.propTypes = {
     alwaysDisplay: React.PropTypes.bool,
   }),
   /**
+   * onClick handler
+   */
+  onClick: React.PropTypes.func,
+  /**
    * right icon that is always shown
    */
   rightIcon: React.PropTypes.shape({
@@ -103,6 +102,10 @@ DropdownMenuListItem.propTypes = {
     sprite: React.PropTypes.string.isRequired,
     background: React.PropTypes.string,
   }),
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(DropdownMenuListItem);

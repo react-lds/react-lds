@@ -6,13 +6,13 @@ export const Badge = props =>
 
 Badge.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * the badge label
+   * badge label
    */
   label: React.PropTypes.string.isRequired,
+  /**
+   * prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(

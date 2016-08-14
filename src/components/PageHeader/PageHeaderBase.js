@@ -20,24 +20,24 @@ export const PageHeaderBase = ({ prefix, title, info, icon }) => {
 
 PageHeaderBase.propTypes = {
   /**
-   * prefix from HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
-  /**
-   * Sprite and Icon
+   * icon and sprite
    */
   icon: React.PropTypes.shape({
     sprite: React.PropTypes.string.isRequired,
     icon: React.PropTypes.string.isRequired,
   }).isRequired,
   /**
-   * Main title
-   */
-  title: React.PropTypes.string.isRequired,
-  /**
    * info subtitle
    */
   info: React.PropTypes.string.isRequired,
+  /**
+   * title
+   */
+  title: React.PropTypes.string.isRequired,
+  /**
+   * prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(PageHeaderBase);

@@ -9,13 +9,13 @@ export const ButtonGroup = ({ children, prefix }) =>
 
 ButtonGroup.propTypes = {
   /**
-   * Prefix from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
-  /**
-   * Should be instances of Button
+   * children shoule be instances of button
    */
   children: React.PropTypes.node.isRequired,
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(ButtonGroup);

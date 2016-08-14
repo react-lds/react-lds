@@ -25,13 +25,13 @@ Spinner.flavors = [
 
 Spinner.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * the spinner size
+   * size
    */
   size: React.PropTypes.oneOf(['small', 'medium', 'large']).isRequired,
+  /**
+   * prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(

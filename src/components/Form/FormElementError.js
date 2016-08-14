@@ -24,13 +24,13 @@ export const FormElementError = (props) => {
 
 FormElementError.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * form-element error
+   * element triggered on the containing form element
    */
   error: React.PropTypes.string,
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(FormElementError);

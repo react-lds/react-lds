@@ -5,7 +5,7 @@ const config = require('./webpack.config');
 
 const port = process.env.PORT || 8080;
 
-config.entry.unshift(`webpack-dev-server/client?http://localhost:${port}/`);
+config.entry.unshift(`webpack-dev-server/client?http://localhost:${port}`);
 const compiler = webpack(config);
 
 const server = new WebPackDevServer(compiler, {
@@ -14,6 +14,7 @@ const server = new WebPackDevServer(compiler, {
   historyApiFallback: true,
   hot: true,
   quiet: false,
+  publicPath: config.output.publicPath,
   stats: { colors: true },
 });
 
@@ -24,5 +25,5 @@ server.listen(port, 'localhost', err => {
   }
 
   // eslint-disable-next-line
-  return console.log(`Listening at http://localhost:${port}/`);
+  return console.log(`Listening at http://localhost:${port}`);
 });

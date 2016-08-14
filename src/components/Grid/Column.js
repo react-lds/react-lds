@@ -41,17 +41,17 @@ Column.variations = [
 
 Column.propTypes = {
   /**
-   * Columns align on the main axis
+   * alignment of columns on the main axis
    */
   align: React.PropTypes.oneOf(['top', 'middle', 'bottom']),
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * main content
+   * column content
    */
   children: React.PropTypes.node,
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(

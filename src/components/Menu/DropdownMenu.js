@@ -80,14 +80,6 @@ DropdownMenu.defaultProps = {
 
 DropdownMenu.propTypes = {
   /**
-   * One DropdownMenuList or many of them
-   */
-  children: React.PropTypes.node.isRequired,
-  /**
-   * force open or closed state, is needed when using a custom button
-   */
-  isOpen: React.PropTypes.bool,
-  /**
    * The button that triggers the dropdown menu
    * ```
    * {
@@ -103,14 +95,31 @@ DropdownMenu.propTypes = {
     noBorder: React.PropTypes.bool,
   }),
   /**
-   * Fully customizable dropdown trigger button, use this instead of the button
+   * one DropdownMenuList or many of them
+   */
+  children: React.PropTypes.node.isRequired,
+  /**
+   * fully customizable dropdown trigger button, use this instead of the button
    * shape if needed
    */
   customButton: React.PropTypes.element,
   /**
-   * prefix function from prefixable HOC
+   * adds disabled attribute to menu button
    */
-  prefix: React.PropTypes.func,
+  disabled: React.PropTypes.bool,
+  /**
+   * forces open or closed state, is needed when using a custom button
+   */
+  isOpen: React.PropTypes.bool,
+  /**
+   * indicates that this is the last element inside a button group and renders
+   * the required css class
+   */
+  last: React.PropTypes.bool,
+  /**
+   * displays the nubbin at the correct position if true, hidden per default
+   */
+  nubbin: React.PropTypes.bool,
   /**
    * position relative to the menu button
    */
@@ -120,18 +129,9 @@ DropdownMenu.propTypes = {
    */
   size: React.PropTypes.oneOf(['small', 'medium', 'large']),
   /**
-   * displays the nubbin at the correct position if true, hidden per default
+   * prefix function from prefixable HOC
    */
-  nubbin: React.PropTypes.bool,
-  /**
-   * indicates that this is the last element inside a button group and renders
-   * the required css class
-   */
-  last: React.PropTypes.bool,
-  /**
-   * menu button in disabled state
-   */
-  disabled: React.PropTypes.bool,
+  prefix: React.PropTypes.func.isRequired,
 };
 
 DropdownMenu.defaultProps = {

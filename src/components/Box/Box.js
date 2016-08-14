@@ -13,9 +13,18 @@ const Box = (props) => {
 };
 
 Box.propTypes = {
-  size: React.PropTypes.oneOf(['x-small', 'small']),
-  prefix: React.PropTypes.func,
+  /**
+   * box content
+   */
   children: React.PropTypes.node,
+  /**
+   * box size
+   */
+  size: React.PropTypes.oneOf(['x-small', 'small']),
+  /**
+   * prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(themeable(Box));
