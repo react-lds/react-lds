@@ -5,25 +5,39 @@ import { mount } from 'enzyme';
 import IconSVG from '../IconSVG';
 
 describe('<IconSVG />', () => {
-  const context = { assetBasePath: '', cssPrefix: 'slds-' };
+  let mounted = null;
+  let props = {};
 
-  it('has `slds-icon`-class', () => {
-    const icon = mount(<IconSVG sprite="standard" icon="account" />, { context });
-    expect(icon.find('svg').hasClass('slds-icon')).toBeTruthy();
+  const context = { assetBasePath: '/assets' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
+  beforeEach(() => {
+    props = {
+      sprite: 'standard',
+      icon: 'account',
+    };
+
+    mounted = mount(<IconSVG {...props} />, options);
+  });
+
+
+  it('has icon-class', () => {
+    expect(mounted.find('svg').hasClass('icon')).toBeTruthy();
   });
 
   it('supports different sizes', () => {
-    const icon = mount(<IconSVG sprite="standard" icon="account" size="large" />, { context });
-    expect(icon.find('svg').hasClass('slds-icon--large')).toBeTruthy();
+    mounted.setProps({ size: 'large' });
+    expect(mounted.find('svg').hasClass('icon--large')).toBeTruthy();
   });
 
-  it('can display an icon with a custom background color', () => {
-    const icon = mount(<IconSVG sprite="standard" icon="account" background="custom-custom89" />, { context });
-    expect(icon.find('svg').hasClass('slds-icon-custom-custom89')).toBeTruthy();
+  it('renders an icon with a custom background color', () => {
+    mounted.setProps({ background: 'custom-custom89' });
+    expect(mounted.find('svg').hasClass('icon-custom-custom89')).toBeTruthy();
   });
 
-  it('can display an icon without a background color', () => {
-    const icon = mount(<IconSVG sprite="standard" icon="account" background={false} />, { context });
-    expect(icon.find('svg').hasClass('slds-icon-standard-account')).toBeFalsy();
+  it('renders an icon without a background color', () => {
+    mounted.setProps({ background: false });
+    expect(mounted.find('svg').hasClass('icon-standard-account')).toBeFalsy();
   });
 });

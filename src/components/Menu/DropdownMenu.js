@@ -7,25 +7,12 @@ import { Button, ButtonIcon } from '../../index';
 export class DropdownMenu extends React.Component {
   constructor(props) {
     super(props);
-    this.classes = [
-      'dropdown-trigger',
-      'dropdown-trigger--click',
-      { 'button--last': this.props.last },
-    ];
+
     this.state = { open: this.props.isOpen };
 
     this.toggle = this.toggle.bind(this);
     this.getClasses = this.getClasses.bind(this);
     this.button = this.button.bind(this);
-
-    this.dropdownClasses = [
-      'dropdown',
-      { [`dropdown--${this.props.size}`]: this.props.size },
-      { 'dropdown--left': this.props.position.endsWith('left') },
-      { 'dropdown--right': this.props.position.endsWith('right') },
-      { 'dropdown--bottom': this.props.position.startsWith('bottom') },
-      { [`nubbin--${this.props.position}`]: this.props.nubbin },
-    ];
   }
 
   getClasses() {
@@ -61,6 +48,21 @@ export class DropdownMenu extends React.Component {
   }
 
   render() {
+    this.classes = [
+      'dropdown-trigger',
+      'dropdown-trigger--click',
+      { 'button--last': this.props.last },
+    ];
+
+    this.dropdownClasses = [
+      'dropdown',
+      { [`dropdown--${this.props.size}`]: this.props.size },
+      { 'dropdown--left': this.props.position.endsWith('left') },
+      { 'dropdown--right': this.props.position.endsWith('right') },
+      { 'dropdown--bottom': this.props.position.startsWith('bottom') },
+      { [`nubbin--${this.props.position}`]: this.props.nubbin },
+    ];
+
     return (
       <div className={this.props.prefix(this.getClasses())}>
         {this.button()}

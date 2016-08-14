@@ -8,6 +8,10 @@ describe('<Select />', () => {
   let props = {};
   let mounted = null;
 
+  const context = { assetBasePath: '/assets' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
   beforeEach(() => {
     props = {
       id: 'select-id',
@@ -20,7 +24,7 @@ describe('<Select />', () => {
         <option>Option 1</option>
         <option>Option2</option>
       </Select>,
-      { context: { assetBasePath: '/' }, childContextTypes: { assetBasePath: React.PropTypes.string } });
+      options);
   });
 
   it('renders the id', () => {

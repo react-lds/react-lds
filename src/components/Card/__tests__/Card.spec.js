@@ -5,40 +5,44 @@ import { mount } from 'enzyme';
 import Card from '../Card';
 
 describe('<Card />', () => {
+  let mounted = null;
+  let props = {};
+
   const context = { assetBasePath: '/assets' };
-  const childContextTypes = {
-    assetBasePath: React.PropTypes.string,
-  };
+  const childContextTypes = { assetBasePath: React.PropTypes.string };
   const options = { context, childContextTypes };
 
-  const mounted = mount(
-    <Card
-      icon="contact"
-      sprite="standard"
-      header="Base Card"
-      headerRight="Right Header"
-      body="Body would be here"
-      footer="Footer"
-    />, options
-  );
+  beforeEach(() => {
+    props = {
+      icon: 'contact',
+      sprite: 'standard',
+      header: 'Base Card',
+      headerRight: 'Right Header',
+      body: 'Body',
+      footer: 'footer',
+    };
+
+    mounted = mount(
+      <Card {...props} />, options);
+  });
 
   it('renders the icon', () => {
     expect(mounted.find('svg').length).toEqual(1);
   });
 
   it('renders the header', () => {
-    expect(mounted.find('span.text-heading--small').first().text()).toEqual('Base Card');
+    expect(mounted.find('span.text-heading--small').first().text()).toEqual(props.header);
   });
 
   it('renders headerRight', () => {
-    expect(mounted.find('div.no-flex').first().text()).toEqual('Right Header');
+    expect(mounted.find('div.no-flex').first().text()).toEqual(props.headerRight);
   });
 
   it('renders body', () => {
-    expect(mounted.find('div.card__body').first().text()).toEqual('Body would be here');
+    expect(mounted.find('div.card__body').first().text()).toEqual(props.body);
   });
 
   it('renders footer', () => {
-    expect(mounted.find('div.card__footer').first().text()).toEqual('Footer');
+    expect(mounted.find('div.card__footer').first().text()).toEqual(props.footer);
   });
 });

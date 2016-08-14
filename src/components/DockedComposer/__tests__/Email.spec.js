@@ -8,13 +8,11 @@ import Email from './../Email/index';
 
 describe('<Email />', () => {
   let props = {};
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = {
-    assetBasePath: React.PropTypes.string,
-  };
-  const options = { context, childContextTypes };
-
   let mounted = null;
+
+  const context = { assetBasePath: '/assets' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const options = { context, childContextTypes };
 
   beforeEach(() => {
     props = {
@@ -39,7 +37,7 @@ describe('<Email />', () => {
           {
             id: '3',
             label: 'Peter Griffin',
-            meta: 'petergriffin@maericandad.com',
+            meta: 'petergriffin@familyguy.com',
             objectType: 'contact',
           },
         ],

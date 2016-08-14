@@ -7,12 +7,11 @@ import ButtonGroup from '../ButtonGroup';
 import Button from '../../Button/Button';
 
 describe('<ButtonGroup />', () => {
-  it('correctly renders the container', () => {
+  it('renders the correct markup', () => {
     const child = <Button title="foobar" variation="neutral" />;
-    const comp = mount(<ButtonGroup>{child}</ButtonGroup>);
+    const mounted = mount(<ButtonGroup>{child}</ButtonGroup>);
 
-    const wrapper = comp.find('div');
-    expect(wrapper.hasClass('button-group')).toBeTruthy();
-    expect(wrapper.contains(child)).toBeTruthy();
+    expect(mounted.find('div').hasClass('button-group')).toBeTruthy();
+    expect(mounted.find('div').contains(child)).toBeTruthy();
   });
 });
