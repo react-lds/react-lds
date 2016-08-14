@@ -18,7 +18,8 @@
     "test-watch": "jest --watch=all",
     "build": "npm run build:babel && npm run build:copy-files",
     "build:babel": "babel ./src --ignore *.spec.js --out-dir ./dist",
-    "build:copy-files": "cp ./src/styles.css ./dist/",
+    "build:copy-files": "cp ./src/styles.css ./dist/; cp ./README.md ./dist/",
+    "build:docs": "webpack --config ./docs/webpack.prod.config",
     "prebuild": "rm -rf ./dist",
     "lint": "eslint src docs"
   },

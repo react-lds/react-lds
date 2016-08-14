@@ -52,10 +52,6 @@ export class Rte extends React.Component {
 
 Rte.propTypes = {
   /**
-   * toolbar element used to construct quill editor
-   */
-  toolbar: React.PropTypes.any,
-  /**
    * initial HTML value
    */
   initialValue: React.PropTypes.string,
@@ -64,9 +60,13 @@ Rte.propTypes = {
    */
   onChange: React.PropTypes.func,
   /**
-   * prefixable function
+   * toolbar element used to construct quill editor
    */
-  prefix: React.PropTypes.func,
+  toolbar: React.PropTypes.any,
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(Rte);

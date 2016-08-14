@@ -1,9 +1,10 @@
 import React from 'react';
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
 
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
+import CodeExample from '../../components/CodeExample';
+import PropTypeDescription from '../../components/PropTypeDescription';
+import Masthead from '../../components/MastHead';
+import HeaderIcon from '../../components/HeaderIcon';
+
 import pillCode from '!raw!react-lds/components/Pill/Pill';
 import pillContainerCode from '!raw!react-lds/components/Pill/PillContainer';
 
@@ -20,7 +21,7 @@ import exampleTruncatedCode from '!raw!./ExampleTruncated';
 import ExampleContainer from './ExampleContainer';
 import exampleContainerCode from '!raw!./ExampleContainer';
 
-require('./pills.scss');
+require('./index.scss');
 
 const PillPage = () => (
   <div>

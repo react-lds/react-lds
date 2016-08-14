@@ -25,13 +25,13 @@ Table.variations = [
 
 Table.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * main content
+   * table content
    */
   children: React.PropTypes.node,
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(

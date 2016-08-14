@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { parse } from 'react-docgen';
 import { parse as parseDoctrine } from 'doctrine';
-import MarkdownElement from './MarkdownElement';
+import MarkdownElement from '../MarkdownElement';
 import recast from 'recast';
 
 function getDeprecatedInfo(type) {

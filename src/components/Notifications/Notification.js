@@ -44,17 +44,17 @@ Notification.flavors = [
 
 Notification.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+   * notification content
    */
-  prefix: React.PropTypes.func,
+  children: React.PropTypes.node.isRequired,
   /**
-   * the alert title (will be rendered as assistiveText)
+   * notification title (will be rendered as assistiveText)
    */
   title: React.PropTypes.string.isRequired,
   /**
-   * the alert content
+   * prefix function from the prefixable HOC
    */
-  children: React.PropTypes.node.isRequired,
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(themeable(

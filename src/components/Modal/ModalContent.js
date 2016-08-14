@@ -20,17 +20,17 @@ export const ModalContent = (props) => {
 
 ModalContent.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * the modal content
+   * modal content
    */
   children: React.PropTypes.node.isRequired,
   /**
    * render as a modal__menu instead
    */
   menu: React.PropTypes.bool,
+  /**
+   * prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 

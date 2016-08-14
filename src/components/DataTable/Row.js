@@ -19,17 +19,17 @@ Row.variations = [
 
 Row.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * main content
+   * row content
    */
   children: React.PropTypes.node,
   /**
-   * adds classes for header rows
+   * marks a header row
    */
   head: React.PropTypes.bool,
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(

@@ -24,19 +24,15 @@ export const FormElement = (props) => {
 
 FormElement.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * form-element children
+   * form content
    */
   children: React.PropTypes.node.isRequired,
   /**
-   * the form-element error
+   * can render errors for the given form element
    */
   error: React.PropTypes.string,
   /**
-   * sets the form-element required
+   * adds required-attribute to the form element
    */
   required: React.PropTypes.bool,
   /**
@@ -44,9 +40,13 @@ FormElement.propTypes = {
    */
   'data-scope': React.PropTypes.string,
   /**
-   * sets the data-select
+   * sets the data-select attribute
    */
   'data-select': React.PropTypes.string,
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(FormElement);

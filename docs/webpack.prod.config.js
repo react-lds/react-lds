@@ -1,11 +1,9 @@
 const path = require('path');
-const webpack = require('webpack');
+const Webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  devtool: 'eval',
   entry: [
-    'webpack/hot/only-dev-server',
     path.resolve(__dirname, './src/app/main.js'),
   ],
   output: {
@@ -14,9 +12,19 @@ module.exports = {
     filename: 'docs.js',
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new Webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new Webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+    }),
     new CopyWebpackPlugin([
       { from: 'node_modules/@salesforce-ux/design-system/assets', to: 'assets' },
+      { from: path.resolve(__dirname, './src/index.html') },
     ]),
   ],
   module: {

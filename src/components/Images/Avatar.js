@@ -23,21 +23,21 @@ Avatar.flavors = [
 
 Avatar.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * the img alt (required when src is specified)
+   * img alt
    */
   alt: React.PropTypes.string,
   /**
-   * the img src (prepended with context.assetBasePath)
+   * img src (prepended with context.assetBasePath)
    */
   src: React.PropTypes.string,
   /**
-   * the image size
+   * image size
    */
   size: React.PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
+  /**
+   * prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 Avatar.contextTypes = {

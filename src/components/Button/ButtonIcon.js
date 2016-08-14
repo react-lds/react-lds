@@ -14,10 +14,22 @@ const ButtonIcon = ({ sprite, icon, position, size }) => {
 };
 
 ButtonIcon.propTypes = {
-  sprite: React.PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
+  /**
+   * icon name
+   */
   icon: React.PropTypes.string.isRequired,
+  /**
+   * icon position
+   */
   position: React.PropTypes.oneOf(['left', 'right']),
+  /**
+   * icon size
+   */
   size: React.PropTypes.oneOf(['x-small', 'small', 'large']),
+  /**
+   * icon sprite name
+   */
+  sprite: React.PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
 };
 
 export default ButtonIcon;

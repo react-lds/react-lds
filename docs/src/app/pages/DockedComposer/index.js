@@ -1,11 +1,10 @@
 import React from 'react';
 import { Grid, Column } from 'react-lds';
 
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
-import PageNavigationElement from './../../components/PageNavigationElement';
-import PageNavigationMenu from './../../components/PageNavigationMenu';
-import PageNavigation from './../../components/PageNavigation';
+import Masthead from '../../components/MastHead';
+import HeaderIcon from '../../components/HeaderIcon';
+import { PageNavigation, PageNavigationElement, PageNavigationMenu } from '../../components/PageNavigation';
+
 
 const DockedComposer = ({ children }) =>
   <div>

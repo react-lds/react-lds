@@ -1,6 +1,8 @@
 import React from 'react';
 
-import CodeExample from './../../../components/CodeExample';
+import CodeExample from '../../../components/CodeExample';
+import PropTypeDescription from '../../../components/PropTypeDescription';
+
 import ExampleDefault from './ExampleDefault';
 import exampleDefaultCode from '!raw!./ExampleDefault';
 import ExampleRequired from './ExampleRequired';
@@ -12,7 +14,6 @@ import exampleDisabledCode from '!raw!./ExampleDisabled';
 import ExampleMultiple from './ExampleMultiple';
 import exampleMultipleCode from '!raw!./ExampleMultiple';
 
-import PropTypeDescription from './../../../components/PropTypeDescription';
 import selectCode from '!raw!react-lds/components/Form/Select';
 
 const mapId = (id) => {

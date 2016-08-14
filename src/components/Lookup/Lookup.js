@@ -349,69 +349,67 @@ Lookup.defaultProps = {
   placeholder: 'Search',
 };
 
+const validateSelection = (props, propName, componentName, ...rest) => {
+  const arrayValidation = React.PropTypes.array(props, propName, componentName, ...rest);
+
+  if (arrayValidation === null && props[propName].length > 1 && !props.multi) {
+    return new Error(`${componentName}.initialSelection should not supply multiple selections to a single-item
+        lookup`);
+  }
+
+  return arrayValidation;
+};
+
 Lookup.propTypes = {
-  /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
-  /**
-   * the id of the input field in the lookup
-   */
-  id: React.PropTypes.string.isRequired,
-  /**
-   * the initial selection
-   */
-  initialSelection: function validateSelection(props, propName, componentName, ...rest) {
-    const arrayValidation = React.PropTypes.array(props, propName, componentName, ...rest);
-
-    if (arrayValidation === null && props[propName].length > 1 && !props.multi) {
-      return new Error(`${componentName}.initialSelection should not supply multiple selections to a single-item
-          lookup`);
-    }
-
-    return arrayValidation;
-  },
-  /**
-   * label for the input in the lookup
-   */
-  inputLabel: React.PropTypes.string.isRequired,
-  /**
-   * label for the dropdown in the lookup
-   */
-  listLabel: React.PropTypes.string.isRequired,
-  /**
-   * load function
-   */
-  load: React.PropTypes.func.isRequired,
-  /**
-   * whether load is called on input change
-   */
-  loadOnChange: React.PropTypes.bool,
-  /**
-   * whether load is called on input focus
-   */
-  loadOnFocus: React.PropTypes.bool,
-  /**
-   * whether load is called on component mount
-   */
-  loadOnMount: React.PropTypes.bool,
-  /**
-   * render as a multi lookup
-   */
-  multi: React.PropTypes.bool,
-  /**
-   * lookup onchange cb. gets passed the selected-array
-   */
-  onChange: React.PropTypes.func,
-  /**
-   * onFocus cb for the input in lookup. gets passed the event
-   */
-  onFocus: React.PropTypes.func,
   /**
    * renders a different layour without borders (bare) for email docked
    * composer
    */
   emailLayout: React.PropTypes.bool,
+  /**
+   * id of the input field in the lookup component
+   */
+  id: React.PropTypes.string.isRequired,
+  /**
+   * initial item selection
+   */
+  initialSelection: validateSelection,
+  /**
+   * label for the input field in the lookup component
+   */
+  inputLabel: React.PropTypes.string.isRequired,
+  /**
+   * label for the dropdown in the lookup component
+   */
+  listLabel: React.PropTypes.string.isRequired,
+  /**
+   * loads items into the lookup component
+   */
+  load: React.PropTypes.func.isRequired,
+  /**
+   * set true to call load() onInputChange (defaults to true)
+   */
+  loadOnChange: React.PropTypes.bool,
+  /**
+   * set true to call load() onInputFocus (defaults to false)
+   */
+  loadOnFocus: React.PropTypes.bool,
+  /**
+   * set true to call load() onComponentDidMount (defaults to false)
+   */
+  loadOnMount: React.PropTypes.bool,
+  /**
+   * renders the lookup in multiple mode
+   */
+  multi: React.PropTypes.bool,
+  /**
+   * onChange handler for the lookup. has selected items as first argument
+   */
+  onChange: React.PropTypes.func,
+  /**
+   * onFocus handler for the input field in the lookup
+   */
+  onFocus: React.PropTypes.func,
   /**
    * placeholder for the input field in lookup
    */
@@ -423,6 +421,10 @@ Lookup.propTypes = {
    * timestamp.
    */
   allowCreate: React.PropTypes.bool,
+  /**
+   * prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(enhanceWithClickOutside(Lookup));

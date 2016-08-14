@@ -12,7 +12,7 @@ const truncatable = (Cell) => {
   };
 
   TruncatableCell.propTypes = Object.assign({}, Cell.propTypes, {
-    prefix: React.PropTypes.func,
+    prefix: React.PropTypes.func.isRequired,
     truncate: React.PropTypes.bool,
   });
 

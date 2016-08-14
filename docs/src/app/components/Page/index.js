@@ -1,6 +1,5 @@
 import React from 'react';
-
-import Navigation from './Navigation';
+import Navigation from '../Navigation';
 
 class Page extends React.Component {
   getChildContext() {
@@ -22,7 +21,7 @@ class Page extends React.Component {
 }
 
 Page.propTypes = {
-  children: React.PropTypes.element.isRequired,
+  children: React.PropTypes.node,
 };
 
 Page.childContextTypes = {

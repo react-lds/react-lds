@@ -134,74 +134,74 @@ const propDefaults = {
 
 const propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * input onChange handler
-   */
-  onChange: React.PropTypes.func,
-  /**
-   * onKeyPress handler
-   */
-  onKeyPress: React.PropTypes.func,
-  /**
-   * input onFocus handler
-   */
-  onFocus: React.PropTypes.func,
-  /**
-   * id of the input tag element
-   */
-  id: React.PropTypes.string.isRequired,
-  /**
-   * input field value
-   */
-  value: React.PropTypes.string,
-  /**
-   * label
-   */
-  label: React.PropTypes.string,
-  /**
-   * placeholder for the input
-   */
-  placeholder: React.PropTypes.string,
-  /**
-   * sets the field required
-   */
-  required: React.PropTypes.bool,
-  /**
-   * sets the input field role
-   */
-  role: React.PropTypes.string,
-  /**
-   * disables the field
+   * adds disabled attribute to the input field
    */
   disabled: React.PropTypes.bool,
   /**
-   * if set, this error message will be shown
+   * renders an error for the input
    */
   error: React.PropTypes.string,
   /**
-   * if set, will display an error icon when error is set
+   * renders an additional error icon if an error is set
    */
   errorIcon: React.PropTypes.bool,
   /**
-   * All HTML5 types are allowed, defaults to "text"
-   * text, password, datetime, datetime-local, date, month, time, week, number, email, url, search, tel, and color
-   */
-  type: React.PropTypes.string,
-  /**
-   * icon from the utility sprite for the left side
+   * icon rendered on the left side of the input (from utility sprite)
    */
   iconLeft: React.PropTypes.string,
   /**
-   * icon form the utility sprite for the right side
+   * icon rendered on the right side of the input (from utility sprite)
    */
   iconRight: React.PropTypes.string,
   /**
    * onClick handler for the right icon
    */
   iconRightOnClick: React.PropTypes.func,
+  /**
+   * id of the input field
+   */
+  id: React.PropTypes.string.isRequired,
+  /**
+   * focuses the input field
+   */
+  isFocused: React.PropTypes.bool,
+  /**
+   * label for the input
+   */
+  label: React.PropTypes.string,
+  /**
+   * onChange handler for input
+   */
+  onChange: React.PropTypes.func,
+  /**
+   * onFocus handler for input
+   */
+  onFocus: React.PropTypes.func,
+  /**
+   * onKeyPress handler
+   */
+  onKeyPress: React.PropTypes.func,
+  /**
+   * placeholder for the input
+   */
+  placeholder: React.PropTypes.string,
+  /**
+   * adds required attribute to input and label
+   */
+  required: React.PropTypes.bool,
+  /**
+   * role of the input field
+   */
+  role: React.PropTypes.string,
+  /**
+   * input type. all HTML5 types are allowed, defaults to "text"
+   * text, password, datetime, datetime-local, date, month, time, week, number, email, url, search, tel, and color
+   */
+  type: React.PropTypes.string,
+  /**
+   * value of the input field
+   */
+  value: React.PropTypes.string,
   /**
    * adds the aria-expanded label
    */
@@ -211,9 +211,9 @@ const propTypes = {
    */
   'aria-activedescendant': React.PropTypes.string,
   /**
-   * set focus after rendering
+   * prefix function from prefixable HOC
    */
-  isFocused: React.PropTypes.bool,
+  prefix: React.PropTypes.func.isRequired,
 };
 
 InputEl.propDefaults = propDefaults;
