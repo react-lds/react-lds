@@ -4,7 +4,7 @@ import sortable from './sortable';
 import truncatable from './truncatable';
 import resizable from './resizable';
 
-export const Cell = (props) => {
+export const Cell = props => {
   const {
     prefix,
     scope,
@@ -13,32 +13,24 @@ export const Cell = (props) => {
     children,
   } = props;
 
-  let element = 'td';
-  const elementProps = {};
-  const sldsClasses = [];
-
-  if (scope === 'col' || scope === 'row') {
-    element = 'th';
-    elementProps.scope = scope;
-  }
-
-  if (dataLabel) {
-    elementProps['data-label'] = dataLabel;
-  }
+  const isHeader = scope === 'col' || scope === 'row';
+  const CellElement = isHeader ? 'th' : 'td';
+  const cellScope = isHeader ? scope : null;
+  let cellTitle = null;
 
   // Set default title if string is found in table cell or child of table cell (e.g. an <a /> tag)
   if (title) {
-    elementProps.title = title;
+    cellTitle = title;
   } else if (typeof children === 'string') {
-    elementProps.title = children;
+    cellTitle = children;
   } else if (React.isValidElement(children) && typeof children.props.children === 'string') {
-    elementProps.title = children.props.children;
+    cellTitle = children.props.children;
   }
 
-  elementProps.className = prefix(sldsClasses, props);
-
   return (
-    React.createElement(element, elementProps, children)
+    <CellElement className={prefix([], props)} scope={cellScope} data-label={dataLabel} title={cellTitle}>
+      {children}
+    </CellElement>
   );
 };
 
