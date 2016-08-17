@@ -8,6 +8,10 @@ describe('<Input />', () => {
   let props = {};
   let mounted = null;
 
+  const context = { assetBasePath: '/assets' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
   beforeEach(() => {
     props = {
       value: '',
@@ -22,16 +26,14 @@ describe('<Input />', () => {
       label: 'some label',
     };
 
-    mounted = mount(
-      <Input {...props} />,
-      { context: { assetBasePath: '/' }, childContextTypes: { assetBasePath: React.PropTypes.string } });
+    mounted = mount(<Input {...props} />, options);
   });
 
   it('renders the id', () => {
     expect(mounted.find(`#${props.id}`).length).toEqual(1);
   });
 
-  it('onChange handler works', () => {
+  it('attaches an onChange handler', () => {
     const input = mounted.find('input');
     const event = { target: { value: 'foo' } };
     input.simulate('change', event);
@@ -54,7 +56,7 @@ describe('<Input />', () => {
     expect(mounted.find('input').props().type).toEqual(type);
   });
 
-  it('renders single iconLeft', () => {
+  it('renders a single iconLeft', () => {
     const iconLeft = 'rainbow';
     mounted.setProps({ iconLeft });
     const formElement = mounted.find('.form-element__control');
@@ -105,6 +107,11 @@ describe('<Input />', () => {
   it('renders disabled', () => {
     mounted.setProps({ disabled: true });
     expect(mounted.find('input').props().disabled).toBeTruthy();
+  });
+
+  it('renders aria-attributes', () => {
+    mounted.setProps({ 'aria-activedescendant': 'foo', 'aria-expanded': true });
+    expect(mounted.find('input[aria-activedescendant="foo"][aria-expanded]').length).toBe(1);
   });
 
   it('renders errorIcon if set', () => {

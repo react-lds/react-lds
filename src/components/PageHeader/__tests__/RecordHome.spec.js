@@ -5,12 +5,11 @@ import { mount } from 'enzyme';
 import RecordHome from '../RecordHome';
 
 describe('<RecordHome />', () => {
-  const childContextTypes = {
-    assetBasePath: React.PropTypes.string,
-  };
-  const context = { assetBasePath: '/assets' };
-  const options = { context, childContextTypes };
   let mounted;
+
+  const context = { assetBasePath: '/assets' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const options = { context, childContextTypes };
 
   beforeEach(() => {
     mounted = mount(

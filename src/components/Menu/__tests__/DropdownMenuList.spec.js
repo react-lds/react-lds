@@ -5,27 +5,34 @@ import DropdownMenuList from '../DropdownMenuList';
 import { mount } from 'enzyme';
 
 describe('<DropdownMenuList />', () => {
+  let mounted = null;
+
+  const children = [<li key="1">one</li>, <li key="2">two</li>];
+
+  beforeEach(() => {
+    mounted = mount(<DropdownMenuList>{children}</DropdownMenuList>);
+  });
+
   it('renders children inside <ul></ul>', () => {
-    const childs = [<li key="1">one</li>, <li key="2">two</li>];
-    const menu = mount(<DropdownMenuList>{childs}</DropdownMenuList>);
-    expect(menu.find('ul').contains(childs)).toBeTruthy();
+    expect(mounted.find('ul').contains(children)).toBeTruthy();
   });
 
   it('renders optional header', () => {
-    const menu = mount(<DropdownMenuList header="pink" />);
-    const header = menu.find('div > div').first();
+    mounted.setProps({ header: 'pink' });
+
+    const header = mounted.find('div > div').first();
     expect(header.hasClass('dropdown__header')).toBeTruthy();
     expect(header.find('span').hasClass('text-heading--label')).toBeTruthy();
     expect(header.text()).toEqual('pink');
   });
 
   it('adds optional height class', () => {
-    const menu = mount(<DropdownMenuList height={5} />).find('ul');
-    expect(menu.hasClass('dropdown--length-5')).toBeTruthy();
+    mounted.setProps({ height: 5 });
+    expect(mounted.find('ul').hasClass('dropdown--length-5')).toBeTruthy();
   });
 
   it('adds optional heightIcon class', () => {
-    const menu = mount(<DropdownMenuList heightIcon={5} />).find('ul');
-    expect(menu.hasClass('dropdown--length-with-icon-5')).toBeTruthy();
+    mounted.setProps({ heightIcon: 5 });
+    expect(mounted.find('ul').hasClass('dropdown--length-with-icon-5')).toBeTruthy();
   });
 });

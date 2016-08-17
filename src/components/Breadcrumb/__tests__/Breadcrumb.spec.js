@@ -5,10 +5,21 @@ import { mount } from 'enzyme';
 import Breadcrumb from '../Breadcrumb';
 
 describe('<Breadcrumb />', () => {
+  let mounted = null;
+
+  beforeEach(() => {
+    mounted = mount(<Breadcrumb />);
+  });
+
+  it('renders the correct markup', () => {
+    expect(mounted.find('nav[role="navigation"] > .breadcrumb').length).toBe(1);
+  });
+
   it('renders a single child', () => {
     const child = <a href="#" key="id-1">foobar</a>;
-    const comp = mount(<Breadcrumb>{child}</Breadcrumb>);
-    expect(comp.find('li').contains(child)).toBeTruthy();
+    mounted.setProps({ children: child });
+
+    expect(mounted.find('li.breadcrumb__item').contains(child)).toBeTruthy();
   });
 
   it('renders multiple children', () => {
@@ -16,10 +27,11 @@ describe('<Breadcrumb />', () => {
       <a href="#" key="id-1">foobar</a>,
       <a href="#" key="id-2">foobar2</a>,
     ];
-    const comp = mount(<Breadcrumb>{children}</Breadcrumb>);
-    const lis = comp.find('li');
+    mounted.setProps({ children });
+
+    const lis = mounted.find('li.breadcrumb__item');
     expect(lis.length).toEqual(2);
-    expect(comp.find('li').first().contains(children[0])).toBeTruthy();
-    expect(comp.find('li').at(1).contains(children[1])).toBeTruthy();
+    expect(lis.first().contains(children[0])).toBeTruthy();
+    expect(lis.at(1).contains(children[1])).toBeTruthy();
   });
 });

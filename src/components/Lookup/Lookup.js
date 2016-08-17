@@ -62,7 +62,9 @@ export class Lookup extends React.Component {
     const param = typeof searchTerm === 'string' ? searchTerm : this.state.searchTerm;
     Promise.resolve(this.props.load(param))
       .then((data) => {
-        this.setState({ loaded: data });
+        if (Array.isArray(data)) {
+          this.setState({ loaded: data });
+        }
       });
   }
 
@@ -151,7 +153,7 @@ export class Lookup extends React.Component {
 
     if (this.props.emailLayout) {
       return (
-        <FormElementControl hasIconRight>
+        <FormElementControl>
           <input
             className={this.props.prefix(['input--bare', 'input--height'])}
             id={this.props.id}

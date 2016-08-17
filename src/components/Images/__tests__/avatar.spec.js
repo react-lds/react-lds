@@ -4,32 +4,44 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Avatar from '../Avatar';
 
-describe('<Avatar>', () => {
-  const context = { assetBasePath: '' };
-  it('should render the correct markup', () => {
-    const wrapper = mount(<Avatar src="foo" alt="bar" size="large" />, { context });
-    expect(wrapper.find('.avatar').length).toBe(1);
-    expect(wrapper.find('img').length).toBe(1);
+describe('<Avatar />', () => {
+  let mounted = null;
+  let props = {};
+
+  const context = { assetBasePath: '/assets' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
+  beforeEach(() => {
+    props = {
+      src: 'foo',
+      alt: 'bar',
+    };
+
+    mounted = mount(<Avatar {...props} />, options);
   });
 
-  it('should accept a size', () => {
-    const wrapper = mount(<Avatar src="foo" alt="bar" size="large" />, { context });
-    expect(wrapper.find('.avatar').first().hasClass('avatar--large')).toBeTruthy();
+  it('renders the correct markup', () => {
+    expect(mounted.find('.avatar').length).toBe(1);
+    expect(mounted.find('img').length).toBe(1);
   });
 
-  it('should accept a src', () => {
-    const wrapper = mount(<Avatar src="foo" alt="bar" />, { context });
-    expect(wrapper.find('img').first().props().src).toBe('foo');
+  it('renders different sizes', () => {
+    mounted.setProps({ size: 'large' });
+    expect(mounted.find('.avatar').first().hasClass('avatar--large')).toBeTruthy();
   });
 
-  it('should render an empty avatar', () => {
-    const wrapper = mount(<Avatar />, { context });
-    expect(wrapper.find('img').length).toBe(0);
-    expect(wrapper.find('.avatar').hasClass('avatar--empty')).toBeTruthy();
+  it('renders a src', () => {
+    expect(mounted.find('img').first().props().src).toBe(`${context.assetBasePath}/${props.src}`);
   });
 
-  it('should add an alt', () => {
-    const wrapper = mount(<Avatar src="foo" alt="bar" />, { context });
-    expect(wrapper.find('img').first().props().alt).toBe('bar');
+  it('renders an alt', () => {
+    expect(mounted.find('img').first().props().alt).toBe(props.alt);
+  });
+
+  it('renders an empty avatar', () => {
+    mounted.setProps({ src: undefined, alt: undefined });
+    expect(mounted.find('img').length).toBe(0);
+    expect(mounted.find('.avatar').hasClass('avatar--empty')).toBeTruthy();
   });
 });

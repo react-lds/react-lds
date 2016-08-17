@@ -8,6 +8,10 @@ describe('<Textarea />', () => {
   let props = {};
   let mounted = null;
 
+  const context = { assetBasePath: '/assets' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
   beforeEach(() => {
     props = {
       mounted: null,
@@ -17,16 +21,14 @@ describe('<Textarea />', () => {
       label: 'some label',
     };
 
-    mounted = mount(
-      <Textarea {...props} />,
-      { context: { assetBasePath: '/' }, childContextTypes: { assetBasePath: React.PropTypes.string } });
+    mounted = mount(<Textarea {...props} />, options);
   });
 
   it('renders the id', () => {
     expect(mounted.find(`#${props.id}`).length).toEqual(1);
   });
 
-  it('onChange handler works', () => {
+  it('attaches an onChange handler', () => {
     const textarea = mounted.find('textarea');
     const event = { target: { value: 'foo' } };
     textarea.simulate('change', event);

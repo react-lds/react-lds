@@ -4,16 +4,24 @@ import React from 'react';
 import Notification from '../Notification';
 import { mount } from 'enzyme';
 
-describe('Notification', () => {
+describe('<Notification />', () => {
+  let mounted = null;
+  let props = {};
+
   const context = { assetBasePath: '/assets' };
-  const childContextTypes = {
-    assetBasePath: React.PropTypes.string,
-  };
+  const childContextTypes = { assetBasePath: React.PropTypes.string };
   const options = { context, childContextTypes };
 
+  beforeEach(() => {
+    props = {
+      title: 'foo',
+    };
+
+    mounted = mount(<Notification {...props}><p>Foobar</p></Notification>, options);
+  });
+
   it('renders the correct markup', () => {
-    const wrapper = mount(<Notification title="foo" alert><p>Foobar</p></Notification>, options);
-    const container = wrapper.find('.notify_container');
+    const container = mounted.find('.notify_container');
     const notification = container.find('.notify');
     expect(container.length).toBe(1);
     expect(notification.length).toBe(1);
@@ -24,16 +32,18 @@ describe('Notification', () => {
   });
 
   it('renders non-inverse buttons for the warning theme', () => {
-    const info = mount(<Notification title="foo" toast theme="info"><p>Foobar</p></Notification>, options);
-    const warning = mount(<Notification title="foo" toast theme="warning"><p>Foobar</p></Notification>, options);
-    expect(info.find('button').hasClass('button--icon-inverse')).toBeTruthy();
-    expect(warning.find('button').hasClass('button--icon-inverse')).toBeFalsy();
+    mounted.setProps({ toast: true, theme: 'info' });
+    expect(mounted.find('button').hasClass('button--icon-inverse')).toBeTruthy();
+
+    mounted.setProps({ theme: 'warning' });
+    expect(mounted.find('button').hasClass('button--icon-inverse')).toBeFalsy();
   });
 
   it('renders large close icons for toasts', () => {
-    const toast = mount(<Notification title="foo" toast><p>Foobar</p></Notification>, options);
-    const alert = mount(<Notification title="foo" alert><p>Foobar</p></Notification>, options);
-    expect(alert.find('button svg').hasClass('button__icon--large')).toBeFalsy();
-    expect(toast.find('button svg').hasClass('button__icon--large')).toBeTruthy();
+    mounted.setProps({ toast: true });
+    expect(mounted.find('button svg').hasClass('button__icon--large')).toBeTruthy();
+
+    mounted.setProps({ toast: false, alert: true });
+    expect(mounted.find('button svg').hasClass('button__icon--large')).toBeFalsy();
   });
 });
