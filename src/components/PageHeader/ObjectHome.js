@@ -64,34 +64,34 @@ export class ObjectHome extends React.Component {
 
 ObjectHome.propTypes = {
   /**
-   * prefix HOC function
+   * bottom Buttons or ButtonGroup(s)
    */
-  prefix: React.PropTypes.func.isRequired,
+  bottomButtons: React.PropTypes.node,
   /**
-   * The title
+   * info that is displayed below the title
+   */
+  info: React.PropTypes.string,
+  /**
+   * record type header above the title
+   */
+  recordType: React.PropTypes.string.isRequired,
+  /**
+   * title
    */
   title: React.PropTypes.string.isRequired,
   /**
-   * Dropdown header menu that get's also triggered whena user clicks on the
+   * dropdown header menu that also get's triggered when a user clicks on the
    * title headline. Must be one or more instances of DropdownMenuList
    */
   titleMenu: React.PropTypes.node,
   /**
-   * Record Type Header above the title
-   */
-  recordType: React.PropTypes.string.isRequired,
-  /**
-   * Top Buttons or ButtonGroup
+   * top Buttons or ButtonGroup(s)
    */
   topButtons: React.PropTypes.node,
   /**
-   * Info that is displayed below the title
+   * prefix function from the prefixable HOC
    */
-  info: React.PropTypes.string,
-  /**
-   * Bototm Buttons or ButtonGroup(s)
-   */
-  bottomButtons: React.PropTypes.node,
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(enhanceWithClickOutside(ObjectHome));

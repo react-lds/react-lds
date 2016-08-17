@@ -32,21 +32,27 @@ export const DropdownMenuList = ({ prefix, header, height, heightIcon, children 
 };
 
 DropdownMenuList.propTypes = {
-  prefix: React.PropTypes.func,
+  /**
+   * list content
+   */
   children: React.PropTypes.arrayOf(React.PropTypes.element),
   /**
-   * Optional Header for this list. Mostly useful is multiple
-   * DropdownMenuListtItems are in use
+   * optional header for this list. Mostly useful is multiple
+   * DropdownMenuListItems are in use
    */
   header: React.PropTypes.string,
   /**
-   * how many items should be displayed?
+   * sets the number of items being displayed
    */
   height: React.PropTypes.oneOf([5, 7, 10]),
   /**
    * use this instead of height if an leftIcon is on every item
    */
   heightIcon: React.PropTypes.oneOf([5, 7, 10]),
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(DropdownMenuList);

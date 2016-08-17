@@ -24,15 +24,15 @@ export const Breadcrumb = ({ prefix, children = [] }) => {
 
 Breadcrumb.propTypes = {
   /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
    * One or many children, that automatically get wrapped into the surrounding
    * `<ol><li></li></ol>` structure of the breadcrumb. Don't forget to add
    * unique keys since react requires this to render more efficiently.
    */
-  children: React.PropTypes.node,
+  children: React.PropTypes.node.isRequired,
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(Breadcrumb);

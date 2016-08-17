@@ -28,27 +28,26 @@ export const FormElementLabel = (props) => {
   );
 };
 
-FormElementLabel.propTypes = {
-  /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * id of the input tag element
+FormElementLabel.propTypes = {  /**
+   * id of the corresponding input tag element
    */
   id: React.PropTypes.string,
   /**
-   * label
+   * label content
    */
   label: React.PropTypes.string.isRequired,
   /**
-   * render a span instead of a label
+   * renders the label as a span-tag instead of a label-tag
    */
   readOnly: React.PropTypes.bool,
   /**
-   * labels a required input
+   * label for required inputs
    */
   required: React.PropTypes.bool,
+  /**
+   * prefix function from prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(FormElementLabel);

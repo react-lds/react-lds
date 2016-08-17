@@ -7,7 +7,7 @@
 
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-@import "init";
+@import "../../init";
 
 .site-navigation {
 
@@ -29,12 +29,15 @@
   }
 
   // Links
-  a {
+  a,
+  .is-unlinked > span {
     display: block;
     padding: $spacing-small $spacing-x-large;
     line-height: 1.28571428571429;
     color: $color-text-default;
+  }
 
+  a {
     &:hover {
       background-color: rgba($color-background, 0.5);
       text-decoration: none;
@@ -45,6 +48,15 @@
   .#{$css-prefix}is-active > a {
     background-color: $color-background-alt-2;
     color: $color-text-tab-label-selected;
+  }
+
+  .#{$css-prefix}is-active > a[href="/"] {
+    color: $color-text-default;
+    background-color: #fff;
+
+    &:hover {
+      background-color: rgba($color-background, 0.5);
+    }
   }
 
   // Open Menu Items
@@ -64,6 +76,13 @@
       opacity: 1;
     }
   }
+
+  // Unlinked
+  .is-unlinked .slds-badge {
+    margin-left: $spacing-x-small;
+    font-size: $font-size-x-small;
+  }
+
 
   // Nested List
   .#{$css-prefix}is-nested {

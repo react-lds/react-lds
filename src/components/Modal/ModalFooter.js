@@ -18,17 +18,17 @@ ModalFooter.flavors = [
 
 ModalFooter.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * the modal content
+   * modal footer content
    */
   children: React.PropTypes.node.isRequired,
   /**
-   * render a modal with `theme--default`
+   * renders the footer with `theme--default`
    */
   default: React.PropTypes.bool,
+  /**
+   * prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(

@@ -16,29 +16,29 @@ const Prompt = (props) => (
 
 Prompt.propTypes = {
   /**
-   * the prompt label
-   */
-  label: React.PropTypes.string.isRequired,
-  /**
-   * the prompt description
-   */
-  description: React.PropTypes.string.isRequired,
-  /**
-   * the prompt closing button text
+   * prompt close button text
    */
   buttonText: React.PropTypes.string.isRequired,
   /**
-   * the prompt content
+   * prompt content
    */
-  title: React.PropTypes.string.isRequired,
+  children: React.PropTypes.node.isRequired,
+  /**
+   * prompt description
+   */
+  description: React.PropTypes.string.isRequired,
+  /**
+   * prompt label
+   */
+  label: React.PropTypes.string.isRequired,
   /**
    * opens the prompt
    */
   open: React.PropTypes.bool,
   /**
-   * the prompt content
+   * prompt content
    */
-  children: React.PropTypes.node.isRequired,
+  title: React.PropTypes.string.isRequired,
 };
 
 export default Prompt;

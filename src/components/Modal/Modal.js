@@ -64,15 +64,11 @@ Modal.flavors = [
 
 Modal.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * the modal content
+   * modal content
    */
   children: React.PropTypes.node.isRequired,
   /**
-   * the id of the modal-content (required as aria-describedby). must be set for --prompts
+   * id of the modal-content (required as aria-describedby). must be set for --prompts
    */
   description: React.PropTypes.string,
   /**
@@ -80,13 +76,17 @@ Modal.propTypes = {
    */
   dialog: React.PropTypes.bool,
   /**
-   * the id of the modal-heading (required as aria-labelledby for modals and prompts, but not for PromptForTouch)
+   * id of the modal-heading
    */
   label: React.PropTypes.string,
   /**
    * opens the modal
    */
   open: React.PropTypes.bool,
+  /**
+   * prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(flavorable(Modal, 'modal'));

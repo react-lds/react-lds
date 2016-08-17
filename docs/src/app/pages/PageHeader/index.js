@@ -1,9 +1,9 @@
 import React from 'react';
 
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
+import CodeExample from '../../components/CodeExample';
+import PropTypeDescription from '../../components/PropTypeDescription';
+import Masthead from '../../components/MastHead';
+import HeaderIcon from '../../components/HeaderIcon';
 
 import PageHeaderExample from './ExampleNormal';
 import pageHeaderExampleCode from '!raw!./ExampleNormal';

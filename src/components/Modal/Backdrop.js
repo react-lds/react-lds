@@ -10,9 +10,9 @@ Backdrop.flavors = [
 
 Backdrop.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+   * prefix function from the prefixable HOC
    */
-  prefix: React.PropTypes.func,
+  prefix: React.PropTypes.func.isRequired,
 };
 
 

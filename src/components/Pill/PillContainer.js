@@ -17,14 +17,17 @@ PillContainer.flavors = [
 
 PillContainer.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
-  /**
-   * the pill passed into the component
+   * the pill(s) passed into the component
    */
   children: React.PropTypes.node.isRequired,
+  /**
+   * onClick handler for the pill container
+   */
   onClick: React.PropTypes.func,
+  /**
+   * prefix function from the prefixable HOC
+   */
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(

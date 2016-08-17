@@ -60,16 +60,11 @@ export class Picklist extends React.Component {
 
 Picklist.propTypes = {
   /**
-   * String that get's displayed on the button, if something was selected, you
-   * should render a text that indicates this
-   */
-  label: React.PropTypes.string.isRequired,
-  /**
    * triggered whenever an item was clicked, has the items key as parameter
    */
   callback: React.PropTypes.func.isRequired,
   /**
-   * list of items that get's displayed
+   * list of displayed items
    * `{key: 'id123', label: 'first entry', isSelected: false}`
    */
   items: React.PropTypes.arrayOf(React.PropTypes.shape({
@@ -77,6 +72,10 @@ Picklist.propTypes = {
     label: React.PropTypes.string,
     isSelected: React.PropTypes.bool,
   })),
+  /**
+   * label for the button. if a selection is present, you should indicate it
+   */
+  label: React.PropTypes.string.isRequired,
 };
 
 export default enhanceWithClickOutside(Picklist);

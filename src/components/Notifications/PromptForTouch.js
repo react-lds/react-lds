@@ -23,29 +23,29 @@ const PromptForTouch = (props) => (
 
 PromptForTouch.propTypes = {
   /**
-   * the prompt label
+   * prompt content
    */
-  label: React.PropTypes.string,
+  children: React.PropTypes.node.isRequired,
   /**
-   * the prompt header-icon
+   * prompt header-icon
    */
   headerIcon: React.PropTypes.node,
   /**
-   * the prompt title
+   * prompt label
    */
-  title: React.PropTypes.string,
-  /**
-   * the prompt tagline
-   */
-  tagline: React.PropTypes.string,
+  label: React.PropTypes.string,
   /**
    * opens the prompt
    */
   open: React.PropTypes.bool,
   /**
-   * the prompt content
+   * prompt tagline
    */
-  children: React.PropTypes.node.isRequired,
+  tagline: React.PropTypes.string,
+  /**
+   * prompt title
+   */
+  title: React.PropTypes.string,
 };
 
 export default PromptForTouch;

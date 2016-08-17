@@ -250,10 +250,68 @@ Email.defaultProps = {
 };
 
 Email.propTypes = {
+  /**
+   * additional lookup component that will be displayed below recipient lookups
+   */
+  additionalLookup: React.PropTypes.node,
+  /**
+   * additional buttons before the Send button in the footer,
+   * will always be taken from utility sprite
+   */
+  footerButtons: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      icon: React.PropTypes.string,
+      key: React.PropTypes.string,
+      onClick: React.PropTypes.func,
+    })
+  ),
   /*
    * header title
    */
   header: React.PropTypes.string,
+  /**
+   * html id
+   */
+  id: React.PropTypes.string.isRequired,
+  /**
+   * load function to search for contacts
+   */
+  loadRecipients: React.PropTypes.func.isRequired,
+  /**
+   * Help text displayed in lookup directive
+   */
+  loadRecipientsLabel: React.PropTypes.string,
+  /**
+   * callback, called whenever something changes, which can be:
+   *   - to
+   *   - cc
+   *   - bcc
+   *   - subject
+   *   - content
+   *   - attachments
+   * those are keys in the callback object
+   */
+  onChange: React.PropTypes.func,
+  /**
+   * onClick handler for the send button
+   */
+  onSend: React.PropTypes.func,
+  /**
+   * label for send button
+   */
+  sendLabel: React.PropTypes.string,
+  /**
+   * placeholder for subject input element
+   */
+  subjectPlaceholder: React.PropTypes.string,
+  /**
+   * Optional Toolbar ButtonGroup content on the left side
+   */
+  toolbarButtonGroupLeft: React.PropTypes.node,
+  /**
+   * Optional Toolbar ButtonGroup content on the right side
+   */
+  toolbarButtonGroupRight: React.PropTypes.node,
   /**
    * value. Attachment icons will be taken from doctype icons
    */
@@ -271,65 +329,7 @@ Email.propTypes = {
     ),
   }),
   /**
-   * placeholder for subject input element
-   */
-  subjectPlaceholder: React.PropTypes.string,
-  /**
-   * callback, called whenever something changes, which can be:
-   *   - to
-   *   - cc
-   *   - bcc
-   *   - subject
-   *   - content
-   *   - attachments
-   * those are keys in the callback object
-   */
-  onChange: React.PropTypes.func,
-  /**
-   * html id
-   */
-  id: React.PropTypes.string.isRequired,
-  /**
-   * additional buttons before the Send button in the footer,
-   * will always be taken from utility sprite
-   */
-  footerButtons: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      icon: React.PropTypes.string,
-      key: React.PropTypes.string,
-      onClick: React.PropTypes.func,
-    })
-  ),
-  /**
-   * onClick handler for the send button
-   */
-  onSend: React.PropTypes.func,
-  /**
-   * label for send button
-   */
-  sendLabel: React.PropTypes.string,
-  /**
-   * load function to search for contacts
-   */
-  loadRecipients: React.PropTypes.func.isRequired,
-  /**
-   * Help text displayed in lookup directive
-   */
-  loadRecipientsLabel: React.PropTypes.string,
-  /**
-   * additional lookup component that will be displayed below recipient lookups
-   */
-  additionalLookup: React.PropTypes.node,
-  /**
-   * Optional Toolbar ButtonGroup content on the right side
-   */
-  toolbarButtonGroupRight: React.PropTypes.node,
-  /**
-   * Optional Toolbar ButtonGroup content on the left side
-   */
-  toolbarButtonGroupLeft: React.PropTypes.node,
-  /**
-   * prefixable function
+   * prefix function from prefixable HOC
    */
   prefix: React.PropTypes.func.isRequired,
 };

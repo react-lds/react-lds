@@ -46,33 +46,33 @@ Pill.flavors = [
 
 Pill.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+   * optional Icon that receives '.pill__icon_container' class
    */
-  prefix: React.PropTypes.func.isRequired,
+  icon: React.PropTypes.node,
   /**
-   * the title of the pill label
-   */
-  title: React.PropTypes.string.isRequired,
-  /**
-   * the content of the pill label
+   * content of the pill label
    */
   label: React.PropTypes.string.isRequired,
+  /**
+   * onClose handler for the pill
+   */
+  onClose: React.PropTypes.func,
+  /**
+   * optional image that receives '.pill__icon' class
+   */
+  portrait: React.PropTypes.node,
+  /**
+   * title of the pill label
+   */
+  title: React.PropTypes.string.isRequired,
   /**
    * optional url for the link label
    */
   url: React.PropTypes.string,
   /**
-   * optional icon that gets '.pill__icon_container'
+   * prefix function from the prefixable HOC
    */
-  icon: React.PropTypes.node,
-  /**
-   * optional image that gets '.pill__icon'
-   */
-  portrait: React.PropTypes.node,
-  /**
-   * function called when pill is closed
-   */
-  onClose: React.PropTypes.func,
+  prefix: React.PropTypes.func.isRequired,
 };
 
 export default prefixable(
