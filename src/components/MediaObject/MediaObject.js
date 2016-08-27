@@ -1,48 +1,58 @@
 import React from 'react';
-import { prefixable, flavorable } from '../../decorators';
+import { prefixClasses } from '../../utils';
+import { flavorable } from '../../decorators';
 
 /**
  * Renders a figure with an optional className
  */
 
-export class MediaObject extends React.Component {
-  renderFigure(figure, className) {
+export const MediaObject = (props, { cssPrefix }) => {
+  const { children, className, figureLeft, figureRight, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
+  const renderFigure = (figure, classes) => {
     if (!figure) {
       return null;
     }
 
-    return (
-      <div className={this.props.prefix(['media__figure', className])}>
-        {figure}
-      </div>
-    );
-  }
+    const sldsClasses = ['media__figure'];
+    if (!!classes) {
+      sldsClasses.push(classes);
+    }
 
-  render() {
-    const { figureLeft, figureRight, children } = this.props;
-    const sldsClasses = ['media'];
+    return (<div className={prefix(sldsClasses)}>{figure}</div>);
+  };
 
-    return (
-      <div className={this.props.prefix(sldsClasses, this.props)}>
-        {this.renderFigure(figureLeft)}
-        <div className={this.props.prefix(['media__body'])}>{children}</div>
-        {this.renderFigure(figureRight, 'media__figure--reverse')}
-      </div>
-    );
-  }
-}
+  return (
+    <div {...rest} className={prefix('media', className)}>
+      {renderFigure(figureLeft)}
+      <div className={prefix('media__body')}>{children}</div>
+      {renderFigure(figureRight, 'media__figure--reverse')}
+    </div>
+  );
+};
 
 MediaObject.flavors = [
   'center',
   'responsive',
 ];
 
+MediaObject.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
 
 MediaObject.propTypes = {
   /**
    * mediaObject content
    */
   children: React.PropTypes.node,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * renders a figure on the left side of the media object
    */
@@ -51,12 +61,6 @@ MediaObject.propTypes = {
    * renders a figure on the right side of the media object
    */
   figureRight: React.PropTypes.node,
-  /**
-   * prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(
-  flavorable(MediaObject, 'media')
-);
+export default flavorable(MediaObject, 'media');

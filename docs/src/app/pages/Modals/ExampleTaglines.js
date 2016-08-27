@@ -26,8 +26,8 @@ const ExampleNormal = () =>
         </div>
       </ModalContent>
       <ModalFooter>
-        <Button variation="neutral" title="Cancel" />
-        <Button variation="brand" title="Save" />
+        <Button neutral title="Cancel" />
+        <Button brand title="Save" />
       </ModalFooter>
     </Modal>
     <Backdrop open />

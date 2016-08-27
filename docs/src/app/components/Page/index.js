@@ -4,7 +4,7 @@ import Navigation from '../Navigation';
 class Page extends React.Component {
   getChildContext() {
     return {
-      assetBasePath: '',
+      assetBasePath: '/',
       cssPrefix: 'slds-',
     };
   }

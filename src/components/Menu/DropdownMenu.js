@@ -1,17 +1,17 @@
 import React from 'react';
 import enhanceWithClickOutside from 'react-click-outside';
 
-import prefixable from './../../decorators/prefixable';
+import { prefixClasses } from '../../utils';
 import { Button, ButtonIcon } from '../../index';
 
 export class DropdownMenu extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, { cssPrefix }) {
+    super(props, { cssPrefix });
 
     this.state = { open: this.props.isOpen };
 
+    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
     this.toggle = this.toggle.bind(this);
-    this.getClasses = this.getClasses.bind(this);
     this.button = this.button.bind(this);
   }
 
@@ -25,11 +25,13 @@ export class DropdownMenu extends React.Component {
 
   button() {
     if (this.props.button) {
+      const noBorder = this.props.button.noBorder;
       return (
         <Button
-          onClick={this.toggle}
-          variation={this.props.button.noBorder ? 'icon-container' : 'icon-border-filled'}
           disabled={this.props.disabled}
+          icon-border-filled={!noBorder}
+          icon-container={noBorder}
+          onClick={this.toggle}
         >
           <ButtonIcon sprite={this.props.button.sprite} icon={this.props.button.icon} />
         </Button>
@@ -64,15 +66,22 @@ export class DropdownMenu extends React.Component {
     ];
 
     return (
-      <div className={this.props.prefix(this.getClasses())}>
+      <div className={this.prefix(this.getClasses(), this.props.className)}>
         {this.button()}
-        <div className={this.props.prefix(this.dropdownClasses)}>
+        <div className={this.prefix(this.dropdownClasses)}>
           {this.props.children}
         </div>
       </div>
     );
   }
 }
+
+DropdownMenu.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
 
 DropdownMenu.defaultProps = {
   isOpen: false,
@@ -98,6 +107,10 @@ DropdownMenu.propTypes = {
    * one DropdownMenuList or many of them
    */
   children: React.PropTypes.node.isRequired,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * fully customizable dropdown trigger button, use this instead of the button
    * shape if needed
@@ -128,10 +141,6 @@ DropdownMenu.propTypes = {
    * length of the menu box
    */
   size: React.PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
 DropdownMenu.defaultProps = {
@@ -141,4 +150,4 @@ DropdownMenu.defaultProps = {
 };
 
 
-export default prefixable(enhanceWithClickOutside(DropdownMenu));
+export default enhanceWithClickOutside(DropdownMenu);

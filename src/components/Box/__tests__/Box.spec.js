@@ -1,19 +1,22 @@
 jest.unmock('../Box');
 
 import React from 'react';
-import { mount } from 'enzyme';
-import Box from '../Box';
+import { shallow } from 'enzyme';
+import { Box } from '../Box';
 
 describe('<Box />', () => {
   let mounted = null;
 
+  const context = { cssPrefix: 'slds-' };
+  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
   beforeEach(() => {
-    mounted = mount(<Box />);
+    mounted = shallow(<Box />, options);
   });
 
   it('renders the correct markup', () => {
-    mounted.setProps({ theme: 'warning' });
-    expect(mounted.find('.box').hasClass('theme--warning')).toBeTruthy();
+    expect(mounted.hasClass('slds-box')).toBeTruthy();
   });
 
   it('renders children', () => {
@@ -25,6 +28,6 @@ describe('<Box />', () => {
 
   it('renders different sizes', () => {
     mounted.setProps({ size: 'small' });
-    expect(mounted.find('.box').hasClass('box--small')).toBeTruthy();
+    expect(mounted.hasClass('slds-box--small')).toBeTruthy();
   });
 });

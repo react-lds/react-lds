@@ -1,9 +1,10 @@
 import React from 'react';
+import { prefixClasses } from '../../utils';
 
-import prefixable from './../../decorators/prefixable';
+const IconSVG = (props, { assetBasePath, cssPrefix }) => {
+  const { background, className, fill, icon, size, sprite, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-const IconSVG = (props, { assetBasePath }) => {
-  const { prefix, sprite, icon, background, size, fill } = props;
   let backgroundClass = background;
   if (backgroundClass === undefined || backgroundClass === true) {
     backgroundClass = `${sprite}-${icon}`;
@@ -15,10 +16,21 @@ const IconSVG = (props, { assetBasePath }) => {
   ];
 
   return (
-    <svg aria-hidden="true" className={prefix(sldsClasses, props)}>
-      <use xlinkHref={`${assetBasePath}/assets/icons/${sprite}-sprite/svg/symbols.svg#${icon}`} />
+    <svg {...rest} aria-hidden="true" className={prefix(sldsClasses, className)}>
+      <use xlinkHref={`${assetBasePath}assets/icons/${sprite}-sprite/svg/symbols.svg#${icon}`} />
     </svg>
   );
+};
+
+IconSVG.contextTypes = {
+  /**
+   * the asset base path
+   */
+  assetBasePath: React.PropTypes.string,
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
 };
 
 IconSVG.propTypes = {
@@ -26,6 +38,10 @@ IconSVG.propTypes = {
    * optional, set this if you want to override the default background class. set to false to not set a background
    */
   background: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * adds the slds-icon class, on by default
    */
@@ -42,18 +58,10 @@ IconSVG.propTypes = {
    * icon sprite name
    */
   sprite: React.PropTypes.string.isRequired,
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
 IconSVG.defaultProps = {
   fill: true,
 };
 
-IconSVG.contextTypes = {
-  assetBasePath: React.PropTypes.string.isRequired,
-};
-
-export default prefixable(IconSVG);
+export default IconSVG;

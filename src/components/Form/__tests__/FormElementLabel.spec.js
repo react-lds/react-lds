@@ -8,13 +8,17 @@ describe('<FormElementLabel />', () => {
   let mounted = null;
   let props = {};
 
+  const context = { cssPrefix: 'slds-' };
+  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
   beforeEach(() => {
     props = {
       id: 'input-it',
       label: 'Input Label',
     };
 
-    mounted = mount(<FormElementLabel {...props} />);
+    mounted = mount(<FormElementLabel {...props} />, options);
   });
 
   it('renders the for-attribute', () => {
@@ -22,17 +26,17 @@ describe('<FormElementLabel />', () => {
   });
 
   it('renders the label', () => {
-    expect(mounted.find('.form-element__label label').text()).toEqual(props.label);
+    expect(mounted.find('.slds-form-element__label label').text()).toEqual(props.label);
   });
 
   it('renders required', () => {
     mounted.setProps({ required: true });
-    expect(mounted.find('.form-element__label abbr.required').length).toBe(1);
+    expect(mounted.find('.slds-form-element__label abbr.slds-required').length).toBe(1);
   });
 
   it('renders as a span', () => {
     mounted.setProps({ readOnly: true });
-    expect(mounted.find('.form-element__label label').length).toBe(0);
-    expect(mounted.find('.form-element__label span').length).toBe(1);
+    expect(mounted.find('.slds-form-element__label label').length).toBe(0);
+    expect(mounted.find('.slds-form-element__label span').length).toBe(1);
   });
 });

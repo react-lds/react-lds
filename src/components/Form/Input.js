@@ -8,11 +8,11 @@ import {
   FormElementLabel,
   FormElementError,
 } from '../../';
+import { prefixClasses } from '../../utils';
 
-import { prefixable } from '../../decorators';
-
-const InputEl = (props) => {
+export const InputRaw = (props, { cssPrefix }) => {
   const {
+    className,
     disabled,
     error,
     errorIcon,
@@ -24,13 +24,14 @@ const InputEl = (props) => {
     onKeyPress,
     onFocus,
     placeholder,
-    prefix,
     required,
     role,
     type,
     value,
     isFocused,
+    ...rest,
   } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderIconLeft = () => {
     let iconName = iconLeft;
@@ -39,11 +40,17 @@ const InputEl = (props) => {
     }
 
     if (iconName) {
+      const iconClasses = [
+        'input__icon',
+        'icon-text-default',
+        { 'input__icon--left': iconLeft && iconRight },
+      ];
+
       return (
         <IconSVG
-          sldsClasses={['input__icon', 'icon-text-default', { 'input__icon--left': iconLeft && iconRight }]}
-          sprite="utility"
+          className={prefix(iconClasses)}
           icon={iconName}
+          sprite="utility"
         />
       );
     }
@@ -53,11 +60,16 @@ const InputEl = (props) => {
 
   const renderIconRight = () => {
     if (iconRight && iconRightOnClick) {
+      const iconClasses = [
+        'input__icon',
+        { 'input__icon--right': iconLeft && iconRight },
+      ];
+
       return (
         <Button
+          className={prefix(iconClasses)}
           icon
           onClick={iconRightOnClick}
-          sldsClasses={['input__icon', { 'input__icon--right': iconLeft && iconRight }]}
         >
           <ButtonIcon sprite="utility" icon={iconRight} />
         </Button>
@@ -65,9 +77,15 @@ const InputEl = (props) => {
     }
 
     if (iconRight) {
+      const iconClasses = [
+        'input__icon',
+        'icon-text-default',
+        { 'input__icon--right': iconLeft && iconRight },
+      ];
+
       return (
         <IconSVG
-          sldsClasses={['input__icon', 'icon-text-default', { 'input__icon--right': iconLeft && iconRight }]}
+          className={prefix(iconClasses)}
           sprite="utility"
           icon={iconRight}
         />
@@ -82,9 +100,8 @@ const InputEl = (props) => {
       {renderIconLeft()}
       {renderIconRight()}
       <input
-        aria-expanded={props['aria-expanded']}
-        aria-activedescendant={props['aria-activedescendant']}
-        className={prefix(['input'])}
+        {...rest}
+        className={prefix('input', className)}
         disabled={disabled}
         id={id}
         onChange={onChange}
@@ -101,17 +118,15 @@ const InputEl = (props) => {
   );
 };
 
-export const InputRaw = prefixable(InputEl);
-
-export const Input = (props) => {
+const Input = props => {
   const {
-    id,
-    label,
-    iconLeft,
-    iconRight,
-    required,
     error,
     errorIcon,
+    iconLeft,
+    iconRight,
+    id,
+    label,
+    required,
   } = props;
 
   const hasIconLeft = !!iconLeft || (error && errorIcon);
@@ -121,7 +136,7 @@ export const Input = (props) => {
     <FormElement required={required} error={error}>
       <FormElementLabel label={label} id={id} required={required} />
       <FormElementControl hasIconLeft={hasIconLeft} hasIconRight={hasIconRight}>
-        <InputEl {...props} />
+        <InputRaw {...props} />
       </FormElementControl>
       <FormElementError error={error} />
     </FormElement>
@@ -132,7 +147,18 @@ const propDefaults = {
   type: 'text',
 };
 
+const contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
+
 const propTypes = {
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * adds disabled attribute to the input field
    */
@@ -202,24 +228,14 @@ const propTypes = {
    * value of the input field
    */
   value: React.PropTypes.string,
-  /**
-   * adds the aria-expanded label
-   */
-  'aria-expanded': React.PropTypes.bool,
-  /**
-   * adds the aria-activedescendant label
-   */
-  'aria-activedescendant': React.PropTypes.string,
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-InputEl.propDefaults = propDefaults;
-InputEl.propTypes = propTypes;
+InputRaw.contextTypes = contextTypes;
+InputRaw.propDefaults = propDefaults;
+InputRaw.propTypes = propTypes;
 
+Input.contextTypes = contextTypes;
 Input.propDefaults = propDefaults;
 Input.propTypes = propTypes;
 
-export default prefixable(Input);
+export default Input;

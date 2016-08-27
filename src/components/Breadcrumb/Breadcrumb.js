@@ -1,10 +1,13 @@
 import React from 'react';
-import prefixable from '../../decorators/prefixable';
+import isArray from 'lodash.isarray';
+import { prefixClasses } from '../../utils';
 
-export const Breadcrumb = ({ prefix, children = [] }) => {
+const Breadcrumb = (props, { cssPrefix }) => {
+  const { children, className, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
   let filtered = children;
 
-  if (!Array.isArray(children)) {
+  if (!isArray(children)) {
     filtered = [children];
   }
 
@@ -15,11 +18,18 @@ export const Breadcrumb = ({ prefix, children = [] }) => {
     filtered.map(child => <li className={prefix(liClasses)} key={child.key}>{child}</li>);
 
   return (
-    <nav role="navigation" aria-label="Breadcrumbs">
+    <nav {...rest} className={className} role="navigation" aria-label="Breadcrumbs">
       <ol className={prefix(olClasses)}>
         {wrapItems}
       </ol>
     </nav>);
+};
+
+Breadcrumb.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
 };
 
 Breadcrumb.propTypes = {
@@ -30,9 +40,9 @@ Breadcrumb.propTypes = {
    */
   children: React.PropTypes.node.isRequired,
   /**
-   * prefix function from prefixable HOC
+   * class name
    */
-  prefix: React.PropTypes.func.isRequired,
+  className: React.PropTypes.string,
 };
 
-export default prefixable(Breadcrumb);
+export default Breadcrumb;

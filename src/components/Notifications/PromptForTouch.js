@@ -1,31 +1,39 @@
 import React from 'react';
 import { Modal, ModalHeader, ModalContent, Backdrop } from '../../index';
 
-const header = (title, tagline, headerIcon) => {
-  const hasHeader = !!title || !!tagline || !!headerIcon;
-  const Header = (
-    <ModalHeader title={title} tagline={tagline} uncloseable>
-      {headerIcon}
-    </ModalHeader>
-  );
-  return hasHeader ? Header : null;
-};
+const PromptForTouch = (props) => {
+  const { children, className, headerIcon, label, open, tagline, title, ...rest } = props;
 
-const PromptForTouch = (props) => (
-  <div>
-    <Modal label={props.label} dialog open={props.open}>
-      {header(props.title, props.tagline, props.headerIcon)}
-      <ModalContent menu>{props.children}</ModalContent>
-    </Modal>
-    <Backdrop open={props.open} />
-  </div>
-);
+  const header = () => {
+    const hasHeader = !!title || !!tagline || !!headerIcon;
+    const Header = (
+      <ModalHeader title={title} tagline={tagline} uncloseable>
+        {headerIcon}
+      </ModalHeader>
+    );
+    return hasHeader ? Header : null;
+  };
+
+  return (
+    <div>
+      <Modal {...rest} className={className} label={label} dialog open={open}>
+        {header()}
+        <ModalContent menu>{children}</ModalContent>
+      </Modal>
+      <Backdrop open={props.open} />
+    </div>
+  );
+};
 
 PromptForTouch.propTypes = {
   /**
    * prompt content
    */
   children: React.PropTypes.node.isRequired,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * prompt header-icon
    */

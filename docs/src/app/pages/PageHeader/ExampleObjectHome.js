@@ -20,8 +20,8 @@ const titleMenu = (
 
 const topButtons = (
   <ButtonGroup>
-    <Button title="New Lead" variation="neutral" />
-    <Button icon variation="icon-border-filled">
+    <Button title="New Lead" neutral />
+    <Button icon icon-border-filled>
       <ButtonIcon sprite="utility" icon="down" />
     </Button>
   </ButtonGroup>
@@ -29,13 +29,13 @@ const topButtons = (
 
 const bottomButtons = (
   <ButtonGroup>
-    <Button icon variation="icon-border">
+    <Button icon icon-border>
       <ButtonIcon sprite="utility" icon="chart" />
     </Button>
-    <Button icon variation="icon-border">
+    <Button icon icon-border>
       <ButtonIcon sprite="utility" icon="filterList" />
     </Button>
-    <Button icon variation="icon-border">
+    <Button icon icon-border>
       <ButtonIcon sprite="utility" icon="settings" />
     </Button>
   </ButtonGroup>

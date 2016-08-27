@@ -1,25 +1,45 @@
 import React from 'react';
+import { prefixClasses } from '../../utils';
+import { flavorable, variationable } from '../../decorators';
 
-import prefixable from './../../decorators/prefixable';
-
-export const Button = (props) => {
-  const { prefix, onClick, variation, title, disabled, children, icon, isPicklistLabel, selected, value } = props;
+export const Button = (props, { cssPrefix }) => {
+  const {
+    children,
+    className,
+    disabled,
+    onClick,
+    selected,
+    value,
+    title,
+    ...rest,
+  } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const classes = [
     'button',
-    { 'button--icon': icon },
-    { [`button--${variation}`]: variation },
-    { picklist__label: isPicklistLabel },
-    { 'is-selected': selected },
+    { 'is-selected': !!selected },
   ];
 
   return (
-    <button onClick={onClick} className={prefix(classes, props)} disabled={disabled} value={value}>
+    <button
+      {...rest}
+      className={prefix(classes, className)}
+      onClick={onClick}
+      disabled={disabled}
+      value={value}
+    >
       {(children && children.props && children.props.position === 'right') ? title : null}
       {!children ? title : children}
       {(children && children.props && children.props.position === 'left') ? title : null}
     </button>
   );
+};
+
+Button.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
 };
 
 Button.propTypes = {
@@ -28,6 +48,10 @@ Button.propTypes = {
    */
   children: React.PropTypes.node,
   /**
+   * class name
+   */
+  className: React.PropTypes.string,
+  /**
    * disables the button
    */
   disabled: React.PropTypes.bool,
@@ -35,10 +59,6 @@ Button.propTypes = {
    * button icons
    */
   icon: React.PropTypes.bool,
-  /**
-   * adds the picklist__label class
-   */
-  isPicklistLabel: React.PropTypes.bool,
   /**
    * onClick handler to trigger an action
    */
@@ -55,23 +75,24 @@ Button.propTypes = {
    * adds optional value tag to the button
    */
   value: React.PropTypes.string,
-  /**
-   * button variation
-   */
-  variation: React.PropTypes.oneOf([
-    'neutral',
-    'brand',
-    'destructive',
-    'icon-border-filled',
-    'icon-container',
-    'icon-inverse',
-    'icon-border',
-    'icon-bare',
-  ]),
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(Button);
+Button.flavors = [
+  'neutral',
+  'brand',
+  'destructive',
+  'icon',
+  'icon-border-filled',
+  'icon-container',
+  'icon-inverse',
+  'icon-border',
+  'icon-bare',
+];
+
+Button.variations = [
+  'is-selected',
+];
+
+export default variationable(
+  flavorable(Button, 'button')
+);

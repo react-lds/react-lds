@@ -1,11 +1,12 @@
 
 import React from 'react';
-import { prefixable } from '../../decorators';
+import { prefixClasses } from '../../utils';
 
-export const FormElementControl = (props) => {
-  const { children, hasIconLeft, hasIconRight, prefix } = props;
+const FormElementControl = (props, { cssPrefix }) => {
+  const { children, className, hasIconLeft, hasIconRight } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const sldsClasses = [
+  const classes = [
     'form-element__control',
     { 'input-has-icon': hasIconLeft || hasIconRight },
     { 'input-has-icon--right': hasIconRight && !hasIconLeft },
@@ -13,9 +14,14 @@ export const FormElementControl = (props) => {
     { 'input-has-icon--left-right': hasIconLeft && hasIconRight },
   ];
 
-  return (
-    <div className={prefix(sldsClasses, props)}>{children}</div>
-  );
+  return (<div className={prefix(classes, className)}>{children}</div>);
+};
+
+FormElementControl.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
 };
 
 FormElementControl.propTypes = {
@@ -24,6 +30,10 @@ FormElementControl.propTypes = {
    */
   children: React.PropTypes.node,
   /**
+   * class name
+   */
+  className: React.PropTypes.string,
+  /**
    * set this to true if the form element has a left icon
    */
   hasIconLeft: React.PropTypes.bool,
@@ -31,10 +41,6 @@ FormElementControl.propTypes = {
    * set this to true if the form element has a right icon
    */
   hasIconRight: React.PropTypes.bool,
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(FormElementControl);
+export default FormElementControl;

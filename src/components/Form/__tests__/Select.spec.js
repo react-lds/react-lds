@@ -8,8 +8,8 @@ describe('<Select />', () => {
   let props = {};
   let mounted = null;
 
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
@@ -42,7 +42,7 @@ describe('<Select />', () => {
   });
 
   it('renders a select-container', () => {
-    expect(mounted.find('.select_container select').length).toBe(1);
+    expect(mounted.find('.slds-select_container select').length).toBe(1);
   });
 
   it('renders required', () => {
@@ -57,7 +57,7 @@ describe('<Select />', () => {
 
   it('renders multiple', () => {
     mounted.setProps({ multiple: true });
-    expect(mounted.find('div.select_container').length).toBe(0);
+    expect(mounted.find('div.slds-select_container').length).toBe(0);
     expect(mounted.find('select').props().multiple).toBeTruthy();
   });
 });

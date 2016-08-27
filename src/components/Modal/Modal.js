@@ -1,16 +1,18 @@
 import React from 'react';
-import { flavorable, prefixable } from '../../decorators';
+import { prefixClasses } from '../../utils';
+import { flavorable } from '../../decorators';
 
-export const Modal = (props) => {
+export const Modal = (props, { cssPrefix }) => {
   const {
-    prefix,
     children,
+    className,
     description,
     dialog,
     label,
     open,
-    prompt, // eslint-disable-line react/prop-types
+    prompt,
   } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const isOpen = !!open;
   const isDialog = !!dialog || !!prompt;
@@ -23,7 +25,7 @@ export const Modal = (props) => {
   ];
 
   const childrenWithProps = [...children].map((child, i) => {
-    const childName = !!child ? child.type.displayName : null;
+    const childName = !!child ? child.type.displayName || child.type.name : null;
 
     if (childName === 'ModalHeader') {
       return React.cloneElement(child, {
@@ -39,14 +41,14 @@ export const Modal = (props) => {
 
   return (
     <div
-      className={prefix(sldsClasses, props)}
+      className={prefix(sldsClasses, className)}
       role={role}
       aria-describedby={description}
       aria-hidden={`${!isOpen}`}
       aria-labelledby={label}
     >
       <div
-        className={prefix(['modal__container'])}
+        className={prefix('modal__container')}
         id={description}
         role={containerRole}
         tabIndex={isDialog ? '0' : null}
@@ -59,14 +61,24 @@ export const Modal = (props) => {
 
 Modal.flavors = [
   'large',
-  'prompt',
 ];
+
+Modal.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
 
 Modal.propTypes = {
   /**
    * modal content
    */
   children: React.PropTypes.node.isRequired,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * id of the modal-content (required as aria-describedby). must be set for --prompts
    */
@@ -84,9 +96,9 @@ Modal.propTypes = {
    */
   open: React.PropTypes.bool,
   /**
-   * prefix function from the prefixable HOC
+   * opens the modal
    */
-  prefix: React.PropTypes.func.isRequired,
+  prompt: React.PropTypes.bool,
 };
 
-export default prefixable(flavorable(Modal, 'modal'));
+export default flavorable(Modal, 'modal');

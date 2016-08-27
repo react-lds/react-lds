@@ -12,9 +12,9 @@ const button = { sprite: 'utility', icon: 'down' };
 
 const ExampleMoreButton = () =>
   <ButtonGroup>
-    <Button variation="neutral" title="Button One" />
-    <Button variation="neutral" title="Button Two" />
-    <Button variation="neutral" title="Button Three" />
+    <Button neutral title="Button One" />
+    <Button neutral title="Button Two" />
+    <Button neutral title="Button Three" />
     <DropdownMenu button={button} last position="top-right">
       <DropdownMenuList>
         <DropdownMenuListItem>Item 1</DropdownMenuListItem>

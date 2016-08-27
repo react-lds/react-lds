@@ -1,15 +1,15 @@
 jest.unmock('../IconSVG');
 
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import IconSVG from '../IconSVG';
 
 describe('<IconSVG />', () => {
   let mounted = null;
   let props = {};
 
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
@@ -18,26 +18,26 @@ describe('<IconSVG />', () => {
       icon: 'account',
     };
 
-    mounted = mount(<IconSVG {...props} />, options);
+    mounted = shallow(<IconSVG {...props} />, options);
   });
 
 
   it('has icon-class', () => {
-    expect(mounted.find('svg').hasClass('icon')).toBeTruthy();
+    expect(mounted.find('svg').hasClass('slds-icon')).toBeTruthy();
   });
 
   it('supports different sizes', () => {
     mounted.setProps({ size: 'large' });
-    expect(mounted.find('svg').hasClass('icon--large')).toBeTruthy();
+    expect(mounted.find('svg').hasClass('slds-icon--large')).toBeTruthy();
   });
 
   it('renders an icon with a custom background color', () => {
     mounted.setProps({ background: 'custom-custom89' });
-    expect(mounted.find('svg').hasClass('icon-custom-custom89')).toBeTruthy();
+    expect(mounted.find('svg').hasClass('slds-icon-custom-custom89')).toBeTruthy();
   });
 
   it('renders an icon without a background color', () => {
     mounted.setProps({ background: false });
-    expect(mounted.find('svg').hasClass('icon-standard-account')).toBeFalsy();
+    expect(mounted.find('svg').hasClass('slds-icon-standard-account')).toBeFalsy();
   });
 });

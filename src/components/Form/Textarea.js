@@ -5,29 +5,27 @@ import {
   FormElementLabel,
   FormElementError,
 } from '../../';
-import { prefixable } from '../../decorators';
+import { prefixClasses } from '../../utils';
 
-export const Textarea = (props) => {
+const Textarea = (props, { cssPrefix }) => {
   const {
+    className,
     disabled,
     error,
     id,
     label,
     onChange,
     placeholder,
-    prefix,
     required,
     readOnly,
+    ...rest,
   } = props;
-
-  const formElementControlClasses = [
-    { 'has-divider--bottom': readOnly },
-  ];
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderContent = () => {
     if (readOnly) {
       return (
-        <div className={prefix(['form-element__static', 'text-longform'])}>
+        <div {...rest} className={prefix(['form-element__static', 'text-longform'])}>
           <p>{placeholder}</p>
         </div>
       );
@@ -35,7 +33,8 @@ export const Textarea = (props) => {
 
     return (
       <textarea
-        className={prefix(['textarea'])}
+        {...rest}
+        className={prefix('textarea', className)}
         id={id}
         onChange={onChange}
         placeholder={placeholder}
@@ -48,7 +47,7 @@ export const Textarea = (props) => {
   return (
     <FormElement required={required} error={error}>
       <FormElementLabel label={label} id={id} required={required} />
-      <FormElementControl sldsClasses={formElementControlClasses}>
+      <FormElementControl className={prefix({ 'has-divider--bottom': readOnly })}>
         {renderContent()}
       </FormElementControl>
       <FormElementError error={error} />
@@ -56,7 +55,18 @@ export const Textarea = (props) => {
   );
 };
 
+Textarea.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
+
 Textarea.propTypes = {
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
   * adds disabled attribute to the textarea
    */
@@ -89,10 +99,6 @@ Textarea.propTypes = {
    * adds required attribute to the textarea
    */
   required: React.PropTypes.bool,
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(Textarea);
+export default Textarea;

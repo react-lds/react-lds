@@ -1,11 +1,11 @@
 import React from 'react';
 import IconSVG from './IconSVG';
-
+import { prefixClasses } from '../../utils';
 import { iconClass } from './util';
-import { prefixable } from '../../decorators';
 
-export const Icon = (props) => {
-  const { sprite, icon, title, circle, background, size, div, prefix } = props;
+const Icon = (props, { cssPrefix }) => {
+  const { background, circle, className, div, icon, size, sprite, title, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
   const backgroundClass = !background ? `icon-${sprite}-${iconClass(sprite, icon)}` : `icon-${background}`;
 
   const sldsClasses = [
@@ -17,11 +17,18 @@ export const Icon = (props) => {
   const WrapperElement = div ? 'div' : 'span';
 
   return (
-    <WrapperElement className={prefix(sldsClasses, props)} title={title}>
+    <WrapperElement {...rest} className={prefix(sldsClasses, className)} title={title}>
       <IconSVG sprite={sprite} icon={icon} size={size} background={background} />
-      <span className={prefix(['assistive-text'])}>{title}</span>
+      <span className={prefix('assistive-text')}>{title}</span>
     </WrapperElement>
   );
+};
+
+Icon.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
 };
 
 Icon.propTypes = {
@@ -33,6 +40,10 @@ Icon.propTypes = {
    * renders a circular icon
    */
   circle: React.PropTypes.bool,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * renders the icon in a div instead of a span
    */
@@ -53,10 +64,6 @@ Icon.propTypes = {
    * icon title
    */
   title: React.PropTypes.string,
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(Icon);
+export default Icon;

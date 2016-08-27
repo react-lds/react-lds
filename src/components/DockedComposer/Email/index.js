@@ -1,6 +1,6 @@
 import React from 'react';
 
-import prefixable from './../../../decorators/prefixable';
+import { prefixClasses } from '../../../utils';
 import { MediaObject } from './../../MediaObject';
 import { Icon } from './../../Icon';
 import { Button, ButtonIcon } from './../../Button';
@@ -10,9 +10,11 @@ import { Grid } from './../../Grid';
 import Toolbar from './Toolbar';
 import Rte from './Rte';
 
-export class Email extends React.Component {
-  constructor(props) {
-    super(props);
+class Email extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
 
     this.state = Object.assign({
       to: [],
@@ -84,9 +86,9 @@ export class Email extends React.Component {
     }
 
     return (
-      <ul className={this.props.prefix(['has-dividers--bottom-space'])}>
+      <ul className={this.prefix('has-dividers--bottom-space')}>
         {this.props.value.attachments.map((attachment, index) =>
-          <li className={this.props.prefix(['item'])} key={index}>
+          <li className={this.prefix('item')} key={index}>
             <MediaObject
               figureLeft={<Icon sprite="doctype" icon={attachment.icon} />}
               figureRight={
@@ -106,7 +108,7 @@ export class Email extends React.Component {
   renderAdditionalLookup() {
     if (this.props.additionalLookup) {
       return (
-        <Grid className={this.props.prefix(['shrink-none'])}>
+        <Grid className={this.prefix('shrink-none')}>
           {this.props.additionalLookup}
         </Grid>
       );
@@ -117,7 +119,7 @@ export class Email extends React.Component {
 
   renderFooterButtons() {
     return this.props.footerButtons.map((button) =>
-      <Button key={button.key} onClick={button.onClick} variation="icon-container" icon>
+      <Button key={button.key} onClick={button.onClick} icon-container icon>
         <ButtonIcon sprite="utility" icon={button.icon} />
       </Button>
     );
@@ -130,18 +132,18 @@ export class Email extends React.Component {
       <div
         role="dialog"
         aria-labelled-by="dialog-heading-id"
-        className={this.props.prefix(['docked-composer', 'grid', 'grid--vertical', 'nowrap', 'is-open'])}
+        className={this.prefix(['docked-composer', 'grid', 'grid--vertical', 'nowrap', 'is-open'])}
       >
-        <header className={this.props.prefix(['docked-composer__header', 'grid', 'grid--align-spread', 'shrink-none'])}>
+        <header className={this.prefix(['docked-composer__header', 'grid', 'grid--align-spread', 'shrink-none'])}>
           <MediaObject center figureLeft={emailIcon}>{this.props.header}</MediaObject>
-          <div className={this.props.prefix(['docked-composer__actions'])}>
-            <Button variation="icon-inverse" icon>
+          <div className={this.prefix('docked-composer__actions')}>
+            <Button icon-inverse icon>
               <ButtonIcon sprite="utility" icon="minimize_window" />
             </Button>
           </div>
         </header>
         <div
-          className={this.props.prefix([
+          className={this.prefix([
             'docked-composer__body',
             'docked-composer__body--email',
             'col',
@@ -150,7 +152,7 @@ export class Email extends React.Component {
             'nowrap',
           ])}
         >
-          <Grid align-spread className={this.props.prefix(['shrink-none'])}>
+          <Grid align-spread className={this.prefix('shrink-none')}>
             <Lookup
               emailLayout
               multi
@@ -163,12 +165,12 @@ export class Email extends React.Component {
               load={this.props.loadRecipients}
               onChange={this.onChangeRecipients('to')}
             />
-            <div className={this.props.prefix(['grid', 'shrink-none', 'p-horizontal--small', 'align-top'])}>
+            <div className={this.prefix(['grid', 'shrink-none', 'p-horizontal--small', 'align-top'])}>
               <Button title="Cc" onClick={this.toggle('hideCc')} />
               <Button title="Bcc" onClick={this.toggle('hideBcc')} />
             </div>
           </Grid>
-          <Grid className={this.props.prefix([{ hide: this.state.hideCc }, 'shrink-none'])}>
+          <Grid className={this.prefix([{ hide: this.state.hideCc }, 'shrink-none'])}>
             <Lookup
               emailLayout
               multi
@@ -183,7 +185,7 @@ export class Email extends React.Component {
               allowCreate
             />
           </Grid>
-          <Grid className={this.props.prefix([{ hide: this.state.hideBcc }, 'shrink-none'])}>
+          <Grid className={this.prefix([{ hide: this.state.hideBcc }, 'shrink-none'])}>
             <Lookup
               emailLayout
               multi
@@ -200,14 +202,14 @@ export class Email extends React.Component {
           </Grid>
           {this.renderAdditionalLookup()}
           <label
-            className={this.props.prefix(['assistive-text'])}
+            className={this.prefix('assistive-text')}
             htmlFor={`${this.props.id}-subject`}
           >
             Enter subject
           </label>
           <input
             id={`${this.props.id}-subject`}
-            className={this.props.prefix(['input'])}
+            className={this.prefix('input')}
             placeholder={this.props.subjectPlaceholder}
             value={this.state.subject}
             onChange={this.onChangeSubject}
@@ -226,9 +228,9 @@ export class Email extends React.Component {
           />
           {this.renderAttachments()}
         </div>
-        <footer className={this.props.prefix(['docked-composer__footer', 'shrink-none'])}>
+        <footer className={this.prefix(['docked-composer__footer', 'shrink-none'])}>
           <div
-            className={this.props.prefix([
+            className={this.prefix([
               'float--right',
               'grid',
               'grid--align-end',
@@ -237,13 +239,20 @@ export class Email extends React.Component {
             ])}
           >
             {this.renderFooterButtons()}
-            <Button variation="brand" onClick={this.props.onSend}>{this.props.sendLabel}</Button>
+            <Button brand onClick={this.props.onSend}>{this.props.sendLabel}</Button>
           </div>
         </footer>
       </div>
     );
   }
 }
+
+Email.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
 
 Email.defaultProps = {
   header: 'New Email',
@@ -330,10 +339,6 @@ Email.propTypes = {
       })
     ),
   }),
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(Email);
+export default Email;

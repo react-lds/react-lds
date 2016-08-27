@@ -43,7 +43,7 @@ const ExampleTable = () =>
     icon="contact"
     sprite="standard"
     header="Contacts (2)"
-    headerRight={<Button title="New" variation="neutral" />}
+    headerRight={<Button title="New" neutral />}
     body={table}
     footer={<a>View all</a>}
   />;

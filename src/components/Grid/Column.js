@@ -1,17 +1,49 @@
 import React from 'react';
-import { prefixable, flavorable, variationable } from '../../decorators';
-import sizeable from './sizeable';
+import { flavorable, variationable } from '../../decorators';
+import { prefixClasses } from '../../utils';
+import omit from 'lodash.omit';
 
-export const Column = (props) => {
+const validBreakpoints = [
+  'small',
+  'medium',
+  'large',
+  'max-small',
+  'max-medium',
+  'max-large',
+];
+
+const breakPointProp = breakpoint => `${breakpoint}-sizeOf`;
+
+const sizeRegex = /^([1-9]|1[0-2])-([1-9]|1[0-2])$/;
+
+export const Column = (props, { cssPrefix }) => {
+  const { align, children, className, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
   const sldsClasses = [
     'col',
-    { [`align-${props.align}`]: !!props.align },
+    { [`align-${align}`]: !!align },
   ];
 
+  const breakpoints = Array.from(validBreakpoints);
+  breakpoints.unshift('');
+
+  breakpoints.forEach(breakpoint => {
+    const propName = breakpoint === '' ? 'sizeOf' : breakPointProp(breakpoint);
+    const sizeString = breakpoint === '' ? 'size' : `${breakpoint}-size`;
+
+    const size = props[propName];
+    if (sizeRegex.test(size)) {
+      const from = parseInt(size.split('-')[0], 10);
+      const to = parseInt(size.split('-')[1], 10);
+      sldsClasses.push(`${sizeString}--${from}-of-${to}`);
+    }
+  });
+
+  const restProps = omit(rest, validBreakpoints.map(breakPointProp), 'sizeOf');
+
   return (
-    <div className={props.prefix(sldsClasses, props)}>
-      {props.children}
-    </div>
+    <div {...restProps} className={prefix(sldsClasses, className)}>{children}</div>
   );
 };
 
@@ -39,7 +71,37 @@ Column.variations = [
   'shrink-none',
 ];
 
-Column.propTypes = {
+Column.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
+
+const sizeOfPropType = (props, propName) => {
+  const size = props[propName];
+
+  if (typeof size !== 'undefined' && typeof size !== 'string') {
+    return new Error(`${propName} must be a string`);
+  }
+
+  if (typeof size === 'string' && !sizeRegex.test(size)) {
+    return new Error(`${propName} must be of format {1-12}-{1-12}`);
+  }
+
+  if (sizeRegex.test(size)) {
+    const from = parseInt(size.split('-')[0], 10);
+    const to = parseInt(size.split('-')[1], 10);
+
+    if (from > to) {
+      return new Error(`${propName} ${size} is impossible. \`${from}\` needs to be smaller than \`${to}\``);
+    }
+  }
+
+  return null;
+};
+
+const columnPropTypes = {
   /**
    * alignment of columns on the main axis
    */
@@ -49,15 +111,23 @@ Column.propTypes = {
    */
   children: React.PropTypes.node,
   /**
-   * prefix function from prefixable HOC
+   * class name
    */
-  prefix: React.PropTypes.func.isRequired,
+  className: React.PropTypes.string,
+  /**
+   * non-responsive sizeOf
+   */
+  sizeOf: sizeOfPropType,
 };
 
-export default prefixable(
-  sizeable(
-    variationable(
-      flavorable(Column, 'col')
-    )
-  )
+Column.propTypes = Object.assign({},
+  columnPropTypes,
+  validBreakpoints.reduce((_propTypes, breakpoint) => {
+    const propTypes = _propTypes;
+    propTypes[breakPointProp(breakpoint)] = sizeOfPropType;
+    return propTypes;
+  }, {}));
+
+export default variationable(
+  flavorable(Column, 'col')
 );

@@ -19,8 +19,8 @@ const ExampleDirectional = () =>
         </div>
       </ModalContent>
       <ModalFooter directional>
-        <Button variation="neutral" title="Skip This Step" />
-        <Button variation="brand" title="Save & Next" />
+        <Button neutral title="Cancel" />
+        <Button brand title="Save" />
       </ModalFooter>
     </Modal>
     <Backdrop open />

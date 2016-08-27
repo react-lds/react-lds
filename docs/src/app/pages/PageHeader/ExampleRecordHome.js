@@ -9,15 +9,15 @@ import {
 
 const RecordHomeExample = () => {
   const headerButtons = ([
-    <Button title="Follow" variation="neutral" key="follow">
+    <Button title="Follow" neutral key="follow">
       <ButtonIcon position="left" sprite="utility" icon="add" />
     </Button>,
 
     <ButtonGroup key="btngroup">
-      <Button title="Edit" variation="neutral" />
-      <Button title="Delete" variation="neutral" />
-      <Button title="Clone" variation="neutral" />
-      <Button icon variation="icon-border-filled">
+      <Button title="Edit" neutral />
+      <Button title="Delete" neutral />
+      <Button title="Clone" neutral />
+      <Button icon icon-border-filled>
         <ButtonIcon sprite="utility" icon="down" />
       </Button>
     </ButtonGroup>,
@@ -44,7 +44,7 @@ const RecordHomeExample = () => {
         },
         {
           title: [<span key="heading">very important</span>, (
-            <Button icon variation="icon-bare" key="icon">
+            <Button icon icon-bare key="icon">
               <ButtonIcon sprite="utility" icon="down" size="small" />
             </Button>
           )],

@@ -8,13 +8,12 @@ describe('<Textarea />', () => {
   let props = {};
   let mounted = null;
 
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
     props = {
-      mounted: null,
       onChange: jest.fn(),
       placeholder: 'Type in something',
       id: 'textarea-id',
@@ -53,6 +52,6 @@ describe('<Textarea />', () => {
   it('renders a readOnly-version', () => {
     mounted.setProps({ readOnly: true });
     expect(mounted.find('textarea').length).toBe(0);
-    expect(mounted.find('div.form-element__static p').text()).toEqual(props.placeholder);
+    expect(mounted.find('.slds-form-element__static p').text()).toEqual(props.placeholder);
   });
 });

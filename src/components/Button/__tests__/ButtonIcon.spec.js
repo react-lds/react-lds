@@ -4,8 +4,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import ButtonIcon from '../ButtonIcon';
 
-const context = { assetBasePath: '/assets' };
-const childContextTypes = { assetBasePath: React.PropTypes.string };
+const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
 const options = { context, childContextTypes };
 
 describe('<ButtonIcon />', () => {
@@ -22,18 +22,18 @@ describe('<ButtonIcon />', () => {
   });
 
   it('renders an enhanced icon', () => {
-    const expectedPath = `${context.assetBasePath}/assets/icons/${props.sprite}-sprite/svg/symbols.svg#${props.icon}`;
-    expect(mounted.find('svg').hasClass('button__icon')).toBeTruthy();
+    const expectedPath = `${context.assetBasePath}assets/icons/${props.sprite}-sprite/svg/symbols.svg#${props.icon}`;
+    expect(mounted.find('svg').hasClass('slds-button__icon')).toBeTruthy();
     expect(mounted.find('use').prop('xlinkHref')).toEqual(expectedPath);
   });
 
   it('applies positions', () => {
     mounted.setProps({ position: 'left' });
-    expect(mounted.find('svg').hasClass('button__icon--left')).toBeTruthy();
+    expect(mounted.find('svg').hasClass('slds-button__icon--left')).toBeTruthy();
   });
 
   it('applies sizes', () => {
     mounted.setProps({ size: 'small' });
-    expect(mounted.find('svg').hasClass('button__icon--small')).toBeTruthy();
+    expect(mounted.find('svg').hasClass('slds-button__icon--small')).toBeTruthy();
   });
 });

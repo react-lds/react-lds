@@ -8,6 +8,10 @@ describe('<Tab />', () => {
   let mounted;
   let props = {};
 
+  const context = { cssPrefix: 'slds-' };
+  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
   beforeEach(() => {
     props = {
       tabs: [
@@ -29,24 +33,24 @@ describe('<Tab />', () => {
       ],
     };
 
-    mounted = mount(<Tab {...props} />);
+    mounted = mount(<Tab {...props} />, options);
   });
 
   it('renders the first tab initially active', () => {
-    expect(mounted.find('ul > li').first().hasClass('active')).toBeTruthy();
-    expect(mounted.find('#tab-1').hasClass('show')).toBeTruthy();
+    expect(mounted.find('ul > li').first().hasClass('slds-active')).toBeTruthy();
+    expect(mounted.find('#tab-1').hasClass('slds-show')).toBeTruthy();
   });
 
   it('accepts a click handler', () => {
     const secondTabHeader = mounted.find('ul > li').at(1);
     const secondTabContent = mounted.find('#tab-2');
 
-    expect(secondTabHeader.hasClass('active')).toBeFalsy();
-    expect(secondTabContent.hasClass('show')).toBeFalsy();
+    expect(secondTabHeader.hasClass('slds-active')).toBeFalsy();
+    expect(secondTabContent.hasClass('slds-show')).toBeFalsy();
 
     secondTabHeader.simulate('click');
-    expect(secondTabHeader.hasClass('active')).toBeTruthy();
-    expect(secondTabContent.hasClass('show')).toBeTruthy();
+    expect(secondTabHeader.hasClass('slds-active')).toBeTruthy();
+    expect(secondTabContent.hasClass('slds-show')).toBeTruthy();
   });
 
   it('defaults to default classes', () => {
@@ -54,9 +58,9 @@ describe('<Tab />', () => {
     const aItem = liItem.find('a');
     const divItem = mounted.find('#tab-1');
 
-    expect(liItem.hasClass('tabs--default__item')).toBeTruthy();
-    expect(aItem.hasClass('tabs--default__link')).toBeTruthy();
-    expect(divItem.hasClass('tabs--default__content')).toBeTruthy();
+    expect(liItem.hasClass('slds-tabs--default__item')).toBeTruthy();
+    expect(aItem.hasClass('slds-tabs--default__link')).toBeTruthy();
+    expect(divItem.hasClass('slds-tabs--default__content')).toBeTruthy();
   });
 
   it('renders scoped variation', () => {
@@ -65,8 +69,8 @@ describe('<Tab />', () => {
     const aItem = liItem.find('a');
     const divItem = mounted.find('#tab-1');
 
-    expect(liItem.hasClass('tabs--scoped__item')).toBeTruthy();
-    expect(aItem.hasClass('tabs--scoped__link')).toBeTruthy();
-    expect(divItem.hasClass('tabs--scoped__content')).toBeTruthy();
+    expect(liItem.hasClass('slds-tabs--scoped__item')).toBeTruthy();
+    expect(aItem.hasClass('slds-tabs--scoped__link')).toBeTruthy();
+    expect(divItem.hasClass('slds-tabs--scoped__content')).toBeTruthy();
   });
 });

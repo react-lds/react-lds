@@ -1,12 +1,17 @@
 jest.unmock('../Badge');
 
 import React from 'react';
-import { mount } from 'enzyme';
-import Badge from '../Badge';
+import { shallow } from 'enzyme';
+import { Badge } from '../Badge';
 
 describe('<Badge />', () => {
+  const context = { cssPrefix: 'slds-' };
+  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
   it('renders a label', () => {
-    const mounted = mount(<Badge label="Foo" />);
-    expect(mounted.find('.badge').text()).toBe('Foo');
+    const mounted = shallow(<Badge label="Foo" />, options);
+    expect(mounted.hasClass('slds-badge')).toBeTruthy();
+    expect(mounted.text()).toBe('Foo');
   });
 });
