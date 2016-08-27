@@ -1,15 +1,11 @@
 import React from 'react';
+import { prefixClasses } from '../../utils';
 
-import prefixable from './../../decorators/prefixable';
-
-export class Tab extends React.Component {
-  constructor(props) {
-    super(props);
+class Tab extends React.Component {
+  constructor(props, context) {
+    super(props, context);
     this.state = { activeTab: this.props.tabs[0].id };
-
-    this.setActiveTab = this.setActiveTab.bind(this);
-    this.renderHeader = this.renderHeader.bind(this);
-    this.renderBody = this.renderBody.bind(this);
+    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
   }
 
   setActiveTab(id) {
@@ -19,21 +15,22 @@ export class Tab extends React.Component {
   renderHeader() {
     return this.props.tabs.map((tab, index) => {
       const boundClick = this.setActiveTab.bind(this, tab.id);
+      const classes = [
+        `tabs--${this.props.variation}__item`,
+        'text-heading--label',
+        { active: this.state.activeTab === tab.id },
+      ];
 
       return (
         <li
           key={tab.id}
-          className={this.props.prefix([
-            `tabs--${this.props.variation}__item`,
-            'text-heading--label',
-            { active: this.state.activeTab === tab.id },
-          ])}
+          className={this.prefix(classes)}
           title={tab.title}
           role="presentation"
           onClick={boundClick}
         >
           <a
-            className={this.props.prefix([`tabs--${this.props.variation}__link`])}
+            className={this.prefix(`tabs--${this.props.variation}__link`)}
             role="tab"
             tabIndex={index}
             aria-selected={this.state.activeTab === tab.id}
@@ -48,27 +45,31 @@ export class Tab extends React.Component {
   }
 
   renderBody() {
-    return this.props.tabs.map((tab) =>
-      <div
-        key={tab.id}
-        id={tab.id}
-        className={this.props.prefix([
-          `tabs--${this.props.variation}__content`,
-          { show: this.state.activeTab === tab.id },
-          { hide: this.state.activeTab !== tab.id },
-        ])}
-        role="tabpanel"
-        aria-labelledby={`${tab.id}__item`}
-      >
-        {tab.content}
-      </div>
-    );
+    return this.props.tabs.map(tab => {
+      const classes = [
+        `tabs--${this.props.variation}__content`,
+        { show: this.state.activeTab === tab.id },
+        { hide: this.state.activeTab !== tab.id },
+      ];
+
+      return (
+        <div
+          key={tab.id}
+          id={tab.id}
+          className={this.prefix(classes)}
+          role="tabpanel"
+          aria-labelledby={`${tab.id}__item`}
+        >
+          {tab.content}
+        </div>
+      );
+    });
   }
 
   render() {
     return (
-      <div className={this.props.prefix([`tabs--${this.props.variation}`])}>
-        <ul className={this.props.prefix([`tabs--${this.props.variation}__nav`])} role="tablist">
+      <div className={this.prefix(`tabs--${this.props.variation}`, this.props.className)}>
+        <ul className={this.prefix(`tabs--${this.props.variation}__nav`)} role="tablist">
           {this.renderHeader()}
         </ul>
         {this.renderBody()}
@@ -77,7 +78,18 @@ export class Tab extends React.Component {
   }
 }
 
+Tab.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
+
 Tab.propTypes = {
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * array of tabs
    */
@@ -90,14 +102,10 @@ Tab.propTypes = {
    * scoped has a border around the tab
    */
   variation: React.PropTypes.oneOf(['default', 'scoped']),
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
 Tab.defaultProps = {
   variation: 'default',
 };
 
-export default prefixable(Tab);
+export default Tab;

@@ -1,11 +1,19 @@
 import React from 'react';
+import { prefixClasses } from '../../utils';
 
-import prefixable from './../../decorators/prefixable';
+const ButtonGroup = (props, { cssPrefix }) => {
+  const { children, className, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-export const ButtonGroup = ({ children, prefix }) =>
-  <div className={prefix(['button-group'])} role="group">
-    {children}
-  </div>;
+  return (<div {...rest} className={prefix(['button-group'], className)} role="group">{children}</div>);
+};
+
+ButtonGroup.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
 
 ButtonGroup.propTypes = {
   /**
@@ -13,9 +21,9 @@ ButtonGroup.propTypes = {
    */
   children: React.PropTypes.node.isRequired,
   /**
-   * prefix function from prefixable HOC
+   * class name
    */
-  prefix: React.PropTypes.func.isRequired,
+  className: React.PropTypes.string,
 };
 
-export default prefixable(ButtonGroup);
+export default ButtonGroup;

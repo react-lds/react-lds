@@ -1,7 +1,7 @@
 jest.unmock('../DropdownMenu');
 
 import React from 'react';
-import DropdownMenu from '../DropdownMenu';
+import { DropdownMenu } from '../DropdownMenu';
 import { mount } from 'enzyme';
 
 describe('<DropdownMenu />', () => {
@@ -9,8 +9,8 @@ describe('<DropdownMenu />', () => {
   let props = {};
   let button;
 
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
@@ -28,19 +28,19 @@ describe('<DropdownMenu />', () => {
 
   it('is closed by default and opens when the button was clicked', () => {
     const menu = mounted.find('div').first();
-    expect(menu.hasClass('is-open')).toBeFalsy();
+    expect(menu.hasClass('slds-is-open')).toBeFalsy();
     menu.find('button').simulate('click');
-    expect(menu.hasClass('is-open')).toBeTruthy();
+    expect(menu.hasClass('slds-is-open')).toBeTruthy();
   });
 
   it('renders buttons with border per default', () => {
-    expect(mounted.find('button').hasClass('button--icon-border-filled')).toBeTruthy();
+    expect(mounted.find('button').hasClass('slds-button--icon-border-filled')).toBeTruthy();
   });
 
   it('renders no border when noBorder button prop was set', () => {
     button.noBorder = true;
     mounted.setProps({ button });
-    expect(mounted.find('button').hasClass('button--icon-container')).toBeTruthy();
+    expect(mounted.find('button').hasClass('slds-button--icon-container')).toBeTruthy();
   });
 
   it('isOpen state override works', () => {
@@ -56,26 +56,26 @@ describe('<DropdownMenu />', () => {
 
   it('uses size class', () => {
     mounted.setProps({ size: 'small' });
-    expect(mounted.find('div').last().hasClass('dropdown--small')).toBeTruthy();
+    expect(mounted.find('div').last().hasClass('slds-dropdown--small')).toBeTruthy();
   });
 
   it('uses left class', () => {
     mounted.setProps({ position: 'top-left' });
-    expect(mounted.find('div').last().hasClass('dropdown--left')).toBeTruthy();
+    expect(mounted.find('div').last().hasClass('slds-dropdown--left')).toBeTruthy();
   });
 
   it('uses right class', () => {
     mounted.setProps({ position: 'top-right' });
-    expect(mounted.find('div').last().hasClass('dropdown--right')).toBeTruthy();
+    expect(mounted.find('div').last().hasClass('slds-dropdown--right')).toBeTruthy();
   });
 
   it('uses bottom class', () => {
     mounted.setProps({ position: 'bottom-right' });
-    expect(mounted.find('div').last().hasClass('dropdown--bottom')).toBeTruthy();
+    expect(mounted.find('div').last().hasClass('slds-dropdown--bottom')).toBeTruthy();
   });
 
   it('uses nubbin class', () => {
     mounted.setProps({ position: 'bottom-right', nubbin: true });
-    expect(mounted.find('div').last().hasClass('nubbin--bottom-right')).toBeTruthy();
+    expect(mounted.find('div').last().hasClass('slds-nubbin--bottom-right')).toBeTruthy();
   });
 });

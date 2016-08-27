@@ -1,21 +1,25 @@
 jest.unmock('../Button');
 
 import React from 'react';
-import { mount } from 'enzyme';
-import Button from '../Button';
+import { shallow } from 'enzyme';
+import { Button } from '../Button';
 
 describe('<Button />', () => {
   let props = {};
   let mounted = null;
 
+  const context = { cssPrefix: 'slds-' };
+  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
   beforeEach(() => {
     props = {};
-    mounted = mount(<Button {...props} />);
+    mounted = shallow(<Button {...props} />, options);
   });
 
 
   it('renders the correct markup', () => {
-    expect(mounted.find('.button').length).toBe(1);
+    expect(mounted.hasClass('slds-button')).toBeTruthy();
   });
 
   it('renders children', () => {
@@ -26,43 +30,28 @@ describe('<Button />', () => {
 
   it('renders a title', () => {
     mounted.setProps({ title: 'Title' });
-    expect(mounted.find('.button').text()).toEqual('Title');
+    expect(mounted.text()).toEqual('Title');
   });
 
   it('renders a value', () => {
     mounted.setProps({ value: 'Value' });
-    expect(mounted.find('.button').prop('value')).toEqual('Value');
-  });
-
-  it('renders variations', () => {
-    mounted.setProps({ variation: 'neutral' });
-    expect(mounted.find('.button').hasClass('button--neutral')).toBeTruthy();
-  });
-
-  it('renders as icon-button', () => {
-    mounted.setProps({ icon: true });
-    expect(mounted.find('.button').hasClass('button--icon')).toBeTruthy();
+    expect(mounted.prop('value')).toEqual('Value');
   });
 
   it('renders as selected', () => {
     mounted.setProps({ selected: true });
-    expect(mounted.find('.button').hasClass('is-selected')).toBeTruthy();
+    expect(mounted.hasClass('slds-is-selected')).toBeTruthy();
   });
 
   it('renders as disabled', () => {
     mounted.setProps({ disabled: true });
-    expect(mounted.find('.button').prop('disabled')).toBeTruthy();
-  });
-
-  it('renders a picklist label', () => {
-    mounted.setProps({ isPicklistLabel: true });
-    expect(mounted.find('.button').hasClass('picklist__label')).toBeTruthy();
+    expect(mounted.prop('disabled')).toBeTruthy();
   });
 
   it('attaches an onClick handler', () => {
     const fn = jest.fn();
     mounted.setProps({ onClick: fn });
-    mounted.find('.button').simulate('click');
+    mounted.simulate('click');
     expect(fn).toBeCalled();
   });
 });

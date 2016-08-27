@@ -1,38 +1,56 @@
 import React from 'react';
-
-import prefixable from '../../decorators/prefixable';
-
 import { Grid, MediaObject, Icon } from '../../index';
+import { prefixClasses } from '../../utils';
 
-export const Card = ({ prefix, icon, sprite, header, headerRight, body, footer }) =>
-  <div className={prefix(['card'])}>
-    <Grid className={prefix(['card__header'])}>
-      <MediaObject
-        center
-        figureLeft={<Icon sprite={sprite} icon={icon} size="small" />}
-        sldsClasses={['has-flexi-truncate']}
-      >
-        <a className={prefix(['text-link--reset'])}>
-          <span className={prefix(['text-heading--small'])}>{header}</span>
-        </a>
-      </MediaObject>
-      <div className={prefix(['no-flex'])}>
-        {headerRight}
-      </div>
-    </Grid>
-    <div className={prefix(['card__body', 'text-align--center'])}>
-      {body}
+const Card = (props, { cssPrefix }) => {
+  const {
+    body,
+    className,
+    footer,
+    header,
+    headerRight,
+    icon,
+    sprite,
+    ...rest,
+  } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
+  return (
+    <div {...rest} className={prefix('card', className)}>
+      <Grid className={prefix('card__header')}>
+        <MediaObject
+          center
+          className={prefix('has-flexi-truncate')}
+          figureLeft={<Icon sprite={sprite} icon={icon} size="small" />}
+        >
+          <a className={prefix('text-link--reset')}>
+            <span className={prefix('text-heading--small')}>{header}</span>
+          </a>
+        </MediaObject>
+        <div className={prefix('no-flex')}>{headerRight}</div>
+      </Grid>
+      <div className={prefix(['card__body', 'text-align--center'])}>{body}</div>
+      <div className={prefix(['card__footer'])}>{footer}</div>
     </div>
-    <div className={prefix(['card__footer'])}>
-      {footer}
-    </div>
-  </div>;
+  );
+};
+
+Card.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
 
 Card.propTypes = {
   /**
    * card body, could be a table for example
    */
   body: React.PropTypes.node,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * footer in the bottom right corner
    */
@@ -53,10 +71,6 @@ Card.propTypes = {
    * icon sprite name
    */
   sprite: React.PropTypes.string.isRequired,
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(Card);
+export default Card;

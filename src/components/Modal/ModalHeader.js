@@ -1,60 +1,68 @@
 import React from 'react';
 import { Button, ButtonIcon } from '../../index';
-import { prefixable } from '../../decorators';
+import { prefixClasses } from '../../utils';
 
-export class ModalHeader extends React.Component {
-  getCloseButton() {
-    return (
-      <Button sldsClasses={['modal__close']} variation="icon-inverse" size="large">
-        <ButtonIcon sprite="action" icon="close" size="large" />
-        <span className={this.props.prefix(['assistive-text'])}>Close</span>
-      </Button>
-    );
-  }
+const ModalHeader = (props, { cssPrefix }) => {
+  const { children, className, label, prompt, tagline, title, uncloseable, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  getTagline() {
-    return (
-      <p className={this.props.prefix(['m-top--x-small'])}>
-        {this.props.tagline}
-      </p>
-    );
-  }
+  const getCloseButton = () => (
+    <Button className={prefix('modal__close')} icon-inverse size="large">
+      <ButtonIcon sprite="action" icon="close" size="large" />
+      <span className={prefix('assistive-text')}>Close</span>
+    </Button>
+  );
 
-  getTitle() {
-    const titleID = this.props.label || null;
+  const getTagline = () => (
+    <p className={prefix('m-top--x-small')}>
+      {tagline}
+    </p>
+  );
+
+  const getTitle = () => {
+    const titleID = label || null;
     return (
-      <h2 id={titleID} className={this.props.prefix(['text-heading--medium'])}>
-        {this.props.title}
+      <h2 id={titleID} className={prefix('text-heading--medium')}>
+        {title}
       </h2>
     );
-  }
+  };
 
-  render() {
-    const isEmpty = !this.props.children && !this.props.tagline && !this.props.title;
+  const isEmpty = !children && !tagline && !title;
 
-    const sldsClasses = [
-      'modal__header',
-      { 'modal__header--empty': isEmpty },
-      { 'theme--error': !!this.props.prompt },
-      { 'theme--alert-texture': !!this.props.prompt },
-    ];
+  const sldsClasses = [
+    'modal__header',
+    { 'modal__header--empty': isEmpty },
+    { 'theme--error': !!prompt },
+    { 'theme--alert-texture': !!prompt },
+  ];
 
-    return (
-      <div className={this.props.prefix(sldsClasses, this.props)}>
-        {!this.props.uncloseable ? this.getCloseButton() : null}
-        {this.props.children}
-        {this.props.title ? this.getTitle() : null}
-        {this.props.tagline ? this.getTagline() : null}
-      </div>
-    );
-  }
-}
+  return (
+    <div {...rest} className={prefix(sldsClasses, className)}>
+      {!uncloseable ? getCloseButton() : null}
+      {children}
+      {title ? getTitle() : null}
+      {tagline ? getTagline() : null}
+    </div>
+  );
+};
+
+ModalHeader.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
 
 ModalHeader.propTypes = {
   /**
    * modal header content
    */
   children: React.PropTypes.node,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * heading id (gets passed down from `Modal prompt`)
    */
@@ -75,10 +83,6 @@ ModalHeader.propTypes = {
    * hides the close-button (gets passed down from `Modal prompt`)
    */
   uncloseable: React.PropTypes.bool,
-  /**
-   * prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(ModalHeader);
+export default ModalHeader;

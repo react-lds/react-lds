@@ -1,18 +1,15 @@
 
 import React from 'react';
-import { prefixable } from '../../decorators';
+import { prefixClasses } from '../../utils';
 
-export const FormElementError = (props) => {
-  const { error, prefix } = props;
-
-  const sldsClasses = [
-    'form-element__help',
-  ];
+const FormElementError = (props, { cssPrefix }) => {
+  const { className, error, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderError = () => {
     if (error) {
       return (
-        <div className={prefix(sldsClasses)}>{error}</div>
+        <div {...rest} className={prefix('form-element__help', className)}>{error}</div>
       );
     }
 
@@ -22,15 +19,18 @@ export const FormElementError = (props) => {
   return renderError();
 };
 
+FormElementError.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
+
 FormElementError.propTypes = {
   /**
    * element triggered on the containing form element
    */
   error: React.PropTypes.string,
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(FormElementError);
+export default FormElementError;

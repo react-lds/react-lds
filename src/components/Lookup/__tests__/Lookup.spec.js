@@ -8,8 +8,8 @@ describe('<Lookup />', () => {
   let mounted = null;
   let props = {};
 
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const context = { assetBasePath: '/assets', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
   const options = { context, childContextTypes };
 
   const sampleData = [
@@ -68,12 +68,12 @@ describe('<Lookup />', () => {
   });
 
   it('renders an input by default', () => {
-    expect(mounted.find('.form-element__control input').length).toBe(1);
-    expect(mounted.find('.pill_container').length).toBe(0);
+    expect(mounted.find('.slds-form-element__control input').length).toBe(1);
+    expect(mounted.find('.slds-pill_container').length).toBe(0);
   });
 
   it('renders a label', () => {
-    expect(mounted.find('.form-element__label').text()).toEqual(props.inputLabel);
+    expect(mounted.find('.slds-form-element__label').text()).toEqual(props.inputLabel);
   });
 
   it('renders a placeholder', () => {
@@ -81,66 +81,66 @@ describe('<Lookup />', () => {
   });
 
   it('renders scope attributes', () => {
-    expect(mounted.find('.form-element').prop('data-scope')).toEqual('single');
+    expect(mounted.find('.slds-form-element').prop('data-scope')).toEqual('single');
     mounted.setProps({ multi: true });
-    expect(mounted.find('.form-element').prop('data-scope')).toEqual(null);
+    expect(mounted.find('.slds-form-element').prop('data-scope')).toEqual(null);
   });
 
   it('renders an alternate email layout', () => {
     mounted.setProps({ emailLayout: true });
-    expect(mounted.find('input').hasClass('input--bare')).toBeTruthy();
-    expect(mounted.find('.form-element__label').length).toBe(0);
-    expect(mounted.find('.grid .email-composer__label').length).toBe(1);
+    expect(mounted.find('input').hasClass('slds-input--bare')).toBeTruthy();
+    expect(mounted.find('.slds-form-element__label').length).toBe(0);
+    expect(mounted.find('.slds-grid .slds-email-composer__label').length).toBe(1);
   });
 
   it('renders a list label', () => {
     mounted.setState({ open: true, loaded: sampleData });
-    expect(mounted.find('.lookup__item--label').text()).toBe(props.listLabel);
+    expect(mounted.find('.slds-lookup__item--label').text()).toBe(props.listLabel);
   });
 
   it('renders a lookup list', () => {
     mounted.setState({ open: true, loaded: sampleData });
-    expect(mounted.find('.lookup__list .lookup__item-action').length).toBe(7);
+    expect(mounted.find('.slds-lookup__list .slds-lookup__item-action').length).toBe(7);
   });
 
   it('renders lookup items correctly', () => {
     mounted.setState({ open: true, loaded: [sampleData[0]] });
 
     const firstData = sampleData[0];
-    const firstResult = mounted.find('.lookup__item-action').first();
-    expect(firstResult.find('.lookup__result-text').text()).toEqual(firstData.label);
-    expect(firstResult.find('.lookup__result-meta').text()).toEqual(firstData.meta);
+    const firstResult = mounted.find('.slds-lookup__item-action').first();
+    expect(firstResult.find('.slds-lookup__result-text').text()).toEqual(firstData.label);
+    expect(firstResult.find('.slds-lookup__result-meta').text()).toEqual(firstData.meta);
     expect(firstResult.find('IconSVG').first().prop('icon')).toEqual(firstData.objectType);
   });
 
   it('renders a list only when there is loaded data', () => {
     mounted.setState({ open: true });
-    expect(mounted.find('.lookup__menu').length).toBe(0);
+    expect(mounted.find('.slds-lookup__menu').length).toBe(0);
     mounted.setState({ loaded: sampleData });
-    expect(mounted.find('.lookup__menu').length).toBe(1);
+    expect(mounted.find('.slds-lookup__menu').length).toBe(1);
   });
 
   it('renders selections correctly', () => {
     mounted.setState({ selected: [sampleData[0]] });
 
     const firstData = sampleData[0];
-    const result = mounted.find('.pill');
-    expect(result.find('.pill__remove').length).toBe(1);
-    expect(result.find('.pill__label').text()).toEqual(firstData.label);
+    const result = mounted.find('.slds-pill');
+    expect(result.find('.slds-pill__remove').length).toBe(1);
+    expect(result.find('.slds-pill__label').text()).toEqual(firstData.label);
     expect(result.find('IconSVG').first().prop('icon')).toEqual(firstData.objectType);
   });
 
   it('renders a selection and no input if there are selected items', () => {
     mounted.setState({ selected: [sampleData[0]] });
     expect(mounted.find('input').length).toBe(0);
-    expect(mounted.find('.pill_container .pill').length).toBe(1);
+    expect(mounted.find('.slds-pill_container .slds-pill').length).toBe(1);
   });
 
   it('renders as a multi lookup', () => {
     mounted.setProps({ multi: true });
     mounted.setState({ selected: sampleData });
 
-    expect(mounted.find('.pill_container .pill').length).toBe(7);
+    expect(mounted.find('.slds-pill_container .slds-pill').length).toBe(7);
     expect(mounted.find('input').length).toBe(0);
   });
 
@@ -148,7 +148,7 @@ describe('<Lookup />', () => {
     mounted.setProps({ multi: true });
     mounted.setState({ selected: sampleData });
 
-    mounted.find('.pill_container').simulate('click');
+    mounted.find('.slds-pill_container').simulate('click');
     expect(mounted.find('input').length).toBe(1);
   });
 
@@ -199,26 +199,26 @@ describe('<Lookup />', () => {
 
   it('sets a selections on lookup item click', () => {
     mounted.setState({ open: true, loaded: sampleData, selected: [] });
-    mounted.find('.lookup__list li').first().simulate('click');
-    expect(mounted.find('.pill_container .pill').length).toBe(1);
+    mounted.find('.slds-lookup__list li').first().simulate('click');
+    expect(mounted.find('.slds-pill_container .slds-pill').length).toBe(1);
   });
 
   it('sets data-highlighted to the currently highlighted listItem-ID', () => {
     mounted.setState({ open: true, loaded: sampleData, selected: [] });
-    mounted.find('.lookup__list li').first().simulate('mouseOver');
+    mounted.find('.slds-lookup__list li').first().simulate('mouseOver');
     expect(mounted.find('input').prop('aria-activedescendant')).toBe('1');
   });
 
   it('sets aria-expanded on input when openend', () => {
     mounted.setState({ open: true });
     expect(mounted.find('input').prop('aria-expanded')).toBeTruthy();
-    expect(mounted.find('.form-element').hasClass('is-open')).toBeTruthy();
+    expect(mounted.find('.slds-form-element').hasClass('slds-is-open')).toBeTruthy();
   });
 
   it('shows the input if the selection is cleared', () => {
     mounted.setState({ selected: [sampleData[0]] });
     expect(mounted.find('input').length).toBe(0);
-    mounted.find('.pill__remove').simulate('click');
+    mounted.find('.slds-pill__remove').simulate('click');
     expect(mounted.find('input').length).toBe(1);
   });
 
@@ -226,14 +226,14 @@ describe('<Lookup />', () => {
     mounted.setProps({ multi: true });
     mounted.setState({ selected: [sampleData[0], sampleData[1]] });
     expect(mounted.find('input').length).toBe(0);
-    mounted.find('.pill__remove').first().simulate('click');
-    mounted.find('.pill__remove').first().simulate('click');
+    mounted.find('.slds-pill__remove').first().simulate('click');
+    mounted.find('.slds-pill__remove').first().simulate('click');
     expect(mounted.find('input').length).toBe(1);
   });
 
   it('subtracts selected items from displayed items', () => {
     mounted.setState({ open: true, loaded: sampleData, selected: [sampleData[0]] });
-    expect(mounted.find('.lookup__list li').length).toBe(6);
-    expect(mounted.find('.lookup__result-text').first().text()).toBe(sampleData[1].label);
+    expect(mounted.find('.slds-lookup__list li').length).toBe(6);
+    expect(mounted.find('.slds-lookup__result-text').first().text()).toBe(sampleData[1].label);
   });
 });

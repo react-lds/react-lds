@@ -3,12 +3,12 @@ import { PromptForTouch, Button } from 'react-lds';
 
 const ExamplePromptTouchHeader = () => (
   <PromptForTouch open title="Select a New Record Type">
-    <Button variation="neutral" title="Simple" />
-    <Button variation="neutral" title="Advanced" />
-    <Button variation="neutral" title="Partner" />
-    <Button variation="neutral" title="Partner" />
-    <Button variation="neutral" title="Person Accounts" />
-    <Button variation="neutral" title="Cancel" />
+    <Button neutral title="Simple" />
+    <Button neutral title="Advanced" />
+    <Button neutral title="Partner" />
+    <Button neutral title="Partner" />
+    <Button neutral title="Person Accounts" />
+    <Button neutral title="Cancel" />
   </PromptForTouch>
 );
 

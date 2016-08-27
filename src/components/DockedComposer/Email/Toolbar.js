@@ -1,48 +1,62 @@
 import React from 'react';
-
-import prefixable from './../../../decorators/prefixable';
-import { Button, ButtonIcon } from './../../Button';
-import { ButtonGroup } from './../../ButtonGroup';
-import { Grid } from './../../Grid';
+import { prefixClasses } from '../../../utils';
+import { Button, ButtonIcon } from '../../Button';
+import { ButtonGroup } from '../../ButtonGroup';
+import { Grid } from '../../Grid';
 
 // At some point, the toolbar should be configurable and also support fonts and
 // font sizes.
-const Toolbar = ({ prefix, buttonGroupRight, buttonGroupLeft }) =>
-  <div
-    className={prefix(['docked-composer__toolbar', 'shrink-none', 'grid', 'grid--align-spread'])}
-  >
-    <Grid>
-      {buttonGroupLeft ? <ButtonGroup>{buttonGroupLeft}</ButtonGroup> : null}
-      <ButtonGroup>
-        <Button icon variation="icon-border-filled" className="ql-bold">
-          <ButtonIcon sprite="utility" icon="bold" />
-        </Button>
-        <Button icon variation="icon-border-filled" className="ql-italic">
-          <ButtonIcon sprite="utility" icon="italic" />
-        </Button>
-        <Button icon variation="icon-border-filled" className="ql-underline">
-          <ButtonIcon sprite="utility" icon="underline" />
-        </Button>
-      </ButtonGroup>
-      <ButtonGroup>
-        <Button icon variation="icon-border-filled" className="ql-list" value="ordered">
-          <ButtonIcon sprite="utility" icon="richtextnumberedlist" />
-        </Button>
-        <Button icon variation="icon-border-filled" className="ql-list" value="bullet">
-          <ButtonIcon sprite="utility" icon="richtextbulletedlist" />
-        </Button>
-      </ButtonGroup>
-      <ButtonGroup>
-        <Button icon variation="icon-border-filled" className="ql-align" value="center">
-          <ButtonIcon sprite="utility" icon="center_align_text" />
-        </Button>
-        <Button icon variation="icon-border-filled" className="ql-align" value="right">
-          <ButtonIcon sprite="utility" icon="right_align_text" />
-        </Button>
-      </ButtonGroup>
-      {buttonGroupRight ? <ButtonGroup>{buttonGroupRight}</ButtonGroup> : null}
-    </Grid>
-  </div>;
+
+const Toolbar = (props, { cssPrefix }) => {
+  const { buttonGroupLeft, buttonGroupRight, className, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
+  return (
+    <div
+      {...rest}
+      className={prefix(['docked-composer__toolbar', 'shrink-none', 'grid', 'grid--align-spread'], className)}
+    >
+      <Grid>
+        {buttonGroupLeft ? <ButtonGroup>{buttonGroupLeft}</ButtonGroup> : null}
+        <ButtonGroup>
+          <Button icon icon-border-filled className="ql-bold">
+            <ButtonIcon sprite="utility" icon="bold" />
+          </Button>
+          <Button icon icon-border-filled className="ql-italic">
+            <ButtonIcon sprite="utility" icon="italic" />
+          </Button>
+          <Button icon icon-border-filled className="ql-underline">
+            <ButtonIcon sprite="utility" icon="underline" />
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button icon icon-border-filled className="ql-list" value="ordered">
+            <ButtonIcon sprite="utility" icon="richtextnumberedlist" />
+          </Button>
+          <Button icon icon-border-filled className="ql-list" value="bullet">
+            <ButtonIcon sprite="utility" icon="richtextbulletedlist" />
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button icon icon-border-filled className="ql-align" value="center">
+            <ButtonIcon sprite="utility" icon="center_align_text" />
+          </Button>
+          <Button icon icon-border-filled className="ql-align" value="right">
+            <ButtonIcon sprite="utility" icon="right_align_text" />
+          </Button>
+        </ButtonGroup>
+        {buttonGroupRight ? <ButtonGroup>{buttonGroupRight}</ButtonGroup> : null}
+      </Grid>
+    </div>
+  );
+};
+
+Toolbar.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
 
 Toolbar.propTypes = {
   /**
@@ -54,9 +68,9 @@ Toolbar.propTypes = {
    */
   buttonGroupRight: React.PropTypes.node,
   /**
-   * prefix function from prefixable HOC
+   * class name
    */
-  prefix: React.PropTypes.func.isRequired,
+  className: React.PropTypes.string,
 };
 
-export default prefixable(Toolbar);
+export default Toolbar;

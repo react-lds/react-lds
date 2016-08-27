@@ -5,40 +5,43 @@ import { shallow } from 'enzyme';
 import flavorable from '../flavorable';
 
 describe('flavorable()', () => {
-  const DummyComponent = () =>
-    <div>
-      it works
-    </div>;
+  let mounted = null;
+  const DummyComponent = () => (<div>it works</div>);
 
   DummyComponent.flavors = [
     'strawberry',
     'cherry',
   ];
 
-  const FlavorableDummyComponent = flavorable(DummyComponent, 'apple');
-
-  it('adds a valid flavor', () => {
-    const wrapper = shallow(<FlavorableDummyComponent strawberry />);
-    expect(wrapper.prop('sldsClasses')).toEqual(['apple--strawberry']);
+  beforeEach(() => {
+    const Dummy = flavorable(DummyComponent, 'apple');
+    mounted = shallow(<Dummy />);
   });
 
-  it('adds multiple flavors', () => {
-    const wrapper = shallow(<FlavorableDummyComponent strawberry cherry />);
-    expect(wrapper.prop('sldsClasses')).toEqual(['apple--strawberry', 'apple--cherry']);
+  it('renders a valid flavor', () => {
+    mounted.setProps({ strawberry: true });
+    expect(mounted.hasClass('apple--strawberry')).toBeTruthy();
   });
 
-  it('does not add invalid flavors', () => {
-    const wrapper = shallow(<FlavorableDummyComponent blueberry />);
-    expect(wrapper.prop('sldsClasses')).toEqual([]);
+  it('renders multiple flavors', () => {
+    mounted.setProps({ strawberry: true, cherry: true });
+    expect(mounted.hasClass('apple--strawberry')).toBeTruthy();
+    expect(mounted.hasClass('apple--cherry')).toBeTruthy();
+  });
+
+  it('does not render invalid flavors', () => {
+    mounted.setProps({ blueberry: true });
+    expect(mounted.hasClass('apple--blueberry')).toBeFalsy();
   });
 
   it('keeps existing sldsClasses and adds flavors', () => {
-    const wrapper = shallow(<FlavorableDummyComponent sldsClasses={['banana']} strawberry />);
-    expect(wrapper.prop('sldsClasses')).toEqual(['apple--strawberry', 'banana']);
+    mounted.setProps({ strawberry: true, className: 'banana' });
+    expect(mounted.hasClass('apple--strawberry')).toBeTruthy();
+    expect(mounted.hasClass('banana')).toBeTruthy();
   });
 
   it('keeps existing sldsClasses', () => {
-    const wrapper = shallow(<FlavorableDummyComponent sldsClasses={['banana']} />);
-    expect(wrapper.prop('sldsClasses')).toEqual(['banana']);
+    mounted.setProps({ className: 'banana' });
+    expect(mounted.hasClass('banana')).toBeTruthy();
   });
 });

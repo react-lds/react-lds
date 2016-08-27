@@ -7,8 +7,8 @@ import { mount } from 'enzyme';
 describe('<DropdownMenuListItem />', () => {
   let mounted = null;
 
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
@@ -28,12 +28,12 @@ describe('<DropdownMenuListItem />', () => {
 
   it('renders isSelected', () => {
     mounted.setProps({ isSelected: true });
-    expect(mounted.find('li').hasClass('is-selected')).toBeTruthy();
+    expect(mounted.find('li').hasClass('slds-is-selected')).toBeTruthy();
   });
 
   it('renders divider', () => {
     mounted.setProps({ divider: true });
-    expect(mounted.find('li').hasClass('has-divider--top-space')).toBeTruthy();
+    expect(mounted.find('li').hasClass('slds-has-divider--top-space')).toBeTruthy();
   });
 
   it('renders left and right icons', () => {

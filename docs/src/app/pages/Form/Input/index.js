@@ -1,7 +1,6 @@
 import React from 'react';
 
 import CodeExample from '../../../components/CodeExample';
-import PropTypeDescription from '../../../components/PropTypeDescription';
 
 import ExampleDefault from './ExampleDefault';
 import exampleDefaultCode from '!raw!./ExampleDefault';
@@ -19,8 +18,6 @@ import ExampleError from './ExampleError';
 import exampleErrorCode from '!raw!./ExampleError';
 import ExampleErrorIcon from './ExampleErrorIcon';
 import exampleErrorIconCode from '!raw!./ExampleErrorIcon';
-
-import inputCode from '!raw!react-lds/components/Form/Input';
 
 const mapId = (id) => {
   let Component = ExampleDefault;
@@ -76,7 +73,6 @@ const mapId = (id) => {
         </section>
 
       </div>
-      <PropTypeDescription code={inputCode} header="### Input" />
     </div>
   );
 };

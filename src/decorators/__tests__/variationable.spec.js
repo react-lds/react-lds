@@ -5,10 +5,9 @@ import { shallow } from 'enzyme';
 import variationable from '../variationable';
 
 describe('variationable()', () => {
-  const DummyComponent = () =>
-    <div>
-      it works
-    </div>;
+  let mounted = null;
+
+  const DummyComponent = () => (<div>it works</div>);
 
   DummyComponent.variations = [
     'old',
@@ -16,30 +15,36 @@ describe('variationable()', () => {
     { fail: ['small', 'big', 'astronomic'] },
   ];
 
-  const VariDummyComponent = variationable(DummyComponent);
-
-  it('adds a valid variation', () => {
-    const wrapper = shallow(<VariDummyComponent old />);
-    expect(wrapper.prop('sldsClasses')).toEqual(['old']);
+  beforeEach(() => {
+    const Dummy = variationable(DummyComponent);
+    mounted = shallow(<Dummy />);
   });
 
-  it('adds multiple variations', () => {
-    const wrapper = shallow(<VariDummyComponent old new big-fail />);
-    expect(wrapper.prop('sldsClasses')).toEqual(['old', 'new', 'big-fail']);
+  it('renders valid variations', () => {
+    mounted.setProps({ old: true });
+    expect(mounted.hasClass('old')).toBeTruthy();
   });
 
-  it('does not add invalid variations', () => {
-    const wrapper = shallow(<VariDummyComponent no-fail />);
-    expect(wrapper.prop('sldsClasses')).toEqual([]);
+  it('renders multiple variations', () => {
+    mounted.setProps({ old: true, new: true, 'big-fail': true });
+    expect(mounted.hasClass('old')).toBeTruthy();
+    expect(mounted.hasClass('new')).toBeTruthy();
+    expect(mounted.hasClass('big-fail')).toBeTruthy();
   });
 
-  it('keeps existing sldsClasses and adds variations', () => {
-    const wrapper = shallow(<VariDummyComponent sldsClasses={['good']} new />);
-    expect(wrapper.prop('sldsClasses')).toEqual(['new', 'good']);
+  it('does not render invalid variations', () => {
+    mounted.setProps({ 'no-fail': true });
+    expect(mounted.hasClass('no-fail')).toBeFalsy();
   });
 
-  it('keeps existing sldsClasses', () => {
-    const wrapper = shallow(<VariDummyComponent sldsClasses={['good']} />);
-    expect(wrapper.prop('sldsClasses')).toEqual(['good']);
+  it('keeps existing classes and renders variations', () => {
+    mounted.setProps({ className: 'old', new: true });
+    expect(mounted.hasClass('old')).toBeTruthy();
+    expect(mounted.hasClass('new')).toBeTruthy();
+  });
+
+  it('keeps existing classes', () => {
+    mounted.setProps({ className: 'old' });
+    expect(mounted.hasClass('old')).toBeTruthy();
   });
 });

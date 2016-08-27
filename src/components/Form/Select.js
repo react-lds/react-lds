@@ -5,26 +5,29 @@ import {
   FormElementLabel,
   FormElementError,
 } from '../../';
-import { prefixable } from '../../decorators';
+import { prefixClasses } from '../../utils';
 
-export const Select = (props) => {
+const Select = (props, { cssPrefix }) => {
   const {
     children,
+    className,
     disabled,
     error,
     id,
     label,
     multiple,
     onChange,
-    prefix,
     required,
+    ...rest,
   } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderSelect = () => {
     const select = (
       <select
+        {...rest}
         id={id}
-        className={prefix(['select'])}
+        className={prefix('select', className)}
         onChange={onChange}
         multiple={multiple}
         required={required}
@@ -38,7 +41,7 @@ export const Select = (props) => {
       return select;
     }
 
-    return (<div className={prefix(['select_container'])}>{select}</div>);
+    return (<div className={prefix('select_container')}>{select}</div>);
   };
 
   return (
@@ -52,11 +55,23 @@ export const Select = (props) => {
   );
 };
 
+Select.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
+
+
 Select.propTypes = {
   /**
    * options & optgroups of the select
    */
   children: React.PropTypes.node.isRequired,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * adds disabled attribute to the select
    */
@@ -85,10 +100,6 @@ Select.propTypes = {
    * adds required attribute to the select field and label
    */
   required: React.PropTypes.bool,
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(Select);
+export default Select;

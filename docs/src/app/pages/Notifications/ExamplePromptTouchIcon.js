@@ -12,9 +12,9 @@ const ExamplePromptTouchIcon = () => (
     our products. Would you mind taking a moment to give us feedback through the
     App Store? We really appreciate your support."
   >
-    <Button variation="brand" title="Rate Salesforce1" />
-    <Button variation="neutral" title="No, Thanks" />
-    <Button variation="neutral" title="Remind Me Later" />
+    <Button brand title="Rate Salesforce1" />
+    <Button neutral title="No, Thanks" />
+    <Button neutral title="Remind Me Later" />
   </PromptForTouch>
 );
 

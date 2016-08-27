@@ -1,22 +1,23 @@
 import React from 'react';
 import enhanceWithClickOutside from 'react-click-outside';
 
+import { prefixClasses } from '../../utils';
 import { DropdownMenu, DropdownMenuList, DropdownMenuListItem, Button, IconSVG } from '../../index';
 
 export class Picklist extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = { open: false };
-    this.button = this.button.bind(this);
-    this.menuItems = this.menuItems.bind(this);
+
+    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
     this.toggle = this.toggle.bind(this);
   }
 
   button() {
     return (
-      <Button variation="neutral" onClick={this.toggle} isPicklistLabel>
-        <span className="slds-prefix">{this.props.label}</span>
+      <Button className={this.prefix('picklist__label')} neutral onClick={this.toggle}>
+        <span className={this.prefix('prefix')}>{this.props.label}</span>
         <IconSVG sprite="utility" icon="down" />
       </Button>
     );
@@ -57,6 +58,13 @@ export class Picklist extends React.Component {
     );
   }
 }
+
+Picklist.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
 
 Picklist.propTypes = {
   /**

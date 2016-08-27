@@ -1,18 +1,21 @@
 import React from 'react';
 import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from '../../index';
 
-const Prompt = (props) => (
-  <div>
-    <Modal label={props.label} description={props.description} open={props.open} dialog prompt>
-      <ModalHeader title={props.title} />
-      <ModalContent>{props.children}</ModalContent>
-      <ModalFooter default>
-        <Button variation="neutral" title={props.buttonText} />
-      </ModalFooter>
-    </Modal>
-    <Backdrop open={props.open} />
-  </div>
-);
+const Prompt = (props) => {
+  const { buttonText, children, className, description, label, open, title, ...rest } = props;
+  return (
+    <div>
+      <Modal {...rest} className={className} label={label} description={description} open={open} dialog prompt>
+        <ModalHeader title={title} />
+        <ModalContent>{children}</ModalContent>
+        <ModalFooter default>
+          <Button neutral title={buttonText} />
+        </ModalFooter>
+      </Modal>
+      <Backdrop open={props.open} />
+    </div>
+  );
+};
 
 Prompt.propTypes = {
   /**
@@ -23,6 +26,10 @@ Prompt.propTypes = {
    * prompt content
    */
   children: React.PropTypes.node.isRequired,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * prompt description
    */

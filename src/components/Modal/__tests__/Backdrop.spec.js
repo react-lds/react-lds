@@ -1,12 +1,16 @@
 jest.unmock('../Backdrop');
 
 import React from 'react';
-import { mount } from 'enzyme';
-import Backdrop from '../Backdrop';
+import { shallow } from 'enzyme';
+import { Backdrop } from '../Backdrop';
 
 describe('<Backdrop />', () => {
-  it('renders opened', () => {
-    const mounted = mount(<Backdrop open />);
-    expect(mounted.find('.backdrop').hasClass('backdrop--open')).toBeTruthy();
+  const context = { cssPrefix: 'slds-' };
+  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
+  it('renders the correct markup', () => {
+    const mounted = shallow(<Backdrop />, options);
+    expect(mounted.hasClass('slds-backdrop')).toBeTruthy();
   });
 });

@@ -1,10 +1,10 @@
 import React from 'react';
-import { prefixable, flavorable } from '../../decorators';
+import { flavorable } from '../../decorators';
 
-export const Container = (props) =>
-  <div className={props.prefix([], props)}>
-    {props.children}
-  </div>;
+export const Container = (props) => {
+  const { children, className } = props;
+  return (<div className={className}>{children}</div>);
+};
 
 Container.flavors = [
   'small',
@@ -23,11 +23,9 @@ Container.propTypes = {
    */
   children: React.PropTypes.node,
   /**
-   * prefix function from prefixable HOC
+   * class name
    */
-  prefix: React.PropTypes.func.isRequired,
+  className: React.PropTypes.string,
 };
 
-export default prefixable(
-  flavorable(Container, 'container')
-);
+export default flavorable(Container, 'container');

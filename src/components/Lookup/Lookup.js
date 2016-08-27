@@ -2,6 +2,7 @@ import React from 'react';
 import enhanceWithClickOutside from 'react-click-outside';
 import throttle from 'lodash.throttle';
 
+import { prefixClasses } from '../../utils';
 import {
   FormElement,
   FormElementControl,
@@ -13,12 +14,12 @@ import {
 } from '../../';
 
 import { InputRaw } from '../Form/Input';
-import { prefixable } from '../../decorators';
 
 export class Lookup extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
+    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
     this.state = {
       searchTerm: '',
       highlighted: null,
@@ -155,7 +156,7 @@ export class Lookup extends React.Component {
       return (
         <FormElementControl>
           <input
-            className={this.props.prefix(['input--bare', 'input--height'])}
+            className={this.prefix(['input--bare', 'input--height'])}
             id={this.props.id}
             type="text"
             onChange={handleInputChange}
@@ -207,7 +208,7 @@ export class Lookup extends React.Component {
           title={item.label}
           label={item.label}
           onClose={onClose}
-          sldsClasses={sldsClasses}
+          className={this.prefix(sldsClasses)}
         />
       );
     });
@@ -234,7 +235,7 @@ export class Lookup extends React.Component {
 
     const renderMeta = () => {
       if (item.meta) {
-        return (<span className={this.props.prefix(['lookup__result-meta', 'text-body--small'])}>{item.meta}</span>);
+        return (<span className={this.prefix(['lookup__result-meta', 'text-body--small'])}>{item.meta}</span>);
       }
 
       return null;
@@ -242,10 +243,10 @@ export class Lookup extends React.Component {
 
     return (
       <li onClick={addSelection} onMouseOver={highlightSelection} key={i}>
-        <a className={this.props.prefix(sldsClasses)} role="option">
+        <a className={this.prefix(sldsClasses)} role="option">
           <IconSVG sprite={this.getSprite(item.objectType)} icon={item.objectType} />
-          <div className={this.props.prefix(['media__body'])}>
-            <div className={this.props.prefix(['lookup__result-text'])}>{item.label}</div>
+          <div className={this.prefix('media__body')}>
+            <div className={this.prefix('lookup__result-text')}>{item.label}</div>
             {renderMeta()}
           </div>
         </a>
@@ -266,15 +267,13 @@ export class Lookup extends React.Component {
   }
 
   lookupList() {
-    const prefix = this.props.prefix;
-
     if (this.state.open && this.state.loaded.length > 0) {
       return (
-        <div className={prefix(['lookup__menu'])} role="listbox">
-          <div className={prefix(['lookup__item--label', 'text-body--small'])}>
+        <div className={this.prefix('lookup__menu')} role="listbox">
+          <div className={this.prefix(['lookup__item--label', 'text-body--small'])}>
             {this.props.listLabel}
           </div>
-          <ul className={prefix(['lookup__list'])} role="presentation">
+          <ul className={this.prefix('lookup__list')} role="presentation">
             {this.lookupItems()}
           </ul>
         </div>
@@ -285,7 +284,6 @@ export class Lookup extends React.Component {
   }
 
   render() {
-    const prefix = this.props.prefix;
     const sldsClasses = [
       'lookup',
       { 'is-open': this.state.open },
@@ -295,11 +293,11 @@ export class Lookup extends React.Component {
 
     if (this.props.emailLayout) {
       return (
-        <div className={prefix(['grid', 'grow', 'p-horizontal--small'])}>
-          <label className={prefix(['email-composer__label', 'align-middle'])} htmlFor={this.props.id}>
+        <div className={this.prefix(['grid', 'grow', 'p-horizontal--small'])}>
+          <label className={this.prefix(['email-composer__label', 'align-middle'])} htmlFor={this.props.id}>
             {this.props.inputLabel}
           </label>
-          <FormElement sldsClasses={sldsClasses} data-select={scope} data-scope={scope}>
+          <FormElement className={this.prefix(sldsClasses)} data-select={scope} data-scope={scope}>
             {this.input()}
             {this.selections()}
             {this.lookupList()}
@@ -309,7 +307,7 @@ export class Lookup extends React.Component {
     }
 
     return (
-      <FormElement sldsClasses={sldsClasses} data-select={scope} data-scope={scope}>
+      <FormElement className={this.prefix(sldsClasses)} data-select={scope} data-scope={scope}>
         <FormElementLabel id={this.props.id} label={this.props.inputLabel} />
         {this.input()}
         {this.selections()}
@@ -335,6 +333,13 @@ const validateSelection = (props, propName, componentName, ...rest) => {
   }
 
   return arrayValidation;
+};
+
+Lookup.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
 };
 
 Lookup.propTypes = {
@@ -391,10 +396,6 @@ Lookup.propTypes = {
    * placeholder for the input field in lookup
    */
   placeholder: React.PropTypes.string,
-  /**
-   * prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(enhanceWithClickOutside(Lookup));
+export default enhanceWithClickOutside(Lookup);

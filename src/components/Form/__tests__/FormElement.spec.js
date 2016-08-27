@@ -1,33 +1,32 @@
 jest.unmock('../FormElement');
 
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import FormElement from '../FormElement';
 
 describe('<FormElement />', () => {
   let mounted = null;
   const child = <div className="foo" />;
 
+  const context = { cssPrefix: 'slds-' };
+  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
   beforeEach(() => {
-    mounted = mount(<FormElement>{child}</FormElement>);
+    mounted = shallow(<FormElement>{child}</FormElement>, options);
   });
 
   it('renders the correct markup', () => {
-    expect(mounted.find('.form-element').contains(child)).toBeTruthy();
+    expect(mounted.find('.slds-form-element').contains(child)).toBeTruthy();
   });
 
   it('renders errors', () => {
     mounted.setProps({ error: 'string' });
-    expect(mounted.find('.form-element').hasClass('has-error')).toBeTruthy();
+    expect(mounted.find('.slds-form-element').hasClass('slds-has-error')).toBeTruthy();
   });
 
   it('renders required', () => {
     mounted.setProps({ required: true });
-    expect(mounted.find('.form-element').hasClass('is-required')).toBeTruthy();
-  });
-
-  it('renders data-attributes', () => {
-    mounted.setProps({ 'data-scope': 'foo', 'data-select': 'bar' });
-    expect(mounted.find('.form-element[data-select="bar"][data-scope="foo"]').length).toBe(1);
+    expect(mounted.find('.slds-form-element').hasClass('slds-is-required')).toBeTruthy();
   });
 });

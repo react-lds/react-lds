@@ -1,7 +1,7 @@
 jest.unmock('../Picklist');
 
 import React from 'react';
-import Picklist from '../Picklist';
+import { Picklist } from '../Picklist';
 import { mount } from 'enzyme';
 
 describe('</Picklist />', () => {
@@ -9,10 +9,8 @@ describe('</Picklist />', () => {
   let props = {};
   let callback = jest.fn();
 
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = {
-    assetBasePath: React.PropTypes.string,
-  };
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
@@ -46,7 +44,7 @@ describe('</Picklist />', () => {
 
   it('correctly sets isSelected child state', () => {
     const second = mounted.find('li').at(1);
-    expect(second.hasClass('is-selected')).toBeTruthy();
+    expect(second.hasClass('slds-is-selected')).toBeTruthy();
   });
 
   it('executes the callback when a child was clicked', () => {

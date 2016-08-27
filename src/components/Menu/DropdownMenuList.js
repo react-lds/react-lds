@@ -1,13 +1,15 @@
 import React from 'react';
+import { prefixClasses } from '../../utils';
 
-import prefixable from './../../decorators/prefixable';
+const DropdownMenuList = (props, { cssPrefix }) => {
+  const { children, className, header, height, heightIcon, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-export const DropdownMenuList = ({ prefix, header, height, heightIcon, children }) => {
   const renderHeader = () => {
     if (header) {
       return (
-        <div className={prefix(['dropdown__header'])}>
-          <span className={prefix(['text-heading--label'])}>{header}</span>
+        <div className={prefix('dropdown__header')}>
+          <span className={prefix('text-heading--label')}>{header}</span>
         </div>
       );
     }
@@ -15,20 +17,27 @@ export const DropdownMenuList = ({ prefix, header, height, heightIcon, children 
     return '';
   };
 
-  const listClasses =
-    `${prefix([
-      { [`dropdown--length-${height}`]: height },
-      { [`dropdown--length-with-icon-${heightIcon}`]: heightIcon },
-    ])} dropdown__list`;
+  const listClasses = [
+    { [`dropdown--length-${height}`]: height },
+    { [`dropdown--length-with-icon-${heightIcon}`]: heightIcon },
+    'dropdown__list',
+  ];
 
   return (
-    <div>
+    <div {...rest} className={className}>
       {renderHeader()}
-      <ul className={listClasses} role="menu">
+      <ul className={prefix(listClasses)} role="menu">
         {children}
       </ul>
     </div>
   );
+};
+
+DropdownMenuList.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
 };
 
 DropdownMenuList.propTypes = {
@@ -36,6 +45,10 @@ DropdownMenuList.propTypes = {
    * list content
    */
   children: React.PropTypes.arrayOf(React.PropTypes.element),
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * optional header for this list. Mostly useful is multiple
    * DropdownMenuListItems are in use
@@ -49,10 +62,6 @@ DropdownMenuList.propTypes = {
    * use this instead of height if an leftIcon is on every item
    */
   heightIcon: React.PropTypes.oneOf([5, 7, 10]),
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(DropdownMenuList);
+export default DropdownMenuList;

@@ -8,8 +8,8 @@ describe('<Card />', () => {
   let mounted = null;
   let props = {};
 
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
@@ -31,18 +31,18 @@ describe('<Card />', () => {
   });
 
   it('renders the header', () => {
-    expect(mounted.find('span.text-heading--small').first().text()).toEqual(props.header);
+    expect(mounted.find('span.slds-text-heading--small').first().text()).toEqual(props.header);
   });
 
   it('renders headerRight', () => {
-    expect(mounted.find('div.no-flex').first().text()).toEqual(props.headerRight);
+    expect(mounted.find('div.slds-no-flex').first().text()).toEqual(props.headerRight);
   });
 
   it('renders body', () => {
-    expect(mounted.find('div.card__body').first().text()).toEqual(props.body);
+    expect(mounted.find('div.slds-card__body').first().text()).toEqual(props.body);
   });
 
   it('renders footer', () => {
-    expect(mounted.find('div.card__footer').first().text()).toEqual(props.footer);
+    expect(mounted.find('div.slds-card__footer').first().text()).toEqual(props.footer);
   });
 });

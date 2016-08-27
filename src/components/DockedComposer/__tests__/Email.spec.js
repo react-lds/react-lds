@@ -10,8 +10,8 @@ describe('<Email />', () => {
   let props = {};
   let mounted = null;
 
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const context = { assetBasePath: '/assets', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
@@ -119,7 +119,7 @@ describe('<Email />', () => {
   });
 
   it('renders attachments', () => {
-    const attachments = mounted.find('ul > li > MediaObject');
+    const attachments = mounted.find('ul > li MediaObject');
     expect(attachments.length).toEqual(1);
     expect(attachments.text()).toEqual(props.value.attachments[0].name);
   });
@@ -128,7 +128,7 @@ describe('<Email />', () => {
     let footerButtons = null;
 
     beforeEach(() => {
-      footerButtons = mounted.find('footer > div > Button');
+      footerButtons = mounted.find('footer > div Button');
     });
 
     it('renders footerButtons', () => {

@@ -7,8 +7,8 @@ import RecordHome from '../RecordHome';
 describe('<RecordHome />', () => {
   let mounted;
 
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
@@ -36,19 +36,19 @@ describe('<RecordHome />', () => {
   });
 
   it('contains the recordType', () => {
-    expect(mounted.find('p.text-heading--label').first().text()).toEqual('unicornz');
+    expect(mounted.find('p.slds-text-heading--label').first().text()).toEqual('unicornz');
   });
 
   it('contains the headerButtons', () => {
-    expect(mounted.find('div.col').at(1).text()).toEqual('button123');
+    expect(mounted.find('div.slds-col').at(1).text()).toEqual('button123');
   });
 
   it('contains detail items', () => {
-    const detailItems = mounted.find('li.page-header__detail-block');
+    const detailItems = mounted.find('li.slds-page-header__detail-block');
     expect(detailItems.length).toEqual(2);
-    expect(detailItems.first().find('p.text-heading--label-normal').text()).toEqual('detail1');
-    expect(detailItems.first().find('p.text-body--regular').text()).toEqual('detailcontent1');
-    expect(detailItems.at(1).find('p.text-heading--label-normal').text()).toEqual('detail2');
-    expect(detailItems.at(1).find('p.text-body--regular').text()).toEqual('detailcontent2');
+    expect(detailItems.first().find('p.slds-text-heading--label-normal').text()).toEqual('detail1');
+    expect(detailItems.first().find('p.slds-text-body--regular').text()).toEqual('detailcontent1');
+    expect(detailItems.at(1).find('p.slds-text-heading--label-normal').text()).toEqual('detail2');
+    expect(detailItems.at(1).find('p.slds-text-body--regular').text()).toEqual('detailcontent2');
   });
 });

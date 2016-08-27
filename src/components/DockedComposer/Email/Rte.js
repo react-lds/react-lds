@@ -1,12 +1,12 @@
 import React from 'react';
 import Quill from 'quill';
+import { prefixClasses } from '../../../utils';
 
-import prefixable from './../../../decorators/prefixable';
+class Rte extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-export class Rte extends React.Component {
-  constructor(props) {
-    super(props);
-
+    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
     this.addEditorElem = this.addEditorElem.bind(this);
   }
 
@@ -41,7 +41,7 @@ export class Rte extends React.Component {
   render() {
     return (
       <div
-        className={this.props.prefix(['docked-composer__input', 'input--bare text-longform', 'grow'])}
+        className={this.prefix(['docked-composer__input', 'input--bare text-longform', 'grow'], this.props.className)}
         ref={this.addEditorElem}
       >
         <div className="ql-editor" />
@@ -50,7 +50,19 @@ export class Rte extends React.Component {
   }
 }
 
+Rte.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
+
+
 Rte.propTypes = {
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * initial HTML value
    */
@@ -63,10 +75,6 @@ Rte.propTypes = {
    * toolbar element used to construct quill editor
    */
   toolbar: React.PropTypes.any,
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(Rte);
+export default Rte;

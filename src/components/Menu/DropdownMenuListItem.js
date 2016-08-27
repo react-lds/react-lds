@@ -1,18 +1,14 @@
 import React from 'react';
 
-import prefixable from './../../decorators/prefixable';
+import { prefixClasses } from '../../utils';
 import { IconSVG } from '../../index';
 
-export const DropdownMenuListItem = ({
-  prefix,
-  children,
-  onClick,
-  isSelected,
-  leftIcon,
-  rightIcon,
-  divider,
-}) => {
+const DropdownMenuListItem = (props, { cssPrefix }) => {
+  const { children, className, onClick, isSelected, leftIcon, rightIcon, divider, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
   const classes = ['dropdown__item'];
+
   if (divider) {
     classes.push('has-divider--top-space');
   }
@@ -22,43 +18,52 @@ export const DropdownMenuListItem = ({
 
   const leftIconElem = () => {
     if (leftIcon) {
+      const iconClasses = [
+        { 'icon--selected': !leftIcon.alwaysDisplay },
+        { 'm-right--x-small': !leftIcon.alwaysDisplay },
+        { 'm-right--small': leftIcon.alwaysDisplay },
+        { icon: leftIcon.alwaysDisplay },
+      ];
+
       return (
         <IconSVG
-          sprite={leftIcon.sprite}
+          background={leftIcon.background}
+          className={prefix(iconClasses)}
           icon={leftIcon.icon}
           size={leftIcon.alwaysDisplay ? 'small' : 'x-small'}
-          background={leftIcon.background}
-          sldsClasses={[
-            { 'icon--selected': !leftIcon.alwaysDisplay },
-            { 'm-right--x-small': !leftIcon.alwaysDisplay },
-            { 'm-right--small': leftIcon.alwaysDisplay },
-            { icon: leftIcon.alwaysDisplay },
-          ]}
+          sprite={leftIcon.sprite}
         />);
     }
 
-    return '';
+    return null;
   };
 
   const rightIconElem = () => {
     if (rightIcon) {
+      const iconClasses = [
+        'icon-selected',
+        'icon-text-default',
+        'm-left--small',
+        'shrink-none',
+      ];
+
       return (
         <IconSVG
-          sprite={rightIcon.sprite}
+          background={rightIcon.background}
+          className={prefix(iconClasses)}
           icon={rightIcon.icon}
           size="x-small"
-          background={rightIcon.background}
-          sldsClasses={['icon-selected', 'icon-text-default', 'm-left--small', 'shrink-none']}
+          sprite={rightIcon.sprite}
         />);
     }
 
-    return '';
+    return null;
   };
 
   return (
-    <li className={prefix(classes)} onClick={onClick}>
+    <li {...rest} className={prefix(classes, className)} onClick={onClick}>
       <a role="menuitem">
-        <p className={prefix(['truncate'])}>
+        <p className={prefix('truncate')}>
           {leftIconElem()}
           {children}
         </p>
@@ -68,11 +73,22 @@ export const DropdownMenuListItem = ({
   );
 };
 
+DropdownMenuListItem.contextTypes = {
+  /**
+   * the css prefix
+   */
+  cssPrefix: React.PropTypes.string,
+};
+
 DropdownMenuListItem.propTypes = {
   /**
    * The content of a menu item, this is just a string
    */
   children: React.PropTypes.string.isRequired,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * set to true if a divider should appear above this list item
    */
@@ -102,10 +118,6 @@ DropdownMenuListItem.propTypes = {
     sprite: React.PropTypes.string.isRequired,
     background: React.PropTypes.string,
   }),
-  /**
-   * prefix function from prefixable HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
 };
 
-export default prefixable(DropdownMenuListItem);
+export default DropdownMenuListItem;

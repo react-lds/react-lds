@@ -7,8 +7,8 @@ import PageHeaderBase from '../PageHeaderBase';
 describe('<PageHeaderBase />', () => {
   let mounted;
 
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = { assetBasePath: React.PropTypes.string };
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
@@ -19,11 +19,11 @@ describe('<PageHeaderBase />', () => {
   });
 
   it('contains the title', () => {
-    expect(mounted.find('p.page-header__title').text()).toEqual('test');
+    expect(mounted.find('p.slds-page-header__title').text()).toEqual('test');
   });
 
   it('contains info', () => {
-    expect(mounted.find('p.text-body--small').text()).toEqual('foo');
+    expect(mounted.find('p.slds-text-body--small').text()).toEqual('foo');
   });
 
   it('renders the icon', () => {
