@@ -1,8 +1,9 @@
-jest.unmock('../MediaObject');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import { MediaObject } from '../MediaObject';
+
+jest.unmock('../MediaObject');
 
 describe('<MediaObject />', () => {
   let mounted = null;

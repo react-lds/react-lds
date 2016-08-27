@@ -1,8 +1,9 @@
-jest.unmock('../Button');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import { Button } from '../Button';
+
+jest.unmock('../Button');
 
 describe('<Button />', () => {
   let props = {};

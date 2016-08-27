@@ -131,7 +131,7 @@ class Email extends React.Component {
     return (
       <div
         role="dialog"
-        aria-labelled-by="dialog-heading-id"
+        aria-labelledby="dialog-heading-id"
         className={this.prefix(['docked-composer', 'grid', 'grid--vertical', 'nowrap', 'is-open'])}
       >
         <header className={this.prefix(['docked-composer__header', 'grid', 'grid--align-spread', 'shrink-none'])}>

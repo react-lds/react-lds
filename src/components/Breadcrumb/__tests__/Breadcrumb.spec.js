@@ -1,12 +1,13 @@
-jest.unmock('../Breadcrumb');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import Breadcrumb from '../Breadcrumb';
+
+jest.unmock('../Breadcrumb');
 
 describe('<Breadcrumb />', () => {
   let mounted = null;
-  const child = <a href="#" key="id-1">foobar</a>;
+  const child = <a href="/" key="id-1">foobar</a>;
 
   const context = { cssPrefix: 'slds-' };
   const childContextTypes = { cssPrefix: React.PropTypes.string };
@@ -26,8 +27,8 @@ describe('<Breadcrumb />', () => {
 
   it('renders multiple children', () => {
     const children = [
-      <a href="#" key="id-1">foobar</a>,
-      <a href="#" key="id-2">foobar2</a>,
+      <a href="/" key="id-1">foobar</a>,
+      <a href="/" key="id-2">foobar2</a>,
     ];
     mounted.setProps({ children });
 

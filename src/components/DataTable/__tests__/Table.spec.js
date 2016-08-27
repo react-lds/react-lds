@@ -1,8 +1,9 @@
-jest.unmock('../Table');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import { Table } from '../Table';
+
+jest.unmock('../Table');
 
 describe('<Table />', () => {
   let mounted = null;

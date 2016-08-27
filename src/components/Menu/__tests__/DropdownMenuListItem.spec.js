@@ -1,8 +1,9 @@
-jest.unmock('../DropdownMenuListItem');
-
 import React from 'react';
-import DropdownMenuListItem from '../DropdownMenuListItem';
 import { mount } from 'enzyme';
+
+import DropdownMenuListItem from '../DropdownMenuListItem';
+
+jest.unmock('../DropdownMenuListItem');
 
 describe('<DropdownMenuListItem />', () => {
   let mounted = null;

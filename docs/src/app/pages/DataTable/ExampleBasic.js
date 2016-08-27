@@ -17,7 +17,7 @@ const ExampleBasic = () =>
     </thead>
     <tbody>
       <Row>
-        <Cell truncate data-label="Opportunity Name" scope="row"><a href="#">Cloudhub</a></Cell>
+        <Cell truncate data-label="Opportunity Name" scope="row"><a href="#top">Cloudhub</a></Cell>
         <Cell truncate data-label="Account Name">Cloudhub</Cell>
         <Cell truncate data-label="Close Date">4/14/2015</Cell>
         <Cell truncate data-label="Stage">Prospecting</Cell>
@@ -26,7 +26,9 @@ const ExampleBasic = () =>
         <Cell truncate data-label="Contact">jrogers@cloudhub.com</Cell>
       </Row>
       <Row>
-        <Cell truncate data-label="Opportunity Name" scope="row"><a href="#">Cloudhub + Anypoint Connectors</a></Cell>
+        <Cell truncate data-label="Opportunity Name" scope="row"><a href="#top">
+        Cloudhub + Anypoint Connectors</a>
+        </Cell>
         <Cell truncate data-label="Account Name">Cloudhub</Cell>
         <Cell truncate data-label="Close Date">4/14/2015</Cell>
         <Cell truncate data-label="Stage">Prospecting</Cell>

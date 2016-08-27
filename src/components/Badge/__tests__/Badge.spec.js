@@ -1,8 +1,9 @@
-jest.unmock('../Badge');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import { Badge } from '../Badge';
+
+jest.unmock('../Badge');
 
 describe('<Badge />', () => {
   const context = { cssPrefix: 'slds-' };

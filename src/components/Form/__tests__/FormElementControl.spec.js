@@ -1,8 +1,9 @@
-jest.unmock('../FormElementControl');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import FormElementControl from '../FormElementControl';
+
+jest.unmock('../FormElementControl');
 
 describe('<FormElementControl />', () => {
   let mounted = null;

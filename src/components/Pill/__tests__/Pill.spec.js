@@ -1,9 +1,10 @@
-jest.unmock('../Pill');
-
 import React from 'react';
+import { shallow } from 'enzyme';
+
 import { Pill } from '../Pill';
 import { Icon, Avatar } from '../../../';
-import { shallow } from 'enzyme';
+
+jest.unmock('../Pill');
 
 describe('<Pill />', () => {
   let props = {};

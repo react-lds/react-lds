@@ -1,8 +1,9 @@
-jest.unmock('../PillContainer');
-
 import React from 'react';
-import { PillContainer } from '../PillContainer';
 import { shallow } from 'enzyme';
+
+import { PillContainer } from '../PillContainer';
+
+jest.unmock('../PillContainer');
 
 describe('<PillContainer />', () => {
   let mounted = null;

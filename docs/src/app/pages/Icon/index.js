@@ -1,19 +1,20 @@
 import React from 'react';
 
-import CodeExample from '../../components/CodeExample';
-import PropTypeDescription from '../../components/PropTypeDescription';
-import Masthead from '../../components/MastHead';
-import HeaderIcon from '../../components/HeaderIcon';
-
-import ExampleBase from './ExampleBase';
-import exampleBaseCode from '!raw!./ExampleBase';
-import ExampleAction from './ExampleAction';
 import exampleActionCode from '!raw!./ExampleAction';
-import ExampleBackground from './ExampleBackground';
 import exampleBackgroundCode from '!raw!./ExampleBackground';
-import ExampleSizes from './ExampleSizes';
+import exampleBaseCode from '!raw!./ExampleBase';
 import exampleSizesCode from '!raw!./ExampleSizes';
 import iconCode from '!raw!react-lds/components/Icon/Icon';
+
+import CodeExample from '../../components/CodeExample';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
+
+import ExampleAction from './ExampleAction';
+import ExampleBackground from './ExampleBackground';
+import ExampleBase from './ExampleBase';
+import ExampleSizes from './ExampleSizes';
 
 const Icons = () =>
   <div>

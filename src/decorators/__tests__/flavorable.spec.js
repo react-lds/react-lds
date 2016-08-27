@@ -1,8 +1,9 @@
-jest.unmock('../flavorable');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import flavorable from '../flavorable';
+
+jest.unmock('../flavorable');
 
 describe('flavorable()', () => {
   let mounted = null;

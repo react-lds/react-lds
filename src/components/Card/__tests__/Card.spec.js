@@ -1,8 +1,9 @@
-jest.unmock('../Card');
-
 import React from 'react';
 import { mount } from 'enzyme';
+
 import Card from '../Card';
+
+jest.unmock('../Card');
 
 describe('<Card />', () => {
   let mounted = null;

@@ -1,9 +1,10 @@
-jest.unmock('../Modal');
-
 import React from 'react';
 import { mount } from 'enzyme';
+
 import { Modal } from '../Modal';
 import ModalHeader from '../ModalHeader';
+
+jest.unmock('../Modal');
 
 describe('<Modal />', () => {
   let mounted = null;
@@ -25,13 +26,13 @@ describe('<Modal />', () => {
 
     const modalProps = mounted.find('.slds-modal').props();
     expect(modalProps.role).toBe('dialog');
-    expect(modalProps['aria-hidden']).toBe('true');
+    expect(modalProps['aria-hidden']).toBeTruthy();
   });
 
   it('renders opened', () => {
     mounted.setProps({ open: true });
     expect(mounted.find('.slds-modal').hasClass('slds-fade-in-open')).toBeTruthy();
-    expect(mounted.find('.slds-modal').prop('aria-hidden')).toBe('false');
+    expect(mounted.find('.slds-modal').prop('aria-hidden')).toBeFalsy();
   });
 
   it('renders and passes label and description', () => {

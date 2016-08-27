@@ -1,8 +1,9 @@
-jest.unmock('../Grid');
-
 import React from 'react';
 import { mount } from 'enzyme';
-import Grid from '../Grid';
+
+import { default as Grid } from '../Grid';
+
+jest.unmock('../Grid');
 
 describe('<Grid />', () => {
   const context = { cssPrefix: 'slds-' };
@@ -10,7 +11,7 @@ describe('<Grid />', () => {
   const options = { context, childContextTypes };
 
   it('renders children', () => {
-    const child = <div className="foo"></div>;
+    const child = <div className="foo" />;
     const mounted = mount(<Grid>{child}</Grid>, options);
 
     expect(mounted.find('.slds-grid').length).toBe(1);

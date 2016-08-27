@@ -1,19 +1,19 @@
 import React from 'react';
 
+import columnCode from '!raw!react-lds/components/Grid/Column';
+import exampleAutomaticCode from '!raw!./ExampleAutomatic';
+import exampleContainersCode from '!raw!./ExampleContainers';
+import exampleManualCode from '!raw!./ExampleManual';
+import gridCode from '!raw!react-lds/components/Grid/Grid';
+
 import CodeExample from '../../components/CodeExample';
-import PropTypeDescription from '../../components/PropTypeDescription';
-import Masthead from '../../components/MastHead';
 import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
 
 import ExampleAutomatic from './ExampleAutomatic';
-import exampleAutomaticCode from '!raw!./ExampleAutomatic';
-import ExampleManual from './ExampleManual';
-import exampleManualCode from '!raw!./ExampleManual';
 import ExampleContainers from './ExampleContainers';
-import exampleContainersCode from '!raw!./ExampleContainers';
-
-import gridCode from '!raw!react-lds/components/Grid/Grid';
-import columnCode from '!raw!react-lds/components/Grid/Column';
+import ExampleManual from './ExampleManual';
 
 const GridSystem = () =>
   <div>

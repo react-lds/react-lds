@@ -4,7 +4,7 @@ import isString from 'lodash.isstring';
 
 const prefixClasses = (prefix, classes, passThrough) => {
   const applyPrefix = className => {
-    if (!!className) {
+    if (className) {
       const classString = classNames(className);
       if (classString !== '') {
         return `${prefix}${classString}`;

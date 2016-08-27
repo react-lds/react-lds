@@ -1,17 +1,18 @@
 import React from 'react';
 
+import exampleDefaultCode from '!raw!./ExampleDefault';
+import exampleNestedCode from '!raw!./ExampleNested';
+import exampleScopedCode from '!raw!./ExampleScoped';
+import tabCode from '!raw!react-lds/components/Tab/Tab';
+
 import CodeExample from '../../components/CodeExample';
-import PropTypeDescription from '../../components/PropTypeDescription';
-import Masthead from '../../components/MastHead';
 import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
 
 import ExampleDefault from './ExampleDefault';
-import exampleDefaultCode from '!raw!./ExampleDefault';
-import ExampleScoped from './ExampleScoped';
-import exampleScopedCode from '!raw!./ExampleScoped';
 import ExampleNested from './ExampleNested';
-import exampleNestedCode from '!raw!./ExampleNested';
-import tabCode from '!raw!react-lds/components/Tab/Tab';
+import ExampleScoped from './ExampleScoped';
 
 const Tabs = () => (
   <div>

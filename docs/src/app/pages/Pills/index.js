@@ -1,25 +1,25 @@
 import React from 'react';
 
-import CodeExample from '../../components/CodeExample';
-import PropTypeDescription from '../../components/PropTypeDescription';
-import Masthead from '../../components/MastHead';
-import HeaderIcon from '../../components/HeaderIcon';
-
+import exampleContainerCode from '!raw!./ExampleContainer';
+import exampleDefaultCode from '!raw!./ExampleDefault';
+import exampleIconCode from '!raw!./ExampleIcon';
+import examplePortraitCode from '!raw!./ExamplePortrait';
+import exampleTruncatedCode from '!raw!./ExampleTruncated';
+import exampleUnlinkedCode from '!raw!./ExampleUnlinked';
 import pillCode from '!raw!react-lds/components/Pill/Pill';
 import pillContainerCode from '!raw!react-lds/components/Pill/PillContainer';
 
-import ExampleDefault from './ExampleDefault';
-import exampleDefaultCode from '!raw!./ExampleDefault';
-import ExamplePortrait from './ExamplePortrait';
-import examplePortraitCode from '!raw!./ExamplePortrait';
-import ExampleIcon from './ExampleIcon';
-import exampleIconCode from '!raw!./ExampleIcon';
-import ExampleUnlinked from './ExampleUnlinked';
-import exampleUnlinkedCode from '!raw!./ExampleUnlinked';
-import ExampleTruncated from './ExampleTruncated';
-import exampleTruncatedCode from '!raw!./ExampleTruncated';
+import CodeExample from '../../components/CodeExample';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
+
 import ExampleContainer from './ExampleContainer';
-import exampleContainerCode from '!raw!./ExampleContainer';
+import ExampleDefault from './ExampleDefault';
+import ExampleIcon from './ExampleIcon';
+import ExamplePortrait from './ExamplePortrait';
+import ExampleTruncated from './ExampleTruncated';
+import ExampleUnlinked from './ExampleUnlinked';
 
 require('./index.scss');
 

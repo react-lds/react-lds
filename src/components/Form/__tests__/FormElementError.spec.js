@@ -1,8 +1,9 @@
-jest.unmock('../FormElementError');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import FormElementError from '../FormElementError';
+
+jest.unmock('../FormElementError');
 
 describe('<FormElementError />', () => {
   const context = { cssPrefix: 'slds-' };

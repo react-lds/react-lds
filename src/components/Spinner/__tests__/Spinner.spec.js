@@ -1,8 +1,9 @@
-jest.unmock('../Spinner');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import { Spinner } from '../Spinner';
+
+jest.unmock('../Spinner');
 
 describe('<Spinner />', () => {
   let mounted = null;

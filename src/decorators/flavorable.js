@@ -1,6 +1,6 @@
 import React from 'react';
-import { prefixClasses } from '../utils';
 import omit from 'lodash.omit';
+import { prefixClasses } from '../utils';
 
 const flavorPropType = validFlavors =>
   function validateFlavor(props, propName, componentName) {

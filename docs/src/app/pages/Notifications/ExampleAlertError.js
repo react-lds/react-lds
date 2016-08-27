@@ -5,7 +5,7 @@ const ExampleAlertError = () => (
   <Notification alert title="Error" theme="error texture">
     <h2>
       <IconSVG sprite="utility" icon="ban" size="small" className="slds-m-right--x-small" />
-      Your browser is currently not supported. Your Salesforce may be degraded. <a href="#">More Information</a>
+      Your browser is currently not supported. Your Salesforce may be degraded. <a href="#top">More Information</a>
     </h2>
   </Notification>
 );

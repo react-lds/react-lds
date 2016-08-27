@@ -46,7 +46,7 @@ export const Cell = (props, { cssPrefix }) => {
   const cellScope = isHeader ? scope : null;
 
   const cellContent = (key) => {
-    if (!!resizable || !!sortable && typeof children === 'string') {
+    if ((!!resizable || !!sortable) && typeof children === 'string') {
       return (<span key={key}>{children}</span>);
     }
 
@@ -54,7 +54,7 @@ export const Cell = (props, { cssPrefix }) => {
   };
 
   const resizeHandle = (key) => {
-    if (!!resizable) {
+    if (resizable) {
       return (
         <div key={key} className={prefix('resizable')}>
           <label className={prefix('assistive-text')} htmlFor={inputId}>{resizableAssistiveText}</label>
@@ -66,7 +66,7 @@ export const Cell = (props, { cssPrefix }) => {
             id={inputId}
           />
           <span className={prefix('resizable__handle')}>
-            <span className={prefix('resizable__divider')}></span>
+            <span className={prefix('resizable__divider')} />
           </span>
         </div>
       );

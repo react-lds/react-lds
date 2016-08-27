@@ -1,28 +1,28 @@
 import React from 'react';
 
-import CodeExample from '../../components/CodeExample';
-import PropTypeDescription from '../../components/PropTypeDescription';
-import Masthead from '../../components/MastHead';
-import HeaderIcon from '../../components/HeaderIcon';
-
-import modalCode from '!raw!react-lds/components/Modal/Modal';
-import modalHeaderCode from '!raw!react-lds/components/Modal/ModalHeader';
-import modalFooterCode from '!raw!react-lds/components/Modal/ModalFooter';
-import modalContentCode from '!raw!react-lds/components/Modal/ModalContent';
 import backdropCode from '!raw!react-lds/components/Modal/Backdrop';
-
-import ExampleNormal from './ExampleNormal';
-import exampleNormalCode from '!raw!./ExampleNormal';
-import ExampleLarge from './ExampleLarge';
-import exampleLargeCode from '!raw!./ExampleLarge';
-import ExampleTaglines from './ExampleTaglines';
-import exampleTaglinesCode from '!raw!./ExampleTaglines';
-import ExampleHeaderEmpty from './ExampleHeaderEmpty';
-import exampleHeaderEmptyCode from '!raw!./ExampleHeaderEmpty';
-import ExampleNoFooter from './ExampleNoFooter';
-import exampleNoFooterCode from '!raw!./ExampleNoFooter';
-import ExampleDirectional from './ExampleDirectional';
 import exampleDirectionalCode from '!raw!./ExampleDirectional';
+import exampleHeaderEmptyCode from '!raw!./ExampleHeaderEmpty';
+import exampleLargeCode from '!raw!./ExampleLarge';
+import exampleNoFooterCode from '!raw!./ExampleNoFooter';
+import exampleNormalCode from '!raw!./ExampleNormal';
+import exampleTaglinesCode from '!raw!./ExampleTaglines';
+import modalCode from '!raw!react-lds/components/Modal/Modal';
+import modalContentCode from '!raw!react-lds/components/Modal/ModalContent';
+import modalFooterCode from '!raw!react-lds/components/Modal/ModalFooter';
+import modalHeaderCode from '!raw!react-lds/components/Modal/ModalHeader';
+
+import CodeExample from '../../components/CodeExample';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
+
+import ExampleDirectional from './ExampleDirectional';
+import ExampleHeaderEmpty from './ExampleHeaderEmpty';
+import ExampleLarge from './ExampleLarge';
+import ExampleNoFooter from './ExampleNoFooter';
+import ExampleNormal from './ExampleNormal';
+import ExampleTaglines from './ExampleTaglines';
 
 require('./index.scss');
 

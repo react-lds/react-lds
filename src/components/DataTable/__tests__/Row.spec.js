@@ -1,8 +1,9 @@
-jest.unmock('../Row');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import { Row } from '../Row';
+
+jest.unmock('../Row');
 
 describe('<Row />', () => {
   let mounted = null;

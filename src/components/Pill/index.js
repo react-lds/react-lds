@@ -1,2 +1,2 @@
-export Pill from './Pill';
-export PillContainer from './PillContainer';
+export { default as Pill } from './Pill';
+export { default as PillContainer } from './PillContainer';

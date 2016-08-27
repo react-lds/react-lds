@@ -1,23 +1,24 @@
 import React from 'react';
 
+import exampleDefaultCode from '!raw!./ExampleDefault';
+import exampleDisabledCode from '!raw!./ExampleDisabled';
+import exampleErrorCode from '!raw!./ExampleError';
+import exampleErrorIconCode from '!raw!./ExampleErrorIcon';
+import exampleIconLeftCode from '!raw!./ExampleIconLeft';
+import exampleIconLeftRightCode from '!raw!./ExampleIconLeftRight';
+import exampleIconRightCode from '!raw!./ExampleIconRight';
+import exampleRequiredCode from '!raw!./ExampleRequired';
+
 import CodeExample from '../../../components/CodeExample';
 
 import ExampleDefault from './ExampleDefault';
-import exampleDefaultCode from '!raw!./ExampleDefault';
-import ExampleIconLeft from './ExampleIconLeft';
-import exampleIconLeftCode from '!raw!./ExampleIconLeft';
-import ExampleIconRight from './ExampleIconRight';
-import exampleIconRightCode from '!raw!./ExampleIconRight';
-import ExampleIconLeftRight from './ExampleIconLeftRight';
-import exampleIconLeftRightCode from '!raw!./ExampleIconLeftRight';
-import ExampleRequired from './ExampleRequired';
-import exampleRequiredCode from '!raw!./ExampleRequired';
 import ExampleDisabled from './ExampleDisabled';
-import exampleDisabledCode from '!raw!./ExampleDisabled';
 import ExampleError from './ExampleError';
-import exampleErrorCode from '!raw!./ExampleError';
 import ExampleErrorIcon from './ExampleErrorIcon';
-import exampleErrorIconCode from '!raw!./ExampleErrorIcon';
+import ExampleIconLeft from './ExampleIconLeft';
+import ExampleIconLeftRight from './ExampleIconLeftRight';
+import ExampleIconRight from './ExampleIconRight';
+import ExampleRequired from './ExampleRequired';
 
 const mapId = (id) => {
   let Component = ExampleDefault;
