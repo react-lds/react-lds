@@ -1,8 +1,9 @@
-jest.unmock('../Select');
-
 import React from 'react';
 import { mount } from 'enzyme';
+
 import Select from '../Select';
+
+jest.unmock('../Select');
 
 describe('<Select />', () => {
   let props = {};

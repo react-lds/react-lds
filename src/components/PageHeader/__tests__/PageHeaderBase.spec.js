@@ -1,8 +1,9 @@
-jest.unmock('../PageHeaderBase');
-
 import React from 'react';
 import { mount } from 'enzyme';
+
 import PageHeaderBase from '../PageHeaderBase';
+
+jest.unmock('../PageHeaderBase');
 
 describe('<PageHeaderBase />', () => {
   let mounted;

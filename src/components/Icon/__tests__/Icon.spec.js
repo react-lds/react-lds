@@ -1,8 +1,9 @@
-jest.unmock('../Icon');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import Icon from '../Icon';
+
+jest.unmock('../Icon');
 
 describe('<Icon />', () => {
   let mounted = null;

@@ -1,8 +1,9 @@
-jest.unmock('../Lookup');
-
 import React from 'react';
 import { mount } from 'enzyme';
+
 import { Lookup } from '../Lookup';
+
+jest.unmock('../Lookup');
 
 describe('<Lookup />', () => {
   let mounted = null;

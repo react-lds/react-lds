@@ -1,14 +1,14 @@
 import React from 'react';
 
+import emailCode from '!raw!react-lds/components/DockedComposer/Email';
+import exampleEmailCode from '!raw!./ExampleEmail';
+import exampleEmailExtendedCode from '!raw!./ExampleEmailExtended';
+
 import CodeExample from '../../../components/CodeExample';
 import PropTypeDescription from '../../../components/PropTypeDescription';
 
 import ExampleEmail from './ExampleEmail';
-import exampleEmailCode from '!raw!./ExampleEmail';
 import ExampleEmailExtended from './ExampleEmailExtended';
-import exampleEmailExtendedCode from '!raw!./ExampleEmailExtended';
-
-import emailCode from '!raw!react-lds/components/DockedComposer/Email';
 
 const mapId = (id) => {
   let Component = ExampleEmail;

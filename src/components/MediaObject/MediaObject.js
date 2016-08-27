@@ -16,7 +16,7 @@ export const MediaObject = (props, { cssPrefix }) => {
     }
 
     const sldsClasses = ['media__figure'];
-    if (!!classes) {
+    if (classes) {
       sldsClasses.push(classes);
     }
 

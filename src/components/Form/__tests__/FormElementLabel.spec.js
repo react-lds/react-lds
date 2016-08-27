@@ -1,8 +1,9 @@
-jest.unmock('../FormElementLabel');
-
 import React from 'react';
 import { mount } from 'enzyme';
+
 import FormElementLabel from '../FormElementLabel';
+
+jest.unmock('../FormElementLabel');
 
 describe('<FormElementLabel />', () => {
   let mounted = null;

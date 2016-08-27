@@ -1,8 +1,9 @@
-jest.unmock('../ModalContent');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import ModalContent from '../ModalContent';
+
+jest.unmock('../ModalContent');
 
 describe('<ModalContent />', () => {
   let mounted = null;

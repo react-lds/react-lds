@@ -1,8 +1,9 @@
-jest.unmock('../ModalHeader');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import ModalHeader from '../ModalHeader';
+
+jest.unmock('../ModalHeader');
 
 describe('<ModalHeader />', () => {
   let mounted = null;

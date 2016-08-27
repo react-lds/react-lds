@@ -4,7 +4,7 @@ import { prefixClasses } from '../utils';
 
 function getVariationClasses(props, validVariations) {
   return Object.keys(props)
-    .filter(variation => validVariations.hasOwnProperty(variation))
+    .filter(variation => Object.hasOwnProperty.call(validVariations, variation))
     .filter(variation => !!props[variation]);
 }
 
@@ -40,7 +40,7 @@ const variationable = C => {
     const { className } = props;
     const prefix = classes => prefixClasses(cssPrefix, classes, className);
 
-    const rest = filterVariations(props, validVariations);
+    const rest = filterVariations(props, C.variations);
     const classes = prefix(getVariationClasses(props, validVariations));
 
     return (<C {...rest} className={classes} />);

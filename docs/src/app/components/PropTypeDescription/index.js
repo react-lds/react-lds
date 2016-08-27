@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { parse } from 'react-docgen';
 import { parse as parseDoctrine } from 'doctrine';
-import MarkdownElement from '../MarkdownElement';
 import recast from 'recast';
+import MarkdownElement from '../MarkdownElement';
 
 function getDeprecatedInfo(type) {
   const deprecatedPropType = 'deprecated(PropTypes.';

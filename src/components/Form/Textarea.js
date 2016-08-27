@@ -40,7 +40,7 @@ const Textarea = (props, { cssPrefix }) => {
         placeholder={placeholder}
         disabled={disabled}
         required={required}
-      ></textarea>
+      />
     );
   };
 

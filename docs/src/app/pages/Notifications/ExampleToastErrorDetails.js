@@ -7,7 +7,7 @@ const ExampleToastErrorDetails = () => (
       <Column className="slds-m-right--small" no-flex>
         <IconSVG sprite="utility" icon="warning" size="small" />
       </Column>
-      <Column className="slds-m-right--small" middle>
+      <Column className="slds-m-right--small">
         <h2 className="slds-text-heading--small">
           You&#x27;ve encountered some errors when trying to save edits to Samuel Smith.
         </h2>

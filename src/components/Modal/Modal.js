@@ -16,7 +16,7 @@ export const Modal = (props, { cssPrefix }) => {
 
   const isOpen = !!open;
   const isDialog = !!dialog || !!prompt;
-  const role = !!prompt ? 'alertdialog' : 'dialog';
+  const role = prompt ? 'alertdialog' : 'dialog';
   const containerRole = isDialog ? 'document' : null;
 
   const sldsClasses = [
@@ -25,7 +25,7 @@ export const Modal = (props, { cssPrefix }) => {
   ];
 
   const childrenWithProps = [...children].map((child, i) => {
-    const childName = !!child ? child.type.displayName || child.type.name : null;
+    const childName = child ? child.type.displayName || child.type.name : null;
 
     if (childName === 'ModalHeader') {
       return React.cloneElement(child, {
@@ -44,7 +44,7 @@ export const Modal = (props, { cssPrefix }) => {
       className={prefix(sldsClasses, className)}
       role={role}
       aria-describedby={description}
-      aria-hidden={`${!isOpen}`}
+      aria-hidden={!isOpen}
       aria-labelledby={label}
     >
       <div

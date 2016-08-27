@@ -1,8 +1,9 @@
-jest.unmock('../Textarea');
-
 import React from 'react';
 import { mount } from 'enzyme';
+
 import Textarea from '../Textarea';
+
+jest.unmock('../Textarea');
 
 describe('<Textarea />', () => {
   let props = {};

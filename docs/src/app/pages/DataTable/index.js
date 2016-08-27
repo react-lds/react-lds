@@ -1,18 +1,18 @@
 import React from 'react';
 
-import CodeExample from '../../components/CodeExample';
-import PropTypeDescription from '../../components/PropTypeDescription';
-import Masthead from '../../components/MastHead';
-import HeaderIcon from '../../components/HeaderIcon';
-
-import ExampleBasic from './ExampleBasic';
-import exampleBasicCode from '!raw!./ExampleBasic';
-import ExampleAdvanced from './ExampleAdvanced';
-import exampleAdvancedCode from '!raw!./ExampleAdvanced';
-
-import tableCode from '!raw!react-lds/components/DataTable/Table';
-import rowCode from '!raw!react-lds/components/DataTable/Row';
 import cellCode from '!raw!react-lds/components/DataTable/Cell';
+import exampleAdvancedCode from '!raw!./ExampleAdvanced';
+import exampleBasicCode from '!raw!./ExampleBasic';
+import rowCode from '!raw!react-lds/components/DataTable/Row';
+import tableCode from '!raw!react-lds/components/DataTable/Table';
+
+import CodeExample from '../../components/CodeExample';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
+
+import ExampleAdvanced from './ExampleAdvanced';
+import ExampleBasic from './ExampleBasic';
 
 const DataTable = () =>
   <div>

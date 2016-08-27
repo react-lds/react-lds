@@ -1,8 +1,9 @@
-jest.unmock('../RecordHome');
-
 import React from 'react';
 import { mount } from 'enzyme';
+
 import RecordHome from '../RecordHome';
+
+jest.unmock('../RecordHome');
 
 describe('<RecordHome />', () => {
   let mounted;

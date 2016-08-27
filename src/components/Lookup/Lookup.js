@@ -79,7 +79,7 @@ export class Lookup extends React.Component {
   handleInputFocus(e) {
     this.openList();
 
-    if (!!this.props.onFocus) {
+    if (this.props.onFocus) {
       this.props.onFocus(e);
     }
 

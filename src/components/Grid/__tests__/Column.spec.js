@@ -1,12 +1,13 @@
-jest.unmock('../Column');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import { Column } from '../Column';
+
+jest.unmock('../Column');
 
 describe('<Column />', () => {
   let mounted = null;
-  let child = <div className="foo"></div>;
+  const child = <div className="foo" />;
 
   const context = { cssPrefix: 'slds-' };
   const childContextTypes = { cssPrefix: React.PropTypes.string };

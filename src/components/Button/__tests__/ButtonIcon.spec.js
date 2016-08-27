@@ -1,16 +1,17 @@
-jest.unmock('../ButtonIcon');
-
 import React from 'react';
 import { mount } from 'enzyme';
+
 import ButtonIcon from '../ButtonIcon';
 
-const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
-const options = { context, childContextTypes };
+jest.unmock('../ButtonIcon');
 
 describe('<ButtonIcon />', () => {
   let props = {};
   let mounted = null;
+
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
 
   beforeEach(() => {
     props = {

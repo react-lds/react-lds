@@ -1,16 +1,16 @@
 import React from 'react';
 
-import CodeExample from '../../components/CodeExample';
-import PropTypeDescription from '../../components/PropTypeDescription';
-import Masthead from '../../components/MastHead';
-import HeaderIcon from '../../components/HeaderIcon';
-
-import ExampleDefault from './ExampleDefault';
+import cardCode from '!raw!react-lds/components/Card/Card';
 import exampleDefaultCode from '!raw!./ExampleDefault';
-import ExampleTable from './ExampleTable';
 import exampleTableCode from '!raw!./ExampleTable';
 
-import cardCode from '!raw!react-lds/components/Card/Card';
+import CodeExample from '../../components/CodeExample';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
+
+import ExampleDefault from './ExampleDefault';
+import ExampleTable from './ExampleTable';
 
 const Cards = () =>
   <div>

@@ -1,8 +1,9 @@
-jest.unmock('../Input');
-
 import React from 'react';
 import { mount } from 'enzyme';
+
 import Input from '../Input';
+
+jest.unmock('../Input');
 
 describe('<Input />', () => {
   let props = {};

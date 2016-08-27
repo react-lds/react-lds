@@ -1,8 +1,9 @@
-jest.unmock('../Backdrop');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import { Backdrop } from '../Backdrop';
+
+jest.unmock('../Backdrop');
 
 describe('<Backdrop />', () => {
   const context = { cssPrefix: 'slds-' };

@@ -2,19 +2,19 @@ import React from 'react';
 
 import { Grid, Column } from 'react-lds';
 
-import Masthead from '../../components/MastHead';
-import HeaderIcon from '../../components/HeaderIcon';
 import { PageNavigation, PageNavigationElement, PageNavigationMenu } from '../../components/PageNavigation';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
 
 const Forms = ({ children }) =>
   <div>
     <Masthead figure={<HeaderIcon />} title="Forms" />
     <Grid>
-      <Column size-of="1-1" large-size-of="5-6">
+      <Column sizeOf="1-1" large-sizeOf="5-6">
         {children}
       </Column>
 
-      <Column size-of="1-1" large-size-of="1-6">
+      <Column sizeOf="1-1" large-sizeOf="1-6">
         <PageNavigation>
           <PageNavigationMenu title="Input" to="/forms/input">
             <PageNavigationElement to="/forms/input/default">Default</PageNavigationElement>

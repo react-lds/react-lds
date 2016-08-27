@@ -1,8 +1,9 @@
-jest.unmock('../Picklist');
-
 import React from 'react';
-import { Picklist } from '../Picklist';
 import { mount } from 'enzyme';
+
+import { Picklist } from '../Picklist';
+
+jest.unmock('../Picklist');
 
 describe('</Picklist />', () => {
   let mounted = null;

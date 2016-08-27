@@ -12,7 +12,7 @@ class Page extends React.Component {
   render() {
     return (
       <div>
-        <header className="site-banner" role="banner"></header>
+        <header className="site-banner" role="banner" />
         <main className="site-main" role="main">{this.props.children}</main>
         <Navigation />
       </div>

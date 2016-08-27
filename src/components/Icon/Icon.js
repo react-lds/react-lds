@@ -1,7 +1,8 @@
 import React from 'react';
 import IconSVG from './IconSVG';
 import { prefixClasses } from '../../utils';
-import { iconClass } from './util';
+
+const iconClass = (sprite, icon) => icon.replace(/_/g, '-');
 
 const Icon = (props, { cssPrefix }) => {
   const { background, circle, className, div, icon, size, sprite, title, ...rest } = props;

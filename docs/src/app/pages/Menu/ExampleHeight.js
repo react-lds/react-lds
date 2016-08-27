@@ -10,8 +10,14 @@ const ExampleNubbin = () => {
   const iconAccount = { sprite: 'standard', icon: 'account', background: 'standard-account', alwaysDisplay: true };
   const iconApproval = { sprite: 'standard', icon: 'approval', background: 'standard-approval', alwaysDisplay: true };
   const iconLead = { sprite: 'standard', icon: 'lead', background: 'standard-lead', alwaysDisplay: true };
-  const iconOpportunity = { sprite: 'standard', icon: 'opportunity', background: 'standard-opportunity',
-    alwaysDisplay: true };
+
+  const iconOpportunity = {
+    sprite: 'standard',
+    icon: 'opportunity',
+    background: 'standard-opportunity',
+    alwaysDisplay: true,
+  };
+
   const iconProduct = { sprite: 'standard', icon: 'product', background: 'standard-product', alwaysDisplay: true };
 
   return (

@@ -1,7 +1,9 @@
 import React from 'react';
 import { PromptForTouch, Button, Icon } from 'react-lds';
 
-const icon = (<Icon sldsClasses={['m-bottom--x-small', 'p-around--x-small']} sprite="action" icon="share_thanks" />);
+const icon = (
+  <Icon className="slds-m-bottom--x-small slds-p-around--x-small" sprite="action" icon="share_thanks" />
+);
 
 const ExamplePromptTouchIcon = () => (
   <PromptForTouch

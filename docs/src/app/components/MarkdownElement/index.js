@@ -1,7 +1,8 @@
-require('./mui-github-markdown.css');
-
 import React, { Component, PropTypes } from 'react';
 import marked from 'marked';
+import hljs from 'highlight.js';
+
+require('./mui-github-markdown.css');
 
 const styles = {
   root: {
@@ -21,7 +22,7 @@ class MarkdownElement extends Component {
       sanitize: false,
       smartLists: true,
       smartypants: false,
-      highlight: (code, lang) => require('highlight.js').highlight(lang, code).value,
+      highlight: (code, lang) => hljs.highlight(lang, code).value,
     });
   }
 

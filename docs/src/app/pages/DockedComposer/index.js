@@ -1,10 +1,9 @@
 import React from 'react';
 import { Grid, Column } from 'react-lds';
 
-import Masthead from '../../components/MastHead';
-import HeaderIcon from '../../components/HeaderIcon';
 import { PageNavigation, PageNavigationElement, PageNavigationMenu } from '../../components/PageNavigation';
-
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
 
 const DockedComposer = ({ children }) =>
   <div>

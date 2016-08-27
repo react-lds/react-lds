@@ -1,13 +1,14 @@
 import React from 'react';
 
+import breadcrumbCode from '!raw!react-lds/components/Breadcrumb/Breadcrumb';
+import exampleNormalCode from '!raw!./ExampleNormal';
+
 import CodeExample from '../../components/CodeExample';
-import PropTypeDescription from '../../components/PropTypeDescription';
-import Masthead from '../../components/MastHead';
 import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
 
 import ExampleNormal from './ExampleNormal';
-import exampleNormalCode from '!raw!./ExampleNormal';
-import breadcrumbCode from '!raw!react-lds/components/Breadcrumb/Breadcrumb';
 
 const Breadcrumb = () =>
   <div>

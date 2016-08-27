@@ -1,15 +1,16 @@
 import React from 'react';
 
+import mediaObjectCode from '!raw!react-lds/components/MediaObject/MediaObject';
+import mediaObjectExampleNormalCode from '!raw!./ExampleNormal';
+import mediaObjectExampleResponsiveCode from '!raw!./ExampleResponsive';
+
 import CodeExample from '../../components/CodeExample';
-import PropTypeDescription from '../../components/PropTypeDescription';
-import Masthead from '../../components/MastHead';
 import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
 
 import MediaObjectExampleNormal from './ExampleNormal';
-import mediaObjectExampleNormalCode from '!raw!./ExampleNormal';
 import MediaObjectExampleResponsive from './ExampleResponsive';
-import mediaObjectExampleResponsiveCode from '!raw!./ExampleResponsive';
-import mediaObjectCode from '!raw!react-lds/components/MediaObject/MediaObject';
 
 const descriptions = {
   normal: '`MediaObject` with a `MediaObjectBody` and `MediaObejctFigure` sub-component',

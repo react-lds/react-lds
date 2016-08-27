@@ -1,14 +1,15 @@
-jest.unmock('../Notification');
-
 import React from 'react';
-import Notification from '../Notification';
 import { mount } from 'enzyme';
+
+import { default as Notification } from '../Notification';
+
+jest.unmock('../Notification');
 
 describe('<Notification />', () => {
   let mounted = null;
   let props = {};
 
-  const child = (<p>Foobar</p>);
+  const child = <p>Foobar</p>;
 
   const context = { assetBasePath: '/', cssPrefix: 'slds-' };
   const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };

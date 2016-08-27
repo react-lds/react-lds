@@ -1,8 +1,9 @@
-jest.unmock('../Cell');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import { Cell } from '../Cell';
+
+jest.unmock('../Cell');
 
 describe('<Cell />', () => {
   let mounted = null;

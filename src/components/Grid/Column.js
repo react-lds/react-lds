@@ -1,7 +1,7 @@
 import React from 'react';
+import omit from 'lodash.omit';
 import { flavorable, variationable } from '../../decorators';
 import { prefixClasses } from '../../utils';
-import omit from 'lodash.omit';
 
 const validBreakpoints = [
   'small',

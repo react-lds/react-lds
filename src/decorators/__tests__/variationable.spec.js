@@ -1,8 +1,9 @@
-jest.unmock('../variationable');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import variationable from '../variationable';
+
+jest.unmock('../variationable');
 
 describe('variationable()', () => {
   let mounted = null;

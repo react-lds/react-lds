@@ -3,7 +3,13 @@ import { Button, ButtonIcon } from '../../index';
 import { flavorable, themeable } from '../../decorators';
 import { prefixClasses } from '../../utils';
 
-const getThemeName = themeStr => themeStr.includes('theme--warning');
+const getThemeName = themeStr => {
+  if (typeof themeStr === 'string') {
+    return themeStr.includes('theme--warning');
+  }
+
+  return false;
+};
 
 export const Notification = (props, { cssPrefix }) => {
   const {
@@ -27,7 +33,7 @@ export const Notification = (props, { cssPrefix }) => {
           className={prefix('notify__close')}
           icon
         >
-          <ButtonIcon sprite="utility" icon="close" size={!!toast ? 'large' : undefined} />
+          <ButtonIcon sprite="utility" icon="close" size={toast ? 'large' : undefined} />
           <span className={prefix('assistive-text')}>Close</span>
         </Button>
         <span className={prefix('assistive-text')}>{title}</span>

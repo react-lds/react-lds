@@ -1,17 +1,18 @@
 import React from 'react';
 
+import buttonGroupCode from '!raw!react-lds/components/ButtonGroup/ButtonGroup';
+import exampleBaseCode from '!raw!./ExampleBase';
+import exampleIconCode from '!raw!./ExampleIcon';
+import exampleMoreButtonCode from '!raw!./ExampleMoreButton';
+
 import CodeExample from '../../components/CodeExample';
-import PropTypeDescription from '../../components/PropTypeDescription';
-import Masthead from '../../components/MastHead';
 import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
 
 import ExampleBase from './ExampleBase';
-import exampleBaseCode from '!raw!./ExampleBase';
-import ExampleMoreButton from './ExampleMoreButton';
-import exampleMoreButtonCode from '!raw!./ExampleMoreButton';
 import ExampleIcon from './ExampleIcon';
-import exampleIconCode from '!raw!./ExampleIcon';
-import buttonGroupCode from '!raw!react-lds/components/ButtonGroup/ButtonGroup';
+import ExampleMoreButton from './ExampleMoreButton';
 
 const ButtonGroups = () =>
   <div>

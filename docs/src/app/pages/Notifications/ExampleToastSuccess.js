@@ -7,9 +7,9 @@ const ExampleToastSuccess = () => (
       <Column className="slds-m-right--small" no-flex>
         <IconSVG sprite="utility" icon="notification" size="small" />
       </Column>
-      <Column className="slds-m-right--small" middle>
+      <Column className="slds-m-right--small">
         <h2 className="slds-text-heading--small">
-          Your new contact <a href="#">Sara Smith</a> was successfully created.
+          Your new contact <a href="#top">Sara Smith</a> was successfully created.
         </h2>
       </Column>
     </Grid>

@@ -1,8 +1,9 @@
-jest.unmock('../IconSVG');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import IconSVG from '../IconSVG';
+
+jest.unmock('../IconSVG');
 
 describe('<IconSVG />', () => {
   let mounted = null;

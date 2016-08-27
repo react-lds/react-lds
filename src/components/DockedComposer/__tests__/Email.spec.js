@@ -1,10 +1,10 @@
-jest.unmock('./../Email/index');
-
-jest.mock('./../Email/Rte', () => () => <p>Mocked out RTE</p>);
-
 import React from 'react';
 import { mount } from 'enzyme';
+
 import Email from './../Email/index';
+
+jest.unmock('./../Email/index');
+jest.mock('./../Email/Rte', () => () => <p>Mocked out RTE</p>);
 
 describe('<Email />', () => {
   let props = {};

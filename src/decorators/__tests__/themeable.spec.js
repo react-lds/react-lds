@@ -1,8 +1,9 @@
-jest.unmock('../themeable');
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import themeable from '../themeable';
+
+jest.unmock('../themeable');
 
 describe('sizeable', () => {
   let mounted = null;
