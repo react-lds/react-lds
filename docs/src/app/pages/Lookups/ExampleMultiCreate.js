@@ -71,6 +71,7 @@ const ExampleMulti = () => {
       multi
       onChange={onChange}
       placeholder="Search Accounts"
+      allowCreate
     />
   );
 };

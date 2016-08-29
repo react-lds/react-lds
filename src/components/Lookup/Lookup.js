@@ -1,6 +1,6 @@
 import React from 'react';
 import enhanceWithClickOutside from 'react-click-outside';
-import throttle from 'lodash.throttle';
+import { debounce } from 'lodash';
 
 import {
   FormElement,
@@ -27,7 +27,8 @@ export class Lookup extends React.Component {
       selected: this.props.initialSelection,
     };
 
-    this.handleLoad = throttle(this.handleLoad, 200);
+    this.handleLoad = debounce(this.handleLoad, 500);
+    this.handleCreateElement = this.handleCreateElement.bind(this);
   }
 
   componentDidMount() {
@@ -85,6 +86,24 @@ export class Lookup extends React.Component {
     }
   }
 
+  handleCreateElement(e) {
+    // if no result was found and enter was pressed, allow creation of new
+    // element
+    if (
+      this.props.allowCreate &&
+      this.props.multi &&
+      e.charCode === 13 &&
+      this.state.loaded.length === 0
+    ) {
+      const selected = this.state.selected;
+      selected.push({
+        id: Date.now(),
+        label: e.target.value,
+      });
+      this.setState({ selected, searchTerm: '', open: false });
+    }
+  }
+
   // List Toggles
   toggleList(state) {
     this.setState({ open: state });
@@ -117,11 +136,12 @@ export class Lookup extends React.Component {
         selected = [...selected, item];
       } else {
         selected = [item];
-        this.closeList();
       }
+
+      this.closeList();
     }
 
-    this.setState({ selected });
+    this.setState({ selected, searchTerm: '' });
   }
 
   removeSelection(item) {
@@ -158,6 +178,7 @@ export class Lookup extends React.Component {
             type="text"
             onChange={handleInputChange}
             onFocus={handleInputFocus}
+            onKeyPress={this.handleCreateElement}
             value={this.state.searchTerm}
             ref={(input) => { if (input && this.state.open) { input.focus(); } }}
           />
@@ -175,6 +196,7 @@ export class Lookup extends React.Component {
           id={this.props.id}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
+          onKeyPress={this.handleCreateElement}
           placeholder={this.props.placeholder}
           role="combobox"
           isFocused={this.state.open}
@@ -196,7 +218,8 @@ export class Lookup extends React.Component {
         e.stopPropagation();
         return this.removeSelection.bind(this, item)();
       };
-      const icon = (<Icon sprite={this.getSprite(item.objectType)} icon={item.objectType} />);
+      const icon =
+        item.objectType ? (<Icon sprite={this.getSprite(item.objectType)} icon={item.objectType} />) : undefined;
       return (
         <Pill
           key={i}
@@ -391,6 +414,13 @@ Lookup.propTypes = {
    * placeholder for the input field in lookup
    */
   placeholder: React.PropTypes.string,
+  /**
+   * if set to true, allows the creation of new elements that were not found
+   * during lookups. For example new email addresses.
+   * The new entry will not have an object type and the ID will be the current
+   * timestamp.
+   */
+  allowCreate: React.PropTypes.bool,
 };
 
 export default prefixable(enhanceWithClickOutside(Lookup));

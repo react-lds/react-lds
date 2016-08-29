@@ -180,6 +180,7 @@ export class Email extends React.Component {
               inputLabel="Cc"
               load={this.props.loadRecipients}
               onChange={this.onChangeRecipients('cc')}
+              allowCreate
             />
           </Grid>
           <Grid className={this.props.prefix([{ hide: this.state.hideBcc }, 'shrink-none'])}>
@@ -194,6 +195,7 @@ export class Email extends React.Component {
               inputLabel="Bcc"
               load={this.props.loadRecipients}
               onChange={this.onChangeRecipients('bcc')}
+              allowCreate
             />
           </Grid>
           {this.renderAdditionalLookup()}

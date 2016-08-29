@@ -21,6 +21,7 @@ const InputEl = (props) => {
     iconRightOnClick,
     id,
     onChange,
+    onKeyPress,
     onFocus,
     placeholder,
     prefix,
@@ -87,6 +88,7 @@ const InputEl = (props) => {
         disabled={disabled}
         id={id}
         onChange={onChange}
+        onKeyPress={onKeyPress}
         onFocus={onFocus}
         placeholder={placeholder}
         required={required}
@@ -139,6 +141,10 @@ const propTypes = {
    * input onChange handler
    */
   onChange: React.PropTypes.func,
+  /**
+   * onKeyPress handler
+   */
+  onKeyPress: React.PropTypes.func,
   /**
    * input onFocus handler
    */
