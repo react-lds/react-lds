@@ -9,6 +9,8 @@ import ExampleDefault from './ExampleDefault';
 import exampleDefaultCode from '!raw!./ExampleDefault';
 import ExampleMulti from './ExampleMulti';
 import exampleMultiCode from '!raw!./ExampleMulti';
+import ExampleMultiCreate from './ExampleMultiCreate';
+import exampleMultiCreateCode from '!raw!./ExampleMultiCreate';
 
 import lookupCode from '!raw!react-lds/components/Lookup/Lookup';
 
@@ -28,6 +30,14 @@ const LookupPage = () => (
         code={exampleMultiCode}
       />
       <ExampleMulti />
+    </div>
+
+    <div className="slds-p-around--xx-large">
+      <CodeExample
+        title="Multi Lookup with create on Enter"
+        code={exampleMultiCreateCode}
+      />
+      <ExampleMultiCreate />
     </div>
 
     <PropTypeDescription code={lookupCode} />
