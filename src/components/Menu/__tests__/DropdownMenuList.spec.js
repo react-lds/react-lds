@@ -40,4 +40,10 @@ describe('<DropdownMenuList />', () => {
     mounted.setProps({ heightIcon: 5 });
     expect(mounted.find('ul').hasClass('slds-dropdown--length-with-icon-5')).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('div').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('div').prop('data-test')).toEqual('bar');
+  });
 });

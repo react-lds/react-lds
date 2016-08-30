@@ -13,7 +13,6 @@ const validBreakpoints = [
 ];
 
 const breakPointProp = breakpoint => `${breakpoint}-sizeOf`;
-
 const sizeRegex = /^([1-9]|1[0-2])-([1-9]|1[0-2])$/;
 
 export const Column = (props, { cssPrefix }) => {
@@ -71,12 +70,7 @@ Column.variations = [
   'shrink-none',
 ];
 
-Column.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Column.contextTypes = { cssPrefix: React.PropTypes.string };
 
 const sizeOfPropType = (props, propName) => {
   const size = props[propName];

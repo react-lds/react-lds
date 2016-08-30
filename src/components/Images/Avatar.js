@@ -3,7 +3,7 @@ import React from 'react';
 import { prefixClasses } from '../../utils';
 import { flavorable } from '../../decorators';
 
-export const Avatar = (props, { assetBasePath, cssPrefix }) => {
+export const Avatar = (props, { cssPrefix }) => {
   const { alt, className, src, size, ...rest } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
@@ -15,7 +15,7 @@ export const Avatar = (props, { assetBasePath, cssPrefix }) => {
 
   return (
     <span {...rest} className={prefix(classes, className)}>
-      {src ? <img src={`${assetBasePath}/${src}`} alt={alt} /> : null}
+      {src ? <img src={src} alt={alt} /> : null}
     </span>
   );
 };
@@ -24,16 +24,7 @@ Avatar.flavors = [
   'circle',
 ];
 
-Avatar.contextTypes = {
-  /**
-   * the asset base path
-   */
-  assetBasePath: React.PropTypes.string,
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Avatar.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Avatar.propTypes = {
   /**

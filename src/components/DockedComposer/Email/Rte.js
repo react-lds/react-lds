@@ -1,8 +1,30 @@
 import React from 'react';
 import Quill from 'quill';
+import omit from 'lodash.omit';
 import { prefixClasses } from '../../../utils';
 
 class Rte extends React.Component {
+  static contextTypes = { cssPrefix: React.PropTypes.string };
+
+  static propTypes = {
+    /**
+     * class name
+     */
+    className: React.PropTypes.string,
+    /**
+     * initial HTML value
+     */
+    initialValue: React.PropTypes.string,
+    /**
+     * callback with new HTML value
+     */
+    onChange: React.PropTypes.func,
+    /**
+     * toolbar element used to construct quill editor
+     */
+    toolbar: React.PropTypes.any,
+  };
+
   constructor(props, context) {
     super(props, context);
 
@@ -39,9 +61,17 @@ class Rte extends React.Component {
   }
 
   render() {
+    const rest = omit(this.props, Object.keys(Rte.propTypes));
+    const sldsClasses = [
+      'docked-composer__input',
+      'input--bare text-longform',
+      'grow',
+    ];
+
     return (
       <div
-        className={this.prefix(['docked-composer__input', 'input--bare text-longform', 'grow'], this.props.className)}
+        {...rest}
+        className={this.prefix(sldsClasses, this.props.className)}
         ref={this.addEditorElem}
       >
         <div className="ql-editor" />
@@ -49,32 +79,5 @@ class Rte extends React.Component {
     );
   }
 }
-
-Rte.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
-
-
-Rte.propTypes = {
-  /**
-   * class name
-   */
-  className: React.PropTypes.string,
-  /**
-   * initial HTML value
-   */
-  initialValue: React.PropTypes.string,
-  /**
-   * callback with new HTML value
-   */
-  onChange: React.PropTypes.func,
-  /**
-   * toolbar element used to construct quill editor
-   */
-  toolbar: React.PropTypes.any,
-};
 
 export default Rte;

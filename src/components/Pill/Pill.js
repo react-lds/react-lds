@@ -54,12 +54,7 @@ Pill.flavors = [
   'bare',
 ];
 
-Pill.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Pill.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Pill.propTypes = {
   /**

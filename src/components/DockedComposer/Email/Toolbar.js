@@ -1,8 +1,6 @@
 import React from 'react';
 import { prefixClasses } from '../../../utils';
-import { Button, ButtonIcon } from '../../Button';
-import { ButtonGroup } from '../../ButtonGroup';
-import { Grid } from '../../Grid';
+import { Button, ButtonIcon, ButtonGroup, Grid } from '../../../';
 
 // At some point, the toolbar should be configurable and also support fonts and
 // font sizes.
@@ -11,10 +9,17 @@ const Toolbar = (props, { cssPrefix }) => {
   const { buttonGroupLeft, buttonGroupRight, className, ...rest } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
+  const sldsClasses = [
+    'docked-composer__toolbar',
+    'shrink-none',
+    'grid',
+    'grid--align-spread',
+  ];
+
   return (
     <div
       {...rest}
-      className={prefix(['docked-composer__toolbar', 'shrink-none', 'grid', 'grid--align-spread'], className)}
+      className={prefix(sldsClasses, className)}
     >
       <Grid>
         {buttonGroupLeft ? <ButtonGroup>{buttonGroupLeft}</ButtonGroup> : null}
@@ -51,12 +56,7 @@ const Toolbar = (props, { cssPrefix }) => {
   );
 };
 
-Toolbar.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Toolbar.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Toolbar.propTypes = {
   /**

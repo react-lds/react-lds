@@ -25,4 +25,10 @@ describe('<Table />', () => {
     mounted.setProps({ children: child });
     expect(mounted.find('table').contains(child)).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('table').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('table').prop('data-test')).toEqual('bar');
+  });
 });

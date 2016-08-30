@@ -20,6 +20,6 @@ const tabs = [
   },
 ];
 
-const ExampleDefault = () => <Tab tabs={tabs} />;
+const ExampleDefault = () => <Tab data-wut="wut" tabs={tabs} />;
 
 export default ExampleDefault;

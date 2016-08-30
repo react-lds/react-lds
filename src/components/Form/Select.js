@@ -55,12 +55,7 @@ const Select = (props, { cssPrefix }) => {
   );
 };
 
-Select.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Select.contextTypes = { cssPrefix: React.PropTypes.string };
 
 
 Select.propTypes = {

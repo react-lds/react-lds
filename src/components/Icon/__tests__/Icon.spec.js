@@ -54,4 +54,10 @@ describe('<Icon />', () => {
     mounted.setProps({ background: 'custom-custom90' });
     expect(mounted.find('.slds-icon_container').hasClass('slds-icon-custom-custom90')).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-icon_container').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-icon_container').prop('data-test')).toEqual('bar');
+  });
 });

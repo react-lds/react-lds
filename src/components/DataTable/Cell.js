@@ -139,12 +139,7 @@ Cell.defaultProps = {
   sortDirection: 'asc',
 };
 
-Cell.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Cell.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Cell.propTypes = {
   /**

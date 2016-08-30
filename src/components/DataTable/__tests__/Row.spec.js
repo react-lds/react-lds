@@ -32,4 +32,10 @@ describe('<Row />', () => {
     mounted.setProps({ head: true });
     expect(mounted.find('tr').hasClass('slds-text-heading--label')).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('tr').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('tr').prop('data-test')).toEqual('bar');
+  });
 });

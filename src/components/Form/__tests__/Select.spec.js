@@ -61,4 +61,10 @@ describe('<Select />', () => {
     expect(mounted.find('div.slds-select_container').length).toBe(0);
     expect(mounted.find('select').props().multiple).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('select').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('select').prop('data-test')).toEqual('bar');
+  });
 });

@@ -59,4 +59,10 @@ describe('<ModalHeader />', () => {
     mounted.setProps({ uncloseable: true });
     expect(mounted.find('.slds-modal__close').length).toBe(0);
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-modal__header').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-modal__header').prop('data-test')).toEqual('bar');
+  });
 });

@@ -52,4 +52,10 @@ describe('<RecordHome />', () => {
     expect(detailItems.at(1).find('p.slds-text-heading--label-normal').text()).toEqual('detail2');
     expect(detailItems.at(1).find('p.slds-text-body--regular').text()).toEqual('detailcontent2');
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-page-header').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-page-header').prop('data-test')).toEqual('bar');
+  });
 });

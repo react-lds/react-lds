@@ -3,25 +3,20 @@ import { themeable } from '../../decorators';
 import { prefixClasses } from '../../utils';
 
 export const Box = (props, { cssPrefix }) => {
-  const { className, ...rest } = props;
+  const { children, className, size, ...rest } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const classes = [
+  const sldsClasses = [
     'box',
-    { [`box--${props.size}`]: !!props.size },
+    { [`box--${size}`]: !!size },
   ];
 
   return (
-    <div {...rest} className={prefix(classes, className)}>{props.children}</div>
+    <div {...rest} className={prefix(sldsClasses, className)}>{children}</div>
   );
 };
 
-Box.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Box.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Box.propTypes = {
   /**

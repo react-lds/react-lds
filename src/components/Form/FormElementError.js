@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { prefixClasses } from '../../utils';
 
@@ -19,12 +18,7 @@ const FormElementError = (props, { cssPrefix }) => {
   return renderError();
 };
 
-FormElementError.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+FormElementError.contextTypes = { cssPrefix: React.PropTypes.string };
 
 FormElementError.propTypes = {
   /**

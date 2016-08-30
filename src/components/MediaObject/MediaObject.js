@@ -2,10 +2,6 @@ import React from 'react';
 import { prefixClasses } from '../../utils';
 import { flavorable } from '../../decorators';
 
-/**
- * Renders a figure with an optional className
- */
-
 export const MediaObject = (props, { cssPrefix }) => {
   const { children, className, figureLeft, figureRight, ...rest } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
@@ -37,12 +33,7 @@ MediaObject.flavors = [
   'responsive',
 ];
 
-MediaObject.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+MediaObject.contextTypes = { cssPrefix: React.PropTypes.string };
 
 MediaObject.propTypes = {
   /**

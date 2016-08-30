@@ -13,12 +13,7 @@ Backdrop.flavors = [
   'open',
 ];
 
-Backdrop.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Backdrop.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Backdrop.propTypes = {
   /**

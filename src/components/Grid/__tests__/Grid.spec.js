@@ -1,20 +1,30 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
-import { default as Grid } from '../Grid';
+import { Grid } from '../Grid';
 
 jest.unmock('../Grid');
 
 describe('<Grid />', () => {
+  let mounted = null;
+  const child = <div className="foo" />;
+
   const context = { cssPrefix: 'slds-' };
   const childContextTypes = { cssPrefix: React.PropTypes.string };
   const options = { context, childContextTypes };
 
-  it('renders children', () => {
-    const child = <div className="foo" />;
-    const mounted = mount(<Grid>{child}</Grid>, options);
+  beforeEach(() => {
+    mounted = shallow(<Grid>{child}</Grid>, options);
+  });
 
+  it('renders children', () => {
     expect(mounted.find('.slds-grid').length).toBe(1);
     expect(mounted.contains(child)).toBeTruthy();
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-grid').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-grid').prop('data-test')).toEqual('bar');
   });
 });

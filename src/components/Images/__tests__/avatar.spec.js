@@ -33,7 +33,7 @@ describe('<Avatar />', () => {
   });
 
   it('renders a src', () => {
-    expect(mounted.find('img').first().props().src).toBe(`${context.assetBasePath}/${props.src}`);
+    expect(mounted.find('img').first().props().src).toBe(props.src);
   });
 
   it('renders an alt', () => {
@@ -44,5 +44,11 @@ describe('<Avatar />', () => {
     mounted.setProps({ src: undefined, alt: undefined });
     expect(mounted.find('img').length).toBe(0);
     expect(mounted.find('.slds-avatar').hasClass('slds-avatar--empty')).toBeTruthy();
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-avatar').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-avatar').prop('data-test')).toEqual('bar');
   });
 });

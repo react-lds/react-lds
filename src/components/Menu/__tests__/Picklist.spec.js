@@ -22,11 +22,11 @@ describe('</Picklist />', () => {
       items: [{
         key: '1',
         label: 'first',
-        isSelected: false,
+        selected: false,
       }, {
         key: '2',
         label: 'second',
-        isSelected: true,
+        selected: true,
       }],
       callback,
     };
@@ -52,5 +52,11 @@ describe('</Picklist />', () => {
     const first = mounted.find('li').first();
     first.simulate('click');
     expect(callback.mock.calls[0][0]).toEqual('1');
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-dropdown').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-dropdown').prop('data-test')).toEqual('bar');
   });
 });

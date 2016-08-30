@@ -40,4 +40,10 @@ describe('<FormElementLabel />', () => {
     expect(mounted.find('.slds-form-element__label label').length).toBe(0);
     expect(mounted.find('.slds-form-element__label span').length).toBe(1);
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-form-element__label').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-form-element__label').prop('data-test')).toEqual('bar');
+  });
 });

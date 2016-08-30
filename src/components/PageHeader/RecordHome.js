@@ -41,12 +41,7 @@ const RecordHome = (props, { cssPrefix }) => {
   );
 };
 
-RecordHome.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+RecordHome.contextTypes = { cssPrefix: React.PropTypes.string };
 
 RecordHome.propTypes = {
   /**

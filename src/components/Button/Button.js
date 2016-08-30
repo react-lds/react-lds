@@ -1,6 +1,6 @@
 import React from 'react';
 import { prefixClasses } from '../../utils';
-import { flavorable, variationable } from '../../decorators';
+import { flavorable } from '../../decorators';
 
 export const Button = (props, { cssPrefix }) => {
   const {
@@ -8,14 +8,14 @@ export const Button = (props, { cssPrefix }) => {
     className,
     disabled,
     onClick,
+    title,
     selected,
     value,
-    title,
     ...rest,
   } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const classes = [
+  const sldsClasses = [
     'button',
     { 'is-selected': !!selected },
   ];
@@ -23,7 +23,7 @@ export const Button = (props, { cssPrefix }) => {
   return (
     <button
       {...rest}
-      className={prefix(classes, className)}
+      className={prefix(sldsClasses, className)}
       onClick={onClick}
       disabled={disabled}
       value={value}
@@ -35,12 +35,19 @@ export const Button = (props, { cssPrefix }) => {
   );
 };
 
-Button.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Button.flavors = [
+  'neutral',
+  'brand',
+  'destructive',
+  'icon',
+  'icon-border-filled',
+  'icon-container',
+  'icon-inverse',
+  'icon-border',
+  'icon-bare',
+];
+
+Button.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Button.propTypes = {
   /**
@@ -56,15 +63,11 @@ Button.propTypes = {
    */
   disabled: React.PropTypes.bool,
   /**
-   * button icons
-   */
-  icon: React.PropTypes.bool,
-  /**
    * onClick handler to trigger an action
    */
   onClick: React.PropTypes.func,
   /**
-   * adds the is-selected class
+   * renders as selected
    */
   selected: React.PropTypes.bool,
   /**
@@ -77,22 +80,4 @@ Button.propTypes = {
   value: React.PropTypes.string,
 };
 
-Button.flavors = [
-  'neutral',
-  'brand',
-  'destructive',
-  'icon',
-  'icon-border-filled',
-  'icon-container',
-  'icon-inverse',
-  'icon-border',
-  'icon-bare',
-];
-
-Button.variations = [
-  'is-selected',
-];
-
-export default variationable(
-  flavorable(Button, 'button')
-);
+export default flavorable(Button, 'button');

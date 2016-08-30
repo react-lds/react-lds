@@ -6,7 +6,7 @@ const ExampleDefault = () =>
   <Card
     icon="contact"
     sprite="standard"
-    header="Base Card"
+    title="Base Card"
     headerRight={<Button title="New" neutral />}
     body="Body would be here"
     footer="Footer"

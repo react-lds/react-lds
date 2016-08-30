@@ -31,13 +31,7 @@ Grid.variations = [
   { nowrap: ['small', 'medium', 'large'] },
 ];
 
-Grid.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
-
+Grid.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Grid.propTypes = {
   /**

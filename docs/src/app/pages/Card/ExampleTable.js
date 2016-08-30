@@ -44,7 +44,7 @@ const ExampleTable = () =>
   <Card
     icon="contact"
     sprite="standard"
-    header="Contacts (2)"
+    title="Contacts (2)"
     headerRight={<Button title="New" neutral />}
     body={table}
     footer={<a>View all</a>}

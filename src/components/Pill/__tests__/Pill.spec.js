@@ -54,4 +54,10 @@ describe('<Pill />', () => {
     mounted.setProps({ icon });
     expect(mounted.find('.slds-pill__icon_container').length).toBe(1);
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-pill').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-pill').prop('data-test')).toEqual('bar');
+  });
 });

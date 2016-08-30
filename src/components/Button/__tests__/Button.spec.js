@@ -39,14 +39,14 @@ describe('<Button />', () => {
     expect(mounted.prop('value')).toEqual('Value');
   });
 
-  it('renders as selected', () => {
-    mounted.setProps({ selected: true });
-    expect(mounted.hasClass('slds-is-selected')).toBeTruthy();
-  });
-
   it('renders as disabled', () => {
     mounted.setProps({ disabled: true });
     expect(mounted.prop('disabled')).toBeTruthy();
+  });
+
+  it('renders as selected', () => {
+    mounted.setProps({ selected: true });
+    expect(mounted.find('.slds-button').hasClass('slds-is-selected')).toBeTruthy();
   });
 
   it('attaches an onClick handler', () => {
@@ -54,5 +54,11 @@ describe('<Button />', () => {
     mounted.setProps({ onClick: fn });
     mounted.simulate('click');
     expect(fn).toBeCalled();
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-button').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-button').prop('data-test')).toEqual('bar');
   });
 });

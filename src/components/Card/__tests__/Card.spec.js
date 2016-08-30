@@ -17,7 +17,7 @@ describe('<Card />', () => {
     props = {
       icon: 'contact',
       sprite: 'standard',
-      header: 'Base Card',
+      title: 'Base Card',
       headerRight: 'Right Header',
       body: 'Body',
       footer: 'footer',
@@ -32,7 +32,7 @@ describe('<Card />', () => {
   });
 
   it('renders the header', () => {
-    expect(mounted.find('span.slds-text-heading--small').first().text()).toEqual(props.header);
+    expect(mounted.find('span.slds-text-heading--small').first().text()).toEqual(props.title);
   });
 
   it('renders headerRight', () => {
@@ -45,5 +45,11 @@ describe('<Card />', () => {
 
   it('renders footer', () => {
     expect(mounted.find('div.slds-card__footer').first().text()).toEqual(props.footer);
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-card').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-card').prop('data-test')).toEqual('bar');
   });
 });

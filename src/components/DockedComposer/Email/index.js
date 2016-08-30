@@ -1,16 +1,106 @@
 import React from 'react';
+import omit from 'lodash.omit';
 
 import { prefixClasses } from '../../../utils';
-import { MediaObject } from './../../MediaObject';
-import { Icon } from './../../Icon';
-import { Button, ButtonIcon } from './../../Button';
-import { Lookup } from './../../Lookup';
-import { Grid } from './../../Grid';
+import { Button, ButtonIcon, Grid, Icon, Lookup, MediaObject } from '../../../';
 
 import Toolbar from './Toolbar';
 import Rte from './Rte';
 
 class Email extends React.Component {
+  static contextTypes = { cssPrefix: React.PropTypes.string };
+
+  static defaultProps = {
+    header: 'New Email',
+    sendLabel: 'Send',
+    subjectPlaceholder: 'Enter subject',
+  };
+
+  static propTypes = {
+    /**
+     * additional lookup component that will be displayed below recipient lookups
+     */
+    additionalLookup: React.PropTypes.node,
+    /**
+     * class name
+     */
+    className: React.PropTypes.string,
+    /**
+     * additional buttons before the Send button in the footer,
+     * will always be taken from utility sprite
+     */
+    footerButtons: React.PropTypes.arrayOf(
+      React.PropTypes.shape({
+        icon: React.PropTypes.string,
+        key: React.PropTypes.string,
+        onClick: React.PropTypes.func,
+      })
+    ),
+    /*
+     * header title
+     */
+    header: React.PropTypes.string,
+    /**
+     * html id
+     */
+    id: React.PropTypes.string.isRequired,
+    /**
+     * load function to search for contacts
+     */
+    loadRecipients: React.PropTypes.func.isRequired,
+    /**
+     * Help text displayed in lookup directive
+     */
+    loadRecipientsLabel: React.PropTypes.string,
+    /**
+     * callback, called whenever something changes, which can be:
+     *   - to
+     *   - cc
+     *   - bcc
+     *   - subject
+     *   - content
+     *   - attachments
+     * those are keys in the callback object
+     */
+    onChange: React.PropTypes.func,
+    /**
+     * onClick handler for the send button
+     */
+    onSend: React.PropTypes.func,
+    /**
+     * label for send button
+     */
+    sendLabel: React.PropTypes.string,
+    /**
+     * placeholder for subject input element
+     */
+    subjectPlaceholder: React.PropTypes.string,
+    /**
+     * Optional Toolbar ButtonGroup content on the left side
+     */
+    toolbarButtonGroupLeft: React.PropTypes.node,
+    /**
+     * Optional Toolbar ButtonGroup content on the right side
+     */
+    toolbarButtonGroupRight: React.PropTypes.node,
+    /**
+     * value. Attachment icons will be taken from doctype icons
+     */
+    value: React.PropTypes.shape({
+      initialContent: React.PropTypes.string,
+      to: React.PropTypes.array,
+      cc: React.PropTypes.array,
+      bcc: React.PropTypes.array,
+      subject: React.PropTypes.string,
+      attachments: React.PropTypes.arrayOf(
+        React.PropTypes.shape({
+          icon: React.PropTypes.string,
+          name: React.PropTypes.string,
+        })
+      ),
+    }),
+  };
+
   constructor(props, context) {
     super(props, context);
 
@@ -127,12 +217,22 @@ class Email extends React.Component {
 
   render() {
     const emailIcon = <Icon sprite="standard" icon="email" size="small" />;
+    const rest = omit(this.props, Object.keys(Email.propTypes));
+
+    const sldsClasses = [
+      'docked-composer',
+      'grid',
+      'grid--vertical',
+      'nowrap',
+      'is-open',
+    ];
 
     return (
       <div
+        {...rest}
+        className={this.prefix(sldsClasses, this.props.className)}
         role="dialog"
         aria-labelledby="dialog-heading-id"
-        className={this.prefix(['docked-composer', 'grid', 'grid--vertical', 'nowrap', 'is-open'])}
       >
         <header className={this.prefix(['docked-composer__header', 'grid', 'grid--align-spread', 'shrink-none'])}>
           <MediaObject center figureLeft={emailIcon}>{this.props.header}</MediaObject>
@@ -244,99 +344,5 @@ class Email extends React.Component {
     );
   }
 }
-
-Email.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
-
-Email.defaultProps = {
-  header: 'New Email',
-  sendLabel: 'Send',
-  subjectPlaceholder: 'Enter subject',
-};
-
-Email.propTypes = {
-  /**
-   * additional lookup component that will be displayed below recipient lookups
-   */
-  additionalLookup: React.PropTypes.node,
-  /**
-   * additional buttons before the Send button in the footer,
-   * will always be taken from utility sprite
-   */
-  footerButtons: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      icon: React.PropTypes.string,
-      key: React.PropTypes.string,
-      onClick: React.PropTypes.func,
-    })
-  ),
-  /*
-   * header title
-   */
-  header: React.PropTypes.string,
-  /**
-   * html id
-   */
-  id: React.PropTypes.string.isRequired,
-  /**
-   * load function to search for contacts
-   */
-  loadRecipients: React.PropTypes.func.isRequired,
-  /**
-   * Help text displayed in lookup directive
-   */
-  loadRecipientsLabel: React.PropTypes.string,
-  /**
-   * callback, called whenever something changes, which can be:
-   *   - to
-   *   - cc
-   *   - bcc
-   *   - subject
-   *   - content
-   *   - attachments
-   * those are keys in the callback object
-   */
-  onChange: React.PropTypes.func,
-  /**
-   * onClick handler for the send button
-   */
-  onSend: React.PropTypes.func,
-  /**
-   * label for send button
-   */
-  sendLabel: React.PropTypes.string,
-  /**
-   * placeholder for subject input element
-   */
-  subjectPlaceholder: React.PropTypes.string,
-  /**
-   * Optional Toolbar ButtonGroup content on the left side
-   */
-  toolbarButtonGroupLeft: React.PropTypes.node,
-  /**
-   * Optional Toolbar ButtonGroup content on the right side
-   */
-  toolbarButtonGroupRight: React.PropTypes.node,
-  /**
-   * value. Attachment icons will be taken from doctype icons
-   */
-  value: React.PropTypes.shape({
-    initialContent: React.PropTypes.string,
-    to: React.PropTypes.array,
-    cc: React.PropTypes.array,
-    bcc: React.PropTypes.array,
-    subject: React.PropTypes.string,
-    attachments: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        icon: React.PropTypes.string,
-        name: React.PropTypes.string,
-      })
-    ),
-  }),
-};
 
 export default Email;

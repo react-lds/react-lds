@@ -74,4 +74,10 @@ describe('<Tab />', () => {
     expect(aItem.hasClass('slds-tabs--scoped__link')).toBeTruthy();
     expect(divItem.hasClass('slds-tabs--scoped__content')).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-tabs--default').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-tabs--default').prop('data-test')).toEqual('bar');
+  });
 });

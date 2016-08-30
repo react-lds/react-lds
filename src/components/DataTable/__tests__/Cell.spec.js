@@ -59,4 +59,10 @@ describe('<Cell />', () => {
     mounted.setProps({ children: child });
     expect(mounted.find('td').prop('title')).toEqual('text');
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('td').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('td').prop('data-test')).toEqual('bar');
+  });
 });

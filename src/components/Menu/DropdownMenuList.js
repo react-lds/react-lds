@@ -33,12 +33,7 @@ const DropdownMenuList = (props, { cssPrefix }) => {
   );
 };
 
-DropdownMenuList.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+DropdownMenuList.contextTypes = { cssPrefix: React.PropTypes.string };
 
 DropdownMenuList.propTypes = {
   /**

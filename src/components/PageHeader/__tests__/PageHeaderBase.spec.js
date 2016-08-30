@@ -30,4 +30,10 @@ describe('<PageHeaderBase />', () => {
   it('renders the icon', () => {
     expect(mounted.find('svg').length).toEqual(1);
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-page-header').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-page-header').prop('data-test')).toEqual('bar');
+  });
 });

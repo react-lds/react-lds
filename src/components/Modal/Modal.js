@@ -11,6 +11,7 @@ export const Modal = (props, { cssPrefix }) => {
     label,
     open,
     prompt,
+    ...rest,
   } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
@@ -21,6 +22,7 @@ export const Modal = (props, { cssPrefix }) => {
 
   const sldsClasses = [
     'modal',
+    { 'modal--prompt': !!prompt },
     { 'fade-in-open': isOpen },
   ];
 
@@ -41,6 +43,7 @@ export const Modal = (props, { cssPrefix }) => {
 
   return (
     <div
+      {...rest}
       className={prefix(sldsClasses, className)}
       role={role}
       aria-describedby={description}
@@ -63,12 +66,7 @@ Modal.flavors = [
   'large',
 ];
 
-Modal.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Modal.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Modal.propTypes = {
   /**

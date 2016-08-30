@@ -147,5 +147,11 @@ describe('<Email />', () => {
       const elem = footerButtons.last();
       expect(elem.text()).toEqual(props.sendLabel);
     });
+
+    it('applies className and rest-properties', () => {
+      mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+      expect(mounted.find('.slds-docked-composer').hasClass('foo')).toBeTruthy();
+      expect(mounted.find('.slds-docked-composer').prop('data-test')).toEqual('bar');
+    });
   });
 });

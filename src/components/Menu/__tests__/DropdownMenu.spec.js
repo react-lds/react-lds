@@ -79,4 +79,10 @@ describe('<DropdownMenu />', () => {
     mounted.setProps({ position: 'bottom-right', nubbin: true });
     expect(mounted.find('div').last().hasClass('slds-nubbin--bottom-right')).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-dropdown').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-dropdown').prop('data-test')).toEqual('bar');
+  });
 });
