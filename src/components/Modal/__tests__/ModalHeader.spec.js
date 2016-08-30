@@ -17,6 +17,13 @@ describe('<ModalHeader>', () => {
     expect(wrapper.find('.button.modal__close').length).toBe(1);
   });
 
+  it('onClickClose triggers when close buttin was clicked', () => {
+    const closeCallback = jest.fn();
+    const wrapper = mount(<ModalHeader onClickClose={closeCallback} />, options);
+    wrapper.find('.button.modal__close').simulate('click');
+    expect(closeCallback).toBeCalled();
+  });
+
   it('should render title and tagline', () => {
     const wrapper = mount(<ModalHeader title="foo" tagline="bar" />, options);
     expect(wrapper.find('h2').first().text()).toBe('foo');

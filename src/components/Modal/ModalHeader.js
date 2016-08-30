@@ -5,7 +5,7 @@ import { prefixable } from '../../decorators';
 export class ModalHeader extends React.Component {
   getCloseButton() {
     return (
-      <Button sldsClasses={['modal__close']} variation="icon-inverse" size="large">
+      <Button onClick={this.props.onClickClose} sldsClasses={['modal__close']} variation="icon-inverse" size="large">
         <ButtonIcon sprite="action" icon="close" size="large" />
         <span className={this.props.prefix(['assistive-text'])}>Close</span>
       </Button>
@@ -79,6 +79,10 @@ ModalHeader.propTypes = {
    * hides the close-button (gets passed down from `Modal prompt`)
    */
   uncloseable: React.PropTypes.bool,
+  /**
+   * triggered when the user clicks the close button
+   */
+  onClickClose: React.PropTypes.func,
 };
 
 export default prefixable(ModalHeader);
