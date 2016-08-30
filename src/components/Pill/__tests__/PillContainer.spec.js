@@ -24,4 +24,10 @@ describe('<PillContainer />', () => {
   it('renders children', () => {
     expect(mounted.contains(child)).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-pill_container').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-pill_container').prop('data-test')).toEqual('bar');
+  });
 });

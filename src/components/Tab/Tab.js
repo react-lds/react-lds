@@ -1,7 +1,30 @@
 import React from 'react';
+import omit from 'lodash.omit';
 import { prefixClasses } from '../../utils';
 
 class Tab extends React.Component {
+  static contextTypes = { cssPrefix: React.PropTypes.string };
+  static defaultProps = { variation: 'default' }
+
+  static propTypes = {
+    /**
+     * class name
+     */
+    className: React.PropTypes.string,
+    /**
+     * array of tabs
+     */
+    tabs: React.PropTypes.arrayOf(React.PropTypes.shape({
+      title: React.PropTypes.string.isRequired,
+      id: React.PropTypes.string.isRequired,
+      content: React.PropTypes.node.isRequired,
+    })).isRequired,
+    /**
+     * scoped has a border around the tab
+     */
+    variation: React.PropTypes.oneOf(['default', 'scoped']),
+  };
+
   constructor(props, context) {
     super(props, context);
     this.state = { activeTab: this.props.tabs[0].id };
@@ -67,8 +90,10 @@ class Tab extends React.Component {
   }
 
   render() {
+    const rest = omit(this.props, Object.keys(Tab.propTypes));
+
     return (
-      <div className={this.prefix(`tabs--${this.props.variation}`, this.props.className)}>
+      <div {...rest} className={this.prefix(`tabs--${this.props.variation}`, this.props.className)}>
         <ul className={this.prefix(`tabs--${this.props.variation}__nav`)} role="tablist">
           {this.renderHeader()}
         </ul>
@@ -77,35 +102,5 @@ class Tab extends React.Component {
     );
   }
 }
-
-Tab.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
-
-Tab.propTypes = {
-  /**
-   * class name
-   */
-  className: React.PropTypes.string,
-  /**
-   * array of tabs
-   */
-  tabs: React.PropTypes.arrayOf(React.PropTypes.shape({
-    title: React.PropTypes.string.isRequired,
-    id: React.PropTypes.string.isRequired,
-    content: React.PropTypes.node.isRequired,
-  })).isRequired,
-  /**
-   * scoped has a border around the tab
-   */
-  variation: React.PropTypes.oneOf(['default', 'scoped']),
-};
-
-Tab.defaultProps = {
-  variation: 'default',
-};
 
 export default Tab;

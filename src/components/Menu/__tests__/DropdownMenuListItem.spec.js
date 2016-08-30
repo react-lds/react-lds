@@ -28,7 +28,7 @@ describe('<DropdownMenuListItem />', () => {
   });
 
   it('renders isSelected', () => {
-    mounted.setProps({ isSelected: true });
+    mounted.setProps({ selected: true });
     expect(mounted.find('li').hasClass('slds-is-selected')).toBeTruthy();
   });
 
@@ -50,5 +50,11 @@ describe('<DropdownMenuListItem />', () => {
 
     expect(mounted.find('li > a > p svg').length).toBe(1);
     expect(mounted.find('li > a svg').length).toBe(2);
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-dropdown__item').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-dropdown__item').prop('data-test')).toEqual('bar');
   });
 });

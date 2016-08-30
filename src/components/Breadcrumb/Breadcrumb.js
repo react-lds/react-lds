@@ -1,5 +1,4 @@
 import React from 'react';
-import isArray from 'lodash.isarray';
 import { prefixClasses } from '../../utils';
 
 const Breadcrumb = (props, { cssPrefix }) => {
@@ -7,12 +6,12 @@ const Breadcrumb = (props, { cssPrefix }) => {
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
   let filtered = children;
 
-  if (!isArray(children)) {
+  if (!Array.isArray(children)) {
     filtered = [children];
   }
 
   const olClasses = ['breadcrumb', 'list--horizontal'];
-  const liClasses = ['breadcrumb__item text-heading--label'];
+  const liClasses = ['breadcrumb__item', 'text-heading--label'];
 
   const wrapItems =
     filtered.map(child => <li className={prefix(liClasses)} key={child.key}>{child}</li>);
@@ -25,12 +24,7 @@ const Breadcrumb = (props, { cssPrefix }) => {
     </nav>);
 };
 
-Breadcrumb.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Breadcrumb.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Breadcrumb.propTypes = {
   /**

@@ -47,4 +47,10 @@ describe('<Notification />', () => {
     mounted.setProps({ toast: false, alert: true });
     expect(mounted.find('button svg').hasClass('slds-button__icon--large')).toBeFalsy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-notify').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-notify').prop('data-test')).toEqual('bar');
+  });
 });

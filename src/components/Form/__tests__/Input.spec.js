@@ -113,4 +113,10 @@ describe('<Input />', () => {
     mounted.setProps({ error: 'shit', errorIcon: true });
     expect(mounted.find('div.slds-form-element__control IconSVG').first().props().icon).toEqual('warning');
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('input').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('input').prop('data-test')).toEqual('bar');
+  });
 });

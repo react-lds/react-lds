@@ -237,4 +237,10 @@ describe('<Lookup />', () => {
     expect(mounted.find('.slds-lookup__list li').length).toBe(6);
     expect(mounted.find('.slds-lookup__result-text').first().text()).toBe(sampleData[1].label);
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-lookup').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-lookup').prop('data-test')).toEqual('bar');
+  });
 });

@@ -42,4 +42,10 @@ describe('<MediaObject />', () => {
     expect(mounted.find('.slds-media__figure').length).toBe(2);
     expect(mounted.find('.slds-media__figure--reverse').length).toBe(1);
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-media').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-media').prop('data-test')).toEqual('bar');
+  });
 });

@@ -55,4 +55,10 @@ describe('<Textarea />', () => {
     expect(mounted.find('textarea').length).toBe(0);
     expect(mounted.find('.slds-form-element__static p').text()).toEqual(props.placeholder);
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('textarea').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('textarea').prop('data-test')).toEqual('bar');
+  });
 });

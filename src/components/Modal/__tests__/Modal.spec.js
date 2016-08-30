@@ -68,4 +68,10 @@ describe('<Modal />', () => {
     expect(modalHeaderProps.prompt).toBe(true);
     expect(modalHeaderProps.uncloseable).toBe(true);
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-modal').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-modal').prop('data-test')).toEqual('bar');
+  });
 });

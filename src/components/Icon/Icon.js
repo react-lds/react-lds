@@ -25,12 +25,7 @@ const Icon = (props, { cssPrefix }) => {
   );
 };
 
-Icon.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Icon.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Icon.propTypes = {
   /**

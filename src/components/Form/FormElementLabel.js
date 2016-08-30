@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { prefixClasses } from '../../utils';
 
@@ -25,12 +24,7 @@ const FormElementLabel = (props, { cssPrefix }) => {
   );
 };
 
-FormElementLabel.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+FormElementLabel.contextTypes = { cssPrefix: React.PropTypes.string };
 
 FormElementLabel.propTypes = {
   /**

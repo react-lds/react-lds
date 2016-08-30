@@ -1,7 +1,11 @@
 import React from 'react';
 import { Avatar } from 'react-lds';
 
-const ExampleSmall = () =>
-  <Avatar alt="Round Image" src="assets/images/avatar2.jpg" size="small" />;
+const ExampleSmall = (props, { assetBasePath }) =>
+  <Avatar alt="Small Image" src={`${assetBasePath}assets/images/avatar2.jpg`} size="small" />;
+
+ExampleSmall.contextTypes = {
+  assetBasePath: React.PropTypes.string,
+};
 
 export default ExampleSmall;

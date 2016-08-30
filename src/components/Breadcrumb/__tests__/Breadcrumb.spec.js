@@ -37,4 +37,10 @@ describe('<Breadcrumb />', () => {
     expect(lis.first().contains(children[0])).toBeTruthy();
     expect(lis.at(1).contains(children[1])).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('nav').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('nav').prop('data-test')).toEqual('bar');
+  });
 });

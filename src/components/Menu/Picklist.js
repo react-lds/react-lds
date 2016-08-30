@@ -1,10 +1,37 @@
 import React from 'react';
 import enhanceWithClickOutside from 'react-click-outside';
+import omit from 'lodash.omit';
 
 import { prefixClasses } from '../../utils';
 import { DropdownMenu, DropdownMenuList, DropdownMenuListItem, Button, IconSVG } from '../../index';
 
 export class Picklist extends React.Component {
+  static contextTypes = { cssPrefix: React.PropTypes.string };
+
+  static propTypes = {
+    /**
+     * triggered whenever an item was clicked, has the items key as parameter
+     */
+    callback: React.PropTypes.func.isRequired,
+    /**
+     * class name
+     */
+    className: React.PropTypes.string,
+    /**
+     * list of displayed items
+     * `{key: 'id123', label: 'first entry', selected: false}`
+     */
+    items: React.PropTypes.arrayOf(React.PropTypes.shape({
+      key: React.PropTypes.any,
+      label: React.PropTypes.string,
+      selected: React.PropTypes.bool,
+    })),
+    /**
+     * label for the button. if a selection is present, you should indicate it
+     */
+    label: React.PropTypes.string.isRequired,
+  };
+
   constructor(props, context) {
     super(props, context);
 
@@ -39,7 +66,7 @@ export class Picklist extends React.Component {
         <DropdownMenuListItem
           key={item.key}
           leftIcon={{ icon: 'check', sprite: 'utility' }}
-          isSelected={item.isSelected}
+          selected={item.selected}
           onClick={boundClick}
         >
           {item.label}
@@ -49,8 +76,10 @@ export class Picklist extends React.Component {
   }
 
   render() {
+    const rest = omit(this.props, Object.keys(Picklist.propTypes));
+
     return (
-      <DropdownMenu customButton={this.button()} isOpen={this.state.open}>
+      <DropdownMenu {...rest} className={this.props.className} customButton={this.button()} isOpen={this.state.open}>
         <DropdownMenuList>
           {this.menuItems()}
         </DropdownMenuList>
@@ -58,32 +87,5 @@ export class Picklist extends React.Component {
     );
   }
 }
-
-Picklist.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
-
-Picklist.propTypes = {
-  /**
-   * triggered whenever an item was clicked, has the items key as parameter
-   */
-  callback: React.PropTypes.func.isRequired,
-  /**
-   * list of displayed items
-   * `{key: 'id123', label: 'first entry', isSelected: false}`
-   */
-  items: React.PropTypes.arrayOf(React.PropTypes.shape({
-    key: React.PropTypes.any,
-    label: React.PropTypes.string,
-    isSelected: React.PropTypes.bool,
-  })),
-  /**
-   * label for the button. if a selection is present, you should indicate it
-   */
-  label: React.PropTypes.string.isRequired,
-};
 
 export default enhanceWithClickOutside(Picklist);

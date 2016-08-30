@@ -16,12 +16,7 @@ Row.variations = [
   'hint-parent',
 ];
 
-Row.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Row.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Row.propTypes = {
   /**

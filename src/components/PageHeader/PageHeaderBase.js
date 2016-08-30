@@ -18,12 +18,7 @@ const PageHeaderBase = (props, { cssPrefix }) => {
   );
 };
 
-PageHeaderBase.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+PageHeaderBase.contextTypes = { cssPrefix: React.PropTypes.string };
 
 PageHeaderBase.propTypes = {
   /**

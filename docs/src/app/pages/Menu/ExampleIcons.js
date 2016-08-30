@@ -31,7 +31,7 @@ const ExampleIcons = () => {
     <div>
       <DropdownMenu button={button}>
         <DropdownMenuList>
-          <DropdownMenuListItem leftIcon={leftIcon} isSelected>Item 1</DropdownMenuListItem>
+          <DropdownMenuListItem leftIcon={leftIcon} selected>Item 1</DropdownMenuListItem>
           <DropdownMenuListItem leftIcon={leftIcon}>Item 2</DropdownMenuListItem>
           <DropdownMenuListItem leftIcon={leftIcon}>Item 3</DropdownMenuListItem>
           <DropdownMenuListItem divider>Important last item</DropdownMenuListItem>
@@ -43,7 +43,7 @@ const ExampleIcons = () => {
           <DropdownMenuListItem
             leftIcon={leftIcon}
             rightIcon={iconTable}
-            isSelected
+            selected
           >Item 1</DropdownMenuListItem>
           <DropdownMenuListItem leftIcon={leftIcon} rightIcon={iconKanban}>Item 2</DropdownMenuListItem>
           <DropdownMenuListItem leftIcon={leftIcon} rightIcon={iconSideList}>Item 3</DropdownMenuListItem>

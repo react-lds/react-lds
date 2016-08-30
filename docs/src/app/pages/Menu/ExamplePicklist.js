@@ -7,12 +7,12 @@ class ExamplePicklist extends React.Component {
 
     this.state = {
       items: [
-        { key: 'item1', label: 'Entry 1', isSelected: false },
-        { key: 'item2', label: 'Entry 2', isSelected: false },
-        { key: 'item3', label: 'Entry 3', isSelected: false },
-        { key: 'item4', label: 'Entry 4', isSelected: false },
-        { key: 'item5', label: 'Entry 5', isSelected: false },
-        { key: 'item6', label: 'Entry 6', isSelected: false },
+        { key: 'item1', label: 'Entry 1', selected: false },
+        { key: 'item2', label: 'Entry 2', selected: false },
+        { key: 'item3', label: 'Entry 3', selected: false },
+        { key: 'item4', label: 'Entry 4', selected: false },
+        { key: 'item5', label: 'Entry 5', selected: false },
+        { key: 'item6', label: 'Entry 6', selected: false },
       ],
       label: 'Select something!',
     };
@@ -24,7 +24,7 @@ class ExamplePicklist extends React.Component {
     const newItems = this.state.items.map(item => {
       const newItem = Object.assign({}, item);
       if (item.key === key) {
-        newItem.isSelected = !newItem.isSelected;
+        newItem.selected = !newItem.selected;
       }
 
       return newItem;
@@ -32,7 +32,7 @@ class ExamplePicklist extends React.Component {
 
 
     const newLabel = newItems.reduce((prev, current) => {
-      if (current.isSelected) {
+      if (current.selected) {
         prev.push(current.label);
       }
 

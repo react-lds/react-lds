@@ -30,4 +30,10 @@ describe('<ModalContent />', () => {
     mounted.setProps({ menu: true });
     expect(mounted.find('.slds-modal__menu').length).toBe(1);
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-modal__content').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-modal__content').prop('data-test')).toEqual('bar');
+  });
 });

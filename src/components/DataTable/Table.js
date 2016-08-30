@@ -21,12 +21,7 @@ Table.variations = [
   'max-medium-table--stacked-horizontal',
 ];
 
-Table.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Table.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Table.propTypes = {
   /**

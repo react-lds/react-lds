@@ -1,6 +1,6 @@
 import React from 'react';
 import { prefixClasses } from '../../utils';
-import IconSVG from '../Icon/IconSVG';
+import { IconSVG } from '../../';
 
 const ButtonIcon = (props, { cssPrefix }) => {
   const { className, sprite, icon, position, size, ...rest } = props;
@@ -24,12 +24,7 @@ const ButtonIcon = (props, { cssPrefix }) => {
   );
 };
 
-ButtonIcon.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+ButtonIcon.contextTypes = { cssPrefix: React.PropTypes.string };
 
 ButtonIcon.propTypes = {
   /**

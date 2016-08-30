@@ -20,12 +20,7 @@ const ModalContent = (props, { cssPrefix }) => {
   );
 };
 
-ModalContent.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+ModalContent.contextTypes = { cssPrefix: React.PropTypes.string };
 
 ModalContent.propTypes = {
   /**

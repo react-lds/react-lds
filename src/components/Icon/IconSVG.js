@@ -22,16 +22,7 @@ const IconSVG = (props, { assetBasePath, cssPrefix }) => {
   );
 };
 
-IconSVG.contextTypes = {
-  /**
-   * the asset base path
-   */
-  assetBasePath: React.PropTypes.string,
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+IconSVG.contextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
 
 IconSVG.propTypes = {
   /**

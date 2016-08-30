@@ -55,12 +55,7 @@ const Textarea = (props, { cssPrefix }) => {
   );
 };
 
-Textarea.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Textarea.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Textarea.propTypes = {
   /**

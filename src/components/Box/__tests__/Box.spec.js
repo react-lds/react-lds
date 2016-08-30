@@ -31,4 +31,10 @@ describe('<Box />', () => {
     mounted.setProps({ size: 'small' });
     expect(mounted.hasClass('slds-box--small')).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-box').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-box').prop('data-test')).toEqual('bar');
+  });
 });

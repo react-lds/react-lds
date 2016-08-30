@@ -1,6 +1,7 @@
 import React from 'react';
 import enhanceWithClickOutside from 'react-click-outside';
 import { debounce } from 'lodash';
+import omit from 'lodash.omit';
 
 import { prefixClasses } from '../../utils';
 import {
@@ -15,7 +16,86 @@ import {
 
 import { InputRaw } from '../Form/Input';
 
+const validateSelection = (props, propName, componentName, ...rest) => {
+  const arrayValidation = React.PropTypes.array(props, propName, componentName, ...rest);
+
+  if (arrayValidation === null && props[propName].length > 1 && !props.multi) {
+    return new Error(`${componentName}.initialSelection should not supply multiple selections to a single-item
+        lookup`);
+  }
+
+  return arrayValidation;
+};
+
 export class Lookup extends React.Component {
+  static contextTypes = { cssPrefix: React.PropTypes.string };
+  static propTypes = {
+    /**
+     * class name
+     */
+    className: React.PropTypes.string,
+    /**
+     * renders a different layour without borders (bare) for email docked
+     * composer
+     */
+    emailLayout: React.PropTypes.bool,
+    /**
+     * id of the input field in the lookup component
+     */
+    id: React.PropTypes.string.isRequired,
+    /**
+     * initial item selection
+     */
+    initialSelection: validateSelection,
+    /**
+     * label for the input field in the lookup component
+     */
+    inputLabel: React.PropTypes.string.isRequired,
+    /**
+     * label for the dropdown in the lookup component
+     */
+    listLabel: React.PropTypes.string.isRequired,
+    /**
+     * loads items into the lookup component
+     */
+    load: React.PropTypes.func.isRequired,
+    /**
+     * set true to call load() onInputChange (defaults to true)
+     */
+    loadOnChange: React.PropTypes.bool,
+    /**
+     * set true to call load() onInputFocus (defaults to false)
+     */
+    loadOnFocus: React.PropTypes.bool,
+    /**
+     * set true to call load() onComponentDidMount (defaults to false)
+     */
+    loadOnMount: React.PropTypes.bool,
+    /**
+     * renders the lookup in multiple mode
+     */
+    multi: React.PropTypes.bool,
+    /**
+     * onChange handler for the lookup. has selected items as first argument
+     */
+    onChange: React.PropTypes.func,
+    /**
+     * onFocus handler for the input field in the lookup
+     */
+    onFocus: React.PropTypes.func,
+    /**
+     * placeholder for the input field in lookup
+     */
+    placeholder: React.PropTypes.string,
+    /**
+     * if set to true, allows the creation of new elements that were not found
+     * during lookups. For example new email addresses.
+     * The new entry will not have an object type and the ID will be the current
+     * timestamp.
+     */
+    allowCreate: React.PropTypes.bool,
+  };
+
   constructor(props, context) {
     super(props, context);
 
@@ -307,6 +387,7 @@ export class Lookup extends React.Component {
   }
 
   render() {
+    const rest = omit(this.props, Object.keys(Lookup.propTypes));
     const sldsClasses = [
       'lookup',
       { 'is-open': this.state.open },
@@ -320,7 +401,12 @@ export class Lookup extends React.Component {
           <label className={this.prefix(['email-composer__label', 'align-middle'])} htmlFor={this.props.id}>
             {this.props.inputLabel}
           </label>
-          <FormElement className={this.prefix(sldsClasses)} data-select={scope} data-scope={scope}>
+          <FormElement
+            {...rest}
+            className={this.prefix(sldsClasses, this.props.className)}
+            data-select={scope}
+            data-scope={scope}
+          >
             {this.input()}
             {this.selections()}
             {this.lookupList()}
@@ -330,7 +416,12 @@ export class Lookup extends React.Component {
     }
 
     return (
-      <FormElement className={this.prefix(sldsClasses)} data-select={scope} data-scope={scope}>
+      <FormElement
+        {...rest}
+        className={this.prefix(sldsClasses, this.props.className)}
+        data-select={scope}
+        data-scope={scope}
+      >
         <FormElementLabel id={this.props.id} label={this.props.inputLabel} />
         {this.input()}
         {this.selections()}
@@ -345,87 +436,6 @@ Lookup.defaultProps = {
   loadOnChange: true,
   multi: false,
   placeholder: 'Search',
-};
-
-const validateSelection = (props, propName, componentName, ...rest) => {
-  const arrayValidation = React.PropTypes.array(props, propName, componentName, ...rest);
-
-  if (arrayValidation === null && props[propName].length > 1 && !props.multi) {
-    return new Error(`${componentName}.initialSelection should not supply multiple selections to a single-item
-        lookup`);
-  }
-
-  return arrayValidation;
-};
-
-Lookup.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
-
-Lookup.propTypes = {
-  /**
-   * renders a different layour without borders (bare) for email docked
-   * composer
-   */
-  emailLayout: React.PropTypes.bool,
-  /**
-   * id of the input field in the lookup component
-   */
-  id: React.PropTypes.string.isRequired,
-  /**
-   * initial item selection
-   */
-  initialSelection: validateSelection,
-  /**
-   * label for the input field in the lookup component
-   */
-  inputLabel: React.PropTypes.string.isRequired,
-  /**
-   * label for the dropdown in the lookup component
-   */
-  listLabel: React.PropTypes.string.isRequired,
-  /**
-   * loads items into the lookup component
-   */
-  load: React.PropTypes.func.isRequired,
-  /**
-   * set true to call load() onInputChange (defaults to true)
-   */
-  loadOnChange: React.PropTypes.bool,
-  /**
-   * set true to call load() onInputFocus (defaults to false)
-   */
-  loadOnFocus: React.PropTypes.bool,
-  /**
-   * set true to call load() onComponentDidMount (defaults to false)
-   */
-  loadOnMount: React.PropTypes.bool,
-  /**
-   * renders the lookup in multiple mode
-   */
-  multi: React.PropTypes.bool,
-  /**
-   * onChange handler for the lookup. has selected items as first argument
-   */
-  onChange: React.PropTypes.func,
-  /**
-   * onFocus handler for the input field in the lookup
-   */
-  onFocus: React.PropTypes.func,
-  /**
-   * placeholder for the input field in lookup
-   */
-  placeholder: React.PropTypes.string,
-  /**
-   * if set to true, allows the creation of new elements that were not found
-   * during lookups. For example new email addresses.
-   * The new entry will not have an object type and the ID will be the current
-   * timestamp.
-   */
-  allowCreate: React.PropTypes.bool,
 };
 
 export default enhanceWithClickOutside(Lookup);

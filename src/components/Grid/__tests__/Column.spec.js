@@ -29,4 +29,10 @@ describe('<Column />', () => {
     mounted.setProps({ align: 'top' });
     expect(mounted.find('.slds-col').hasClass('slds-align-top')).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-col').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-col').prop('data-test')).toEqual('bar');
+  });
 });

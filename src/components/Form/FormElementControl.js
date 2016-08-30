@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { prefixClasses } from '../../utils';
 
 const FormElementControl = (props, { cssPrefix }) => {
-  const { children, className, hasIconLeft, hasIconRight } = props;
+  const { children, className, hasIconLeft, hasIconRight, ...rest } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const classes = [
@@ -14,15 +13,10 @@ const FormElementControl = (props, { cssPrefix }) => {
     { 'input-has-icon--left-right': hasIconLeft && hasIconRight },
   ];
 
-  return (<div className={prefix(classes, className)}>{children}</div>);
+  return (<div {...rest} className={prefix(classes, className)}>{children}</div>);
 };
 
-FormElementControl.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+FormElementControl.contextTypes = { cssPrefix: React.PropTypes.string };
 
 FormElementControl.propTypes = {
   /**

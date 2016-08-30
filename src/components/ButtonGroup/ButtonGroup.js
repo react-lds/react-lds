@@ -5,15 +5,10 @@ const ButtonGroup = (props, { cssPrefix }) => {
   const { children, className, ...rest } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  return (<div {...rest} className={prefix(['button-group'], className)} role="group">{children}</div>);
+  return (<div {...rest} className={prefix('button-group', className)} role="group">{children}</div>);
 };
 
-ButtonGroup.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+ButtonGroup.contextTypes = { cssPrefix: React.PropTypes.string };
 
 ButtonGroup.propTypes = {
   /**

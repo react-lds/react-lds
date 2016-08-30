@@ -42,4 +42,10 @@ describe('<FormElementControl />', () => {
     expect(mounted.find('.slds-form-element__control').hasClass('slds-input-has-icon')).toBeTruthy();
     expect(mounted.find('.slds-form-element__control').hasClass('slds-input-has-icon--left-right')).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-form-element__control').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-form-element__control').prop('data-test')).toEqual('bar');
+  });
 });

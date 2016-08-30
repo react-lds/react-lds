@@ -147,12 +147,7 @@ const propDefaults = {
   type: 'text',
 };
 
-const contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+const contextTypes = { cssPrefix: React.PropTypes.string };
 
 const propTypes = {
   /**

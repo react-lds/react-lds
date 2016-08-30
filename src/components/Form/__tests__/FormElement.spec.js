@@ -30,4 +30,10 @@ describe('<FormElement />', () => {
     mounted.setProps({ required: true });
     expect(mounted.find('.slds-form-element').hasClass('slds-is-required')).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-form-element').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-form-element').prop('data-test')).toEqual('bar');
+  });
 });

@@ -26,12 +26,7 @@ Spinner.flavors = [
   'inverse',
 ];
 
-Spinner.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Spinner.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Spinner.propTypes = {
   /**

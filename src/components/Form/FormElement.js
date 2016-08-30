@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { prefixClasses } from '../../utils';
 
@@ -15,12 +14,7 @@ const FormElement = (props, { cssPrefix }) => {
   return (<div {...rest} className={prefix(classes, className)}>{children}</div>);
 };
 
-FormElement.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+FormElement.contextTypes = { cssPrefix: React.PropTypes.string };
 
 FormElement.propTypes = {
   /**

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, MediaObject, Icon } from '../../index';
+import { Grid, Icon, MediaObject } from '../../index';
 import { prefixClasses } from '../../utils';
 
 const Card = (props, { cssPrefix }) => {
@@ -7,10 +7,10 @@ const Card = (props, { cssPrefix }) => {
     body,
     className,
     footer,
-    header,
     headerRight,
     icon,
     sprite,
+    title,
     ...rest,
   } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
@@ -24,7 +24,7 @@ const Card = (props, { cssPrefix }) => {
           figureLeft={<Icon sprite={sprite} icon={icon} size="small" />}
         >
           <a className={prefix('text-link--reset')}>
-            <span className={prefix('text-heading--small')}>{header}</span>
+            <span className={prefix('text-heading--small')}>{title}</span>
           </a>
         </MediaObject>
         <div className={prefix('no-flex')}>{headerRight}</div>
@@ -35,12 +35,7 @@ const Card = (props, { cssPrefix }) => {
   );
 };
 
-Card.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Card.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Card.propTypes = {
   /**
@@ -58,7 +53,7 @@ Card.propTypes = {
   /**
    * card header
    */
-  header: React.PropTypes.string.isRequired,
+  title: React.PropTypes.string.isRequired,
   /**
    * top right corner of the card, can be used for a Button for example
    */

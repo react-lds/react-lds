@@ -2,8 +2,8 @@ import React from 'react';
 import { flavorable } from '../../decorators';
 
 export const Container = (props) => {
-  const { children, className } = props;
-  return (<div className={className}>{children}</div>);
+  const { children, className, ...rest } = props;
+  return (<div {...rest} className={className}>{children}</div>);
 };
 
 Container.flavors = [

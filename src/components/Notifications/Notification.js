@@ -17,6 +17,7 @@ export const Notification = (props, { cssPrefix }) => {
     className,
     title,
     toast,
+    ...rest,
   } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
@@ -27,7 +28,7 @@ export const Notification = (props, { cssPrefix }) => {
 
   return (
     <div className={prefix('notify_container')}>
-      <div className={prefix(sldsClasses, className)} role="alert">
+      <div {...rest} className={prefix(sldsClasses, className)} role="alert">
         <Button
           icon-inverse={getThemeName(className) ? undefined : true}
           className={prefix('notify__close')}
@@ -47,12 +48,7 @@ Notification.flavors = [
   'alert',
 ];
 
-Notification.contextTypes = {
-  /**
-   * the css prefix
-   */
-  cssPrefix: React.PropTypes.string,
-};
+Notification.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Notification.propTypes = {
   /**

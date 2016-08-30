@@ -41,4 +41,10 @@ describe('<IconSVG />', () => {
     mounted.setProps({ background: false });
     expect(mounted.find('svg').hasClass('slds-icon-standard-account')).toBeFalsy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-icon').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-icon').prop('data-test')).toEqual('bar');
+  });
 });

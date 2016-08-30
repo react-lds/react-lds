@@ -37,4 +37,10 @@ describe('<ButtonIcon />', () => {
     mounted.setProps({ size: 'small' });
     expect(mounted.find('svg').hasClass('slds-button__icon--small')).toBeTruthy();
   });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-button__icon').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-button__icon').prop('data-test')).toEqual('bar');
+  });
 });
