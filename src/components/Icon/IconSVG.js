@@ -1,9 +1,11 @@
 import React from 'react';
 
-import prefixable from './../../decorators/prefixable';
+import { prefixClasses } from '../../utils';
 
-const IconSVG = (props, { assetBasePath }) => {
-  const { prefix, sprite, icon, background, size, fill } = props;
+const IconSVG = (props, { assetBasePath, cssPrefix }) => {
+  const { background, className, fill, icon, size, sprite, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
   let backgroundClass = background;
   if (backgroundClass === undefined || backgroundClass === true) {
     backgroundClass = `${sprite}-${icon}`;
@@ -15,45 +17,43 @@ const IconSVG = (props, { assetBasePath }) => {
   ];
 
   return (
-    <svg aria-hidden="true" className={prefix(sldsClasses, props)}>
-      <use xlinkHref={`${assetBasePath}/assets/icons/${sprite}-sprite/svg/symbols.svg#${icon}`} />
+    <svg {...rest} aria-hidden="true" className={prefix(sldsClasses, className)}>
+      <use xlinkHref={`${assetBasePath}assets/icons/${sprite}-sprite/svg/symbols.svg#${icon}`} />
     </svg>
   );
 };
 
+IconSVG.contextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
+
 IconSVG.propTypes = {
-  /**
-   * prefix from HOC
-   */
-  prefix: React.PropTypes.func.isRequired,
-  /**
-   * the icon sprite collection
-   */
-  sprite: React.PropTypes.string.isRequired,
-  /**
-   * the icon name
-   */
-  icon: React.PropTypes.string.isRequired,
   /**
    * optional, set this if you want to override the default background class. set to false to not set a background
    */
   background: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
   /**
-   * size of the icon
-  */
-  size: React.PropTypes.oneOf(['x-small', 'small', 'large']),
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
-   * sets the slds-icon class, on by default
+   * adds the slds-icon class, on by default
    */
   fill: React.PropTypes.bool,
+  /**
+   * icon name
+   */
+  icon: React.PropTypes.string.isRequired,
+  /**
+   * icon size
+   */
+  size: React.PropTypes.oneOf(['x-small', 'small', 'large']),
+  /**
+   * icon sprite name
+   */
+  sprite: React.PropTypes.string.isRequired,
 };
 
 IconSVG.defaultProps = {
   fill: true,
 };
 
-IconSVG.contextTypes = {
-  assetBasePath: React.PropTypes.string.isRequired,
-};
-
-export default prefixable(IconSVG);
+export default IconSVG;

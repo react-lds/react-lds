@@ -1,64 +1,69 @@
 import React from 'react';
 
-import prefixable from './../../decorators/prefixable';
-import { IconSVG } from '../../index';
+import { prefixClasses } from '../../utils';
+import { IconSVG } from '../../';
 
-export const DropdownMenuListItem = ({
-  prefix,
-  children,
-  onClick,
-  isSelected,
-  leftIcon,
-  rightIcon,
-  divider,
-}) => {
+const DropdownMenuListItem = (props, { cssPrefix }) => {
+  const { children, className, onClick, selected, leftIcon, rightIcon, divider, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
   const classes = ['dropdown__item'];
+
   if (divider) {
     classes.push('has-divider--top-space');
   }
-  if (isSelected) {
+  if (selected) {
     classes.push('is-selected');
   }
 
   const leftIconElem = () => {
     if (leftIcon) {
+      const iconClasses = [
+        { 'icon--selected': !leftIcon.alwaysDisplay },
+        { 'm-right--x-small': !leftIcon.alwaysDisplay },
+        { 'm-right--small': leftIcon.alwaysDisplay },
+        { icon: leftIcon.alwaysDisplay },
+      ];
+
       return (
         <IconSVG
-          sprite={leftIcon.sprite}
+          background={leftIcon.background}
+          className={prefix(iconClasses)}
           icon={leftIcon.icon}
           size={leftIcon.alwaysDisplay ? 'small' : 'x-small'}
-          background={leftIcon.background}
-          sldsClasses={[
-            { 'icon--selected': !leftIcon.alwaysDisplay },
-            { 'm-right--x-small': !leftIcon.alwaysDisplay },
-            { 'm-right--small': leftIcon.alwaysDisplay },
-            { icon: leftIcon.alwaysDisplay },
-          ]}
+          sprite={leftIcon.sprite}
         />);
     }
 
-    return '';
+    return null;
   };
 
   const rightIconElem = () => {
     if (rightIcon) {
+      const iconClasses = [
+        'icon-selected',
+        'icon-text-default',
+        'm-left--small',
+        'shrink-none',
+      ];
+
       return (
         <IconSVG
-          sprite={rightIcon.sprite}
+          background={rightIcon.background}
+          className={prefix(iconClasses)}
           icon={rightIcon.icon}
           size="x-small"
-          background={rightIcon.background}
-          sldsClasses={['icon-selected', 'icon-text-default', 'm-left--small', 'shrink-none']}
+          sprite={rightIcon.sprite}
         />);
     }
 
-    return '';
+    return null;
   };
 
   return (
-    <li className={prefix(classes)} onClick={onClick}>
+    <li {...rest} className={prefix(classes, className)} onClick={onClick}>
       <a role="menuitem">
-        <p className={prefix(['truncate'])}>
+        <p className={prefix('truncate')}>
           {leftIconElem()}
           {children}
         </p>
@@ -68,26 +73,23 @@ export const DropdownMenuListItem = ({
   );
 };
 
+DropdownMenuListItem.contextTypes = { cssPrefix: React.PropTypes.string };
+
 DropdownMenuListItem.propTypes = {
-  prefix: React.PropTypes.func,
   /**
    * The content of a menu item, this is just a string
    */
   children: React.PropTypes.string.isRequired,
   /**
-   * onClick handler
+   * class name
    */
-  onClick: React.PropTypes.func,
+  className: React.PropTypes.string,
   /**
    * set to true if a divider should appear above this list item
    */
   divider: React.PropTypes.bool,
   /**
-   * sets this item into a selection state that displays the leftIcon
-   */
-  isSelected: React.PropTypes.bool,
-  /**
-   * left icon that is only shown when isSelected is true
+   * left icon that is only shown when selected is true
    */
   leftIcon: React.PropTypes.shape({
     icon: React.PropTypes.string.isRequired,
@@ -96,6 +98,10 @@ DropdownMenuListItem.propTypes = {
     alwaysDisplay: React.PropTypes.bool,
   }),
   /**
+   * onClick handler
+   */
+  onClick: React.PropTypes.func,
+  /**
    * right icon that is always shown
    */
   rightIcon: React.PropTypes.shape({
@@ -103,6 +109,10 @@ DropdownMenuListItem.propTypes = {
     sprite: React.PropTypes.string.isRequired,
     background: React.PropTypes.string,
   }),
+  /**
+   * sets this item into a selection state that displays the leftIcon
+   */
+  selected: React.PropTypes.bool,
 };
 
-export default prefixable(DropdownMenuListItem);
+export default DropdownMenuListItem;

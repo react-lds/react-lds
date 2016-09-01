@@ -1,21 +1,26 @@
 import React from 'react';
-import { prefixable, flavorable } from '../../decorators';
+import { prefixClasses } from '../../utils';
+import { flavorable } from '../../decorators';
 
-export const Backdrop = (props) =>
-  <div className={props.prefix(['backdrop'], props)} />;
+export const Backdrop = (props, { cssPrefix }) => {
+  const { className, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
+  return (<div {...rest} className={prefix('backdrop', className)} />);
+};
 
 Backdrop.flavors = [
   'open',
 ];
 
+Backdrop.contextTypes = { cssPrefix: React.PropTypes.string };
+
 Backdrop.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+   * class name
    */
-  prefix: React.PropTypes.func,
+  className: React.PropTypes.string,
 };
 
 
-export default prefixable(
-  flavorable(Backdrop, 'backdrop')
-);
+export default flavorable(Backdrop, 'backdrop');

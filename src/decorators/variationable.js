@@ -1,74 +1,68 @@
 import React from 'react';
+import omit from 'lodash.omit';
+import { prefixClasses } from '../utils';
 
 function getVariationClasses(props, validVariations) {
-  const variations = Object.keys(props)
-    .filter(variation => validVariations.includes(variation))
+  return Object.keys(props)
+    .filter(variation => Object.hasOwnProperty.call(validVariations, variation))
     .filter(variation => !!props[variation]);
-
-  return variations;
 }
 
 function getValidVariations(definition) {
-  const validVariations = definition.reduce((propTypes, variation) => {
+  const validVariations = definition.reduce((_propTypes, variation) => {
+    const propTypes = _propTypes;
+
     if (typeof variation === 'string') {
-      // eslint-disable-next-line no-param-reassign
       propTypes[variation] = React.PropTypes.bool;
     } else {
       const variationName = Object.keys(variation)[0];
       const responsives = variation[variationName];
 
-      // eslint-disable-next-line no-param-reassign
       propTypes[variationName] = React.PropTypes.bool;
 
       responsives.forEach((responsive) => {
-        // eslint-disable-next-line no-param-reassign
         propTypes[`${responsive}-${variationName}`] = React.PropTypes.bool;
       });
     }
+
     return propTypes;
   }, {});
 
   return validVariations;
 }
 
-const variationable = (Component) => {
-  const displayName = Component.displayName || Component.name;
+const filterVariations = (props, validVariations) => omit(Object.assign({}, props), validVariations);
 
-  const VariationComponent = (props) => {
-    const newProps = Object.assign({}, props);
-    const existingSlds = props.sldsClasses || [];
+const variationable = C => {
+  const validVariations = getValidVariations(C.variations);
 
-    newProps.sldsClasses = [...new Set(
-      getVariationClasses(
-        props,
-        Object.keys(getValidVariations(Component.variations))
-      ).concat(existingSlds)
-    )];
+  const VariationedComponent = (props, { cssPrefix }) => {
+    const { className } = props;
+    const prefix = classes => prefixClasses(cssPrefix, classes, className);
 
-    return (
-      <Component {...newProps} />
-    );
+    const rest = filterVariations(props, C.variations);
+    const classes = prefix(getVariationClasses(props, validVariations));
+
+    return (<C {...rest} className={classes} />);
   };
 
-  VariationComponent.displayName = displayName;
+  VariationedComponent.displayName = `Variationed_${C.displayName || C.name}`;
 
-  VariationComponent.propTypes = Object.assign(
-    {},
-    Component.propTypes,
-    getValidVariations(Component.variations)
+  VariationedComponent.contextTypes = Object.assign({}, C.contextTypes, {
+    cssPrefix: React.PropTypes.string,
+  });
+
+  VariationedComponent.propTypes = Object.assign({},
+    C.propTypes,
+    { className: React.PropTypes.string },
+    validVariations
   );
 
-  if (Component.flavors) {
-    VariationComponent.flavors = Component.flavors;
+  if (C.flavors) {
+    VariationedComponent.flavors = C.flavors;
   }
 
-  if (Component.contextTypes) {
-    VariationComponent.contextTypes = Component.contextTypes;
-  }
-
-  return VariationComponent;
+  return VariationedComponent;
 };
 
-export {
-  variationable as default,
-};
+export default variationable;

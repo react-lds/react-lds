@@ -1,23 +1,39 @@
-jest.unmock('../ModalContent');
-
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
+
 import ModalContent from '../ModalContent';
 
-describe('<ModalContent>', () => {
-  it('should render the correct markup', () => {
-    const wrapper = mount(<ModalContent><div className="foo">bar</div></ModalContent>);
-    expect(wrapper.find('.modal__content').hasClass('p-vertical--large')).toBeTruthy();
-    expect(wrapper.find('.modal__content').hasClass('p-horizontal--x-large')).toBeTruthy();
+jest.unmock('../ModalContent');
+
+describe('<ModalContent />', () => {
+  let mounted = null;
+  const child = (<div className="foo">bar</div>);
+
+  const context = { cssPrefix: 'slds-' };
+  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
+  beforeEach(() => {
+    mounted = shallow(<ModalContent>{child}</ModalContent>, options);
   });
 
-  it('should accept children', () => {
-    const wrapper = mount(<ModalContent><div className="foo">bar</div></ModalContent>);
-    expect(wrapper.find('.foo').length).toBe(1);
+  it('renders the correct markup', () => {
+    expect(mounted.find('.slds-modal__content').hasClass('slds-p-vertical--large')).toBeTruthy();
+    expect(mounted.find('.slds-modal__content').hasClass('slds-p-horizontal--x-large')).toBeTruthy();
   });
 
-  it('should allow to be turned into a menu', () => {
-    const wrapper = mount(<ModalContent menu><div className="foo">bar</div></ModalContent>);
-    expect(wrapper.find('.modal__menu').length).toBe(1);
+  it('renders children', () => {
+    expect(mounted.contains(child)).toBeTruthy();
+  });
+
+  it('renders as a menu', () => {
+    mounted.setProps({ menu: true });
+    expect(mounted.find('.slds-modal__menu').length).toBe(1);
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-modal__content').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-modal__content').prop('data-test')).toEqual('bar');
   });
 });

@@ -1,11 +1,16 @@
 import React from 'react';
+import Navigation from '../Navigation';
 
-import Navigation from './Navigation';
+let basePath = '/';
+
+if (!module.hot) {
+  basePath = 'https://propertybase.github.io/react-lds/';
+}
 
 class Page extends React.Component {
   getChildContext() {
     return {
-      assetBasePath: '',
+      assetBasePath: basePath,
       cssPrefix: 'slds-',
     };
   }
@@ -13,7 +18,7 @@ class Page extends React.Component {
   render() {
     return (
       <div>
-        <header className="site-banner" role="banner"></header>
+        <header className="site-banner" role="banner" />
         <main className="site-main" role="main">{this.props.children}</main>
         <Navigation />
       </div>
@@ -22,7 +27,7 @@ class Page extends React.Component {
 }
 
 Page.propTypes = {
-  children: React.PropTypes.element.isRequired,
+  children: React.PropTypes.node,
 };
 
 Page.childContextTypes = {

@@ -1,11 +1,13 @@
 import React from 'react';
-import IconSVG from './IconSVG';
 
-import { iconClass } from './util';
-import { prefixable } from '../../decorators';
+import { prefixClasses } from '../../utils';
+import { IconSVG } from '../../';
 
-export const Icon = (props) => {
-  const { sprite, icon, title, circle, background, size, div, prefix } = props;
+const iconClass = (sprite, icon) => icon.replace(/_/g, '-');
+
+const Icon = (props, { cssPrefix }) => {
+  const { background, circle, className, div, icon, size, sprite, title, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
   const backgroundClass = !background ? `icon-${sprite}-${iconClass(sprite, icon)}` : `icon-${background}`;
 
   const sldsClasses = [
@@ -17,25 +19,48 @@ export const Icon = (props) => {
   const WrapperElement = div ? 'div' : 'span';
 
   return (
-    <WrapperElement className={prefix(sldsClasses, props)} title={title}>
+    <WrapperElement {...rest} className={prefix(sldsClasses, className)} title={title}>
       <IconSVG sprite={sprite} icon={icon} size={size} background={background} />
-      <span className={prefix(['assistive-text'])}>{title}</span>
+      <span className={prefix('assistive-text')}>{title}</span>
     </WrapperElement>
   );
 };
 
+Icon.contextTypes = { cssPrefix: React.PropTypes.string };
+
 Icon.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+  * optional, set this if you want to override the default background class. set to false to not set a background
    */
-  prefix: React.PropTypes.func,
-  sprite: React.PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
-  icon: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string,
-  circle: React.PropTypes.bool,
-  div: React.PropTypes.bool,
   background: React.PropTypes.string,
+  /**
+   * renders a circular icon
+   */
+  circle: React.PropTypes.bool,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
+  /**
+   * renders the icon in a div instead of a span
+   */
+  div: React.PropTypes.bool,
+  /**
+   * icon name
+   */
+  icon: React.PropTypes.string.isRequired,
+  /**
+   * icon size
+   */
   size: React.PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
+  /**
+   * icon sprite name
+   */
+  sprite: React.PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
+  /**
+   * icon title
+   */
+  title: React.PropTypes.string,
 };
 
-export default prefixable(Icon);
+export default Icon;

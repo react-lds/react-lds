@@ -1,20 +1,26 @@
 import React from 'react';
-import { prefixable, themeable } from '../../decorators';
 
-export const Badge = (props) =>
-  <span className={props.prefix(['badge'], props)}>{props.label}</span>;
+import { themeable } from '../../decorators';
+import { prefixClasses } from '../../utils';
+
+export const Badge = (props, { cssPrefix }) => {
+  const { className, label, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
+  return (<span {...rest} className={prefix('badge', className)}>{label}</span>);
+};
+
+Badge.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Badge.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+   * class name
    */
-  prefix: React.PropTypes.func,
+  className: React.PropTypes.string,
   /**
-   * the badge label
+   * badge label
    */
   label: React.PropTypes.string.isRequired,
 };
 
-export default prefixable(
-  themeable(Badge)
-);
+export default themeable(Badge);

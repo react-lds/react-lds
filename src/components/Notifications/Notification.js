@@ -1,36 +1,44 @@
 import React from 'react';
-import { Button, ButtonIcon } from '../../index';
-import { flavorable, prefixable, themeable } from '../../decorators';
 
-function getThemeName(themeStr) {
-  return /\stexture/.test(themeStr) ? `${themeStr.split(' ')[0]}` : `${themeStr}`;
-}
+import { flavorable, themeable } from '../../decorators';
+import { prefixClasses } from '../../utils';
+import { Button, ButtonIcon } from '../../';
 
-export const Notification = (props) => {
+const getThemeName = themeStr => {
+  if (typeof themeStr === 'string') {
+    return themeStr.includes('theme--warning');
+  }
+
+  return false;
+};
+
+export const Notification = (props, { cssPrefix }) => {
   const {
     children,
+    className,
     title,
-    prefix,
-    toast, // eslint-disable-line react/prop-types
-    theme, // eslint-disable-line react/prop-types
+    toast,
+    ...rest,
   } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const sldsClasses = [
     'notify',
+    { 'notify--toast': !!toast },
   ];
 
   return (
-    <div className={prefix(['notify_container'])}>
-      <div className={prefix(sldsClasses, props)} role="alert">
+    <div className={prefix('notify_container')}>
+      <div {...rest} className={prefix(sldsClasses, className)} role="alert">
         <Button
+          icon-inverse={getThemeName(className) ? undefined : true}
+          className={prefix('notify__close')}
           icon
-          variation={getThemeName(theme) !== 'warning' ? 'icon-inverse' : undefined}
-          sldsClasses={['notify__close']}
         >
-          <ButtonIcon sprite="utility" icon="close" size={!!toast ? 'large' : undefined} />
-          <span className={prefix(['assistive-text'])}>Close</span>
+          <ButtonIcon sprite="utility" icon="close" size={toast ? 'large' : undefined} />
+          <span className={prefix('assistive-text')}>Close</span>
         </Button>
-        <span className={prefix(['assistive-text'])}>{title}</span>
+        <span className={prefix('assistive-text')}>{title}</span>
         {children}
       </div>
     </div>
@@ -39,24 +47,29 @@ export const Notification = (props) => {
 
 Notification.flavors = [
   'alert',
-  'toast',
 ];
+
+Notification.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Notification.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+   * notification content
    */
-  prefix: React.PropTypes.func,
+  children: React.PropTypes.node.isRequired,
   /**
-   * the alert title (will be rendered as assistiveText)
+   * class name
+   */
+  className: React.PropTypes.string,
+  /**
+   * notification title (will be rendered as assistiveText)
    */
   title: React.PropTypes.string.isRequired,
   /**
-   * the alert content
+   * render the notification as a toast
    */
-  children: React.PropTypes.node.isRequired,
+  toast: React.PropTypes.bool,
 };
 
-export default prefixable(themeable(
+export default themeable(
   flavorable(Notification, 'notify')
-));
+);

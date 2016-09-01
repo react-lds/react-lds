@@ -1,19 +1,20 @@
 import React from 'react';
 
-import CodeExample from './../../../components/CodeExample';
-import ExampleDefault from './ExampleDefault';
 import exampleDefaultCode from '!raw!./ExampleDefault';
-import ExampleRequired from './ExampleRequired';
-import exampleRequiredCode from '!raw!./ExampleRequired';
-import ExampleError from './ExampleError';
-import exampleErrorCode from '!raw!./ExampleError';
-import ExampleDisabled from './ExampleDisabled';
 import exampleDisabledCode from '!raw!./ExampleDisabled';
-import ExampleReadonly from './ExampleReadonly';
+import exampleErrorCode from '!raw!./ExampleError';
 import exampleReadonlyCode from '!raw!./ExampleReadonly';
-
-import PropTypeDescription from './../../../components/PropTypeDescription';
+import exampleRequiredCode from '!raw!./ExampleRequired';
 import inputCode from '!raw!react-lds/components/Form/Textarea';
+
+import CodeExample from '../../../components/CodeExample';
+import PropTypeDescription from '../../../components/PropTypeDescription';
+
+import ExampleDefault from './ExampleDefault';
+import ExampleDisabled from './ExampleDisabled';
+import ExampleError from './ExampleError';
+import ExampleReadonly from './ExampleReadonly';
+import ExampleRequired from './ExampleRequired';
 
 const mapId = (id) => {
   let Component = ExampleDefault;

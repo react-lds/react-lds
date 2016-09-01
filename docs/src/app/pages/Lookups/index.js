@@ -1,18 +1,18 @@
 import React from 'react';
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
 
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
+import exampleDefaultCode from '!raw!./ExampleDefault';
+import exampleMultiCode from '!raw!./ExampleMulti';
+import exampleMultiCreateCode from '!raw!./ExampleMultiCreate';
+import lookupCode from '!raw!react-lds/components/Lookup/Lookup';
+
+import CodeExample from '../../components/CodeExample';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
 
 import ExampleDefault from './ExampleDefault';
-import exampleDefaultCode from '!raw!./ExampleDefault';
 import ExampleMulti from './ExampleMulti';
-import exampleMultiCode from '!raw!./ExampleMulti';
 import ExampleMultiCreate from './ExampleMultiCreate';
-import exampleMultiCreateCode from '!raw!./ExampleMultiCreate';
-
-import lookupCode from '!raw!react-lds/components/Lookup/Lookup';
 
 const LookupPage = () => (
   <div>

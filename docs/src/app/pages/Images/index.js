@@ -1,25 +1,28 @@
 import React from 'react';
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
 
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
-
-import ExampleNormal from './ExampleNormal';
-import exampleNormalCode from '!raw!./ExampleNormal';
-import ExampleEmpty from './ExampleEmpty';
-import exampleEmptyCode from '!raw!./ExampleEmpty';
-import ExampleRound from './ExampleRound';
-import exampleRoundCode from '!raw!./ExampleRound';
-import ExampleSmall from './ExampleSmall';
-import exampleSmallCode from '!raw!./ExampleSmall';
-import ExampleMedium from './ExampleMedium';
-import exampleMediumCode from '!raw!./ExampleMedium';
-import ExampleLarge from './ExampleLarge';
-import exampleLargeCode from '!raw!./ExampleLarge';
-import ExampleXSmall from './ExampleXSmall';
-import exampleXSmallCode from '!raw!./ExampleXSmall';
+import { Avatar } from 'react-lds/components/Images/Avatar';
 import avatarCode from '!raw!react-lds/components/Images/Avatar';
+import exampleEmptyCode from '!raw!./ExampleEmpty';
+import exampleLargeCode from '!raw!./ExampleLarge';
+import exampleMediumCode from '!raw!./ExampleMedium';
+import exampleNormalCode from '!raw!./ExampleNormal';
+import exampleRoundCode from '!raw!./ExampleRound';
+import exampleSmallCode from '!raw!./ExampleSmall';
+import exampleXSmallCode from '!raw!./ExampleXSmall';
+
+import CodeExample from '../../components/CodeExample';
+import DecoratorList from '../../components/DecoratorList';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
+
+import ExampleEmpty from './ExampleEmpty';
+import ExampleLarge from './ExampleLarge';
+import ExampleMedium from './ExampleMedium';
+import ExampleNormal from './ExampleNormal';
+import ExampleRound from './ExampleRound';
+import ExampleSmall from './ExampleSmall';
+import ExampleXSmall from './ExampleXSmall';
 
 const Images = () => (
   <div>
@@ -81,6 +84,7 @@ const Images = () => (
       <ExampleLarge />
     </div>
 
+    <DecoratorList component={Avatar} />
     <PropTypeDescription code={avatarCode} />
 
   </div>

@@ -1,26 +1,28 @@
 import React from 'react';
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
 
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
-import ExampleDefault from './ExampleDefault';
 import exampleDefaultCode from '!raw!./ExampleDefault';
-import ExampleHeadings from './ExampleHeadings';
 import exampleHeadingsCode from '!raw!./ExampleHeadings';
-import ExampleIcons from './ExampleIcons';
-import exampleIconsCode from '!raw!./ExampleIcons';
-import ExampleNubbin from './ExampleNubbin';
-import exampleNubbinCode from '!raw!./ExampleNubbin';
-import ExampleHeight from './ExampleHeight';
 import exampleHeightCode from '!raw!./ExampleHeight';
-import ExamplePicklist from './ExamplePicklist';
+import exampleIconsCode from '!raw!./ExampleIcons';
+import exampleNubbinCode from '!raw!./ExampleNubbin';
 import examplePicklistCode from '!raw!./ExamplePicklist';
 
 import dropdownMenuCode from '!raw!react-lds/components/Menu/DropdownMenu';
 import dropdownMenuListCode from '!raw!react-lds/components/Menu/DropdownMenuList';
 import dropdownMenuListItemCode from '!raw!react-lds/components/Menu/DropdownMenuListItem';
 import picklistCode from '!raw!react-lds/components/Menu/Picklist';
+
+import CodeExample from '../../components/CodeExample';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
+
+import ExampleDefault from './ExampleDefault';
+import ExampleHeadings from './ExampleHeadings';
+import ExampleHeight from './ExampleHeight';
+import ExampleIcons from './ExampleIcons';
+import ExampleNubbin from './ExampleNubbin';
+import ExamplePicklist from './ExamplePicklist';
 
 const MenuPage = () =>
   <div>

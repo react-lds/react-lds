@@ -1,18 +1,32 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+
+import ButtonGroup from '../ButtonGroup';
+import { Button } from '../../Button/Button';
+
 jest.unmock('../ButtonGroup');
 jest.unmock('../../Button/Button');
 
-import React from 'react';
-import { mount } from 'enzyme';
-import ButtonGroup from '../ButtonGroup';
-import Button from '../../Button/Button';
-
 describe('<ButtonGroup />', () => {
-  it('correctly renders the container', () => {
-    const child = <Button title="foobar" variation="neutral" />;
-    const comp = mount(<ButtonGroup>{child}</ButtonGroup>);
+  let mounted = null;
+  const child = <Button title="foobar" neutral />;
 
-    const wrapper = comp.find('div');
-    expect(wrapper.hasClass('button-group')).toBeTruthy();
-    expect(wrapper.contains(child)).toBeTruthy();
+  const context = { cssPrefix: 'slds-' };
+  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
+  beforeEach(() => {
+    mounted = shallow(<ButtonGroup>{child}</ButtonGroup>, options);
+  });
+
+  it('renders the correct markup', () => {
+    expect(mounted.hasClass('slds-button-group')).toBeTruthy();
+    expect(mounted.contains(child)).toBeTruthy();
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-button-group').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-button-group').prop('data-test')).toEqual('bar');
   });
 });

@@ -1,54 +1,53 @@
-
 import React from 'react';
-import { prefixable } from '../../decorators';
 
-export const FormElementLabel = (props) => {
-  const { id, label, readOnly, required, prefix } = props;
+import { prefixClasses } from '../../utils';
+
+const FormElementLabel = (props, { cssPrefix }) => {
+  const { className, id, label, readOnly, required, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const Tag = readOnly ? 'span' : 'label';
 
   const renderRequired = () => {
     if (required) {
       return (
-        <abbr className={prefix(['required'])} title="required">*</abbr>
+        <abbr className={prefix('required')} title="required">*</abbr>
       );
     }
 
     return null;
   };
 
-  const sldsClasses = [
-    'form-element__label',
-  ];
-
   return (
-    <Tag className={prefix(sldsClasses, props)} htmlFor={readOnly ? null : id}>
+    <Tag {...rest} className={prefix('form-element__label', className)} htmlFor={readOnly ? null : id}>
       {renderRequired()}{label}
     </Tag>
   );
 };
 
+FormElementLabel.contextTypes = { cssPrefix: React.PropTypes.string };
+
 FormElementLabel.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+   * class name
    */
-  prefix: React.PropTypes.func,
+  className: React.PropTypes.string,
   /**
-   * id of the input tag element
+   * id of the corresponding input tag element
    */
   id: React.PropTypes.string,
   /**
-   * label
+   * label content
    */
   label: React.PropTypes.string.isRequired,
   /**
-   * render a span instead of a label
+   * renders the label as a span-tag instead of a label-tag
    */
   readOnly: React.PropTypes.bool,
   /**
-   * labels a required input
+   * label for required inputs
    */
   required: React.PropTypes.bool,
 };
 
-export default prefixable(FormElementLabel);
+export default FormElementLabel;

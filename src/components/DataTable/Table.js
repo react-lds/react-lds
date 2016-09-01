@@ -1,14 +1,13 @@
 import React from 'react';
-import { prefixable, flavorable, variationable } from '../../decorators';
 
-export const Table = (props) => {
-  const { prefix, children } = props;
+import { flavorable, variationable } from '../../decorators';
+import { prefixClasses } from '../../utils';
 
-  return (
-    <table className={prefix(['table'], props)}>
-      {children}
-    </table>
-  );
+export const Table = (props, { cssPrefix }) => {
+  const { children, className, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
+  return (<table {...rest} className={prefix(['table'], className)}>{children}</table>);
 };
 
 Table.flavors = [
@@ -23,19 +22,19 @@ Table.variations = [
   'max-medium-table--stacked-horizontal',
 ];
 
+Table.contextTypes = { cssPrefix: React.PropTypes.string };
+
 Table.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * main content
+   * table content
    */
   children: React.PropTypes.node,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
 };
 
-export default prefixable(
-  variationable(
-    flavorable(Table, 'table')
-  )
+export default variationable(
+  flavorable(Table, 'table')
 );

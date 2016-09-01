@@ -1,12 +1,35 @@
 import React from 'react';
 import Quill from 'quill';
+import omit from 'lodash.omit';
 
-import prefixable from './../../../decorators/prefixable';
+import { prefixClasses } from '../../../utils';
 
-export class Rte extends React.Component {
-  constructor(props) {
-    super(props);
+class Rte extends React.Component {
+  static contextTypes = { cssPrefix: React.PropTypes.string };
 
+  static propTypes = {
+    /**
+     * class name
+     */
+    className: React.PropTypes.string,
+    /**
+     * initial HTML value
+     */
+    initialValue: React.PropTypes.string,
+    /**
+     * callback with new HTML value
+     */
+    onChange: React.PropTypes.func,
+    /**
+     * toolbar element used to construct quill editor
+     */
+    toolbar: React.PropTypes.any,
+  };
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
     this.addEditorElem = this.addEditorElem.bind(this);
   }
 
@@ -39,9 +62,17 @@ export class Rte extends React.Component {
   }
 
   render() {
+    const rest = omit(this.props, Object.keys(Rte.propTypes));
+    const sldsClasses = [
+      'docked-composer__input',
+      'input--bare text-longform',
+      'grow',
+    ];
+
     return (
       <div
-        className={this.props.prefix(['docked-composer__input', 'input--bare text-longform', 'grow'])}
+        {...rest}
+        className={this.prefix(sldsClasses, this.props.className)}
         ref={this.addEditorElem}
       >
         <div className="ql-editor" />
@@ -50,23 +81,4 @@ export class Rte extends React.Component {
   }
 }
 
-Rte.propTypes = {
-  /**
-   * toolbar element used to construct quill editor
-   */
-  toolbar: React.PropTypes.any,
-  /**
-   * initial HTML value
-   */
-  initialValue: React.PropTypes.string,
-  /**
-   * callback with new HTML value
-   */
-  onChange: React.PropTypes.func,
-  /**
-   * prefixable function
-   */
-  prefix: React.PropTypes.func,
-};
-
-export default prefixable(Rte);
+export default Rte;

@@ -1,25 +1,27 @@
-jest.unmock('../FormElementError');
-
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
+
 import FormElementError from '../FormElementError';
+
+jest.unmock('../FormElementError');
 
 describe('<FormElementError />', () => {
   let mounted = null;
-  let props = {};
+  const context = { cssPrefix: 'slds-' };
+  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
 
   beforeEach(() => {
-    props = {
-      error: 'This field is required',
-    };
-
-    mounted = mount(
-      <FormElementError {...props} />,
-      { context: { assetBasePath: '/' }, childContextTypes: { assetBasePath: React.PropTypes.string } }
-    );
+    mounted = shallow(<FormElementError error="Foo" />, options);
   });
 
-  it('renders the error', () => {
-    expect(mounted.find('div.form-element__help').text()).toEqual(props.error);
+  it('renders an error', () => {
+    expect(mounted.find('div.slds-form-element__help').text()).toEqual('Foo');
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-form-element__help').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-form-element__help').prop('data-test')).toEqual('bar');
   });
 });

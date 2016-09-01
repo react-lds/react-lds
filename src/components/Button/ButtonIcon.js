@@ -1,23 +1,53 @@
 import React from 'react';
-import IconSVG from '../Icon/IconSVG';
 
-const ButtonIcon = ({ sprite, icon, position, size }) => {
+import { IconSVG } from '../../';
+import { prefixClasses } from '../../utils';
+
+const ButtonIcon = (props, { cssPrefix }) => {
+  const { className, sprite, icon, position, size, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
   const classes = [
     'button__icon',
     { [`button__icon--${position}`]: !!position },
-    { [`button__icon--${size}`]: size },
+    { [`button__icon--${size}`]: !!size },
   ];
 
   return (
-    <IconSVG sprite={sprite} icon={icon} sldsClasses={classes} fill={false} background={false} />
+    <IconSVG
+      {...rest}
+      background={false}
+      className={prefix(classes, className)}
+      fill={false}
+      icon={icon}
+      sprite={sprite}
+    />
   );
 };
 
+ButtonIcon.contextTypes = { cssPrefix: React.PropTypes.string };
+
 ButtonIcon.propTypes = {
-  sprite: React.PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
+  /**
+   * icon name
+   */
   icon: React.PropTypes.string.isRequired,
+  /**
+   * icon position
+   */
   position: React.PropTypes.oneOf(['left', 'right']),
+  /**
+   * icon size
+   */
   size: React.PropTypes.oneOf(['x-small', 'small', 'large']),
+  /**
+   * icon sprite name
+   */
+  sprite: React.PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
 };
 
 export default ButtonIcon;

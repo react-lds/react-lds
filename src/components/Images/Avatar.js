@@ -1,18 +1,21 @@
-
 import React from 'react';
-import { prefixable, flavorable } from '../../decorators';
 
-export const Avatar = (props, { assetBasePath }) => {
-  const { alt, prefix, src, size } = props;
-  const sldsClasses = [
+import { flavorable } from '../../decorators';
+import { prefixClasses } from '../../utils';
+
+export const Avatar = (props, { cssPrefix }) => {
+  const { alt, className, src, size, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
+  const classes = [
     'avatar',
     { [`avatar--${size}`]: !!size },
     { 'avatar--empty': !src },
   ];
 
   return (
-    <span className={prefix(sldsClasses, props)}>
-      {!!src ? <img src={`${assetBasePath}${src}`} alt={alt} /> : null}
+    <span {...rest} className={prefix(classes, className)}>
+      {src ? <img src={src} alt={alt} /> : null}
     </span>
   );
 };
@@ -21,29 +24,25 @@ Avatar.flavors = [
   'circle',
 ];
 
+Avatar.contextTypes = { cssPrefix: React.PropTypes.string };
+
 Avatar.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * the img alt (required when src is specified)
+   * img alt
    */
   alt: React.PropTypes.string,
   /**
-   * the img src (prepended with context.assetBasePath)
+   * class name
+   */
+  className: React.PropTypes.string,
+  /**
+   * img src (prepended with context.assetBasePath)
    */
   src: React.PropTypes.string,
   /**
-   * the image size
+   * image size
    */
   size: React.PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
 };
 
-Avatar.contextTypes = {
-  assetBasePath: React.PropTypes.string.isRequired,
-};
-
-export default prefixable(
-  flavorable(Avatar, 'avatar')
-);
+export default flavorable(Avatar, 'avatar');

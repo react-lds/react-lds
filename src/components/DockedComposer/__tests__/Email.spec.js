@@ -1,20 +1,18 @@
-jest.unmock('./../Email/index');
-
-jest.mock('./../Email/Rte', () => () => <p>Mocked out RTE</p>);
-
 import React from 'react';
 import { mount } from 'enzyme';
+
 import Email from './../Email/index';
+
+jest.unmock('./../Email/index');
+jest.mock('./../Email/Rte', () => () => <p>Mocked out RTE</p>);
 
 describe('<Email />', () => {
   let props = {};
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = {
-    assetBasePath: React.PropTypes.string,
-  };
-  const options = { context, childContextTypes };
-
   let mounted = null;
+
+  const context = { assetBasePath: '/assets', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
 
   beforeEach(() => {
     props = {
@@ -39,7 +37,7 @@ describe('<Email />', () => {
           {
             id: '3',
             label: 'Peter Griffin',
-            meta: 'petergriffin@maericandad.com',
+            meta: 'petergriffin@familyguy.com',
             objectType: 'contact',
           },
         ],
@@ -121,7 +119,7 @@ describe('<Email />', () => {
   });
 
   it('renders attachments', () => {
-    const attachments = mounted.find('ul > li > MediaObject');
+    const attachments = mounted.find('ul > li MediaObject');
     expect(attachments.length).toEqual(1);
     expect(attachments.text()).toEqual(props.value.attachments[0].name);
   });
@@ -130,7 +128,7 @@ describe('<Email />', () => {
     let footerButtons = null;
 
     beforeEach(() => {
-      footerButtons = mounted.find('footer > div > Button');
+      footerButtons = mounted.find('footer > div Button');
     });
 
     it('renders footerButtons', () => {
@@ -148,6 +146,12 @@ describe('<Email />', () => {
     it('renders sendLabel', () => {
       const elem = footerButtons.last();
       expect(elem.text()).toEqual(props.sendLabel);
+    });
+
+    it('applies className and rest-properties', () => {
+      mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+      expect(mounted.find('.slds-docked-composer').hasClass('foo')).toBeTruthy();
+      expect(mounted.find('.slds-docked-composer').prop('data-test')).toEqual('bar');
     });
   });
 });

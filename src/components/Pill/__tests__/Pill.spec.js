@@ -1,17 +1,17 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+
+import { Pill } from '../Pill';
+import { Icon, Avatar } from '../../../';
+
 jest.unmock('../Pill');
 
-import React from 'react';
-import { Pill } from '../';
-import { Icon, Avatar } from '../../../';
-import { mount } from 'enzyme';
-
-describe('<PillContainer />', () => {
+describe('<Pill />', () => {
   let props = {};
   let mounted = null;
-  const context = { assetBasePath: '/assets' };
-  const childContextTypes = {
-    assetBasePath: React.PropTypes.string,
-  };
+
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
@@ -19,41 +19,45 @@ describe('<PillContainer />', () => {
       title: 'A title',
       label: 'A label',
     };
-    mounted = mount(
-      <Pill {...props} />, options
-    );
+    mounted = shallow(<Pill {...props} />, options);
   });
 
-  it('should render as a <span> when no url is passed', () => {
-    expect(mounted.find('span.pill__label').length).toBe(1);
+  it('renders as a <span> when no url is passed', () => {
+    expect(mounted.find('span.slds-pill__label').length).toBe(1);
   });
 
-  it('should render as an <a> when an url is passed', () => {
+  it('renders as an <a> when an url is passed', () => {
     mounted.setProps({ url: '#foo' });
-    expect(mounted.find('a.pill__label').length).toBe(1);
+    expect(mounted.find('a.slds-pill__label').length).toBe(1);
   });
 
-  it('should render a close-button', () => {
-    expect(mounted.find('button.pill__remove').length).toBe(1);
+  it('renders a close-button', () => {
+    expect(mounted.find('.slds-pill__remove').length).toBe(1);
   });
 
-  it('should render a label', () => {
-    expect(mounted.find('.pill__label').text()).toEqual(props.label);
+  it('renders a label', () => {
+    expect(mounted.find('.slds-pill__label').text()).toEqual(props.label);
   });
 
-  it('should render a title-attribute', () => {
-    expect(mounted.find('.pill__label').props().title).toEqual(props.title);
+  it('renders a title-attribute', () => {
+    expect(mounted.find('.slds-pill__label').props().title).toEqual(props.title);
   });
 
-  it('should render a portrait', () => {
+  it('renders a portrait', () => {
     const portrait = (<Avatar src="foo" />);
     mounted.setProps({ portrait });
-    expect(mounted.find('.pill__icon').length).toBe(1);
+    expect(mounted.find('.slds-pill__icon').length).toBe(1);
   });
 
-  it('should render an icon', () => {
+  it('renders an icon', () => {
     const icon = (<Icon icon="delete" sprite="utility" />);
     mounted.setProps({ icon });
-    expect(mounted.find('.pill__icon_container').length).toBe(1);
+    expect(mounted.find('.slds-pill__icon_container').length).toBe(1);
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-pill').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-pill').prop('data-test')).toEqual('bar');
   });
 });

@@ -1,52 +1,39 @@
-
 import React from 'react';
-import { prefixable } from '../../decorators';
 
-export const FormElement = (props) => {
-  const { children, error, prefix, required } = props;
+import { prefixClasses } from '../../utils';
 
-  const sldsClasses = [
+const FormElement = (props, { cssPrefix }) => {
+  const { children, className, error, required, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
+  const classes = [
     'form-element',
     { 'has-error': !!error },
     { 'is-required': required },
   ];
 
-  return (
-    <div
-      className={prefix(sldsClasses, props)}
-      data-scope={props['data-scope']}
-      data-select={props['data-select']}
-    >
-      {children}
-    </div>
-  );
+  return (<div {...rest} className={prefix(classes, className)}>{children}</div>);
 };
+
+FormElement.contextTypes = { cssPrefix: React.PropTypes.string };
 
 FormElement.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * form-element children
+   * form content
    */
   children: React.PropTypes.node.isRequired,
   /**
-   * the form-element error
+   * class name
+   */
+  className: React.PropTypes.string,
+  /**
+   * can render errors for the given form element
    */
   error: React.PropTypes.string,
   /**
-   * sets the form-element required
+   * adds required-attribute to the form element
    */
   required: React.PropTypes.bool,
-  /**
-   * sets the data-scope attribute
-   */
-  'data-scope': React.PropTypes.string,
-  /**
-   * sets the data-select
-   */
-  'data-select': React.PropTypes.string,
 };
 
-export default prefixable(FormElement);
+export default FormElement;

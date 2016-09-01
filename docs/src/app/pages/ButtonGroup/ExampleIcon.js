@@ -8,13 +8,13 @@ import {
 
 const ExampleIcon = () =>
   <ButtonGroup>
-    <Button icon selected variation="icon-border">
+    <Button icon icon-border selected>
       <ButtonIcon sprite="utility" icon="chart" />
     </Button>
-    <Button icon variation="icon-border">
+    <Button icon icon-border>
       <ButtonIcon sprite="utility" icon="filterList" />
     </Button>
-    <Button icon variation="icon-border">
+    <Button icon icon-border>
       <ButtonIcon sprite="utility" icon="settings" />
     </Button>
   </ButtonGroup>;

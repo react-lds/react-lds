@@ -1,43 +1,46 @@
 import React from 'react';
 
-import prefixable from './../../decorators/prefixable';
-import { IconSVG, MediaObject } from '../../index';
+import { prefixClasses } from '../../utils';
+import { IconSVG, MediaObject } from '../../';
 
-export const PageHeaderBase = ({ prefix, title, info, icon }) => {
+const PageHeaderBase = (props, { cssPrefix }) => {
+  const { className, icon, info, title, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
   const iconRendered = <IconSVG sprite={icon.sprite} icon={icon.icon} />;
 
   return (
-    <div className={prefix(['page-header'])} role="banner">
+    <div {...rest} className={prefix('page-header', className)} role="banner">
       <MediaObject figureLeft={iconRendered} center>
-        <p className={prefix(['page-header__title', 'truncate', 'align-middle'])} title={title}>
-          {title}
-        </p>
+        <p className={prefix(['page-header__title', 'truncate', 'align-middle'])} title={title}>{title}</p>
         <p className={prefix(['text-body--small', 'page-header__info'])}>{info}</p>
       </MediaObject>
     </div>
   );
 };
 
+PageHeaderBase.contextTypes = { cssPrefix: React.PropTypes.string };
+
 PageHeaderBase.propTypes = {
   /**
-   * prefix from HOC
+   * class name
    */
-  prefix: React.PropTypes.func.isRequired,
+  className: React.PropTypes.string,
   /**
-   * Sprite and Icon
+   * icon and sprite
    */
   icon: React.PropTypes.shape({
     sprite: React.PropTypes.string.isRequired,
     icon: React.PropTypes.string.isRequired,
   }).isRequired,
   /**
-   * Main title
-   */
-  title: React.PropTypes.string.isRequired,
-  /**
    * info subtitle
    */
   info: React.PropTypes.string.isRequired,
+  /**
+   * title
+   */
+  title: React.PropTypes.string.isRequired,
 };
 
-export default prefixable(PageHeaderBase);
+export default PageHeaderBase;

@@ -1,51 +1,54 @@
 import React from 'react';
 
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
-
-import ExampleAlertNormal from './ExampleAlertNormal';
-import exampleAlertNormalCode from '!raw!./ExampleAlertNormal';
-import ExampleAlertError from './ExampleAlertError';
 import exampleAlertErrorCode from '!raw!./ExampleAlertError';
-import ExampleAlertOffline from './ExampleAlertOffline';
+import exampleAlertNormalCode from '!raw!./ExampleAlertNormal';
 import exampleAlertOfflineCode from '!raw!./ExampleAlertOffline';
-import ExampleAlertSuccess from './ExampleAlertSuccess';
 import exampleAlertSuccessCode from '!raw!./ExampleAlertSuccess';
-
-import ExampleToastNormal from './ExampleToastNormal';
-import exampleToastNormalCode from '!raw!./ExampleToastNormal';
-import ExampleToastError from './ExampleToastError';
 import exampleToastErrorCode from '!raw!./ExampleToastError';
-import ExampleToastErrorDetails from './ExampleToastErrorDetails';
 import exampleToastErrorDetailsCode from '!raw!./ExampleToastErrorDetails';
-import ExampleToastWarning from './ExampleToastWarning';
-import exampleToastWarningCode from '!raw!./ExampleToastWarning';
-import ExampleToastSuccess from './ExampleToastSuccess';
+import exampleToastNormalCode from '!raw!./ExampleToastNormal';
 import exampleToastSuccessCode from '!raw!./ExampleToastSuccess';
+import exampleToastWarningCode from '!raw!./ExampleToastWarning';
 
-import ExamplePrompt from './ExamplePrompt';
-import examplePromptCode from '!raw!./ExamplePrompt';
-
-import ExamplePromptTouch from './ExamplePromptTouch';
-import examplePromptTouchCode from '!raw!./ExamplePromptTouch';
-import ExamplePromptTouchHeader from './ExamplePromptTouchHeader';
-import examplePromptTouchHeaderCode from '!raw!./ExamplePromptTouchHeader';
-import ExamplePromptTouchTagline from './ExamplePromptTouchTagline';
-import examplePromptTouchTaglineCode from '!raw!./ExamplePromptTouchTagline';
-import ExamplePromptTouchIcon from './ExamplePromptTouchIcon';
-import examplePromptTouchIconCode from '!raw!./ExamplePromptTouchIcon';
-
-
-import ExampleModalToast from './ExampleModalToast';
 import exampleModalToastCode from '!raw!./ExampleModalToast';
+import examplePromptCode from '!raw!./ExamplePrompt';
+import examplePromptTouchCode from '!raw!./ExamplePromptTouch';
+import examplePromptTouchHeaderCode from '!raw!./ExamplePromptTouchHeader';
+import examplePromptTouchIconCode from '!raw!./ExamplePromptTouchIcon';
+import examplePromptTouchTaglineCode from '!raw!./ExamplePromptTouchTagline';
 
+import { Notification } from 'react-lds/components/Notifications/Notification';
+import notificationCode from '!raw!react-lds/components/Notifications/Notification';
 import promptCode from '!raw!react-lds/components/Notifications/Prompt';
 import promptForTouchCode from '!raw!react-lds/components/Notifications/PromptForTouch';
-import notificationCode from '!raw!react-lds/components/Notifications/Notification';
 
-require('./notifications.scss');
+import CodeExample from '../../components/CodeExample';
+import DecoratorList from '../../components/DecoratorList';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
+
+import ExampleAlertError from './ExampleAlertError';
+import ExampleAlertNormal from './ExampleAlertNormal';
+import ExampleAlertOffline from './ExampleAlertOffline';
+import ExampleAlertSuccess from './ExampleAlertSuccess';
+
+import ExampleToastError from './ExampleToastError';
+import ExampleToastErrorDetails from './ExampleToastErrorDetails';
+import ExampleToastNormal from './ExampleToastNormal';
+import ExampleToastSuccess from './ExampleToastSuccess';
+import ExampleToastWarning from './ExampleToastWarning';
+
+import ExamplePrompt from './ExamplePrompt';
+
+import ExamplePromptTouch from './ExamplePromptTouch';
+import ExamplePromptTouchHeader from './ExamplePromptTouchHeader';
+import ExamplePromptTouchIcon from './ExamplePromptTouchIcon';
+import ExamplePromptTouchTagline from './ExamplePromptTouchTagline';
+
+import ExampleModalToast from './ExampleModalToast';
+
+require('./index.scss');
 
 const Notifications = () => (
   <div>
@@ -200,19 +203,20 @@ const Notifications = () => (
       </div>
     </div>
 
+    <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">Notification</h2>
+    <DecoratorList component={Notification} />
     <PropTypeDescription
       code={notificationCode}
-      header="### Notification"
     />
 
+    <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">Prompt</h2>
     <PropTypeDescription
       code={promptCode}
-      header="### Prompt"
     />
 
+    <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">Prompt For Touch</h2>
     <PropTypeDescription
       code={promptForTouchCode}
-      header="### Prompt For Touch"
     />
 
   </div>

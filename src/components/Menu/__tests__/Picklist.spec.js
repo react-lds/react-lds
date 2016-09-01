@@ -1,49 +1,62 @@
-jest.unmock('../Picklist');
-
 import React from 'react';
-import Picklist from '../Picklist';
 import { mount } from 'enzyme';
 
+import { Picklist } from '../Picklist';
+
+jest.unmock('../Picklist');
+
 describe('</Picklist />', () => {
-  const childContextTypes = {
-    assetBasePath: React.PropTypes.string,
-  };
-  const context = { assetBasePath: '/assets' };
-  const label = 'Do not click this!';
-  const items = [{
-    key: '1',
-    label: 'first',
-    isSelected: false,
-  }, {
-    key: '2',
-    label: 'second',
-    isSelected: true,
-  }];
+  let mounted = null;
+  let props = {};
   let callback = jest.fn();
-  let elem = null;
+
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
 
   beforeEach(() => {
     callback = jest.fn();
-    elem = mount(<Picklist label={label} callback={callback} items={items} />, { context, childContextTypes });
+
+    props = {
+      label: 'Label',
+      items: [{
+        key: '1',
+        label: 'first',
+        selected: false,
+      }, {
+        key: '2',
+        label: 'second',
+        selected: true,
+      }],
+      callback,
+    };
+
+    mounted = mount(<Picklist {...props} />, options);
   });
 
   it('renders the label', () => {
-    expect(elem.find('span').first().text()).toEqual(label);
+    expect(mounted.find('span').first().text()).toEqual(props.label);
   });
 
   it('renders all childs', () => {
-    const childs = elem.find('li');
+    const childs = mounted.find('li');
     expect(childs.length).toBe(2);
   });
 
   it('correctly sets isSelected child state', () => {
-    const second = elem.find('li').at(1);
-    expect(second.hasClass('is-selected')).toBeTruthy();
+    const second = mounted.find('li').at(1);
+    expect(second.hasClass('slds-is-selected')).toBeTruthy();
   });
 
   it('executes the callback when a child was clicked', () => {
-    const first = elem.find('li').first();
+    const first = mounted.find('li').first();
     first.simulate('click');
     expect(callback.mock.calls[0][0]).toEqual('1');
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-dropdown').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-dropdown').prop('data-test')).toEqual('bar');
   });
 });

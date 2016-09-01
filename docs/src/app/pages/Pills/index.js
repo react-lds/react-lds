@@ -1,26 +1,30 @@
 import React from 'react';
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
 
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
+import exampleContainerCode from '!raw!./ExampleContainer';
+import exampleDefaultCode from '!raw!./ExampleDefault';
+import exampleIconCode from '!raw!./ExampleIcon';
+import examplePortraitCode from '!raw!./ExamplePortrait';
+import exampleTruncatedCode from '!raw!./ExampleTruncated';
+import exampleUnlinkedCode from '!raw!./ExampleUnlinked';
+import { Pill } from 'react-lds/components/Pill/Pill';
 import pillCode from '!raw!react-lds/components/Pill/Pill';
+import { PillContainer } from 'react-lds/components/Pill/PillContainer';
 import pillContainerCode from '!raw!react-lds/components/Pill/PillContainer';
 
-import ExampleDefault from './ExampleDefault';
-import exampleDefaultCode from '!raw!./ExampleDefault';
-import ExamplePortrait from './ExamplePortrait';
-import examplePortraitCode from '!raw!./ExamplePortrait';
-import ExampleIcon from './ExampleIcon';
-import exampleIconCode from '!raw!./ExampleIcon';
-import ExampleUnlinked from './ExampleUnlinked';
-import exampleUnlinkedCode from '!raw!./ExampleUnlinked';
-import ExampleTruncated from './ExampleTruncated';
-import exampleTruncatedCode from '!raw!./ExampleTruncated';
-import ExampleContainer from './ExampleContainer';
-import exampleContainerCode from '!raw!./ExampleContainer';
+import CodeExample from '../../components/CodeExample';
+import DecoratorList from '../../components/DecoratorList';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
 
-require('./pills.scss');
+import ExampleContainer from './ExampleContainer';
+import ExampleDefault from './ExampleDefault';
+import ExampleIcon from './ExampleIcon';
+import ExamplePortrait from './ExamplePortrait';
+import ExampleTruncated from './ExampleTruncated';
+import ExampleUnlinked from './ExampleUnlinked';
+
+require('./index.scss');
 
 const PillPage = () => (
   <div>
@@ -74,14 +78,16 @@ const PillPage = () => (
       <ExampleContainer />
     </div>
 
+    <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">Pill</h2>
+    <DecoratorList component={Pill} />
     <PropTypeDescription
       code={pillCode}
-      header="### Pill"
     />
 
+    <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">PillContainer</h2>
+    <DecoratorList component={PillContainer} />
     <PropTypeDescription
       code={pillContainerCode}
-      header="### PillContainer"
     />
 
   </div>

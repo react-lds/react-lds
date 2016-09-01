@@ -1,17 +1,28 @@
 import React from 'react';
-import { Button, ButtonIcon } from '../Button';
-import { prefixable, flavorable } from '../../decorators';
 
+import { prefixClasses } from '../../utils';
+import { flavorable } from '../../decorators';
+import { Button, ButtonIcon } from '../../';
 
-export const Pill = (props) => {
-  const { icon, label, onClose, portrait, prefix, title, url } = props;
+export const Pill = (props, { cssPrefix }) => {
+  const {
+    className,
+    icon,
+    label,
+    onClose,
+    portrait,
+    title,
+    url,
+    ...rest,
+  } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const isLinked = !!url;
   const LabelElement = isLinked ? 'a' : 'span';
 
   const getIcon = () => {
     if (icon) {
-      return React.cloneElement(icon, { sldsClasses: ['pill__icon_container'] });
+      return React.cloneElement(icon, { className: prefix('pill__icon_container') });
     }
 
     return null;
@@ -19,22 +30,22 @@ export const Pill = (props) => {
 
   const getPortrait = () => {
     if (portrait) {
-      return React.cloneElement(portrait, { sldsClasses: ['pill__icon'] });
+      return React.cloneElement(portrait, { className: prefix('pill__icon') });
     }
 
     return null;
   };
 
   return (
-    <span className={prefix(['pill'], props)}>
+    <span {...rest} className={prefix('pill', className)}>
       {getIcon()}
       {getPortrait()}
-      <LabelElement href={isLinked ? url : null} className={prefix(['pill__label'])} title={title}>
+      <LabelElement href={isLinked ? url : null} className={prefix('pill__label')} title={title}>
         {label}
       </LabelElement>
-      <Button onClick={onClose} sldsClasses={['pill__remove']} icon>
+      <Button onClick={onClose} className={prefix('pill__remove')} icon>
         <ButtonIcon sprite="utility" icon="close" />
-        <span className={prefix(['assistive-text'])}>Remove</span>
+        <span className={prefix('assistive-text')}>Remove</span>
       </Button>
     </span>
   );
@@ -44,37 +55,37 @@ Pill.flavors = [
   'bare',
 ];
 
+Pill.contextTypes = { cssPrefix: React.PropTypes.string };
+
 Pill.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+   * class name
    */
-  prefix: React.PropTypes.func.isRequired,
+  className: React.PropTypes.string,
   /**
-   * the title of the pill label
+   * optional Icon that receives '.pill__icon_container' class
    */
-  title: React.PropTypes.string.isRequired,
+  icon: React.PropTypes.node,
   /**
-   * the content of the pill label
+   * content of the pill label
    */
   label: React.PropTypes.string.isRequired,
+  /**
+   * onClose handler for the pill
+   */
+  onClose: React.PropTypes.func,
+  /**
+   * optional image that receives '.pill__icon' class
+   */
+  portrait: React.PropTypes.node,
+  /**
+   * title of the pill label
+   */
+  title: React.PropTypes.string.isRequired,
   /**
    * optional url for the link label
    */
   url: React.PropTypes.string,
-  /**
-   * optional icon that gets '.pill__icon_container'
-   */
-  icon: React.PropTypes.node,
-  /**
-   * optional image that gets '.pill__icon'
-   */
-  portrait: React.PropTypes.node,
-  /**
-   * function called when pill is closed
-   */
-  onClose: React.PropTypes.func,
 };
 
-export default prefixable(
-  flavorable(Pill, 'pill')
-);
+export default flavorable(Pill, 'pill');

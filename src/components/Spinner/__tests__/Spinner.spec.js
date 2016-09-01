@@ -1,23 +1,43 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+
+import { Spinner } from '../Spinner';
+
 jest.unmock('../Spinner');
 
-import React from 'react';
-import { mount } from 'enzyme';
-import Spinner from '../Spinner';
-
 describe('<Spinner />', () => {
-  it('renders the correct markup spinner', () => {
-    const comp = mount(<Spinner size="small" />);
-    expect(comp.find('.spinner_container').length).toBe(1);
-    expect(comp.find('.spinner').length).toBe(1);
-    expect(comp.find('.spinner__dot-a').length).toBe(1);
-    expect(comp.find('.spinner__dot-b').length).toBe(1);
-    expect(comp.find('.spinner_container').children().length).toBe(1);
-    expect(comp.find('.spinner').children().length).toBe(2);
+  let mounted = null;
+  let props = {};
+
+  const context = { cssPrefix: 'slds-' };
+  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
+
+  beforeEach(() => {
+    props = {
+      size: 'small',
+    };
+
+    mounted = shallow(<Spinner {...props} />, options);
   });
 
-  it('renders sizes and flavors on the spinner itself', () => {
-    const comp = mount(<Spinner inverse size="large" />);
-    expect(comp.find('.spinner').hasClass('spinner--large')).toBeTruthy();
-    expect(comp.find('.spinner').hasClass('spinner--inverse')).toBeTruthy();
+  it('renders the correct markup', () => {
+    expect(mounted.find('.slds-spinner_container').length).toBe(1);
+    expect(mounted.find('.slds-spinner').length).toBe(1);
+    expect(mounted.find('.slds-spinner__dot-a').length).toBe(1);
+    expect(mounted.find('.slds-spinner__dot-b').length).toBe(1);
+    expect(mounted.find('.slds-spinner_container').children().length).toBe(1);
+    expect(mounted.find('.slds-spinner').children().length).toBe(2);
+  });
+
+  it('renders sizes', () => {
+    mounted.setProps({ size: 'large' });
+    expect(mounted.find('.slds-spinner').hasClass('slds-spinner--large')).toBeTruthy();
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-spinner').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-spinner').prop('data-test')).toEqual('bar');
   });
 });

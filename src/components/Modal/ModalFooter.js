@@ -1,14 +1,19 @@
 import React from 'react';
-import { prefixable, flavorable } from '../../decorators';
 
-export const ModalFooter = (props) => {
+import { flavorable } from '../../decorators';
+import { prefixClasses } from '../../utils';
+
+export const ModalFooter = (props, { cssPrefix }) => {
+  const { children, className, defaultTheme, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
   const sldsClasses = [
     'modal__footer',
-    { 'theme--default': !!props.default },
+    { 'theme--default': !!defaultTheme },
   ];
 
   return (
-    <div className={props.prefix(sldsClasses, props)}>{props.children}</div>
+    <div {...rest} className={prefix(sldsClasses, className)}>{children}</div>
   );
 };
 
@@ -16,21 +21,21 @@ ModalFooter.flavors = [
   'directional',
 ];
 
+ModalFooter.contextTypes = { cssPrefix: React.PropTypes.string };
+
 ModalFooter.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * the modal content
+   * modal footer content
    */
   children: React.PropTypes.node.isRequired,
   /**
-   * render a modal with `theme--default`
+   * class name
    */
-  default: React.PropTypes.bool,
+  className: React.PropTypes.string,
+  /**
+   * renders the footer with `theme--default`
+   */
+  defaultTheme: React.PropTypes.bool,
 };
 
-export default prefixable(
-  flavorable(ModalFooter, 'modal__footer')
-);
+export default flavorable(ModalFooter, 'modal__footer');

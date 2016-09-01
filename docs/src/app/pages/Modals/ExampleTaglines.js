@@ -4,7 +4,7 @@ import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from 
 const tagline = (
   <span>
     Here’s a tagline if you need it. It is allowed to extend across mulitple lines, so I’m making up content to show
-    that to you. It is allowed to <a href="#">contain links or be a link</a>.
+    that to you. It is allowed to <a href="#top">contain links or be a link</a>.
   </span>
 );
 
@@ -26,8 +26,8 @@ const ExampleNormal = () =>
         </div>
       </ModalContent>
       <ModalFooter>
-        <Button variation="neutral" title="Cancel" />
-        <Button variation="brand" title="Save" />
+        <Button neutral title="Cancel" />
+        <Button brand title="Save" />
       </ModalFooter>
     </Modal>
     <Backdrop open />

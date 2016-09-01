@@ -1,38 +1,64 @@
 import React from 'react';
 
-import prefixable from '../../decorators/prefixable';
+import { prefixClasses } from '../../utils';
+import { Grid, Icon, MediaObject } from '../../';
 
-import { Grid, MediaObject, Icon } from '../../index';
+const Card = (props, { cssPrefix }) => {
+  const {
+    body,
+    className,
+    footer,
+    headerRight,
+    icon,
+    sprite,
+    title,
+    ...rest,
+  } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-export const Card = ({ prefix, icon, sprite, header, headerRight, body, footer }) =>
-  <div className={prefix(['card'])}>
-    <Grid className={prefix(['card__header'])}>
-      <MediaObject
-        center
-        figureLeft={<Icon sprite={sprite} icon={icon} size="small" />}
-        sldsClasses={['has-flexi-truncate']}
-      >
-        <a className={prefix(['text-link--reset'])}>
-          <span className={prefix(['text-heading--small'])}>{header}</span>
-        </a>
-      </MediaObject>
-      <div className={prefix(['no-flex'])}>
-        {headerRight}
-      </div>
-    </Grid>
-    <div className={prefix(['card__body', 'text-align--center'])}>
-      {body}
+  return (
+    <div {...rest} className={prefix('card', className)}>
+      <Grid className={prefix('card__header')}>
+        <MediaObject
+          center
+          className={prefix('has-flexi-truncate')}
+          figureLeft={<Icon sprite={sprite} icon={icon} size="small" />}
+        >
+          <a className={prefix('text-link--reset')}>
+            <span className={prefix('text-heading--small')}>{title}</span>
+          </a>
+        </MediaObject>
+        <div className={prefix('no-flex')}>{headerRight}</div>
+      </Grid>
+      <div className={prefix(['card__body', 'text-align--center'])}>{body}</div>
+      <div className={prefix(['card__footer'])}>{footer}</div>
     </div>
-    <div className={prefix(['card__footer'])}>
-      {footer}
-    </div>
-  </div>;
+  );
+};
+
+Card.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Card.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+   * card body, could be a table for example
    */
-  prefix: React.PropTypes.func.isRequired,
+  body: React.PropTypes.node,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
+  /**
+   * footer in the bottom right corner
+   */
+  footer: React.PropTypes.node,
+  /**
+   * card header
+   */
+  title: React.PropTypes.string.isRequired,
+  /**
+   * top right corner of the card, can be used for a Button for example
+   */
+  headerRight: React.PropTypes.node,
   /**
    * icon name
    */
@@ -41,22 +67,6 @@ Card.propTypes = {
    * icon sprite name
    */
   sprite: React.PropTypes.string.isRequired,
-  /**
-   * the header
-   */
-  header: React.PropTypes.string.isRequired,
-  /**
-   * Top right corner of the card, can be used for a Button for example
-   */
-  headerRight: React.PropTypes.node,
-  /**
-   * Body, could be a table for example
-   */
-  body: React.PropTypes.node,
-  /**
-   * Footer in the bottom right corner
-   */
-  footer: React.PropTypes.node,
 };
 
-export default prefixable(Card);
+export default Card;

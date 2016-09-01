@@ -1,15 +1,15 @@
 import React from 'react';
-import { prefixable, variationable } from '../../decorators';
 
-export const Row = (props) => {
-  const { head, prefix, children } = props;
+import { variationable } from '../../decorators';
+import { prefixClasses } from '../../utils';
+
+export const Row = (props, { cssPrefix }) => {
+  const { children, className, head, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
   const sldsClasses = head ? ['text-heading--label'] : [];
 
-  return (
-    <tr className={prefix(sldsClasses, props)}>
-      {children}
-    </tr>
-  );
+  return (<tr {...rest} className={prefix(sldsClasses, className)}>{children}</tr>);
 };
 
 Row.variations = [
@@ -17,21 +17,21 @@ Row.variations = [
   'hint-parent',
 ];
 
+Row.contextTypes = { cssPrefix: React.PropTypes.string };
+
 Row.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * main content
+   * row content
    */
   children: React.PropTypes.node,
   /**
-   * adds classes for header rows
+   * class name
+   */
+  className: React.PropTypes.string,
+  /**
+   * marks a header row
    */
   head: React.PropTypes.bool,
 };
 
-export default prefixable(
-  variationable(Row)
-);
+export default variationable(Row);

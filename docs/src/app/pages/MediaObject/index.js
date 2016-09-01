@@ -1,14 +1,18 @@
 import React from 'react';
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
 
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
-import MediaObjectExampleNormal from './ExampleNormal';
-import mediaObjectExampleNormalCode from '!raw!./ExampleNormal';
-import MediaObjectExampleResponsive from './ExampleResponsive';
-import mediaObjectExampleResponsiveCode from '!raw!./ExampleResponsive';
+import { MediaObject } from 'react-lds/components/MediaObject/MediaObject';
 import mediaObjectCode from '!raw!react-lds/components/MediaObject/MediaObject';
+import mediaObjectExampleNormalCode from '!raw!./ExampleNormal';
+import mediaObjectExampleResponsiveCode from '!raw!./ExampleResponsive';
+
+import CodeExample from '../../components/CodeExample';
+import DecoratorList from '../../components/DecoratorList';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
+
+import MediaObjectExampleNormal from './ExampleNormal';
+import MediaObjectExampleResponsive from './ExampleResponsive';
 
 const descriptions = {
   normal: '`MediaObject` with a `MediaObjectBody` and `MediaObejctFigure` sub-component',
@@ -35,6 +39,7 @@ const MediaObjectPage = () => (
       <MediaObjectExampleResponsive />
     </div>
 
+    <DecoratorList component={MediaObject} />
     <PropTypeDescription code={mediaObjectCode} />
   </div>
 );

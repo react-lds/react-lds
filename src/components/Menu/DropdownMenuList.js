@@ -1,13 +1,16 @@
 import React from 'react';
 
-import prefixable from './../../decorators/prefixable';
+import { prefixClasses } from '../../utils';
 
-export const DropdownMenuList = ({ prefix, header, height, heightIcon, children }) => {
+const DropdownMenuList = (props, { cssPrefix }) => {
+  const { children, className, header, height, heightIcon, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
   const renderHeader = () => {
     if (header) {
       return (
-        <div className={prefix(['dropdown__header'])}>
-          <span className={prefix(['text-heading--label'])}>{header}</span>
+        <div className={prefix('dropdown__header')}>
+          <span className={prefix('text-heading--label')}>{header}</span>
         </div>
       );
     }
@@ -15,32 +18,40 @@ export const DropdownMenuList = ({ prefix, header, height, heightIcon, children 
     return '';
   };
 
-  const listClasses =
-    `${prefix([
-      { [`dropdown--length-${height}`]: height },
-      { [`dropdown--length-with-icon-${heightIcon}`]: heightIcon },
-    ])} dropdown__list`;
+  const listClasses = [
+    { [`dropdown--length-${height}`]: height },
+    { [`dropdown--length-with-icon-${heightIcon}`]: heightIcon },
+    'dropdown__list',
+  ];
 
   return (
-    <div>
+    <div {...rest} className={className}>
       {renderHeader()}
-      <ul className={listClasses} role="menu">
+      <ul className={prefix(listClasses)} role="menu">
         {children}
       </ul>
     </div>
   );
 };
 
+DropdownMenuList.contextTypes = { cssPrefix: React.PropTypes.string };
+
 DropdownMenuList.propTypes = {
-  prefix: React.PropTypes.func,
+  /**
+   * list content
+   */
   children: React.PropTypes.arrayOf(React.PropTypes.element),
   /**
-   * Optional Header for this list. Mostly useful is multiple
-   * DropdownMenuListtItems are in use
+   * class name
+   */
+  className: React.PropTypes.string,
+  /**
+   * optional header for this list. Mostly useful is multiple
+   * DropdownMenuListItems are in use
    */
   header: React.PropTypes.string,
   /**
-   * how many items should be displayed?
+   * sets the number of items being displayed
    */
   height: React.PropTypes.oneOf([5, 7, 10]),
   /**
@@ -49,4 +60,4 @@ DropdownMenuList.propTypes = {
   heightIcon: React.PropTypes.oneOf([5, 7, 10]),
 };
 
-export default prefixable(DropdownMenuList);
+export default DropdownMenuList;

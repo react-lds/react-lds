@@ -1,9 +1,11 @@
-
 import React from 'react';
-import { prefixable } from '../../decorators';
 
-export const ModalContent = (props) => {
-  const { prefix, children, menu } = props;
+import { prefixClasses } from '../../utils';
+
+const ModalContent = (props, { cssPrefix }) => {
+  const { children, className, menu, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
   const isMenu = !!menu;
 
   const sldsClasses = [
@@ -14,19 +16,21 @@ export const ModalContent = (props) => {
   ];
 
   return (
-    <div className={prefix(sldsClasses, props)}>{children}</div>
+    <div {...rest} className={prefix(sldsClasses, className)}>{children}</div>
   );
 };
 
+ModalContent.contextTypes = { cssPrefix: React.PropTypes.string };
+
 ModalContent.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * the modal content
+   * modal content
    */
   children: React.PropTypes.node.isRequired,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
   /**
    * render as a modal__menu instead
    */
@@ -34,4 +38,4 @@ ModalContent.propTypes = {
 };
 
 
-export default prefixable(ModalContent);
+export default ModalContent;

@@ -1,16 +1,16 @@
-jest.unmock('../RecordHome');
-
 import React from 'react';
 import { mount } from 'enzyme';
+
 import RecordHome from '../RecordHome';
 
+jest.unmock('../RecordHome');
+
 describe('<RecordHome />', () => {
-  const childContextTypes = {
-    assetBasePath: React.PropTypes.string,
-  };
-  const context = { assetBasePath: '/assets' };
-  const options = { context, childContextTypes };
   let mounted;
+
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
 
   beforeEach(() => {
     mounted = mount(
@@ -37,19 +37,25 @@ describe('<RecordHome />', () => {
   });
 
   it('contains the recordType', () => {
-    expect(mounted.find('p.text-heading--label').first().text()).toEqual('unicornz');
+    expect(mounted.find('p.slds-text-heading--label').first().text()).toEqual('unicornz');
   });
 
   it('contains the headerButtons', () => {
-    expect(mounted.find('div.col').at(1).text()).toEqual('button123');
+    expect(mounted.find('div.slds-col').at(1).text()).toEqual('button123');
   });
 
   it('contains detail items', () => {
-    const detailItems = mounted.find('li.page-header__detail-block');
+    const detailItems = mounted.find('li.slds-page-header__detail-block');
     expect(detailItems.length).toEqual(2);
-    expect(detailItems.first().find('p.text-heading--label-normal').text()).toEqual('detail1');
-    expect(detailItems.first().find('p.text-body--regular').text()).toEqual('detailcontent1');
-    expect(detailItems.at(1).find('p.text-heading--label-normal').text()).toEqual('detail2');
-    expect(detailItems.at(1).find('p.text-body--regular').text()).toEqual('detailcontent2');
+    expect(detailItems.first().find('p.slds-text-heading--label-normal').text()).toEqual('detail1');
+    expect(detailItems.first().find('p.slds-text-body--regular').text()).toEqual('detailcontent1');
+    expect(detailItems.at(1).find('p.slds-text-heading--label-normal').text()).toEqual('detail2');
+    expect(detailItems.at(1).find('p.slds-text-body--regular').text()).toEqual('detailcontent2');
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-page-header').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-page-header').prop('data-test')).toEqual('bar');
   });
 });

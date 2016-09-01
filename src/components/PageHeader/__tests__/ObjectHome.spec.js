@@ -1,16 +1,16 @@
-jest.unmock('../ObjectHome');
-
 import React from 'react';
 import { mount } from 'enzyme';
-import ObjectHome from '../ObjectHome';
+
+import { ObjectHome } from '../ObjectHome';
+
+jest.unmock('../ObjectHome');
 
 describe('<ObjectHome />', () => {
-  const childContextTypes = {
-    assetBasePath: React.PropTypes.string,
-  };
-  const context = { assetBasePath: '/assets' };
-  const options = { context, childContextTypes };
   let mounted;
+
+  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
+  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
+  const options = { context, childContextTypes };
 
   beforeEach(() => {
     mounted = mount(
@@ -25,12 +25,12 @@ describe('<ObjectHome />', () => {
     options);
   });
 
-  it('click on the headline opens the menu', () => {
+  it('opens the menu on headline click', () => {
     const headline = mounted.find('h1').first();
-    const dropdown = mounted.find('div.dropdown-trigger').first();
-    expect(dropdown.hasClass('is-open')).toBeFalsy();
+    const dropdown = mounted.find('div.slds-dropdown-trigger').first();
+    expect(dropdown.hasClass('slds-is-open')).toBeFalsy();
     headline.simulate('click');
-    expect(dropdown.hasClass('is-open')).toBeTruthy();
+    expect(dropdown.hasClass('slds-is-open')).toBeTruthy();
   });
 
   it('contains the title', () => {
@@ -38,16 +38,16 @@ describe('<ObjectHome />', () => {
   });
 
   it('contains the titleMenu', () => {
-    expect(mounted.find('div.dropdown-trigger').first().text()).toEqual('test123');
+    expect(mounted.find('div.slds-dropdown-trigger').first().text()).toEqual('test123');
   });
 
   it('contains the recordType', () => {
-    expect(mounted.find('p.text-heading--label').first().text()).toEqual('unicornz');
+    expect(mounted.find('p.slds-text-heading--label').first().text()).toEqual('unicornz');
   });
 
   it('contains topButtons', () => {
     expect(mounted
-      .find('div.grid')
+      .find('div.slds-grid')
       .first()
       .children()
       .at(1)
@@ -56,16 +56,22 @@ describe('<ObjectHome />', () => {
   });
 
   it('contains info', () => {
-    expect(mounted.find('p.text-body--small').text()).toEqual('yeah');
+    expect(mounted.find('p.slds-text-body--small').text()).toEqual('yeah');
   });
 
   it('contains bottomButtons', () => {
     expect(mounted
-      .find('div.grid')
+      .find('div.slds-grid')
       .at(4)
       .children()
       .at(1)
       .text())
       .toEqual('button1234');
+  });
+
+  it('applies className and rest-properties', () => {
+    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    expect(mounted.find('.slds-page-header').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-page-header').prop('data-test')).toEqual('bar');
   });
 });

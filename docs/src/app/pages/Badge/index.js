@@ -1,13 +1,14 @@
 import React from 'react';
 
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
+import badgeCode from '!raw!react-lds/components/Badge/Badge';
+import exampleBadgeCode from '!raw!./ExampleNormal';
+
+import CodeExample from '../../components/CodeExample';
+import PropTypeDescription from '../../components/PropTypeDescription';
+import Masthead from '../../components/MastHead';
+import HeaderIcon from '../../components/HeaderIcon';
 
 import ExampleBadge from './ExampleNormal';
-import exampleBadgeCode from '!raw!./ExampleNormal';
-import badgeCode from '!raw!react-lds/components/Badge/Badge';
 
 const Badge = () =>
   <div>

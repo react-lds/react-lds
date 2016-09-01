@@ -1,51 +1,60 @@
 import React from 'react';
-import { Modal, ModalHeader, ModalContent, Backdrop } from '../../index';
 
-const header = (title, tagline, headerIcon) => {
-  const hasHeader = !!title || !!tagline || !!headerIcon;
-  const Header = (
-    <ModalHeader title={title} tagline={tagline} uncloseable>
-      {headerIcon}
-    </ModalHeader>
+import { Modal, ModalHeader, ModalContent, Backdrop } from '../../';
+
+const PromptForTouch = (props) => {
+  const { children, className, headerIcon, label, open, tagline, title, ...rest } = props;
+
+  const header = () => {
+    const hasHeader = !!title || !!tagline || !!headerIcon;
+    const Header = (
+      <ModalHeader title={title} tagline={tagline} uncloseable>
+        {headerIcon}
+      </ModalHeader>
+    );
+    return hasHeader ? Header : null;
+  };
+
+  return (
+    <div>
+      <Modal {...rest} className={className} label={label} dialog open={open}>
+        {header()}
+        <ModalContent menu>{children}</ModalContent>
+      </Modal>
+      <Backdrop open={props.open} />
+    </div>
   );
-  return hasHeader ? Header : null;
 };
-
-const PromptForTouch = (props) => (
-  <div>
-    <Modal label={props.label} dialog open={props.open}>
-      {header(props.title, props.tagline, props.headerIcon)}
-      <ModalContent menu>{props.children}</ModalContent>
-    </Modal>
-    <Backdrop open={props.open} />
-  </div>
-);
 
 PromptForTouch.propTypes = {
   /**
-   * the prompt label
+   * prompt content
    */
-  label: React.PropTypes.string,
+  children: React.PropTypes.node.isRequired,
   /**
-   * the prompt header-icon
+   * class name
+   */
+  className: React.PropTypes.string,
+  /**
+   * prompt header-icon
    */
   headerIcon: React.PropTypes.node,
   /**
-   * the prompt title
+   * prompt label
    */
-  title: React.PropTypes.string,
-  /**
-   * the prompt tagline
-   */
-  tagline: React.PropTypes.string,
+  label: React.PropTypes.string,
   /**
    * opens the prompt
    */
   open: React.PropTypes.bool,
   /**
-   * the prompt content
+   * prompt tagline
    */
-  children: React.PropTypes.node.isRequired,
+  tagline: React.PropTypes.string,
+  /**
+   * prompt title
+   */
+  title: React.PropTypes.string,
 };
 
 export default PromptForTouch;

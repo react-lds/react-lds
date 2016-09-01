@@ -1,117 +1,22 @@
 import React from 'react';
+
 import {
-  Button,
-  ButtonIcon,
-  IconSVG,
   FormElement,
   FormElementControl,
   FormElementLabel,
   FormElementError,
+  InputRaw,
 } from '../../';
 
-import { prefixable } from '../../decorators';
-
-const InputEl = (props) => {
+const Input = props => {
   const {
-    disabled,
     error,
     errorIcon,
     iconLeft,
     iconRight,
-    iconRightOnClick,
-    id,
-    onChange,
-    onKeyPress,
-    onFocus,
-    placeholder,
-    prefix,
-    required,
-    role,
-    type,
-    value,
-    isFocused,
-  } = props;
-
-  const renderIconLeft = () => {
-    let iconName = iconLeft;
-    if (error && errorIcon) {
-      iconName = 'warning';
-    }
-
-    if (iconName) {
-      return (
-        <IconSVG
-          sldsClasses={['input__icon', 'icon-text-default', { 'input__icon--left': iconLeft && iconRight }]}
-          sprite="utility"
-          icon={iconName}
-        />
-      );
-    }
-
-    return null;
-  };
-
-  const renderIconRight = () => {
-    if (iconRight && iconRightOnClick) {
-      return (
-        <Button
-          icon
-          onClick={iconRightOnClick}
-          sldsClasses={['input__icon', { 'input__icon--right': iconLeft && iconRight }]}
-        >
-          <ButtonIcon sprite="utility" icon={iconRight} />
-        </Button>
-      );
-    }
-
-    if (iconRight) {
-      return (
-        <IconSVG
-          sldsClasses={['input__icon', 'icon-text-default', { 'input__icon--right': iconLeft && iconRight }]}
-          sprite="utility"
-          icon={iconRight}
-        />
-      );
-    }
-
-    return null;
-  };
-
-  return (
-    <span>
-      {renderIconLeft()}
-      {renderIconRight()}
-      <input
-        aria-expanded={props['aria-expanded']}
-        aria-activedescendant={props['aria-activedescendant']}
-        className={prefix(['input'])}
-        disabled={disabled}
-        id={id}
-        onChange={onChange}
-        onKeyPress={onKeyPress}
-        onFocus={onFocus}
-        placeholder={placeholder}
-        required={required}
-        role={role}
-        type={type}
-        value={value}
-        ref={(input) => { if (input && isFocused) { input.focus(); } }}
-      />
-    </span>
-  );
-};
-
-export const InputRaw = prefixable(InputEl);
-
-export const Input = (props) => {
-  const {
     id,
     label,
-    iconLeft,
-    iconRight,
     required,
-    error,
-    errorIcon,
   } = props;
 
   const hasIconLeft = !!iconLeft || (error && errorIcon);
@@ -121,81 +26,42 @@ export const Input = (props) => {
     <FormElement required={required} error={error}>
       <FormElementLabel label={label} id={id} required={required} />
       <FormElementControl hasIconLeft={hasIconLeft} hasIconRight={hasIconRight}>
-        <InputEl {...props} />
+        <InputRaw {...props} />
       </FormElementControl>
       <FormElementError error={error} />
     </FormElement>
   );
 };
 
-const propDefaults = {
+Input.contextTypes = { cssPrefix: React.PropTypes.string };
+
+Input.propDefaults = {
   type: 'text',
 };
 
-const propTypes = {
+Input.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
+   * class name
    */
-  prefix: React.PropTypes.func,
+  className: React.PropTypes.string,
   /**
-   * input onChange handler
-   */
-  onChange: React.PropTypes.func,
-  /**
-   * onKeyPress handler
-   */
-  onKeyPress: React.PropTypes.func,
-  /**
-   * input onFocus handler
-   */
-  onFocus: React.PropTypes.func,
-  /**
-   * id of the input tag element
-   */
-  id: React.PropTypes.string.isRequired,
-  /**
-   * input field value
-   */
-  value: React.PropTypes.string,
-  /**
-   * label
-   */
-  label: React.PropTypes.string,
-  /**
-   * placeholder for the input
-   */
-  placeholder: React.PropTypes.string,
-  /**
-   * sets the field required
-   */
-  required: React.PropTypes.bool,
-  /**
-   * sets the input field role
-   */
-  role: React.PropTypes.string,
-  /**
-   * disables the field
+   * adds disabled attribute to the input field
    */
   disabled: React.PropTypes.bool,
   /**
-   * if set, this error message will be shown
+   * renders an error for the input
    */
   error: React.PropTypes.string,
   /**
-   * if set, will display an error icon when error is set
+   * renders an additional error icon if an error is set
    */
   errorIcon: React.PropTypes.bool,
   /**
-   * All HTML5 types are allowed, defaults to "text"
-   * text, password, datetime, datetime-local, date, month, time, week, number, email, url, search, tel, and color
-   */
-  type: React.PropTypes.string,
-  /**
-   * icon from the utility sprite for the left side
+   * icon rendered on the left side of the input (from utility sprite)
    */
   iconLeft: React.PropTypes.string,
   /**
-   * icon form the utility sprite for the right side
+   * icon rendered on the right side of the input (from utility sprite)
    */
   iconRight: React.PropTypes.string,
   /**
@@ -203,23 +69,50 @@ const propTypes = {
    */
   iconRightOnClick: React.PropTypes.func,
   /**
-   * adds the aria-expanded label
+   * id of the input field
    */
-  'aria-expanded': React.PropTypes.bool,
+  id: React.PropTypes.string.isRequired,
   /**
-   * adds the aria-activedescendant label
-   */
-  'aria-activedescendant': React.PropTypes.string,
-  /**
-   * set focus after rendering
+   * focuses the input field
    */
   isFocused: React.PropTypes.bool,
+  /**
+   * label for the input
+   */
+  label: React.PropTypes.string,
+  /**
+   * onChange handler for input
+   */
+  onChange: React.PropTypes.func,
+  /**
+   * onFocus handler for input
+   */
+  onFocus: React.PropTypes.func,
+  /**
+   * onKeyPress handler
+   */
+  onKeyPress: React.PropTypes.func,
+  /**
+   * placeholder for the input
+   */
+  placeholder: React.PropTypes.string,
+  /**
+   * adds required attribute to input and label
+   */
+  required: React.PropTypes.bool,
+  /**
+   * role of the input field
+   */
+  role: React.PropTypes.string,
+  /**
+   * input type. all HTML5 types are allowed, defaults to "text"
+   * text, password, datetime, datetime-local, date, month, time, week, number, email, url, search, tel, and color
+   */
+  type: React.PropTypes.string,
+  /**
+   * value of the input field
+   */
+  value: React.PropTypes.string,
 };
 
-InputEl.propDefaults = propDefaults;
-InputEl.propTypes = propTypes;
-
-Input.propDefaults = propDefaults;
-Input.propTypes = propTypes;
-
-export default prefixable(Input);
+export default Input;

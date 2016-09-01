@@ -20,3 +20,4 @@ export * from './components/Spinner';
 export * from './components/Tab';
 export * from './components/DockedComposer';
 export * from './decorators';
+export * from './utils';

@@ -1,31 +1,34 @@
 import React from 'react';
 
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
-
-import SpinnerExampleSmall from './ExampleSmall';
-import spinnerExampleSmallCode from '!raw!./ExampleSmall';
-import SpinnerExampleMedium from './ExampleMedium';
-import spinnerExampleMediumCode from '!raw!./ExampleMedium';
-import SpinnerExampleLarge from './ExampleLarge';
-import spinnerExampleLargeCode from '!raw!./ExampleLarge';
-import SpinnerExampleBrandSmall from './ExampleBrandSmall';
-import spinnerExampleBrandSmallCode from '!raw!./ExampleBrandSmall';
-import SpinnerExampleBrandMedium from './ExampleBrandMedium';
-import spinnerExampleBrandMediumCode from '!raw!./ExampleBrandMedium';
-import SpinnerExampleBrandLarge from './ExampleBrandLarge';
-import spinnerExampleBrandLargeCode from '!raw!./ExampleBrandLarge';
-import SpinnerExampleInverseSmall from './ExampleInverseSmall';
-import spinnerExampleInverseSmallCode from '!raw!./ExampleInverseSmall';
-import SpinnerExampleInverseMedium from './ExampleInverseMedium';
-import spinnerExampleInverseMediumCode from '!raw!./ExampleInverseMedium';
-import SpinnerExampleInverseLarge from './ExampleInverseLarge';
-import spinnerExampleInverseLargeCode from '!raw!./ExampleInverseLarge';
+import { Spinner } from 'react-lds/components/Spinner/Spinner';
 import spinnerCode from '!raw!react-lds/components/Spinner/Spinner';
+import spinnerExampleBrandLargeCode from '!raw!./ExampleBrandLarge';
+import spinnerExampleBrandMediumCode from '!raw!./ExampleBrandMedium';
+import spinnerExampleBrandSmallCode from '!raw!./ExampleBrandSmall';
+import spinnerExampleInverseLargeCode from '!raw!./ExampleInverseLarge';
+import spinnerExampleInverseMediumCode from '!raw!./ExampleInverseMedium';
+import spinnerExampleInverseSmallCode from '!raw!./ExampleInverseSmall';
+import spinnerExampleLargeCode from '!raw!./ExampleLarge';
+import spinnerExampleMediumCode from '!raw!./ExampleMedium';
+import spinnerExampleSmallCode from '!raw!./ExampleSmall';
 
-require('./spinners.scss');
+import CodeExample from '../../components/CodeExample';
+import DecoratorList from '../../components/DecoratorList';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
+
+import SpinnerExampleBrandLarge from './ExampleBrandLarge';
+import SpinnerExampleBrandMedium from './ExampleBrandMedium';
+import SpinnerExampleBrandSmall from './ExampleBrandSmall';
+import SpinnerExampleInverseLarge from './ExampleInverseLarge';
+import SpinnerExampleInverseMedium from './ExampleInverseMedium';
+import SpinnerExampleInverseSmall from './ExampleInverseSmall';
+import SpinnerExampleLarge from './ExampleLarge';
+import SpinnerExampleMedium from './ExampleMedium';
+import SpinnerExampleSmall from './ExampleSmall';
+
+require('./index.scss');
 
 const Spinners = () => (
   <div>
@@ -111,6 +114,8 @@ const Spinners = () => (
         <SpinnerExampleInverseLarge />
       </div>
     </div>
+
+    <DecoratorList component={Spinner} />
     <PropTypeDescription code={spinnerCode} />
   </div>
 );

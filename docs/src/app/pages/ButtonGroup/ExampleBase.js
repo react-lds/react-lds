@@ -4,9 +4,9 @@ import { ButtonGroup, Button } from 'react-lds';
 
 const ExampleBase = () =>
   <ButtonGroup>
-    <Button variation="neutral" title="Button One" />
-    <Button variation="neutral" title="Button Two" />
-    <Button variation="neutral" title="Button Three" />
+    <Button neutral title="Button One" />
+    <Button neutral title="Button Two" />
+    <Button neutral title="Button Three" />
   </ButtonGroup>;
 
 export default ExampleBase;

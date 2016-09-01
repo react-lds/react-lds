@@ -1,21 +1,37 @@
 import React from 'react';
-import { prefixable, themeable } from '../../decorators';
 
-const Box = (props) => {
+import { themeable } from '../../decorators';
+import { prefixClasses } from '../../utils';
+
+export const Box = (props, { cssPrefix }) => {
+  const { children, className, size, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
   const sldsClasses = [
     'box',
-    { [`box--${props.size}`]: !!props.size },
+    { [`box--${size}`]: !!size },
   ];
 
   return (
-    <div className={props.prefix(sldsClasses, props)}>{props.children}</div>
+    <div {...rest} className={prefix(sldsClasses, className)}>{children}</div>
   );
 };
 
+Box.contextTypes = { cssPrefix: React.PropTypes.string };
+
 Box.propTypes = {
-  size: React.PropTypes.oneOf(['x-small', 'small']),
-  prefix: React.PropTypes.func,
+  /**
+   * box content
+   */
   children: React.PropTypes.node,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
+  /**
+   * box size
+   */
+  size: React.PropTypes.oneOf(['x-small', 'small']),
 };
 
-export default prefixable(themeable(Box));
+export default themeable(Box);

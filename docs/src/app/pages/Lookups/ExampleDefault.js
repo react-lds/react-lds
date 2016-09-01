@@ -42,6 +42,7 @@ const exampleData = [
 
 const ExampleDefault = () => {
   const loadFunction = () => {
+    // eslint-disable-next-line no-console
     console.log('load called');
     return exampleData;
   };

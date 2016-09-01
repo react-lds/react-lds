@@ -1,29 +1,34 @@
 import React from 'react';
-import { flavorable, prefixable } from '../../decorators';
 
-export const Modal = (props) => {
+import { flavorable } from '../../decorators';
+import { prefixClasses } from '../../utils';
+
+export const Modal = (props, { cssPrefix }) => {
   const {
-    prefix,
     children,
+    className,
     description,
     dialog,
     label,
     open,
-    prompt, // eslint-disable-line react/prop-types
+    prompt,
+    ...rest,
   } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const isOpen = !!open;
   const isDialog = !!dialog || !!prompt;
-  const role = !!prompt ? 'alertdialog' : 'dialog';
+  const role = prompt ? 'alertdialog' : 'dialog';
   const containerRole = isDialog ? 'document' : null;
 
   const sldsClasses = [
     'modal',
+    { 'modal--prompt': !!prompt },
     { 'fade-in-open': isOpen },
   ];
 
   const childrenWithProps = [...children].map((child, i) => {
-    const childName = !!child ? child.type.displayName : null;
+    const childName = child ? child.type.displayName || child.type.name : null;
 
     if (childName === 'ModalHeader') {
       return React.cloneElement(child, {
@@ -39,14 +44,15 @@ export const Modal = (props) => {
 
   return (
     <div
-      className={prefix(sldsClasses, props)}
+      {...rest}
+      className={prefix(sldsClasses, className)}
       role={role}
       aria-describedby={description}
-      aria-hidden={`${!isOpen}`}
+      aria-hidden={!isOpen}
       aria-labelledby={label}
     >
       <div
-        className={prefix(['modal__container'])}
+        className={prefix('modal__container')}
         id={description}
         role={containerRole}
         tabIndex={isDialog ? '0' : null}
@@ -59,20 +65,21 @@ export const Modal = (props) => {
 
 Modal.flavors = [
   'large',
-  'prompt',
 ];
+
+Modal.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Modal.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * the modal content
+   * modal content
    */
   children: React.PropTypes.node.isRequired,
   /**
-   * the id of the modal-content (required as aria-describedby). must be set for --prompts
+   * class name
+   */
+  className: React.PropTypes.string,
+  /**
+   * id of the modal-content (required as aria-describedby). must be set for --prompts
    */
   description: React.PropTypes.string,
   /**
@@ -80,13 +87,17 @@ Modal.propTypes = {
    */
   dialog: React.PropTypes.bool,
   /**
-   * the id of the modal-heading (required as aria-labelledby for modals and prompts, but not for PromptForTouch)
+   * id of the modal-heading
    */
   label: React.PropTypes.string,
   /**
    * opens the modal
    */
   open: React.PropTypes.bool,
+  /**
+   * opens the modal
+   */
+  prompt: React.PropTypes.bool,
 };
 
-export default prefixable(flavorable(Modal, 'modal'));
+export default flavorable(Modal, 'modal');

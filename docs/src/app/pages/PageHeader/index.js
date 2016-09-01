@@ -1,20 +1,21 @@
 import React from 'react';
 
-import CodeExample from './../../components/CodeExample';
-import PropTypeDescription from './../../components/PropTypeDescription';
-import Masthead from './../../Masthead';
-import HeaderIcon from './../../HeaderIcon';
-
-import PageHeaderExample from './ExampleNormal';
-import pageHeaderExampleCode from '!raw!./ExampleNormal';
-import RecordHomeExample from './ExampleRecordHome';
-import recordHomeExampleCode from '!raw!./ExampleRecordHome';
-import ObjectHomeExample from './ExampleObjectHome';
-import objectHomeExampleCode from '!raw!./ExampleObjectHome';
-
-import pageHeaderBaseCode from '!raw!react-lds/components/PageHeader/PageHeaderBase';
-import recordHomeCode from '!raw!react-lds/components/PageHeader/RecordHome';
 import objectHomeCode from '!raw!react-lds/components/PageHeader/ObjectHome';
+import objectHomeExampleCode from '!raw!./ExampleObjectHome';
+import pageHeaderBaseCode from '!raw!react-lds/components/PageHeader/PageHeaderBase';
+import pageHeaderExampleCode from '!raw!./ExampleNormal';
+import recordHomeCode from '!raw!react-lds/components/PageHeader/RecordHome';
+import recordHomeExampleCode from '!raw!./ExampleRecordHome';
+
+import CodeExample from '../../components/CodeExample';
+import HeaderIcon from '../../components/HeaderIcon';
+import Masthead from '../../components/MastHead';
+import PropTypeDescription from '../../components/PropTypeDescription';
+
+
+import ObjectHomeExample from './ExampleObjectHome';
+import PageHeaderExample from './ExampleNormal';
+import RecordHomeExample from './ExampleRecordHome';
 
 const PageHeaders = () => (
   <div>

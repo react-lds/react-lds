@@ -1,19 +1,21 @@
 import React from 'react';
 
-import CodeExample from './../../../components/CodeExample';
-import ExampleDefault from './ExampleDefault';
-import exampleDefaultCode from '!raw!./ExampleDefault';
-import ExampleRequired from './ExampleRequired';
-import exampleRequiredCode from '!raw!./ExampleRequired';
-import ExampleError from './ExampleError';
-import exampleErrorCode from '!raw!./ExampleError';
-import ExampleDisabled from './ExampleDisabled';
-import exampleDisabledCode from '!raw!./ExampleDisabled';
-import ExampleMultiple from './ExampleMultiple';
-import exampleMultipleCode from '!raw!./ExampleMultiple';
 
-import PropTypeDescription from './../../../components/PropTypeDescription';
+import exampleDefaultCode from '!raw!./ExampleDefault';
+import exampleDisabledCode from '!raw!./ExampleDisabled';
+import exampleErrorCode from '!raw!./ExampleError';
+import exampleMultipleCode from '!raw!./ExampleMultiple';
+import exampleRequiredCode from '!raw!./ExampleRequired';
 import selectCode from '!raw!react-lds/components/Form/Select';
+
+import CodeExample from '../../../components/CodeExample';
+import PropTypeDescription from '../../../components/PropTypeDescription';
+
+import ExampleDefault from './ExampleDefault';
+import ExampleDisabled from './ExampleDisabled';
+import ExampleError from './ExampleError';
+import ExampleMultiple from './ExampleMultiple';
+import ExampleRequired from './ExampleRequired';
 
 const mapId = (id) => {
   let Component = ExampleDefault;

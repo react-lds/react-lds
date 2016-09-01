@@ -1,30 +1,34 @@
 import React from 'react';
+
+import { prefixClasses } from '../../utils';
 import {
   FormElement,
   FormElementControl,
   FormElementLabel,
   FormElementError,
 } from '../../';
-import { prefixable } from '../../decorators';
 
-export const Select = (props) => {
+const Select = (props, { cssPrefix }) => {
   const {
     children,
+    className,
     disabled,
     error,
     id,
     label,
     multiple,
     onChange,
-    prefix,
     required,
+    ...rest,
   } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderSelect = () => {
     const select = (
       <select
+        {...rest}
         id={id}
-        className={prefix(['select'])}
+        className={prefix('select', className)}
         onChange={onChange}
         multiple={multiple}
         required={required}
@@ -38,7 +42,7 @@ export const Select = (props) => {
       return select;
     }
 
-    return (<div className={prefix(['select_container'])}>{select}</div>);
+    return (<div className={prefix('select_container')}>{select}</div>);
   };
 
   return (
@@ -52,43 +56,46 @@ export const Select = (props) => {
   );
 };
 
+Select.contextTypes = { cssPrefix: React.PropTypes.string };
+
+
 Select.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * select onChange handler
-   */
-  onChange: React.PropTypes.func,
-  /**
-   * id of the select tag element
-   */
-  id: React.PropTypes.string.isRequired,
-  /**
-   * options & optgroups of the select tag element
+   * options & optgroups of the select
    */
   children: React.PropTypes.node.isRequired,
   /**
-   * label
+   * class name
    */
-  label: React.PropTypes.string.isRequired,
+  className: React.PropTypes.string,
   /**
-   * sets the field required
-   */
-  required: React.PropTypes.bool,
-  /**
-   * disables the field
+   * adds disabled attribute to the select
    */
   disabled: React.PropTypes.bool,
   /**
-   * if set, this error message will be shown
+  * renders an error for the select
    */
   error: React.PropTypes.string,
   /**
-   * sets the field to multiple mode
+   * id of the select
+   */
+  id: React.PropTypes.string.isRequired,
+  /**
+   * label for the select
+   */
+  label: React.PropTypes.string.isRequired,
+  /**
+   * adds the multiple attribute to the select
    */
   multiple: React.PropTypes.bool,
+  /**
+   * onChange handler for the select
+   */
+  onChange: React.PropTypes.func,
+  /**
+   * adds required attribute to the select field and label
+   */
+  required: React.PropTypes.bool,
 };
 
-export default prefixable(Select);
+export default Select;

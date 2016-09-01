@@ -1,20 +1,21 @@
 import React from 'react';
+import { prefixClasses } from '../utils';
 
 const themeNames = [
-  'default',
-  'shade',
-  'inverse',
   'alt-inverse',
+  'default',
+  'error',
   'info',
+  'inverse',
+  'offline',
+  'shade',
   'success',
   'warning',
-  'error',
-  'offline',
 ];
 
 const validThemes = themeNames.concat(themeNames.map(themeName => `${themeName} texture`));
 
-function themePropType(props, propName, componentName) {
+const themePropType = (props, propName, componentName) => {
   const theme = props[propName];
 
   if (typeof theme !== 'undefined' && typeof theme !== 'string') {
@@ -28,9 +29,9 @@ function themePropType(props, propName, componentName) {
   }
 
   return null;
-}
+};
 
-function getThemeClassName(theme) {
+const getTheme = theme => {
   let classes = [];
 
   if (/\stexture/.test(theme)) {
@@ -40,45 +41,36 @@ function getThemeClassName(theme) {
   }
 
   return classes;
-}
+};
 
-const themeable = (Component) => {
-  const displayName = Component.displayName || Component.name;
+const themeable = C => {
+  const ThemedComponent = (props, { cssPrefix }) => {
+    const { className, theme, ...rest } = props;
+    const prefix = classes => prefixClasses(cssPrefix, classes, className);
 
-  const ThemedComponent = (props) => {
-    const newProps = Object.assign({}, props);
-    const existingSlds = props.sldsClasses || [];
+    const classes = prefix(getTheme(theme));
 
-    newProps.sldsClasses = [...new Set(
-      getThemeClassName(props.theme).concat(existingSlds)
-    )];
-
-    return (
-      <Component {...newProps} />
-    );
+    return (<C {...rest} className={classes} />);
   };
 
-  if (Component.propTypes && Component.propTypes.theme) {
-    // eslint-disable-next-line no-console
-    console.warn(`Warning: \`@themeable()\` is overriding the original \`${displayName}.propTypes.theme\`.`);
-  }
+  ThemedComponent.displayName = `Themed_${C.displayName || C.name}`;
 
-  ThemedComponent.displayName = displayName;
-
-  ThemedComponent.propTypes = Object.assign({}, Component.propTypes, {
+  ThemedComponent.contextTypes = Object.assign({}, C.contextTypes, {
+    cssPrefix: React.PropTypes.string,
+  });
+  ThemedComponent.propTypes = Object.assign({}, C.propTypes, {
     theme: themePropType,
   });
 
-  if (Component.contextTypes) {
-    ThemedComponent.contextTypes = Component.contextTypes;
+  if (C.variations) {
+    ThemedComponent.variations = C.variations;
+  }
+
+  if (C.flavors) {
+    ThemedComponent.flavors = C.flavors;
   }
 
   return ThemedComponent;
 };
 
-export {
-  themePropType,
-  validThemes,
-  getThemeClassName,
-  themeable as default,
-};
+export default themeable;

@@ -1,14 +1,13 @@
 import React from 'react';
-import { prefixable, flavorable, variationable } from '../../decorators';
 
-export const Grid = (props) => {
-  const sldsClasses = ['grid'];
+import { flavorable, variationable } from '../../decorators';
+import { prefixClasses } from '../../utils';
 
-  return (
-    <div className={props.prefix(sldsClasses, props)}>
-      {props.children}
-    </div>
-  );
+export const Grid = (props, { cssPrefix }) => {
+  const { children, className, ...rest } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
+  return (<div {...rest} className={prefix('grid', className)}>{children}</div>);
 };
 
 Grid.flavors = [
@@ -33,19 +32,19 @@ Grid.variations = [
   { nowrap: ['small', 'medium', 'large'] },
 ];
 
+Grid.contextTypes = { cssPrefix: React.PropTypes.string };
+
 Grid.propTypes = {
   /**
-   * the prefix function from the prefixable HOC
-   */
-  prefix: React.PropTypes.func,
-  /**
-   * main content
+   * grid content
    */
   children: React.PropTypes.node,
+  /**
+   * class name
+   */
+  className: React.PropTypes.string,
 };
 
-export default prefixable(
-  variationable(
-    flavorable(Grid, 'grid')
-  )
+export default variationable(
+  flavorable(Grid, 'grid')
 );

@@ -9,8 +9,9 @@ module.exports = {
     path.resolve(__dirname, './src/app/main.js'),
   ],
   output: {
-    path: path.resolve(__dirname, 'src'),
-    filename: 'demo.js',
+    path: path.resolve(__dirname, 'build'),
+    publicPath: '/',
+    filename: 'docs.js',
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
