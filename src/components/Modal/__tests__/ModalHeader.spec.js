@@ -31,10 +31,10 @@ describe('<ModalHeader />', () => {
     expect(mounted.find('.slds-modal__close').length).toBe(1);
   });
 
-  it('onClickClose triggers when close buttin was clicked', () => {
+  it('onClickClose triggers when close button was clicked', () => {
     const closeCallback = jest.fn();
-    const wrapper = mount(<ModalHeader onClickClose={closeCallback} />, options);
-    wrapper.find('.button.modal__close').simulate('click');
+    mounted.setProps({ onClickClose: closeCallback });
+    mounted.find('.slds-modal__close').simulate('click');
     expect(closeCallback).toBeCalled();
   });
 

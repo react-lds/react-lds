@@ -1,6 +1,6 @@
 import React from 'react';
 import enhanceWithClickOutside from 'react-click-outside';
-import { debounce } from 'lodash';
+import debounce from 'lodash.debounce';
 import omit from 'lodash.omit';
 
 import { prefixClasses } from '../../utils';

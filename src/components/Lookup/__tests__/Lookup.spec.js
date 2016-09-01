@@ -4,6 +4,7 @@ import { mount } from 'enzyme';
 import { Lookup } from '../Lookup';
 
 jest.unmock('../Lookup');
+jest.useFakeTimers();
 
 describe('<Lookup />', () => {
   let mounted = null;
@@ -164,6 +165,7 @@ describe('<Lookup />', () => {
     mounted.setProps({ load: mockFunction });
     const input = mounted.find('input');
     input.simulate('change');
+    jest.runAllTimers();
     expect(mockFunction).toBeCalled();
   });
 
@@ -172,6 +174,7 @@ describe('<Lookup />', () => {
     mounted.setProps({ load: mockFunction, loadOnFocus: true });
     const input = mounted.find('input');
     input.simulate('focus');
+    jest.runAllTimers();
     expect(mockFunction).toBeCalled();
   });
 
@@ -180,6 +183,7 @@ describe('<Lookup />', () => {
     props = Object.assign({}, props, { load: mockFunction, loadOnMount: true });
     mounted = mount(<Lookup {...props} />, options);
     mounted.setProps({ load: mockFunction, loadOnMount: true });
+    jest.runAllTimers();
     expect(mockFunction).toBeCalled();
   });
 
