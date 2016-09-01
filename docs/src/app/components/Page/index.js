@@ -1,10 +1,16 @@
 import React from 'react';
 import Navigation from '../Navigation';
 
+let basePath = '/';
+
+if (!module.hot) {
+  basePath = 'https://propertybase.github.io/react-lds/';
+}
+
 class Page extends React.Component {
   getChildContext() {
     return {
-      assetBasePath: '/',
+      assetBasePath: basePath,
       cssPrefix: 'slds-',
     };
   }

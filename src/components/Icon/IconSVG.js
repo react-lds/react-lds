@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { prefixClasses } from '../../utils';
 
 const IconSVG = (props, { assetBasePath, cssPrefix }) => {

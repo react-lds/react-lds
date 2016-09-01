@@ -1,6 +1,7 @@
 import React from 'react';
-import { prefixClasses } from '../../utils';
+
 import { variationable } from '../../decorators';
+import { prefixClasses } from '../../utils';
 
 export const Row = (props, { cssPrefix }) => {
   const { children, className, head, ...rest } = props;

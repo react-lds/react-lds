@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, ButtonIcon } from '../../index';
+
 import { prefixClasses } from '../../utils';
+import { Button, ButtonIcon } from '../../';
 
 const ModalHeader = (props, { cssPrefix }) => {
   const { children, className, label, prompt, tagline, title, uncloseable, onClickClose, ...rest } = props;

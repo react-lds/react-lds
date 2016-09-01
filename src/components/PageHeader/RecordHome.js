@@ -1,6 +1,7 @@
 import React from 'react';
+
 import { prefixClasses } from '../../utils';
-import { Grid, Column, MediaObject, IconSVG } from '../../index';
+import { Grid, Column, MediaObject, IconSVG } from '../../';
 
 const RecordHome = (props, { cssPrefix }) => {
   const { className, detailItems = [], headerButtons, icon, recordType, title, ...rest } = props;

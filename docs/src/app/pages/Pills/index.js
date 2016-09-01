@@ -6,10 +6,13 @@ import exampleIconCode from '!raw!./ExampleIcon';
 import examplePortraitCode from '!raw!./ExamplePortrait';
 import exampleTruncatedCode from '!raw!./ExampleTruncated';
 import exampleUnlinkedCode from '!raw!./ExampleUnlinked';
+import { Pill } from 'react-lds/components/Pill/Pill';
 import pillCode from '!raw!react-lds/components/Pill/Pill';
+import { PillContainer } from 'react-lds/components/Pill/PillContainer';
 import pillContainerCode from '!raw!react-lds/components/Pill/PillContainer';
 
 import CodeExample from '../../components/CodeExample';
+import DecoratorList from '../../components/DecoratorList';
 import HeaderIcon from '../../components/HeaderIcon';
 import Masthead from '../../components/MastHead';
 import PropTypeDescription from '../../components/PropTypeDescription';
@@ -75,14 +78,16 @@ const PillPage = () => (
       <ExampleContainer />
     </div>
 
+    <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">Pill</h2>
+    <DecoratorList component={Pill} />
     <PropTypeDescription
       code={pillCode}
-      header="### Pill"
     />
 
+    <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">PillContainer</h2>
+    <DecoratorList component={PillContainer} />
     <PropTypeDescription
       code={pillContainerCode}
-      header="### PillContainer"
     />
 
   </div>

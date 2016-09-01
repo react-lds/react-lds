@@ -1,6 +1,7 @@
 import React from 'react';
-import { prefixClasses } from '../../utils';
+
 import { flavorable, variationable } from '../../decorators';
+import { prefixClasses } from '../../utils';
 
 export const Table = (props, { cssPrefix }) => {
   const { children, className, ...rest } = props;

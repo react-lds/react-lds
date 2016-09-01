@@ -3,7 +3,7 @@ import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash.omit';
 
 import { prefixClasses } from '../../utils';
-import { Button, ButtonIcon } from '../../index';
+import { Button, ButtonIcon } from '../../';
 
 export class DropdownMenu extends React.Component {
   static contextTypes = { cssPrefix: React.PropTypes.string };

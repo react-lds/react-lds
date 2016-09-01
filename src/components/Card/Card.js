@@ -1,6 +1,7 @@
 import React from 'react';
-import { Grid, Icon, MediaObject } from '../../index';
+
 import { prefixClasses } from '../../utils';
+import { Grid, Icon, MediaObject } from '../../';
 
 const Card = (props, { cssPrefix }) => {
   const {

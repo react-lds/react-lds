@@ -1,5 +1,6 @@
 import React from 'react';
-import { Modal, ModalHeader, ModalContent, Backdrop } from '../../index';
+
+import { Modal, ModalHeader, ModalContent, Backdrop } from '../../';
 
 const PromptForTouch = (props) => {
   const { children, className, headerIcon, label, open, tagline, title, ...rest } = props;

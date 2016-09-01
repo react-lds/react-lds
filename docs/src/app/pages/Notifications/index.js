@@ -17,11 +17,13 @@ import examplePromptTouchHeaderCode from '!raw!./ExamplePromptTouchHeader';
 import examplePromptTouchIconCode from '!raw!./ExamplePromptTouchIcon';
 import examplePromptTouchTaglineCode from '!raw!./ExamplePromptTouchTagline';
 
+import { Notification } from 'react-lds/components/Notifications/Notification';
 import notificationCode from '!raw!react-lds/components/Notifications/Notification';
 import promptCode from '!raw!react-lds/components/Notifications/Prompt';
 import promptForTouchCode from '!raw!react-lds/components/Notifications/PromptForTouch';
 
 import CodeExample from '../../components/CodeExample';
+import DecoratorList from '../../components/DecoratorList';
 import HeaderIcon from '../../components/HeaderIcon';
 import Masthead from '../../components/MastHead';
 import PropTypeDescription from '../../components/PropTypeDescription';
@@ -201,19 +203,20 @@ const Notifications = () => (
       </div>
     </div>
 
+    <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">Notification</h2>
+    <DecoratorList component={Notification} />
     <PropTypeDescription
       code={notificationCode}
-      header="### Notification"
     />
 
+    <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">Prompt</h2>
     <PropTypeDescription
       code={promptCode}
-      header="### Prompt"
     />
 
+    <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">Prompt For Touch</h2>
     <PropTypeDescription
       code={promptForTouchCode}
-      header="### Prompt For Touch"
     />
 
   </div>

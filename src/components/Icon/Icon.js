@@ -1,6 +1,7 @@
 import React from 'react';
-import IconSVG from './IconSVG';
+
 import { prefixClasses } from '../../utils';
+import { IconSVG } from '../../';
 
 const iconClass = (sprite, icon) => icon.replace(/_/g, '-');
 

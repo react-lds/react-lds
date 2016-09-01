@@ -1,7 +1,7 @@
-
 import React from 'react';
-import { prefixClasses } from '../../utils';
+
 import { flavorable } from '../../decorators';
+import { prefixClasses } from '../../utils';
 
 export const Avatar = (props, { cssPrefix }) => {
   const { alt, className, src, size, ...rest } = props;

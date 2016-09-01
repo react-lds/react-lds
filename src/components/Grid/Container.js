@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { flavorable } from '../../decorators';
 
 export const Container = (props) => {

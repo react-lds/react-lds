@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Spinner } from 'react-lds/components/Spinner/Spinner';
 import spinnerCode from '!raw!react-lds/components/Spinner/Spinner';
 import spinnerExampleBrandLargeCode from '!raw!./ExampleBrandLarge';
 import spinnerExampleBrandMediumCode from '!raw!./ExampleBrandMedium';
@@ -12,6 +13,7 @@ import spinnerExampleMediumCode from '!raw!./ExampleMedium';
 import spinnerExampleSmallCode from '!raw!./ExampleSmall';
 
 import CodeExample from '../../components/CodeExample';
+import DecoratorList from '../../components/DecoratorList';
 import HeaderIcon from '../../components/HeaderIcon';
 import Masthead from '../../components/MastHead';
 import PropTypeDescription from '../../components/PropTypeDescription';
@@ -112,6 +114,8 @@ const Spinners = () => (
         <SpinnerExampleInverseLarge />
       </div>
     </div>
+
+    <DecoratorList component={Spinner} />
     <PropTypeDescription code={spinnerCode} />
   </div>
 );

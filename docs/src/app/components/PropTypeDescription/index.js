@@ -152,7 +152,7 @@ const PropTypeDescription = ({ code, header }) => {
   }
 
   return (
-    <div className="propTypeDescription slds-p-around--xx-large">
+    <div className="propTypeDescription slds-p-left--xx-large slds-p-right--xx-large slds-p-bottom--xx-large">
       <MarkdownElement text={text} />
       <div style={{ fontSize: '90%', paddingLeft: '15px' }}>{requiredPropFootnote}</div>
     </div>

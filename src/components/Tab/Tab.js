@@ -1,5 +1,6 @@
 import React from 'react';
 import omit from 'lodash.omit';
+
 import { prefixClasses } from '../../utils';
 
 class Tab extends React.Component {

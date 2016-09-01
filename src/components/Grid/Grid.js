@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { flavorable, variationable } from '../../decorators';
 import { prefixClasses } from '../../utils';
 

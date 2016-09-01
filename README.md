@@ -29,7 +29,7 @@ const HelloWorld = props => (
 
 ```
 
-Head over to the [Docs](#) to see a list of available components and their usage as well as interactive sample implementations of each component.
+Head over to the [Docs](https://propertybase.github.io/react-lds) to see a list of available components and their usage as well as interactive sample implementations of each component.
 
 ### Context
 
@@ -115,15 +115,43 @@ import React from 'react';
 import { Grid, Column } from 'react-lds';
 
 // Wrap is a variation, pull-padded is a flavor. There is no difference in usage
-const GridSystem = props =>
-<Grid pull-padded wrap>
-  {props.children}
-</Grid>;
+const GridSystem = props => (
+  <Grid pull-padded wrap>
+    {props.children}
+  </Grid>
+);
 ```
 
 #### Prefixes
 
-React LDS internally prefixes all relevant classNames with the cssPrefix you set in the React context (`slds-` in the standard LDS implementation).
+React LDS internally prefixes all relevant classNames with the cssPrefix you set in the React context (`slds-` in the standard LDS implementation). You can implement this behavior in your own components like this:
+
+``` js
+import React from 'react';
+import { prefixClasses } from 'react-lds';
+
+const CustomComponent = (props, { cssPrefix }) => {
+  const { className, children } = props;
+  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
+  const sldsClasses = [
+    'text-heading--small',
+    'button',
+  ];
+  // sldsClasses will be prefixed, className will be passed without prefixing
+  return (
+    <div className={prefix(sldsClasses, className)}>{children}</div>
+  );
+};
+
+CustomComponent.contextTypes = { cssPrefix: React.PropTypes.string };
+
+
+// Usage
+<CustomComponent className="custom-class-1 custom-class-2" />
+```
+
+You can pass custom, non-prefixed classes to react-lds components via the `className`-prop. These will be added to the prefixed classes.
 
 ### Interactivity
 
@@ -132,6 +160,7 @@ Some components need a certain level of interactivity to be usable as React comp
  - `<Email />`
  - `<Lookup />`
  - `<DropDownMenu />`
+ - `<Modal />`
  - `<PickList />`
  - `<Tab />`
 
@@ -152,7 +181,10 @@ provided `styles.css` inside the `dist` folder.
 You can change the port with the `PORT=` environment variable. Hot reloading
 is setup to reload whenever a file was changed.
 
+For component-skelethons, check out the Wiki.
+
 ## Developing while embedded into a react project
+
 `npm link` in this folder. After you changed stuff, run `npm build` to update
 the files inside the `dist` folder, because that's the entry point for
 external react applications.

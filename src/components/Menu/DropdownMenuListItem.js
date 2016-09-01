@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { prefixClasses } from '../../utils';
-import { IconSVG } from '../../index';
+import { IconSVG } from '../../';
 
 const DropdownMenuListItem = (props, { cssPrefix }) => {
   const { children, className, onClick, selected, leftIcon, rightIcon, divider, ...rest } = props;

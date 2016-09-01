@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, ButtonIcon } from '../../index';
+
 import { flavorable, themeable } from '../../decorators';
 import { prefixClasses } from '../../utils';
+import { Button, ButtonIcon } from '../../';
 
 const getThemeName = themeStr => {
   if (typeof themeStr === 'string') {

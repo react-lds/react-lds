@@ -10,11 +10,10 @@ import {
   FormElementLabel,
   Icon,
   IconSVG,
+  InputRaw,
   Pill,
   PillContainer,
 } from '../../';
-
-import { InputRaw } from '../Form/Input';
 
 const validateSelection = (props, propName, componentName, ...rest) => {
   const arrayValidation = React.PropTypes.array(props, propName, componentName, ...rest);

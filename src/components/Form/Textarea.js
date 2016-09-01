@@ -1,11 +1,12 @@
 import React from 'react';
+
+import { prefixClasses } from '../../utils';
 import {
   FormElement,
   FormElementControl,
   FormElementLabel,
   FormElementError,
 } from '../../';
-import { prefixClasses } from '../../utils';
 
 const Textarea = (props, { cssPrefix }) => {
   const {

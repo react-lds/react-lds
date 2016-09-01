@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { themeable } from '../../decorators';
 import { prefixClasses } from '../../utils';
 

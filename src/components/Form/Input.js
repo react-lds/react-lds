@@ -1,122 +1,12 @@
 import React from 'react';
+
 import {
-  Button,
-  ButtonIcon,
-  IconSVG,
   FormElement,
   FormElementControl,
   FormElementLabel,
   FormElementError,
+  InputRaw,
 } from '../../';
-import { prefixClasses } from '../../utils';
-
-export const InputRaw = (props, { cssPrefix }) => {
-  const {
-    className,
-    disabled,
-    error,
-    errorIcon,
-    iconLeft,
-    iconRight,
-    iconRightOnClick,
-    id,
-    onChange,
-    onKeyPress,
-    onFocus,
-    placeholder,
-    required,
-    role,
-    type,
-    value,
-    isFocused,
-    ...rest,
-  } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-
-  const renderIconLeft = () => {
-    let iconName = iconLeft;
-    if (error && errorIcon) {
-      iconName = 'warning';
-    }
-
-    if (iconName) {
-      const iconClasses = [
-        'input__icon',
-        'icon-text-default',
-        { 'input__icon--left': iconLeft && iconRight },
-      ];
-
-      return (
-        <IconSVG
-          className={prefix(iconClasses)}
-          icon={iconName}
-          sprite="utility"
-        />
-      );
-    }
-
-    return null;
-  };
-
-  const renderIconRight = () => {
-    if (iconRight && iconRightOnClick) {
-      const iconClasses = [
-        'input__icon',
-        { 'input__icon--right': iconLeft && iconRight },
-      ];
-
-      return (
-        <Button
-          className={prefix(iconClasses)}
-          icon
-          onClick={iconRightOnClick}
-        >
-          <ButtonIcon sprite="utility" icon={iconRight} />
-        </Button>
-      );
-    }
-
-    if (iconRight) {
-      const iconClasses = [
-        'input__icon',
-        'icon-text-default',
-        { 'input__icon--right': iconLeft && iconRight },
-      ];
-
-      return (
-        <IconSVG
-          className={prefix(iconClasses)}
-          sprite="utility"
-          icon={iconRight}
-        />
-      );
-    }
-
-    return null;
-  };
-
-  return (
-    <span>
-      {renderIconLeft()}
-      {renderIconRight()}
-      <input
-        {...rest}
-        className={prefix('input', className)}
-        disabled={disabled}
-        id={id}
-        onChange={onChange}
-        onKeyPress={onKeyPress}
-        onFocus={onFocus}
-        placeholder={placeholder}
-        required={required}
-        role={role}
-        type={type}
-        value={value}
-        ref={(input) => { if (input && isFocused) { input.focus(); } }}
-      />
-    </span>
-  );
-};
 
 const Input = props => {
   const {
@@ -143,13 +33,13 @@ const Input = props => {
   );
 };
 
-const propDefaults = {
+Input.contextTypes = { cssPrefix: React.PropTypes.string };
+
+Input.propDefaults = {
   type: 'text',
 };
 
-const contextTypes = { cssPrefix: React.PropTypes.string };
-
-const propTypes = {
+Input.propTypes = {
   /**
    * class name
    */
@@ -224,13 +114,5 @@ const propTypes = {
    */
   value: React.PropTypes.string,
 };
-
-InputRaw.contextTypes = contextTypes;
-InputRaw.propDefaults = propDefaults;
-InputRaw.propTypes = propTypes;
-
-Input.contextTypes = contextTypes;
-Input.propDefaults = propDefaults;
-Input.propTypes = propTypes;
 
 export default Input;

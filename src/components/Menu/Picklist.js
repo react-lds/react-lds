@@ -3,7 +3,7 @@ import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash.omit';
 
 import { prefixClasses } from '../../utils';
-import { DropdownMenu, DropdownMenuList, DropdownMenuListItem, Button, IconSVG } from '../../index';
+import { DropdownMenu, DropdownMenuList, DropdownMenuListItem, Button, IconSVG } from '../../';
 
 export class Picklist extends React.Component {
   static contextTypes = { cssPrefix: React.PropTypes.string };

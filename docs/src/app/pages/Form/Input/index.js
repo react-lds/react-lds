@@ -8,8 +8,10 @@ import exampleIconLeftCode from '!raw!./ExampleIconLeft';
 import exampleIconLeftRightCode from '!raw!./ExampleIconLeftRight';
 import exampleIconRightCode from '!raw!./ExampleIconRight';
 import exampleRequiredCode from '!raw!./ExampleRequired';
+import inputCode from '!raw!react-lds/components/Form/Input';
 
 import CodeExample from '../../../components/CodeExample';
+import PropTypeDescription from '../../../components/PropTypeDescription';
 
 import ExampleDefault from './ExampleDefault';
 import ExampleDisabled from './ExampleDisabled';
@@ -74,6 +76,8 @@ const mapId = (id) => {
         </section>
 
       </div>
+
+      <PropTypeDescription code={inputCode} header="### Input" />
     </div>
   );
 };

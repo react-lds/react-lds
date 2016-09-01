@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { MediaObject } from 'react-lds/components/MediaObject/MediaObject';
 import mediaObjectCode from '!raw!react-lds/components/MediaObject/MediaObject';
 import mediaObjectExampleNormalCode from '!raw!./ExampleNormal';
 import mediaObjectExampleResponsiveCode from '!raw!./ExampleResponsive';
 
 import CodeExample from '../../components/CodeExample';
+import DecoratorList from '../../components/DecoratorList';
 import HeaderIcon from '../../components/HeaderIcon';
 import Masthead from '../../components/MastHead';
 import PropTypeDescription from '../../components/PropTypeDescription';
@@ -37,6 +39,7 @@ const MediaObjectPage = () => (
       <MediaObjectExampleResponsive />
     </div>
 
+    <DecoratorList component={MediaObject} />
     <PropTypeDescription code={mediaObjectCode} />
   </div>
 );

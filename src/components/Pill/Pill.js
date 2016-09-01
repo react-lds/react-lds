@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, ButtonIcon } from '../Button';
+
 import { prefixClasses } from '../../utils';
 import { flavorable } from '../../decorators';
+import { Button, ButtonIcon } from '../../';
 
 export const Pill = (props, { cssPrefix }) => {
   const {

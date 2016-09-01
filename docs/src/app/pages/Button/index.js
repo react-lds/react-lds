@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Button } from 'react-lds/components/Button/Button';
 import buttonCode from '!raw!react-lds/components/Button/Button';
 import buttonIconCode from '!raw!react-lds/components/Button/ButtonIcon';
 import exampleIconOnlyCode from '!raw!./ExampleIconOnly';
@@ -7,6 +8,7 @@ import exampleIconsCode from '!raw!./ExampleIcons';
 import exampleNormalCode from '!raw!./ExampleNormal';
 
 import CodeExample from '../../components/CodeExample';
+import DecoratorList from '../../components/DecoratorList';
 import HeaderIcon from '../../components/HeaderIcon';
 import Masthead from '../../components/MastHead';
 import PropTypeDescription from '../../components/PropTypeDescription';
@@ -44,10 +46,12 @@ const Buttons = () =>
       </section>
     </div>
 
-    <h2 className="slds-text-heading--medium slds-p-left--xx-large">Button</h2>
+
+    <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">Button</h2>
+    <DecoratorList component={Button} />
     <PropTypeDescription code={buttonCode} />
 
-    <h2 className="slds-text-heading--medium slds-p-left--xx-large">Button Icon</h2>
+    <h2 className="slds-text-heading--medium slds-p-left--xx-large  slds-p-bottom--medium">Button Icon</h2>
     <PropTypeDescription code={buttonIconCode} />
   </div>;
 

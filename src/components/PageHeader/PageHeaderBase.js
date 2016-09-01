@@ -1,6 +1,7 @@
 import React from 'react';
+
 import { prefixClasses } from '../../utils';
-import { IconSVG, MediaObject } from '../../index';
+import { IconSVG, MediaObject } from '../../';
 
 const PageHeaderBase = (props, { cssPrefix }) => {
   const { className, icon, info, title, ...rest } = props;

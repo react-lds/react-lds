@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { variationable } from '../../decorators';
 import { prefixClasses, uniqueId } from '../../utils';
 import { IconSVG } from '../../';

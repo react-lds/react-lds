@@ -3,7 +3,7 @@ import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash.omit';
 
 import { prefixClasses } from '../../utils';
-import { Grid, Column, DropdownMenu } from '../../index';
+import { Grid, Column, DropdownMenu } from '../../';
 
 export class ObjectHome extends React.Component {
   static contextTypes = { cssPrefix: React.PropTypes.string };

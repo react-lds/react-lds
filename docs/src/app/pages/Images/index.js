@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Avatar } from 'react-lds/components/Images/Avatar';
 import avatarCode from '!raw!react-lds/components/Images/Avatar';
 import exampleEmptyCode from '!raw!./ExampleEmpty';
 import exampleLargeCode from '!raw!./ExampleLarge';
@@ -10,6 +11,7 @@ import exampleSmallCode from '!raw!./ExampleSmall';
 import exampleXSmallCode from '!raw!./ExampleXSmall';
 
 import CodeExample from '../../components/CodeExample';
+import DecoratorList from '../../components/DecoratorList';
 import HeaderIcon from '../../components/HeaderIcon';
 import Masthead from '../../components/MastHead';
 import PropTypeDescription from '../../components/PropTypeDescription';
@@ -82,6 +84,7 @@ const Images = () => (
       <ExampleLarge />
     </div>
 
+    <DecoratorList component={Avatar} />
     <PropTypeDescription code={avatarCode} />
 
   </div>

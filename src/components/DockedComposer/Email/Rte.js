@@ -1,6 +1,7 @@
 import React from 'react';
 import Quill from 'quill';
 import omit from 'lodash.omit';
+
 import { prefixClasses } from '../../../utils';
 
 class Rte extends React.Component {

@@ -1,6 +1,7 @@
 import React from 'react';
-import { prefixClasses } from '../../utils';
+
 import { flavorable } from '../../decorators';
+import { prefixClasses } from '../../utils';
 
 export const Button = (props, { cssPrefix }) => {
   const {

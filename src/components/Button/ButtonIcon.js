@@ -1,6 +1,7 @@
 import React from 'react';
-import { prefixClasses } from '../../utils';
+
 import { IconSVG } from '../../';
+import { prefixClasses } from '../../utils';
 
 const ButtonIcon = (props, { cssPrefix }) => {
   const { className, sprite, icon, position, size, ...rest } = props;
