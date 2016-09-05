@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+* 1.0.0 seems to have been already released.
+
 ## 1.0.0
 
 * Make everything ready for public release
