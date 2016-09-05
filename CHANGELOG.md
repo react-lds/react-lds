@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0
+
+* Make everything ready for public release
+* Cleanup of Documentation
+* Cleanup of Components
+* Cleanup of Tests
+* Removal of prefixable HOC
+
 ## 0.3.0
 
 * Deprecate `prefixable` and `sldsClasses`
