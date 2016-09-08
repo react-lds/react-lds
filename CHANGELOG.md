@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2
+
+* Make Text Content of Email Component available.
+* Update Quill to final 1.0.0
+
 ## 1.0.1
 
 * 1.0.0 seems to have been already released.
