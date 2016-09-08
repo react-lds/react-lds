@@ -119,17 +119,24 @@ class Email extends React.Component {
     this.onChangeRecipients = this.onChangeRecipients.bind(this);
     this.toggle = this.toggle.bind(this);
     this.onChangeHtml = this.onChangeHtml.bind(this);
+    this.onChangeText = this.onChangeText.bind(this);
   }
 
   onChange(params) {
     const { to, cc, bcc, subject } = params;
     const attachments = this.props.value.attachments;
     const content = params.content || this.content;
-    this.props.onChange({ content, to, cc, bcc, subject, attachments });
+    const contentText = params.contentText || this.contentText;
+    this.props.onChange({ content, contentText, to, cc, bcc, subject, attachments });
   }
 
   onChangeHtml(value) {
     this.content = value;
+    this.onChange(this.state);
+  }
+
+  onChangeText(value) {
+    this.contentText = value;
     this.onChange(this.state);
   }
 
@@ -325,6 +332,7 @@ class Email extends React.Component {
             toolbar={this.state.toolbarElem}
             initialValue={this.props.value.initialContent}
             onChange={this.onChangeHtml}
+            onChangeText={this.onChangeText}
           />
           {this.renderAttachments()}
         </div>

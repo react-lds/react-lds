@@ -21,6 +21,10 @@ class Rte extends React.Component {
      */
     onChange: React.PropTypes.func,
     /**
+     * callback with new text value
+     */
+    onChangeText: React.PropTypes.func,
+    /**
      * toolbar element used to construct quill editor
      */
     toolbar: React.PropTypes.any,
@@ -51,7 +55,13 @@ class Rte extends React.Component {
 
     editor.on('text-change', () => {
       const html = this.editorElem.querySelector('.ql-editor').innerHTML;
-      this.props.onChange(html);
+      const text = editor.getText();
+      if (this.props.onChange) {
+        this.props.onChange(html);
+      }
+      if (this.props.onChangeText) {
+        this.props.onChangeText(text);
+      }
     });
 
     this.editor = editor;
