@@ -5,5 +5,16 @@ cache:
     - node_modules
 node_js:
   - "6"
-before_script:
-  - npm run lint
+env:
+  global:
+  - secure: 2YydrbNYnLgEeOcEEw5KlEOm1a8Yn1GxN8ue723l8C/XuaySCp1pIluVUgNwgRUjTfW7YH+/PdxizbA4QsSrmA/tdK1KpZvwmUiNa3vLsHq9xJxRPE09pwV7dsD8nixZTDb54o9u+Y8pjiWboFgY7f4CDAay6qmpy0weBE/nACLMOpPJtP4RTKj3yaB2ZRGx3WGWBZWCZYwFK+ET4hvU/pv7OLOO1T0SVCx7i/Wz6DW5pvnz/GTppQrxfyYkWLQLk1qRjk+EG4RK5cuFaovf1OkE9QEnP1AgVhvgI0iwiYq+E9CkVR3StVGcmcH6XjPYb6NlnKqoitgI+gfpsWbMNi/Gse9GRtxCFHhLl7tVYnaxGJxwqgRlHciFq64KggLhvEJMgJ/zqdfMplYmG4tpLppXxM15r6RD8q87OtmbP8fkyM5kdZ6LbWib0sG6YopfO/xGW0lnrk0skwKFOWwZyQ5hRm0MvwOQOFYMtXrHUSiyBTKrCCsNIvfMrBM6b7oAHP1yX//Osb5/H9vOIyLi5a7U9LSl3koSolJkPodSJwTSOuhGfZBKSekBppZOiN9ia0bmgE4xwH3jHIG61QsBTOceNvHe2imQh1YDUA1Qjc4omFUmce9NB4MsMpEbq5/1wjgeqaeToHtFPp6TeRf0cSQV8DmbPbFJCxiWohNK18M=
+after_success:
+- npm run deploy
+deploy:
+  provider: npm
+  email: technik@propertybase.com
+  api_key:
+    secure: EQK2P3RyD0wJ9Y9DQQluVokvPrZlSrOa92m9jRq9SnoQoZTPKDPGC6gJgViih2GD7DOSQuinzyCg7LRHNMMuvwWc2rFWFZYEfcoeFggDDqChHcRMNJdI42SU2CLm6AZ+p7vnxK8mBR7rhJCKWUCehcnfDyESYgmHew11jAlbqa4Jujmzg0ZWwc04RdGL6haLJ5PVySnY12pQsxbhaLH9ETWJavA0ApVnVbbuNhUouybof21mN4bWIqNUZlblXwiA9aPyX28Fct6a633Qgxp/dHq/fp9u61LF4SbAFFAwr7fdg2dewYEWt4ho6mZxu4Dj4HU/3JP+H66+QCsib9wtBJeOrM6jHC1jzKSe1Do53PISn2oAwgClqWDtFyNKx/wQZ6zzFgxPF50ZFsTLXN7Xh73qzZrPNOTinprtWYYTdQnhSpIDWKBS+4aE/Rxy21/L4+K4F46x/Gku9dLrwD7rJ1Zr3PEt85nHX6Ghw33E+zPBPiWVDqGPEu7XRP/oABLCu0VXkMHstxe7JysDycZbeREFr+CqkByAUsrgl7U44i/XtfyCUAk3lq9cv5vp++sCQmG35ZIyHcusd47B5qyNxcDy8BTs37GUvqMJT4UPguDW/kX6Y6vlvAEr9OQ+mHpLQjmZ+5i93jd+AWtk5G/2HeM5qLLp/KEIaFBpzQzC71c=
+  on:
+    tags: true
+    repo: propertybase/react-lds

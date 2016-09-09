@@ -193,11 +193,7 @@ In your react app: `npm link react-lds`.
 
 ## Publish
 
+- Open a new pull request from `propertybase/release/{version}`
 - Adjust version in `package.json`
 - Write `CHANGELOG.md`
-- Build package and publish it
-
-    ```sh
-    npm run prebuild && npm run build
-    npm publish
-    ```
+- Merge into master and add a new tag. Travis will do the rest
