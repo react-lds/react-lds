@@ -19,7 +19,6 @@
     "build:babel": "babel ./src --ignore *.spec.js --out-dir ./dist",
     "build:copy-files": "cp ./src/styles.css ./dist/; cp ./README.md ./dist/",
     "build:docs": "rm -rf ./docs/build; webpack --config ./docs/webpack.prod.config",
-    "deploy": "bash deploy.sh",
     "prebuild": "rm -rf ./dist",
     "prepublish": "npm run prebuild; npm run build",
     "pretest": "npm run lint"
