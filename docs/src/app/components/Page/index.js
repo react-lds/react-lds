@@ -4,7 +4,7 @@ import Navigation from '../Navigation';
 let basePath = '/';
 
 if (!module.hot) {
-  basePath = 'https://propertybase.github.io/react-lds/';
+  basePath = '//propertybase.github.io/react-lds/';
 }
 
 class Page extends React.Component {
