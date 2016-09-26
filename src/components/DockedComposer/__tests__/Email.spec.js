@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import Email from './../Email/index';
+import ButtonFlavored from './../../Button/Button';
 
 jest.unmock('./../Email/index');
 jest.mock('./../Email/Rte', () => () => <p>Mocked out RTE</p>);
@@ -70,6 +71,11 @@ describe('<Email />', () => {
           key: 'attach',
           onClick: jest.fn(),
         },
+        {
+          customButton: <ButtonFlavored key="customButton" icon icon-container onClick={jest.fn()}>
+            CustomButtonText
+          </ButtonFlavored>,
+        },
       ],
       onSend: jest.fn(),
       sendLabel: 'Throw away',
@@ -131,11 +137,17 @@ describe('<Email />', () => {
       footerButtons = mounted.find('footer > div Button');
     });
 
-    it('renders footerButtons', () => {
-      props.footerButtons.forEach((button, key) => {
+    it('renders standard footerButtons', () => {
+      const standardButtons = props.footerButtons.slice(0, 1);
+      standardButtons.forEach((button, key) => {
         const elem = footerButtons.at(key);
         expect(elem.prop('onClick')).toEqual(button.onClick);
       });
+    });
+
+    it('renders custom footerButtons', () => {
+      const elem = footerButtons.at(2);
+      expect(elem.text()).toEqual('CustomButtonText');
     });
 
     it('binds onSend callback', () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Email } from 'react-lds';
+import { Email, Button, ButtonIcon } from 'react-lds';
 
 const footerButtons = [
   {
@@ -23,6 +23,11 @@ const footerButtons = [
   {
     icon: 'delete',
     key: 'delete_icon',
+  },
+  {
+    customButton: <Button icon icon-container key="CustomButton">
+      <ButtonIcon sprite="utility" icon="download" />
+    </Button>,
   },
 ];
 
