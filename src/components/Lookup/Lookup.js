@@ -13,6 +13,9 @@ import {
   InputRaw,
   Pill,
   PillContainer,
+  Table,
+  Row,
+  Cell,
 } from '../../';
 
 const validateSelection = (props, propName, componentName, ...rest) => {
@@ -93,6 +96,28 @@ export class Lookup extends React.Component {
      * timestamp.
      */
     allowCreate: React.PropTypes.bool,
+    /**
+     * if set, renders the Advanced Modal table layout
+     */
+    table: React.PropTypes.bool,
+    tableFields: React.PropTypes.arrayOf(
+      React.PropTypes.shape({
+        name: React.PropTypes.string.isRequired,
+        label: React.PropTypes.string.isRequired,
+      })
+    ),
+    /**
+     * Label behind the number of Results in the table header
+     */
+    tableResultsHeading: React.PropTypes.string,
+  };
+
+  static defaultProps = {
+    initialSelection: [],
+    loadOnChange: true,
+    multi: false,
+    placeholder: 'Search',
+    tableResultsHeading: 'Results',
   };
 
   constructor(props, context) {
@@ -356,12 +381,13 @@ export class Lookup extends React.Component {
     );
   }
 
-  lookupItems() {
-    const filterDisplayItems = (src, target, prop = 'id') =>
-      src.filter(o1 => !target.some(o2 => o1[prop] === o2[prop]));
+  filterDisplayItems(src, target, prop = 'id') {
+    return src.filter(o1 => !target.some(o2 => o1[prop] === o2[prop]));
+  }
 
+  lookupItems() {
     if (this.state.loaded.length > 0) {
-      const displayItems = filterDisplayItems(this.state.loaded, this.state.selected);
+      const displayItems = this.filterDisplayItems(this.state.loaded, this.state.selected);
       return displayItems.map((item, i) => this.lookupItem(item, i));
     }
 
@@ -369,7 +395,7 @@ export class Lookup extends React.Component {
   }
 
   lookupList() {
-    if (this.state.open && this.state.loaded.length > 0) {
+    if (!this.props.table && this.state.open && this.state.loaded.length > 0) {
       return (
         <div className={this.prefix('lookup__menu')} role="listbox">
           <div className={this.prefix(['lookup__item--label', 'text-body--small'])}>
@@ -379,6 +405,67 @@ export class Lookup extends React.Component {
             {this.lookupItems()}
           </ul>
         </div>
+      );
+    }
+
+    return null;
+  }
+
+  lookupListTable() {
+    const results = this.filterDisplayItems(this.state.loaded, this.state.selected);
+    const renderBodyCell = (content, index, objectType) => {
+      if (index === 0) {
+        return (
+          <a>
+            {objectType ?
+              (<Icon
+                size="small"
+                className={this.prefix('m-right--x-small')}
+                sprite={this.getSprite(objectType)}
+                icon={objectType}
+              />) :
+              undefined}
+            {content}
+          </a>
+        );
+      }
+
+      return content;
+    };
+
+    if (this.props.table && results.length > 0) {
+      return (
+        <Table bordered className={this.prefix('m-top--small')}>
+          <thead>
+            <Row>
+              <Cell scope="col" colSpan={this.props.tableFields.length}>
+                {`${results.length} ${this.props.tableResultsHeading}`}
+              </Cell>
+            </Row>
+            <Row>
+              {this.props.tableFields.map(field =>
+                <Cell scope="col" key={field.name}>{field.label}</Cell>
+              )}
+            </Row>
+          </thead>
+          <tbody>
+            {results.map(item =>
+              <Row key={item.id}>
+                {this.props.tableFields.map((field, index) =>
+                  <Cell
+                    truncate
+                    data-label={field.name}
+                    scope={index === 0 ? 'row' : undefined}
+                    onClick={() => this.addSelection(item)}
+                    key={`${item.id}${index}`}
+                  >
+                    {renderBodyCell(item[field.name], index, item.objectType)}
+                  </Cell>
+                )}
+              </Row>
+            )}
+          </tbody>
+        </Table>
       );
     }
 
@@ -415,26 +502,22 @@ export class Lookup extends React.Component {
     }
 
     return (
-      <FormElement
-        {...rest}
-        className={this.prefix(sldsClasses, this.props.className)}
-        data-select={scope}
-        data-scope={scope}
-      >
-        <FormElementLabel id={this.props.id} label={this.props.inputLabel} />
-        {this.input()}
-        {this.selections()}
-        {this.lookupList()}
-      </FormElement>
+      <div>
+        <FormElement
+          {...rest}
+          className={this.prefix(sldsClasses, this.props.className)}
+          data-select={scope}
+          data-scope={scope}
+        >
+          <FormElementLabel id={this.props.id} label={this.props.inputLabel} />
+          {this.input()}
+          {this.selections()}
+          {this.lookupList()}
+        </FormElement>
+        {this.lookupListTable()}
+      </div>
     );
   }
 }
-
-Lookup.defaultProps = {
-  initialSelection: [],
-  loadOnChange: true,
-  multi: false,
-  placeholder: 'Search',
-};
 
 export default enhanceWithClickOutside(Lookup);

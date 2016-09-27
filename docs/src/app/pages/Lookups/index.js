@@ -3,6 +3,7 @@ import React from 'react';
 import exampleDefaultCode from '!raw!./ExampleDefault';
 import exampleMultiCode from '!raw!./ExampleMulti';
 import exampleMultiCreateCode from '!raw!./ExampleMultiCreate';
+import exampleMultiTableCode from '!raw!./ExampleMultiTable';
 import lookupCode from '!raw!react-lds/components/Lookup/Lookup';
 
 import CodeExample from '../../components/CodeExample';
@@ -13,6 +14,7 @@ import PropTypeDescription from '../../components/PropTypeDescription';
 import ExampleDefault from './ExampleDefault';
 import ExampleMulti from './ExampleMulti';
 import ExampleMultiCreate from './ExampleMultiCreate';
+import ExampleMultiTable from './ExampleMultiTable';
 
 const LookupPage = () => (
   <div>
@@ -38,6 +40,14 @@ const LookupPage = () => (
         code={exampleMultiCreateCode}
       />
       <ExampleMultiCreate />
+    </div>
+
+    <div className="slds-p-around--xx-large">
+      <CodeExample
+        title="Multi Lookup with table results"
+        code={exampleMultiTableCode}
+      />
+      <ExampleMultiTable />
     </div>
 
     <PropTypeDescription code={lookupCode} />
