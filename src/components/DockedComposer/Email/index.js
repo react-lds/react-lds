@@ -34,6 +34,11 @@ class Email extends React.Component {
         icon: React.PropTypes.string,
         key: React.PropTypes.string,
         onClick: React.PropTypes.func,
+        /**
+         * if set, customButton will be used instead of the other props to
+         * automatically generate a button
+         */
+        customButton: React.PropTypes.node,
       })
     ),
     /*
@@ -215,10 +220,15 @@ class Email extends React.Component {
   }
 
   renderFooterButtons() {
-    return this.props.footerButtons.map((button) =>
-      <Button key={button.key} onClick={button.onClick} icon-container icon>
+    return this.props.footerButtons.map((button) => {
+      if (button.customButton) {
+        return button.customButton;
+      }
+
+      return (<Button key={button.key} onClick={button.onClick} icon-container icon>
         <ButtonIcon sprite="utility" icon={button.icon} />
-      </Button>
+      </Button>);
+    }
     );
   }
 
