@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+
+* Allow custom buttons in <Email>-Footer
+* Add Advanced Lookup Table Layout for <Lookup>
+* Lock crucial dependencies to patch-release-range
+
 ## 1.0.2
 
 * Make Text Content of Email Component available.
