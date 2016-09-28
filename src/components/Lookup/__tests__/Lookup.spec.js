@@ -105,6 +105,13 @@ describe('<Lookup />', () => {
     expect(mounted.find('.slds-lookup__list .slds-lookup__item-action').length).toBe(7);
   });
 
+  it('renders a lookup list with table layout', () => {
+    mounted.setState({ open: true, loaded: sampleData });
+    mounted.setProps({ table: true, tableFields: [{ name: 'Name', label: 'Name' }] });
+    expect(mounted.find('.slds-lookup__list .slds-lookup__item-action').length).toBe(0);
+    expect(mounted.find('table tbody tr').length).toBe(7);
+  });
+
   it('renders lookup items correctly', () => {
     mounted.setState({ open: true, loaded: [sampleData[0]] });
 
