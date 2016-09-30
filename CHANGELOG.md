@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.4
+* Button Labels in Dropdown Menu
+
 ## 1.0.3
 
 * Allow custom buttons in <Email>-Footer
