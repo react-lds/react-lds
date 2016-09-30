@@ -77,9 +77,9 @@ DropdownMenuListItem.contextTypes = { cssPrefix: React.PropTypes.string };
 
 DropdownMenuListItem.propTypes = {
   /**
-   * The content of a menu item, this is just a string
+   * The content of a menu item
    */
-  children: React.PropTypes.string.isRequired,
+  children: React.PropTypes.node.isRequired,
   /**
    * class name
    */

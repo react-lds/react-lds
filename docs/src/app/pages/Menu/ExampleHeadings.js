@@ -6,7 +6,7 @@ import {
 } from 'react-lds';
 
 const ExampleHeadings = () => {
-  const button = { sprite: 'utility', icon: 'down' };
+  const button = { sprite: 'utility', icon: 'down', title: 'Click me', neutral: true };
 
   return (
     <DropdownMenu button={button} size="medium" position="top-left">

@@ -22,6 +22,7 @@ export class DropdownMenu extends React.Component {
      * {
      *    icon: 'settings',
      *    sprite: 'utility',
+     *    title: 'Click me',
      *    noBorder: true,
      * }
      * ```
@@ -29,7 +30,10 @@ export class DropdownMenu extends React.Component {
     button: React.PropTypes.shape({
       icon: React.PropTypes.string.isRequired,
       sprite: React.PropTypes.string.isRequired,
+      title: React.PropTypes.string,
       noBorder: React.PropTypes.bool,
+      neutral: React.PropTypes.bool,
+      brand: React.PropTypes.bool,
     }),
     /**
      * one DropdownMenuList or many of them
@@ -92,14 +96,22 @@ export class DropdownMenu extends React.Component {
   button() {
     if (this.props.button) {
       const noBorder = this.props.button.noBorder;
+      const title = this.props.button.title;
       return (
         <Button
+          title={this.props.button.title}
           disabled={this.props.disabled}
-          icon-border-filled={!noBorder}
-          icon-container={noBorder}
+          icon-border-filled={!noBorder && !title}
+          icon-container={noBorder && !title}
           onClick={this.toggle}
+          neutral={this.props.button.neutral}
+          brand={this.props.button.brand}
         >
-          <ButtonIcon sprite={this.props.button.sprite} icon={this.props.button.icon} />
+          <ButtonIcon
+            sprite={this.props.button.sprite}
+            icon={this.props.button.icon}
+            position={title ? 'right' : undefined}
+          />
         </Button>
       );
     }
