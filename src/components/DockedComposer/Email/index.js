@@ -85,6 +85,10 @@ class Email extends React.Component {
      */
     subjectPlaceholder: React.PropTypes.string,
     /**
+     * disable alignment buttons
+     */
+    toolbarDisableTextAlign: React.PropTypes.bool,
+    /**
      * Optional Toolbar ButtonGroup content on the left side
      */
     toolbarButtonGroupLeft: React.PropTypes.node,
@@ -338,6 +342,7 @@ class Email extends React.Component {
 
           <div ref={this.addToolbar}>
             <Toolbar
+              disableTextAlign={this.props.toolbarDisableTextAlign}
               buttonGroupRight={this.props.toolbarButtonGroupRight}
               buttonGroupLeft={this.props.toolbarButtonGroupLeft}
             />
