@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.5
+* Prop to disable text alignment in Email Component
+* Prop to disable send button in Email Component
+* Jest16 / newest eslint
+
 ## 1.0.4
 * Button Labels in Dropdown Menu
 
