@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import flavorable from '../flavorable';
 
-jest.unmock('../flavorable');
-
 describe('flavorable()', () => {
   let mounted = null;
   const DummyComponent = () => (<div>it works</div>);

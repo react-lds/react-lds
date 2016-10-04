@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import { Badge } from '../Badge';
 
-jest.unmock('../Badge');
-
 describe('<Badge />', () => {
   let mounted = null;
 

@@ -4,8 +4,6 @@ import { mount } from 'enzyme';
 import { Modal } from '../Modal';
 import ModalHeader from '../ModalHeader';
 
-jest.unmock('../Modal');
-
 describe('<Modal />', () => {
   let mounted = null;
 

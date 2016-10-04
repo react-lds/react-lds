@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import { ModalFooter } from '../ModalFooter';
 
-jest.unmock('../ModalFooter');
-
 describe('<ModalFooter />', () => {
   let mounted = null;
   const child = (<div className="foo">bar</div>);

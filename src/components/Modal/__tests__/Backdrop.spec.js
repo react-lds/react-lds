@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import { Backdrop } from '../Backdrop';
 
-jest.unmock('../Backdrop');
-
 describe('<Backdrop />', () => {
   let mounted = null;
 

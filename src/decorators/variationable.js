@@ -33,7 +33,7 @@ function getValidVariations(definition) {
 
 const filterVariations = (props, validVariations) => omit(Object.assign({}, props), validVariations);
 
-const variationable = C => {
+const variationable = (C) => {
   const validVariations = getValidVariations(C.variations);
 
   const VariationedComponent = (props, { cssPrefix }) => {

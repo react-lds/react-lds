@@ -69,7 +69,7 @@ class Tab extends React.Component {
   }
 
   renderBody() {
-    return this.props.tabs.map(tab => {
+    return this.props.tabs.map((tab) => {
       const classes = [
         `tabs--${this.props.variation}__content`,
         { show: this.state.activeTab === tab.id },

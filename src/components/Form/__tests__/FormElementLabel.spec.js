@@ -3,8 +3,6 @@ import { mount } from 'enzyme';
 
 import FormElementLabel from '../FormElementLabel';
 
-jest.unmock('../FormElementLabel');
-
 describe('<FormElementLabel />', () => {
   let mounted = null;
   let props = {};

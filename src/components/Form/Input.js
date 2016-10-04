@@ -8,7 +8,7 @@ import {
   InputRaw,
 } from '../../';
 
-const Input = props => {
+const Input = (props) => {
   const {
     error,
     errorIcon,

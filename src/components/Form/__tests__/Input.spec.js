@@ -3,8 +3,6 @@ import { mount } from 'enzyme';
 
 import Input from '../Input';
 
-jest.unmock('../Input');
-
 describe('<Input />', () => {
   let props = {};
   let mounted = null;

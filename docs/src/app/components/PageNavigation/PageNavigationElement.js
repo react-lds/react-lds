@@ -26,12 +26,10 @@ const PageNavigationElement = (props, { router }) => {
 };
 
 PageNavigationElement.propTypes = {
-  children: React.PropTypes.node,
   to: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.object]).isRequired,
   query: React.PropTypes.object,
   hash: React.PropTypes.string,
   state: React.PropTypes.object,
-  activeClassName: React.PropTypes.string,
 };
 
 PageNavigationElement.contextTypes = {

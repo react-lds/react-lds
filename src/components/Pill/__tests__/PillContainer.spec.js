@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import { PillContainer } from '../PillContainer';
 
-jest.unmock('../PillContainer');
-
 describe('<PillContainer />', () => {
   let mounted = null;
   const child = <div className="foo">bar</div>;

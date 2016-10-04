@@ -1,7 +1,5 @@
 import prefixClasses from '../prefixClasses';
 
-jest.unmock('../prefixClasses');
-
 describe('prefixClasses()', () => {
   const prefix = 'slds-';
 

@@ -95,8 +95,8 @@ const listings = [
   },
 ];
 
-const loadRecipients = (searchTerm) => exampleData.filter((elem) => elem.label.startsWith(searchTerm));
-const loadListings = (searchTerm) => listings.filter((elem) => elem.label.startsWith(searchTerm));
+const loadRecipients = searchTerm => exampleData.filter(elem => elem.label.startsWith(searchTerm));
+const loadListings = searchTerm => listings.filter(elem => elem.label.startsWith(searchTerm));
 const selectSomething = (
   <form className="slds-form--inline">
     <Select label="Selct" id="select-something">

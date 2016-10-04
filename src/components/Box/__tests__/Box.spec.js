@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import { Box } from '../Box';
 
-jest.unmock('../Box');
-
 describe('<Box />', () => {
   let mounted = null;
 

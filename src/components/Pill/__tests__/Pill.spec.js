@@ -4,8 +4,6 @@ import { shallow } from 'enzyme';
 import { Pill } from '../Pill';
 import { Icon, Avatar } from '../../../';
 
-jest.unmock('../Pill');
-
 describe('<Pill />', () => {
   let props = {};
   let mounted = null;

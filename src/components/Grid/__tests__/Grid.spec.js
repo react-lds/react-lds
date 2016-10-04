@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import { Grid } from '../Grid';
 
-jest.unmock('../Grid');
-
 describe('<Grid />', () => {
   let mounted = null;
   const child = <div className="foo" />;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge } from 'react-lds';
 
-const DecoratorList = props => {
+const DecoratorList = (props) => {
   const { component } = props;
 
   const variations = component.variations;

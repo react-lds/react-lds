@@ -3,8 +3,6 @@ import { mount } from 'enzyme';
 
 import { ObjectHome } from '../ObjectHome';
 
-jest.unmock('../ObjectHome');
-
 describe('<ObjectHome />', () => {
   let mounted;
 

@@ -3,7 +3,6 @@ import { mount } from 'enzyme';
 
 import { Lookup } from '../Lookup';
 
-jest.unmock('../Lookup');
 jest.useFakeTimers();
 
 describe('<Lookup />', () => {

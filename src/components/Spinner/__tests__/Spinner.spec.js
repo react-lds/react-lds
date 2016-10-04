@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import { Spinner } from '../Spinner';
 
-jest.unmock('../Spinner');
-
 describe('<Spinner />', () => {
   let mounted = null;
   let props = {};

@@ -4,9 +4,6 @@ import { shallow } from 'enzyme';
 import ButtonGroup from '../ButtonGroup';
 import { Button } from '../../Button/Button';
 
-jest.unmock('../ButtonGroup');
-jest.unmock('../../Button/Button');
-
 describe('<ButtonGroup />', () => {
   let mounted = null;
   const child = <Button title="foobar" neutral />;

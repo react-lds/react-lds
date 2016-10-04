@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import Icon from '../Icon';
 
-jest.unmock('../Icon');
-
 describe('<Icon />', () => {
   let mounted = null;
   let props = {};

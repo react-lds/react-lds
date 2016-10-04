@@ -3,8 +3,6 @@ import { mount } from 'enzyme';
 
 import { DropdownMenu } from '../DropdownMenu';
 
-jest.unmock('../DropdownMenu');
-
 describe('<DropdownMenu />', () => {
   let mounted = null;
   let props = {};
@@ -50,7 +48,7 @@ describe('<DropdownMenu />', () => {
   });
 
   it('customButtom is used when provided', () => {
-    const customButton = <div>i'm a button!</div>;
+    const customButton = <div>im a button!</div>;
     mounted.setProps({ button: undefined, customButton });
     expect(mounted.contains(customButton)).toBeTruthy();
   });

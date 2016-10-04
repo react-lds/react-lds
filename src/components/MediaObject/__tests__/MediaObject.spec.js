@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import { MediaObject } from '../MediaObject';
 
-jest.unmock('../MediaObject');
-
 describe('<MediaObject />', () => {
   let mounted = null;
   const figure = <div className="foo" />;

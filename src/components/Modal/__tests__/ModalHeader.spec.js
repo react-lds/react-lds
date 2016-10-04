@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import ModalHeader from '../ModalHeader';
 
-jest.unmock('../ModalHeader');
-
 describe('<ModalHeader />', () => {
   let mounted = null;
   let props = {};
