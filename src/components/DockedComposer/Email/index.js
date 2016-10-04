@@ -77,6 +77,10 @@ class Email extends React.Component {
      */
     sendLabel: React.PropTypes.string,
     /**
+     * disables send button if true
+     */
+    sendDisabled: React.PropTypes.bool,
+    /**
      * placeholder for subject input element
      */
     subjectPlaceholder: React.PropTypes.string,
@@ -357,7 +361,7 @@ class Email extends React.Component {
             ])}
           >
             {this.renderFooterButtons()}
-            <Button brand onClick={this.props.onSend}>{this.props.sendLabel}</Button>
+            <Button brand disabled={this.props.sendDisabled} onClick={this.props.onSend}>{this.props.sendLabel}</Button>
           </div>
         </footer>
       </div>
