@@ -59,7 +59,7 @@ export class Picklist extends React.Component {
   }
 
   menuItems() {
-    return this.props.items.map(item => {
+    return this.props.items.map((item) => {
       const boundClick = this.props.callback.bind(this, item.key);
 
       return (

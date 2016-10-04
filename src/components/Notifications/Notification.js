@@ -4,7 +4,7 @@ import { flavorable, themeable } from '../../decorators';
 import { prefixClasses } from '../../utils';
 import { Button, ButtonIcon } from '../../';
 
-const getThemeName = themeStr => {
+const getThemeName = (themeStr) => {
   if (typeof themeStr === 'string') {
     return themeStr.includes('theme--warning');
   }

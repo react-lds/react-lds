@@ -18,7 +18,7 @@ const server = new WebPackDevServer(compiler, {
   stats: { colors: true },
 });
 
-server.listen(port, 'localhost', err => {
+server.listen(port, 'localhost', (err) => {
   if (err) {
     // eslint-disable-next-line
     return console.log(err);

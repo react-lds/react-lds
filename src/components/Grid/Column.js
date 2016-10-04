@@ -28,7 +28,7 @@ export const Column = (props, { cssPrefix }) => {
   const breakpoints = Array.from(validBreakpoints);
   breakpoints.unshift('');
 
-  breakpoints.forEach(breakpoint => {
+  breakpoints.forEach((breakpoint) => {
     const propName = breakpoint === '' ? 'sizeOf' : breakPointProp(breakpoint);
     const sizeString = breakpoint === '' ? 'size' : `${breakpoint}-size`;
 

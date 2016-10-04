@@ -21,7 +21,7 @@ class ExamplePicklist extends React.Component {
 
   callback(key) {
     // you are responsible for the logic of multi or single picklists
-    const newItems = this.state.items.map(item => {
+    const newItems = this.state.items.map((item) => {
       const newItem = Object.assign({}, item);
       if (item.key === key) {
         newItem.selected = !newItem.selected;

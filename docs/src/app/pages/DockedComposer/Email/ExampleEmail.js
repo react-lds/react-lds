@@ -85,7 +85,7 @@ const exampleData = [
   },
 ];
 
-const loadRecipients = (searchTerm) => exampleData.filter((elem) => elem.label.startsWith(searchTerm));
+const loadRecipients = searchTerm => exampleData.filter(elem => elem.label.startsWith(searchTerm));
 
 class ExampleEmail extends React.Component {
   constructor(props) {

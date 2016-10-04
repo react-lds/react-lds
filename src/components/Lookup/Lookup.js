@@ -29,6 +29,21 @@ const validateSelection = (props, propName, componentName, ...rest) => {
   return arrayValidation;
 };
 
+/**
+* use standard sprite and if custom icon is used, custom sprite
+*/
+function getSprite(objectType = '') {
+  if (objectType.startsWith('custom')) {
+    return 'custom';
+  }
+
+  return 'standard';
+}
+
+function filterDisplayItems(src, target, prop = 'id') {
+  return src.filter(o1 => !target.some(o2 => o1[prop] === o2[prop]));
+}
+
 export class Lookup extends React.Component {
   static contextTypes = { cssPrefix: React.PropTypes.string };
   static propTypes = {
@@ -146,17 +161,6 @@ export class Lookup extends React.Component {
     if (!!this.props.onChange && this.state.selected !== nextState.selected) {
       this.props.onChange(nextState.selected);
     }
-  }
-
-  /**
-   * use standard sprite and if custom icon is used, custom sprite
-   */
-  getSprite(objectType = '') {
-    if (objectType.startsWith('custom')) {
-      return 'custom';
-    }
-
-    return 'standard';
   }
 
   // Event Handlers
@@ -326,7 +330,7 @@ export class Lookup extends React.Component {
         return this.removeSelection.bind(this, item)();
       };
       const icon =
-        item.objectType ? (<Icon sprite={this.getSprite(item.objectType)} icon={item.objectType} />) : undefined;
+        item.objectType ? (<Icon sprite={getSprite(item.objectType)} icon={item.objectType} />) : undefined;
       return (
         <Pill
           key={i}
@@ -371,7 +375,7 @@ export class Lookup extends React.Component {
     return (
       <li onClick={addSelection} onMouseOver={highlightSelection} key={i}>
         <a className={this.prefix(sldsClasses)} role="option">
-          <IconSVG sprite={this.getSprite(item.objectType)} icon={item.objectType} />
+          <IconSVG sprite={getSprite(item.objectType)} icon={item.objectType} />
           <div className={this.prefix('media__body')}>
             <div className={this.prefix('lookup__result-text')}>{item.label}</div>
             {renderMeta()}
@@ -381,13 +385,9 @@ export class Lookup extends React.Component {
     );
   }
 
-  filterDisplayItems(src, target, prop = 'id') {
-    return src.filter(o1 => !target.some(o2 => o1[prop] === o2[prop]));
-  }
-
   lookupItems() {
     if (this.state.loaded.length > 0) {
-      const displayItems = this.filterDisplayItems(this.state.loaded, this.state.selected);
+      const displayItems = filterDisplayItems(this.state.loaded, this.state.selected);
       return displayItems.map((item, i) => this.lookupItem(item, i));
     }
 
@@ -412,7 +412,7 @@ export class Lookup extends React.Component {
   }
 
   lookupListTable() {
-    const results = this.filterDisplayItems(this.state.loaded, this.state.selected);
+    const results = filterDisplayItems(this.state.loaded, this.state.selected);
     const renderBodyCell = (content, index, objectType) => {
       if (index === 0) {
         return (
@@ -421,7 +421,7 @@ export class Lookup extends React.Component {
               (<Icon
                 size="small"
                 className={this.prefix('m-right--x-small')}
-                sprite={this.getSprite(objectType)}
+                sprite={getSprite(objectType)}
                 icon={objectType}
               />) :
               undefined}

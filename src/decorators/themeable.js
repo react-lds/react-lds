@@ -31,7 +31,7 @@ const themePropType = (props, propName, componentName) => {
   return null;
 };
 
-const getTheme = theme => {
+const getTheme = (theme) => {
   let classes = [];
 
   if (/\stexture/.test(theme)) {
@@ -43,7 +43,7 @@ const getTheme = theme => {
   return classes;
 };
 
-const themeable = C => {
+const themeable = (C) => {
   const ThemedComponent = (props, { cssPrefix }) => {
     const { className, theme, ...rest } = props;
     const prefix = classes => prefixClasses(cssPrefix, classes, className);

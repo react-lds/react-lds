@@ -101,7 +101,7 @@ export const Cell = (props, { cssPrefix }) => {
     return null;
   };
 
-  const wrapChildren = content => {
+  const wrapChildren = (content) => {
     if (!!sortable && isHeader) {
       return <a className={prefix(['th__action', 'text-link--reset'])}>{content}</a>;
     }

@@ -48,7 +48,7 @@ describe('<DropdownMenu />', () => {
   });
 
   it('customButtom is used when provided', () => {
-    const customButton = <div>i'm a button!</div>;
+    const customButton = <div>im a button!</div>;
     mounted.setProps({ button: undefined, customButton });
     expect(mounted.contains(customButton)).toBeTruthy();
   });

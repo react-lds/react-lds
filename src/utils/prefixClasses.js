@@ -3,7 +3,7 @@ import isArray from 'lodash.isarray';
 import isString from 'lodash.isstring';
 
 const prefixClasses = (prefix, classes, passThrough) => {
-  const applyPrefix = className => {
+  const applyPrefix = (className) => {
     if (className) {
       const classString = classNames(className);
       if (classString !== '') {
