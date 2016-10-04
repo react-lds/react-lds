@@ -7,7 +7,7 @@ import { Button, ButtonIcon, ButtonGroup, Grid } from '../../../';
 // font sizes.
 
 const Toolbar = (props, { cssPrefix }) => {
-  const { buttonGroupLeft, buttonGroupRight, className, ...rest } = props;
+  const { disableTextAlign, buttonGroupLeft, buttonGroupRight, className, ...rest } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const sldsClasses = [
@@ -16,6 +16,23 @@ const Toolbar = (props, { cssPrefix }) => {
     'grid',
     'grid--align-spread',
   ];
+
+  const renderButtonGroupAlign = () => {
+    if (disableTextAlign) {
+      return null;
+    }
+
+    return (
+      <ButtonGroup>
+        <Button icon icon-border-filled className="ql-align" value="center">
+          <ButtonIcon sprite="utility" icon="center_align_text" />
+        </Button>
+        <Button icon icon-border-filled className="ql-align" value="right">
+          <ButtonIcon sprite="utility" icon="right_align_text" />
+        </Button>
+      </ButtonGroup>
+    );
+  };
 
   return (
     <div
@@ -43,14 +60,7 @@ const Toolbar = (props, { cssPrefix }) => {
             <ButtonIcon sprite="utility" icon="richtextbulletedlist" />
           </Button>
         </ButtonGroup>
-        <ButtonGroup>
-          <Button icon icon-border-filled className="ql-align" value="center">
-            <ButtonIcon sprite="utility" icon="center_align_text" />
-          </Button>
-          <Button icon icon-border-filled className="ql-align" value="right">
-            <ButtonIcon sprite="utility" icon="right_align_text" />
-          </Button>
-        </ButtonGroup>
+        {renderButtonGroupAlign()}
         {buttonGroupRight ? <ButtonGroup>{buttonGroupRight}</ButtonGroup> : null}
       </Grid>
     </div>
@@ -60,6 +70,10 @@ const Toolbar = (props, { cssPrefix }) => {
 Toolbar.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Toolbar.propTypes = {
+  /**
+   * if true, text centering and left-align buttons won't be displayed
+   */
+  disableTextAlign: React.PropTypes.bool,
   /**
    * optional ButtonGroup content on the left side
    */
