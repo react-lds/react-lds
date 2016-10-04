@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import { Avatar } from '../Avatar';
 
-jest.unmock('../Avatar');
-
 describe('<Avatar />', () => {
   let mounted = null;
   let props = {};

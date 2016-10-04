@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import DropdownMenuList from '../DropdownMenuList';
 
-jest.unmock('../DropdownMenuList');
-
 describe('<DropdownMenuList />', () => {
   let mounted = null;
 

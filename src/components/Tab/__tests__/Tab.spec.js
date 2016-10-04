@@ -3,8 +3,6 @@ import { mount } from 'enzyme';
 
 import Tab from '../Tab';
 
-jest.unmock('../Tab');
-
 describe('<Tab />', () => {
   let mounted;
   let props = {};

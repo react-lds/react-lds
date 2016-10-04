@@ -3,8 +3,6 @@ import { mount } from 'enzyme';
 
 import { DropdownMenu } from '../DropdownMenu';
 
-jest.unmock('../DropdownMenu');
-
 describe('<DropdownMenu />', () => {
   let mounted = null;
   let props = {};

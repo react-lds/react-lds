@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import { Container } from '../Container';
 
-jest.unmock('../Container');
-
 describe('<Container />', () => {
   let mounted = null;
   const child = <span className="foo" />;

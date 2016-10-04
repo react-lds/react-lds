@@ -3,8 +3,6 @@ import { mount } from 'enzyme';
 
 import Card from '../Card';
 
-jest.unmock('../Card');
-
 describe('<Card />', () => {
   let mounted = null;
   let props = {};

@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import IconSVG from '../IconSVG';
 
-jest.unmock('../IconSVG');
-
 describe('<IconSVG />', () => {
   let mounted = null;
   let props = {};

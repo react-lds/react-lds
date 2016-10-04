@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import FormElementError from '../FormElementError';
 
-jest.unmock('../FormElementError');
-
 describe('<FormElementError />', () => {
   let mounted = null;
   const context = { cssPrefix: 'slds-' };

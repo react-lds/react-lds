@@ -3,8 +3,6 @@ import { mount } from 'enzyme';
 
 import Textarea from '../Textarea';
 
-jest.unmock('../Textarea');
-
 describe('<Textarea />', () => {
   let props = {};
   let mounted = null;

@@ -3,8 +3,6 @@ import { mount } from 'enzyme';
 
 import { default as Notification } from '../Notification';
 
-jest.unmock('../Notification');
-
 describe('<Notification />', () => {
   let mounted = null;
   let props = {};

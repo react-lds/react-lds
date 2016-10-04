@@ -4,7 +4,6 @@ import { mount } from 'enzyme';
 import Email from './../Email/index';
 import ButtonFlavored from './../../Button/Button';
 
-jest.unmock('./../Email/index');
 jest.mock('./../Email/Rte', () => () => <p>Mocked out RTE</p>);
 
 describe('<Email />', () => {

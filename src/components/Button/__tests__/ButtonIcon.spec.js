@@ -3,8 +3,6 @@ import { mount } from 'enzyme';
 
 import ButtonIcon from '../ButtonIcon';
 
-jest.unmock('../ButtonIcon');
-
 describe('<ButtonIcon />', () => {
   let props = {};
   let mounted = null;

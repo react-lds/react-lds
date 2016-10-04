@@ -3,8 +3,6 @@ import { mount } from 'enzyme';
 
 import { Picklist } from '../Picklist';
 
-jest.unmock('../Picklist');
-
 describe('</Picklist />', () => {
   let mounted = null;
   let props = {};

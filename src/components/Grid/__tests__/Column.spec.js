@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import { Column } from '../Column';
 
-jest.unmock('../Column');
-
 describe('<Column />', () => {
   let mounted = null;
   const child = <div className="foo" />;

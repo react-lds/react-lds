@@ -3,8 +3,6 @@ import { mount } from 'enzyme';
 
 import DropdownMenuListItem from '../DropdownMenuListItem';
 
-jest.unmock('../DropdownMenuListItem');
-
 describe('<DropdownMenuListItem />', () => {
   let mounted = null;
 

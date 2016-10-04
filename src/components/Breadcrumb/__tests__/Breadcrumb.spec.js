@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import Breadcrumb from '../Breadcrumb';
 
-jest.unmock('../Breadcrumb');
-
 describe('<Breadcrumb />', () => {
   let mounted = null;
   const child = <a href="/" key="id-1">foobar</a>;
