@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { parse } from 'react-docgen';
+import { parse, resolver } from 'react-docgen';
 import { parse as parseDoctrine } from 'doctrine';
 import recast from 'recast';
 import MarkdownElement from '../MarkdownElement';
@@ -109,13 +109,15 @@ const PropTypeDescription = ({ code, header }) => {
 | Name | Type | Default | Description |
 |:-----|:-----|:-----|:-----|\n`;
 
-  const componentInfo = parse(code);
+  const componentInfo = parse(code, resolver.findAllExportedComponentDefinitions);
 
-  if (componentInfo.props) {
-    Object.keys(componentInfo.props).forEach((key) => {
-      if ({}.hasOwnProperty.call(componentInfo.props, key)) {
+  const firstComponent = componentInfo['0'];
+
+  if (firstComponent.props) {
+    Object.keys(firstComponent.props).forEach((key) => {
+      if ({}.hasOwnProperty.call(firstComponent.props, key)) {
         let workingKey = key;
-        const prop = componentInfo.props[workingKey];
+        const prop = firstComponent.props[workingKey];
 
         const description = generateDescription(prop.required, prop.description, prop.type);
 
