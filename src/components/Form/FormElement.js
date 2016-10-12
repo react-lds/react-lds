@@ -3,7 +3,7 @@ import React from 'react';
 import { prefixClasses } from '../../utils';
 
 const FormElement = (props, { cssPrefix }) => {
-  const { children, className, error, required, ...rest } = props;
+  const { children, className, error, required, fieldset, ...rest } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const classes = [
@@ -12,7 +12,9 @@ const FormElement = (props, { cssPrefix }) => {
     { 'is-required': required },
   ];
 
-  return (<div {...rest} className={prefix(classes, className)}>{children}</div>);
+  const Tag = fieldset ? 'fieldset' : 'div';
+
+  return (<Tag {...rest} className={prefix(classes, className)}>{children}</Tag>);
 };
 
 FormElement.contextTypes = { cssPrefix: React.PropTypes.string };
@@ -31,9 +33,14 @@ FormElement.propTypes = {
    */
   error: React.PropTypes.string,
   /**
+   * renders as a fieldset instead
+   */
+  fieldset: React.PropTypes.bool,
+  /**
    * adds required-attribute to the form element
    */
   required: React.PropTypes.bool,
 };
+
 
 export default FormElement;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import { getUniqueHash } from '../../../utils';
 import FormElementError from '../FormElementError';
 
 describe('<FormElementError />', () => {
@@ -10,11 +11,15 @@ describe('<FormElementError />', () => {
   const options = { context, childContextTypes };
 
   beforeEach(() => {
-    mounted = shallow(<FormElementError error="Foo" />, options);
+    mounted = shallow(<FormElementError error="Foo" id="Bar" />, options);
   });
 
   it('renders an error', () => {
     expect(mounted.find('div.slds-form-element__help').text()).toEqual('Foo');
+  });
+
+  it('applies an id set to the hash of the ', () => {
+    expect(mounted.find('div.slds-form-element__help').prop('id')).toEqual(getUniqueHash('Foo', 'Bar'));
   });
 
   it('applies className and rest-properties', () => {

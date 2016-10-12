@@ -28,7 +28,7 @@ const Input = (props) => {
       <FormElementControl hasIconLeft={hasIconLeft} hasIconRight={hasIconRight}>
         <InputRaw {...props} />
       </FormElementControl>
-      <FormElementError error={error} />
+      <FormElementError error={error} id={id} />
     </FormElement>
   );
 };

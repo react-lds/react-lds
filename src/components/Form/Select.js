@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { prefixClasses } from '../../utils';
+import { getUniqueHash, prefixClasses } from '../../utils';
 import {
   FormElement,
   FormElementControl,
@@ -33,7 +33,7 @@ const Select = (props, { cssPrefix }) => {
         multiple={multiple}
         required={required}
         disabled={disabled}
-        aria-describedby={error}
+        aria-describedby={error ? getUniqueHash(error, id) : null}
       >
         {children}
       </select>
@@ -52,7 +52,7 @@ const Select = (props, { cssPrefix }) => {
       <FormElementControl>
         {renderSelect()}
       </FormElementControl>
-      <FormElementError error={error} />
+      <FormElementError error={error} id={id} />
     </FormElement>
   );
 };

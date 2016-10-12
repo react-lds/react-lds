@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { prefixClasses } from '../../utils';
+import { getUniqueHash, prefixClasses } from '../../utils';
 import {
   FormElement,
   FormElementControl,
@@ -41,7 +41,7 @@ const Textarea = (props, { cssPrefix }) => {
         placeholder={placeholder}
         disabled={disabled}
         required={required}
-        aria-describedby={error}
+        aria-describedby={error ? getUniqueHash(error, id) : null}
       />
     );
   };
@@ -52,7 +52,7 @@ const Textarea = (props, { cssPrefix }) => {
       <FormElementControl className={prefix({ 'has-divider--bottom': readOnly })}>
         {renderContent()}
       </FormElementControl>
-      <FormElementError error={error} />
+      <FormElementError error={error} id={id} />
     </FormElement>
   );
 };
