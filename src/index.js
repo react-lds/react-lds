@@ -19,5 +19,6 @@ export * from './components/Pill';
 export * from './components/Spinner';
 export * from './components/Tab';
 export * from './components/DockedComposer';
+export * from './components/Navigation';
 export * from './decorators';
 export * from './utils';

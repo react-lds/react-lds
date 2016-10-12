@@ -19,6 +19,7 @@ import Lookups from './pages/Lookups';
 import MediaObject from './pages/MediaObject';
 import Menu from './pages/Menu';
 import Modals from './pages/Modals';
+import Navigation from './pages/Navigation';
 import Notifications from './pages/Notifications';
 import Page from './components/Page';
 import PageHeader from './pages/PageHeader';
@@ -68,6 +69,7 @@ const routes = (
     <Route path="media-objects" component={MediaObject} />
     <Route path="menus" component={Menu} />
     <Route path="modals" component={Modals} />
+    <Route path="navigation" component={Navigation} />
     <Route path="notifications" component={Notifications} />
     <Route path="page-headers" component={PageHeader} />
     <Route path="pills" component={Pills} />
