@@ -13,7 +13,7 @@
   "scripts": {
     "start": "node ./docs/server.js",
     "test": "jest",
-    "test-watch": "jest --watch=all",
+    "test-watch": "jest --watchAll",
     "lint": "eslint src docs",
     "build": "npm run build:babel && npm run build:copy-files",
     "build:babel": "babel ./src --ignore *.spec.js --out-dir ./dist",
@@ -52,7 +52,7 @@
     "react-click-outside": "2.1.0"
   },
   "devDependencies": {
-    "@salesforce-ux/design-system": "~2.0.3",
+    "@salesforce-ux/design-system": "2.1.3",
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
     "babel-eslint": "^6.1.2",

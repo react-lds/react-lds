@@ -27,6 +27,7 @@ const Navigation = () =>
         <NavLink to="/media-objects" label="Media Objects" />
         <NavLink to="/menus" label="Menus" />
         <NavLink to="/modals" label="Modals" />
+        <NavLink to="/navigation" label="Navigation" />
         <NavLink to="/notifications" label="Notifications" />
         <NavLink to="/page-headers" label="Page Headers" />
         <NavLink to="/pills" label="Pills" />
