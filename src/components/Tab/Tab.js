@@ -41,7 +41,7 @@ class Tab extends React.Component {
       const boundClick = this.setActiveTab.bind(this, tab.id);
       const classes = [
         `tabs--${this.props.variation}__item`,
-        'text-heading--label',
+        'text-title--caps',
         { active: this.state.activeTab === tab.id },
       ];
 

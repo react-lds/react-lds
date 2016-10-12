@@ -33,6 +33,7 @@ const Select = (props, { cssPrefix }) => {
         multiple={multiple}
         required={required}
         disabled={disabled}
+        aria-describedby={error}
       >
         {children}
       </select>

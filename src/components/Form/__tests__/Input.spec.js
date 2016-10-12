@@ -112,6 +112,11 @@ describe('<Input />', () => {
     expect(mounted.find('div.slds-form-element__control IconSVG').first().props().icon).toEqual('warning');
   });
 
+  it('labels the input with an error', () => {
+    mounted.setProps({ error: 'shit' });
+    expect(mounted.find('input').prop('aria-describedby')).toEqual('shit');
+  });
+
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('input').hasClass('foo')).toBeTruthy();

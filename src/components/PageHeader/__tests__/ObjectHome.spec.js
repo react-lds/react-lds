@@ -40,7 +40,7 @@ describe('<ObjectHome />', () => {
   });
 
   it('contains the recordType', () => {
-    expect(mounted.find('p.slds-text-heading--label').first().text()).toEqual('unicornz');
+    expect(mounted.find('p.slds-text-title--caps').first().text()).toEqual('unicornz');
   });
 
   it('contains topButtons', () => {

@@ -25,7 +25,7 @@ describe('<DropdownMenuList />', () => {
 
     const header = mounted.find('div > div').first();
     expect(header.hasClass('slds-dropdown__header')).toBeTruthy();
-    expect(header.find('span').hasClass('slds-text-heading--label')).toBeTruthy();
+    expect(header.find('span').hasClass('slds-text-title--caps')).toBeTruthy();
     expect(header.text()).toEqual('pink');
   });
 

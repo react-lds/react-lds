@@ -15,13 +15,11 @@ export const Cell = (props, { cssPrefix }) => {
     sortDirection,
     sortAssistiveText,
     title,
-    truncate,
     ...rest,
   } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const sldsClasses = [
-    { truncate: !!truncate },
     { 'is-resizable': scope === 'col' && !!resizable },
     { 'is-sorted--asc': !!sortable && sortDirection === 'asc' },
   ];
@@ -124,7 +122,9 @@ export const Cell = (props, { cssPrefix }) => {
       scope={cellScope}
       title={cellTitle}
     >
-      {wrappedChildren}
+      <div className={prefix('truncate')}>
+        {wrappedChildren}
+      </div>
     </CellElement>
   );
 };
@@ -179,10 +179,6 @@ Cell.propTypes = {
    * overrides the cell's title attribute
    */
   title: React.PropTypes.string,
-  /**
-   * truncates the cell content
-   */
-  truncate: React.PropTypes.bool,
 };
 
 export default variationable(Cell);

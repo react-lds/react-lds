@@ -35,7 +35,7 @@ describe('<RecordHome />', () => {
   });
 
   it('contains the recordType', () => {
-    expect(mounted.find('p.slds-text-heading--label').first().text()).toEqual('unicornz');
+    expect(mounted.find('p.slds-text-title--caps').first().text()).toEqual('unicornz');
   });
 
   it('contains the headerButtons', () => {
@@ -45,9 +45,9 @@ describe('<RecordHome />', () => {
   it('contains detail items', () => {
     const detailItems = mounted.find('li.slds-page-header__detail-block');
     expect(detailItems.length).toEqual(2);
-    expect(detailItems.first().find('p.slds-text-heading--label-normal').text()).toEqual('detail1');
+    expect(detailItems.first().find('p.slds-text-title').text()).toEqual('detail1');
     expect(detailItems.first().find('p.slds-text-body--regular').text()).toEqual('detailcontent1');
-    expect(detailItems.at(1).find('p.slds-text-heading--label-normal').text()).toEqual('detail2');
+    expect(detailItems.at(1).find('p.slds-text-title').text()).toEqual('detail2');
     expect(detailItems.at(1).find('p.slds-text-body--regular').text()).toEqual('detailcontent2');
   });
 

@@ -106,6 +106,7 @@ const InputRaw = (props, { cssPrefix }) => {
         type={type}
         value={value}
         ref={(input) => { if (input && isFocused) { input.focus(); } }}
+        aria-describedby={error}
       />
     </span>
   );

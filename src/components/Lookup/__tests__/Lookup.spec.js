@@ -210,13 +210,13 @@ describe('<Lookup />', () => {
 
   it('sets a selections on lookup item click', () => {
     mounted.setState({ open: true, loaded: sampleData, selected: [] });
-    mounted.find('.slds-lookup__list li').first().simulate('click');
+    mounted.find('.slds-lookup__list li > span').first().simulate('click');
     expect(mounted.find('.slds-pill_container .slds-pill').length).toBe(1);
   });
 
   it('sets data-highlighted to the currently highlighted listItem-ID', () => {
     mounted.setState({ open: true, loaded: sampleData, selected: [] });
-    mounted.find('.slds-lookup__list li').first().simulate('mouseOver');
+    mounted.find('.slds-lookup__list li > span').first().simulate('mouseOver');
     expect(mounted.find('input').prop('aria-activedescendant')).toBe('1');
   });
 

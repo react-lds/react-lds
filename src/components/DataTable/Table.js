@@ -7,11 +7,12 @@ export const Table = (props, { cssPrefix }) => {
   const { children, className, ...rest } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  return (<table {...rest} className={prefix(['table'], className)}>{children}</table>);
+  return (<table {...rest} className={prefix(['table', 'table--cell-buffer'], className)}>{children}</table>);
 };
 
 Table.flavors = [
   'bordered',
+  'col-bordered',
   'striped',
   'fixed-layout',
 ];

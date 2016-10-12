@@ -373,14 +373,24 @@ export class Lookup extends React.Component {
     };
 
     return (
-      <li onClick={addSelection} onMouseOver={highlightSelection} key={i}>
-        <a className={this.prefix(sldsClasses)} role="option">
-          <IconSVG sprite={getSprite(item.objectType)} icon={item.objectType} />
+      <li key={i} role="presentation">
+        <span
+          className={this.prefix(sldsClasses)}
+          id={`${this.props.id}-option-${i}`}
+          onClick={addSelection}
+          onMouseOver={highlightSelection}
+          role="option"
+        >
+          <IconSVG
+            className={this.prefix('media__figure')}
+            sprite={getSprite(item.objectType)}
+            icon={item.objectType}
+          />
           <div className={this.prefix('media__body')}>
             <div className={this.prefix('lookup__result-text')}>{item.label}</div>
             {renderMeta()}
           </div>
-        </a>
+        </span>
       </li>
     );
   }
@@ -453,7 +463,6 @@ export class Lookup extends React.Component {
               <Row key={item.id}>
                 {this.props.tableFields.map((field, index) =>
                   <Cell
-                    truncate
                     data-label={field.name}
                     scope={index === 0 ? 'row' : undefined}
                     onClick={() => this.addSelection(item)}

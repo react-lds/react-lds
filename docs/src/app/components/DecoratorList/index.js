@@ -1,6 +1,8 @@
 import React from 'react';
 import { Badge } from 'react-lds';
 
+require('./decoratorlist.scss');
+
 const DecoratorList = (props) => {
   const { component } = props;
 
@@ -16,14 +18,14 @@ const DecoratorList = (props) => {
           variation = JSON.stringify(variation);
         }
 
-        return (<li className="slds-item slds-p-right--small" key={i}><Badge label={variation} /></li>);
+        return (<li className="slds-p-right--small" key={i}><Badge label={variation} /></li>);
       });
 
 
       return (
         <div className="slds-p-bottom--medium">
           <h3 className="slds-text-heading--small slds-p-bottom--small">{name}</h3>
-          <ul className="slds-list--horizontal">{decoratorItems}</ul>
+          <ul className="decoratorlist">{decoratorItems}</ul>
         </div>
       );
     }
