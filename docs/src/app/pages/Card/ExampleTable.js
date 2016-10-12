@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, Button, Table, Row, Cell } from 'react-lds';
 
 const table = (
-  <Table bordered>
+  <Table bordered no-row-hover>
     <thead>
       <Row head>
         <Cell scope="col" truncate>Opportunity Name</Cell>

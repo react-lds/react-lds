@@ -106,6 +106,7 @@ export class DropdownMenu extends React.Component {
           onClick={this.toggle}
           neutral={this.props.button.neutral}
           brand={this.props.button.brand}
+          aria-haspopup="true"
         >
           <ButtonIcon
             sprite={this.props.button.sprite}

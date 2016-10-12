@@ -10,7 +10,7 @@ const DropdownMenuList = (props, { cssPrefix }) => {
     if (header) {
       return (
         <div className={prefix('dropdown__header')}>
-          <span className={prefix('text-heading--label')}>{header}</span>
+          <span className={prefix('text-title--caps')}>{header}</span>
         </div>
       );
     }

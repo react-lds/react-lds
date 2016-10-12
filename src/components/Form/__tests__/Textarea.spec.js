@@ -48,6 +48,11 @@ describe('<Textarea />', () => {
     expect(mounted.find('textarea').props().disabled).toBeTruthy();
   });
 
+  it('labels the textarea with an error', () => {
+    mounted.setProps({ error: 'shit' });
+    expect(mounted.find('textarea').prop('aria-describedby')).toEqual('shit');
+  });
+
   it('renders a readOnly-version', () => {
     mounted.setProps({ readOnly: true });
     expect(mounted.find('textarea').length).toBe(0);

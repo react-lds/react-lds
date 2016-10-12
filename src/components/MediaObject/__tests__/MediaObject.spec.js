@@ -41,6 +41,17 @@ describe('<MediaObject />', () => {
     expect(mounted.find('.slds-media__figure--reverse').length).toBe(1);
   });
 
+  it('allows a custom tag to be used', () => {
+    mounted.setProps({ customTag: 'header' });
+    expect(mounted.find('header').length).toBe(1);
+  });
+
+  it('truncates the __body', () => {
+    mounted.setProps({ truncate: true });
+    expect(mounted.find('.slds-media__body').hasClass('slds-truncate')).toBeTruthy();
+  });
+
+
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-media').hasClass('foo')).toBeTruthy();

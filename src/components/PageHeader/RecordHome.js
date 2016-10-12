@@ -13,7 +13,7 @@ const RecordHome = (props, { cssPrefix }) => {
   if (detailItems.length > 0) {
     const detailItemsRendered = detailItems.map((item, index) =>
       <li className={prefix('page-header__detail-block')} key={`${item.title}-${index}`}>
-        <p className={prefix(['text-heading--label-normal', 'truncate', 'm-bottom--xx-small'])}>{item.title}</p>
+        <p className={prefix(['text-title', 'truncate', 'm-bottom--xx-small'])}>{item.title}</p>
         <p className={prefix(['text-body--regular', 'truncate'])}>{item.content}</p>
       </li>
     );
@@ -29,7 +29,7 @@ const RecordHome = (props, { cssPrefix }) => {
       <Grid>
         <Column className={prefix('has-flexi-truncate')}>
           <MediaObject figureLeft={iconRendered} className={prefix(['grow', 'no-space', 'media--center'])}>
-            <p className={prefix('text-heading--label')}>{recordType}</p>
+            <p className={prefix('text-title--caps')}>{recordType}</p>
             <h1 className={prefix(['page-header__title', 'm-right--small', 'truncate', 'align-middle'])} title={title}>
               {title}
             </h1>

@@ -4,7 +4,7 @@ import { flavorable } from '../../decorators';
 import { prefixClasses } from '../../utils';
 
 export const MediaObject = (props, { cssPrefix }) => {
-  const { children, className, figureLeft, figureRight, ...rest } = props;
+  const { children, className, customTag, figureLeft, figureRight, truncate, ...rest } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderFigure = (figure, classes) => {
@@ -20,12 +20,19 @@ export const MediaObject = (props, { cssPrefix }) => {
     return (<div className={prefix(sldsClasses)}>{figure}</div>);
   };
 
+  const Tag = customTag || 'div';
+
+  const bodyClasses = [
+    'media__body',
+    { truncate: !!truncate },
+  ];
+
   return (
-    <div {...rest} className={prefix('media', className)}>
+    <Tag {...rest} className={prefix('media', className)}>
       {renderFigure(figureLeft)}
-      <div className={prefix('media__body')}>{children}</div>
+      <div className={prefix(bodyClasses)}>{children}</div>
       {renderFigure(figureRight, 'media__figure--reverse')}
-    </div>
+    </Tag>
   );
 };
 
@@ -42,6 +49,10 @@ MediaObject.propTypes = {
    */
   children: React.PropTypes.node,
   /**
+   * Renders a customTag instead of a div
+   */
+  customTag: React.PropTypes.string,
+  /**
    * class name
    */
   className: React.PropTypes.string,
@@ -53,6 +64,10 @@ MediaObject.propTypes = {
    * renders a figure on the right side of the media object
    */
   figureRight: React.PropTypes.node,
+  /**
+   * truncates the body
+   */
+  truncate: React.PropTypes.bool,
 };
 
 export default flavorable(MediaObject, 'media');

@@ -60,6 +60,11 @@ describe('<Select />', () => {
     expect(mounted.find('select').props().multiple).toBeTruthy();
   });
 
+  it('labels the select with an error', () => {
+    mounted.setProps({ error: 'shit' });
+    expect(mounted.find('select').prop('aria-describedby')).toEqual('shit');
+  });
+
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('select').hasClass('foo')).toBeTruthy();

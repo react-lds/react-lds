@@ -12,7 +12,7 @@ const Breadcrumb = (props, { cssPrefix }) => {
   }
 
   const olClasses = ['breadcrumb', 'list--horizontal'];
-  const liClasses = ['breadcrumb__item', 'text-heading--label'];
+  const liClasses = ['breadcrumb__item', 'text-title--caps'];
 
   const wrapItems =
     filtered.map(child => <li className={prefix(liClasses)} key={child.key}>{child}</li>);

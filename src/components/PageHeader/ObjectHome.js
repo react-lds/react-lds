@@ -61,7 +61,7 @@ export class ObjectHome extends React.Component {
       <div {...rest} className={this.prefix('page-header', this.props.className)} role="banner">
         <Grid>
           <Column className={this.prefix('has-flexi-truncate')}>
-            <p className={this.prefix('text-heading--label')}>{this.props.recordType}</p>
+            <p className={this.prefix('text-title--caps')}>{this.props.recordType}</p>
             <Grid>
               <Grid className={this.prefix(['type-focus', 'no-space'])}>
                 <h1

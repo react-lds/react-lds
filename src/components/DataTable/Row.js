@@ -7,7 +7,7 @@ export const Row = (props, { cssPrefix }) => {
   const { children, className, head, ...rest } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const sldsClasses = head ? ['text-heading--label'] : [];
+  const sldsClasses = head ? ['text-title--caps'] : [];
 
   return (<tr {...rest} className={prefix(sldsClasses, className)}>{children}</tr>);
 };

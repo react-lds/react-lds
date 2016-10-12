@@ -47,7 +47,7 @@ describe('</Picklist />', () => {
   });
 
   it('executes the callback when a child was clicked', () => {
-    const first = mounted.find('li').first();
+    const first = mounted.find('li > a').first();
     first.simulate('click');
     expect(callback.mock.calls[0][0]).toEqual('1');
   });

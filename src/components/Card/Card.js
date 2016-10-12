@@ -20,13 +20,17 @@ const Card = (props, { cssPrefix }) => {
     <div {...rest} className={prefix('card', className)}>
       <Grid className={prefix('card__header')}>
         <MediaObject
+          customTag="header"
           center
           className={prefix('has-flexi-truncate')}
           figureLeft={<Icon sprite={sprite} icon={icon} size="small" />}
+          truncate
         >
-          <a className={prefix('text-link--reset')}>
-            <span className={prefix('text-heading--small')}>{title}</span>
-          </a>
+          <h2>
+            <a className={prefix('text-link--reset')}>
+              <span className={prefix('text-heading--small')}>{title}</span>
+            </a>
+          </h2>
         </MediaObject>
         <div className={prefix('no-flex')}>{headerRight}</div>
       </Grid>

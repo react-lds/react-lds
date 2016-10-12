@@ -17,7 +17,7 @@ describe('<DropdownMenuListItem />', () => {
   it('handles onClick', () => {
     const clickMock = jest.fn();
     mounted.setProps({ onClick: clickMock });
-    mounted.find('li').simulate('click');
+    mounted.find('li > a').simulate('click');
     expect(clickMock).toBeCalled();
   });
 
