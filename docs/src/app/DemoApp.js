@@ -7,8 +7,6 @@ import ButtonGroups from './pages/ButtonGroup';
 import Buttons from './pages/Button';
 import Cards from './pages/Card';
 import DataTable from './pages/DataTable';
-import DockedComposer from './pages/DockedComposer';
-import DockedComposerVariants from './pages/DockedComposer/Email';
 import Forms from './pages/Form';
 import GridSystem from './pages/GridSystem';
 import Icons from './pages/Icon';
@@ -40,13 +38,6 @@ const routes = (
     <Route path="buttons" component={Buttons} />
     <Route path="cards" component={Cards} />
     <Route path="data-tables" component={DataTable} />
-    <Route path="docked-composer" component={DockedComposer}>
-      <IndexRedirect to="email" />
-      <Route path="email">
-        <IndexRedirect to="default" />
-        <Route path=":exampleId" component={DockedComposerVariants} />
-      </Route>
-    </Route>
     <Route path="forms" component={Forms}>
       <IndexRedirect to="input" />
       <Route path="input">

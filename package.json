@@ -17,7 +17,7 @@
     "lint": "eslint src docs",
     "build": "npm run build:babel && npm run build:copy-files",
     "build:babel": "babel ./src --ignore *.spec.js --out-dir ./dist",
-    "build:copy-files": "cp ./src/styles.css ./dist/; cp ./README.md ./dist/",
+    "build:copy-files": "cp ./README.md ./dist/",
     "build:docs": "rm -rf ./docs/build; webpack --config ./docs/webpack.prod.config",
     "prebuild": "rm -rf ./dist",
     "prepublish": "npm run prebuild; npm run build",
@@ -48,7 +48,6 @@
     "lodash.debounce": "^4.0.8",
     "lodash.isstring": "^4.0.1",
     "lodash.omit": "^4.5.0",
-    "quill": "1.0.0",
     "react-click-outside": "2.1.0"
   },
   "devDependencies": {
