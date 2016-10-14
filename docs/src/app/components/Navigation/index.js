@@ -17,7 +17,6 @@ const Navigation = () =>
         <NavLink to="/cards" label="Cards" />
         <NavLink to="/data-tables" label="Data Tables" />
         <NavLink unfinished to="/datepickers" label="Datepickers" />
-        <NavLink to="/docked-composer" label="Docked Composer" />
         <NavLink unfinished to="/feeds" label="Feeds" />
         <NavLink to="/forms" label="Forms" />
         <NavLink to="/grid-system" label="Grid System" />

@@ -157,22 +157,11 @@ You can pass custom, non-prefixed classes to react-lds components via the `class
 
 Some components need a certain level of interactivity to be usable as React components. In order to achieve this, these components keep a minimal internal state and provide ways to hook into fired events:
 
- - `<Email />`
  - `<Lookup />`
  - `<DropDownMenu />`
  - `<Modal />`
  - `<PickList />`
  - `<Tab />`
-
-Check the implementation examples in the docs to see how these components work. `Email` internally uses the [Quill](https://github.com/quilljs/quill) RTE Editor.
-
-### Styling
-
-Some components need additional styles. If you use them, also include our
-provided `styles.css` inside the `dist` folder.
-
-- `<Email />` Component from Docked-Composer
-
 
 ## Development
 
@@ -181,7 +170,7 @@ provided `styles.css` inside the `dist` folder.
 You can change the port with the `PORT=` environment variable. Hot reloading
 is setup to reload whenever a file was changed.
 
-For component-skelethons, check out the Wiki.
+For component skeletons, check out the Wiki.
 
 ## Developing while embedded into a react project
 
