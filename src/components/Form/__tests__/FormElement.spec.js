@@ -29,6 +29,12 @@ describe('<FormElement />', () => {
     expect(mounted.find('.slds-form-element').hasClass('slds-is-required')).toBeTruthy();
   });
 
+  it('renders as a fieldset', () => {
+    expect(mounted.find('div.slds-form-element').length).toBe(1);
+    mounted.setProps({ fieldset: true });
+    expect(mounted.find('fieldset.slds-form-element').length).toBe(1);
+  });
+
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-form-element').hasClass('foo')).toBeTruthy();

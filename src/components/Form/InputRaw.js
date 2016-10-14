@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { prefixClasses } from '../../utils';
+import { getUniqueHash, prefixClasses } from '../../utils';
 import { Button, ButtonIcon, IconSVG } from '../../';
 
 const InputRaw = (props, { cssPrefix }) => {
@@ -106,7 +106,7 @@ const InputRaw = (props, { cssPrefix }) => {
         type={type}
         value={value}
         ref={(input) => { if (input && isFocused) { input.focus(); } }}
-        aria-describedby={error}
+        aria-describedby={error ? getUniqueHash(error, id) : null}
       />
     </span>
   );

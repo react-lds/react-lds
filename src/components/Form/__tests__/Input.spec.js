@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+import { getUniqueHash } from '../../../utils';
 import Input from '../Input';
 
 describe('<Input />', () => {
@@ -114,7 +115,8 @@ describe('<Input />', () => {
 
   it('labels the input with an error', () => {
     mounted.setProps({ error: 'shit' });
-    expect(mounted.find('input').prop('aria-describedby')).toEqual('shit');
+    const hash = getUniqueHash('shit', props.id);
+    expect(mounted.find('input').prop('aria-describedby')).toEqual(hash);
   });
 
   it('applies className and rest-properties', () => {

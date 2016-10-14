@@ -1,15 +1,21 @@
 import React from 'react';
 
-import { prefixClasses } from '../../utils';
+import { getUniqueHash, prefixClasses } from '../../utils';
 
 const FormElementError = (props, { cssPrefix }) => {
-  const { className, error, ...rest } = props;
+  const { className, error, id, ...rest } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderError = () => {
     if (error) {
       return (
-        <div {...rest} className={prefix('form-element__help', className)}>{error}</div>
+        <div
+          {...rest}
+          id={getUniqueHash(error, id)}
+          className={prefix('form-element__help', className)}
+        >
+          {error}
+        </div>
       );
     }
 
@@ -26,6 +32,10 @@ FormElementError.propTypes = {
    * element triggered on the containing form element
    */
   error: React.PropTypes.string,
+  /**
+   * id of the parent component carrying the error
+   */
+  id: React.PropTypes.string.isRequired,
 };
 
 export default FormElementError;

@@ -26,6 +26,7 @@ import PageHeader from './pages/PageHeader';
 import Pills from './pages/Pills';
 import Radio from './pages/Form/Radio';
 import SelectVariants from './pages/Form/Select';
+import CheckboxVariants from './pages/Form/Checkbox';
 import Spinners from './pages/Spinners';
 import Tabs from './pages/Tab';
 import TextareaVariants from './pages/Form/Textarea';
@@ -60,6 +61,10 @@ const routes = (
       <Route path="select">
         <IndexRedirect to="default" />
         <Route path=":exampleId" component={SelectVariants} />
+      </Route>
+      <Route path="checkbox">
+        <IndexRedirect to="default" />
+        <Route path=":exampleId" component={CheckboxVariants} />
       </Route>
     </Route>
     <Route path="grid-system" component={GridSystem} />

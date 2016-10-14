@@ -3,10 +3,8 @@ import React from 'react';
 import { prefixClasses } from '../../utils';
 
 const FormElementLabel = (props, { cssPrefix }) => {
-  const { className, id, label, readOnly, required, ...rest } = props;
+  const { className, id, label, legend, readOnly, required, ...rest } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-
-  const Tag = readOnly ? 'span' : 'label';
 
   const renderRequired = () => {
     if (required) {
@@ -18,8 +16,22 @@ const FormElementLabel = (props, { cssPrefix }) => {
     return null;
   };
 
+
+  let Tag = 'label';
+
+  if (readOnly) {
+    Tag = 'span';
+  } else if (legend) {
+    Tag = 'legend';
+  }
+
+  const sldsClasses = [
+    { 'form-element__legend': !!legend },
+    'form-element__label',
+  ];
+
   return (
-    <Tag {...rest} className={prefix('form-element__label', className)} htmlFor={readOnly ? null : id}>
+    <Tag {...rest} className={prefix(sldsClasses, className)} htmlFor={readOnly || legend ? null : id}>
       {renderRequired()}{label}
     </Tag>
   );
@@ -40,6 +52,10 @@ FormElementLabel.propTypes = {
    * label content
    */
   label: React.PropTypes.string.isRequired,
+  /**
+   * Renders as a html5 legend
+   */
+  legend: React.PropTypes.bool,
   /**
    * renders the label as a span-tag instead of a label-tag
    */
