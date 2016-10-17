@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.6
+* Deprecate DockedComposer
+* Add checkboxes
+* LDS 2.1.3
+* Navigation Component
+
 ## 1.0.5
 * Prop to disable text alignment in Email Component
 * Prop to disable send button in Email Component
