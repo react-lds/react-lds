@@ -69,7 +69,7 @@ For a detailed sample integration, check the [source of the docs](https://github
 
 ### Decorators
 
-The Lightning Design System enables you to modify components with different styles and [themes](https://www.lightningdesignsystem.com/components/utilities/themes/). Components can either be modified via **Flavors** (`slds-component--${flavor}`), **Variations** (`slds-component slds-${flavor}`) or **Themes** (`slds-component slds-theme--${theme}`).
+The Lightning Design System enables you to modify components with different styles and [themes](https://www.lightningdesignsystem.com/components/utilities/themes/). Components can either be modified via **Flavors** (`slds-component--${flavor}`), **Variations** (`slds-component slds-${variation}`) or **Themes** (`slds-component slds-theme--${theme}`).
 
 This library uses Higher Order Components (HoC) to enhance components with these modifiers, reducing the complexity of the components considerably. The different modifiers can be used as follows:
 
