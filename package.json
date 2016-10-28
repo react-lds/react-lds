@@ -15,13 +15,13 @@
     "test": "jest",
     "test-watch": "jest --watchAll",
     "lint": "eslint src docs",
-    "build": "npm run build:babel && npm run build:copy-files",
+    "build": "yarn run build:babel && yarn run build:copy-files",
     "build:babel": "babel ./src --ignore *.spec.js --out-dir ./dist",
     "build:copy-files": "cp ./README.md ./dist/",
     "build:docs": "rm -rf ./docs/build; webpack --config ./docs/webpack.prod.config",
     "prebuild": "rm -rf ./dist",
-    "prepublish": "npm run prebuild; npm run build",
-    "pretest": "npm run lint"
+    "prepublish": "yarn run prebuild; yarn run build",
+    "pretest": "yarn run lint"
   },
   "contributors": [
     "Konstantin Krauss <konstantin@propertybase.com> (http://www.propertybase.com)",
@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "eslint": "3.7.1",
     "lodash.debounce": "^4.0.8",
     "lodash.isstring": "^4.0.1",
     "lodash.omit": "^4.5.0",

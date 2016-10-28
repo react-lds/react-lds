@@ -4,6 +4,7 @@ dist
 docs/build
 lib
 coverage
+yarn-error.log
 
 # Exclude IDE project folders
 *.sublime-project
