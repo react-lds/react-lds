@@ -253,4 +253,19 @@ describe('<Lookup />', () => {
     expect(mounted.find('.slds-lookup').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-lookup').prop('data-test')).toEqual('bar');
   });
+
+  it('calls a function when a result is added and replaces the result-pill if a component is returned', () => {
+    const mockFn = jest.fn(() => <div key="replaced">Replace me</div>);
+    mounted.setProps({ onResultAdd: mockFn });
+    mounted.setState({ open: true, loaded: sampleData, selected: [] });
+
+    mounted.find('.slds-lookup__list li > span').first().simulate('click');
+
+    expect(mockFn).toBeCalled();
+
+    const mockCall = mockFn.mock.calls[0];
+
+    expect(React.isValidElement(mockCall[0])).toBeTruthy();
+    expect(mockCall[1].id).toEqual('1');
+  });
 });

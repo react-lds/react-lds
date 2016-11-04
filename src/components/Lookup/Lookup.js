@@ -101,6 +101,10 @@ export class Lookup extends React.Component {
      */
     onFocus: React.PropTypes.func,
     /**
+     * gets called when a result is chosen. gets passed the pill and expects a cloned Pill back
+     */
+    onResultAdd: React.PropTypes.func,
+    /**
      * placeholder for the input field in lookup
      */
     placeholder: React.PropTypes.string,
@@ -147,11 +151,13 @@ export class Lookup extends React.Component {
       selected: this.props.initialSelection,
     };
 
-    this.handleLoad = debounce(this.handleLoad, 500);
+    this.handleLoad = debounce(this.handleLoad, 400);
     this.handleCreateElement = this.handleCreateElement.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputFocus = this.handleInputFocus.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     if (this.props.loadOnMount) {
       this.handleLoad();
     }
@@ -277,9 +283,6 @@ export class Lookup extends React.Component {
       return null;
     }
 
-    const handleInputChange = this.handleInputChange.bind(this);
-    const handleInputFocus = this.handleInputFocus.bind(this);
-
     if (this.props.emailLayout) {
       return (
         <FormElementControl>
@@ -287,8 +290,8 @@ export class Lookup extends React.Component {
             className={this.prefix(['input--bare', 'input--height'])}
             id={this.props.id}
             type="text"
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
+            onChange={this.handleInputChange}
+            onFocus={this.handleInputFocus}
             onKeyPress={this.handleCreateElement}
             value={this.state.searchTerm}
             ref={(input) => { if (input && this.state.open) { input.focus(); } }}
@@ -305,8 +308,8 @@ export class Lookup extends React.Component {
           iconRight="search"
           value={this.state.searchTerm}
           id={this.props.id}
-          onChange={handleInputChange}
-          onFocus={handleInputFocus}
+          onChange={this.handleInputChange}
+          onFocus={this.handleInputFocus}
           onKeyPress={this.handleCreateElement}
           placeholder={this.props.placeholder}
           role="combobox"
@@ -321,31 +324,40 @@ export class Lookup extends React.Component {
       return null;
     }
 
-    const onClick = this.openList.bind(this);
-
     const selectionPills = this.state.selected.map((item, i) => {
       const sldsClasses = this.props.multi ? null : ['size--1-of-1'];
       const onClose = (e) => {
         e.stopPropagation();
-        return this.removeSelection.bind(this, item)();
+        this.removeSelection(item);
       };
       const icon =
         item.objectType ? (<Icon sprite={getSprite(item.objectType)} icon={item.objectType} />) : undefined;
-      return (
+
+      let resultPill = (
         <Pill
-          key={i}
+          className={this.prefix(sldsClasses)}
           icon={icon}
           id={item.id}
-          title={item.label}
+          key={i}
           label={item.label}
           onClose={onClose}
-          className={this.prefix(sldsClasses)}
+          title={item.label}
         />
       );
+
+      if (this.props.onResultAdd) {
+        const replacedPill = this.props.onResultAdd(resultPill, item);
+
+        if (React.isValidElement(replacedPill)) {
+          resultPill = replacedPill;
+        }
+      }
+
+      return resultPill;
     });
 
     return (
-      <PillContainer bare={this.props.emailLayout} onClick={onClick}>{selectionPills}</PillContainer>
+      <PillContainer bare={this.props.emailLayout} onClick={() => this.openList()}>{selectionPills}</PillContainer>
     );
   }
 
@@ -360,8 +372,6 @@ export class Lookup extends React.Component {
   }
 
   lookupItem(item, i) {
-    const addSelection = this.addSelection.bind(this, item);
-    const highlightSelection = this.highlightSelection.bind(this, item.id);
     const sldsClasses = ['lookup__item-action', 'media', 'media--center'];
 
     const renderMeta = () => {
@@ -377,8 +387,8 @@ export class Lookup extends React.Component {
         <span
           className={this.prefix(sldsClasses)}
           id={`${this.props.id}-option-${i}`}
-          onClick={addSelection}
-          onMouseOver={highlightSelection}
+          onClick={() => this.addSelection(item)}
+          onMouseOver={() => this.highlightSelection(item.id)}
           role="option"
         >
           <IconSVG
