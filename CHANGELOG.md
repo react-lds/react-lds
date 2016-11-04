@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+* Add callback when result is added to Lookup. It can manipulate the result that is added
+* Clean up callback bindings in Lookup & reduce debounce delay by 100ms
+
 ## 1.0.6
 * Deprecate DockedComposer
 * Add checkboxes

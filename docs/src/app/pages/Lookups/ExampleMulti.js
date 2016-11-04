@@ -61,6 +61,9 @@ const ExampleMulti = () => {
     console.log(selectedItems);
   };
 
+
+  const onAdd = (C, item) => React.cloneElement(C, { className: `yalla-${item.id}` });
+
   return (
     <Lookup
       id="lookup-multi"
@@ -70,6 +73,7 @@ const ExampleMulti = () => {
       load={loadFunction}
       multi
       onChange={onChange}
+      onResultAdd={onAdd}
       placeholder="Search Accounts"
     />
   );
