@@ -7,6 +7,7 @@ import ButtonGroups from './pages/ButtonGroup';
 import Buttons from './pages/Button';
 import Cards from './pages/Card';
 import DataTable from './pages/DataTable';
+import Datepicker from './pages/Datepicker';
 import Forms from './pages/Form';
 import GridSystem from './pages/GridSystem';
 import Icons from './pages/Icon';
@@ -38,6 +39,7 @@ const routes = (
     <Route path="buttons" component={Buttons} />
     <Route path="cards" component={Cards} />
     <Route path="data-tables" component={DataTable} />
+    <Route path="datepickers" component={Datepicker} />
     <Route path="forms" component={Forms}>
       <IndexRedirect to="input" />
       <Route path="input">
