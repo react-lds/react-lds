@@ -49,6 +49,8 @@
     "lodash.debounce": "^4.0.8",
     "lodash.isstring": "^4.0.1",
     "lodash.omit": "^4.5.0",
+    "moment": "^2.16.0",
+    "moment-range": "^2.2.0",
     "react-click-outside": "2.1.0"
   },
   "devDependencies": {
