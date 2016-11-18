@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.7
+* Switch to yarn
+* Add Datepicker Component
+
 ## 1.0.6
 * Deprecate DockedComposer
 * Add checkboxes
