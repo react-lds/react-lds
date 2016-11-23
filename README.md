@@ -165,7 +165,7 @@ Some components need a certain level of interactivity to be usable as React comp
 
 ## Development
 
-`npm install` and `npm start`. Happy hacking!
+`yarn install` and `npm start`. Happy hacking!
 
 You can change the port with the `PORT=` environment variable. Hot reloading
 is setup to reload whenever a file was changed.
