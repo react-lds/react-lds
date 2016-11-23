@@ -111,7 +111,7 @@ export class Datepicker extends React.Component {
     return (
       <thead>
         <tr id="weekdays">
-          {moment.weekdaysShort().map(wd => <th key={wd} id={wd} tbody="col">
+          {moment.weekdaysShort().map(wd => <th key={wd} id={wd}>
             <abbr title={wd}>{wd}</abbr>
           </th>
           ) }
@@ -124,6 +124,16 @@ export class Datepicker extends React.Component {
     return (
       <tbody>
         {this.getMonthDays().map((week, weekIndex) => this.renderWeek(week, weekIndex))}
+        <tr>
+          <td colSpan="7" role="gridcell">
+            <a
+              onClick={this.resetViewToToday}
+              className={this.prefix(['show--inline-block', 'p-bottom--x-small'])}
+            >
+              {this.props.translations.today}
+            </a>
+          </td>
+        </tr>
       </tbody>
     );
   }
@@ -175,16 +185,6 @@ export class Datepicker extends React.Component {
         <table className={this.prefix('datepicker__month')} role="grid">
           {this.renderWeekHeader()}
           {this.renderMonth()}
-          <tr>
-            <td colSpan="7" role="gridcell">
-              <a
-                onClick={this.resetViewToToday}
-                className={this.prefix(['show--inline-block', 'p-bottom--x-small'])}
-              >
-                {this.props.translations.today}
-              </a>
-            </td>
-          </tr>
         </table>
       </div>
     );
