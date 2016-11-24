@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.8
+* Update Datepicker
+
 ## 1.0.7
 * Switch to yarn
 * Add Datepicker Component
