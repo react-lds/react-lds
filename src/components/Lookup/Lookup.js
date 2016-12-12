@@ -197,21 +197,40 @@ export class Lookup extends React.Component {
     }
   }
 
+  createElement(value) {
+    const selected = this.state.selected;
+    selected.push({
+      id: Date.now(),
+      label: value,
+    });
+    this.setState({ selected, searchTerm: '', open: false });
+  }
+
   handleCreateElement(e) {
-    // if no result was found and enter was pressed, allow creation of new
-    // element
-    if (
-      this.props.allowCreate &&
-      this.props.multi &&
-      e.charCode === 13 &&
-      this.state.loaded.length === 0
-    ) {
-      const selected = this.state.selected;
-      selected.push({
-        id: Date.now(),
-        label: e.target.value,
-      });
-      this.setState({ selected, searchTerm: '', open: false });
+    // if no result was found and enter was pressed or input field was left,
+    // allow creation of new element. in case of the email layout a minimum of
+    // validation ensures that the input is an email address.
+    const value = e.target.value;
+    const keyCode = e.charCode;
+
+    if (this.props.emailLayout) {
+      if (
+        (keyCode === 13 || typeof keyCode === 'undefined') &&
+        /^.+@.+\..+$/.test(value) &&
+        this.props.allowCreate &&
+        this.props.multi &&
+        this.state.loaded.length === 0
+      ) {
+        this.createElement(value);
+      }
+    } else if (
+        (keyCode === 13 || typeof keyCode === 'undefined') &&
+        value !== '' &&
+        this.props.allowCreate &&
+        this.props.multi &&
+        this.state.loaded.length === 0
+      ) {
+      this.createElement(value);
     }
   }
 
@@ -289,6 +308,7 @@ export class Lookup extends React.Component {
             type="text"
             onChange={handleInputChange}
             onFocus={handleInputFocus}
+            onBlur={this.handleCreateElement}
             onKeyPress={this.handleCreateElement}
             value={this.state.searchTerm}
             ref={(input) => { if (input && this.state.open) { input.focus(); } }}
@@ -307,6 +327,7 @@ export class Lookup extends React.Component {
           id={this.props.id}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
+          onBlur={this.handleCreateElement}
           onKeyPress={this.handleCreateElement}
           placeholder={this.props.placeholder}
           role="combobox"
