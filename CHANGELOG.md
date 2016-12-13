@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.9
+* Update Lookup Component
+
 ## 1.0.8
 * Update Datepicker
 
