@@ -31,7 +31,7 @@ const Navigation = () =>
         <NavLink to="/page-headers" label="Page Headers" />
         <NavLink to="/pills" label="Pills" />
         <NavLink unfinished to="/process" label="Process" />
-        <NavLink unfinished to="/popovers" label="Popovers" />
+        <NavLink to="/popovers" label="Popovers" />
         <NavLink unfinished to="/publishers" label="Publishers" />
         <NavLink to="/spinners" label="Spinners" />
         <NavLink to="/tabs" label="Tabs" />
