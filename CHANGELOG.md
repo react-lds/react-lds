@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.10
+* Add Popover Component
+* Bugfix: Adjust Datepicker day format test
+
 ## 1.0.9
 * Update Lookup Component
 
