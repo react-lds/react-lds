@@ -1,5 +1,6 @@
 import React from 'react';
 import get from 'lodash.get';
+import omit from 'lodash.omit';
 import without from 'lodash.without';
 
 import { flavorable, variationable } from '../../decorators';
@@ -67,16 +68,6 @@ export class DataTableAdvanced extends React.Component {
   }
 
 
-  toggleAllRows() {
-    const selectedRows = (this.state.selectedRows.length === this.props.data.length)
-      ? []
-      : this.props.data.map(d => d.id);
-
-    this.setState({ selectedRows });
-    this.props.onSelection(selectedRows);
-  }
-
-
   toggleRow(rowId = '') {
     const selectedRows = this.state.selectedRows.includes(rowId)
       ? without(this.state.selectedRows, rowId)
@@ -87,17 +78,35 @@ export class DataTableAdvanced extends React.Component {
   }
 
 
+  toggleAllRows() {
+    const selectedRows = this.areAllRowsSelected()
+      ? []
+      : this.props.data.map(d => d.id);
+
+    this.setState({ selectedRows });
+    this.props.onSelection(selectedRows);
+  }
+
+
+  areAllRowsSelected() {
+    return this.state.selectedRows.length === this.props.data.length;
+  }
+
+
   renderBody() {
     const rows = this.props.data.map((rowData) => {
+      const { isActionable, hasSelectableRows } = this.props;
       const { id } = rowData;
 
       return (
         <DataRow
           columnsConf={this.columnsConf}
-          isSelectable={this.props.hasSelectableRows}
+          isActionable={isActionable}
+          isSelectable={hasSelectableRows}
           isSelected={this.state.selectedRows.includes(id)}
-          onToggle={() => this.toggleRow(id)}
           key={id}
+          onAction={rowId => this.props.onAction(rowId)}
+          onToggle={rowId => this.toggleRow(rowId)}
           rowData={rowData}
         />
       );
@@ -112,25 +121,28 @@ export class DataTableAdvanced extends React.Component {
 
 
   render() {
-    const {
-      className,
-      currentPage,
-      data,
-      hasSelectableRows,
-      height,
-      isLoading,
-      onSelection,
-      onSorting,
-      rowsPerPage,
-      selectedRows,
-      totalPages,
-      ...rest,
-    } = this.props;
+    const rest = omit(this.props, [
+      'className',
+      'currentPage',
+      'data',
+      'hasSelectableRows',
+      'isActionable',
+      'height',
+      'isLoading',
+      'onAction',
+      'onSelection',
+      'onSorting',
+      'rowsPerPage',
+      'selectedRows',
+      'totalPages',
+    ]);
 
     return (
-      <table {...rest} className={this.cx('table', className)}>
+      <table {...rest} className={this.cx('table', this.props.className)}>
         <TableHead
           columnsConf={this.columnsConf}
+          isActionable={this.props.isActionable}
+          isAllSelected={this.areAllRowsSelected()}
           isSelectable={this.props.hasSelectableRows}
           onChangeSorting={sortBy => this.setSorting(sortBy)}
           onToggle={() => this.toggleAllRows()}
@@ -187,6 +199,11 @@ DataTableAdvanced.propTypes = {
   hasSelectableRows: React.PropTypes.bool,
 
   /**
+   * Does each row have a trailing "Show more" element?
+   */
+  isActionable: React.PropTypes.bool,
+
+  /**
    * Set to `true` while the upstream component fetches new data. Optional,
    * defaults to `false`.
    */
@@ -214,12 +231,17 @@ DataTableAdvanced.propTypes = {
   rowsPerPage: React.PropTypes.number,
 
   /**
+   * Callback triggered by clicking on the trailing "Show more" element in a
+   * row. Will receive the row ID as argument.
+   */
+  onAction: React.PropTypes.func,
+
+  /**
    * Callback, triggered by clicks on sortable column headers.  Will receive
    * two arguments: a string denoting which data key to sort by and a string
    * specifying the sort order ('asc' or 'desc').
    */
   onSorting: React.PropTypes.func.isRequired,
-
 
   /**
    * Callback, triggered whenever one or more rows have been selected. Returns

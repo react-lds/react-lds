@@ -7,15 +7,25 @@ import DataCell from './DataCell';
 const DataRow = (props, { cssPrefix }) => {
   const {
     columnsConf,
+    isActionable,
     isSelectable,
     isSelected,
     onToggle,
+    onAction,
     rowData,
   } = props;
 
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-  let checkboxCell = null;
+  const dataCells = columnsConf.map(conf => (
+    <DataCell
+      dataKey={conf.dataKey}
+      key={conf.dataKey}
+      renderer={conf.renderer}
+      value={rowData[conf.dataKey]}
+    />
+  ));
 
+  let checkboxCell = null;
   if (isSelectable) {
     const checkboxId = `checkbox-${rowData.id}`;
 
@@ -44,14 +54,25 @@ const DataRow = (props, { cssPrefix }) => {
     );
   }
 
-  const dataCells = columnsConf.map(conf => (
-    <DataCell
-      dataKey={conf.dataKey}
-      key={conf.dataKey}
-      renderer={conf.renderer}
-      value={rowData[conf.dataKey]}
-    />
-  ));
+  let showMoreCell = null;
+  if (isActionable) {
+    showMoreCell = (
+      <td role="gridcell" style={{ width: '3.25rem' }}>
+        <button
+          className={prefix(['button', 'button--icon-border-filled', 'button--icon-x-small'])}
+          onClick={() => onAction(rowData.id)}
+          title="Show More"
+        >
+          <svg className={prefix(['button__icon', 'button__icon--hint', 'button__icon--small'])} aria-hidden="true">
+            <use xlinkHref="/assets/icons/utility-sprite/svg/symbols.svg#down" />
+          </svg>
+          <span className={prefix('assistive-text')}>
+            Show More
+          </span>
+        </button>
+      </td>
+    );
+  }
 
   const cxTr = prefix([
     'hint-parent',
@@ -62,6 +83,7 @@ const DataRow = (props, { cssPrefix }) => {
     <tr className={cxTr}>
       {checkboxCell}
       {dataCells}
+      {showMoreCell}
     </tr>
   );
 };
@@ -85,6 +107,11 @@ DataRow.propTypes = {
   columnsConf: React.PropTypes.array.isRequired,
 
   /**
+   * Does each row have a trailing "Show more" element?
+   */
+  isActionable: React.PropTypes.bool,
+
+  /**
    * Is this row selectable, i.e. should it show a checkbox in front?
    */
   isSelectable: React.PropTypes.bool,
@@ -93,6 +120,12 @@ DataRow.propTypes = {
    * Is this row currently selected?
    */
   isSelected: React.PropTypes.bool,
+
+  /**
+   * Callback triggered by clicking on the trailing "Show more" element in a
+   * row. Required when `props.isActionable` is `true`.
+   */
+  onAction: React.PropTypes.func,
 
   /**
    * Callback triggered by activating/deactivating the row selection checkbox.

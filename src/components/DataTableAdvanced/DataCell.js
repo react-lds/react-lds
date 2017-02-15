@@ -14,11 +14,13 @@ const DataCell = (props, { cssPrefix }) => {
 
   return (
     <td role="gridcell">
-      { renderer && renderer(dataKey, value) }
-      { !renderer &&
-        <div className={prefix('truncate')} title={value}>
-          {value}
-        </div>
+      { renderer
+        ? renderer(dataKey, value)
+        : (
+          <div className={prefix('truncate')} title={value}>
+            {value}
+          </div>
+        )
       }
     </td>
   );

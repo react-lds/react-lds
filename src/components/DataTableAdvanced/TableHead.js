@@ -8,7 +8,9 @@ import HeadCell from './HeadCell';
 const TableHead = (props, { cssPrefix }) => {
   const {
     columnsConf,
+    isAllSelected,
     isSelectable,
+    isActionable,
     onChangeSorting,
     onToggle,
     sortBy,
@@ -34,6 +36,7 @@ const TableHead = (props, { cssPrefix }) => {
               name="options"
               onChange={onToggle}
               type="checkbox"
+              checked={isAllSelected}
             />
             <label className={prefix('checkbox__label')} htmlFor={checkboxId}>
               <span className={prefix('checkbox--faux')} />
@@ -42,6 +45,17 @@ const TableHead = (props, { cssPrefix }) => {
               </span>
             </label>
           </span>
+        </div>
+      </th>
+    );
+  }
+
+  let actionsCell = null;
+  if (isActionable) {
+    actionsCell = (
+      <th scope="col" style={{ width: '3.25rem' }}>
+        <div className={prefix('th__action')}>
+          <span className={prefix('assistive-text')}>Actions</span>
         </div>
       </th>
     );
@@ -71,6 +85,7 @@ const TableHead = (props, { cssPrefix }) => {
       <tr className={prefix('line-height--reset')}>
         {checkboxCell}
         {headCells}
+        {actionsCell}
       </tr>
     </thead>
   );
@@ -88,6 +103,16 @@ TableHead.propTypes = {
    * Array containing column configurations
    */
   columnsConf: React.PropTypes.array.isRequired,
+
+  /**
+   * Does each row below have a trailing "Show more" element?
+   */
+  isActionable: React.PropTypes.bool,
+
+  /**
+   * Are all table rows selected at the moment?
+   */
+  isAllSelected: React.PropTypes.bool,
 
   /**
    * Is this row selectable, i.e. should it show a checkbox in front?
