@@ -1,64 +1,102 @@
 import React from 'react';
+import omit from 'lodash.omit';
 
 import { themeable } from '../../decorators';
 import { prefixClasses } from '../../utils';
 
 import { Button, ButtonIcon } from '../../';
 
-const getThemeName = (themeStr) => {
-  if (typeof themeStr === 'string') {
-    return themeStr.includes('error') ||
-      themeStr.includes('success') ||
-      themeStr.includes('info');
+export class Popover extends React.Component {
+  static contextTypes = { cssPrefix: React.PropTypes.string };
+
+  static defaultProps = {
+    open: false,
+    closeable: true,
+    panels: false,
+    nubbin: 'bottom-left',
+  };
+
+  static propTypes = {
+    /**
+     * Open popover
+     */
+    open: React.PropTypes.bool,
+    /**
+     * Show close button
+     */
+    closeable: React.PropTypes.bool,
+    /**
+     * onClose handler
+     */
+    onClose: React.PropTypes.func.isRequired,
+    /**
+     * Popover header content
+     */
+    header: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.node,
+    ]),
+    /**
+     * Popover body content
+     */
+    body: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.node,
+    ]),
+    /**
+     * Popover footer content
+     */
+    footer: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.node,
+    ]),
+    /**
+     * Additional css classes
+     */
+    className: React.PropTypes.string,
+    /**
+     * Optional panel layout
+     */
+    panels: React.PropTypes.bool,
+    /**
+     * Optional position of nubbin
+     */
+    nubbin: React.PropTypes.string,
+    /**
+     * Optional custom layout (warning, error, success, info)
+     */
+    customLayout: React.PropTypes.string,
   }
-  return false;
-};
 
-const Popover = (props, { cssPrefix }) => {
-  const {
-    open,
-    header,
-    body,
-    footer,
-    className,
-    onClose,
-    closeable,
-    panels,
-    nubbin,
-    customLayout,
-    ...rest,
-  } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+  static getThemeName(themeStr) {
+    if (typeof themeStr === 'string') {
+      return themeStr.includes('error') ||
+        themeStr.includes('success') ||
+        themeStr.includes('info');
+    }
+    return false;
+  }
 
-  const sldsClasses = [
-    'popover',
-    { 'nubbin--left': !nubbin },
-    { [`nubbin--${nubbin}`]: !!nubbin },
-    { 'popover--panel': (!!panels && (typeof customLayout === 'undefined' || customLayout === '')) },
-    { hide: !open },
-  ];
-  const sldsClassesHeader = [
-    'popover__header',
-    { 'theme--warning': customLayout === 'warning' },
-    { 'theme--error': customLayout === 'error' },
-    { 'theme--success': customLayout === 'success' },
-    { 'theme--info': customLayout === 'info' },
-  ];
-  const sldsClassesBody = [
-    { popover__body: (typeof customLayout === 'undefined' || customLayout === '') },
-  ];
-  const sldsClassesFooter = 'popover__footer';
-  const sldsClassesCloseButton = [
-    'button--icon-small',
-    'float--right',
-    'popover__close',
-  ];
+  constructor(props, { cssPrefix }) {
+    super(props, { cssPrefix });
 
-  const renderHeader = () => {
+    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
+  }
+
+  renderHeader() {
+    const { header, panels, customLayout } = this.props;
+    const sldsClassesHeader = [
+      'popover__header',
+      { 'theme--warning': customLayout === 'warning' },
+      { 'theme--error': customLayout === 'error' },
+      { 'theme--success': customLayout === 'success' },
+      { 'theme--info': customLayout === 'info' },
+    ];
+
     let headerContent;
     let borderRadius;
     if (!!panels && (typeof customLayout !== 'undefined') && customLayout !== '') {
-      headerContent = (<h2 className={prefix(['text-heading--medium', 'p-around--x-small'])}>{header}</h2>);
+      headerContent = (<h2 className={this.prefix(['text-heading--medium', 'p-around--x-small'])}>{header}</h2>);
       borderRadius = {
         borderTopLeftRadius: 'calc(0.25rem - 1px)',
         borderTopRightRadius: 'calc(0.25rem - 1px)',
@@ -66,108 +104,82 @@ const Popover = (props, { cssPrefix }) => {
     } else {
       headerContent = header;
     }
+
     return (
-      <header className={prefix(sldsClassesHeader)} style={borderRadius}>
+      <header className={this.prefix(sldsClassesHeader)} style={borderRadius}>
         {headerContent}
       </header>
     );
-  };
+  }
 
-  const renderBody = () => (
-    <div className={prefix(sldsClassesBody)}>
-      {body}
-    </div>
-  );
+  renderBody() {
+    const { body, customLayout } = this.props;
+    const sldsClassesBody = [
+      { popover__body: (typeof customLayout === 'undefined' || customLayout === '') },
+    ];
 
-  const renderFooter = () => (
-    <footer className={prefix(sldsClassesFooter)}>
-      <p>{footer}</p>
-    </footer>
-  );
+    return (
+      <div className={this.prefix(sldsClassesBody)}>
+        {body}
+      </div>
+    );
+  }
 
-  const renderCloseButton = () => {
-    const invertIcon = customLayout ? getThemeName(customLayout) : getThemeName(className);
+  renderFooter() {
+    const { footer } = this.props;
+    const sldsClassesFooter = 'popover__footer';
+
+    return (
+      <footer className={this.prefix(sldsClassesFooter)}>
+        <p>{footer}</p>
+      </footer>
+    );
+  }
+
+  renderCloseButton() {
+    const { onClose, className, customLayout } = this.props;
+    const sldsClassesCloseButton = [
+      'button--icon-small',
+      'float--right',
+      'popover__close',
+    ];
+    const invertIcon = customLayout ? Popover.getThemeName(customLayout) : Popover.getThemeName(className);
+
     return (
       <Button
         icon
         icon-inverse={invertIcon}
-        className={prefix(sldsClassesCloseButton)}
+        className={this.prefix(sldsClassesCloseButton)}
         onClick={onClose}
       >
         <ButtonIcon sprite="utility" icon="close" />
       </Button>
     );
-  };
+  }
 
-  return (
-    <section
-      {...rest}
-      className={prefix(sldsClasses, className)}
-      role="dialog"
-      onBlur={onClose}
-    >
-      {closeable ? renderCloseButton() : null}
-      {header ? renderHeader() : null}
-      {body ? renderBody() : null}
-      {footer ? renderFooter() : null}
-    </section>
-  );
-};
+  render() {
+    const { className, closeable, open, customLayout, nubbin, panels, header, body, footer } = this.props;
+    const rest = omit(this.props, Object.keys(Popover.propTypes));
+    const sldsClasses = [
+      'popover',
+      { [`nubbin--${nubbin}`]: !!nubbin },
+      { 'popover--panel': (!!panels && (typeof customLayout === 'undefined' || customLayout === '')) },
+      { hide: !open },
+    ];
 
-Popover.contextTypes = {
-  cssPrefix: React.PropTypes.string,
-};
-
-Popover.propTypes = {
-  /**
-   * Open popover
-   */
-  open: React.PropTypes.bool,
-  /**
-   * Show close button
-   */
-  closeable: React.PropTypes.bool,
-  /**
-   * onClose handler
-   */
-  onClose: React.PropTypes.func.isRequired,
-  /**
-   * Popover header content
-   */
-  header: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.node,
-  ]),
-  /**
-   * Popover body content
-   */
-  body: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.node,
-  ]),
-  /**
-   * Popover footer content
-   */
-  footer: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.node,
-  ]),
-  /**
-   * Additional css classes
-   */
-  className: React.PropTypes.string,
-  /**
-   * Optional panel layout
-   */
-  panels: React.PropTypes.bool,
-  /**
-   * Optional position of nubbin
-   */
-  nubbin: React.PropTypes.string,
-  /**
-   * Optional custom layout (warning, error, success, info)
-   */
-  customLayout: React.PropTypes.string,
-};
+    return (
+      <section
+        {...rest}
+        className={this.prefix(sldsClasses, className)}
+        role="dialog"
+      >
+        {closeable ? this.renderCloseButton() : null}
+        {header ? this.renderHeader() : null}
+        {body ? this.renderBody() : null}
+        {footer ? this.renderFooter() : null}
+      </section>
+    );
+  }
+}
 
 export default themeable(Popover);

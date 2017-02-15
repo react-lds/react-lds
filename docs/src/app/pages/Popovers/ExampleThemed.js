@@ -10,7 +10,7 @@ const Example = () => (
       vel urna vitae nibh dictum fermentum quis quis elit. Donec placerat, augue
       eu vehicula iaculis, magna risus porttitor est, in aliquam magna lorem ac
       arcu. Pellentesque ut purus et lacus vestibulum eleifend."
-    theme="info"
+    theme="error"
   />
 );
 

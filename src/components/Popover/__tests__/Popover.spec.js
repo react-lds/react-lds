@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import Popover from '../Popover';
+import { default as Popover } from '../Popover';
 
 describe('<Popover />', () => {
   let props = {};
@@ -75,13 +75,6 @@ describe('<Popover />', () => {
     mounted.setProps({ closeable: true, onClose: mockFunction });
     const button = mounted.find('Flavored_Button button');
     button.simulate('click');
-    expect(mockFunction).toBeCalled();
-  });
-
-  it('calls the onClose function on loosing focus', () => {
-    const mockFunction = jest.fn();
-    mounted.setProps({ closeable: true, onClose: mockFunction });
-    mounted.simulate('blur');
     expect(mockFunction).toBeCalled();
   });
 
