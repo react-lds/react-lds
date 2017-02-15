@@ -16,23 +16,31 @@ const HeadCell = (props, { cssPrefix }) => {
 
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const xlinkHref = (sortBy === dataKey && sortDirection === 'desc')
-    ? '/assets/icons/utility-sprite/svg/symbols.svg#arrowup'
-    : '/assets/icons/utility-sprite/svg/symbols.svg#arrowdown';
+  const isCurrentSortColumn = isSortable && dataKey === sortBy;
+  const isSortAsc = sortDirection === 'asc';
+  let assistiveText = null;
+
+  if (isCurrentSortColumn) {
+    assistiveText = isSortAsc ? 'Sorted ascending' : 'Sorted descending';
+  }
 
   const cxTh = prefix([
     'text-title--caps',
     {
       'is-resizable': isResizable,
       'is-sortable': isSortable,
+      'is-sorted': isCurrentSortColumn,
+      [`is-sorted--${sortDirection}`]: isCurrentSortColumn,
     },
   ]);
+  const resizeHandleId = `cell-resize-handle-${dataKey}`;
 
   return (
     <th
       className={cxTh}
       key={dataKey}
       scope="col"
+      aria-sort={isCurrentSortColumn ? `${sortDirection}ending` : null}
     >
       { !isSortable &&
         <div className={prefix('truncate')} title={title}>
@@ -55,25 +63,27 @@ const HeadCell = (props, { cssPrefix }) => {
               aria-hidden="true"
               className={prefix(['icon', 'icon--x-small', 'icon-text-default', 'is-sortable__icon'])}
             >
-              <use xlinkHref={xlinkHref} />
+              <use xlinkHref="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown" />
             </svg>
           </div>
           <span
             className={prefix('assistive-text')}
             aria-live="assertive"
             aria-atomic="true"
-          />
+          >
+            {assistiveText}
+          </span>
         </a>
       }
 
       { isResizable &&
         <div className={prefix('resizable')}>
-          <label htmlFor="cell-resize-handle-567" className={prefix('assistive-text')}>
+          <label htmlFor={resizeHandleId} className={prefix('assistive-text')}>
             {title} column width
           </label>
           <input
             className={prefix(['resizable__input', 'assistive-text'])}
-            id="cell-resize-handle-567"
+            id={resizeHandleId}
             max="1000"
             min="20"
             tabIndex="0"

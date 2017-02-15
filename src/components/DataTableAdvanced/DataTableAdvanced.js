@@ -37,7 +37,7 @@ export class DataTableAdvanced extends React.Component {
 
   setSorting(newSortBy = '') {
     const { sortBy, sortDirection } = this.state;
-    let newSortDirection = 'asc';
+    let newSortDirection = 'desc';
 
     if (sortBy === newSortBy) {
       newSortDirection = (sortDirection === 'asc') ? 'desc' : 'asc';
