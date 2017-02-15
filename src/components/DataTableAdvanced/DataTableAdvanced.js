@@ -1,6 +1,6 @@
 import React from 'react';
 import get from 'lodash.get';
-import without from 'lodash/without';
+import without from 'lodash.without';
 
 import { flavorable, variationable } from '../../decorators';
 import { prefixClasses } from '../../utils';
@@ -24,7 +24,7 @@ export class DataTableAdvanced extends React.Component {
       selectedRows: [],
     };
 
-    this.buildColumnsConfig();
+    this.initcolumnsConf();
   }
 
 
@@ -33,22 +33,20 @@ export class DataTableAdvanced extends React.Component {
   }
 
 
-  setSorting(sortBy = '') {
-    let { sortDirection } = this.state;
+  setSorting(newSortBy = '') {
+    const { sortBy, sortDirection } = this.state;
+    let newSortDirection = 'asc';
 
-    if (this.state.sortBy !== sortBy) {
-      sortDirection = 'asc';
-    } else {
-      sortDirection = (sortDirection === 'asc') ? 'desc' : 'asc';
+    if (sortBy === newSortBy) {
+      newSortDirection = (sortDirection === 'asc') ? 'desc' : 'asc';
     }
 
     this.setState({
-      sortBy,
-      sortDirection,
+      sortBy: newSortBy,
+      sortDirection: newSortDirection,
     });
 
-    // TODO: inform upstream
-    this.props.onSorting(this.state.sortBy, this.state.sortDirection);
+    this.props.onSorting(newSortBy, newSortDirection);
   }
 
 
@@ -58,13 +56,12 @@ export class DataTableAdvanced extends React.Component {
 
 
   // Loops over the `DataTableColumn` children and extracts their props as
-  // config objects into `this.columnsConfig`.
+  // config objects into `this.columnsConf`.
   //
-  buildColumnsConfig() {
-    this.columnsConfig = this.columnsConfig ||
-      [].concat(this.props.children)
-        .filter(child => get(child, 'type') === DataTableColumn)
-        .map(child => child.props);
+  initcolumnsConf() {
+    this.columnsConf = [].concat(this.props.children)
+      .filter(child => get(child, 'type') === DataTableColumn)
+      .map(child => child.props);
   }
 
 
@@ -86,7 +83,7 @@ export class DataTableAdvanced extends React.Component {
   }
 
 
-  renderHeadCheckbox() {
+  renderHeadCheckboxColumn() {
     if (!this.props.hasSelectableRows) {
       return null;
     }
@@ -102,11 +99,10 @@ export class DataTableAdvanced extends React.Component {
         <div className={this.cx(['th__action', 'th__action--form'])}>
           <span className={this.cx('checkbox')}>
             <input
+              id={checkboxId}
+              name="options"
               onChange={() => this.toggleAllRows()}
               type="checkbox"
-              name="options"
-              id={checkboxId}
-              checked=""
             />
             <label className={this.cx('checkbox__label')} htmlFor={checkboxId}>
               <span className={this.cx('checkbox--faux')} />
@@ -122,7 +118,8 @@ export class DataTableAdvanced extends React.Component {
 
 
   renderHeadColumn(conf = {}) {
-    const xlinkHref = (this.state.sortBy === conf.dataKey && this.state.sortDirection === 'desc')
+    const { sortBy, sortDirection } = this.state;
+    const xlinkHref = (sortBy === conf.dataKey && sortDirection === 'desc')
       ? '/assets/icons/utility-sprite/svg/symbols.svg#arrowup'
       : '/assets/icons/utility-sprite/svg/symbols.svg#arrowdown';
 
@@ -153,7 +150,9 @@ export class DataTableAdvanced extends React.Component {
             tabIndex="0"
           >
             <span className={this.cx('assistive-text')}>Sort </span>
-            <span className={this.cx('truncate')} title={conf.title}>{conf.title}</span>
+            <span className={this.cx('truncate')} title={conf.title}>
+              {conf.title}
+            </span>
             <div className={this.cx('icon_container')}>
               <svg
                 aria-hidden="true"
@@ -162,7 +161,11 @@ export class DataTableAdvanced extends React.Component {
                 <use xlinkHref={xlinkHref} />
               </svg>
             </div>
-            <span className={this.cx('assistive-text')} aria-live="assertive" aria-atomic="true" />
+            <span
+              className={this.cx('assistive-text')}
+              aria-live="assertive"
+              aria-atomic="true"
+            />
           </a>
         }
 
@@ -193,32 +196,103 @@ export class DataTableAdvanced extends React.Component {
     return (
       <thead>
         <tr className={this.cx('line-height--reset')}>
-          {this.renderHeadCheckbox()}
-          {this.columnsConfig.map(conf => this.renderHeadColumn(conf))}
+          {this.renderHeadCheckboxColumn()}
+          {this.columnsConf.map(conf => this.renderHeadColumn(conf))}
         </tr>
       </thead>
     );
   }
 
 
-  renderBody() {
+  renderRowCheckboxColumn(dataObj = {}) {
+    if (!this.props.hasSelectableRows) {
+      return null;
+    }
+
+    const checkboxId = `checkbox-${dataObj.id}`;
+    const isRowSelected = this.state.selectedRows.includes(dataObj.id);
+
     return (
-      <tbody />
+      <td
+        className={this.cx('text-align--right')}
+        role="gridcell"
+        style={{ width: '3.25rem' }}
+      >
+        <span className={this.cx('checkbox')}>
+          <input
+            checked={isRowSelected}
+            id={checkboxId}
+            name="options"
+            onChange={() => this.toggleRow(dataObj.id)}
+            type="checkbox"
+          />
+          <label className={this.cx('checkbox__label')} htmlFor={checkboxId}>
+            <span className={this.cx('checkbox--faux')} />
+            <span className="slds-form-element__label slds-assistive-text">
+              Select item {dataObj.id}
+            </span>
+          </label>
+        </span>
+      </td>
+    );
+  }
+
+
+  renderDataCell(key = '', val = '', conf = {}) {
+    return (
+      <td role="gridcell" key={key}>
+        { conf.renderer &&
+          conf.renderer(key, val)
+        }
+
+        { !conf.renderer &&
+          <div className={this.cx('truncate')} title={val}>
+            {val}
+          </div>
+        }
+      </td>
+    );
+  }
+
+
+  renderBody() {
+    const rows = this.props.data.map((dataObj) => {
+      const columns = this.columnsConf.map(conf => (
+        this.renderDataCell(conf.dataKey, dataObj[conf.dataKey], conf)
+      ));
+
+      return (
+        <tr className={this.cx('hint-parent')} key={dataObj.id}>
+          {this.renderRowCheckboxColumn(dataObj)}
+          {columns}
+        </tr>
+      );
+    });
+
+    return (
+      <tbody>
+        {rows}
+      </tbody>
     );
   }
 
 
   render() {
-    const { data, className, ...rest } = this.props;
+    const {
+      data,
+      className,
+      hasSelectableRows,
+      onSorting,
+      height,
+      isLoading,
+      selectedRows,
+      totalPages,
+      currentPage,
+      rowsPerPage,
+      ...rest,
+    } = this.props;
 
-    console.log(this.columnsConfig);
-    console.log(data);
-
-    const cxTable = prefixClasses(
-      this.cssPrefix,
-      ['table', 'table--cell-buffer'],
-      className
-    );
+    const cxTable = this.cx('table', className);
 
     return (
       <table {...rest} className={cxTable}>
