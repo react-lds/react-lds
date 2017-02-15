@@ -66,20 +66,22 @@ export class DataTableAdvanced extends React.Component {
 
 
   toggleAllRows() {
-    this.setState({
-      selectedRows: (this.state.selectedRows.length === this.props.data.length)
-        ? []
-        : this.props.data.map(d => d.id),
-    });
+    const selectedRows = (this.state.selectedRows.length === this.props.data.length)
+      ? []
+      : this.props.data.map(d => d.id);
+
+    this.setState({ selectedRows });
+    this.props.onSelection(selectedRows);
   }
 
 
   toggleRow(rowId = '') {
-    this.setState({
-      selectedRows: this.state.selectedRows.includes(rowId)
-        ? without(this.state.selectedRows, rowId)
-        : [...this.state.selectedRows, rowId],
-    });
+    const selectedRows = this.state.selectedRows.includes(rowId)
+      ? without(this.state.selectedRows, rowId)
+      : [...this.state.selectedRows, rowId];
+
+    this.setState({ selectedRows });
+    this.props.onSelection(selectedRows);
   }
 
 
@@ -279,23 +281,22 @@ export class DataTableAdvanced extends React.Component {
 
   render() {
     const {
-      data,
       className,
+      currentPage,
+      data,
       hasSelectableRows,
-      onSorting,
       height,
       isLoading,
+      onSelection,
+      onSorting,
+      rowsPerPage,
       selectedRows,
       totalPages,
-      currentPage,
-      rowsPerPage,
       ...rest,
     } = this.props;
 
-    const cxTable = this.cx('table', className);
-
     return (
-      <table {...rest} className={cxTable}>
+      <table {...rest} className={this.cx('table', className)}>
         {this.renderHead()}
         {this.renderBody()}
       </table>
@@ -312,9 +313,9 @@ DataTableAdvanced.flavors = [
 ];
 
 DataTableAdvanced.variations = [
-  'no-row-hover',
-  'max-medium-table--stacked',
   'max-medium-table--stacked-horizontal',
+  'max-medium-table--stacked',
+  'no-row-hover',
 ];
 
 DataTableAdvanced.contextTypes = {
@@ -378,6 +379,13 @@ DataTableAdvanced.propTypes = {
    * specifying the sort order ('asc' or 'desc').
    */
   onSorting: React.PropTypes.func.isRequired,
+
+
+  /**
+   * Callback, triggered whenever one or more rows have been selected. Returns
+   * an array containing all selected row IDs.
+   */
+  onSelection: React.PropTypes.func.isRequired,
 };
 
 
