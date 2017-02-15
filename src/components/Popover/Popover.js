@@ -7,66 +7,6 @@ import { prefixClasses } from '../../utils';
 import { Button, ButtonIcon } from '../../';
 
 export class Popover extends React.Component {
-  static contextTypes = { cssPrefix: React.PropTypes.string };
-
-  static defaultProps = {
-    open: false,
-    closeable: true,
-    panels: false,
-    nubbin: 'bottom-left',
-  };
-
-  static propTypes = {
-    /**
-     * Open popover
-     */
-    open: React.PropTypes.bool,
-    /**
-     * Show close button
-     */
-    closeable: React.PropTypes.bool,
-    /**
-     * onClose handler
-     */
-    onClose: React.PropTypes.func.isRequired,
-    /**
-     * Popover header content
-     */
-    header: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.node,
-    ]),
-    /**
-     * Popover body content
-     */
-    body: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.node,
-    ]),
-    /**
-     * Popover footer content
-     */
-    footer: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.node,
-    ]),
-    /**
-     * Additional css classes
-     */
-    className: React.PropTypes.string,
-    /**
-     * Optional panel layout
-     */
-    panels: React.PropTypes.bool,
-    /**
-     * Optional position of nubbin
-     */
-    nubbin: React.PropTypes.string,
-    /**
-     * Optional custom layout (warning, error, success, info)
-     */
-    customLayout: React.PropTypes.string,
-  }
 
   static getThemeName(themeStr) {
     if (typeof themeStr === 'string') {
@@ -181,5 +121,66 @@ export class Popover extends React.Component {
     );
   }
 }
+
+Popover.contextTypes = { cssPrefix: React.PropTypes.string };
+
+Popover.defaultProps = {
+  open: false,
+  closeable: true,
+  panels: false,
+  nubbin: 'bottom-left',
+};
+
+Popover.propTypes = {
+  /**
+   * Open popover
+   */
+  open: React.PropTypes.bool,
+  /**
+   * Show close button
+   */
+  closeable: React.PropTypes.bool,
+  /**
+   * onClose handler
+   */
+  onClose: React.PropTypes.func.isRequired,
+  /**
+   * Popover header content
+   */
+  header: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.node,
+  ]),
+  /**
+   * Popover body content
+   */
+  body: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.node,
+  ]),
+  /**
+   * Popover footer content
+   */
+  footer: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.node,
+  ]),
+  /**
+   * Additional css classes
+   */
+  className: React.PropTypes.string,
+  /**
+   * Optional panel layout
+   */
+  panels: React.PropTypes.bool,
+  /**
+   * Optional position of nubbin
+   */
+  nubbin: React.PropTypes.string,
+  /**
+   * Optional custom layout (warning, error, success, info)
+   */
+  customLayout: React.PropTypes.string,
+};
 
 export default themeable(Popover);
