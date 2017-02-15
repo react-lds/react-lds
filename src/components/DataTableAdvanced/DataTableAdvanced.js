@@ -4,6 +4,8 @@ import without from 'lodash.without';
 
 import { flavorable, variationable } from '../../decorators';
 import { prefixClasses } from '../../utils';
+import DataRow from './DataRow';
+import TableHead from './TableHead';
 import DataTableColumn from './DataTableColumn';
 
 
@@ -85,189 +87,19 @@ export class DataTableAdvanced extends React.Component {
   }
 
 
-  renderHeadCheckboxColumn() {
-    if (!this.props.hasSelectableRows) {
-      return null;
-    }
-
-    const checkboxId = 'checkbox-1234';
-
-    return (
-      <th
-        className={this.cx('text-align--right')}
-        scope="col"
-        style={{ width: '3.25rem' }}
-      >
-        <div className={this.cx(['th__action', 'th__action--form'])}>
-          <span className={this.cx('checkbox')}>
-            <input
-              id={checkboxId}
-              name="options"
-              onChange={() => this.toggleAllRows()}
-              type="checkbox"
-            />
-            <label className={this.cx('checkbox__label')} htmlFor={checkboxId}>
-              <span className={this.cx('checkbox--faux')} />
-              <span className={this.cx(['form-element__label', 'assistive-text'])}>
-                Select All
-              </span>
-            </label>
-          </span>
-        </div>
-      </th>
-    );
-  }
-
-
-  renderHeadColumn(conf = {}) {
-    const { sortBy, sortDirection } = this.state;
-    const xlinkHref = (sortBy === conf.dataKey && sortDirection === 'desc')
-      ? '/assets/icons/utility-sprite/svg/symbols.svg#arrowup'
-      : '/assets/icons/utility-sprite/svg/symbols.svg#arrowdown';
-
-    const cxTh = this.cx([
-      'text-title--caps',
-      {
-        'is-resizable': conf.isResizable,
-        'is-sortable': conf.isSortable,
-      },
-    ]);
-
-    return (
-      <th
-        className={cxTh}
-        key={conf.dataKey}
-        scope="col"
-      >
-        { !conf.isSortable &&
-          <div className={this.cx('truncate')} title={conf.title}>
-            {conf.title}
-          </div>
-        }
-
-        { conf.isSortable &&
-          <a
-            onClick={() => this.setSorting(conf.dataKey)}
-            className={this.cx(['th__action', 'text-link--reset'])}
-            tabIndex="0"
-          >
-            <span className={this.cx('assistive-text')}>Sort </span>
-            <span className={this.cx('truncate')} title={conf.title}>
-              {conf.title}
-            </span>
-            <div className={this.cx('icon_container')}>
-              <svg
-                aria-hidden="true"
-                className={this.cx(['icon', 'icon--x-small', 'icon-text-default', 'is-sortable__icon'])}
-              >
-                <use xlinkHref={xlinkHref} />
-              </svg>
-            </div>
-            <span
-              className={this.cx('assistive-text')}
-              aria-live="assertive"
-              aria-atomic="true"
-            />
-          </a>
-        }
-
-        { conf.isResizable &&
-          <div className={this.cx('resizable')}>
-            <label htmlFor="cell-resize-handle-567" className={this.cx('assistive-text')}>
-              {conf.title} column width
-            </label>
-            <input
-              className={this.cx(['resizable__input', 'assistive-text'])}
-              id="cell-resize-handle-567"
-              max="1000"
-              min="20"
-              tabIndex="0"
-              type="range"
-            />
-            <span className={this.cx('resizable__handle')}>
-              <span className={this.cx('resizable__divider')} />
-            </span>
-          </div>
-        }
-      </th>
-    );
-  }
-
-
-  renderHead() {
-    return (
-      <thead>
-        <tr className={this.cx('line-height--reset')}>
-          {this.renderHeadCheckboxColumn()}
-          {this.columnsConf.map(conf => this.renderHeadColumn(conf))}
-        </tr>
-      </thead>
-    );
-  }
-
-
-  renderRowCheckboxColumn(dataObj = {}) {
-    if (!this.props.hasSelectableRows) {
-      return null;
-    }
-
-    const checkboxId = `checkbox-${dataObj.id}`;
-    const isRowSelected = this.state.selectedRows.includes(dataObj.id);
-
-    return (
-      <td
-        className={this.cx('text-align--right')}
-        role="gridcell"
-        style={{ width: '3.25rem' }}
-      >
-        <span className={this.cx('checkbox')}>
-          <input
-            checked={isRowSelected}
-            id={checkboxId}
-            name="options"
-            onChange={() => this.toggleRow(dataObj.id)}
-            type="checkbox"
-          />
-          <label className={this.cx('checkbox__label')} htmlFor={checkboxId}>
-            <span className={this.cx('checkbox--faux')} />
-            <span className="slds-form-element__label slds-assistive-text">
-              Select item {dataObj.id}
-            </span>
-          </label>
-        </span>
-      </td>
-    );
-  }
-
-
-  renderDataCell(key = '', val = '', conf = {}) {
-    return (
-      <td role="gridcell" key={key}>
-        { conf.renderer &&
-          conf.renderer(key, val)
-        }
-
-        { !conf.renderer &&
-          <div className={this.cx('truncate')} title={val}>
-            {val}
-          </div>
-        }
-      </td>
-    );
-  }
-
-
   renderBody() {
-    const rows = this.props.data.map((dataObj) => {
-      const columns = this.columnsConf.map(conf => (
-        this.renderDataCell(conf.dataKey, dataObj[conf.dataKey], conf)
-      ));
+    const rows = this.props.data.map((rowData) => {
+      const { id } = rowData;
 
       return (
-        <tr className={this.cx('hint-parent')} key={dataObj.id}>
-          {this.renderRowCheckboxColumn(dataObj)}
-          {columns}
-        </tr>
+        <DataRow
+          columnsConf={this.columnsConf}
+          isSelectable={this.props.hasSelectableRows}
+          isSelected={this.state.selectedRows.includes(id)}
+          onToggle={() => this.toggleRow(id)}
+          key={id}
+          rowData={rowData}
+        />
       );
     });
 
@@ -297,7 +129,15 @@ export class DataTableAdvanced extends React.Component {
 
     return (
       <table {...rest} className={this.cx('table', className)}>
-        {this.renderHead()}
+        <TableHead
+          columnsConf={this.columnsConf}
+          isSelectable={this.props.hasSelectableRows}
+          onChangeSorting={sortBy => this.setSorting(sortBy)}
+          onToggle={() => this.toggleAllRows()}
+          sortBy={this.state.sortBy}
+          sortDirection={this.state.sortDirection}
+        />
+
         {this.renderBody()}
       </table>
     );
