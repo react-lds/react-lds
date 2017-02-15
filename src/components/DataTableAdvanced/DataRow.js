@@ -53,8 +53,13 @@ const DataRow = (props, { cssPrefix }) => {
     />
   ));
 
+  const cxTr = prefix([
+    'hint-parent',
+    { 'is-selected': isSelected },
+  ]);
+
   return (
-    <tr className={prefix('hint-parent')}>
+    <tr className={cxTr}>
       {checkboxCell}
       {dataCells}
     </tr>
