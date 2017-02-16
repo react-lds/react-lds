@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.11
+* Improve Popover Component
+* Bugfix: Make renderWeekHeader in Datepicker static
+
 ## 1.0.10
 * Add Popover Component
 * Bugfix: Adjust Datepicker day format test
