@@ -38,6 +38,19 @@ export class Datepicker extends React.Component {
     },
   };
 
+  static renderWeekHeader() {
+    return (
+      <thead>
+        <tr id="weekdays">
+          {moment.weekdaysShort().map(wd => <th key={wd} id={wd}>
+            <abbr title={wd}>{wd}</abbr>
+          </th>
+          ) }
+        </tr>
+      </thead>
+    );
+  }
+
   constructor(props, context) {
     super(props, context);
     this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
@@ -107,19 +120,6 @@ export class Datepicker extends React.Component {
     );
   }
 
-  renderWeekHeader() {
-    return (
-      <thead>
-        <tr id="weekdays">
-          {moment.weekdaysShort().map(wd => <th key={wd} id={wd}>
-            <abbr title={wd}>{wd}</abbr>
-          </th>
-          ) }
-        </tr>
-      </thead>
-    );
-  }
-
   renderMonth() {
     return (
       <tbody>
@@ -183,7 +183,7 @@ export class Datepicker extends React.Component {
           {this.renderYearPicker()}
         </div>
         <table className={this.prefix('datepicker__month')} role="grid">
-          {this.renderWeekHeader()}
+          {Datepicker.renderWeekHeader()}
           {this.renderMonth()}
         </table>
       </div>
