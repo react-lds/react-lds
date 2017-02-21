@@ -29,7 +29,7 @@ const TableHead = (props, { cssPrefix }) => {
         scope="col"
         style={{ width: '3.25rem' }}
       >
-        <div className={prefix(['th__action', 'th__action--form'])}>
+        <div>
           <span className={prefix('checkbox')}>
             <input
               id={checkboxId}
