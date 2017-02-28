@@ -22,7 +22,7 @@ describe('<DropdownMenuListItem />', () => {
   });
 
   it('renders children', () => {
-    expect(mounted.find('li > a p').text()).toEqual('foobar');
+    expect(mounted.find('li > a div').text()).toEqual('foobar');
   });
 
   it('renders isSelected', () => {
@@ -46,7 +46,7 @@ describe('<DropdownMenuListItem />', () => {
       rightIcon: icon,
     });
 
-    expect(mounted.find('li > a > p svg').length).toBe(1);
+    expect(mounted.find('li > a > div svg').length).toBe(1);
     expect(mounted.find('li > a svg').length).toBe(2);
   });
 

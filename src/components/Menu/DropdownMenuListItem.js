@@ -63,10 +63,10 @@ const DropdownMenuListItem = (props, { cssPrefix }) => {
   return (
     <li {...rest} className={prefix(classes, className)} role="presentation">
       <a role="menuitem" onClick={onClick}>
-        <p className={prefix('truncate')}>
+        <div className={prefix('truncate')}>
           {leftIconElem()}
           {children}
-        </p>
+        </div>
         {rightIconElem()}
       </a>
     </li>
