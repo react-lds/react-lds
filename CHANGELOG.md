@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.1
+* Fix Popover font style
+
 ## 1.1.0
 * Add Popover Component
 * Bugfixes
