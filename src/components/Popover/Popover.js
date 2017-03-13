@@ -36,7 +36,7 @@ export class Popover extends React.Component {
     let headerContent;
     let borderRadius;
     if (!!panels && (typeof customLayout !== 'undefined') && customLayout !== '') {
-      headerContent = (<h2 className={this.prefix(['text-heading--medium', 'p-around--x-small'])}>{header}</h2>);
+      headerContent = (<h2 className={this.prefix(['text-heading--small', 'p-around--xxx-small'])}>{header}</h2>);
       borderRadius = {
         borderTopLeftRadius: 'calc(0.25rem - 1px)',
         borderTopRightRadius: 'calc(0.25rem - 1px)',
