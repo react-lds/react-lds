@@ -8,15 +8,15 @@ import {
 const icon = <Icon sprite="utility" icon="warning" size="x-small" background="text-warning" />;
 const syntaxWarning = (
   <div>
-    <h2 className="slds-text-heading--small slds-m-bottom--xx-small">Syntax Warning</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat minus
+    <h3 className="slds-m-bottom--xx-small">Syntax Warning</h3>
+    <p className="slds-text-color--weak">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat minus
     molestias reprehenderit consequuntur sapiente.</p>
   </div>
 );
 const fieldWarning = (
   <div>
-    <h2 className="slds-text-heading--small slds-m-bottom--xx-small">Field Warning</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat minus
+    <h3 className="slds-m-bottom--xx-small">Field Warning</h3>
+    <p className="slds-text-color--weak">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat minus
     molestias reprehenderit consequuntur sapiente. Modi veritatis totam
     accusantium numquam assumenda.</p>
   </div>
