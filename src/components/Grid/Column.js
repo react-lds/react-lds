@@ -48,9 +48,6 @@ export const Column = (props, { cssPrefix }) => {
 };
 
 Column.flavors = [
-  'padded',
-  'padded-medium',
-  'padded-large',
   'bump-left',
   'bump-right',
   'bump-top',
