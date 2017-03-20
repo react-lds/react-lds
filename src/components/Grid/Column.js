@@ -17,13 +17,14 @@ const breakPointProp = breakpoint => `${breakpoint}-sizeOf`;
 const sizeRegex = /^([1-9]|1[0-2])-([1-9]|1[0-2])$/;
 
 export const Column = (props, { cssPrefix }) => {
-  const { align, children, className, ...rest } = props;
+  const { align, children, className, omitSldsCol, ...rest } = props;
+
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const sldsClasses = [
-    'col',
-    { [`align-${align}`]: !!align },
-  ];
+  const sldsClasses = [];
+  const noCol = !!omitSldsCol;
+  sldsClasses.push(noCol ? '' : 'col');
+  sldsClasses.push({ [`align-${align}`]: !!align });
 
   const breakpoints = Array.from(validBreakpoints);
   breakpoints.unshift('');
@@ -41,7 +42,6 @@ export const Column = (props, { cssPrefix }) => {
   });
 
   const restProps = omit(rest, validBreakpoints.map(breakPointProp), 'sizeOf');
-
   return (
     <div {...restProps} className={prefix(sldsClasses, className)}>{children}</div>
   );
@@ -110,6 +110,10 @@ const columnPropTypes = {
    * non-responsive sizeOf
    */
   sizeOf: sizeOfPropType,
+  /**
+   * omit 'slds-col'
+   */
+  omitSldsCol: React.PropTypes.bool,
 };
 
 Column.propTypes = Object.assign({},
