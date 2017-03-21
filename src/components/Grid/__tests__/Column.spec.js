@@ -33,4 +33,9 @@ describe('<Column />', () => {
     expect(mounted.find('.slds-col').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-col').prop('data-test')).toEqual('bar');
   });
+
+  it('omits .slds-col', () => {
+    mounted.setProps({ omitCol: true });
+    expect(mounted.find('.slds-col').length).toBe(0);
+  });
 });
