@@ -20,6 +20,7 @@ const DropdownMenuListItem = (props, { cssPrefix }) => {
     if (leftIcon) {
       const iconClasses = [
         { 'icon--selected': !leftIcon.alwaysDisplay },
+        { 'icon-text-default': !leftIcon.alwaysDisplay },
         { 'm-right--x-small': !leftIcon.alwaysDisplay },
         { 'm-right--small': leftIcon.alwaysDisplay },
         { icon: leftIcon.alwaysDisplay },
