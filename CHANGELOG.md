@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2
+* Fix icon colors for selected picklist items
+* Update Column layout
+
 ## 1.1.1
 * Fix Popover font style
 
