@@ -3,7 +3,17 @@ import React from 'react';
 import { prefixClasses } from '../../utils';
 
 const FormElementLabel = (props, { cssPrefix }) => {
-  const { className, id, label, legend, readOnly, required, ...rest } = props;
+  const {
+    className,
+    hideLabel,
+    id,
+    label,
+    legend,
+    readOnly,
+    required,
+    ...rest,
+  } = props;
+
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderRequired = () => {
@@ -28,6 +38,7 @@ const FormElementLabel = (props, { cssPrefix }) => {
   const sldsClasses = [
     { 'form-element__legend': !!legend },
     'form-element__label',
+    { 'assistive-text': hideLabel },
   ];
 
   return (
@@ -48,6 +59,10 @@ FormElementLabel.propTypes = {
    * id of the corresponding input tag element
    */
   id: React.PropTypes.string,
+  /**
+   * sets the label to render as assistive text
+   */
+  hideLabel: React.PropTypes.bool,
   /**
    * label content
    */

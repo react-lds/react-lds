@@ -45,6 +45,11 @@ describe('<FormElementLabel />', () => {
     expect(mounted.find('legend').length).toBe(1);
   });
 
+  it('renders as assistive text', () => {
+    mounted.setProps({ hideLabel: true });
+    expect(mounted.find('.slds-form-element__label').hasClass('slds-assistive-text')).toBeTruthy();
+  });
+
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-form-element__label').hasClass('foo')).toBeTruthy();

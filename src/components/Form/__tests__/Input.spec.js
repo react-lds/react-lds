@@ -119,6 +119,11 @@ describe('<Input />', () => {
     expect(mounted.find('input').prop('aria-describedby')).toEqual(hash);
   });
 
+  it('applies hideLabel to the label', () => {
+    mounted.setProps({ hideLabel: true });
+    expect(mounted.find('FormElementLabel').prop('hideLabel')).toBeTruthy();
+  });
+
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('input').hasClass('foo')).toBeTruthy();

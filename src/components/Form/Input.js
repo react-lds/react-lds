@@ -12,11 +12,13 @@ const Input = (props) => {
   const {
     error,
     errorIcon,
+    hideLabel,
     iconLeft,
     iconRight,
     id,
     label,
     required,
+    ...rest,
   } = props;
 
   const hasIconLeft = !!iconLeft || (error && errorIcon);
@@ -24,9 +26,23 @@ const Input = (props) => {
 
   return (
     <FormElement required={required} error={error}>
-      <FormElementLabel label={label} id={id} required={required} />
+      <FormElementLabel
+        hideLabel={hideLabel}
+        label={label}
+        id={id}
+        required={required}
+      />
       <FormElementControl hasIconLeft={hasIconLeft} hasIconRight={hasIconRight}>
-        <InputRaw {...props} />
+        <InputRaw
+          error={error}
+          errorIcon={errorIcon}
+          iconLeft={iconLeft}
+          iconRight={iconRight}
+          id={id}
+          label={label}
+          required={required}
+          {...rest}
+        />
       </FormElementControl>
       <FormElementError error={error} id={id} />
     </FormElement>
@@ -37,6 +53,7 @@ Input.contextTypes = { cssPrefix: React.PropTypes.string };
 
 Input.propDefaults = {
   type: 'text',
+  hideLabel: false,
 };
 
 Input.propTypes = {
@@ -56,6 +73,10 @@ Input.propTypes = {
    * renders an additional error icon if an error is set
    */
   errorIcon: React.PropTypes.bool,
+  /**
+   * sets the label to render as assistive text
+   */
+  hideLabel: React.PropTypes.bool,
   /**
    * icon rendered on the left side of the input (from utility sprite)
    */
