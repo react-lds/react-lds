@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.3
+* Add option to hide input labels
+
 ## 1.1.2
 * Fix icon colors for selected picklist items
 * Update Column layout
