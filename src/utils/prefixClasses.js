@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import isArray from 'lodash.isarray';
 import isString from 'lodash.isstring';
 
 const prefixClasses = (prefix, classes, passThrough) => {
@@ -16,7 +15,7 @@ const prefixClasses = (prefix, classes, passThrough) => {
 
   let prefixed = classes;
 
-  if (isArray(classes) && isString(prefix)) {
+  if (Array.isArray(classes) && isString(prefix)) {
     prefixed = classes.map(applyPrefix);
   } else if (isString(classes) && isString(prefix)) {
     prefixed = applyPrefix(classes);
