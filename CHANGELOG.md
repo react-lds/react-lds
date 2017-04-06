@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.4
+* Remove deprecated lodash method
+
 ## 1.1.3
 * Add option to hide input labels
 
