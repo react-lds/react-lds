@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { parse } from 'react-docgen';
 import CodeBlock from './CodeBlock';
 
@@ -22,7 +23,7 @@ CodeExample.propTypes = {
   code: PropTypes.string.isRequired,
   component: PropTypes.bool,
   description: PropTypes.string,
-  exampleBlockStyle: React.PropTypes.object,
+  exampleBlockStyle: PropTypes.object,
   layoutSideBySide: PropTypes.bool,
   title: PropTypes.string,
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import exampleDefaultCode from '!raw!./ExampleDefault';
 import exampleDisabledCode from '!raw!./ExampleDisabled';
@@ -69,7 +70,7 @@ const TextareaVariants = ({ params }) =>
   </div>;
 
 TextareaVariants.propTypes = {
-  params: React.PropTypes.object,
+  params: PropTypes.object,
 };
 
 export default TextareaVariants;

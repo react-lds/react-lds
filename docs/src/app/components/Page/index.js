@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Navigation from '../Navigation';
 
 let basePath = '/';
@@ -27,12 +28,12 @@ class Page extends React.Component {
 }
 
 Page.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 Page.childContextTypes = {
-  assetBasePath: React.PropTypes.string,
-  cssPrefix: React.PropTypes.string,
+  assetBasePath: PropTypes.string,
+  cssPrefix: PropTypes.string,
 };
 
 

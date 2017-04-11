@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { MediaObject } from 'react-lds';
 
 require('./index.scss');
@@ -13,8 +14,8 @@ const Masthead = ({ title, figure }) =>
   </header>;
 
 Masthead.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  figure: React.PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
+  figure: PropTypes.node.isRequired,
 };
 
 export default Masthead;

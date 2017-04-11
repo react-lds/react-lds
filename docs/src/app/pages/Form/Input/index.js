@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import exampleDefaultCode from '!raw!./ExampleDefault';
 import exampleDisabledCode from '!raw!./ExampleDisabled';
@@ -88,7 +89,7 @@ const InputVariants = ({ params }) =>
   </div>;
 
 InputVariants.propTypes = {
-  params: React.PropTypes.object,
+  params: PropTypes.object,
 };
 
 export default InputVariants;
