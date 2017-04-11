@@ -37,6 +37,7 @@ In order to use React LDS, you will have to provide `assetBasePath` and `cssPref
 
 ``` js
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Page should be high in your component hierarchy
 // in order to be able to provide context
@@ -56,12 +57,12 @@ class Page extends React.Component {
 }
 
 Page.propTypes = {
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 Page.childContextTypes = {
-  assetBasePath: React.PropTypes.string,
-  cssPrefix: React.PropTypes.string,
+  assetBasePath: PropTypes.string,
+  cssPrefix: PropTypes.string,
 };
 ```
 
@@ -128,6 +129,7 @@ React LDS internally prefixes all relevant classNames with the cssPrefix you set
 
 ``` js
 import React from 'react';
+import PropTypes from 'prop-types';
 import { prefixClasses } from 'react-lds';
 
 const CustomComponent = (props, { cssPrefix }) => {
@@ -144,7 +146,7 @@ const CustomComponent = (props, { cssPrefix }) => {
   );
 };
 
-CustomComponent.contextTypes = { cssPrefix: React.PropTypes.string };
+CustomComponent.contextTypes = { cssPrefix: PropTypes.string };
 
 
 // Usage
