@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import omit from 'lodash.omit';
 
 import { flavorable, variationable } from '../../decorators';
@@ -68,7 +70,7 @@ Column.variations = [
   'shrink-none',
 ];
 
-Column.contextTypes = { cssPrefix: React.PropTypes.string };
+Column.contextTypes = { cssPrefix: PropTypes.string };
 
 const sizeOfPropType = (props, propName) => {
   const size = props[propName];
@@ -97,15 +99,15 @@ const columnPropTypes = {
   /**
    * alignment of columns on the main axis
    */
-  align: React.PropTypes.oneOf(['top', 'middle', 'bottom']),
+  align: PropTypes.oneOf(['top', 'middle', 'bottom']),
   /**
    * column content
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * non-responsive sizeOf
    */
@@ -113,7 +115,7 @@ const columnPropTypes = {
   /**
    * omit 'slds-col'
    */
-  omitCol: React.PropTypes.bool,
+  omitCol: PropTypes.bool,
 };
 
 Column.propTypes = Object.assign({},

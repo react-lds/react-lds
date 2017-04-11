@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { flavorable } from '../../decorators';
 import { prefixClasses } from '../../utils';
@@ -41,33 +42,33 @@ MediaObject.flavors = [
   'responsive',
 ];
 
-MediaObject.contextTypes = { cssPrefix: React.PropTypes.string };
+MediaObject.contextTypes = { cssPrefix: PropTypes.string };
 
 MediaObject.propTypes = {
   /**
    * mediaObject content
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
   /**
    * Renders a customTag instead of a div
    */
-  customTag: React.PropTypes.string,
+  customTag: PropTypes.string,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * renders a figure on the left side of the media object
    */
-  figureLeft: React.PropTypes.node,
+  figureLeft: PropTypes.node,
   /**
    * renders a figure on the right side of the media object
    */
-  figureRight: React.PropTypes.node,
+  figureRight: PropTypes.node,
   /**
    * truncates the body
    */
-  truncate: React.PropTypes.bool,
+  truncate: PropTypes.bool,
 };
 
 export default flavorable(MediaObject, 'media');

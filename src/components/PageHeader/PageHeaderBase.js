@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 import { IconSVG, MediaObject } from '../../';
@@ -19,28 +20,28 @@ const PageHeaderBase = (props, { cssPrefix }) => {
   );
 };
 
-PageHeaderBase.contextTypes = { cssPrefix: React.PropTypes.string };
+PageHeaderBase.contextTypes = { cssPrefix: PropTypes.string };
 
 PageHeaderBase.propTypes = {
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * icon and sprite
    */
-  icon: React.PropTypes.shape({
-    sprite: React.PropTypes.string.isRequired,
-    icon: React.PropTypes.string.isRequired,
+  icon: PropTypes.shape({
+    sprite: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
   }).isRequired,
   /**
    * info subtitle
    */
-  info: React.PropTypes.string.isRequired,
+  info: PropTypes.string.isRequired,
   /**
    * title
    */
-  title: React.PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default PageHeaderBase;

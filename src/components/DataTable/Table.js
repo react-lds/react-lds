@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { flavorable, variationable } from '../../decorators';
 import { prefixClasses } from '../../utils';
@@ -23,17 +24,17 @@ Table.variations = [
   'max-medium-table--stacked-horizontal',
 ];
 
-Table.contextTypes = { cssPrefix: React.PropTypes.string };
+Table.contextTypes = { cssPrefix: PropTypes.string };
 
 Table.propTypes = {
   /**
    * table content
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default variationable(

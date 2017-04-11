@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import { PillContainer } from '../PillContainer';
@@ -8,7 +9,7 @@ describe('<PillContainer />', () => {
   const child = <div className="foo">bar</div>;
 
   const context = { assetBasePath: '/assets', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
+  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {

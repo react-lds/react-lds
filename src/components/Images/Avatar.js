@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { flavorable } from '../../decorators';
 import { prefixClasses } from '../../utils';
@@ -24,25 +25,25 @@ Avatar.flavors = [
   'circle',
 ];
 
-Avatar.contextTypes = { cssPrefix: React.PropTypes.string };
+Avatar.contextTypes = { cssPrefix: PropTypes.string };
 
 Avatar.propTypes = {
   /**
    * img alt
    */
-  alt: React.PropTypes.string,
+  alt: PropTypes.string,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * img src (prepended with context.assetBasePath)
    */
-  src: React.PropTypes.string,
+  src: PropTypes.string,
   /**
    * image size
    */
-  size: React.PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
+  size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
 };
 
 export default flavorable(Avatar, 'avatar');

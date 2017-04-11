@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import NavigationListElement from '../NavigationListElement';
@@ -8,7 +9,7 @@ describe('<NavigationListElement />', () => {
   const child = <a>Some Link</a>;
 
   const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const childContextTypes = { cssPrefix: PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {

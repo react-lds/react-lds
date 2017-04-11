@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import omit from 'lodash.omit';
 import { prefixClasses } from '../utils';
 
@@ -13,15 +14,15 @@ function getValidVariations(definition) {
     const propTypes = _propTypes;
 
     if (typeof variation === 'string') {
-      propTypes[variation] = React.PropTypes.bool;
+      propTypes[variation] = PropTypes.bool;
     } else {
       const variationName = Object.keys(variation)[0];
       const responsives = variation[variationName];
 
-      propTypes[variationName] = React.PropTypes.bool;
+      propTypes[variationName] = PropTypes.bool;
 
       responsives.forEach((responsive) => {
-        propTypes[`${responsive}-${variationName}`] = React.PropTypes.bool;
+        propTypes[`${responsive}-${variationName}`] = PropTypes.bool;
       });
     }
 
@@ -49,12 +50,12 @@ const variationable = (C) => {
   VariationedComponent.displayName = `Variationed_${C.displayName || C.name}`;
 
   VariationedComponent.contextTypes = Object.assign({}, C.contextTypes, {
-    cssPrefix: React.PropTypes.string,
+    cssPrefix: PropTypes.string,
   });
 
   VariationedComponent.propTypes = Object.assign({},
     C.propTypes,
-    { className: React.PropTypes.string },
+    { className: PropTypes.string },
     validVariations
   );
 

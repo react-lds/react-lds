@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { flavorable } from '../../decorators';
 
@@ -22,11 +23,11 @@ Container.propTypes = {
   /**
    * container content
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default flavorable(Container, 'container');

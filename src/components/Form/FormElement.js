@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 
@@ -17,29 +18,29 @@ const FormElement = (props, { cssPrefix }) => {
   return (<Tag {...rest} className={prefix(classes, className)}>{children}</Tag>);
 };
 
-FormElement.contextTypes = { cssPrefix: React.PropTypes.string };
+FormElement.contextTypes = { cssPrefix: PropTypes.string };
 
 FormElement.propTypes = {
   /**
    * form content
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * can render errors for the given form element
    */
-  error: React.PropTypes.string,
+  error: PropTypes.string,
   /**
    * renders as a fieldset instead
    */
-  fieldset: React.PropTypes.bool,
+  fieldset: PropTypes.bool,
   /**
    * adds required-attribute to the form element
    */
-  required: React.PropTypes.bool,
+  required: PropTypes.bool,
 };
 
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { flavorable } from '../../decorators';
 import { prefixClasses } from '../../utils';
@@ -21,21 +22,21 @@ ModalFooter.flavors = [
   'directional',
 ];
 
-ModalFooter.contextTypes = { cssPrefix: React.PropTypes.string };
+ModalFooter.contextTypes = { cssPrefix: PropTypes.string };
 
 ModalFooter.propTypes = {
   /**
    * modal footer content
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * renders the footer with `theme--default`
    */
-  defaultTheme: React.PropTypes.bool,
+  defaultTheme: PropTypes.bool,
 };
 
 export default flavorable(ModalFooter, 'modal__footer');

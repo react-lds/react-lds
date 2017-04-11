@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 import { flavorable } from '../../decorators';
@@ -55,37 +56,37 @@ Pill.flavors = [
   'bare',
 ];
 
-Pill.contextTypes = { cssPrefix: React.PropTypes.string };
+Pill.contextTypes = { cssPrefix: PropTypes.string };
 
 Pill.propTypes = {
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * optional Icon that receives '.pill__icon_container' class
    */
-  icon: React.PropTypes.node,
+  icon: PropTypes.node,
   /**
    * content of the pill label
    */
-  label: React.PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   /**
    * onClose handler for the pill
    */
-  onClose: React.PropTypes.func,
+  onClose: PropTypes.func,
   /**
    * optional image that receives '.pill__icon' class
    */
-  portrait: React.PropTypes.node,
+  portrait: PropTypes.node,
   /**
    * title of the pill label
    */
-  title: React.PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   /**
    * optional url for the link label
    */
-  url: React.PropTypes.string,
+  url: PropTypes.string,
 };
 
 export default flavorable(Pill, 'pill');

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Grid } from 'react-lds';
 import { flavorable } from '../../decorators';
@@ -17,11 +18,11 @@ Navigation.propTypes = {
   /**
    * NavigationHeadline or NavigationList components
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * className
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default flavorable(Navigation, 'navigation-list');

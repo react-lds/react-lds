@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { variationable } from '../../decorators';
 import { prefixClasses } from '../../utils';
@@ -17,21 +18,21 @@ Row.variations = [
   'hint-parent',
 ];
 
-Row.contextTypes = { cssPrefix: React.PropTypes.string };
+Row.contextTypes = { cssPrefix: PropTypes.string };
 
 Row.propTypes = {
   /**
    * row content
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * marks a header row
    */
-  head: React.PropTypes.bool,
+  head: PropTypes.bool,
 };
 
 export default variationable(Row);

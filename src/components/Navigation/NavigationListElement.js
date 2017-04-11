@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 
@@ -14,21 +15,21 @@ const NavigationListElement = ({ children, active, ...rest }, { cssPrefix }) => 
   );
 };
 
-NavigationListElement.contextTypes = { cssPrefix: React.PropTypes.string };
+NavigationListElement.contextTypes = { cssPrefix: PropTypes.string };
 
 NavigationListElement.propTypes = {
   /**
    * typically an a tag
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * renders navigation element as active
    */
-  active: React.PropTypes.bool,
+  active: PropTypes.bool,
   /**
    * aria describedby, set by NavigationList into props
    */
-  'aria-describedby': React.PropTypes.string,
+  'aria-describedby': PropTypes.string,
 };
 
 export default NavigationListElement;

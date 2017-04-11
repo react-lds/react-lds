@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { flavorable, variationable } from '../../decorators';
 import { prefixClasses } from '../../utils';
@@ -32,17 +33,17 @@ Grid.variations = [
   { nowrap: ['small', 'medium', 'large'] },
 ];
 
-Grid.contextTypes = { cssPrefix: React.PropTypes.string };
+Grid.contextTypes = { cssPrefix: PropTypes.string };
 
 Grid.propTypes = {
   /**
    * grid content
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default variationable(

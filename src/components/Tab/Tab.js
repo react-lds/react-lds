@@ -1,29 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import omit from 'lodash.omit';
 
 import { prefixClasses } from '../../utils';
 
 class Tab extends React.Component {
-  static contextTypes = { cssPrefix: React.PropTypes.string };
+  static contextTypes = { cssPrefix: PropTypes.string };
   static defaultProps = { variation: 'default' }
 
   static propTypes = {
     /**
      * class name
      */
-    className: React.PropTypes.string,
+    className: PropTypes.string,
     /**
      * array of tabs
      */
-    tabs: React.PropTypes.arrayOf(React.PropTypes.shape({
-      title: React.PropTypes.string.isRequired,
-      id: React.PropTypes.string.isRequired,
-      content: React.PropTypes.node.isRequired,
+    tabs: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      content: PropTypes.node.isRequired,
     })).isRequired,
     /**
      * scoped has a border around the tab
      */
-    variation: React.PropTypes.oneOf(['default', 'scoped']),
+    variation: PropTypes.oneOf(['default', 'scoped']),
   };
 
   constructor(props, context) {

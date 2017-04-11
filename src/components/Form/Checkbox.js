@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   CheckboxRaw,
@@ -24,21 +25,21 @@ const Checkbox = (props) => {
   );
 };
 
-Checkbox.contextTypes = { cssPrefix: React.PropTypes.string };
+Checkbox.contextTypes = { cssPrefix: PropTypes.string };
 
 Checkbox.propTypes = {
   /**
   * renders an error for the checkbox
    */
-  error: React.PropTypes.string,
+  error: PropTypes.string,
   /**
    * id of the checkbox
    */
-  id: React.PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   /**
    * adds required attribute to the checkbox
    */
-  required: React.PropTypes.bool,
+  required: PropTypes.bool,
 };
 
 export default Checkbox;

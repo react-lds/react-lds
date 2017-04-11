@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { flavorable, themeable } from '../../decorators';
 import { prefixClasses } from '../../utils';
@@ -49,25 +50,25 @@ Notification.flavors = [
   'alert',
 ];
 
-Notification.contextTypes = { cssPrefix: React.PropTypes.string };
+Notification.contextTypes = { cssPrefix: PropTypes.string };
 
 Notification.propTypes = {
   /**
    * notification content
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * notification title (will be rendered as assistiveText)
    */
-  title: React.PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   /**
    * render the notification as a toast
    */
-  toast: React.PropTypes.bool,
+  toast: PropTypes.bool,
 };
 
 export default themeable(

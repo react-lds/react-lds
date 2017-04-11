@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 
@@ -25,7 +26,7 @@ const Breadcrumb = (props, { cssPrefix }) => {
     </nav>);
 };
 
-Breadcrumb.contextTypes = { cssPrefix: React.PropTypes.string };
+Breadcrumb.contextTypes = { cssPrefix: PropTypes.string };
 
 Breadcrumb.propTypes = {
   /**
@@ -33,11 +34,11 @@ Breadcrumb.propTypes = {
    * `<ol><li></li></ol>` structure of the breadcrumb. Don't forget to add
    * unique keys since react requires this to render more efficiently.
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default Breadcrumb;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import Card from '../Card';
@@ -8,7 +9,7 @@ describe('<Card />', () => {
   let props = {};
 
   const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
+  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {

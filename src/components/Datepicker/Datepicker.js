@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, ButtonIcon } from 'react-lds';
 import classnames from 'classnames';
 
@@ -8,26 +9,26 @@ import 'moment-range';
 import { prefixClasses } from '../../utils';
 
 export class Datepicker extends React.Component {
-  static contextTypes = { cssPrefix: React.PropTypes.string };
+  static contextTypes = { cssPrefix: PropTypes.string };
 
   static propTypes = {
     /**
     * Optional preselected date
     */
-    selectedDate: React.PropTypes.string,
+    selectedDate: PropTypes.string,
     /**
     * Callback function once day has been changed
     */
-    onSelectDate: React.PropTypes.func.isRequired,
+    onSelectDate: PropTypes.func.isRequired,
     /**
     * How many years to show before and after the current year
     */
-    yearSpan: React.PropTypes.number,
+    yearSpan: PropTypes.number,
     /**
     * Optional translations, default to english
     */
-    translations: React.PropTypes.shape({
-      today: React.PropTypes.string,
+    translations: PropTypes.shape({
+      today: PropTypes.string,
     }),
   };
 

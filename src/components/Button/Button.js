@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { flavorable } from '../../decorators';
 import { prefixClasses } from '../../utils';
@@ -48,37 +49,37 @@ Button.flavors = [
   'icon-bare',
 ];
 
-Button.contextTypes = { cssPrefix: React.PropTypes.string };
+Button.contextTypes = { cssPrefix: PropTypes.string };
 
 Button.propTypes = {
   /**
    * button content
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * disables the button
    */
-  disabled: React.PropTypes.bool,
+  disabled: PropTypes.bool,
   /**
    * onClick handler to trigger an action
    */
-  onClick: React.PropTypes.func,
+  onClick: PropTypes.func,
   /**
    * renders as selected
    */
-  selected: React.PropTypes.bool,
+  selected: PropTypes.bool,
   /**
    * button title
    */
-  title: React.PropTypes.string,
+  title: PropTypes.string,
   /**
    * adds optional value tag to the button
    */
-  value: React.PropTypes.string,
+  value: PropTypes.string,
 };
 
 export default flavorable(Button, 'button');

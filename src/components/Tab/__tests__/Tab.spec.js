@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import Tab from '../Tab';
@@ -8,7 +9,7 @@ describe('<Tab />', () => {
   let props = {};
 
   const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const childContextTypes = { cssPrefix: PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 import { IconSVG } from '../../';
@@ -26,41 +27,41 @@ const Icon = (props, { cssPrefix }) => {
   );
 };
 
-Icon.contextTypes = { cssPrefix: React.PropTypes.string };
+Icon.contextTypes = { cssPrefix: PropTypes.string };
 
 Icon.propTypes = {
   /**
   * optional, set this if you want to override the default background class. set to false to not set a background
    */
-  background: React.PropTypes.string,
+  background: PropTypes.string,
   /**
    * renders a circular icon
    */
-  circle: React.PropTypes.bool,
+  circle: PropTypes.bool,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * renders the icon in a div instead of a span
    */
-  div: React.PropTypes.bool,
+  div: PropTypes.bool,
   /**
    * icon name
    */
-  icon: React.PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
   /**
    * icon size
    */
-  size: React.PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
+  size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
   /**
    * icon sprite name
    */
-  sprite: React.PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
+  sprite: PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
   /**
    * icon title
    */
-  title: React.PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default Icon;

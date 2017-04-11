@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { variationable } from '../../decorators';
 import { prefixClasses, uniqueId } from '../../utils';
@@ -140,45 +141,45 @@ Cell.defaultProps = {
   sortDirection: 'asc',
 };
 
-Cell.contextTypes = { cssPrefix: React.PropTypes.string };
+Cell.contextTypes = { cssPrefix: PropTypes.string };
 
 Cell.propTypes = {
   /**
    * cell content
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * makes the cell resizable
    */
-  resizable: React.PropTypes.bool,
+  resizable: PropTypes.bool,
   /**
    * assistiveText for resize handler
    */
-  resizableAssistiveText: React.PropTypes.string,
+  resizableAssistiveText: PropTypes.string,
   /**
    * only `th` cells have a scope. Header cells have a col scope, and leading body cells can have a row scope
    */
-  scope: React.PropTypes.oneOf(['col', 'row']),
+  scope: PropTypes.oneOf(['col', 'row']),
   /**
    * renders a sortable cell
    */
-  sortable: React.PropTypes.bool,
+  sortable: PropTypes.bool,
   /**
    * assistive text for the sort icon
    */
-  sortAssistiveText: React.PropTypes.string,
+  sortAssistiveText: PropTypes.string,
   /**
    * sortDirection
    */
-  sortDirection: React.PropTypes.oneOf(['asc', 'desc']),
+  sortDirection: PropTypes.oneOf(['asc', 'desc']),
   /**
    * overrides the cell's title attribute
    */
-  title: React.PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default variationable(Cell);

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { themeable } from '../../decorators';
 import { prefixClasses } from '../../utils';
@@ -17,21 +18,21 @@ export const Box = (props, { cssPrefix }) => {
   );
 };
 
-Box.contextTypes = { cssPrefix: React.PropTypes.string };
+Box.contextTypes = { cssPrefix: PropTypes.string };
 
 Box.propTypes = {
   /**
    * box content
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * box size
    */
-  size: React.PropTypes.oneOf(['x-small', 'small']),
+  size: PropTypes.oneOf(['x-small', 'small']),
 };
 
 export default themeable(Box);

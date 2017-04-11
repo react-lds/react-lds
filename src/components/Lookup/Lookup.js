@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
 import debounce from 'lodash.debounce';
 import omit from 'lodash.omit';
@@ -19,7 +20,7 @@ import {
 } from '../../';
 
 const validateSelection = (props, propName, componentName, ...rest) => {
-  const arrayValidation = React.PropTypes.array(props, propName, componentName, ...rest);
+  const arrayValidation = PropTypes.array(props, propName, componentName, ...rest);
 
   if (arrayValidation === null && props[propName].length > 1 && !props.multi) {
     return new Error(`${componentName}.initialSelection should not supply multiple selections to a single-item
@@ -45,21 +46,21 @@ function filterDisplayItems(src, target, prop = 'id') {
 }
 
 export class Lookup extends React.Component {
-  static contextTypes = { cssPrefix: React.PropTypes.string };
+  static contextTypes = { cssPrefix: PropTypes.string };
   static propTypes = {
     /**
      * class name
      */
-    className: React.PropTypes.string,
+    className: PropTypes.string,
     /**
      * renders a different layour without borders (bare) for email docked
      * composer
      */
-    emailLayout: React.PropTypes.bool,
+    emailLayout: PropTypes.bool,
     /**
      * id of the input field in the lookup component
      */
-    id: React.PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     /**
      * initial item selection
      */
@@ -67,64 +68,64 @@ export class Lookup extends React.Component {
     /**
      * label for the input field in the lookup component
      */
-    inputLabel: React.PropTypes.string.isRequired,
+    inputLabel: PropTypes.string.isRequired,
     /**
      * label for the dropdown in the lookup component
      */
-    listLabel: React.PropTypes.string.isRequired,
+    listLabel: PropTypes.string.isRequired,
     /**
      * loads items into the lookup component
      */
-    load: React.PropTypes.func.isRequired,
+    load: PropTypes.func.isRequired,
     /**
      * set true to call load() onInputChange (defaults to true)
      */
-    loadOnChange: React.PropTypes.bool,
+    loadOnChange: PropTypes.bool,
     /**
      * set true to call load() onInputFocus (defaults to false)
      */
-    loadOnFocus: React.PropTypes.bool,
+    loadOnFocus: PropTypes.bool,
     /**
      * set true to call load() onComponentDidMount (defaults to false)
      */
-    loadOnMount: React.PropTypes.bool,
+    loadOnMount: PropTypes.bool,
     /**
      * renders the lookup in multiple mode
      */
-    multi: React.PropTypes.bool,
+    multi: PropTypes.bool,
     /**
      * onChange handler for the lookup. has selected items as first argument
      */
-    onChange: React.PropTypes.func,
+    onChange: PropTypes.func,
     /**
      * onFocus handler for the input field in the lookup
      */
-    onFocus: React.PropTypes.func,
+    onFocus: PropTypes.func,
     /**
      * placeholder for the input field in lookup
      */
-    placeholder: React.PropTypes.string,
+    placeholder: PropTypes.string,
     /**
      * if set to true, allows the creation of new elements that were not found
      * during lookups. For example new email addresses.
      * The new entry will not have an object type and the ID will be the current
      * timestamp.
      */
-    allowCreate: React.PropTypes.bool,
+    allowCreate: PropTypes.bool,
     /**
      * if set, renders the Advanced Modal table layout
      */
-    table: React.PropTypes.bool,
-    tableFields: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        name: React.PropTypes.string.isRequired,
-        label: React.PropTypes.string.isRequired,
+    table: PropTypes.bool,
+    tableFields: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
       })
     ),
     /**
      * Label behind the number of Results in the table header
      */
-    tableResultsHeading: React.PropTypes.string,
+    tableResultsHeading: PropTypes.string,
   };
 
   static defaultProps = {

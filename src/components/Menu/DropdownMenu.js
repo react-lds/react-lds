@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash.omit';
 
@@ -6,7 +7,7 @@ import { prefixClasses } from '../../utils';
 import { Button, ButtonIcon } from '../../';
 
 export class DropdownMenu extends React.Component {
-  static contextTypes = { cssPrefix: React.PropTypes.string };
+  static contextTypes = { cssPrefix: PropTypes.string };
 
   static defaultProps = {
     isOpen: false,
@@ -27,52 +28,52 @@ export class DropdownMenu extends React.Component {
      * }
      * ```
      */
-    button: React.PropTypes.shape({
-      icon: React.PropTypes.string.isRequired,
-      sprite: React.PropTypes.string.isRequired,
-      title: React.PropTypes.string,
-      noBorder: React.PropTypes.bool,
-      neutral: React.PropTypes.bool,
-      brand: React.PropTypes.bool,
+    button: PropTypes.shape({
+      icon: PropTypes.string.isRequired,
+      sprite: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      noBorder: PropTypes.bool,
+      neutral: PropTypes.bool,
+      brand: PropTypes.bool,
     }),
     /**
      * one DropdownMenuList or many of them
      */
-    children: React.PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
     /**
      * class name
      */
-    className: React.PropTypes.string,
+    className: PropTypes.string,
     /**
      * fully customizable dropdown trigger button, use this instead of the button
      * shape if needed
      */
-    customButton: React.PropTypes.element,
+    customButton: PropTypes.element,
     /**
      * adds disabled attribute to menu button
      */
-    disabled: React.PropTypes.bool,
+    disabled: PropTypes.bool,
     /**
      * forces open or closed state, is needed when using a custom button
      */
-    isOpen: React.PropTypes.bool,
+    isOpen: PropTypes.bool,
     /**
      * indicates that this is the last element inside a button group and renders
      * the required css class
      */
-    last: React.PropTypes.bool,
+    last: PropTypes.bool,
     /**
      * displays the nubbin at the correct position if true, hidden per default
      */
-    nubbin: React.PropTypes.bool,
+    nubbin: PropTypes.bool,
     /**
      * position relative to the menu button
      */
-    position: React.PropTypes.oneOf(['top-left', 'top', 'top-right', 'bottom-left', 'bototm', 'bottom-right']),
+    position: PropTypes.oneOf(['top-left', 'top', 'top-right', 'bottom-left', 'bototm', 'bottom-right']),
     /**
      * length of the menu box
      */
-    size: React.PropTypes.oneOf(['small', 'medium', 'large']),
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
   };
 
   constructor(props, { cssPrefix }) {

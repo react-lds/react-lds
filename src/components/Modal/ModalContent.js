@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 
@@ -20,21 +21,21 @@ const ModalContent = (props, { cssPrefix }) => {
   );
 };
 
-ModalContent.contextTypes = { cssPrefix: React.PropTypes.string };
+ModalContent.contextTypes = { cssPrefix: PropTypes.string };
 
 ModalContent.propTypes = {
   /**
    * modal content
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * render as a modal__menu instead
    */
-  menu: React.PropTypes.bool,
+  menu: PropTypes.bool,
 };
 
 

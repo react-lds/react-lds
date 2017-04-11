@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses, getUniqueHash } from '../../utils';
 
@@ -54,41 +55,41 @@ const CheckboxRaw = (props, { cssPrefix }) => {
   );
 };
 
-CheckboxRaw.contextTypes = { cssPrefix: React.PropTypes.string };
+CheckboxRaw.contextTypes = { cssPrefix: PropTypes.string };
 
 CheckboxRaw.propTypes = {
   /**
    * checks the checkbox
    */
-  checked: React.PropTypes.bool,
+  checked: PropTypes.bool,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
   * adds disabled attribute
    */
-  disabled: React.PropTypes.bool,
+  disabled: PropTypes.bool,
   /**
   * renders an error for the checkbox
    */
-  error: React.PropTypes.string,
+  error: PropTypes.string,
   /**
    * id of the checkbox
    */
-  id: React.PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   /**
    * label
    */
-  label: React.PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   /**
    * onChange handler
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
   /**
    * adds required attribute to the checkbox
    */
-  required: React.PropTypes.bool,
+  required: PropTypes.bool,
 };
 
 export default CheckboxRaw;

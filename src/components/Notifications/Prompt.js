@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from '../../';
 
@@ -22,31 +23,31 @@ Prompt.propTypes = {
   /**
    * prompt close button text
    */
-  buttonText: React.PropTypes.string.isRequired,
+  buttonText: PropTypes.string.isRequired,
   /**
    * prompt content
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * prompt description
    */
-  description: React.PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   /**
    * prompt label
    */
-  label: React.PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   /**
    * opens the prompt
    */
-  open: React.PropTypes.bool,
+  open: PropTypes.bool,
   /**
    * prompt content
    */
-  title: React.PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Prompt;

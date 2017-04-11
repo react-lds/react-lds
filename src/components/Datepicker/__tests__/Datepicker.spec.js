@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import { shallow } from 'enzyme';
 import { Datepicker } from '../Datepicker';
@@ -7,7 +8,7 @@ describe('<Datepicker />', () => {
   let mounted = null;
 
   const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const childContextTypes = { cssPrefix: PropTypes.string };
   const options = { context, childContextTypes };
   const selected = jest.fn();
 
