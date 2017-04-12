@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import omit from 'lodash.omit';
 
 import { themeable } from '../../decorators';
@@ -122,7 +123,7 @@ export class Popover extends React.Component {
   }
 }
 
-Popover.contextTypes = { cssPrefix: React.PropTypes.string };
+Popover.contextTypes = { cssPrefix: PropTypes.string };
 
 Popover.defaultProps = {
   open: false,
@@ -135,52 +136,52 @@ Popover.propTypes = {
   /**
    * Open popover
    */
-  open: React.PropTypes.bool,
+  open: PropTypes.bool,
   /**
    * Show close button
    */
-  closeable: React.PropTypes.bool,
+  closeable: PropTypes.bool,
   /**
    * onClose handler
    */
-  onClose: React.PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   /**
    * Popover header content
    */
-  header: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.node,
+  header: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
   ]),
   /**
    * Popover body content
    */
-  body: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.node,
+  body: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
   ]),
   /**
    * Popover footer content
    */
-  footer: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.node,
+  footer: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
   ]),
   /**
    * Additional css classes
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * Optional panel layout
    */
-  panels: React.PropTypes.bool,
+  panels: PropTypes.bool,
   /**
    * Optional position of nubbin
    */
-  nubbin: React.PropTypes.string,
+  nubbin: PropTypes.string,
   /**
    * Optional custom layout (warning, error, success, info)
    */
-  customLayout: React.PropTypes.string,
+  customLayout: PropTypes.string,
 };
 
 export default themeable(Popover);

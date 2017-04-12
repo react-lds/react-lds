@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import { ModalFooter } from '../ModalFooter';
@@ -8,7 +9,7 @@ describe('<ModalFooter />', () => {
   const child = (<div className="foo">bar</div>);
 
   const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: React.PropTypes.string };
+  const childContextTypes = { cssPrefix: PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {

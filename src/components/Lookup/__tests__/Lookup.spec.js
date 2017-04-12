@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { Lookup } from '../Lookup';
@@ -10,7 +11,7 @@ describe('<Lookup />', () => {
   let props = {};
 
   const context = { assetBasePath: '/assets', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: React.PropTypes.string, cssPrefix: React.PropTypes.string };
+  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
   const options = { context, childContextTypes };
 
   const sampleData = [

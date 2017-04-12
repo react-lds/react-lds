@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Badge } from 'react-lds';
 
 require('./decoratorlist.scss');
@@ -52,7 +53,7 @@ const DecoratorList = (props) => {
 };
 
 DecoratorList.propTypes = {
-  component: React.PropTypes.func.isRequired,
+  component: PropTypes.func.isRequired,
 };
 
 export default DecoratorList;

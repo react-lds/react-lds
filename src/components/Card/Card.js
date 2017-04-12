@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 import { Grid, Icon, MediaObject } from '../../';
@@ -40,37 +41,37 @@ const Card = (props, { cssPrefix }) => {
   );
 };
 
-Card.contextTypes = { cssPrefix: React.PropTypes.string };
+Card.contextTypes = { cssPrefix: PropTypes.string };
 
 Card.propTypes = {
   /**
    * card body, could be a table for example
    */
-  body: React.PropTypes.node,
+  body: PropTypes.node,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * footer in the bottom right corner
    */
-  footer: React.PropTypes.node,
+  footer: PropTypes.node,
   /**
    * card header
    */
-  title: React.PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   /**
    * top right corner of the card, can be used for a Button for example
    */
-  headerRight: React.PropTypes.node,
+  headerRight: PropTypes.node,
   /**
    * icon name
    */
-  icon: React.PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
   /**
    * icon sprite name
    */
-  sprite: React.PropTypes.string.isRequired,
+  sprite: PropTypes.string.isRequired,
 };
 
 export default Card;

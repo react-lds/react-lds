@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Badge } from 'react-lds';
 
@@ -39,13 +40,13 @@ const NavLink = (props, context) => {
 };
 
 NavLink.propTypes = {
-  to: React.PropTypes.string.isRequired,
-  label: React.PropTypes.string.isRequired,
-  unfinished: React.PropTypes.bool,
+  to: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  unfinished: PropTypes.bool,
 };
 
 NavLink.contextTypes = {
-  router: React.PropTypes.object,
+  router: PropTypes.object,
 };
 
 export default NavLink;

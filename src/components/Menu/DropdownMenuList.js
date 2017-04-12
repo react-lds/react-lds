@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 
@@ -34,30 +35,30 @@ const DropdownMenuList = (props, { cssPrefix }) => {
   );
 };
 
-DropdownMenuList.contextTypes = { cssPrefix: React.PropTypes.string };
+DropdownMenuList.contextTypes = { cssPrefix: PropTypes.string };
 
 DropdownMenuList.propTypes = {
   /**
    * list content
    */
-  children: React.PropTypes.arrayOf(React.PropTypes.element),
+  children: PropTypes.arrayOf(PropTypes.element),
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * optional header for this list. Mostly useful is multiple
    * DropdownMenuListItems are in use
    */
-  header: React.PropTypes.string,
+  header: PropTypes.string,
   /**
    * sets the number of items being displayed
    */
-  height: React.PropTypes.oneOf([5, 7, 10]),
+  height: PropTypes.oneOf([5, 7, 10]),
   /**
    * use this instead of height if an leftIcon is on every item
    */
-  heightIcon: React.PropTypes.oneOf([5, 7, 10]),
+  heightIcon: PropTypes.oneOf([5, 7, 10]),
 };
 
 export default DropdownMenuList;

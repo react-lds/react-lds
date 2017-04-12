@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   FormElement,
@@ -55,31 +56,31 @@ CheckboxGroup.propTypes = {
   /**
    * The checkboxes to render
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * renders an error for the fieldset
    */
-  error: React.PropTypes.string,
+  error: PropTypes.string,
   /**
    * id of the fieldset
    */
-  id: React.PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   /**
    * label
    */
-  label: React.PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   /**
    * onchange handler
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
   /**
    * adds required attribute to the fieldset
    */
-  required: React.PropTypes.bool,
+  required: PropTypes.bool,
 };
 
 export default CheckboxGroup;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 import { flavorable } from '../../decorators';
@@ -18,21 +19,21 @@ PillContainer.flavors = [
   'bare',
 ];
 
-PillContainer.contextTypes = { cssPrefix: React.PropTypes.string };
+PillContainer.contextTypes = { cssPrefix: PropTypes.string };
 
 PillContainer.propTypes = {
   /**
    * the pill(s) passed into the component
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * onClick handler for the pill container
    */
-  onClick: React.PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 export default flavorable(PillContainer, 'pill_container');

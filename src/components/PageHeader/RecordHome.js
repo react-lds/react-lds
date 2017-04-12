@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 import { Grid, Column, MediaObject, IconSVG } from '../../';
@@ -42,40 +43,40 @@ const RecordHome = (props, { cssPrefix }) => {
   );
 };
 
-RecordHome.contextTypes = { cssPrefix: React.PropTypes.string };
+RecordHome.contextTypes = { cssPrefix: PropTypes.string };
 
 RecordHome.propTypes = {
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * entries for the detail row, can be just strings or more complex nodes like
    * links or text with icons etc...
    */
-  detailItems: React.PropTypes.arrayOf(React.PropTypes.shape({
-    title: React.PropTypes.node.isRequired,
-    content: React.PropTypes.node.isRequired,
+  detailItems: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.node.isRequired,
+    content: PropTypes.node.isRequired,
   })),
   /**
    * buttons that are rendered on the right side of the header
    */
-  headerButtons: React.PropTypes.node,
+  headerButtons: PropTypes.node,
   /**
    * sprite and icon
    */
-  icon: React.PropTypes.shape({
-    sprite: React.PropTypes.string.isRequired,
-    icon: React.PropTypes.string.isRequired,
+  icon: PropTypes.shape({
+    sprite: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
   }).isRequired,
   /**
    * record type header above the title
    */
-  recordType: React.PropTypes.string.isRequired,
+  recordType: PropTypes.string.isRequired,
   /**
    * title
    */
-  title: React.PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default RecordHome;

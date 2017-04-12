@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { getUniqueHash, prefixClasses } from '../../utils';
 import {
@@ -57,45 +58,45 @@ const Textarea = (props, { cssPrefix }) => {
   );
 };
 
-Textarea.contextTypes = { cssPrefix: React.PropTypes.string };
+Textarea.contextTypes = { cssPrefix: PropTypes.string };
 
 Textarea.propTypes = {
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
   * adds disabled attribute to the textarea
    */
-  disabled: React.PropTypes.bool,
+  disabled: PropTypes.bool,
   /**
   * renders an error for the textarea
    */
-  error: React.PropTypes.string,
+  error: PropTypes.string,
   /**
    * id of the textarea
    */
-  id: React.PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   /**
    * label for the textarea
    */
-  label: React.PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   /**
    * onChange handler for the textarea
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
   /**
    * textarea placeholder
    */
-  placeholder: React.PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
   /**
    * renders a static textarea output instead
    */
-  readOnly: React.PropTypes.bool,
+  readOnly: PropTypes.bool,
   /**
    * adds required attribute to the textarea
    */
-  required: React.PropTypes.bool,
+  required: PropTypes.bool,
 };
 
 export default Textarea;

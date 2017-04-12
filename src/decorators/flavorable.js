@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import omit from 'lodash.omit';
 import { prefixClasses } from '../utils';
 
@@ -48,12 +49,12 @@ const flavorable = (C, baseClass) => {
   FlavoredComponent.displayName = `Flavored_${C.displayName || C.name}`;
 
   FlavoredComponent.contextTypes = Object.assign({}, C.contextTypes, {
-    cssPrefix: React.PropTypes.string,
+    cssPrefix: PropTypes.string,
   });
 
   FlavoredComponent.propTypes = Object.assign({},
     C.propTypes,
-    { className: React.PropTypes.string },
+    { className: PropTypes.string },
     C.flavors.reduce((_propTypes, flavor) => {
       const propTypes = _propTypes;
       propTypes[flavor] = flavorPropType(C.flavors);

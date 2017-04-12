@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash.omit';
 
@@ -6,38 +7,38 @@ import { prefixClasses } from '../../utils';
 import { Grid, Column, DropdownMenu } from '../../';
 
 export class ObjectHome extends React.Component {
-  static contextTypes = { cssPrefix: React.PropTypes.string };
+  static contextTypes = { cssPrefix: PropTypes.string };
 
   static propTypes = {
     /**
      * bottom Buttons or ButtonGroup(s)
      */
-    bottomButtons: React.PropTypes.node,
+    bottomButtons: PropTypes.node,
     /**
      * class name
      */
-    className: React.PropTypes.string,
+    className: PropTypes.string,
     /**
      * info that is displayed below the title
      */
-    info: React.PropTypes.string,
+    info: PropTypes.string,
     /**
      * record type header above the title
      */
-    recordType: React.PropTypes.string.isRequired,
+    recordType: PropTypes.string.isRequired,
     /**
      * title
      */
-    title: React.PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     /**
      * dropdown header menu that also get's triggered when a user clicks on the
      * title headline. Must be one or more instances of DropdownMenuList
      */
-    titleMenu: React.PropTypes.node,
+    titleMenu: PropTypes.node,
     /**
      * top Buttons or ButtonGroup(s)
      */
-    topButtons: React.PropTypes.node,
+    topButtons: PropTypes.node,
   };
 
   constructor(props, context) {

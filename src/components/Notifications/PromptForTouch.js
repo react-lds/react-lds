@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Modal, ModalHeader, ModalContent, Backdrop } from '../../';
 
@@ -30,31 +31,31 @@ PromptForTouch.propTypes = {
   /**
    * prompt content
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * prompt header-icon
    */
-  headerIcon: React.PropTypes.node,
+  headerIcon: PropTypes.node,
   /**
    * prompt label
    */
-  label: React.PropTypes.string,
+  label: PropTypes.string,
   /**
    * opens the prompt
    */
-  open: React.PropTypes.bool,
+  open: PropTypes.bool,
   /**
    * prompt tagline
    */
-  tagline: React.PropTypes.string,
+  tagline: PropTypes.string,
   /**
    * prompt title
    */
-  title: React.PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default PromptForTouch;

@@ -6,19 +6,24 @@
     "jest": true,
   },
   "rules": {
+    "comma-dangle": "off",
     "max-len": [2, 120, 2, {
       "ignoreUrls": true,
       "ignoreComments": false
     }],
     "import/no-duplicates": "off",
     "import/no-extraneous-dependencies": "off",
+    "import/no-named-default": 1,
     "import/prefer-default-export": "off",
+    "import/no-webpack-loader-syntax": "off",
+    "react/no-array-index-key": 1,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/forbid-prop-types": "off",
+    "react/require-default-props": 1,
     "jsx-a11y/anchor-has-content": "off",
     "class-methods-use-this": [1, { "exceptMethods": ['getChildContext', 'componentWillMount'] }],
     "react/no-unused-prop-types": "off",
-    "jsx-a11y/no-static-element-interactions": "off"
+    "jsx-a11y/no-static-element-interactions": "off",
   },
   settings: {
     "import/resolver": {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { IconSVG } from '../../';
 import { prefixClasses } from '../../utils';
@@ -25,29 +26,29 @@ const ButtonIcon = (props, { cssPrefix }) => {
   );
 };
 
-ButtonIcon.contextTypes = { cssPrefix: React.PropTypes.string };
+ButtonIcon.contextTypes = { cssPrefix: PropTypes.string };
 
 ButtonIcon.propTypes = {
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * icon name
    */
-  icon: React.PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
   /**
    * icon position
    */
-  position: React.PropTypes.oneOf(['left', 'right']),
+  position: PropTypes.oneOf(['left', 'right']),
   /**
    * icon size
    */
-  size: React.PropTypes.oneOf(['x-small', 'small', 'large']),
+  size: PropTypes.oneOf(['x-small', 'small', 'large']),
   /**
    * icon sprite name
    */
-  sprite: React.PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
+  sprite: PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
 };
 
 export default ButtonIcon;

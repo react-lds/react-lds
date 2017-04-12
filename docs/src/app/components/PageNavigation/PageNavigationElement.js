@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Link } from 'react-router';
 
@@ -26,14 +27,14 @@ const PageNavigationElement = (props, { router }) => {
 };
 
 PageNavigationElement.propTypes = {
-  to: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.object]).isRequired,
-  query: React.PropTypes.object,
-  hash: React.PropTypes.string,
-  state: React.PropTypes.object,
+  to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  query: PropTypes.object,
+  hash: PropTypes.string,
+  state: PropTypes.object,
 };
 
 PageNavigationElement.contextTypes = {
-  router: React.PropTypes.object,
+  router: PropTypes.object,
 };
 
 export default PageNavigationElement;

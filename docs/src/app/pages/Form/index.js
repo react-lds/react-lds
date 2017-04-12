@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Grid, Column } from 'react-lds';
 
@@ -59,7 +60,7 @@ const Forms = ({ children }) =>
 
 
 Forms.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default Forms;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 import { IconSVG } from '../../';
@@ -74,46 +75,46 @@ const DropdownMenuListItem = (props, { cssPrefix }) => {
   );
 };
 
-DropdownMenuListItem.contextTypes = { cssPrefix: React.PropTypes.string };
+DropdownMenuListItem.contextTypes = { cssPrefix: PropTypes.string };
 
 DropdownMenuListItem.propTypes = {
   /**
    * The content of a menu item
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * set to true if a divider should appear above this list item
    */
-  divider: React.PropTypes.bool,
+  divider: PropTypes.bool,
   /**
    * left icon that is only shown when selected is true
    */
-  leftIcon: React.PropTypes.shape({
-    icon: React.PropTypes.string.isRequired,
-    sprite: React.PropTypes.string.isRequired,
-    background: React.PropTypes.string,
-    alwaysDisplay: React.PropTypes.bool,
+  leftIcon: PropTypes.shape({
+    icon: PropTypes.string.isRequired,
+    sprite: PropTypes.string.isRequired,
+    background: PropTypes.string,
+    alwaysDisplay: PropTypes.bool,
   }),
   /**
    * onClick handler
    */
-  onClick: React.PropTypes.func,
+  onClick: PropTypes.func,
   /**
    * right icon that is always shown
    */
-  rightIcon: React.PropTypes.shape({
-    icon: React.PropTypes.string,
-    sprite: React.PropTypes.string.isRequired,
-    background: React.PropTypes.string,
+  rightIcon: PropTypes.shape({
+    icon: PropTypes.string,
+    sprite: PropTypes.string.isRequired,
+    background: PropTypes.string,
   }),
   /**
    * sets this item into a selection state that displays the leftIcon
    */
-  selected: React.PropTypes.bool,
+  selected: PropTypes.bool,
 };
 
 export default DropdownMenuListItem;

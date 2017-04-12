@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import marked from 'marked';
 import hljs from 'highlight.js';
 
@@ -51,6 +52,5 @@ MarkdownElement.propTypes = {
 MarkdownElement.defaultProps = {
   text: '',
 };
-
 
 export default MarkdownElement;

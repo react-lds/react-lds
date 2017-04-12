@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 
@@ -48,37 +49,37 @@ const FormElementLabel = (props, { cssPrefix }) => {
   );
 };
 
-FormElementLabel.contextTypes = { cssPrefix: React.PropTypes.string };
+FormElementLabel.contextTypes = { cssPrefix: PropTypes.string };
 
 FormElementLabel.propTypes = {
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * id of the corresponding input tag element
    */
-  id: React.PropTypes.string,
+  id: PropTypes.string,
   /**
    * sets the label to render as assistive text
    */
-  hideLabel: React.PropTypes.bool,
+  hideLabel: PropTypes.bool,
   /**
    * label content
    */
-  label: React.PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   /**
    * Renders as a html5 legend
    */
-  legend: React.PropTypes.bool,
+  legend: PropTypes.bool,
   /**
    * renders the label as a span-tag instead of a label-tag
    */
-  readOnly: React.PropTypes.bool,
+  readOnly: PropTypes.bool,
   /**
    * label for required inputs
    */
-  required: React.PropTypes.bool,
+  required: PropTypes.bool,
 };
 
 export default FormElementLabel;

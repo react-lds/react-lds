@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { prefixClasses } from '../utils';
 
 const themeNames = [
@@ -56,7 +57,7 @@ const themeable = (C) => {
   ThemedComponent.displayName = `Themed_${C.displayName || C.name}`;
 
   ThemedComponent.contextTypes = Object.assign({}, C.contextTypes, {
-    cssPrefix: React.PropTypes.string,
+    cssPrefix: PropTypes.string,
   });
   ThemedComponent.propTypes = Object.assign({}, C.propTypes, {
     theme: themePropType,

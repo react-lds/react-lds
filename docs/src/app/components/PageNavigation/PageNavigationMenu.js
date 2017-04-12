@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { IconSVG, prefixClasses as prefix } from 'react-lds';
 
@@ -25,17 +26,17 @@ const PageNavigationMenu = ({ to, children, title }, { cssPrefix, router }) => {
 };
 
 PageNavigationMenu.propTypes = {
-  title: React.PropTypes.string,
+  title: PropTypes.string,
   /**
    * Instances of PageNavigationElement
    */
-  children: React.PropTypes.node,
-  to: React.PropTypes.string,
+  children: PropTypes.node,
+  to: PropTypes.string,
 };
 
 PageNavigationMenu.contextTypes = {
-  cssPrefix: React.PropTypes.string,
-  router: React.PropTypes.object,
+  cssPrefix: PropTypes.string,
+  router: PropTypes.object,
 };
 
 export default PageNavigationMenu;

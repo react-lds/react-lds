@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 
@@ -17,25 +18,25 @@ const FormElementControl = (props, { cssPrefix }) => {
   return (<div {...rest} className={prefix(classes, className)}>{children}</div>);
 };
 
-FormElementControl.contextTypes = { cssPrefix: React.PropTypes.string };
+FormElementControl.contextTypes = { cssPrefix: PropTypes.string };
 
 FormElementControl.propTypes = {
   /**
    * control element(s)
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * set this to true if the form element has a left icon
    */
-  hasIconLeft: React.PropTypes.bool,
+  hasIconLeft: PropTypes.bool,
   /**
    * set this to true if the form element has a right icon
    */
-  hasIconRight: React.PropTypes.bool,
+  hasIconRight: PropTypes.bool,
 };
 
 export default FormElementControl;

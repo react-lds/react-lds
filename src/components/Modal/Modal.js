@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { flavorable } from '../../decorators';
 import { prefixClasses } from '../../utils';
@@ -67,37 +68,37 @@ Modal.flavors = [
   'large',
 ];
 
-Modal.contextTypes = { cssPrefix: React.PropTypes.string };
+Modal.contextTypes = { cssPrefix: PropTypes.string };
 
 Modal.propTypes = {
   /**
    * modal content
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * id of the modal-content (required as aria-describedby). must be set for --prompts
    */
-  description: React.PropTypes.string,
+  description: PropTypes.string,
   /**
    * whether a container is a dialog (optional when `<Modal prompt>`). Needed for PromptForTouch and ModalPrompt
    */
-  dialog: React.PropTypes.bool,
+  dialog: PropTypes.bool,
   /**
    * id of the modal-heading
    */
-  label: React.PropTypes.string,
+  label: PropTypes.string,
   /**
    * opens the modal
    */
-  open: React.PropTypes.bool,
+  open: PropTypes.bool,
   /**
    * opens the modal
    */
-  prompt: React.PropTypes.bool,
+  prompt: PropTypes.bool,
 };
 
 export default flavorable(Modal, 'modal');

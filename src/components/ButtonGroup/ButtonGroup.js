@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 
@@ -9,17 +10,17 @@ const ButtonGroup = (props, { cssPrefix }) => {
   return (<div {...rest} className={prefix('button-group', className)} role="group">{children}</div>);
 };
 
-ButtonGroup.contextTypes = { cssPrefix: React.PropTypes.string };
+ButtonGroup.contextTypes = { cssPrefix: PropTypes.string };
 
 ButtonGroup.propTypes = {
   /**
    * children shoule be instances of button
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default ButtonGroup;

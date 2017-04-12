@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { getUniqueHash, prefixClasses } from '../../utils';
 import {
@@ -57,46 +58,46 @@ const Select = (props, { cssPrefix }) => {
   );
 };
 
-Select.contextTypes = { cssPrefix: React.PropTypes.string };
+Select.contextTypes = { cssPrefix: PropTypes.string };
 
 
 Select.propTypes = {
   /**
    * options & optgroups of the select
    */
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * adds disabled attribute to the select
    */
-  disabled: React.PropTypes.bool,
+  disabled: PropTypes.bool,
   /**
   * renders an error for the select
    */
-  error: React.PropTypes.string,
+  error: PropTypes.string,
   /**
    * id of the select
    */
-  id: React.PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   /**
    * label for the select
    */
-  label: React.PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   /**
    * adds the multiple attribute to the select
    */
-  multiple: React.PropTypes.bool,
+  multiple: PropTypes.bool,
   /**
    * onChange handler for the select
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
   /**
    * adds required attribute to the select field and label
    */
-  required: React.PropTypes.bool,
+  required: PropTypes.bool,
 };
 
 export default Select;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { themeable } from '../../decorators';
 import { prefixClasses } from '../../utils';
@@ -10,17 +11,17 @@ export const Badge = (props, { cssPrefix }) => {
   return (<span {...rest} className={prefix('badge', className)}>{label}</span>);
 };
 
-Badge.contextTypes = { cssPrefix: React.PropTypes.string };
+Badge.contextTypes = { cssPrefix: PropTypes.string };
 
 Badge.propTypes = {
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * badge label
    */
-  label: React.PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 export default themeable(Badge);

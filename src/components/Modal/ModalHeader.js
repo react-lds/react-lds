@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 import { Button, ButtonIcon } from '../../';
@@ -48,41 +49,41 @@ const ModalHeader = (props, { cssPrefix }) => {
   );
 };
 
-ModalHeader.contextTypes = { cssPrefix: React.PropTypes.string };
+ModalHeader.contextTypes = { cssPrefix: PropTypes.string };
 
 ModalHeader.propTypes = {
   /**
    * modal header content
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * heading id (gets passed down from `Modal prompt`)
    */
-  label: React.PropTypes.string,
+  label: PropTypes.string,
   /**
    * render header as a prompt header (gets passed down from `Modal prompt`)
    */
-  prompt: React.PropTypes.bool,
+  prompt: PropTypes.bool,
   /**
    * (optional) modal tagline
    */
-  tagline: React.PropTypes.node,
+  tagline: PropTypes.node,
   /**
    * (optional) modal title
    */
-  title: React.PropTypes.string,
+  title: PropTypes.string,
   /**
    * hides the close-button (gets passed down from `Modal prompt`)
    */
-  uncloseable: React.PropTypes.bool,
+  uncloseable: PropTypes.bool,
   /**
    * triggered when the user clicks the close button
    */
-  onClickClose: React.PropTypes.func,
+  onClickClose: PropTypes.func,
 };
 
 export default ModalHeader;

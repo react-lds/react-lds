@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefixClasses } from '../../utils';
 
@@ -20,21 +21,21 @@ const NavigationList = ({ id, title, children }, { cssPrefix }) => {
   );
 };
 
-NavigationList.contextTypes = { cssPrefix: React.PropTypes.string };
+NavigationList.contextTypes = { cssPrefix: PropTypes.string };
 
 NavigationList.propTypes = {
   /**
    * id of the headline element
    */
-  id: React.PropTypes.string,
+  id: PropTypes.string,
   /**
    * headline title
    */
-  title: React.PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   /**
    * NavigationListElement items
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default NavigationList;

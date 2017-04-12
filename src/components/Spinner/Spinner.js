@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { flavorable } from '../../decorators';
 import { prefixClasses } from '../../utils';
@@ -27,17 +28,17 @@ Spinner.flavors = [
   'inverse',
 ];
 
-Spinner.contextTypes = { cssPrefix: React.PropTypes.string };
+Spinner.contextTypes = { cssPrefix: PropTypes.string };
 
 Spinner.propTypes = {
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * size
    */
-  size: React.PropTypes.oneOf(['small', 'medium', 'large']).isRequired,
+  size: PropTypes.oneOf(['small', 'medium', 'large']).isRequired,
 };
 
 export default flavorable(Spinner, 'spinner');

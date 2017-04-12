@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { getUniqueHash, prefixClasses } from '../../utils';
 
@@ -25,17 +26,17 @@ const FormElementError = (props, { cssPrefix }) => {
   return renderError();
 };
 
-FormElementError.contextTypes = { cssPrefix: React.PropTypes.string };
+FormElementError.contextTypes = { cssPrefix: PropTypes.string };
 
 FormElementError.propTypes = {
   /**
    * element triggered on the containing form element
    */
-  error: React.PropTypes.string,
+  error: PropTypes.string,
   /**
    * id of the parent component carrying the error
    */
-  id: React.PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default FormElementError;

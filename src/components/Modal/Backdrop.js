@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { prefixClasses } from '../../utils';
 import { flavorable } from '../../decorators';
 
@@ -13,13 +14,13 @@ Backdrop.flavors = [
   'open',
 ];
 
-Backdrop.contextTypes = { cssPrefix: React.PropTypes.string };
+Backdrop.contextTypes = { cssPrefix: PropTypes.string };
 
 Backdrop.propTypes = {
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
 };
 
 

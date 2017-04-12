@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const PageNavigation = ({ children }) =>
   <div className="site-menu--jump-links">
@@ -9,7 +10,7 @@ const PageNavigation = ({ children }) =>
   </div>;
 
 PageNavigation.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default PageNavigation;
