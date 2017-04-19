@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.5
+* Compatibility with react 15.5
+
 ## 1.1.4
 * Remove deprecated lodash method
 
