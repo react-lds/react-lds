@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.6
+* Add option to hide input labels for `Checkbox`, `CheckboxRaw`,
+  `Select`, `Textarea`
+
 ## 1.1.5
 * Compatibility with react 15.5
 
