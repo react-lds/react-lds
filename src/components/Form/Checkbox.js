@@ -33,6 +33,10 @@ Checkbox.propTypes = {
    */
   error: PropTypes.string,
   /**
+   * sets the label to render as assistive text
+   */
+  hideLabel: PropTypes.bool,
+  /**
    * id of the checkbox
    */
   id: PropTypes.string.isRequired,

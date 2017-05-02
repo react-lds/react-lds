@@ -9,6 +9,7 @@ const CheckboxRaw = (props, { cssPrefix }) => {
     className,
     disabled,
     error,
+    hideLabel,
     id,
     label,
     onChange,
@@ -31,10 +32,14 @@ const CheckboxRaw = (props, { cssPrefix }) => {
     />
 );
 
+  const labelClassNames = ['form-element__label'];
+  if (hideLabel) {
+    labelClassNames.push('assistive-text');
+  }
   const renderLabel = () => (
     <label className={prefix('checkbox__label')} htmlFor={id}>
       <span className={prefix('checkbox--faux')} />
-      <span className={prefix('form-element__label')}>{label}</span>
+      <span className={prefix(labelClassNames)}>{label}</span>
     </label>
   );
 
@@ -74,6 +79,10 @@ CheckboxRaw.propTypes = {
   * renders an error for the checkbox
    */
   error: PropTypes.string,
+  /**
+   * sets the label to render as assistive text
+   */
+  hideLabel: PropTypes.bool,
   /**
    * id of the checkbox
    */

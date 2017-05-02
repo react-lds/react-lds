@@ -14,6 +14,7 @@ const Textarea = (props, { cssPrefix }) => {
     className,
     disabled,
     error,
+    hideLabel,
     id,
     label,
     onChange,
@@ -49,7 +50,7 @@ const Textarea = (props, { cssPrefix }) => {
 
   return (
     <FormElement required={required} error={error}>
-      <FormElementLabel label={label} id={id} required={required} />
+      <FormElementLabel label={label} id={id} required={required} hideLabel={hideLabel} />
       <FormElementControl className={prefix({ 'has-divider--bottom': readOnly })}>
         {renderContent()}
       </FormElementControl>
@@ -73,6 +74,10 @@ Textarea.propTypes = {
   * renders an error for the textarea
    */
   error: PropTypes.string,
+  /**
+   * sets the label to render as assistive text
+   */
+  hideLabel: PropTypes.bool,
   /**
    * id of the textarea
    */
