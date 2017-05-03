@@ -46,6 +46,11 @@ describe('<Checkbox />', () => {
     expect(mounted.find('input[type="checkbox"]').props().disabled).toBeTruthy();
   });
 
+  it('hides the label', () => {
+    mounted.setProps({ hideLabel: true });
+    expect(mounted.find('span.slds-assistive-text').length).toBe(1);
+  });
+
   it('labels the checkbox with an error', () => {
     mounted.setProps({ error: 'shit' });
     const hash = getUniqueHash('shit', props.id);

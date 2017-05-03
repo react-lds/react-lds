@@ -15,6 +15,7 @@ const Select = (props, { cssPrefix }) => {
     className,
     disabled,
     error,
+    hideLabel,
     id,
     label,
     multiple,
@@ -49,7 +50,7 @@ const Select = (props, { cssPrefix }) => {
 
   return (
     <FormElement required={required} error={error}>
-      <FormElementLabel label={label} id={id} required={required} />
+      <FormElementLabel label={label} id={id} hideLabel={hideLabel} required={required} />
       <FormElementControl>
         {renderSelect()}
       </FormElementControl>
@@ -78,6 +79,10 @@ Select.propTypes = {
   * renders an error for the select
    */
   error: PropTypes.string,
+  /**
+   * sets the label to render as assistive text
+   */
+  hideLabel: PropTypes.bool,
   /**
    * id of the select
    */

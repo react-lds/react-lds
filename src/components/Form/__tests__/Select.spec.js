@@ -62,6 +62,11 @@ describe('<Select />', () => {
     expect(mounted.find('select').props().multiple).toBeTruthy();
   });
 
+  it('hides the label', () => {
+    mounted.setProps({ hideLabel: true });
+    expect(mounted.find('label.slds-assistive-text').length).toBe(1);
+  });
+
   it('labels the select with an error', () => {
     mounted.setProps({ error: 'shit' });
     const hash = getUniqueHash('shit', props.id);

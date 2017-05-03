@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 import { prefixClasses, getUniqueHash } from '../../utils';
 
@@ -9,6 +10,7 @@ const CheckboxRaw = (props, { cssPrefix }) => {
     className,
     disabled,
     error,
+    hideLabel,
     id,
     label,
     onChange,
@@ -31,10 +33,15 @@ const CheckboxRaw = (props, { cssPrefix }) => {
     />
 );
 
+  const labelClassNames = classnames(
+    'form-element__label',
+    { 'assistive-text': hideLabel },
+  ).split(' ');
+
   const renderLabel = () => (
     <label className={prefix('checkbox__label')} htmlFor={id}>
       <span className={prefix('checkbox--faux')} />
-      <span className={prefix('form-element__label')}>{label}</span>
+      <span className={prefix(labelClassNames)}>{label}</span>
     </label>
   );
 
@@ -74,6 +81,10 @@ CheckboxRaw.propTypes = {
   * renders an error for the checkbox
    */
   error: PropTypes.string,
+  /**
+   * sets the label to render as assistive text
+   */
+  hideLabel: PropTypes.bool,
   /**
    * id of the checkbox
    */
