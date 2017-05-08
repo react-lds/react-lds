@@ -10,10 +10,20 @@ describe('<Datepicker />', () => {
   const context = { cssPrefix: 'slds-' };
   const childContextTypes = { cssPrefix: PropTypes.string };
   const options = { context, childContextTypes };
-  const selected = jest.fn();
+  const clicked = jest.fn();
+  const changed = jest.fn();
 
   beforeEach(() => {
-    mounted = shallow(<Datepicker onSelectDate={selected} />, options);
+    mounted = shallow(<Datepicker isOpen onValidDateChange={changed} onClick={clicked} />, options);
+  });
+
+  it('renders input field', () => {
+    expect(mounted.find('Input').first().length).toBe(1);
+  });
+
+  it('hides datepicker', () => {
+    mounted.setProps({ isOpen: false });
+    expect(mounted.find('.datepicker').length).toBe(0);
   });
 
   it('renders the current month and year by default', () => {
@@ -40,8 +50,33 @@ describe('<Datepicker />', () => {
     mounted.setState({ viewedDate: moment([2016, 5, 1]) });
     const sampleDate = mounted.find('.slds-day').first();
     sampleDate.simulate('click');
-    expect(selected).toHaveBeenCalledTimes(1);
-    expect(selected).toHaveBeenCalledWith('2016-05-29');
+    expect(changed).toBeCalled();
+    expect(changed).toHaveBeenCalledWith('2016-05-29');
+    expect(mounted.find('Input').first().props().error).toBeUndefined();
+  });
+
+  it('calls the callback function if a valid date is input', () => {
+    const input = mounted.find('Input').first();
+    const sampleDate = '1/10/2017';
+    input.simulate('change', { target: { value: sampleDate } });
+    expect(changed).toBeCalled();
+    expect(changed).toHaveBeenCalledWith('2017-01-10');
+    expect(mounted.find('Input').first().props().error).toBeUndefined();
+  });
+
+  it('displays an error message if the input date is invalid', () => {
+    const input = mounted.find('Input').first();
+    const falseSampleDate = '13/10/2017';
+    input.simulate('change', { target: { value: falseSampleDate } });
+    expect(mounted.find('Input').first().props().error).toBeDefined();
+  });
+
+  it('datepicker mirrors the same date as the input', () => {
+    const input = mounted.find('Input').first();
+    const sampleDate = '1/10/2017';
+    input.simulate('change', { target: { value: sampleDate } });
+    expect(changed).toBeCalled();
+    expect(mounted.state().viewedDate.toString()).toEqual(moment(mounted.state().inputDate, 'M/D/YYYY').toString());
   });
 
   it('highlights the selected date', () => {
@@ -79,7 +114,7 @@ describe('<Datepicker />', () => {
   });
 
   it('shows the correct translation strings', () => {
-    mounted.setProps({ translations: { today: 'Heute' } });
+    mounted.setProps({ translations: { inputFieldError: 'Fehler', inputFieldLabel: 'Datum', today: 'Heute' } });
     const translatedTodayLink = mounted.find('a');
     expect(translatedTodayLink.text()).toEqual('Heute');
   });
