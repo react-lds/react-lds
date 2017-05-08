@@ -16,6 +16,7 @@ export const Cell = (props, { cssPrefix }) => {
     sortDirection,
     sortAssistiveText,
     title,
+    truncate,
     ...rest,
   } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
@@ -115,6 +116,7 @@ export const Cell = (props, { cssPrefix }) => {
   childArray.push(assistiveText(4));
 
   const wrappedChildren = wrapChildren(childArray);
+  const wrapperClassName = truncate ? prefix('truncate') : null;
 
   return (
     <CellElement
@@ -123,7 +125,7 @@ export const Cell = (props, { cssPrefix }) => {
       scope={cellScope}
       title={cellTitle}
     >
-      <div className={prefix('truncate')}>
+      <div className={wrapperClassName}>
         {wrappedChildren}
       </div>
     </CellElement>
@@ -139,6 +141,7 @@ Cell.defaultProps = {
   resizableAssistiveText: 'Resize Cell',
   sortAssistiveText: 'Sort Column',
   sortDirection: 'asc',
+  truncate: true,
 };
 
 Cell.contextTypes = { cssPrefix: PropTypes.string };
@@ -180,6 +183,10 @@ Cell.propTypes = {
    * overrides the cell's title attribute
    */
   title: PropTypes.string,
+  /**
+   * Whether the cell content should be truncated
+   */
+  truncate: PropTypes.bool,
 };
 
 export default variationable(Cell);
