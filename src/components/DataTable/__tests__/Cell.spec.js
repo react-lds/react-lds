@@ -64,4 +64,13 @@ describe('<Cell />', () => {
     expect(mounted.find('td').hasClass('foo')).toBeTruthy();
     expect(mounted.find('td').prop('data-test')).toEqual('bar');
   });
+
+  it('truncates the cell content by default', () => {
+    expect(mounted.find('.slds-truncate').length).toBe(1);
+  });
+
+  it('won\'t truncate if truncate prop is set to false', () => {
+    mounted.setProps({ truncate: false });
+    expect(mounted.find('.slds-truncate').length).toBe(0);
+  });
 });
