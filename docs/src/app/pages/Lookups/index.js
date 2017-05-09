@@ -4,6 +4,7 @@ import exampleDefaultCode from '!raw!./ExampleDefault';
 import exampleMultiCode from '!raw!./ExampleMulti';
 import exampleMultiCreateCode from '!raw!./ExampleMultiCreate';
 import exampleMultiTableCode from '!raw!./ExampleMultiTable';
+import exampleControlledCode from '!raw!./ExampleControlled';
 import lookupCode from '!raw!react-lds/components/Lookup/Lookup';
 
 import CodeExample from '../../components/CodeExample';
@@ -15,6 +16,7 @@ import ExampleDefault from './ExampleDefault';
 import ExampleMulti from './ExampleMulti';
 import ExampleMultiCreate from './ExampleMultiCreate';
 import ExampleMultiTable from './ExampleMultiTable';
+import ExampleControlled from './ExampleControlled';
 
 const LookupPage = () => (
   <div>
@@ -48,6 +50,14 @@ const LookupPage = () => (
         code={exampleMultiTableCode}
       />
       <ExampleMultiTable />
+    </div>
+
+    <div className="slds-p-around--xx-large">
+      <CodeExample
+        title="Controlled Lookup"
+        code={exampleControlledCode}
+      />
+      <ExampleControlled />
     </div>
 
     <PropTypeDescription code={lookupCode} />

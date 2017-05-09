@@ -66,6 +66,10 @@ export class Lookup extends React.Component {
      */
     initialSelection: validateSelection,
     /**
+     * item selection
+     */
+    selection: validateSelection,
+    /**
      * label for the input field in the lookup component
      */
     inputLabel: PropTypes.string.isRequired,
@@ -130,6 +134,7 @@ export class Lookup extends React.Component {
 
   static defaultProps = {
     initialSelection: [],
+    selection: [],
     loadOnChange: true,
     multi: false,
     placeholder: 'Search',
@@ -139,13 +144,15 @@ export class Lookup extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    const { initialSelection, selection } = props;
+
     this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
     this.state = {
       searchTerm: '',
       highlighted: null,
       open: false,
       loaded: [],
-      selected: this.props.initialSelection,
+      selected: initialSelection || selection || [],
     };
 
     this.handleLoad = debounce(this.handleLoad, 500);
@@ -155,6 +162,15 @@ export class Lookup extends React.Component {
   componentDidMount() {
     if (this.props.loadOnMount) {
       this.handleLoad();
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { selection } = this.state;
+    const { selection: nextSelection } = nextProps;
+
+    if (selection !== nextSelection) {
+      this.setState({ selected: nextSelection });
     }
   }
 

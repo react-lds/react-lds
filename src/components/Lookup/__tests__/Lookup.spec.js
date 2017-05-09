@@ -254,4 +254,25 @@ describe('<Lookup />', () => {
     expect(mounted.find('.slds-lookup').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-lookup').prop('data-test')).toEqual('bar');
   });
+
+  describe('with controlled selection', () => {
+    beforeEach(() => {
+      mounted.setProps({ selection: [sampleData[0]] });
+    });
+
+    it('takes the selection from the selection prop', () => {
+      expect(mounted.state().selected).toEqual([sampleData[0]]);
+    });
+
+    it('updates the selection when the selection prop changes', () => {
+      mounted.setProps({ selection: [sampleData[1]] });
+      expect(mounted.state().selected).toEqual([sampleData[1]]);
+    });
+
+    it('does not call onChange', () => {
+      const onChange = jest.fn();
+      mounted.setProps({ onChange, selection: [sampleData[1]] });
+      expect(onChange).not.toBeCalled();
+    });
+  });
 });
