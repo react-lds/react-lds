@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.8
+* Bugfix: Revert Lookup component behavior to version `1.1.6`.
+
 ## 1.1.7
 * Add opt-in support for controlled lookup selection. `Lookup` selection can now be set from outside via the `selection` prop
 * Enable opt-out from `Cell` truncation via the `truncate` prop
