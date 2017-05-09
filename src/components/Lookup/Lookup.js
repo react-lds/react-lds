@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
 import debounce from 'lodash.debounce';
 import omit from 'lodash.omit';
+import has from 'lodash/has';
 
 import { prefixClasses } from '../../utils';
 import {
@@ -65,6 +66,10 @@ export class Lookup extends React.Component {
      * initial item selection
      */
     initialSelection: validateSelection,
+    /**
+     * item selection
+     */
+    selection: validateSelection,
     /**
      * label for the input field in the lookup component
      */
@@ -130,6 +135,7 @@ export class Lookup extends React.Component {
 
   static defaultProps = {
     initialSelection: [],
+    selection: [],
     loadOnChange: true,
     multi: false,
     placeholder: 'Search',
@@ -139,13 +145,15 @@ export class Lookup extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    const { initialSelection, selection } = props;
+
     this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
     this.state = {
       searchTerm: '',
       highlighted: null,
       open: false,
       loaded: [],
-      selected: this.props.initialSelection,
+      selected: initialSelection || selection || [],
     };
 
     this.handleLoad = debounce(this.handleLoad, 500);
@@ -155,6 +163,21 @@ export class Lookup extends React.Component {
   componentDidMount() {
     if (this.props.loadOnMount) {
       this.handleLoad();
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { load } = this.props;
+    const { selection } = this.state;
+
+    const { load: nextLoad, selection: nextSelection } = nextProps;
+
+    if (has(nextProps, 'selection') && selection !== nextSelection) {
+      this.setState({ selected: nextSelection });
+    }
+
+    if (load && load !== nextLoad) {
+      this.setState({ selected: [] });
     }
   }
 
