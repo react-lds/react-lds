@@ -255,6 +255,14 @@ describe('<Lookup />', () => {
     expect(mounted.find('.slds-lookup').prop('data-test')).toEqual('bar');
   });
 
+  it('clears the internal state when the load function changes', () => {
+    const load = () => {};
+    const newLoad = () => {};
+    mounted.setProps({ load, selection: [sampleData[0]] });
+    mounted.setProps({ load: newLoad });
+    expect(mounted.state().selected).toEqual([]);
+  });
+
   describe('with controlled selection', () => {
     beforeEach(() => {
       mounted.setProps({ selection: [sampleData[0]] });

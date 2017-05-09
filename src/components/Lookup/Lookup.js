@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
 import debounce from 'lodash.debounce';
 import omit from 'lodash.omit';
+import has from 'lodash/has';
 
 import { prefixClasses } from '../../utils';
 import {
@@ -166,11 +167,17 @@ export class Lookup extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { load } = this.props;
     const { selection } = this.state;
-    const { selection: nextSelection } = nextProps;
 
-    if (selection !== nextSelection) {
+    const { load: nextLoad, selection: nextSelection } = nextProps;
+
+    if (has(nextProps, 'selection') && selection !== nextSelection) {
       this.setState({ selected: nextSelection });
+    }
+
+    if (load && load !== nextLoad) {
+      this.setState({ selected: [] });
     }
   }
 
