@@ -3,9 +3,8 @@ import { Datepicker } from 'react-lds';
 
 const ExampleDatepicker = () => (
   <Datepicker
-    isOpen
+    open
     onValidDateChange={() => {}}
-    onClick={() => {}}
   />
 );
 

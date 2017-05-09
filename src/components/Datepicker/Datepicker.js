@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, ButtonIcon, Input } from 'react-lds';
 import classnames from 'classnames';
+import enhanceWithClickOutside from 'react-click-outside';
 
 import moment from 'moment';
 import 'moment-range';
@@ -17,10 +18,11 @@ export class Datepicker extends React.Component {
     return (
       <thead>
         <tr id="weekdays">
-          {moment.weekdaysShort().map(wd => <th key={wd} id={wd}>
-            <abbr title={wd}>{wd}</abbr>
-          </th>
-          ) }
+          {moment.weekdaysShort().map(wd => (
+            <th key={wd} id={wd}>
+              <abbr title={wd}>{wd}</abbr>
+            </th>
+          ))}
         </tr>
       </thead>
     );
@@ -29,10 +31,10 @@ export class Datepicker extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
-    const { preselectedDate } = this.props;
+    const { open, preselectedDate } = this.props;
 
     this.state = {
-      isOpen: false,
+      open,
       preselectedDate: preselectedDate ? moment(preselectedDate) : null,
       inputDate: preselectedDate ? moment(preselectedDate).format(salesforceDateFormat).toString() : '',
       viewedDate: moment(),
@@ -67,14 +69,14 @@ export class Datepicker extends React.Component {
    * @return {void}       interacts with component state and callback from props
    */
   onDayChange = (day) => {
-    const { onClick, onValidDateChange } = this.props;
+    const { onValidDateChange } = this.props;
     this.setState({
-      preselectedDate: day,
       inputDate: moment(day).format(salesforceDateFormat).toString(),
       isInputInvalid: false,
+      preselectedDate: day,
+      open: false,
     });
 
-    onClick();
     onValidDateChange(day.format(iso8601DateFormat));
   };
 
@@ -111,6 +113,14 @@ export class Datepicker extends React.Component {
   }
 
   /**
+   * Callback when the input field is clicked
+   * @return {void} interacts with component state
+   */
+  onInputFieldClick = () => {
+    this.setState(prevState => ({ open: !prevState.open }));
+  }
+
+  /**
    * Get all weeks touched by the current month and mark days within it.
    * @return {Array} all visible days organized by week
    */
@@ -135,6 +145,14 @@ export class Datepicker extends React.Component {
       acc[acc.length - 1].push([moment(val), moment(val).within(monthRange)]);
       return acc;
     }, [[]]).filter(bin => bin.length > 0);
+  }
+
+  /**
+   * Callback when an outside click occurs
+   * @return {void} interacts with component state
+   */
+  handleClickOutside() {
+    this.setState({ open: false });
   }
 
   /**
@@ -222,10 +240,11 @@ export class Datepicker extends React.Component {
       [this.prefix('disabled-text')]: !inRange,
       [this.prefix('is-selected')]: day.isSame(preselectedDate, 'day'),
     };
+    const onClick = () => inRange && this.onDayChange(day);
 
     return (
       <td key={dayIndex} className={classnames(classes)} headers={day.day()}>
-        <span className={this.prefix('day')} onClick={() => this.onDayChange(day)}>
+        <span className={this.prefix('day')} onClick={onClick}>
           {day.date()}
         </span>
       </td>
@@ -234,14 +253,13 @@ export class Datepicker extends React.Component {
 
   render() {
     const {
-      isOpen,
-      onClick,
+      required,
       translations: {
         inputFieldLabel,
         inputFieldError
       },
     } = this.props;
-    const { viewedDate, inputDate, isInputInvalid } = this.state;
+    const { inputDate, isInputInvalid, open, viewedDate } = this.state;
     const error = isInputInvalid ? inputFieldError : undefined;
 
     return (
@@ -253,11 +271,11 @@ export class Datepicker extends React.Component {
           iconRight="monthlyview"
           error={error}
           value={inputDate}
-          onClick={onClick}
+          onClick={this.onInputFieldClick}
           onChange={e => this.onInputFieldChange(e.target.value)}
-          required={this.isRequired}
+          required={required}
         />
-        {isOpen && (
+        {open && (
           <div className={this.prefix(['datepicker', 'dropdown', 'dropdown--left'])}>
             <div className={this.prefix(['datepicker__filter', 'grid'])}>
               <div className={this.prefix(['datepicker__filter--month', 'grid', 'grid--align-spread', 'grow'])}>
@@ -291,8 +309,8 @@ export class Datepicker extends React.Component {
 Datepicker.contextTypes = { cssPrefix: PropTypes.string };
 
 Datepicker.defaultProps = {
-  isOpen: false,
-  isRequired: false,
+  open: false,
+  required: false,
   yearSpan: 2,
   preselectedDate: null,
   translations: {
@@ -306,15 +324,11 @@ Datepicker.propTypes = {
   /**
    * Whether the datepicker is open or closed
    */
-  isOpen: PropTypes.bool,
+  open: PropTypes.bool,
   /**
    * Whether input is required
    */
-  isRequired: PropTypes.bool,
-  /**
-   * Callback function if the input is clicked or a day is selected
-   */
-  onClick: PropTypes.func.isRequired,
+  required: PropTypes.bool,
   /**
    * Callback function once a valid date has been selected or input
    */
@@ -337,4 +351,4 @@ Datepicker.propTypes = {
   yearSpan: PropTypes.number,
 };
 
-export default Datepicker;
+export default enhanceWithClickOutside(Datepicker);
