@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.7
+* Add opt-in support for controlled lookup selection. `Lookup` selection can now be set from outside via the `selection` prop
+* Enable opt-out from `Cell` truncation via the `truncate` prop
+* Make the datepicker a controlled component and add an input field
+* Bugfix: reset internal selection if the load callback changes
+
 ## 1.1.6
 * Add option to hide input labels for `Checkbox`, `CheckboxRaw`,
   `Select`, `Textarea`
