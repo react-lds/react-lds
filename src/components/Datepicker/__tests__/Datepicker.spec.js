@@ -10,11 +10,10 @@ describe('<Datepicker />', () => {
   const context = { cssPrefix: 'slds-' };
   const childContextTypes = { cssPrefix: PropTypes.string };
   const options = { context, childContextTypes };
-  const clicked = jest.fn();
   const changed = jest.fn();
 
   beforeEach(() => {
-    mounted = shallow(<Datepicker isOpen onValidDateChange={changed} onClick={clicked} />, options);
+    mounted = shallow(<Datepicker open onValidDateChange={changed} />, options);
   });
 
   it('renders input field', () => {
@@ -22,7 +21,7 @@ describe('<Datepicker />', () => {
   });
 
   it('hides datepicker', () => {
-    mounted.setProps({ isOpen: false });
+    mounted.setProps({ open: false });
     expect(mounted.find('.datepicker').length).toBe(0);
   });
 
@@ -47,11 +46,11 @@ describe('<Datepicker />', () => {
   });
 
   it('calls the callback function if a date is selected', () => {
-    mounted.setState({ viewedDate: moment([2016, 5, 1]) });
-    const sampleDate = mounted.find('.slds-day').first();
+    mounted.setState({ viewedDate: moment('2016-05-11') });
+    const sampleDate = mounted.find('.slds-day').at(10);
     sampleDate.simulate('click');
     expect(changed).toBeCalled();
-    expect(changed).toHaveBeenCalledWith('2016-05-29');
+    expect(changed).toHaveBeenCalledWith('2016-05-11');
     expect(mounted.find('Input').first().props().error).toBeUndefined();
   });
 
@@ -80,9 +79,10 @@ describe('<Datepicker />', () => {
   });
 
   it('highlights the selected date', () => {
-    const sampleDate = mounted.find('.slds-day').first();
+    const sampleDate = mounted.find('.slds-day').at(10);
     const sampleDateContent = sampleDate.text();
     sampleDate.simulate('click');
+    mounted.setState({ open: true });
     const sampleDateParent = mounted.find('.slds-is-selected');
     expect(sampleDateParent.text()).toContain(sampleDateContent);
   });
