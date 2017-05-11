@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
 import debounce from 'lodash.debounce';
@@ -19,34 +19,9 @@ import {
   Cell,
 } from '../../';
 
-const validateSelection = (props, propName, componentName, ...rest) => {
-  const arrayValidation = PropTypes.array(props, propName, componentName, ...rest);
-
-  if (arrayValidation === null && props[propName].length > 1 && !props.multi) {
-    return new Error(`${componentName}.initialSelection should not supply multiple selections to a single-item
-        lookup`);
-  }
-
-  return arrayValidation;
-};
-
-/**
-* use standard sprite and if custom icon is used, custom sprite
-*/
-function getSprite(objectType = '') {
-  if (objectType.startsWith('custom')) {
-    return 'custom';
-  }
-
-  return 'standard';
-}
-
-function filterDisplayItems(src, target, prop = 'id') {
-  return src.filter(o1 => !target.some(o2 => o1[prop] === o2[prop]));
-}
-
-export class Lookup extends React.Component {
+export class Lookup extends Component {
   static contextTypes = { cssPrefix: PropTypes.string };
+
   static propTypes = {
     /**
      * class name
@@ -64,7 +39,7 @@ export class Lookup extends React.Component {
     /**
      * initial item selection
      */
-    initialSelection: validateSelection,
+    initialSelection: Lookup.validateSelection,
     /**
      * label for the input field in the lookup component
      */
@@ -96,7 +71,7 @@ export class Lookup extends React.Component {
     /**
      * onChange handler for the lookup. has selected items as first argument
      */
-    onChange: PropTypes.func,
+    onChange: PropTypes.func.isRequired,
     /**
      * onFocus handler for the input field in the lookup
      */
@@ -129,12 +104,43 @@ export class Lookup extends React.Component {
   };
 
   static defaultProps = {
+    allowCreate: false,
+    className: null,
+    emailLayout: false,
     initialSelection: [],
+    loadOnFocus: true,
     loadOnChange: true,
+    loadOnMount: false,
     multi: false,
+    onFocus: null,
     placeholder: 'Search',
     tableResultsHeading: 'Results',
+    table: false,
+    tableFields: [],
   };
+
+  static getSprite(objectType = '') {
+    if (objectType.startsWith('custom')) {
+      return 'custom';
+    }
+
+    return 'standard';
+  }
+
+  static validateSelection(props, propName, componentName, ...rest) {
+    const arrayValidation = PropTypes.array(props, propName, componentName, ...rest);
+
+    if (arrayValidation === null && props[propName].length > 1 && !props.multi) {
+      return new Error(`${componentName}.initialSelection should not supply multiple selections to a single-item
+          lookup`);
+    }
+
+    return arrayValidation;
+  }
+
+  static filterDisplayItems(src, target, prop = 'id') {
+    return src.filter(o1 => !target.some(o2 => o1[prop] === o2[prop]));
+  }
 
   constructor(props, context) {
     super(props, context);
@@ -142,6 +148,7 @@ export class Lookup extends React.Component {
     const { initialSelection } = props;
 
     this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
+
     this.state = {
       searchTerm: '',
       highlighted: null,
@@ -151,170 +158,152 @@ export class Lookup extends React.Component {
     };
 
     this.handleLoad = debounce(this.handleLoad, 500);
-    this.handleCreateElement = this.handleCreateElement.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.loadOnMount) {
-      this.handleLoad();
-    }
+    if (this.props.loadOnMount) { this.handleLoad(); }
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if (!!this.props.onChange && this.state.selected !== nextState.selected) {
-      this.props.onChange(nextState.selected);
-    }
+    const { onChange } = this.props;
+    if (this.state.selected !== nextState.selected) { onChange(nextState.selected); }
   }
 
-  // Event Handlers
-  handleClickOutside() {
-    this.closeList();
+  handleClickOutside = () => {
+    this.setState({ open: false });
   }
 
-  handleLoad(searchTerm) {
-    const param = typeof searchTerm === 'string' ? searchTerm : this.state.searchTerm;
-    Promise.resolve(this.props.load(param))
-      .then((data) => {
-        if (Array.isArray(data)) {
-          this.setState({ loaded: data });
-        }
-      });
+  handleLoad = (searchTerm) => {
+    const { searchTerm: prevSearchTerm } = this.state;
+    const { load } = this.props;
+
+    const param = typeof term === 'string' ? searchTerm : prevSearchTerm;
+
+    const onSuccess = (data) => {
+      if (Array.isArray(data)) {
+        this.setState({ loaded: data });
+      }
+
+      return data;
+    };
+
+    const loadCall = load(param);
+
+    return new Promise((resolve) => {
+      const isPromise = loadCall && loadCall.then;
+      return isPromise ? loadCall : Promise.resolve(loadCall)
+        .then(onSuccess)
+        .then(resolve);
+    });
   }
 
-  handleInputChange(event) {
-    this.setState({ searchTerm: event.target.value });
-    if (this.props.loadOnChange) {
-      this.handleLoad(event.target.value);
-    }
+  handleInputChange = (event) => {
+    const { loadOnChange } = this.props;
+    const { target: { value } } = event;
+
+    this.setState({ searchTerm: value });
+    if (loadOnChange) { this.handleLoad(value); }
   }
 
-  handleInputFocus(e) {
+  handleInputFocus = (event) => {
+    const { loadOnFocus, onFocus } = this.props;
+
     this.openList();
-
-    if (this.props.onFocus) {
-      this.props.onFocus(e);
-    }
-
-    if (this.props.loadOnFocus) {
-      this.handleLoad();
-    }
+    if (onFocus) { onFocus(event); }
+    if (loadOnFocus) { this.handleLoad(); }
   }
 
   createElement(value) {
-    const selected = this.state.selected;
-    selected.push({
+    const newItem = {
       id: Date.now(),
       label: value,
+    };
+
+    this.setState({
+      selected: [...this.state.selected, newItem],
+      searchTerm: '',
+      open: false,
     });
-    this.setState({ selected, searchTerm: '', open: false });
   }
 
-  handleCreateElement(e) {
-    // if no result was found and enter was pressed or input field was left,
-    // allow creation of new element. in case of the email layout a minimum of
-    // validation ensures that the input is an email address.
-    const value = e.target.value;
-    const keyCode = e.charCode;
+  handleCreateElement = (event) => {
+    const { charCode, target: { value } } = event;
+    const { allowCreate, emailLayout, multi } = this.props;
+    const { loaded } = this.state;
 
-    if (this.props.emailLayout) {
-      if (
-        (keyCode === 13 || typeof keyCode === 'undefined') &&
-        /^.+@.+\..+$/.test(value) &&
-        this.props.allowCreate &&
-        this.props.multi &&
-        this.state.loaded.length === 0
-      ) {
-        this.createElement(value);
-      }
-    } else if (
-        (keyCode === 13 || typeof keyCode === 'undefined') &&
-        value !== '' &&
-        this.props.allowCreate &&
-        this.props.multi &&
-        this.state.loaded.length === 0
-      ) {
+    const isEnterPress = (charCode === 13 || typeof charCode === 'undefined');
+    const isAllowed = allowCreate && multi && loaded.length === 0;
+    const isValid = emailLayout ? /^.+@.+\..+$/.test(value) : value !== '';
+
+    if (isEnterPress && isValid && isAllowed) {
       this.createElement(value);
     }
   }
 
-  // List Toggles
-  toggleList(state) {
-    this.setState({ open: state });
-  }
+  openList = () => {
+    const { multi } = this.props;
+    const { open, selected } = this.state;
 
-  closeList() {
-    if (this.state.open) {
-      this.toggleList(false);
+    if (!open) {
+      if (!multi && selected.length < 1) { this.setState({ open: true }); }
+      if (multi) { this.setState({ open: true }); }
     }
   }
 
-  openList() {
-    // single selection
-    if (!this.state.open && !this.props.multi && this.state.selected.length < 1) {
-      this.toggleList(true);
-    }
-
-    // multi selection
-    if (!this.state.open && this.props.multi) {
-      this.toggleList(true);
-    }
-  }
-
-  // Result handlers
   addSelection(item) {
-    let selected = this.state.selected;
+    const { multi } = this.props;
+    const { selected } = this.state;
 
-    if (selected.indexOf(item) === -1) {
-      if (this.props.multi) {
-        selected = [...selected, item];
-      } else {
-        selected = [item];
-      }
+    const isNewItem = selected.indexOf(item) === -1;
 
-      this.closeList();
+    const setNextSelection = (nextSelection = selected) => {
+      this.setState({
+        open: false,
+        selected: nextSelection,
+        searchTerm: ''
+      });
+    };
+
+    if (isNewItem) {
+      setNextSelection(multi ? [...selected, item] : [item]);
+    } else {
+      setNextSelection();
     }
-
-    this.setState({ selected, searchTerm: '' });
   }
 
   removeSelection(item) {
-    const selected = this.state.selected.filter(select => select.id !== item.id);
-
-    this.setState({ selected });
+    const nextSelection = this.state.selected.filter(select => select.id !== item.id);
+    this.setState({ selected: nextSelection });
   }
 
-  highlightSelection(id) {
+  highlightSelection = (id) => {
     this.setState({ highlighted: id });
   }
 
-  // Elements
   input() {
-    // hide single select
-    if (!this.props.multi && !this.state.open && this.state.selected.length > 0) {
-      return null;
-    }
+    const { emailLayout, id, placeholder } = this.props;
+    const {
+      highlighted,
+      open,
+      searchTerm,
+      selected
+    } = this.state;
 
-    // hide multi select
-    if (this.props.multi && !this.state.open && this.state.selected.length > 0) {
-      return null;
-    }
+    if (!open && selected.length > 0) { return null; }
 
-    const handleInputChange = this.handleInputChange.bind(this);
-    const handleInputFocus = this.handleInputFocus.bind(this);
-
-    if (this.props.emailLayout) {
+    if (emailLayout) {
       return (
         <FormElementControl>
           <input
             className={this.prefix(['input--bare', 'input--height'])}
-            id={this.props.id}
+            id={id}
             type="text"
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
+            onChange={this.handleInputChange}
+            onFocus={this.handleInputFocus}
             onBlur={this.handleCreateElement}
             onKeyPress={this.handleCreateElement}
-            value={this.state.searchTerm}
-            ref={(input) => { if (input && this.state.open) { input.focus(); } }}
+            value={searchTerm}
+            ref={(input) => { if (input && open) { input.focus(); } }}
           />
         </FormElementControl>
       );
@@ -323,142 +312,122 @@ export class Lookup extends React.Component {
     return (
       <FormElementControl hasIconRight>
         <InputRaw
-          aria-activedescendant={this.state.highlighted}
-          aria-expanded={this.state.open}
+          aria-activedescendant={highlighted}
+          aria-expanded={open}
           iconRight="search"
-          value={this.state.searchTerm}
-          id={this.props.id}
-          onChange={handleInputChange}
-          onFocus={handleInputFocus}
+          value={searchTerm}
+          id={id}
+          onChange={this.handleInputChange}
+          onFocus={this.handleInputFocus}
           onBlur={this.handleCreateElement}
           onKeyPress={this.handleCreateElement}
-          placeholder={this.props.placeholder}
+          placeholder={placeholder}
           role="combobox"
-          isFocused={this.state.open}
+          isFocused={open}
         />
       </FormElementControl>
     );
   }
 
   selections() {
-    if (this.state.selected.length < 1) {
-      return null;
-    }
+    const { emailLayout, multi } = this.props;
+    const { selected } = this.state;
 
-    const onClick = this.openList.bind(this);
+    if (selected.length < 1) { return null; }
 
-    const selectionPills = this.state.selected.map((item, i) => {
-      const sldsClasses = this.props.multi ? null : ['size--1-of-1'];
-      const onClose = (e) => {
-        e.stopPropagation();
-        return this.removeSelection.bind(this, item)();
-      };
-      const icon =
-        item.objectType ? (<Icon sprite={getSprite(item.objectType)} icon={item.objectType} />) : undefined;
+    const pill = (item, i) => {
+      const { id, label, objectType } = item;
       return (
         <Pill
           key={i}
-          icon={icon}
-          id={item.id}
-          title={item.label}
-          label={item.label}
-          onClose={onClose}
-          className={this.prefix(sldsClasses)}
+          className={!multi ? this.prefix(['size--1-of-1']) : null}
+          icon={objectType && (<Icon sprite={Lookup.getSprite(objectType)} icon={objectType} />)}
+          id={id}
+          title={label}
+          label={label}
+          onClose={() => this.removeSelection(item)}
         />
       );
-    });
+    };
 
     return (
-      <PillContainer bare={this.props.emailLayout} onClick={onClick}>{selectionPills}</PillContainer>
+      <PillContainer bare={emailLayout} onClick={this.openList}>
+        {selected.map(pill)}
+      </PillContainer>
     );
   }
 
-  controls() {
-    const hasSelection = this.state.selected.length > 0;
-
-    if (hasSelection) {
-      return this.selections();
-    }
-
-    return this.input();
-  }
-
-  lookupItem(item, i) {
-    const addSelection = this.addSelection.bind(this, item);
-    const highlightSelection = this.highlightSelection.bind(this, item.id);
-    const sldsClasses = ['lookup__item-action', 'media', 'media--center'];
-
-    const renderMeta = () => {
-      if (item.meta) {
-        return (<span className={this.prefix(['lookup__result-meta', 'text-body--small'])}>{item.meta}</span>);
-      }
-
-      return null;
-    };
+  lookupItem = (item, i) => {
+    const { id } = this.props;
+    const { objectType, label, id: itemId, meta } = item;
 
     return (
       <li key={i} role="presentation">
         <span
-          className={this.prefix(sldsClasses)}
-          id={`${this.props.id}-option-${i}`}
-          onClick={addSelection}
-          onMouseOver={highlightSelection}
+          className={this.prefix(['lookup__item-action', 'media', 'media--center'])}
+          id={`${id}-option-${i}`}
+          onClick={() => this.addSelection(item)}
+          onMouseOver={() => this.highlightSelection(itemId)}
           role="option"
         >
           <IconSVG
             className={this.prefix('media__figure')}
-            sprite={getSprite(item.objectType)}
-            icon={item.objectType}
+            sprite={Lookup.getSprite(objectType)}
+            icon={objectType}
           />
           <div className={this.prefix('media__body')}>
-            <div className={this.prefix('lookup__result-text')}>{item.label}</div>
-            {renderMeta()}
+            <div className={this.prefix('lookup__result-text')}>{label}</div>
+            {meta && (
+              <span className={this.prefix(['lookup__result-meta', 'text-body--small'])}>
+                {meta}
+              </span>
+            )}
           </div>
         </span>
       </li>
     );
   }
 
-  lookupItems() {
-    if (this.state.loaded.length > 0) {
-      const displayItems = filterDisplayItems(this.state.loaded, this.state.selected);
-      return displayItems.map((item, i) => this.lookupItem(item, i));
-    }
-
-    return null;
-  }
-
   lookupList() {
-    if (!this.props.table && this.state.open && this.state.loaded.length > 0) {
-      return (
-        <div className={this.prefix('lookup__menu')} role="listbox">
-          <div className={this.prefix(['lookup__item--label', 'text-body--small'])}>
-            {this.props.listLabel}
-          </div>
-          <ul className={this.prefix('lookup__list')} role="presentation">
-            {this.lookupItems()}
-          </ul>
-        </div>
-      );
-    }
+    const { listLabel, table } = this.props;
+    const { loaded, selected } = this.state;
 
-    return null;
+    const displayItems = Lookup.filterDisplayItems(loaded, selected);
+
+    if (table || !open || displayItems.length < 1) { return null; }
+
+    return (
+      <div className={this.prefix('lookup__menu')} role="listbox">
+        <div className={this.prefix(['lookup__item--label', 'text-body--small'])}>
+          {listLabel}
+        </div>
+        <ul className={this.prefix('lookup__list')} role="presentation">
+          {displayItems.map(this.lookupItem)}
+        </ul>
+      </div>
+    );
   }
 
   lookupListTable() {
-    const results = filterDisplayItems(this.state.loaded, this.state.selected);
+    const { table, tableFields, tableResultsHeading } = this.props;
+    const { loaded, selected } = this.state;
+
+    const displayItems = Lookup.filterDisplayItems(loaded, selected);
+
+    if (!table || displayItems.length < 1) { return null; }
+
     const renderBodyCell = (content, index, objectType) => {
       if (index === 0) {
         return (
           <a>
-            {objectType ?
-              (<Icon
+            {objectType && (
+              <Icon
                 size="small"
                 className={this.prefix('m-right--x-small')}
-                sprite={getSprite(objectType)}
+                sprite={Lookup.getSprite(objectType)}
                 icon={objectType}
-              />) :
-              undefined}
+              />
+            )}
             {content}
           </a>
         );
@@ -467,62 +436,68 @@ export class Lookup extends React.Component {
       return content;
     };
 
-    if (this.props.table && results.length > 0) {
-      return (
-        <Table bordered className={this.prefix('m-top--small')}>
-          <thead>
-            <Row>
-              <Cell scope="col" colSpan={this.props.tableFields.length}>
-                {`${results.length} ${this.props.tableResultsHeading}`}
-              </Cell>
-            </Row>
-            <Row>
-              {this.props.tableFields.map(field =>
-                <Cell scope="col" key={field.name}>{field.label}</Cell>
-              )}
-            </Row>
-          </thead>
-          <tbody>
-            {results.map(item =>
-              <Row key={item.id}>
-                {this.props.tableFields.map((field, index) =>
-                  <Cell
-                    data-label={field.name}
-                    scope={index === 0 ? 'row' : undefined}
-                    onClick={() => this.addSelection(item)}
-                    key={`${item.id}${index}`}
-                  >
-                    {renderBodyCell(item[field.name], index, item.objectType)}
-                  </Cell>
-                )}
-              </Row>
-            )}
-          </tbody>
-        </Table>
-      );
-    }
+    const header = (
+      <thead>
+        <Row>
+          <Cell scope="col" colSpan={tableFields.length}>
+            {`${displayItems.length} ${tableResultsHeading}`}
+          </Cell>
+        </Row>
+        <Row>
+          {tableFields.map(({ name, label }) => <Cell scope="col" key={name}>{label}</Cell>)}
+        </Row>
+      </thead>
+    );
 
-    return null;
+    const body = (
+      <tbody>
+        {displayItems.map(item =>
+          <Row key={item.id}>
+            {tableFields.map((field, index) =>
+              <Cell
+                data-label={field.name}
+                scope={index === 0 ? 'row' : null}
+                onClick={() => this.addSelection(item)}
+                key={`${item.id}${index}`}
+              >
+                {renderBodyCell(item[field.name], index, item.objectType)}
+              </Cell>
+            )}
+          </Row>
+        )}
+      </tbody>
+    );
+
+    return (
+      <Table bordered className={this.prefix('m-top--small')}>
+        {header}
+        {body}
+      </Table>
+    );
   }
 
   render() {
+    const { className, emailLayout, id, inputLabel, multi } = this.props;
+    const { open } = this.state;
+
     const rest = omit(this.props, Object.keys(Lookup.propTypes));
+
     const sldsClasses = [
       'lookup',
-      { 'is-open': this.state.open },
+      { 'is-open': open },
     ];
 
-    const scope = this.props.multi ? null : 'single';
+    const scope = multi ? null : 'single';
 
-    if (this.props.emailLayout) {
+    if (emailLayout) {
       return (
         <div className={this.prefix(['grid', 'grow', 'p-horizontal--small'])}>
-          <label className={this.prefix(['email-composer__label', 'align-middle'])} htmlFor={this.props.id}>
-            {this.props.inputLabel}
+          <label className={this.prefix(['email-composer__label', 'align-middle'])} htmlFor={id}>
+            {inputLabel}
           </label>
           <FormElement
             {...rest}
-            className={this.prefix(sldsClasses, this.props.className)}
+            className={this.prefix(sldsClasses, className)}
             data-select={scope}
             data-scope={scope}
           >
@@ -538,11 +513,11 @@ export class Lookup extends React.Component {
       <div>
         <FormElement
           {...rest}
-          className={this.prefix(sldsClasses, this.props.className)}
+          className={this.prefix(sldsClasses, className)}
           data-select={scope}
           data-scope={scope}
         >
-          <FormElementLabel id={this.props.id} label={this.props.inputLabel} />
+          <FormElementLabel id={id} label={inputLabel} />
           {this.input()}
           {this.selections()}
           {this.lookupList()}

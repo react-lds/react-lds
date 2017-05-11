@@ -4,8 +4,6 @@ import { mount } from 'enzyme';
 
 import { Lookup } from '../Lookup';
 
-jest.useFakeTimers();
-
 describe('<Lookup />', () => {
   let mounted = null;
   let props = {};
@@ -55,6 +53,8 @@ describe('<Lookup />', () => {
 
   const loadFn = () => sampleData;
 
+  const onChange = () => {};
+
   beforeEach(() => {
     props = {
       'data-scope': 'single',
@@ -64,6 +64,7 @@ describe('<Lookup />', () => {
       listLabel: 'Recent Accounts',
       placeholder: 'Search Accounts',
       load: loadFn,
+      onChange,
       prefix: function prefix(sldsClasses) { return sldsClasses.join(' '); },
     };
     mounted = mount(<Lookup {...props} />, options);
@@ -172,8 +173,10 @@ describe('<Lookup />', () => {
     mounted.setProps({ load: mockFunction });
     const input = mounted.find('input');
     input.simulate('change');
-    jest.runAllTimers();
-    expect(mockFunction).toBeCalled();
+
+    setTimeout(() => {
+      expect(mockFunction).toBeCalled();
+    }, 600);
   });
 
   it('calls the load function onFocus', () => {
@@ -181,17 +184,18 @@ describe('<Lookup />', () => {
     mounted.setProps({ load: mockFunction, loadOnFocus: true });
     const input = mounted.find('input');
     input.simulate('focus');
-    jest.runAllTimers();
-    expect(mockFunction).toBeCalled();
+    setTimeout(() => {
+      expect(mockFunction).toBeCalled();
+    }, 600);
   });
 
   it('calls the load function onMount', () => {
     const mockFunction = jest.fn();
-    props = Object.assign({}, props, { load: mockFunction, loadOnMount: true });
-    mounted = mount(<Lookup {...props} />, options);
-    mounted.setProps({ load: mockFunction, loadOnMount: true });
-    jest.runAllTimers();
-    expect(mockFunction).toBeCalled();
+    mounted = mount(<Lookup {...props} load={mockFunction} loadOnMount />, options);
+
+    setTimeout(() => {
+      expect(mockFunction).toBeCalled();
+    }, 600);
   });
 
   it('attaches an onChange handler', () => {
