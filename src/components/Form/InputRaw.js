@@ -6,6 +6,7 @@ import { Button, ButtonIcon, IconSVG } from '../../';
 
 const InputRaw = (props, { cssPrefix }) => {
   const {
+    bare,
     className,
     disabled,
     error,
@@ -95,7 +96,7 @@ const InputRaw = (props, { cssPrefix }) => {
       {renderIconRight()}
       <input
         {...rest}
-        className={prefix('input', className)}
+        className={prefix(bare ? 'input--bare' : 'input', className)}
         disabled={disabled}
         id={id}
         onChange={onChange}
@@ -116,10 +117,15 @@ const InputRaw = (props, { cssPrefix }) => {
 InputRaw.contextTypes = { cssPrefix: PropTypes.string };
 
 InputRaw.propDefaults = {
+  bare: false,
   type: 'text',
 };
 
 InputRaw.propTypes = {
+  /**
+   * renders a bare input
+   */
+  bare: PropTypes.bool,
   /**
    * class name
    */

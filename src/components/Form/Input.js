@@ -59,6 +59,10 @@ Input.propDefaults = {
 
 Input.propTypes = {
   /**
+   * renders a bare input
+   */
+  bare: PropTypes.bool,
+  /**
    * class name
    */
   className: PropTypes.string,

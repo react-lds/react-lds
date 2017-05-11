@@ -114,6 +114,12 @@ describe('<Input />', () => {
     expect(mounted.find('div.slds-form-element__control IconSVG').first().props().icon).toEqual('warning');
   });
 
+  it('renders a bare input', () => {
+    mounted.setProps({ bare: true });
+    expect(mounted.find('.slds-input')).toHaveLength(0);
+    expect(mounted.find('.slds-input--bare')).toHaveLength(1);
+  });
+
   it('labels the input with an error', () => {
     mounted.setProps({ error: 'shit' });
     const hash = getUniqueHash('shit', props.id);
