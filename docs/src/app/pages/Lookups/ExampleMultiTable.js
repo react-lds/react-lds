@@ -1,5 +1,6 @@
 import React from 'react';
 import { Lookup } from 'react-lds';
+import exampleData from './exampleData';
 
 const initialSelection = [
   {
@@ -7,45 +8,6 @@ const initialSelection = [
     label: 'Something',
     meta: 'Very meta',
     objectType: 'contact',
-  },
-];
-
-const exampleData = [
-  {
-    id: '1',
-    label: 'Something',
-    meta: 'Very meta',
-    objectType: 'contact',
-    name: 'Something',
-    email: 'something@nobody.com',
-  },
-  {
-    id: '2',
-    label: 'Really',
-    objectType: 'contact',
-    name: 'Really',
-    email: 'really@nobody.com',
-  },
-  {
-    id: '3',
-    label: 'Not so',
-    objectType: 'contact',
-    name: 'Not so',
-    email: 'notso@nobody.com',
-  },
-  {
-    id: '4',
-    label: 'Much useful',
-    objectType: 'contact',
-    name: 'Much useful',
-    email: 'useful@nobody.com',
-  },
-  {
-    id: '5',
-    label: 'Of any type',
-    objectType: 'contact',
-    name: 'Of any type',
-    email: 'any@nobody.com',
   },
 ];
 

@@ -198,13 +198,6 @@ describe('<Lookup />', () => {
     }, 600);
   });
 
-  it('attaches an onChange handler', () => {
-    const mockFn = jest.fn();
-    mounted.setProps({ onChange: mockFn });
-    mounted.setState({ selected: [] });
-    expect(mockFn).toBeCalled();
-  });
-
   it('attaches an onFocus handler', () => {
     const mockFunction = jest.fn();
     mounted.setProps({ onFocus: mockFunction });
@@ -257,5 +250,19 @@ describe('<Lookup />', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-lookup').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-lookup').prop('data-test')).toEqual('bar');
+  });
+
+  it('resets selection & loading state when the objectType of the lookup changes', () => {
+    mounted.setState({ selected: sampleData, loaded: sampleData });
+    mounted.setProps({ objectType: 'newObject' });
+    expect(mounted.state('selected').length).toEqual(0);
+    expect(mounted.state('loaded').length).toEqual(0);
+  });
+
+  it('works as a controlled component', () => {
+    mounted.setProps({ selection: sampleData, initialSelection: null });
+    expect(mounted.state('selected').length).toEqual(7);
+    mounted.setProps({ selection: [] });
+    expect(mounted.state('selected').length).toEqual(0);
   });
 });

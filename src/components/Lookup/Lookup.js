@@ -36,10 +36,11 @@ export class Lookup extends Component {
      * id of the input field in the lookup component
      */
     id: PropTypes.string.isRequired,
+    selection: PropTypes.array,
     /**
-     * initial item selection
+     * initial item selection. use with uncontrolled lookup
      */
-    initialSelection: Lookup.validateSelection,
+    initialSelection: PropTypes.array,
     /**
      * label for the input field in the lookup component
      */
@@ -68,6 +69,10 @@ export class Lookup extends Component {
      * renders the lookup in multiple mode
      */
     multi: PropTypes.bool,
+    /**
+     * type of object that is queried via the lookup. if it changes, loaded items will be reset
+     */
+    objectType: PropTypes.string,
     /**
      * onChange handler for the lookup. has selected items as first argument
      */
@@ -107,14 +112,16 @@ export class Lookup extends Component {
     allowCreate: false,
     className: null,
     emailLayout: false,
-    initialSelection: [],
+    initialSelection: null,
     loadOnFocus: true,
     loadOnChange: true,
     loadOnMount: false,
     multi: false,
+    objectType: 'default',
     onFocus: null,
     placeholder: 'Search',
     tableResultsHeading: 'Results',
+    selection: null,
     table: false,
     tableFields: [],
   };
@@ -127,17 +134,6 @@ export class Lookup extends Component {
     return 'standard';
   }
 
-  static validateSelection(props, propName, componentName, ...rest) {
-    const arrayValidation = PropTypes.array(props, propName, componentName, ...rest);
-
-    if (arrayValidation === null && props[propName].length > 1 && !props.multi) {
-      return new Error(`${componentName}.initialSelection should not supply multiple selections to a single-item
-          lookup`);
-    }
-
-    return arrayValidation;
-  }
-
   static filterDisplayItems(src, target, prop = 'id') {
     return src.filter(o1 => !target.some(o2 => o1[prop] === o2[prop]));
   }
@@ -145,16 +141,32 @@ export class Lookup extends Component {
   constructor(props, context) {
     super(props, context);
 
-    const { initialSelection } = props;
-
     this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
+
+    const { initialSelection, selection } = props;
+
+    if (initialSelection && selection) {
+      console.warn(
+        '[react-lds] Lookup:',
+        'You are supplying both `selection` & `initialSelection`, ignoring `initialSelection`.',
+        'The component will work as a controlled component'
+      );
+    }
+
+    let initialSelected = [];
+
+    if (selection && selection.length > 0) {
+      initialSelected = selection;
+    } else if (!selection && initialSelection && initialSelection.length > 0) {
+      initialSelected = initialSelection;
+    }
 
     this.state = {
       searchTerm: '',
       highlighted: null,
       open: false,
       loaded: [],
-      selected: initialSelection,
+      selected: initialSelected,
     };
 
     this.handleLoad = debounce(this.handleLoad, 500);
@@ -164,13 +176,21 @@ export class Lookup extends Component {
     if (this.props.loadOnMount) { this.handleLoad(); }
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    const { onChange } = this.props;
-    if (this.state.selected !== nextState.selected) { onChange(nextState.selected); }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.objectType !== nextProps.objectType) {
+      this.setState({
+        loaded: [],
+        selected: [],
+      });
+    }
+
+    if (nextProps.selection) {
+      this.setState({ selected: nextProps.selection });
+    }
   }
 
   handleClickOutside = () => {
-    this.setState({ open: false });
+    this.closeList(false);
   }
 
   handleLoad = (searchTerm) => {
@@ -187,14 +207,7 @@ export class Lookup extends Component {
       return data;
     };
 
-    const loadCall = load(param);
-
-    return new Promise((resolve) => {
-      const isPromise = loadCall && loadCall.then;
-      return isPromise ? loadCall : Promise.resolve(loadCall)
-        .then(onSuccess)
-        .then(resolve);
-    });
+    return Promise.resolve(load(param)).then(onSuccess);
   }
 
   handleInputChange = (event) => {
@@ -211,19 +224,6 @@ export class Lookup extends Component {
     this.openList();
     if (onFocus) { onFocus(event); }
     if (loadOnFocus) { this.handleLoad(); }
-  }
-
-  createElement(value) {
-    const newItem = {
-      id: Date.now(),
-      label: value,
-    };
-
-    this.setState({
-      selected: [...this.state.selected, newItem],
-      searchTerm: '',
-      open: false,
-    });
   }
 
   handleCreateElement = (event) => {
@@ -245,42 +245,69 @@ export class Lookup extends Component {
     const { open, selected } = this.state;
 
     if (!open) {
-      if (!multi && selected.length < 1) { this.setState({ open: true }); }
+      if (!multi && selected.length <= 1) { this.setState({ open: true }); }
       if (multi) { this.setState({ open: true }); }
     }
   }
 
+  closeList = (clearSearch = true) => {
+    this.setState({
+      open: false,
+      ...(clearSearch ? { searchTerm: '' } : {})
+    });
+  };
+
+
   addSelection(item) {
-    const { multi } = this.props;
+    const { multi, onChange, selection } = this.props;
     const { selected } = this.state;
 
     const isNewItem = selected.indexOf(item) === -1;
 
-    const setNextSelection = (nextSelection = selected) => {
-      this.setState({
-        open: false,
-        selected: nextSelection,
-        searchTerm: ''
-      });
-    };
+    const nextSelection = multi ? [...selected, item] : [item];
 
-    if (isNewItem) {
-      setNextSelection(multi ? [...selected, item] : [item]);
-    } else {
-      setNextSelection();
+    if (isNewItem && !selection) {
+      this.setState({ selected: nextSelection });
     }
+
+    onChange(nextSelection);
+    this.closeList();
   }
 
   removeSelection(item) {
+    const { onChange, selection } = this.props;
     const nextSelection = this.state.selected.filter(select => select.id !== item.id);
-    this.setState({ selected: nextSelection });
+
+    if (!selection) {
+      this.setState({ selected: nextSelection });
+    }
+
+    onChange(nextSelection);
+  }
+
+  createElement = (value) => {
+    const { onChange, selection } = this.props;
+
+    const newItem = {
+      id: Date.now(),
+      label: value,
+    };
+
+    const nextSelection = [...this.state.selected, newItem];
+
+    if (!selection) {
+      this.setState({ selected: nextSelection });
+    }
+
+    onChange(nextSelection);
+    this.closeList();
   }
 
   highlightSelection = (id) => {
     this.setState({ highlighted: id });
   }
 
-  input() {
+  renderInput() {
     const { emailLayout, id, placeholder } = this.props;
     const {
       highlighted,
@@ -291,51 +318,36 @@ export class Lookup extends Component {
 
     if (!open && selected.length > 0) { return null; }
 
-    if (emailLayout) {
-      return (
-        <FormElementControl>
-          <input
-            className={this.prefix(['input--bare', 'input--height'])}
-            id={id}
-            type="text"
-            onChange={this.handleInputChange}
-            onFocus={this.handleInputFocus}
-            onBlur={this.handleCreateElement}
-            onKeyPress={this.handleCreateElement}
-            value={searchTerm}
-            ref={(input) => { if (input && open) { input.focus(); } }}
-          />
-        </FormElementControl>
-      );
-    }
-
     return (
-      <FormElementControl hasIconRight>
+      <FormElementControl hasIconRight={!emailLayout}>
         <InputRaw
-          aria-activedescendant={highlighted}
-          aria-expanded={open}
-          iconRight="search"
-          value={searchTerm}
           id={id}
+          isFocused={open}
+          type="text"
+          placeholder={emailLayout ? null : placeholder}
+          role="combobox"
+          value={searchTerm}
           onChange={this.handleInputChange}
           onFocus={this.handleInputFocus}
           onBlur={this.handleCreateElement}
           onKeyPress={this.handleCreateElement}
-          placeholder={placeholder}
-          role="combobox"
-          isFocused={open}
+          aria-activedescendant={highlighted}
+          aria-expanded={open}
+          iconRight={emailLayout ? null : 'search'}
+          bare={emailLayout}
+          className={emailLayout ? this.prefix('input--height') : null}
         />
       </FormElementControl>
     );
   }
 
-  selections() {
+  renderSelections() {
     const { emailLayout, multi } = this.props;
     const { selected } = this.state;
 
     if (selected.length < 1) { return null; }
 
-    const pill = (item, i) => {
+    const renderSelection = (item, i) => {
       const { id, label, objectType } = item;
       return (
         <Pill
@@ -352,43 +364,12 @@ export class Lookup extends Component {
 
     return (
       <PillContainer bare={emailLayout} onClick={this.openList}>
-        {selected.map(pill)}
+        {selected.map(renderSelection)}
       </PillContainer>
     );
   }
 
-  lookupItem = (item, i) => {
-    const { id } = this.props;
-    const { objectType, label, id: itemId, meta } = item;
-
-    return (
-      <li key={i} role="presentation">
-        <span
-          className={this.prefix(['lookup__item-action', 'media', 'media--center'])}
-          id={`${id}-option-${i}`}
-          onClick={() => this.addSelection(item)}
-          onMouseOver={() => this.highlightSelection(itemId)}
-          role="option"
-        >
-          <IconSVG
-            className={this.prefix('media__figure')}
-            sprite={Lookup.getSprite(objectType)}
-            icon={objectType}
-          />
-          <div className={this.prefix('media__body')}>
-            <div className={this.prefix('lookup__result-text')}>{label}</div>
-            {meta && (
-              <span className={this.prefix(['lookup__result-meta', 'text-body--small'])}>
-                {meta}
-              </span>
-            )}
-          </div>
-        </span>
-      </li>
-    );
-  }
-
-  lookupList() {
+  renderLookupList() {
     const { listLabel, table } = this.props;
     const { loaded, selected } = this.state;
 
@@ -396,19 +377,50 @@ export class Lookup extends Component {
 
     if (table || !open || displayItems.length < 1) { return null; }
 
+    const renderLookupItem = (item, i) => {
+      const { id } = this.props;
+      const { objectType, label, id: itemId, meta } = item;
+
+      return (
+        <li key={i} role="presentation">
+          <span
+            className={this.prefix(['lookup__item-action', 'media', 'media--center'])}
+            id={`${id}-option-${i}`}
+            onClick={() => this.addSelection(item)}
+            onMouseOver={() => this.highlightSelection(itemId)}
+            role="option"
+          >
+            <IconSVG
+              className={this.prefix('media__figure')}
+              sprite={Lookup.getSprite(objectType)}
+              icon={objectType}
+            />
+            <div className={this.prefix('media__body')}>
+              <div className={this.prefix('lookup__result-text')}>{label}</div>
+              {meta && (
+                <span className={this.prefix(['lookup__result-meta', 'text-body--small'])}>
+                  {meta}
+                </span>
+              )}
+            </div>
+          </span>
+        </li>
+      );
+    };
+
     return (
       <div className={this.prefix('lookup__menu')} role="listbox">
         <div className={this.prefix(['lookup__item--label', 'text-body--small'])}>
           {listLabel}
         </div>
         <ul className={this.prefix('lookup__list')} role="presentation">
-          {displayItems.map(this.lookupItem)}
+          {displayItems.map(renderLookupItem)}
         </ul>
       </div>
     );
   }
 
-  lookupListTable() {
+  renderLookupTable() {
     const { table, tableFields, tableResultsHeading } = this.props;
     const { loaded, selected } = this.state;
 
@@ -482,47 +494,29 @@ export class Lookup extends Component {
 
     const rest = omit(this.props, Object.keys(Lookup.propTypes));
 
-    const sldsClasses = [
-      'lookup',
-      { 'is-open': open },
-    ];
+    const sldsClasses = ['lookup', { 'is-open': open }];
 
     const scope = multi ? null : 'single';
 
-    if (emailLayout) {
-      return (
-        <div className={this.prefix(['grid', 'grow', 'p-horizontal--small'])}>
+    return (
+      <div className={emailLayout ? this.prefix(['grid', 'grow', 'p-horizontal--small']) : null}>
+        {emailLayout && (
           <label className={this.prefix(['email-composer__label', 'align-middle'])} htmlFor={id}>
             {inputLabel}
           </label>
-          <FormElement
-            {...rest}
-            className={this.prefix(sldsClasses, className)}
-            data-select={scope}
-            data-scope={scope}
-          >
-            {this.input()}
-            {this.selections()}
-            {this.lookupList()}
-          </FormElement>
-        </div>
-      );
-    }
-
-    return (
-      <div>
+        )}
         <FormElement
           {...rest}
           className={this.prefix(sldsClasses, className)}
           data-select={scope}
           data-scope={scope}
         >
-          <FormElementLabel id={id} label={inputLabel} />
-          {this.input()}
-          {this.selections()}
-          {this.lookupList()}
+          {!emailLayout && (<FormElementLabel id={id} label={inputLabel} />)}
+          {this.renderInput()}
+          {this.renderSelections()}
+          {this.renderLookupList()}
         </FormElement>
-        {this.lookupListTable()}
+        {this.renderLookupTable()}
       </div>
     );
   }
