@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid } from 'react-lds';
+import { Grid } from '../../';
 import { flavorable } from '../../decorators';
 
 export const Navigation = ({ children, className }) =>

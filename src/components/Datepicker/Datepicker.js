@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonIcon, Input } from 'react-lds';
 import classnames from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
 
 import moment from 'moment';
 import 'moment-range';
 
+import { Button, ButtonIcon, Input } from '../../';
 import { prefixClasses } from '../../utils';
 
 const iso8601DateFormat = 'YYYY-MM-DD';

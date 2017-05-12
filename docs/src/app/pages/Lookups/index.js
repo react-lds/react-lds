@@ -1,6 +1,7 @@
 import React from 'react';
 
 import exampleDefaultCode from '!raw!./ExampleDefault';
+import exampleControlledCode from '!raw!./ExampleControlled';
 import exampleMultiCode from '!raw!./ExampleMulti';
 import exampleMultiCreateCode from '!raw!./ExampleMultiCreate';
 import exampleMultiTableCode from '!raw!./ExampleMultiTable';
@@ -12,6 +13,7 @@ import Masthead from '../../components/MastHead';
 import PropTypeDescription from '../../components/PropTypeDescription';
 
 import ExampleDefault from './ExampleDefault';
+import ExampleControlled from './ExampleControlled';
 import ExampleMulti from './ExampleMulti';
 import ExampleMultiCreate from './ExampleMultiCreate';
 import ExampleMultiTable from './ExampleMultiTable';
@@ -25,6 +27,13 @@ const LookupPage = () => (
         code={exampleDefaultCode}
       />
       <ExampleDefault />
+    </div>
+    <div className="slds-p-around--xx-large">
+      <CodeExample
+        title="Controlled Lookup"
+        code={exampleControlledCode}
+      />
+      <ExampleControlled />
     </div>
     <div className="slds-p-around--xx-large">
       <CodeExample
