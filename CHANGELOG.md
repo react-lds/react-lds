@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.9
+* Add opt-in support for controlled lookup selection. `Lookup` selection can now be set from outside via the `selection` prop (now for real)
+* Allow bare `<Inputs />`
+* Bugfix: reset internal selection if the load callback changes (now for real)
+* Bugfix: Fix non-relative imports in src
+
 ## 1.1.8
 * Bugfix: Revert Lookup component behavior to version `1.1.6`.
 
