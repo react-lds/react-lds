@@ -3,14 +3,20 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
 
-import moment from 'moment';
+import moment from 'moment-timezone';
 import 'moment-range';
 
 import { Button, ButtonIcon, Input } from '../../';
 import { prefixClasses } from '../../utils';
 
+const defaultDateFormat = 'l';
+const placeholderDateFormat = 'L';
 const iso8601DateFormat = 'YYYY-MM-DD';
-const salesforceDateFormat = 'M/D/YYYY';
+const defaultTranslations = {
+  inputFieldError: '',
+  inputFieldLabel: 'Date',
+  today: 'Today',
+};
 
 export class Datepicker extends React.Component {
 
@@ -28,17 +34,127 @@ export class Datepicker extends React.Component {
     );
   }
 
+  static validate = date => moment(date, iso8601DateFormat, true).isValid();
+
   constructor(props, context) {
     super(props, context);
     this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
-    const { open, preselectedDate } = this.props;
+    const { date, initialDate, locale, open, timezone, translations } = this.props;
+
+    moment.locale(locale.toLowerCase());
+    moment.tz.setDefault(timezone);
+
+    defaultTranslations.inputFieldError = `Please enter a valid date in the following format:
+      ${moment().localeData().longDateFormat(placeholderDateFormat)}`;
+
+    if (date && initialDate) {
+      console.warn(
+        '[react-lds] Datepicker:',
+        'You are supplying both `initialDate` & `date`, ignoring `initialDate`.',
+        'The component will work as a controlled component'
+      );
+    }
+
+    let initial;
+    let isValid;
+
+    if (date) {
+      initial = date;
+      isValid = Datepicker.validate(date);
+    } else if (!date && initialDate) {
+      initial = initialDate;
+      isValid = Datepicker.validate(initialDate);
+    }
 
     this.state = {
       open,
-      preselectedDate: preselectedDate ? moment(preselectedDate) : null,
-      inputDate: preselectedDate ? moment(preselectedDate).format(salesforceDateFormat).toString() : '',
-      viewedDate: moment(),
+      inputValue: isValid ? moment(initial).format(defaultDateFormat).toString() : '',
+      isInvalid: !isValid,
+      viewedDate: isValid ? moment(initial) : moment(),
     };
+
+    this.mergedTranslations = {
+      ...defaultTranslations,
+      ...translations,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { required } = this.props;
+    const { date } = nextProps;
+    const nextDate = moment(date, [iso8601DateFormat, defaultDateFormat]);
+    const isValid = Datepicker.validate(date);
+
+    this.setState({
+      inputValue: isValid ? nextDate.format(defaultDateFormat).toString() : date,
+      isInvalid: date !== null ? !isValid : required,
+      viewedDate: isValid ? nextDate : moment(),
+    });
+  }
+
+  /**
+   * Callback when a day is selected or the link to reset to today is clicked
+   * @param  {Object} value moment object
+   * @return {void}         interacts with component state and callback from props
+   */
+  onDatepickerChange = (day) => {
+    const { date, onChange } = this.props;
+
+    const inputValue = day ?
+      moment(day).format(defaultDateFormat).toString() :
+      moment().format(defaultDateFormat).toString();
+    const viewedDate = day ? moment(day) : moment();
+
+    if (!date) {
+      this.setState({
+        inputValue,
+        isInvalid: false,
+        open: false,
+        viewedDate,
+      });
+    }
+
+    const output = day ? day.format(iso8601DateFormat) : moment().format(iso8601DateFormat);
+    onChange(output, true);
+  }
+
+  /**
+   * Callback when the input field changes
+   * @param  {String} value input value as string
+   * @return {void}         interacts with component state and callback from props
+   */
+  onInputFieldChange = (value) => {
+    const { date, onChange, required } = this.props;
+    const newDate = moment(value, defaultDateFormat);
+
+    if (moment(value, defaultDateFormat, true).isValid()) {
+      if (!date) {
+        this.setState({
+          viewedDate: newDate,
+          inputValue: value,
+          isInvalid: false,
+        });
+      }
+      onChange(newDate.format(iso8601DateFormat), true);
+    } else if (value === '') {
+      if (!date) {
+        const isInvalid = required || false;
+        this.setState({
+          viewedDate: moment(),
+          inputValue: '',
+          isInvalid,
+        });
+      }
+      onChange(null, false);
+    } else {
+      if (!date) {
+        this.setState({
+          inputValue: value,
+          isInvalid: true,
+        });
+      }
+      onChange(value, false);
+    }
   }
 
   /**
@@ -64,64 +180,24 @@ export class Datepicker extends React.Component {
   };
 
   /**
-   * Callback when the month changes
-   * @param  {Object} day day as moment object
-   * @return {void}       interacts with component state and callback from props
-   */
-  onDayChange = (day) => {
-    const { onValidDateChange } = this.props;
-    this.setState({
-      inputDate: moment(day).format(salesforceDateFormat).toString(),
-      isInputInvalid: false,
-      preselectedDate: day,
-      open: false,
-    });
-
-    onValidDateChange(day.format(iso8601DateFormat));
-  };
-
-  /**
-   * Callback when today reset link is cliecked
-   * @return {void} interacts with component state
-   */
-  onTodayChange = () => this.setState({ viewedDate: moment() });
-
-  /**
-   * Callback when the input field changes
-   * @param  {String} value input value as string
-   * @return {void}         interacts with component state and callback from props
-   */
-  onInputFieldChange = (value) => {
-    const { onValidDateChange } = this.props;
-    const newDate = moment(value, salesforceDateFormat);
-
-    if (moment(value, salesforceDateFormat, true).isValid()) {
-      this.setState({
-        viewedDate: newDate,
-        preselectedDate: newDate,
-        inputDate: value,
-        isInputInvalid: false,
-      });
-
-      onValidDateChange(newDate.format(iso8601DateFormat));
-    } else {
-      this.setState({
-        inputDate: value,
-        isInputInvalid: true,
-      });
-    }
-  }
-
-  /**
-   * Callback when the input field is clicked
+   * Callback when the input field is clicked or gets focused
    * @return {void} interacts with component state
    */
   onInputFieldClick = () => {
-    this.setState(prevState => ({ open: !prevState.open }));
+    this.setState({ open: true });
   }
 
   /**
-   * Get all weeks touched by the current month and mark days within it.
+   * Get provided translations or fall back to default values
+   * @param  {String} key translation key
+   * @return {String}     translation string
+   */
+  getTranslations(key) {
+    return this.mergedTranslations[key];
+  }
+
+  /**
+   * Get all weeks touched by the current month and mark days within it
    * @return {Array} all visible days organized by week
    */
   getMonthDays() {
@@ -131,8 +207,15 @@ export class Datepicker extends React.Component {
     // of all days of all weeks which the month is in
     const firstDay = moment(viewedDate).startOf('month');
     const lastDay = moment(viewedDate).endOf('month');
-    const firstDayFirstWeek = moment(firstDay).startOf('week');
-    const lastDayLastWeek = moment(lastDay).endOf('week');
+
+    // Get the first Sunday of the first week and the last Saturday of the last week
+    // touched by the current month
+    const firstDayFirstWeek = moment(firstDay).isoWeekday() === 7 ?
+      moment(firstDay) :
+      moment(firstDay).startOf('isoweek').subtract(1, 'days');
+    const lastDayLastWeek = moment(lastDay).isoWeekday() === 7 ?
+      moment(lastDay).add(6, 'days') :
+      moment(lastDay).endOf('isoweek').subtract(1, 'days');
 
     // Create two ranges, one spanning all weeks touched by the current month,
     // and one spanning only the month
@@ -151,7 +234,7 @@ export class Datepicker extends React.Component {
    * Callback when an outside click occurs
    * @return {void} interacts with component state
    */
-  handleClickOutside() {
+  handleClickOutside = () => {
     this.setState({ open: false });
   }
 
@@ -199,14 +282,16 @@ export class Datepicker extends React.Component {
    * @return {ReactElement} tbody
    */
   renderMonth() {
-    const today = this.props.translations.today;
+    const today = this.getTranslations('today');
+    const onClick = () => this.onDatepickerChange();
+
     return (
       <tbody>
         {this.getMonthDays().map((week, weekIndex) => this.renderWeek(week, weekIndex))}
         <tr>
           <td colSpan="7" role="gridcell">
             <a
-              onClick={this.onTodayChange}
+              onClick={onClick}
               className={this.prefix(['show--inline-block', 'p-bottom--x-small'])}
             >
               {today}
@@ -234,13 +319,13 @@ export class Datepicker extends React.Component {
    * @return {ReactElement} td
    */
   renderDay(day, inRange, dayIndex) {
-    const { preselectedDate } = this.state;
+    const { inputValue } = this.state;
     const classes = {
       [this.prefix('is-today')]: day.isSame(moment(), 'day'),
       [this.prefix('disabled-text')]: !inRange,
-      [this.prefix('is-selected')]: day.isSame(preselectedDate, 'day'),
+      [this.prefix('is-selected')]: day.isSame(moment(inputValue, defaultDateFormat), 'day'),
     };
-    const onClick = () => inRange && this.onDayChange(day);
+    const onClick = () => inRange && this.onDatepickerChange(day);
 
     return (
       <td key={dayIndex} className={classnames(classes)} headers={day.day()}>
@@ -254,24 +339,24 @@ export class Datepicker extends React.Component {
   render() {
     const {
       required,
-      translations: {
-        inputFieldLabel,
-        inputFieldError
-      },
     } = this.props;
-    const { inputDate, isInputInvalid, open, viewedDate } = this.state;
-    const error = isInputInvalid ? inputFieldError : undefined;
+    const { inputValue, isInvalid, open, viewedDate } = this.state;
+    const inputFieldLabel = this.getTranslations('inputFieldLabel');
+    const inputFieldError = this.getTranslations('inputFieldError');
+    const error = isInvalid ? inputFieldError : undefined;
+    const placeholder = moment().localeData().longDateFormat(placeholderDateFormat);
 
     return (
-      <div>
+      <div style={{ position: 'relative' }}>
         <Input
           id="date-input"
           label={inputFieldLabel}
-          placeholder={salesforceDateFormat}
+          placeholder={placeholder}
           iconRight="monthlyview"
           error={error}
-          value={inputDate}
+          value={inputValue || ''}
           onClick={this.onInputFieldClick}
+          onFocus={this.onInputFieldClick}
           onChange={e => this.onInputFieldChange(e.target.value)}
           required={required}
         />
@@ -309,18 +394,34 @@ export class Datepicker extends React.Component {
 Datepicker.contextTypes = { cssPrefix: PropTypes.string };
 
 Datepicker.defaultProps = {
+  date: null,
+  initialDate: null,
+  locale: 'en',
   open: false,
   required: false,
+  timezone: 'America/Los_Angeles',
+  translations: defaultTranslations,
   yearSpan: 2,
-  preselectedDate: null,
-  translations: {
-    inputFieldError: `Invalid date, please use the following format: ${salesforceDateFormat}`,
-    inputFieldLabel: 'Date',
-    today: 'Today',
-  },
 };
 
 Datepicker.propTypes = {
+  /**
+   * Date in ISO 8601 format (controlled component)
+   */
+  date: PropTypes.string,
+  /**
+   * Optional initial date in ISO 8601 format
+   */
+  initialDate: PropTypes.string,
+  /**
+   * Optional locale
+   */
+  locale: PropTypes.string,
+  /**
+   * Callback function once a date has been selected or the input has been changed
+   * Returns the input value and whether it is valid or not
+   */
+  onChange: PropTypes.func.isRequired,
   /**
    * Whether the datepicker is open or closed
    */
@@ -330,20 +431,16 @@ Datepicker.propTypes = {
    */
   required: PropTypes.bool,
   /**
-   * Callback function once a valid date has been selected or input
+   * Optional timezone
    */
-  onValidDateChange: PropTypes.func.isRequired,
+  timezone: PropTypes.string,
   /**
-   * Optional preselected date
-   */
-  preselectedDate: PropTypes.string,
-  /**
-   * Optional translations, default to english
+   * Optional translations, default is english
    */
   translations: PropTypes.shape({
-    inputFieldError: PropTypes.string.isRequired,
-    inputFieldLabel: PropTypes.string.isRequired,
-    today: PropTypes.string.isRequired,
+    inputFieldError: PropTypes.string,
+    inputFieldLabel: PropTypes.string,
+    today: PropTypes.string,
   }),
   /**
    * How many years to show before and after the current year
