@@ -13,7 +13,7 @@ describe('<Datepicker />', () => {
   const changed = jest.fn();
 
   beforeEach(() => {
-    mounted = shallow(<Datepicker open onValidDateChange={changed} />, options);
+    mounted = shallow(<Datepicker open onChange={changed} locale="en" />, options);
   });
 
   it('renders input field', () => {
@@ -50,7 +50,7 @@ describe('<Datepicker />', () => {
     const sampleDate = mounted.find('.slds-day').at(10);
     sampleDate.simulate('click');
     expect(changed).toBeCalled();
-    expect(changed).toHaveBeenCalledWith('2016-05-11');
+    expect(changed).toHaveBeenCalledWith('2016-05-11', true);
     expect(mounted.find('Input').first().props().error).toBeUndefined();
   });
 
@@ -59,7 +59,7 @@ describe('<Datepicker />', () => {
     const sampleDate = '1/10/2017';
     input.simulate('change', { target: { value: sampleDate } });
     expect(changed).toBeCalled();
-    expect(changed).toHaveBeenCalledWith('2017-01-10');
+    expect(changed).toHaveBeenCalledWith('2017-01-10', true);
     expect(mounted.find('Input').first().props().error).toBeUndefined();
   });
 
@@ -67,6 +67,8 @@ describe('<Datepicker />', () => {
     const input = mounted.find('Input').first();
     const falseSampleDate = '13/10/2017';
     input.simulate('change', { target: { value: falseSampleDate } });
+    expect(changed).toBeCalled();
+    expect(changed).toHaveBeenCalledWith('13/10/2017', false);
     expect(mounted.find('Input').first().props().error).toBeDefined();
   });
 
@@ -75,7 +77,7 @@ describe('<Datepicker />', () => {
     const sampleDate = '1/10/2017';
     input.simulate('change', { target: { value: sampleDate } });
     expect(changed).toBeCalled();
-    expect(mounted.state().viewedDate.toString()).toEqual(moment(mounted.state().inputDate, 'M/D/YYYY').toString());
+    expect(mounted.state().viewedDate.toString()).toEqual(moment(mounted.state().inputValue, 'M/D/YYYY').toString());
   });
 
   it('highlights the selected date', () => {
@@ -114,8 +116,18 @@ describe('<Datepicker />', () => {
   });
 
   it('shows the correct translation strings', () => {
-    mounted.setProps({ translations: { inputFieldError: 'Fehler', inputFieldLabel: 'Datum', today: 'Heute' } });
+    mounted = shallow(<Datepicker open onChange={changed} locale="de" translations={{ today: 'Heute' }} />, options);
     const translatedTodayLink = mounted.find('a');
     expect(translatedTodayLink.text()).toEqual('Heute');
+  });
+
+  it('sets the correct locale', () => {
+    mounted = shallow(<Datepicker open onChange={changed} locale="de" />, options);
+    expect(moment.locale()).toEqual(mounted.instance().props.locale);
+  });
+
+  it('sets the correct time zone', () => {
+    mounted = shallow(<Datepicker open onChange={changed} timezone="America/Los_Angeles" />, options);
+    expect(moment().tz()).toEqual(mounted.instance().props.timezone);
   });
 });
