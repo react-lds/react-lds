@@ -19,6 +19,7 @@ export const Notification = (props, { cssPrefix }) => {
     className,
     title,
     toast,
+    onClickClose,
     ...rest,
   } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
@@ -35,6 +36,7 @@ export const Notification = (props, { cssPrefix }) => {
           icon-inverse={getThemeName(className) ? undefined : true}
           className={prefix('notify__close')}
           icon
+          onClick={onClickClose}
         >
           <ButtonIcon sprite="utility" icon="close" size={toast ? 'large' : undefined} />
           <span className={prefix('assistive-text')}>Close</span>
@@ -69,6 +71,10 @@ Notification.propTypes = {
    * render the notification as a toast
    */
   toast: PropTypes.bool,
+  /**
+   * function to call when close button is clicked
+   */
+  onClickClose: PropTypes.func
 };
 
 export default themeable(
