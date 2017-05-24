@@ -20,6 +20,10 @@ const defaultTranslations = {
 
 export class Datepicker extends React.Component {
 
+  /**
+   * Renders visible weekdays
+   * @return {ReactElement} thead
+   */
   static renderWeekHeader() {
     return (
       <thead>
@@ -34,7 +38,26 @@ export class Datepicker extends React.Component {
     );
   }
 
+  /**
+   * Checks whether a date is valid
+   * @param {String|Object} date date as string or moment object
+   * @return {ReactElement}      thead
+   */
   static validate = date => moment(date, iso8601DateFormat, true).isValid();
+
+  /**
+   * Checks whether the date is controlled
+   * @param {String} date date as string or moment object
+   * @return {Bool}
+   */
+  static isControlled = date => typeof date !== 'undefined';
+
+  /**
+   * Checks whether the component is controlled
+   * @param {String} date date as string or moment object
+   * @return {Bool}
+   */
+  static isControlled = date => typeof date !== 'undefined';
 
   constructor(props, context) {
     super(props, context);
@@ -57,11 +80,12 @@ export class Datepicker extends React.Component {
 
     let initial;
     let isValid;
+    const isControlled = Datepicker.isControlled(date);
 
-    if (date) {
+    if (isControlled) {
       initial = date;
       isValid = Datepicker.validate(date);
-    } else if (!date && initialDate) {
+    } else {
       initial = initialDate;
       isValid = Datepicker.validate(initialDate);
     }
@@ -69,7 +93,7 @@ export class Datepicker extends React.Component {
     this.state = {
       open,
       inputValue: isValid ? moment(initial).format(defaultDateFormat).toString() : '',
-      isInvalid: !isValid,
+      isValid: true,
       viewedDate: isValid ? moment(initial) : moment(),
     };
 
@@ -80,16 +104,21 @@ export class Datepicker extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { required } = this.props;
-    const { date } = nextProps;
-    const nextDate = moment(date, [iso8601DateFormat, defaultDateFormat]);
-    const isValid = Datepicker.validate(date);
+    const { date: nextDate } = nextProps;
+    const { date: previousDate, required } = this.props;
+    const isControlled = Datepicker.isControlled(previousDate);
 
-    this.setState({
-      inputValue: isValid ? nextDate.format(defaultDateFormat).toString() : date,
-      isInvalid: date !== null ? !isValid : required,
-      viewedDate: isValid ? nextDate : moment(),
-    });
+    if (isControlled) {
+      const nextValidDate = moment(nextDate, [iso8601DateFormat, defaultDateFormat]);
+      const isValid = Datepicker.validate(nextDate);
+
+      this.setState({
+        inputValue: isValid ? nextValidDate.format(defaultDateFormat).toString() : nextDate,
+        isValid: nextDate === null || nextDate === '' ? !required : isValid,
+        viewedDate: isValid ? nextValidDate : moment(),
+        open: nextDate === null || nextDate === '' ? !!required : !isValid,
+      });
+    }
   }
 
   /**
@@ -99,16 +128,16 @@ export class Datepicker extends React.Component {
    */
   onDatepickerChange = (day) => {
     const { date, onChange } = this.props;
-
+    const isControlled = Datepicker.isControlled(date);
     const inputValue = day ?
       moment(day).format(defaultDateFormat).toString() :
       moment().format(defaultDateFormat).toString();
     const viewedDate = day ? moment(day) : moment();
 
-    if (!date) {
+    if (!isControlled) {
       this.setState({
         inputValue,
-        isInvalid: false,
+        isValid: true,
         open: false,
         viewedDate,
       });
@@ -126,31 +155,34 @@ export class Datepicker extends React.Component {
   onInputFieldChange = (value) => {
     const { date, onChange, required } = this.props;
     const newDate = moment(value, defaultDateFormat);
+    const isControlled = Datepicker.isControlled(date);
 
     if (moment(value, defaultDateFormat, true).isValid()) {
-      if (!date) {
+      if (!isControlled) {
         this.setState({
-          viewedDate: newDate,
           inputValue: value,
-          isInvalid: false,
+          isValid: true,
+          open: false,
+          viewedDate: newDate,
         });
       }
       onChange(newDate.format(iso8601DateFormat), true);
     } else if (value === '') {
-      if (!date) {
-        const isInvalid = required || false;
+      if (!isControlled) {
         this.setState({
-          viewedDate: moment(),
           inputValue: '',
-          isInvalid,
+          isValid: !required,
+          open: !!required,
+          viewedDate: moment(),
         });
       }
-      onChange(null, false);
+      onChange(null, !required);
     } else {
-      if (!date) {
+      if (!isControlled) {
         this.setState({
           inputValue: value,
-          isInvalid: true,
+          isValid: false,
+          open: true,
         });
       }
       onChange(value, false);
@@ -183,8 +215,15 @@ export class Datepicker extends React.Component {
    * Callback when the input field is clicked or gets focused
    * @return {void} interacts with component state
    */
-  onInputFieldClick = () => {
-    this.setState({ open: true });
+  onInputFieldClick = (value) => {
+    const { required } = this.props;
+    const date = moment(value, defaultDateFormat);
+    const isValid = Datepicker.validate(date);
+
+    this.setState({
+      isValid: value === null || value === '' ? !required : isValid,
+      open: true,
+    });
   }
 
   /**
@@ -225,7 +264,7 @@ export class Datepicker extends React.Component {
     // Return filled week bins
     return fullWeekRange.toArray('days').reduce((acc, val) => {
       if (moment(val).day() % 7 === 0) { acc.push([]); }
-      acc[acc.length - 1].push([moment(val), moment(val).within(monthRange)]);
+      acc[acc.length - 1].push([moment(val), monthRange.contains(val)]);
       return acc;
     }, [[]]).filter(bin => bin.length > 0);
   }
@@ -340,10 +379,10 @@ export class Datepicker extends React.Component {
     const {
       required,
     } = this.props;
-    const { inputValue, isInvalid, open, viewedDate } = this.state;
+    const { inputValue, isValid, open, viewedDate } = this.state;
     const inputFieldLabel = this.getTranslations('inputFieldLabel');
     const inputFieldError = this.getTranslations('inputFieldError');
-    const error = isInvalid ? inputFieldError : undefined;
+    const error = isValid ? undefined : inputFieldError;
     const placeholder = moment().localeData().longDateFormat(placeholderDateFormat);
 
     return (
@@ -355,8 +394,7 @@ export class Datepicker extends React.Component {
           iconRight="monthlyview"
           error={error}
           value={inputValue || ''}
-          onClick={this.onInputFieldClick}
-          onFocus={this.onInputFieldClick}
+          onFocus={e => this.onInputFieldClick(e.target.value)}
           onChange={e => this.onInputFieldChange(e.target.value)}
           required={required}
         />
@@ -394,7 +432,7 @@ export class Datepicker extends React.Component {
 Datepicker.contextTypes = { cssPrefix: PropTypes.string };
 
 Datepicker.defaultProps = {
-  date: null,
+  date: undefined,
   initialDate: null,
   locale: 'en',
   open: false,
