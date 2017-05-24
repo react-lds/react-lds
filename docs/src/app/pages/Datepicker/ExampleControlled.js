@@ -44,6 +44,7 @@ class ExampleControlled extends React.Component {
             timezone="Europe/Berlin"
             onChange={this.onChange}
             open
+            required
           />
         </div>
       </Grid>
