@@ -2,6 +2,7 @@ import React from 'react';
 
 import datepickerCode from '!raw!react-lds/components/Datepicker/Datepicker';
 import exampleDatepickerCode from '!raw!./ExampleDatepicker';
+import exampleEmptyDatepickerCode from '!raw!./ExampleEmptyDatepicker';
 import exampleControlledCode from '!raw!./ExampleControlled';
 
 import CodeExample from '../../components/CodeExample';
@@ -10,6 +11,7 @@ import Masthead from '../../components/MastHead';
 import PropTypeDescription from '../../components/PropTypeDescription';
 
 import ExampleDatepicker from './ExampleDatepicker';
+import ExampleEmptyDatepicker from './ExampleEmptyDatepicker';
 import ExampleControlled from './ExampleControlled';
 
 const Datepickers = () =>
@@ -18,7 +20,19 @@ const Datepickers = () =>
     <div className="slds-p-around--xx-large" style={{ height: '500px' }}>
       <section className="slds-m-bottom--xx-large slds-p-top--x-large">
         <CodeExample
-          title="Datepicker"
+          title="Default Datepicker"
+          code={exampleEmptyDatepickerCode}
+        />
+        <div style={{ position: 'relative' }}>
+          <ExampleEmptyDatepicker />
+        </div>
+      </section>
+    </div>
+
+    <div className="slds-p-around--xx-large" style={{ height: '500px' }}>
+      <section className="slds-m-bottom--xx-large slds-p-top--x-large">
+        <CodeExample
+          title="Preset Datepicker"
           code={exampleDatepickerCode}
         />
         <div style={{ position: 'relative' }}>

@@ -54,7 +54,7 @@ describe('<Datepicker />', () => {
     expect(mounted.find('Input').first().props().error).toBeUndefined();
   });
 
-  it('calls the callback function if a valid date is input', () => {
+  it('calls the callback function if a date is input', () => {
     const input = mounted.find('Input').first();
     const sampleDate = '1/10/2017';
     input.simulate('change', { target: { value: sampleDate } });
@@ -72,12 +72,20 @@ describe('<Datepicker />', () => {
     expect(mounted.find('Input').first().props().error).toBeDefined();
   });
 
-  it('datepicker mirrors the same date as the input', () => {
+  it('datepicker mirrors the date of the input', () => {
     const input = mounted.find('Input').first();
     const sampleDate = '1/10/2017';
     input.simulate('change', { target: { value: sampleDate } });
     expect(changed).toBeCalled();
-    expect(mounted.state().viewedDate.toString()).toEqual(moment(mounted.state().inputValue, 'M/D/YYYY').toString());
+    expect(mounted.state('viewedDate').toString()).toEqual(moment(mounted.state('inputValue'), 'M/D/YYYY').toString());
+  });
+
+  it('input mirrors the date of the datepicker', () => {
+    mounted.setState({ viewedDate: moment('2016-05-11') });
+    const sampleDate = mounted.find('.slds-day').at(10);
+    sampleDate.simulate('click');
+    const input = mounted.find('Input').first();
+    expect(mounted.state('viewedDate').toString()).toEqual(moment(input.props().value, 'MM/DD/YYYY').toString());
   });
 
   it('highlights the selected date', () => {
@@ -115,6 +123,12 @@ describe('<Datepicker />', () => {
     expect(moment(mounted.state().viewedDate).month()).toEqual(moment().month());
   });
 
+  it('makes the input field required', () => {
+    mounted = shallow(<Datepicker open onChange={changed} required />, options);
+    const input = mounted.find('Input').first();
+    expect(input.props().required).toEqual(true);
+  });
+
   it('shows the correct translation strings', () => {
     mounted = shallow(<Datepicker open onChange={changed} locale="de" translations={{ today: 'Heute' }} />, options);
     const translatedTodayLink = mounted.find('a');
@@ -129,5 +143,17 @@ describe('<Datepicker />', () => {
   it('sets the correct time zone', () => {
     mounted = shallow(<Datepicker open onChange={changed} timezone="America/Los_Angeles" />, options);
     expect(moment().tz()).toEqual(mounted.instance().props.timezone);
+  });
+
+  it('works as a controlled component', () => {
+    mounted = shallow(<Datepicker open onChange={changed} date="2017-10-10" />, options);
+    mounted.setProps({ date: '2017-10-11' });
+    expect(changed).toBeCalled();
+    expect(mounted.state('viewedDate').toString()).toEqual(moment('2017-10-11', 'YYYY-MM-DD').toString());
+    expect(mounted.state('inputValue')).toEqual(moment('2017-10-11', 'YYYY-MM-DD').format('MM/DD/YYYY').toString());
+    mounted.setProps({ date: null });
+    expect(changed).toBeCalled();
+    expect(mounted.state('viewedDate').toString()).toEqual(moment().toString());
+    expect(mounted.state('inputValue')).toEqual(null);
   });
 });
