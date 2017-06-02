@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.11
+
+* Add onClickClose handler for Notifications (thanks @frontendloader)
+* Datepicker: Fix highlighted date
+* Datepicker: Fix required prop
+* Datepicker: Fix focus event
+
 ## 1.1.10
 * Add locale and timezone support for `Datepicker`. Add optional `date` prop to use the `Datepicker` as a controlled component.
 
