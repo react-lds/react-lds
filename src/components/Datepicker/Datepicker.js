@@ -52,13 +52,6 @@ export class Datepicker extends React.Component {
    */
   static isControlled = date => typeof date !== 'undefined';
 
-  /**
-   * Checks whether the component is controlled
-   * @param {String} date date as string or moment object
-   * @return {Bool}
-   */
-  static isControlled = date => typeof date !== 'undefined';
-
   constructor(props, context) {
     super(props, context);
     this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
@@ -111,12 +104,13 @@ export class Datepicker extends React.Component {
     if (isControlled) {
       const nextValidDate = moment(nextDate, [iso8601DateFormat, defaultDateFormat]);
       const isValid = Datepicker.validate(nextDate);
+      const isEmptyDate = nextDate === null || nextDate === '';
 
       this.setState({
         inputValue: isValid ? nextValidDate.format(defaultDateFormat).toString() : nextDate,
-        isValid: nextDate === null || nextDate === '' ? !required : isValid,
+        isValid: isEmptyDate ? !required : isValid,
         viewedDate: isValid ? nextValidDate : moment(),
-        open: nextDate === null || nextDate === '' ? !!required : !isValid,
+        open: isEmptyDate ? !!required : !isValid,
       });
     }
   }
