@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { getUniqueHash } from '../../../utils';
@@ -9,10 +8,6 @@ describe('<Textarea />', () => {
   let props = {};
   let mounted = null;
 
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
     props = {
       onChange: jest.fn(),
@@ -21,7 +16,7 @@ describe('<Textarea />', () => {
       label: 'some label',
     };
 
-    mounted = mount(<Textarea {...props} />, options);
+    mounted = mount(<Textarea {...props} />);
   });
 
   it('renders the id', () => {

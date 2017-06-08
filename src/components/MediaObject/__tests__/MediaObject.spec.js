@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import { MediaObject } from '../MediaObject';
@@ -8,12 +7,8 @@ describe('<MediaObject />', () => {
   let mounted = null;
   const figure = <div className="foo" />;
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
-    mounted = shallow(<MediaObject />, options);
+    mounted = shallow(<MediaObject />);
   });
 
   it('renders the correct markup', () => {

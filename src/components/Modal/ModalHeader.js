@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
 import { Button, ButtonIcon } from '../../';
 
-const ModalHeader = (props, { cssPrefix }) => {
+const ModalHeader = (props) => {
   const { children, className, label, prompt, tagline, title, uncloseable, onClickClose, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const getCloseButton = () => (
-    <Button onClick={onClickClose} className={prefix('modal__close')} icon-inverse size="large">
+    <Button onClick={onClickClose} className="slds-modal__close" icon-inverse size="large">
       <ButtonIcon sprite="action" icon="close" size="large" />
-      <span className={prefix('assistive-text')}>Close</span>
+      <span className="slds-assistive-text">Close</span>
     </Button>
   );
 
   const getTagline = () => (
-    <p className={prefix('m-top--x-small')}>
+    <p className="slds-m-top--x-small">
       {tagline}
     </p>
   );
@@ -24,7 +23,7 @@ const ModalHeader = (props, { cssPrefix }) => {
   const getTitle = () => {
     const titleID = label || null;
     return (
-      <h2 id={titleID} className={prefix('text-heading--medium')}>
+      <h2 id={titleID} className="slds-text-heading--medium">
         {title}
       </h2>
     );
@@ -33,14 +32,15 @@ const ModalHeader = (props, { cssPrefix }) => {
   const isEmpty = !children && !tagline && !title;
 
   const sldsClasses = [
-    'modal__header',
-    { 'modal__header--empty': isEmpty },
-    { 'theme--error': !!prompt },
-    { 'theme--alert-texture': !!prompt },
+    'slds-modal__header',
+    { 'slds-modal__header--empty': isEmpty },
+    { 'slds-theme--error': !!prompt },
+    { 'slds-theme--alert-texture': !!prompt },
+    className,
   ];
 
   return (
-    <div {...rest} className={prefix(sldsClasses, className)}>
+    <div {...rest} className={cx(sldsClasses)}>
       {!uncloseable ? getCloseButton() : null}
       {children}
       {title ? getTitle() : null}
@@ -49,7 +49,16 @@ const ModalHeader = (props, { cssPrefix }) => {
   );
 };
 
-ModalHeader.contextTypes = { cssPrefix: PropTypes.string };
+ModalHeader.defaultProps = {
+  children: null,
+  className: null,
+  label: null,
+  prompt: false,
+  tagline: null,
+  title: null,
+  uncloseable: undefined,
+  onClickClose: () => {},
+};
 
 ModalHeader.propTypes = {
   /**

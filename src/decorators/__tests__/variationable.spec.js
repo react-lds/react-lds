@@ -21,25 +21,25 @@ describe('variationable()', () => {
 
   it('renders valid variations', () => {
     mounted.setProps({ old: true });
-    expect(mounted.hasClass('old')).toBeTruthy();
+    expect(mounted.hasClass('slds-old')).toBeTruthy();
   });
 
   it('renders multiple variations', () => {
     mounted.setProps({ old: true, new: true, 'big-fail': true });
-    expect(mounted.hasClass('old')).toBeTruthy();
-    expect(mounted.hasClass('new')).toBeTruthy();
-    expect(mounted.hasClass('big-fail')).toBeTruthy();
+    expect(mounted.hasClass('slds-old')).toBeTruthy();
+    expect(mounted.hasClass('slds-new')).toBeTruthy();
+    expect(mounted.hasClass('slds-big-fail')).toBeTruthy();
   });
 
   it('does not render invalid variations', () => {
     mounted.setProps({ 'no-fail': true });
-    expect(mounted.hasClass('no-fail')).toBeFalsy();
+    expect(mounted.hasClass('slds-no-fail')).toBeFalsy();
   });
 
   it('keeps existing classes and renders variations', () => {
     mounted.setProps({ className: 'old', new: true });
     expect(mounted.hasClass('old')).toBeTruthy();
-    expect(mounted.hasClass('new')).toBeTruthy();
+    expect(mounted.hasClass('slds-new')).toBeTruthy();
   });
 
   it('keeps existing classes', () => {

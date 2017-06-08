@@ -1,17 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { themeable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
-export const Badge = (props, { cssPrefix }) => {
+export const Badge = (props) => {
   const { className, label, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  return (<span {...rest} className={prefix('badge', className)}>{label}</span>);
+  const sldsClasses = [
+    'slds-badge',
+    className,
+  ];
+
+  return (<span {...rest} className={cx(sldsClasses)}>{label}</span>);
 };
 
-Badge.contextTypes = { cssPrefix: PropTypes.string };
+Badge.defaultProps = {
+  className: null,
+};
 
 Badge.propTypes = {
   /**

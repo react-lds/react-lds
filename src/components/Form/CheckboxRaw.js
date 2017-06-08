@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import cx from 'classnames';
 
-import { prefixClasses, getUniqueHash } from '../../utils';
+import { getUniqueHash } from '../../utils';
 
-const CheckboxRaw = (props, { cssPrefix }) => {
+const CheckboxRaw = (props) => {
   const {
     checked,
     className,
@@ -17,7 +17,6 @@ const CheckboxRaw = (props, { cssPrefix }) => {
     required,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderCheckbox = () => (
     <input
@@ -31,17 +30,17 @@ const CheckboxRaw = (props, { cssPrefix }) => {
       onChange={onChange}
       type="checkbox"
     />
-);
+  );
 
-  const labelClassNames = classnames(
-    'form-element__label',
-    { 'assistive-text': hideLabel },
-  ).split(' ');
+  const labelClasses = [
+    'slds-form-element__label',
+    { 'slds-assistive-text': hideLabel },
+  ];
 
   const renderLabel = () => (
-    <label className={prefix('checkbox__label')} htmlFor={id}>
-      <span className={prefix('checkbox--faux')} />
-      <span className={prefix(labelClassNames)}>{label}</span>
+    <label className="slds-checkbox__label" htmlFor={id}>
+      <span className="slds-checkbox--faux" />
+      <span className={cx(labelClasses)}>{label}</span>
     </label>
   );
 
@@ -50,11 +49,11 @@ const CheckboxRaw = (props, { cssPrefix }) => {
       return null;
     }
 
-    return (<abbr className={prefix('required')} title="required">*</abbr>);
+    return (<abbr className="slds-required" title="required">*</abbr>);
   };
 
   return (
-    <span className={prefix('checkbox')}>
+    <span className="slds-checkbox">
       {renderRequired()}
       {renderCheckbox()}
       {renderLabel()}
@@ -62,7 +61,15 @@ const CheckboxRaw = (props, { cssPrefix }) => {
   );
 };
 
-CheckboxRaw.contextTypes = { cssPrefix: PropTypes.string };
+CheckboxRaw.defaultProps = {
+  checked: null,
+  className: null,
+  disabled: false,
+  error: null,
+  hideLabel: false,
+  onChange: () => {},
+  required: false,
+};
 
 CheckboxRaw.propTypes = {
   /**

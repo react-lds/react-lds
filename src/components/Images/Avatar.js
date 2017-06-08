@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { flavorable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
-export const Avatar = (props, { cssPrefix }) => {
+export const Avatar = (props) => {
   const { alt, className, src, size, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const classes = [
-    'avatar',
-    { [`avatar--${size}`]: !!size },
-    { 'avatar--empty': !src },
+  const sldsClasses = [
+    'slds-avatar',
+    { [`slds-avatar--${size}`]: !!size },
+    { 'slds-avatar--empty': !src },
+    className
   ];
 
   return (
-    <span {...rest} className={prefix(classes, className)}>
+    <span {...rest} className={cx(sldsClasses)}>
       {src ? <img src={src} alt={alt} /> : null}
     </span>
   );
@@ -25,7 +25,12 @@ Avatar.flavors = [
   'circle',
 ];
 
-Avatar.contextTypes = { cssPrefix: PropTypes.string };
+Avatar.defaultProps = {
+  alt: null,
+  className: null,
+  size: null,
+  src: null,
+};
 
 Avatar.propTypes = {
   /**

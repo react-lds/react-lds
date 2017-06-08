@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import FormElementControl from '../FormElementControl';
@@ -8,12 +7,8 @@ describe('<FormElementControl />', () => {
   let mounted = null;
   const child = <div className="foo" />;
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
-    mounted = shallow(<FormElementControl>{child}</FormElementControl>, options);
+    mounted = shallow(<FormElementControl>{child}</FormElementControl>);
   });
 
   it('renders the correct markup', () => {
