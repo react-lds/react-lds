@@ -32,7 +32,7 @@ const Navigation = () =>
         <NavLink to="/pills" label="Pills" />
         <NavLink unfinished to="/process" label="Process" />
         <NavLink to="/popovers" label="Popovers" />
-        <NavLink to="/progressbar" label="Progressbar" />
+        <NavLink to="/progressbar" label="Progress Bar" />
         <NavLink unfinished to="/publishers" label="Publishers" />
         <NavLink to="/spinners" label="Spinners" />
         <NavLink to="/tabs" label="Tabs" />
