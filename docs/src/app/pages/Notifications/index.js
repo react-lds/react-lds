@@ -12,15 +12,10 @@ import exampleToastWarningCode from '!raw!./ExampleToastWarning';
 
 import exampleModalToastCode from '!raw!./ExampleModalToast';
 import examplePromptCode from '!raw!./ExamplePrompt';
-import examplePromptTouchCode from '!raw!./ExamplePromptTouch';
-import examplePromptTouchHeaderCode from '!raw!./ExamplePromptTouchHeader';
-import examplePromptTouchIconCode from '!raw!./ExamplePromptTouchIcon';
-import examplePromptTouchTaglineCode from '!raw!./ExamplePromptTouchTagline';
 
 import { Notification } from 'react-lds/components/Notifications/Notification';
 import notificationCode from '!raw!react-lds/components/Notifications/Notification';
 import promptCode from '!raw!react-lds/components/Notifications/Prompt';
-import promptForTouchCode from '!raw!react-lds/components/Notifications/PromptForTouch';
 
 import CodeExample from '../../components/CodeExample';
 import DecoratorList from '../../components/DecoratorList';
@@ -40,11 +35,6 @@ import ExampleToastSuccess from './ExampleToastSuccess';
 import ExampleToastWarning from './ExampleToastWarning';
 
 import ExamplePrompt from './ExamplePrompt';
-
-import ExamplePromptTouch from './ExamplePromptTouch';
-import ExamplePromptTouchHeader from './ExamplePromptTouchHeader';
-import ExamplePromptTouchIcon from './ExamplePromptTouchIcon';
-import ExamplePromptTouchTagline from './ExamplePromptTouchTagline';
 
 import ExampleModalToast from './ExampleModalToast';
 
@@ -155,46 +145,6 @@ const Notifications = () => (
 
     <div className="slds-p-around--xx-large">
       <CodeExample
-        title="Example PromptForTouch"
-        code={examplePromptTouchCode}
-      />
-      <div className="demo-modal">
-        <ExamplePromptTouch />
-      </div>
-    </div>
-
-    <div className="slds-p-around--xx-large">
-      <CodeExample
-        title="Example PromptForTouch with Header"
-        code={examplePromptTouchHeaderCode}
-      />
-      <div className="demo-modal">
-        <ExamplePromptTouchHeader />
-      </div>
-    </div>
-
-    <div className="slds-p-around--xx-large">
-      <CodeExample
-        title="Example PromptForTouch with Tagline"
-        code={examplePromptTouchTaglineCode}
-      />
-      <div className="demo-modal">
-        <ExamplePromptTouchTagline />
-      </div>
-    </div>
-
-    <div className="slds-p-around--xx-large">
-      <CodeExample
-        title="Example PromptForTouch with Icon"
-        code={examplePromptTouchIconCode}
-      />
-      <div className="demo-modal">
-        <ExamplePromptTouchIcon />
-      </div>
-    </div>
-
-    <div className="slds-p-around--xx-large">
-      <CodeExample
         title="Example Modal Toast"
         code={exampleModalToastCode}
       />
@@ -212,11 +162,6 @@ const Notifications = () => (
     <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">Prompt</h2>
     <PropTypeDescription
       code={promptCode}
-    />
-
-    <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">Prompt For Touch</h2>
-    <PropTypeDescription
-      code={promptForTouchCode}
     />
 
   </div>
