@@ -18,6 +18,7 @@ export * from './components/Notifications';
 export * from './components/PageHeader';
 export * from './components/Pill';
 export * from './components/Popover';
+export * from './components/ProgressBar';
 export * from './components/Spinner';
 export * from './components/Tab';
 export * from './components/Navigation';

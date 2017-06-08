@@ -18,11 +18,11 @@ import PropTypeDescription from '../../components/PropTypeDescription';
 
 const ProgressBarPage = () => (
   <div>
-    <Masthead figure={<HeaderIcon />} title="Pills" />
+    <Masthead figure={<HeaderIcon />} title="Progress Bar" />
 
     <div className="slds-p-around--xx-large">
       <CodeExample
-        title="Default Pill"
+        title="Default Progress Bar"
         code={exampleDefaultCode}
       />
       <ExampleDefault />
