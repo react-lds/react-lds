@@ -45,12 +45,12 @@
   }
 
   // Active Link
-  .#{$css-prefix}is-active > a {
+  .slds-is-active > a {
     background-color: $color-background-alt-2;
     color: $color-text-tab-label-selected;
   }
 
-  .#{$css-prefix}is-active > a[href="/"] {
+  .slds-is-active > a[href="/"] {
     color: $color-text-default;
     background-color: #fff;
 
@@ -60,12 +60,12 @@
   }
 
   // Open Menu Items
-  .#{$css-prefix}is-open {
+  .slds-is-open {
     padding-bottom: $spacing-x-small;
   }
 
   // Section Selected
-  .#{$css-prefix}is-selected {
+  .slds-is-selected {
     background-color: $color-background;
 
     a:hover {
@@ -85,7 +85,7 @@
 
 
   // Nested List
-  .#{$css-prefix}is-nested {
+  .slds-is-nested {
     margin-left: 0;
 
     a {
@@ -96,7 +96,7 @@
       }
     }
 
-    .#{$css-prefix}is-nested a {
+    .slds-is-nested a {
       padding-left: $spacing-x-large + ($spacing-large * 2);
     }
   }
@@ -136,7 +136,7 @@
   }
 
   // Deal with open states
-  .#{$css-prefix}is-open {
+  .slds-is-open {
 
     .site-states {
       display: block;
@@ -205,7 +205,7 @@
     }
 
     // When component variant is selected
-    .#{$css-prefix}is-selected {
+    .slds-is-selected {
       background-color: $color-background;
 
       a:hover {
@@ -229,7 +229,7 @@
       padding-left: $spacing-x-large;
     }
 
-    .#{$css-prefix}is-active a {
+    .slds-is-active a {
       color: $color-text-tab-label-selected;
       background-color: $color-background-alt-2;
     }
@@ -261,7 +261,7 @@ table {
     margin-top: 0;
   }
 
-  .site-code--content + .#{$css-prefix}container--medium &:first-child {
+  .site-code--content + .slds-container--medium &:first-child {
     margin-top: $spacing-xx-large;
   }
 }
@@ -269,7 +269,7 @@ table {
 .site-text-heading--large {
   font-size: $site-font-size-x-large;
 
-  .#{$css-prefix}select {
+  .slds-select {
     font-size: $site-font-size-medium;
   }
 }
@@ -279,7 +279,7 @@ table {
 }
 
 [class*="text-heading--label"],
-.#{$css-prefix}max-medium-table--stacked-horizontal td:before {
+.slds-max-medium-table--stacked-horizontal td:before {
   font-size: $site-font-size-small;
   text-transform: uppercase;
 }
