@@ -50,11 +50,26 @@ const Input = (props) => {
   );
 };
 
-Input.contextTypes = { cssPrefix: PropTypes.string };
-
-Input.propDefaults = {
-  type: 'text',
+Input.defaultProps = {
+  bare: false,
+  className: null,
+  disabled: false,
+  error: null,
+  errorIcon: false,
   hideLabel: false,
+  iconLeft: null,
+  iconRight: null,
+  iconRightOnClick: () => {},
+  isFocused: false,
+  label: null,
+  onChange: () => {},
+  onFocus: () => {},
+  onKeyPress: () => {},
+  placeholder: null,
+  role: null,
+  required: false,
+  type: 'text',
+  value: null,
 };
 
 Input.propTypes = {

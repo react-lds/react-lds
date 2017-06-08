@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import NavigationList from '../NavigationList';
@@ -8,12 +7,9 @@ describe('<NavigationList />', () => {
   let mounted = null;
 
   const child = <div className="child">child</div>;
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   beforeEach(() => {
-    mounted = shallow(<NavigationList id="test-id" title="super headline">{child}</NavigationList>, options);
+    mounted = shallow(<NavigationList id="test-id" title="super headline">{child}</NavigationList>);
   });
 
   it('headline has id', () => {

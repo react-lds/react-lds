@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import { Spinner } from '../Spinner';
@@ -8,16 +7,12 @@ describe('<Spinner />', () => {
   let mounted = null;
   let props = {};
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
     props = {
       size: 'small',
     };
 
-    mounted = shallow(<Spinner {...props} />, options);
+    mounted = shallow(<Spinner {...props} />);
   });
 
   it('renders the correct markup', () => {

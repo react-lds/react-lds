@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import PageHeaderBase from '../PageHeaderBase';
@@ -7,15 +6,8 @@ import PageHeaderBase from '../PageHeaderBase';
 describe('<PageHeaderBase />', () => {
   let mounted;
 
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
-    mounted = mount(
-      <PageHeaderBase title="test" info="foo" icon={{ sprite: 'standard', icon: 'opportunity' }} />,
-      options
-    );
+    mounted = mount(<PageHeaderBase title="test" info="foo" icon={{ sprite: 'standard', icon: 'opportunity' }} />);
   });
 
   it('contains the title', () => {

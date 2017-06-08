@@ -1,27 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
-
-const ModalContent = (props, { cssPrefix }) => {
+const ModalContent = (props) => {
   const { children, className, menu, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-
-  const isMenu = !!menu;
 
   const sldsClasses = [
-    { modal__content: !isMenu },
-    { modal__menu: isMenu },
-    { 'p-vertical--large': !isMenu },
-    { 'p-horizontal--x-large': !isMenu },
+    { 'slds-modal__content': !menu },
+    { 'slds-modal__menu': !!menu },
+    { 'slds-p-vertical--large': !menu },
+    { 'slds-p-horizontal--x-large': !menu },
+    className,
   ];
 
-  return (
-    <div {...rest} className={prefix(sldsClasses, className)}>{children}</div>
-  );
+  return (<div {...rest} className={cx(sldsClasses)}>{children}</div>);
 };
 
-ModalContent.contextTypes = { cssPrefix: PropTypes.string };
+ModalContent.defaultProps = {
+  className: null,
+  menu: false,
+};
 
 ModalContent.propTypes = {
   /**

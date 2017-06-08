@@ -1,32 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
-
-const Breadcrumb = (props, { cssPrefix }) => {
+const Breadcrumb = (props) => {
   const { children, className, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
   let filtered = children;
 
   if (!Array.isArray(children)) {
     filtered = [children];
   }
 
-  const olClasses = ['breadcrumb', 'list--horizontal'];
-  const liClasses = ['breadcrumb__item', 'text-title--caps'];
+  const sldsClasses = [
+    'slds-breadcrumb',
+    'slds-list--horizontal',
+    className
+  ];
+
+  const liClasses = [
+    'slds-breadcrumb__item',
+    'slds-text-title--caps'
+  ];
 
   const wrapItems =
-    filtered.map(child => <li className={prefix(liClasses)} key={child.key}>{child}</li>);
+    filtered.map(child => <li className={cx(liClasses)} key={child.key}>{child}</li>);
 
   return (
     <nav {...rest} className={className} role="navigation" aria-label="Breadcrumbs">
-      <ol className={prefix(olClasses)}>
+      <ol className={cx(sldsClasses)}>
         {wrapItems}
       </ol>
     </nav>);
 };
 
-Breadcrumb.contextTypes = { cssPrefix: PropTypes.string };
+Breadcrumb.defaultProps = {
+  className: null,
+};
 
 Breadcrumb.propTypes = {
   /**

@@ -1,41 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
-
-const DropdownMenuList = (props, { cssPrefix }) => {
+const DropdownMenuList = (props) => {
   const { children, className, header, height, heightIcon, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderHeader = () => {
     if (header) {
       return (
-        <div className={prefix('dropdown__header')}>
-          <span className={prefix('text-title--caps')}>{header}</span>
+        <div className="slds-dropdown__header">
+          <span className="slds-text-title--caps">{header}</span>
         </div>
       );
     }
 
-    return '';
+    return null;
   };
 
   const listClasses = [
-    { [`dropdown--length-${height}`]: height },
-    { [`dropdown--length-with-icon-${heightIcon}`]: heightIcon },
-    'dropdown__list',
+    { [`slds-dropdown--length-${height}`]: height },
+    { [`slds-dropdown--length-with-icon-${heightIcon}`]: heightIcon },
+    'slds-dropdown__list',
   ];
 
   return (
     <div {...rest} className={className}>
       {renderHeader()}
-      <ul className={prefix(listClasses)} role="menu">
+      <ul className={cx(listClasses)} role="menu">
         {children}
       </ul>
     </div>
   );
 };
 
-DropdownMenuList.contextTypes = { cssPrefix: PropTypes.string };
+DropdownMenuList.defaultProps = {
+  children: null,
+  className: null,
+  header: null,
+  height: null,
+  heightIcon: null,
+};
 
 DropdownMenuList.propTypes = {
   /**

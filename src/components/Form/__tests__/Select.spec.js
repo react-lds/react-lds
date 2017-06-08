@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { getUniqueHash } from '../../../utils';
@@ -8,10 +7,6 @@ import Select from '../Select';
 describe('<Select />', () => {
   let props = {};
   let mounted = null;
-
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   beforeEach(() => {
     props = {
@@ -24,8 +19,8 @@ describe('<Select />', () => {
       <Select {...props}>
         <option>Option 1</option>
         <option>Option2</option>
-      </Select>,
-      options);
+      </Select>
+    );
   });
 
   it('renders the id', () => {

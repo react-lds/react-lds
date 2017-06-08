@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import omit from 'lodash.omit';
 
-import { prefixClasses } from '../../utils';
-
 class Tab extends React.Component {
-  static contextTypes = { cssPrefix: PropTypes.string };
-  static defaultProps = { variation: 'default' }
+  static defaultProps = {
+    className: null,
+    variation: 'default'
+  }
 
   static propTypes = {
     /**
@@ -30,7 +31,6 @@ class Tab extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = { activeTab: this.props.tabs[0].id };
-    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
   }
 
   setActiveTab(id) {
@@ -38,27 +38,30 @@ class Tab extends React.Component {
   }
 
   renderHeader() {
-    return this.props.tabs.map((tab, index) => {
+    const { tabs, variation } = this.props;
+    const { activeTab } = this.state;
+
+    return tabs.map((tab, index) => {
       const boundClick = this.setActiveTab.bind(this, tab.id);
-      const classes = [
-        `tabs--${this.props.variation}__item`,
-        'text-title--caps',
-        { active: this.state.activeTab === tab.id },
+      const headerClasses = [
+        `slds-tabs--${variation}__item`,
+        'slds-text-title--caps',
+        { 'slds-active': activeTab === tab.id },
       ];
 
       return (
         <li
           key={tab.id}
-          className={this.prefix(classes)}
+          className={cx(headerClasses)}
           title={tab.title}
           role="presentation"
           onClick={boundClick}
         >
           <a
-            className={this.prefix(`tabs--${this.props.variation}__link`)}
+            className={`slds-tabs--${variation}__link`}
             role="tab"
             tabIndex={index}
-            aria-selected={this.state.activeTab === tab.id}
+            aria-selected={activeTab === tab.id}
             aria-controls={tab.id}
             id={`${tab.id}__item`}
           >
@@ -70,18 +73,21 @@ class Tab extends React.Component {
   }
 
   renderBody() {
-    return this.props.tabs.map((tab) => {
-      const classes = [
-        `tabs--${this.props.variation}__content`,
-        { show: this.state.activeTab === tab.id },
-        { hide: this.state.activeTab !== tab.id },
+    const { tabs, variation } = this.props;
+    const { activeTab } = this.state;
+
+    return tabs.map((tab) => {
+      const bodyClasses = [
+        `slds-tabs--${variation}__content`,
+        { 'slds-show': activeTab === tab.id },
+        { 'slds-hide': activeTab !== tab.id },
       ];
 
       return (
         <div
           key={tab.id}
           id={tab.id}
-          className={this.prefix(classes)}
+          className={cx(bodyClasses)}
           role="tabpanel"
           aria-labelledby={`${tab.id}__item`}
         >
@@ -92,11 +98,17 @@ class Tab extends React.Component {
   }
 
   render() {
+    const { className, variation } = this.props;
     const rest = omit(this.props, Object.keys(Tab.propTypes));
 
+    const sldsClasses = [
+      `slds-tabs--${variation}`,
+      className
+    ];
+
     return (
-      <div {...rest} className={this.prefix(`tabs--${this.props.variation}`, this.props.className)}>
-        <ul className={this.prefix(`tabs--${this.props.variation}__nav`)} role="tablist">
+      <div {...rest} className={cx(sldsClasses)}>
+        <ul className={`slds-tabs--${this.props.variation}__nav`} role="tablist">
           {this.renderHeader()}
         </ul>
         {this.renderBody()}

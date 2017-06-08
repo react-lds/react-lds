@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import DropdownMenuListItem from '../DropdownMenuListItem';
@@ -7,12 +6,8 @@ import DropdownMenuListItem from '../DropdownMenuListItem';
 describe('<DropdownMenuListItem />', () => {
   let mounted = null;
 
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
-    mounted = mount(<DropdownMenuListItem>foobar</DropdownMenuListItem>, options);
+    mounted = mount(<DropdownMenuListItem>foobar</DropdownMenuListItem>);
   });
 
   it('handles onClick', () => {

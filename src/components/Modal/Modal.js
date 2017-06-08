@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { flavorable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
-export const Modal = (props, { cssPrefix }) => {
+export const Modal = (props) => {
   const {
     children,
     className,
@@ -15,18 +15,11 @@ export const Modal = (props, { cssPrefix }) => {
     prompt,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const isOpen = !!open;
   const isDialog = !!dialog || !!prompt;
   const role = prompt ? 'alertdialog' : 'dialog';
   const containerRole = isDialog ? 'document' : null;
-
-  const sldsClasses = [
-    'modal',
-    { 'modal--prompt': !!prompt },
-    { 'fade-in-open': isOpen },
-  ];
 
   const childrenWithProps = [...children].map((child, i) => {
     const childName = child ? child.type.displayName || child.type.name : null;
@@ -43,17 +36,24 @@ export const Modal = (props, { cssPrefix }) => {
     return child;
   });
 
+  const sldsClasses = [
+    'slds-modal',
+    { 'slds-modal--prompt': !!prompt },
+    { 'slds-fade-in-open': isOpen },
+    className,
+  ];
+
   return (
     <div
       {...rest}
-      className={prefix(sldsClasses, className)}
+      className={cx(sldsClasses)}
       role={role}
       aria-describedby={description}
       aria-hidden={!isOpen}
       aria-labelledby={label}
     >
       <div
-        className={prefix('modal__container')}
+        className="slds-modal__container"
         id={description}
         role={containerRole}
         tabIndex={isDialog ? '0' : null}
@@ -68,7 +68,14 @@ Modal.flavors = [
   'large',
 ];
 
-Modal.contextTypes = { cssPrefix: PropTypes.string };
+Modal.defaultProps = {
+  className: null,
+  description: null,
+  dialog: false,
+  label: null,
+  open: false,
+  prompt: false,
+};
 
 Modal.propTypes = {
   /**

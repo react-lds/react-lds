@@ -14,6 +14,10 @@ Navigation.flavors = [
   'vertical-inverse',
 ];
 
+Navigation.defaultProps = {
+  className: null,
+};
+
 Navigation.propTypes = {
   /**
    * NavigationHeadline or NavigationList components

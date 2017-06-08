@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import ModalHeader from '../ModalHeader';
@@ -10,10 +9,6 @@ describe('<ModalHeader />', () => {
 
   const child = (<div className="foobar" />);
 
-  const context = { assetBasePath: '/assets', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
     props = {
       label: 'foo',
@@ -21,9 +16,7 @@ describe('<ModalHeader />', () => {
       tagline: 'baz',
     };
 
-    mounted = shallow(
-      <ModalHeader {...props}>{child}</ModalHeader>,
-      options);
+    mounted = shallow(<ModalHeader {...props}>{child}</ModalHeader>);
   });
 
   it('renders a close-button by default', () => {
