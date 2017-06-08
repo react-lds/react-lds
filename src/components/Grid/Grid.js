@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { flavorable, variationable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
-export const Grid = (props, { cssPrefix }) => {
+export const Grid = (props) => {
   const { children, className, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  return (<div {...rest} className={prefix('grid', className)}>{children}</div>);
+  const sldsClasses = [
+    'slds-grid',
+    className,
+  ];
+
+  return (<div {...rest} className={cx(sldsClasses)}>{children}</div>);
 };
 
 Grid.flavors = [
@@ -33,7 +37,10 @@ Grid.variations = [
   { nowrap: ['small', 'medium', 'large'] },
 ];
 
-Grid.contextTypes = { cssPrefix: PropTypes.string };
+Grid.defaultProps = {
+  children: null,
+  className: null,
+};
 
 Grid.propTypes = {
   /**

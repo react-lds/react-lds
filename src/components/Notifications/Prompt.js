@@ -19,6 +19,11 @@ const Prompt = (props) => {
   );
 };
 
+Prompt.defaultProps = {
+  className: null,
+  open: false,
+};
+
 Prompt.propTypes = {
   /**
    * prompt close button text

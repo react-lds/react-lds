@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { Modal } from '../Modal';
@@ -8,16 +7,13 @@ import ModalHeader from '../ModalHeader';
 describe('<Modal />', () => {
   let mounted = null;
 
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
     mounted = mount(
       <Modal>
         <ModalHeader />
         <div className="foo" />
-      </Modal>, options);
+      </Modal>
+    );
   });
 
   it('renders the correct markup', () => {

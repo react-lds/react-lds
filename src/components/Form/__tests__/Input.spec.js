@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { getUniqueHash } from '../../../utils';
@@ -8,10 +7,6 @@ import Input from '../Input';
 describe('<Input />', () => {
   let props = {};
   let mounted = null;
-
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   beforeEach(() => {
     props = {
@@ -26,7 +21,7 @@ describe('<Input />', () => {
       label: 'some label',
     };
 
-    mounted = mount(<Input {...props} />, options);
+    mounted = mount(<Input {...props} />);
   });
 
   it('renders the id', () => {

@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { variationable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
-export const Row = (props, { cssPrefix }) => {
+export const Row = (props) => {
   const { children, className, head, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const sldsClasses = head ? ['text-title--caps'] : [];
+  const sldsClasses = [
+    { 'slds-text-title--caps': !!head },
+    className
+  ];
 
-  return (<tr {...rest} className={prefix(sldsClasses, className)}>{children}</tr>);
+  return (<tr {...rest} className={cx(sldsClasses)}>{children}</tr>);
 };
 
 Row.variations = [
@@ -18,7 +20,11 @@ Row.variations = [
   'hint-parent',
 ];
 
-Row.contextTypes = { cssPrefix: PropTypes.string };
+Row.defaultProps = {
+  children: null,
+  className: null,
+  head: false,
+};
 
 Row.propTypes = {
   /**

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { getUniqueHash } from '../../../utils';
@@ -9,15 +8,11 @@ describe('<CheckboxGroup />', () => {
   let mounted = null;
   let props = {};
 
-  const child = (<input type="checkbox" />);
-
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
+  const child = (<input id="foo" type="checkbox" />);
 
   beforeEach(() => {
     props = { label: 'bar', id: 'foo' };
-    mounted = mount(<CheckboxGroup {...props}>{child}</CheckboxGroup>, options);
+    mounted = mount(<CheckboxGroup {...props}>{child}</CheckboxGroup>);
   });
 
   it('renders a fieldset and a legend', () => {

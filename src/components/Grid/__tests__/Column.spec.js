@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import { Column } from '../Column';
@@ -8,12 +7,8 @@ describe('<Column />', () => {
   let mounted = null;
   const child = <div className="foo" />;
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
-    mounted = shallow(<Column>{child}</Column>, options);
+    mounted = shallow(<Column>{child}</Column>);
   });
 
   it('renders the correct markup', () => {

@@ -12,7 +12,6 @@ class Page extends React.Component {
   getChildContext() {
     return {
       assetBasePath: basePath,
-      cssPrefix: 'slds-',
     };
   }
 
@@ -33,7 +32,6 @@ Page.propTypes = {
 
 Page.childContextTypes = {
   assetBasePath: PropTypes.string,
-  cssPrefix: PropTypes.string,
 };
 
 

@@ -1,24 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
-
-const FormElement = (props, { cssPrefix }) => {
+const FormElement = (props) => {
   const { children, className, error, required, fieldset, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const classes = [
-    'form-element',
-    { 'has-error': !!error },
-    { 'is-required': required },
+  const sldsClasses = [
+    'slds-form-element',
+    { 'slds-has-error': !!error },
+    { 'slds-is-required': required },
+    className
   ];
 
   const Tag = fieldset ? 'fieldset' : 'div';
 
-  return (<Tag {...rest} className={prefix(classes, className)}>{children}</Tag>);
+  return (<Tag {...rest} className={cx(sldsClasses)}>{children}</Tag>);
 };
 
-FormElement.contextTypes = { cssPrefix: PropTypes.string };
+FormElement.defaultProps = {
+  className: null,
+  error: null,
+  fieldset: false,
+  required: false,
+};
 
 FormElement.propTypes = {
   /**
