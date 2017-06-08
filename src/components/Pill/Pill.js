@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
 import { flavorable } from '../../decorators';
 import { Button, ButtonIcon } from '../../';
 
-export const Pill = (props, { cssPrefix }) => {
+export const Pill = (props) => {
   const {
     className,
     icon,
@@ -16,14 +16,13 @@ export const Pill = (props, { cssPrefix }) => {
     url,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const isLinked = !!url;
   const LabelElement = isLinked ? 'a' : 'span';
 
   const getIcon = () => {
     if (icon) {
-      return React.cloneElement(icon, { className: prefix('pill__icon_container') });
+      return React.cloneElement(icon, { className: 'slds-pill__icon_container' });
     }
 
     return null;
@@ -31,22 +30,27 @@ export const Pill = (props, { cssPrefix }) => {
 
   const getPortrait = () => {
     if (portrait) {
-      return React.cloneElement(portrait, { className: prefix('pill__icon') });
+      return React.cloneElement(portrait, { className: 'slds-pill__icon' });
     }
 
     return null;
   };
 
+  const sldsClasses = [
+    'slds-pill',
+    className
+  ];
+
   return (
-    <span {...rest} className={prefix('pill', className)}>
+    <span {...rest} className={cx(sldsClasses)}>
       {getIcon()}
       {getPortrait()}
-      <LabelElement href={isLinked ? url : null} className={prefix('pill__label')} title={title}>
+      <LabelElement href={isLinked ? url : null} className="slds-pill__label" title={title}>
         {label}
       </LabelElement>
-      <Button onClick={onClose} className={prefix('pill__remove')} icon>
+      <Button onClick={onClose} className="slds-pill__remove" icon>
         <ButtonIcon sprite="utility" icon="close" />
-        <span className={prefix('assistive-text')}>Remove</span>
+        <span className="slds-assistive-text">Remove</span>
       </Button>
     </span>
   );
@@ -56,7 +60,13 @@ Pill.flavors = [
   'bare',
 ];
 
-Pill.contextTypes = { cssPrefix: PropTypes.string };
+Pill.defaultProps = {
+  className: null,
+  icon: null,
+  onClose: () => {},
+  portrait: null,
+  url: null,
+};
 
 Pill.propTypes = {
   /**

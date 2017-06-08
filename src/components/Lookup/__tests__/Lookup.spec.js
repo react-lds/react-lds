@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { Lookup } from '../Lookup';
@@ -7,10 +6,6 @@ import { Lookup } from '../Lookup';
 describe('<Lookup />', () => {
   let mounted = null;
   let props = {};
-
-  const context = { assetBasePath: '/assets', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   const sampleData = [
     {
@@ -65,9 +60,9 @@ describe('<Lookup />', () => {
       placeholder: 'Search Accounts',
       load: loadFn,
       onChange,
-      prefix: function prefix(sldsClasses) { return sldsClasses.join(' '); },
     };
-    mounted = mount(<Lookup {...props} />, options);
+
+    mounted = mount(<Lookup {...props} />);
   });
 
   it('renders an input by default', () => {
@@ -164,7 +159,7 @@ describe('<Lookup />', () => {
 
   it('accepts an initial selection', () => {
     props.initialSelection = [sampleData[0]];
-    mounted = mount(<Lookup {...props} />, options);
+    mounted = mount(<Lookup {...props} />);
     expect(mounted.state('selected').length).toBe(1);
   });
 
@@ -191,7 +186,7 @@ describe('<Lookup />', () => {
 
   it('calls the load function onMount', () => {
     const mockFunction = jest.fn();
-    mounted = mount(<Lookup {...props} load={mockFunction} loadOnMount />, options);
+    mounted = mount(<Lookup {...props} load={mockFunction} loadOnMount />);
 
     setTimeout(() => {
       expect(mockFunction).toBeCalled();

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { flavorable, themeable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 import { Button, ButtonIcon } from '../../';
 
 const getThemeName = (themeStr) => {
@@ -13,7 +13,7 @@ const getThemeName = (themeStr) => {
   return false;
 };
 
-export const Notification = (props, { cssPrefix }) => {
+export const Notification = (props) => {
   const {
     children,
     className,
@@ -22,26 +22,26 @@ export const Notification = (props, { cssPrefix }) => {
     onClickClose,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const sldsClasses = [
-    'notify',
-    { 'notify--toast': !!toast },
+    'slds-notify',
+    { 'slds-notify--toast': !!toast },
+    className,
   ];
 
   return (
-    <div className={prefix('notify_container')}>
-      <div {...rest} className={prefix(sldsClasses, className)} role="alert">
+    <div className="slds-notify_container">
+      <div {...rest} className={cx(sldsClasses)} role="alert">
         <Button
           icon-inverse={getThemeName(className) ? undefined : true}
-          className={prefix('notify__close')}
+          className="slds-notify__close"
           icon
           onClick={onClickClose}
         >
           <ButtonIcon sprite="utility" icon="close" size={toast ? 'large' : undefined} />
-          <span className={prefix('assistive-text')}>Close</span>
+          <span className="slds-assistive-text">Close</span>
         </Button>
-        <span className={prefix('assistive-text')}>{title}</span>
+        <span className="slds-assistive-text">{title}</span>
         {children}
       </div>
     </div>
@@ -52,7 +52,11 @@ Notification.flavors = [
   'alert',
 ];
 
-Notification.contextTypes = { cssPrefix: PropTypes.string };
+Notification.defaultProps = {
+  className: null,
+  toast: false,
+  onClickClose: () => {},
+};
 
 Notification.propTypes = {
   /**

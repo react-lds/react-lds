@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { getUniqueHash, prefixClasses } from '../../utils';
+import { getUniqueHash } from '../../utils';
 import {
   FormElement,
   FormElementControl,
@@ -9,7 +10,7 @@ import {
   FormElementError,
 } from '../../';
 
-const Select = (props, { cssPrefix }) => {
+const Select = (props) => {
   const {
     children,
     className,
@@ -23,14 +24,18 @@ const Select = (props, { cssPrefix }) => {
     required,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
+  const sldsClasses = [
+    'slds-select',
+    className,
+  ];
 
   const renderSelect = () => {
     const select = (
       <select
         {...rest}
         id={id}
-        className={prefix('select', className)}
+        className={cx(sldsClasses)}
         onChange={onChange}
         multiple={multiple}
         required={required}
@@ -45,7 +50,7 @@ const Select = (props, { cssPrefix }) => {
       return select;
     }
 
-    return (<div className={prefix('select_container')}>{select}</div>);
+    return (<div className="slds-select_container">{select}</div>);
   };
 
   return (
@@ -59,8 +64,15 @@ const Select = (props, { cssPrefix }) => {
   );
 };
 
-Select.contextTypes = { cssPrefix: PropTypes.string };
-
+Select.defaultProps = {
+  className: null,
+  disabled: false,
+  error: null,
+  hideLabel: false,
+  multiple: false,
+  onChange: () => {},
+  required: false,
+};
 
 Select.propTypes = {
   /**

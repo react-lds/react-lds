@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import DropdownMenuList from '../DropdownMenuList';
@@ -9,12 +8,8 @@ describe('<DropdownMenuList />', () => {
 
   const children = [<li key="1">one</li>, <li key="2">two</li>];
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
-    mounted = shallow(<DropdownMenuList>{children}</DropdownMenuList>, options);
+    mounted = shallow(<DropdownMenuList>{children}</DropdownMenuList>);
   });
 
   it('renders children inside <ul></ul>', () => {

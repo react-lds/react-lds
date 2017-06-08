@@ -8,8 +8,8 @@ describe('<ButtonIcon />', () => {
   let props = {};
   let mounted = null;
 
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
+  const context = { assetBasePath: '/' };
+  const childContextTypes = { assetBasePath: PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {

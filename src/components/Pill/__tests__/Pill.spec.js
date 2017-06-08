@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import { Pill } from '../Pill';
@@ -9,16 +8,12 @@ describe('<Pill />', () => {
   let props = {};
   let mounted = null;
 
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
     props = {
       title: 'A title',
       label: 'A label',
     };
-    mounted = shallow(<Pill {...props} />, options);
+    mounted = shallow(<Pill {...props} />);
   });
 
   it('renders as a <span> when no url is passed', () => {

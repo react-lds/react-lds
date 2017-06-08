@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { default as Notification } from '../Notification';
@@ -10,16 +9,12 @@ describe('<Notification />', () => {
 
   const child = <p>Foobar</p>;
 
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
     props = {
       title: 'foo',
     };
 
-    mounted = mount(<Notification {...props}>{child}</Notification>, options);
+    mounted = mount(<Notification {...props}>{child}</Notification>);
   });
 
   it('renders the correct markup', () => {

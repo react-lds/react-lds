@@ -1,28 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { flavorable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
-export const ModalFooter = (props, { cssPrefix }) => {
+export const ModalFooter = (props) => {
   const { children, className, defaultTheme, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const sldsClasses = [
-    'modal__footer',
-    { 'theme--default': !!defaultTheme },
+    'slds-modal__footer',
+    { 'slds-theme--default': !!defaultTheme },
+    className
   ];
 
-  return (
-    <div {...rest} className={prefix(sldsClasses, className)}>{children}</div>
-  );
+  return (<div {...rest} className={cx(sldsClasses)}>{children}</div>);
 };
 
 ModalFooter.flavors = [
   'directional',
 ];
 
-ModalFooter.contextTypes = { cssPrefix: PropTypes.string };
+ModalFooter.defaultProps = {
+  className: null,
+  defaultTheme: false,
+};
 
 ModalFooter.propTypes = {
   /**

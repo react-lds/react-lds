@@ -1,23 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { flavorable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
-export const Spinner = (props, { cssPrefix }) => {
+export const Spinner = (props) => {
   const { className, size, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const classes = [
-    'spinner',
-    { [`spinner--${size}`]: !!size },
+  const sldsClasses = [
+    'slds-spinner',
+    { [`slds-spinner--${size}`]: !!size },
+    className
   ];
 
   return (
-    <div className={prefix('spinner_container')}>
-      <div {...rest} className={prefix(classes, className)} aria-hidden="false" role="alert">
-        <div className={prefix('spinner__dot-a')} />
-        <div className={prefix('spinner__dot-b')} />
+    <div className="slds-spinner_container">
+      <div {...rest} className={cx(sldsClasses)} aria-hidden="false" role="alert">
+        <div className="slds-spinner__dot-a" />
+        <div className="slds-spinner__dot-b" />
       </div>
     </div>
   );
@@ -28,7 +28,10 @@ Spinner.flavors = [
   'inverse',
 ];
 
-Spinner.contextTypes = { cssPrefix: PropTypes.string };
+Spinner.defaultProps = {
+  className: null,
+  size: 'medium',
+};
 
 Spinner.propTypes = {
   /**
@@ -38,7 +41,6 @@ Spinner.propTypes = {
   /**
    * size
    */
-
   size: PropTypes.oneOf(['xx-small', 'x-small', 'small', 'medium', 'large']).isRequired,
 };
 

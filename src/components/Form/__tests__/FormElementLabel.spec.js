@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import FormElementLabel from '../FormElementLabel';
@@ -8,17 +7,13 @@ describe('<FormElementLabel />', () => {
   let mounted = null;
   let props = {};
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
     props = {
       id: 'input-it',
       label: 'Input Label',
     };
 
-    mounted = mount(<FormElementLabel {...props} />, options);
+    mounted = mount(<FormElementLabel {...props} />);
   });
 
   it('renders the for-attribute', () => {

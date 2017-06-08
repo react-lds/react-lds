@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { default as Popover } from '../Popover';
@@ -7,10 +6,6 @@ import { default as Popover } from '../Popover';
 describe('<Popover />', () => {
   let props = {};
   let mounted = null;
-
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   beforeEach(() => {
     props = {
@@ -20,7 +15,7 @@ describe('<Popover />', () => {
       footer: 'Footer content',
       onClose: () => {},
     };
-    mounted = mount(<Popover {...props} />, options);
+    mounted = mount(<Popover {...props} />);
   });
 
   it('renders header content', () => {
