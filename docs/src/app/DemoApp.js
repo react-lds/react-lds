@@ -24,6 +24,7 @@ import Page from './components/Page';
 import PageHeader from './pages/PageHeader';
 import Pills from './pages/Pills';
 import Popovers from './pages/Popovers';
+import ProgressBar from './pages/ProgressBar';
 import Radio from './pages/Form/Radio';
 import SelectVariants from './pages/Form/Select';
 import CheckboxVariants from './pages/Form/Checkbox';
@@ -73,6 +74,7 @@ const routes = (
     <Route path="page-headers" component={PageHeader} />
     <Route path="pills" component={Pills} />
     <Route path="popovers" component={Popovers} />
+    <Route path="progressbar" component={ProgressBar} />
     <Route path="spinners" component={Spinners} />
     <Route path="tabs" component={Tabs} />
   </Route>
