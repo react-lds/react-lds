@@ -38,7 +38,8 @@ Spinner.propTypes = {
   /**
    * size
    */
-  size: PropTypes.oneOf(['small', 'medium', 'large']).isRequired,
+
+  size: PropTypes.oneOf(['xx-small', 'x-small', 'small', 'medium', 'large']).isRequired,
 };
 
 export default flavorable(Spinner, 'spinner');
