@@ -1,24 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { IconSVG } from '../../';
-import { prefixClasses } from '../../utils';
 
-const ButtonIcon = (props, { cssPrefix }) => {
+const ButtonIcon = (props) => {
   const { className, sprite, icon, position, size, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const classes = [
-    'button__icon',
-    { [`button__icon--${position}`]: !!position },
-    { [`button__icon--${size}`]: !!size },
+  const sldsClasses = [
+    'slds-button__icon',
+    { [`slds-button__icon--${position}`]: !!position },
+    { [`slds-button__icon--${size}`]: !!size },
+    className
   ];
 
   return (
     <IconSVG
       {...rest}
       background={false}
-      className={prefix(classes, className)}
+      className={cx(sldsClasses)}
       fill={false}
       icon={icon}
       sprite={sprite}
@@ -26,7 +26,11 @@ const ButtonIcon = (props, { cssPrefix }) => {
   );
 };
 
-ButtonIcon.contextTypes = { cssPrefix: PropTypes.string };
+ButtonIcon.defaultProps = {
+  className: null,
+  position: null,
+  size: null,
+};
 
 ButtonIcon.propTypes = {
   /**

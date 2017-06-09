@@ -1,16 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
-
-const ButtonGroup = (props, { cssPrefix }) => {
+const ButtonGroup = (props) => {
   const { children, className, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  return (<div {...rest} className={prefix('button-group', className)} role="group">{children}</div>);
+  const sldsClasses = [
+    'slds-button-group',
+    className
+  ];
+
+  return (<div {...rest} className={cx(sldsClasses)} role="group">{children}</div>);
 };
 
-ButtonGroup.contextTypes = { cssPrefix: PropTypes.string };
+ButtonGroup.defaultProps = {
+  className: null,
+};
 
 ButtonGroup.propTypes = {
   /**

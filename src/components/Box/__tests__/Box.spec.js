@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import { Box } from '../Box';
@@ -7,12 +6,8 @@ import { Box } from '../Box';
 describe('<Box />', () => {
   let mounted = null;
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
-    mounted = shallow(<Box />, options);
+    mounted = shallow(<Box>fake</Box>);
   });
 
   it('renders the correct markup', () => {

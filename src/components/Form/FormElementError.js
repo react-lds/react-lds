@@ -1,19 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { getUniqueHash, prefixClasses } from '../../utils';
+import { getUniqueHash } from '../../utils';
 
-const FormElementError = (props, { cssPrefix }) => {
+const FormElementError = (props) => {
   const { className, error, id, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderError = () => {
     if (error) {
+      const sldsClasses = [
+        'slds-form-element__help',
+        className
+      ];
+
       return (
         <div
           {...rest}
           id={getUniqueHash(error, id)}
-          className={prefix('form-element__help', className)}
+          className={cx(sldsClasses)}
         >
           {error}
         </div>
@@ -26,7 +31,9 @@ const FormElementError = (props, { cssPrefix }) => {
   return renderError();
 };
 
-FormElementError.contextTypes = { cssPrefix: PropTypes.string };
+FormElementError.defaultProps = {
+  error: null,
+};
 
 FormElementError.propTypes = {
   /**

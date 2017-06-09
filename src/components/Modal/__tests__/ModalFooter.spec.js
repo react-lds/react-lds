@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import { ModalFooter } from '../ModalFooter';
@@ -8,12 +7,8 @@ describe('<ModalFooter />', () => {
   let mounted = null;
   const child = (<div className="foo">bar</div>);
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
-    mounted = shallow(<ModalFooter>{child}</ModalFooter>, options);
+    mounted = shallow(<ModalFooter>{child}</ModalFooter>);
   });
 
   it('renders the correct markup', () => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import { Button } from '../Button';
@@ -8,13 +7,11 @@ describe('<Button />', () => {
   let props = {};
   let mounted = null;
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
-    props = {};
-    mounted = shallow(<Button {...props} />, options);
+    props = {
+      onClick: () => {}
+    };
+    mounted = shallow(<Button {...props} />);
   });
 
 

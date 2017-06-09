@@ -43,13 +43,20 @@ const CheckboxGroup = (props) => {
       onChange={onChange}
       required={required}
     >
-      <FormElementLabel legend required={required} label={label} />
+      <FormElementLabel legend required={required} label={label} id={id} />
       <FormElementControl>
         {wrapChildrenWithError()}
       </FormElementControl>
       <FormElementError error={error} id={id} />
     </FormElement>
   );
+};
+
+CheckboxGroup.defaultProps = {
+  className: null,
+  error: null,
+  onChange: () => {},
+  required: false,
 };
 
 CheckboxGroup.propTypes = {
