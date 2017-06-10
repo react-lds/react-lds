@@ -47,6 +47,8 @@ Button.flavors = [
   'icon-inverse',
   'icon-border',
   'icon-bare',
+  'icon-x-small',
+  'reset',
 ];
 
 Button.defaultProps = {
