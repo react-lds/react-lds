@@ -1,49 +1,74 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
 import { Grid, Column, MediaObject, IconSVG } from '../../';
 
-const RecordHome = (props, { cssPrefix }) => {
+const RecordHome = (props) => {
   const { className, detailItems = [], headerButtons, icon, recordType, title, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const iconRendered = <IconSVG sprite={icon.sprite} icon={icon.icon} />;
   let detailRow;
 
   if (detailItems.length > 0) {
+    const titleClasses = [
+      'slds-text-title',
+      'slds-truncate',
+      'slds-m-bottom--xx-small'
+    ];
+
     const detailItemsRendered = detailItems.map((item, index) =>
-      <li className={prefix('page-header__detail-block')} key={`${item.title}-${index}`}>
-        <p className={prefix(['text-title', 'truncate', 'm-bottom--xx-small'])}>{item.title}</p>
-        <p className={prefix(['text-body--regular', 'truncate'])}>{item.content}</p>
+      <li className="slds-page-header__detail-block" key={`${item.title}-${index}`}>
+        <p className={cx(titleClasses)}>{item.title}</p>
+        <p className="slds-text-body--regular slds-truncate">{item.content}</p>
       </li>
     );
     detailRow = (
-      <ul className={prefix(['grid', 'page-header__detail-row'])}>{detailItemsRendered}</ul>
+      <ul className="slds-grid slds-page-header__detail-row">{detailItemsRendered}</ul>
     );
   } else {
     detailRow = '';
   }
 
+  const sldsClasses = [
+    'slds-page-header',
+    className
+  ];
+
+  const pageHeaderTitleClasses = [
+    'slds-page-header__title',
+    'slds-m-right--small',
+    'slds-truncate',
+    'slds-align-middle',
+  ];
+
   return (
-    <div {...rest} className={prefix('page-header', className)} role="banner">
+    <div {...rest} className={cx(sldsClasses)} role="banner">
       <Grid>
-        <Column className={prefix('has-flexi-truncate')}>
-          <MediaObject figureLeft={iconRendered} className={prefix(['grow', 'no-space', 'media--center'])}>
-            <p className={prefix('text-title--caps')}>{recordType}</p>
-            <h1 className={prefix(['page-header__title', 'm-right--small', 'truncate', 'align-middle'])} title={title}>
+        <Column className="slds-has-flexi-truncate">
+          <MediaObject
+            center
+            figureLeft={iconRendered}
+            className="slds-grow slds-no-space"
+          >
+            <p className="slds-text-title--caps">{recordType}</p>
+            <h1 className={pageHeaderTitleClasses} title={title}>
               {title}
             </h1>
           </MediaObject>
         </Column>
-        <Column className={prefix(['no-flex', 'grid', 'align-bottom'])}>{headerButtons}</Column>
+        <Column className="slds-no-flex slds-grid slds-align-bottom">{headerButtons}</Column>
       </Grid>
       {detailRow}
     </div>
   );
 };
 
-RecordHome.contextTypes = { cssPrefix: PropTypes.string };
+RecordHome.defaultProps = {
+  className: null,
+  detailItems: null,
+  headerButtons: null
+};
 
 RecordHome.propTypes = {
   /**

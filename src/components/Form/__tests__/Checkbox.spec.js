@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { getUniqueHash } from '../../../utils';
@@ -9,10 +8,6 @@ describe('<Checkbox />', () => {
   let props = {};
   let mounted = null;
 
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
     props = {
       onChange: jest.fn(),
@@ -20,7 +15,7 @@ describe('<Checkbox />', () => {
       label: 'some label',
     };
 
-    mounted = mount(<Checkbox {...props} />, options);
+    mounted = mount(<Checkbox {...props} />);
   });
 
   it('renders the id', () => {

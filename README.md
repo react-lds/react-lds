@@ -33,7 +33,7 @@ Head over to the [Docs](https://propertybase.github.io/react-lds) to see a list 
 
 ### Context
 
-In order to use React LDS, you will have to provide `assetBasePath` and `cssPrefix` via the [React Context](https://facebook.github.io/react/docs/context.html).
+In order to use React LDS, you will have to provide `assetBasePath` via the [React Context](https://facebook.github.io/react/docs/context.html).
 
 ``` js
 import React from 'react';
@@ -45,7 +45,6 @@ class Page extends React.Component {
   getChildContext() {
     return {
       assetBasePath: '',
-      cssPrefix: 'slds-',
     };
   }
 
@@ -62,7 +61,6 @@ Page.propTypes = {
 
 Page.childContextTypes = {
   assetBasePath: PropTypes.string,
-  cssPrefix: PropTypes.string,
 };
 ```
 
@@ -123,42 +121,11 @@ const GridSystem = props => (
 );
 ```
 
-#### Prefixes
-
-React LDS internally prefixes all relevant classNames with the cssPrefix you set in the React context (`slds-` in the standard LDS implementation). You can implement this behavior in your own components like this:
-
-``` js
-import React from 'react';
-import PropTypes from 'prop-types';
-import { prefixClasses } from 'react-lds';
-
-const CustomComponent = (props, { cssPrefix }) => {
-  const { className, children } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-
-  const sldsClasses = [
-    'text-heading--small',
-    'button',
-  ];
-  // sldsClasses will be prefixed, className will be passed without prefixing
-  return (
-    <div className={prefix(sldsClasses, className)}>{children}</div>
-  );
-};
-
-CustomComponent.contextTypes = { cssPrefix: PropTypes.string };
-
-
-// Usage
-<CustomComponent className="custom-class-1 custom-class-2" />
-```
-
-You can pass custom, non-prefixed classes to react-lds components via the `className`-prop. These will be added to the prefixed classes.
-
 ### Interactivity
 
 Some components need a certain level of interactivity to be usable as React components. In order to achieve this, these components keep a minimal internal state and provide ways to hook into fired events:
 
+ - `<Datepicker />`
  - `<Lookup />`
  - `<DropDownMenu />`
  - `<Modal />`
@@ -184,7 +151,7 @@ In your react app: `npm link react-lds`.
 
 ## Publish
 
-- Open a new pull request from `propertybase/release/{version}`
+- Open a new pull request from `/release/{version}`
 - Adjust version in `package.json`
 - Write `CHANGELOG.md`
 - Merge into master and add a new tag. Travis will do the rest

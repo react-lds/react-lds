@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { getUniqueHash, prefixClasses } from '../../utils';
+import { getUniqueHash } from '../../utils';
 import { Button, ButtonIcon, IconSVG } from '../../';
 
-const InputRaw = (props, { cssPrefix }) => {
+const InputRaw = (props) => {
   const {
     bare,
     className,
@@ -26,24 +27,24 @@ const InputRaw = (props, { cssPrefix }) => {
     isFocused,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderIconLeft = () => {
     let iconName = iconLeft;
+
     if (error && errorIcon) {
       iconName = 'warning';
     }
 
     if (iconName) {
       const iconClasses = [
-        'input__icon',
-        'icon-text-default',
-        { 'input__icon--left': iconLeft && iconRight },
+        'slds-input__icon',
+        'slds-icon-text-default',
+        { 'slds-input__icon--left': iconLeft && iconRight },
       ];
 
       return (
         <IconSVG
-          className={prefix(iconClasses)}
+          className={cx(iconClasses)}
           icon={iconName}
           sprite="utility"
         />
@@ -56,13 +57,13 @@ const InputRaw = (props, { cssPrefix }) => {
   const renderIconRight = () => {
     if (iconRight && iconRightOnClick) {
       const iconClasses = [
-        'input__icon',
-        { 'input__icon--right': iconLeft && iconRight },
+        'slds-input__icon',
+        { 'slds-input__icon--right': iconLeft && iconRight },
       ];
 
       return (
         <Button
-          className={prefix(iconClasses)}
+          className={cx(iconClasses)}
           icon
           onClick={iconRightOnClick}
         >
@@ -73,14 +74,14 @@ const InputRaw = (props, { cssPrefix }) => {
 
     if (iconRight) {
       const iconClasses = [
-        'input__icon',
-        'icon-text-default',
-        { 'input__icon--right': iconLeft && iconRight },
+        'slds-input__icon',
+        'slds-icon-text-default',
+        { 'slds-input__icon--right': iconLeft && iconRight },
       ];
 
       return (
         <IconSVG
-          className={prefix(iconClasses)}
+          className={cx(iconClasses)}
           sprite="utility"
           icon={iconRight}
         />
@@ -90,13 +91,19 @@ const InputRaw = (props, { cssPrefix }) => {
     return null;
   };
 
+  const sldsClasses = [
+    { 'slds-input--bare': bare },
+    { 'slds-input': !bare },
+    className
+  ];
+
   return (
     <span>
       {renderIconLeft()}
       {renderIconRight()}
       <input
         {...rest}
-        className={prefix(bare ? 'input--bare' : 'input', className)}
+        className={cx(sldsClasses)}
         disabled={disabled}
         id={id}
         onChange={onChange}
@@ -114,11 +121,25 @@ const InputRaw = (props, { cssPrefix }) => {
   );
 };
 
-InputRaw.contextTypes = { cssPrefix: PropTypes.string };
-
-InputRaw.propDefaults = {
+InputRaw.defaultProps = {
   bare: false,
+  className: null,
+  disabled: false,
+  error: null,
+  errorIcon: false,
+  iconLeft: null,
+  iconRight: null,
+  iconRightOnClick: () => {},
+  isFocused: false,
+  label: null,
+  onChange: () => {},
+  onFocus: () => {},
+  onKeyPress: () => {},
+  placeholder: null,
+  role: null,
+  required: false,
   type: 'text',
+  value: null,
 };
 
 InputRaw.propTypes = {

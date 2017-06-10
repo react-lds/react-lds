@@ -1,21 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { prefixClasses } from '../../utils';
-
-const NavigationListElement = ({ children, active, ...rest }, { cssPrefix }) => {
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-  const activeClass = active ? prefix('is-active') : undefined;
-  const childClasses = prefix(['navigation-list--vertical__action', 'text-link--reset']);
+const NavigationListElement = ({ children, active, ...rest }) => {
+  const activeClass = active ? 'slds-is-active' : undefined;
 
   return (
     <li className={activeClass}>
-      {React.cloneElement(children, { className: childClasses, ...rest })}
+      {React.cloneElement(children, {
+        className: 'slds-navigation-list--vertical__action slds-text-link--reset',
+        ...rest
+      })}
     </li>
   );
 };
 
-NavigationListElement.contextTypes = { cssPrefix: PropTypes.string };
+
+NavigationListElement.defaultProps = {
+  active: false,
+  'aria-describedby': null,
+};
 
 NavigationListElement.propTypes = {
   /**

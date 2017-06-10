@@ -19,6 +19,11 @@ Container.flavors = [
   'right',
 ];
 
+Container.defaultProps = {
+  children: null,
+  className: null,
+};
+
 Container.propTypes = {
   /**
    * container content

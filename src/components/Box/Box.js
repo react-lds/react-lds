@@ -1,30 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { themeable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
-export const Box = (props, { cssPrefix }) => {
+export const Box = (props) => {
   const { children, className, size, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const sldsClasses = [
-    'box',
-    { [`box--${size}`]: !!size },
+    'slds-box',
+    { [`slds-box--${size}`]: !!size },
+    className
   ];
 
-  return (
-    <div {...rest} className={prefix(sldsClasses, className)}>{children}</div>
-  );
+  return (<div {...rest} className={cx(sldsClasses)}>{children}</div>);
 };
 
-Box.contextTypes = { cssPrefix: PropTypes.string };
+Box.defaultProps = {
+  className: null,
+  size: null,
+};
 
 Box.propTypes = {
   /**
    * box content
    */
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
