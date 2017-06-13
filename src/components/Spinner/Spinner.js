@@ -34,14 +34,12 @@ Spinner.defaultProps = {
 };
 
 Spinner.propTypes = {
-  /**
-   * class name
-   */
+
   className: PropTypes.string,
-  /**
-   * size
-   */
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
+
+
+  size: PropTypes.oneOf(['xx-small', 'x-small', 'small', 'medium', 'large']),
+
 };
 
 export default flavorable(Spinner, 'spinner');

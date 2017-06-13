@@ -28,7 +28,10 @@ describe('<Spinner />', () => {
     mounted.setProps({ size: 'large' });
     expect(mounted.find('.slds-spinner').hasClass('slds-spinner--large')).toBeTruthy();
   });
-
+  it('renders new sizes added in 2.3.x', () => {
+    mounted.setProps({ size: 'xx-small' });
+    expect(mounted.find('.slds-spinner').hasClass('slds-spinner--xx-small')).toBeTruthy();
+  });
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-spinner').hasClass('foo')).toBeTruthy();
