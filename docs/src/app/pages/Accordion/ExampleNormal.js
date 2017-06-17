@@ -3,14 +3,19 @@ import { Accordion } from 'react-lds';
 
 const sections = [
   {
-    summary: 'bilbili',
+    summary: 'summary1',
     id: 'section1',
-    content: <p>othercontent</p>
+    content: <p>Lorem ipsum dolor sit amet, consectetur adipisicing</p>
   },
   {
-    summary: 'bululu pocapica',
+    summary: 'summary2',
     id: 'section2',
     content: <p>content1</p>,
+  },
+  {
+    summary: 'summary3',
+    id: 'ertzuio',
+    content: <p>othercontent</p>
   }
 ];
 

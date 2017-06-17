@@ -54,18 +54,22 @@ class Accordion extends React.Component {
       return (
         <li
           className="slds-accordion__list-item"
-          onClick={boundClick}
+          key={`whatkey_${section.id}`}
         >
           <section
             className={cx(sectionClasses)}
             id={section.id}
           >
-            <div className="slds-accordion__summary">
-              <h3 className="slds-text-heading_small slds-accordion__summary-heading">
+            <div
+              className="slds-accordion__summary"
+            >
+              <h3
+                className="slds-text-heading_small slds-accordion__summary-heading"
+                onClick={boundClick}
+              >
                 <Button
                   aria-controls={`accordion-details-${section.id}`}
-                  // TODO
-                  onClick="pass"
+                  onClick={boundClick}
                 >
                   <ButtonIcon
                     position="left"
@@ -81,8 +85,6 @@ class Accordion extends React.Component {
                 aria-haspopup="true"
                 icon
                 neutral
-                // TODO
-                onClick="pass"
               >
                 <ButtonIcon
                   position="left"
@@ -113,9 +115,9 @@ class Accordion extends React.Component {
     ];
 
     return (
-      <div {...rest} className={cx(sldsClasses)}>
+      <ul {...rest} className={cx(sldsClasses)}>
         {this.renderSections()}
-      </div>
+      </ul>
     );
   }
 
