@@ -5,7 +5,12 @@ const sections = [
   {
     summary: 'bilbili',
     id: 'section1',
-    children: []
+    content: <p>othercontent</p>
+  },
+  {
+    summary: 'bululu pocapica',
+    id: 'section2',
+    content: <p>content1</p>,
   }
 ];
 

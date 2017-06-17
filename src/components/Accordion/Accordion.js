@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import cx from 'classnames';
+import cx from 'classnames';
 import omit from 'lodash.omit';
 
-import { AccordionListItem } from '../../';
+import { Button, ButtonIcon } from 'react-lds';
 
 class Accordion extends React.Component {
-
-  static defaultProps = { variation: 'default' };
+  static defaultProps = {
+    className: null,
+    variation: 'default',
+  }
 
   static propTypes = {
     /**
@@ -15,21 +17,19 @@ class Accordion extends React.Component {
      */
     className: PropTypes.string,
     /**
-    * array of sections
-    */
+     * array of sections
+     */
     sections: PropTypes.arrayOf(PropTypes.shape({
       summary: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
-      children: PropTypes.arrayOf(PropTypes.element),
+      content: PropTypes.node.isRequired,
     })).isRequired,
     /**
-    * styled has a card wrapped around it
-    */
+     * scoped has a border around the tab
+     */
     variation: PropTypes.oneOf(['default', 'styled']),
-  };
+  }
 
-
-//  DO I NEED THIS OR IS IT LEGACY? By default first section is open, should it be like that?
   constructor(props, context) {
     super(props, context);
     this.state = { activeSection: this.props.sections[0].id };
@@ -40,20 +40,82 @@ class Accordion extends React.Component {
   }
 
   renderSections() {
-    return this.props.sections.map(item =>
-       (<AccordionListItem summary={item.summary} id={item.id}>
-         {item.children}
-       </AccordionListItem>)
-    );
+    const { sections } = this.props;
+    const { activeSection } = this.state;
+
+    return sections.map((section) => {
+      const sectionClasses = [
+        'slds-accordion__section',
+        { 'slds-is-open': activeSection === section.id },
+      ];
+
+      const boundClick = this.setActiveSection.bind(this, section.id);
+
+      return (
+        <li
+          className="slds-accordion__list-item"
+          onClick={boundClick}
+        >
+          <section
+            className={cx(sectionClasses)}
+            id={section.id}
+          >
+            <div className="slds-accordion__summary">
+              <h3 className="slds-text-heading_small slds-accordion__summary-heading">
+                <Button
+                  aria-controls={`accordion-details-${section.id}`}
+                  // TODO
+                  onClick="pass"
+                >
+                  <ButtonIcon
+                    position="left"
+                    sprite="utility"
+                    icon="switch"
+                    aria-expanded={activeSection === section.id ? 'true' : 'false'}
+                    className="slds-accordion__summary-action"
+                  />
+                  <span className="slds-truncate" title={section.summary}>{section.summary}</span>
+                </Button>
+              </h3>
+              <Button
+                aria-haspopup="true"
+                icon
+                neutral
+                // TODO
+                onClick="pass"
+              >
+                <ButtonIcon
+                  position="left"
+                  sprite="utility"
+                  icon="down"
+                />
+              </Button>
+            </div>
+            <div
+              aria-hidden={activeSection === section.id ? 'false' : 'true'}
+              className="slds-accordion__content" id={section.id}
+            >
+              {section.content}
+            </div>
+          </section>
+        </li>
+      );
+    });
   }
 
   render() {
+    const { className } = this.props;
     const rest = omit(this.props, Object.keys(Accordion.propTypes));
 
+    const sldsClasses = [
+      'slds-accordion',
+      className
+    ];
+
     return (
-      <ul {...rest} className="slds-accordion">
+      <div {...rest} className={cx(sldsClasses)}>
         {this.renderSections()}
-      </ul>
+      </div>
     );
   }
 
