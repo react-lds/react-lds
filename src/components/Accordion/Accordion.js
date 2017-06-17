@@ -70,27 +70,28 @@ class Accordion extends React.Component {
                 <Button
                   aria-controls={`accordion-details-${section.id}`}
                   onClick={boundClick}
+                  className="slds-accordion__summary-action"
+                  aria-expanded={activeSection === section.id ? 'true' : 'false'}
                 >
                   <ButtonIcon
                     position="left"
                     sprite="utility"
-                    icon="switch"
-                    aria-expanded={activeSection === section.id ? 'true' : 'false'}
-                    className="slds-accordion__summary-action"
+                    icon={activeSection === section.id ? 'chevrondown' : 'chevronright'}
                   />
                   <span className="slds-truncate" title={section.summary}>{section.summary}</span>
                 </Button>
               </h3>
               <Button
                 aria-haspopup="true"
-                icon
-                neutral
+                icon-container
               >
                 <ButtonIcon
                   position="left"
                   sprite="utility"
                   icon="down"
+                  className="slds-shrink-none"
                 />
+                <span className="slds-assistive-text">More Options</span>
               </Button>
             </div>
             <div
