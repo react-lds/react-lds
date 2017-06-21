@@ -17,6 +17,7 @@ const Navigation = () =>
         <NavLink to="/cards" label="Cards" />
         <NavLink to="/data-tables" label="Data Tables" />
         <NavLink to="/datepickers" label="Datepickers" />
+        <NavLink to="/expandable-sections" label="Expandable Sections" />
         <NavLink unfinished to="/feeds" label="Feeds" />
         <NavLink to="/forms" label="Forms" />
         <NavLink to="/grid-system" label="Grid System" />

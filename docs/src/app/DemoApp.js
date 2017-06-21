@@ -8,6 +8,7 @@ import Buttons from './pages/Button';
 import Cards from './pages/Card';
 import DataTable from './pages/DataTable';
 import Datepicker from './pages/Datepicker';
+import ExpandableSections from './pages/ExpandableSection';
 import Forms from './pages/Form';
 import GridSystem from './pages/GridSystem';
 import Icons from './pages/Icon';
@@ -42,6 +43,7 @@ const routes = (
     <Route path="cards" component={Cards} />
     <Route path="data-tables" component={DataTable} />
     <Route path="datepickers" component={Datepicker} />
+    <Route path="expandable-sections" component={ExpandableSections} />
     <Route path="forms" component={Forms}>
       <IndexRedirect to="input" />
       <Route path="input">
