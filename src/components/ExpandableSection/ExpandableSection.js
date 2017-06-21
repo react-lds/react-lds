@@ -8,7 +8,15 @@ class ExpandableSection extends Component {
   constructor(props) {
     super(props);
 
-    const { open } = props;
+    const { open, collapsable } = props;
+
+    if (!open && !collapsable) {
+      // eslint-disable-next-line
+      console.warn(
+        '[react-lds] ExpandableSection:',
+        'When collapsable is false, open cannot be false.',
+      );
+    }
 
     this.state = {
       open,
@@ -35,7 +43,6 @@ class ExpandableSection extends Component {
 
     return (
       <Button
-        icon
         aria-controls={id}
         aria-expanded={open.toString()}
         className="slds-section__title-action"
@@ -55,7 +62,7 @@ class ExpandableSection extends Component {
   }
 
   render() {
-    const { children, className, id, uncollapsable } = this.props;
+    const { children, className, id, collapsable } = this.props;
     const { open } = this.state;
 
     const sldsClasses = [
@@ -66,15 +73,15 @@ class ExpandableSection extends Component {
 
     const headerClasses = [
       'slds-section__title',
-      { 'slds-theme_shade': uncollapsable },
+      { 'slds-theme_shade': !collapsable },
     ];
 
     return (
       <div className={cx(sldsClasses)}>
         <h3 className={cx(headerClasses)}>
-          {uncollapsable
-            ? this.renderUncollapsable()
-            : this.renderCollapsable()}
+          {collapsable
+            ? this.renderCollapsable()
+            : this.renderUncollapsable()}
         </h3>
         <div aria-hidden={(!open).toString()} className="slds-section__content" id={id}>
           {children}
@@ -88,8 +95,9 @@ ExpandableSection.defaultProps = {
   className: null,
   title: null,
   open: true,
-  uncollapsable: false,
+  collapsable: true,
   onClickToggle: () => {},
+  children: null,
 };
 
 ExpandableSection.propTypes = {
@@ -108,7 +116,7 @@ ExpandableSection.propTypes = {
   /**
    * defines whether section is expandable or not
    */
-  uncollapsable: PropTypes.bool,
+  collapsable: PropTypes.bool,
   /**
    * defines whether section is open or closed
    */
@@ -117,7 +125,9 @@ ExpandableSection.propTypes = {
    * triggered when the user clicks the expand button
    */
   onClickToggle: PropTypes.func,
-
+  /**
+   * content to be displayed
+   */
   children: PropTypes.node,
 };
 export default ExpandableSection;
