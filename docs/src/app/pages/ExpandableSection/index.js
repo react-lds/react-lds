@@ -3,9 +3,9 @@ import { ExpandableSection } from 'react-lds';
 import expandableSectionCode from '!raw!react-lds/components/ExpandableSection/ExpandableSection';
 
 import exampleDefaultCode from '!raw!./ExampleDefault';
-import ExampleNoncollapsableCode from '!raw!./ExampleNoncollapsable';
+import ExampleNonCollapsableCode from '!raw!./ExampleNonCollapsable';
 import ExampleDefault from './ExampleDefault';
-import ExampleNoncollapsable from './ExampleNoncollapsable';
+import ExampleNonCollapsable from './ExampleNonCollapsable';
 
 import CodeExample from '../../components/CodeExample';
 import DecoratorList from '../../components/DecoratorList';
@@ -24,11 +24,16 @@ const ExpandableSectionPage = () => (
           code={exampleDefaultCode}
         />
         <ExampleDefault />
+      </section>
+    </div>
+
+    <div className="slds-p-around--xx-large">
+      <section className="slds-m-bottom--xx-large slds-p-top--x-large">
         <CodeExample
           title="Noncollapsable Section"
-          code={ExampleNoncollapsableCode}
+          code={ExampleNonCollapsableCode}
         />
-        <ExampleNoncollapsable />
+        <ExampleNonCollapsable />
       </section>
     </div>
     <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">Expandable Section</h2>

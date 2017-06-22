@@ -130,4 +130,5 @@ ExpandableSection.propTypes = {
    */
   children: PropTypes.node,
 };
+
 export default ExpandableSection;
