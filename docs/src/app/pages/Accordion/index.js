@@ -2,7 +2,6 @@ import React from 'react';
 
 import accordionCode from '!raw!react-lds/components/Accordion/Accordion';
 import exampleNormalCode from '!raw!./ExampleNormal';
-// import accordionExampleCodeStyled from '!raw!./ExampleStyled';
 
 import CodeExample from '../../components/CodeExample';
 import PropTypeDescription from '../../components/PropTypeDescription';

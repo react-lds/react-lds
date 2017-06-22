@@ -5,10 +5,9 @@ import omit from 'lodash.omit';
 
 import { Button, ButtonIcon } from 'react-lds';
 
-class Accordion extends React.Component {
+export default class Accordion extends React.Component {
   static defaultProps = {
     className: null,
-    variation: 'default',
   }
 
   static propTypes = {
@@ -23,11 +22,8 @@ class Accordion extends React.Component {
       summary: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
       content: PropTypes.node.isRequired,
+      // onClick: PropTypes.func,
     })).isRequired,
-    /**
-     * scoped has a border around the tab
-     */
-    variation: PropTypes.oneOf(['default', 'styled']),
   }
 
   constructor(props, context) {
@@ -54,7 +50,7 @@ class Accordion extends React.Component {
       return (
         <li
           className="slds-accordion__list-item"
-          key={`whatkey_${section.id}`}
+          key={`${section.id}`}
         >
           <section
             className={cx(sectionClasses)}
@@ -123,5 +119,3 @@ class Accordion extends React.Component {
   }
 
 }
-
-export default Accordion;
