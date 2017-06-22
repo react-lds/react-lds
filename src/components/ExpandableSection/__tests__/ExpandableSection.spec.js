@@ -33,7 +33,6 @@ describe('<ExpandableSection />', () => {
   });
   it('does not render slds-open when open is false', () => {
     const mounted = getExpandableSection({ open: false });
-    // mounted.setProps({ id: '123', open: false });
     expect(mounted.find('.slds-section').hasClass('slds-is-open')).toBeFalsy();
   });
   it('does render right class when collapsable is false', () => {
