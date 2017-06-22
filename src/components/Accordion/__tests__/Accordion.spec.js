@@ -71,4 +71,45 @@ describe('<Accordion />', () => {
     expect(mounted.find('.slds-accordion').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-accordion').prop('data-test')).toEqual('bar');
   });
+
+  it('takes styled prop and does something', () => {
+    const mounted = getAccordion({
+      sections: [
+        {
+          summary: 'Section 1',
+          id: 'section-1',
+          content: <p>I am the first section!</p>,
+        },
+        {
+          summary: 'Section 2',
+          id: 'section-2',
+          content: <p>I am the second section!</p>,
+        },
+      ],
+      styled: true,
+    });
+
+    expect(mounted.find('div').first().hasClass('slds-card')).toBeTruthy();
+  });
+
+  it('takes defaultOpen prop and does something', () => {
+    const mounted = getAccordion({
+      sections: [
+        {
+          summary: 'Section 1',
+          id: 'section-1',
+          content: <p>I am the first section!</p>,
+        },
+        {
+          summary: 'Section 2',
+          id: 'section-2',
+          content: <p>I am the second section!</p>,
+        },
+      ],
+      defaultOpen: 'section-2',
+    });
+
+    expect(mounted.find('#section-2').first().hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('#section-1').first().hasClass('slds-is-open')).toBeFalsy();
+  });
 });
