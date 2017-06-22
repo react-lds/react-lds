@@ -8,6 +8,8 @@ import { Button, ButtonIcon } from 'react-lds';
 export default class Accordion extends React.Component {
   static defaultProps = {
     className: null,
+    defaultOpen: false,
+    styled: false,
   }
 
   static propTypes = {
@@ -24,11 +26,19 @@ export default class Accordion extends React.Component {
       content: PropTypes.node.isRequired,
       // onClick: PropTypes.func,
     })).isRequired,
+    /**
+      * which section should be open by default, defaults to first
+      */
+    defaultOpen: PropTypes.string,
+    /**
+      * wraps the component in a card
+      */
+    styled: PropTypes.bool,
   }
 
   constructor(props, context) {
     super(props, context);
-    this.state = { activeSection: this.props.sections[0].id };
+    this.state = { activeSection: this.props.defaultOpen ? this.props.defaultOpen : this.props.sections[0].id };
   }
 
   setActiveSection(id) {
@@ -65,9 +75,10 @@ export default class Accordion extends React.Component {
               >
                 <Button
                   aria-controls={`accordion-details-${section.id}`}
-                  onClick={boundClick}
-                  className="slds-accordion__summary-action"
                   aria-expanded={activeSection === section.id ? 'true' : 'false'}
+                  className="slds-accordion__summary-action"
+                  onClick={boundClick}
+                  reset
                 >
                   <ButtonIcon
                     position="left"
@@ -79,13 +90,15 @@ export default class Accordion extends React.Component {
               </h3>
               <Button
                 aria-haspopup="true"
-                icon-container
+                className="slds-shrink-none"
+                icon
+                icon-border-filled
+                icon-x-small
               >
                 <ButtonIcon
-                  position="left"
                   sprite="utility"
                   icon="down"
-                  className="slds-shrink-none"
+                  size="x-small"
                 />
                 <span className="slds-assistive-text">More Options</span>
               </Button>
@@ -102,7 +115,7 @@ export default class Accordion extends React.Component {
     });
   }
 
-  render() {
+  renderWrapper() {
     const { className } = this.props;
     const rest = omit(this.props, Object.keys(Accordion.propTypes));
 
@@ -116,6 +129,20 @@ export default class Accordion extends React.Component {
         {this.renderSections()}
       </ul>
     );
+  }
+
+  render() {
+    const { styled } = this.props;
+
+    if (styled) {
+      return (
+        <div className="slds-card">
+          {this.renderWrapper()}
+        </div>
+      );
+    }
+
+    return this.renderWrapper();
   }
 
 }
