@@ -8,7 +8,6 @@ import { Button, ButtonIcon } from 'react-lds';
 export default class Accordion extends React.Component {
   static defaultProps = {
     className: null,
-    defaultOpen: false,
     styled: false,
   }
 
@@ -24,7 +23,7 @@ export default class Accordion extends React.Component {
       summary: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
       content: PropTypes.node.isRequired,
-      // onClick: PropTypes.func,
+      summaryOnClick: PropTypes.func,
     })).isRequired,
     /**
       * which section should be open by default, defaults to first
@@ -94,6 +93,7 @@ export default class Accordion extends React.Component {
                 icon
                 icon-border-filled
                 icon-x-small
+                onClick={section.summaryOnClick ? section.summaryOnClick : () => {}}
               >
                 <ButtonIcon
                   sprite="utility"

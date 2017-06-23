@@ -5,7 +5,8 @@ const sections = [
   {
     summary: 'summary1',
     id: 'section1',
-    content: <p>Lorem ipsum dolor sit amet, consectetur adipisicing</p>
+    content: <p>Lorem ipsum dolor sit amet, consectetur adipisicing</p>,
+    summaryOnClick: function example() {},
   },
   {
     summary: 'summary2',
@@ -15,7 +16,7 @@ const sections = [
   {
     summary: 'summary3',
     id: 'ertzuio',
-    content: <p>othercontent</p>
+    content: <p>othercontent</p>,
   }
 ];
 
