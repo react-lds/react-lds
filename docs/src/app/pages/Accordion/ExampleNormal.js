@@ -1,27 +1,30 @@
 import React from 'react';
-import { Accordion } from 'react-lds';
-
-const sections = [
-  {
-    summary: 'summary1',
-    id: 'section1',
-    content: <p>Lorem ipsum dolor sit amet, consectetur adipisicing</p>,
-    summaryOnClick: function example() {},
-  },
-  {
-    summary: 'summary2',
-    id: 'section2',
-    content: <p>content1</p>,
-  },
-  {
-    summary: 'summary3',
-    id: 'ertzuio',
-    content: <p>othercontent</p>,
-  }
-];
+import { Accordion, AccordionSection } from 'react-lds';
 
 const ExampleNormal = () => (
-  <Accordion sections={sections} />
+  <Accordion>
+    <AccordionSection
+      summary="summary for 1st section"
+      id="section1"
+    >
+      <p>Testing testing 123</p>
+    </AccordionSection>
+    <AccordionSection
+      summary="summary for 2nd section"
+      id="section2"
+    >
+      <div>
+        <p>One little paragraph</p>
+        <p>Two little paragraphs</p>
+      </div>
+    </AccordionSection>
+    <AccordionSection
+      summary="summary for 3rd section"
+      id="section3"
+    >
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
+    </AccordionSection>
+  </Accordion>
 );
 
 export default ExampleNormal;
