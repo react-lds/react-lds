@@ -1,6 +1,8 @@
 import React from 'react';
 
 import accordionCode from '!raw!react-lds/components/Accordion/Accordion';
+import accordionSectionCode from '!raw!react-lds/components/Accordion/AccordionSection';
+
 import exampleNormalCode from '!raw!./ExampleNormal';
 import exampleStyledCode from '!raw!./ExampleStyled';
 import exampleOpenCode from '!raw!./ExampleOpen';
@@ -25,7 +27,13 @@ const Accordions = () =>
         />
         <ExampleNormal />
       </section>
-
+      <section className="slds-m-bottom--xx-large slds-p-top--x-large">
+        <CodeExample
+          title="Accordion with defaultOpen"
+          code={exampleOpenCode}
+        />
+        <ExampleOpen />
+      </section>
       <section className="slds-m-bottom--xx-large slds-p-top--x-large">
         <CodeExample
           title="Accordion styled"
@@ -33,17 +41,9 @@ const Accordions = () =>
         />
         <ExampleStyled />
       </section>
-
-      <section className="slds-m-bottom--xx-large slds-p-top--x-large">
-        <CodeExample
-          title="Accordion with different defaultOpen"
-          code={exampleOpenCode}
-        />
-        <ExampleOpen />
-      </section>
-
     </div>
     <PropTypeDescription code={accordionCode} />
+    <PropTypeDescription code={accordionSectionCode} />
   </div>
 ;
 
