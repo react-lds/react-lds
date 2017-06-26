@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash.omit';
 
-import { prefixClasses } from '../../utils';
 import { Button, ButtonIcon } from '../../';
 
-export class DropdownMenu extends React.Component {
-  static contextTypes = { cssPrefix: PropTypes.string };
-
+export class DropdownMenu extends Component {
   static defaultProps = {
+    button: null,
+    className: null,
+    customButton: null,
+    disabled: false,
     isOpen: false,
+    last: false,
     nubbin: false,
     position: 'top-left',
     size: 'small',
@@ -78,12 +81,7 @@ export class DropdownMenu extends React.Component {
 
   constructor(props, { cssPrefix }) {
     super(props, { cssPrefix });
-
     this.state = { open: this.props.isOpen };
-
-    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
-    this.toggle = this.toggle.bind(this);
-    this.button = this.button.bind(this);
   }
 
   getClasses() {
@@ -91,67 +89,72 @@ export class DropdownMenu extends React.Component {
       return this.classes;
     }
 
-    return [...this.classes, 'is-open'];
+    return [...this.classes, 'slds-is-open'];
   }
 
-  button() {
-    if (this.props.button) {
-      const noBorder = this.props.button.noBorder;
-      const title = this.props.button.title;
-      return (
-        <Button
-          title={this.props.button.title}
-          disabled={this.props.disabled}
-          icon-border-filled={!noBorder && !title}
-          icon-container={noBorder && !title}
-          onClick={this.toggle}
-          neutral={this.props.button.neutral}
-          brand={this.props.button.brand}
-          aria-haspopup="true"
-        >
-          <ButtonIcon
-            sprite={this.props.button.sprite}
-            icon={this.props.button.icon}
-            position={title ? 'right' : undefined}
-          />
-        </Button>
-      );
-    }
-
-    return this.props.customButton;
-  }
-
-  toggle() {
-    this.setState({ open: !this.state.open });
+  toggle = () => {
+    this.setState(prevState => ({ open: !prevState.open }));
   }
 
   handleClickOutside() {
     this.setState({ open: false });
   }
 
+  button = () => {
+    const { button, customButton, disabled } = this.props;
+
+    if (button) {
+      const noBorder = button.noBorder;
+      const title = button.title;
+      return (
+        <Button
+          aria-haspopup="true"
+          brand={button.brand}
+          disabled={disabled}
+          icon-border-filled={!noBorder && !title}
+          icon-container={noBorder && !title}
+          neutral={button.neutral}
+          onClick={this.toggle}
+          title={button.title}
+        >
+          <ButtonIcon
+            icon={button.icon}
+            position={title ? 'right' : undefined}
+            sprite={button.sprite}
+          />
+        </Button>
+      );
+    }
+
+    return customButton;
+  }
+
   render() {
+    const { children, className, last, position, nubbin, size } = this.props;
+
     this.classes = [
-      'dropdown-trigger',
-      'dropdown-trigger--click',
-      { 'button--last': this.props.last },
+      'slds-dropdown-trigger',
+      'slds-dropdown-trigger--click',
+      { 'slds-button--last': last },
     ];
 
     this.dropdownClasses = [
-      'dropdown',
-      { [`dropdown--${this.props.size}`]: this.props.size },
-      { 'dropdown--left': this.props.position.endsWith('left') },
-      { 'dropdown--right': this.props.position.endsWith('right') },
-      { 'dropdown--bottom': this.props.position.startsWith('bottom') },
-      { [`nubbin--${this.props.position}`]: this.props.nubbin },
+      'slds-dropdown',
+      { [`slds-dropdown--${size}`]: size },
+      { 'slds-dropdown--left': position.endsWith('left') },
+      { 'slds-dropdown--right': position.endsWith('right') },
+      { 'slds-dropdown--bottom': position.startsWith('bottom') },
+      { [`slds-nubbin--${position}`]: nubbin },
+      className,
     ];
 
     const rest = omit(this.props, Object.keys(DropdownMenu.propTypes));
 
     return (
-      <div className={this.prefix(this.getClasses())}>
+      <div className={cx(this.getClasses())}>
         {this.button()}
-        <div {...rest} className={this.prefix(this.dropdownClasses, this.props.className)}>
-          {this.props.children}
+        <div {...rest} className={cx(this.dropdownClasses)}>
+          {children}
         </div>
       </div>
     );

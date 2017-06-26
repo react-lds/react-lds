@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import cx from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
 
 import moment from 'moment-timezone';
 import 'moment-range';
 
 import { Button, ButtonIcon, Input } from '../../';
-import { prefixClasses } from '../../utils';
 
 const defaultDateFormat = 'l';
 const placeholderDateFormat = 'L';
@@ -54,7 +53,6 @@ export class Datepicker extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
     const { date, initialDate, locale, open, timezone, translations } = this.props;
 
     moment.locale(locale.toLowerCase());
@@ -295,12 +293,12 @@ export class Datepicker extends React.Component {
     const { viewedDate } = this.state;
 
     return (
-      <div className={this.prefix('shrink-none')}>
-        <label className={this.prefix('assistive-text')} htmlFor="select-01">Pick a Year</label>
-        <div className={this.prefix('select_container')}>
+      <div className="slds-shrink-none">
+        <label className="slds-assistive-text" htmlFor="select-01">Pick a Year</label>
+        <div className="slds-select_container">
           <select
             value={viewedDate.year()}
-            className={this.prefix('select')}
+            className="slds-select"
             onChange={this.onYearChange}
           >
             {this.renderYearOptions()}
@@ -325,7 +323,7 @@ export class Datepicker extends React.Component {
           <td colSpan="7" role="gridcell">
             <a
               onClick={onClick}
-              className={this.prefix(['show--inline-block', 'p-bottom--x-small'])}
+              className="slds-show--inline-block slds-p-bottom--x-small"
             >
               {today}
             </a>
@@ -353,16 +351,18 @@ export class Datepicker extends React.Component {
    */
   renderDay(day, inRange, dayIndex) {
     const { inputValue } = this.state;
-    const classes = {
-      [this.prefix('is-today')]: day.isSame(moment(), 'day'),
-      [this.prefix('disabled-text')]: !inRange,
-      [this.prefix('is-selected')]: day.isSame(moment(inputValue, defaultDateFormat), 'day'),
-    };
+
     const onClick = () => inRange && this.onDatepickerChange(day);
 
+    const classes = {
+      'slds-is-today': day.isSame(moment(), 'day'),
+      'slds-disabled-text': !inRange,
+      'slds-is-selected': day.isSame(moment(inputValue, defaultDateFormat), 'day'),
+    };
+
     return (
-      <td key={dayIndex} className={classnames(classes)} headers={day.day()}>
-        <span className={this.prefix('day')} onClick={onClick}>
+      <td key={dayIndex} className={cx(classes)} headers={day.day()}>
+        <span className="slds-day" onClick={onClick}>
           {day.date()}
         </span>
       </td>
@@ -370,10 +370,9 @@ export class Datepicker extends React.Component {
   }
 
   render() {
-    const {
-      required,
-    } = this.props;
+    const { required } = this.props;
     const { inputValue, isValid, open, viewedDate } = this.state;
+
     const inputFieldLabel = this.getTranslations('inputFieldLabel');
     const inputFieldError = this.getTranslations('inputFieldError');
     const error = isValid ? undefined : inputFieldError;
@@ -393,18 +392,18 @@ export class Datepicker extends React.Component {
           required={required}
         />
         {open && (
-          <div className={this.prefix(['datepicker', 'dropdown', 'dropdown--left'])}>
-            <div className={this.prefix(['datepicker__filter', 'grid'])}>
-              <div className={this.prefix(['datepicker__filter--month', 'grid', 'grid--align-spread', 'grow'])}>
-                <div className={this.prefix('align-middle')}>
+          <div className="slds-datepicker slds-dropdown slds-dropdown--left">
+            <div className="slds-datepicker__filter slds-grid">
+              <div className="slds-datepicker__filter--month slds-grid slds-grid--align-spread slds-grow">
+                <div className="slds-align-middle">
                   <Button icon onClick={() => this.onMonthChange(-1)} icon-container>
                     <ButtonIcon position="left" sprite="utility" icon="left" />
                   </Button>
                 </div>
-                <h2 id="month" className={this.prefix('align-middle')}>
+                <h2 id="month" className="slds-align-middle">
                   {viewedDate.format('MMMM')}
                 </h2>
-                <div className={this.prefix('align-middle')}>
+                <div className="slds-align-middle">
                   <Button icon onClick={() => this.onMonthChange(1)} icon-container>
                     <ButtonIcon position="right" sprite="utility" icon="right" />
                   </Button>
@@ -412,7 +411,7 @@ export class Datepicker extends React.Component {
               </div>
               {this.renderYearPicker()}
             </div>
-            <table className={this.prefix('datepicker__month')} role="grid">
+            <table className="slds-datepicker__month" role="grid">
               {Datepicker.renderWeekHeader()}
               {this.renderMonth()}
             </table>
@@ -422,8 +421,6 @@ export class Datepicker extends React.Component {
     );
   }
 }
-
-Datepicker.contextTypes = { cssPrefix: PropTypes.string };
 
 Datepicker.defaultProps = {
   date: undefined,

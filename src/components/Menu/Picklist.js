@@ -3,12 +3,9 @@ import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash.omit';
 
-import { prefixClasses } from '../../utils';
 import { DropdownMenu, DropdownMenuList, DropdownMenuListItem, Button, IconSVG } from '../../';
 
 export class Picklist extends React.Component {
-  static contextTypes = { cssPrefix: PropTypes.string };
-
   static propTypes = {
     /**
      * triggered whenever an item was clicked, has the items key as parameter
@@ -33,25 +30,17 @@ export class Picklist extends React.Component {
     label: PropTypes.string.isRequired,
   };
 
+  static defaultProps = {
+    className: null,
+    items: [],
+  }
+
   constructor(props, context) {
     super(props, context);
-
     this.state = { open: false };
-
-    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
-    this.toggle = this.toggle.bind(this);
   }
 
-  button() {
-    return (
-      <Button className={this.prefix('picklist__label')} neutral onClick={this.toggle}>
-        <span className={this.prefix('prefix')}>{this.props.label}</span>
-        <IconSVG sprite="utility" icon="down" />
-      </Button>
-    );
-  }
-
-  toggle() {
+  toggle = () => {
     this.setState({ open: !this.state.open });
   }
 
@@ -59,9 +48,19 @@ export class Picklist extends React.Component {
     this.setState({ open: false });
   }
 
+  button() {
+    return (
+      <Button className="slds-picklist__label" neutral onClick={this.toggle}>
+        <span className="slds-prefix">{this.props.label}</span>
+        <IconSVG sprite="utility" icon="down" />
+      </Button>
+    );
+  }
+
   menuItems() {
-    return this.props.items.map((item) => {
-      const boundClick = this.props.callback.bind(this, item.key);
+    const { callback, items } = this.props;
+    return items.map((item) => {
+      const boundClick = callback.bind(this, item.key);
 
       return (
         <DropdownMenuListItem

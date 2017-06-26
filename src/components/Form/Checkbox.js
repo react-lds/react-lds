@@ -25,7 +25,11 @@ const Checkbox = (props) => {
   );
 };
 
-Checkbox.contextTypes = { cssPrefix: PropTypes.string };
+Checkbox.defaultProps = {
+  error: null,
+  hideLabel: false,
+  required: false,
+};
 
 Checkbox.propTypes = {
   /**

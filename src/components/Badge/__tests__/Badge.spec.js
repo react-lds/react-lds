@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import { Badge } from '../Badge';
@@ -7,12 +6,8 @@ import { Badge } from '../Badge';
 describe('<Badge />', () => {
   let mounted = null;
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
-    mounted = shallow(<Badge label="Foo" />, options);
+    mounted = shallow(<Badge label="Foo" />);
   });
 
   it('renders a label', () => {

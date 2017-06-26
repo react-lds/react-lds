@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { DropdownMenu } from '../DropdownMenu';
@@ -8,10 +7,6 @@ describe('<DropdownMenu />', () => {
   let mounted = null;
   let props = {};
   let button;
-
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   beforeEach(() => {
     button = {
@@ -23,7 +18,7 @@ describe('<DropdownMenu />', () => {
       button,
     };
 
-    mounted = mount(<DropdownMenu {...props}>fakechilds</DropdownMenu>, options);
+    mounted = mount(<DropdownMenu {...props}>fakechilds</DropdownMenu>);
   });
 
   it('is closed by default and opens when the button was clicked', () => {

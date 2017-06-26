@@ -1,15 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import RecordHome from '../RecordHome';
 
 describe('<RecordHome />', () => {
   let mounted;
-
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   beforeEach(() => {
     mounted = mount(
@@ -22,8 +17,7 @@ describe('<RecordHome />', () => {
           { title: 'detail1', content: 'detailcontent1' },
           { title: 'detail2', content: 'detailcontent2' },
         ]}
-      />,
-      options
+      />
     );
   });
 

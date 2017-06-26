@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import Tab from '../Tab';
@@ -7,10 +6,6 @@ import Tab from '../Tab';
 describe('<Tab />', () => {
   let mounted;
   let props = {};
-
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   beforeEach(() => {
     props = {
@@ -33,7 +28,7 @@ describe('<Tab />', () => {
       ],
     };
 
-    mounted = mount(<Tab {...props} />, options);
+    mounted = mount(<Tab {...props} />);
   });
 
   it('renders the first tab initially active', () => {

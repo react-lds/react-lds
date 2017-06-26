@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import ButtonGroup from '../ButtonGroup';
@@ -7,14 +6,10 @@ import { Button } from '../../Button/Button';
 
 describe('<ButtonGroup />', () => {
   let mounted = null;
-  const child = <Button title="foobar" neutral />;
-
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
+  const child = <Button title="foobar" neutral onClick={() => {}} />;
 
   beforeEach(() => {
-    mounted = shallow(<ButtonGroup>{child}</ButtonGroup>, options);
+    mounted = shallow(<ButtonGroup>{child}</ButtonGroup>);
   });
 
   it('renders the correct markup', () => {
