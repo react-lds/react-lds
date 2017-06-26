@@ -94,16 +94,20 @@ describe('<Accordion />', () => {
       </Accordion>
     );
 
-    const ulItem = mounted.find('ul');
-    const liItem = mounted.find('li').first();
-    const sectionItem = liItem.find('section').first();
-    const SummaryDivItem = sectionItem.find('div').first();
-    const h3Item = SummaryDivItem.find('h3').first();
-    expect(ulItem.hasClass('slds-accordion')).toBeTruthy();
-    expect(liItem.hasClass('slds-accordion__list-item')).toBeTruthy();
-    expect(sectionItem.hasClass('slds-accordion__section')).toBeTruthy();
-    expect(SummaryDivItem.hasClass('slds-accordion__summary')).toBeTruthy();
-    expect(h3Item.hasClass('slds-text-heading_small slds-accordion__summary-heading')).toBeTruthy();
+    expect(mounted.find('ul').hasClass('slds-accordion')).toBeTruthy();
+    expect(mounted.find('li').first().hasClass('slds-accordion__list-item')).toBeTruthy();
+    expect(mounted.find('li').first().find('section').first()
+      .hasClass('slds-accordion__section')).toBeTruthy();
+    expect(mounted.find('li').first().find('section').first()
+      .find('div')
+      .first()
+      .hasClass('slds-accordion__summary')).toBeTruthy();
+    expect(mounted.find('li').first().find('section').first()
+      .find('div')
+      .first()
+      .find('h3')
+      .first()
+      .hasClass('slds-text-heading_small slds-accordion__summary-heading')).toBeTruthy();
   });
 
   it('applies className and rest-properties to Accordion', () => {
@@ -170,7 +174,7 @@ describe('<Accordion />', () => {
     expect(mounted.find('.slds-accordion__list-item').first().prop('data-test')).toEqual('bar');
   });
 
-  it('takes styled prop and does something', () => {
+  it('takes styled prop and wraps Accordion in slds-card', () => {
     const mounted = render(
       <Accordion styled>
         <AccordionSection
@@ -194,7 +198,7 @@ describe('<Accordion />', () => {
     expect(mounted.find('div').first().hasClass('slds-card')).toBeTruthy();
   });
 
-  it('takes defaultOpen prop and does something', () => {
+  it('takes defaultOpen prop and renders with that section open', () => {
     const mounted = mount(
       <Accordion styled defaultOpen="section-2">
         <AccordionSection
