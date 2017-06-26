@@ -25,18 +25,12 @@ const AccordionSection = (props) => {
         className={cx(sectionClasses)}
         id={id}
       >
-        <div
-          className="slds-accordion__summary"
-        >
-          <h3
-            className="slds-text-heading_small slds-accordion__summary-heading"
-            onClick=""
-          >
+        <div className="slds-accordion__summary">
+          <h3 className="slds-text-heading_small slds-accordion__summary-heading">
             <Button
               aria-controls={`accordion-details-${id}`}
               aria-expanded={open ? 'true' : 'false'}
               className="slds-accordion__summary-action"
-              onClick={() => {}} // TODO
               reset
             >
               <ButtonIcon
