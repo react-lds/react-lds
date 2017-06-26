@@ -32,10 +32,9 @@ export default class Accordion extends Component {
   constructor(props) {
     super(props);
     this.state = { activeSection: props.defaultOpen ? props.defaultOpen : props.children[0].props.id };
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(id) {
+  handleClick = (id) => {
     this.setState({ activeSection: id });
   }
 
