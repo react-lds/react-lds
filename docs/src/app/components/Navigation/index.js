@@ -10,7 +10,6 @@ const Navigation = () =>
       <ul className="slds-list--vertical slds-has-block-links">
         <NavLink to="/" label="Usage" />
         <NavLink unfinished to="/activity-timeline" label="Activity Timeline" />
-        <NavLink to="/accordions" label="Accordions" />
         <NavLink to="/badges" label="Badges" />
         <NavLink to="/breadcrumbs" label="Breadcrumbs" />
         <NavLink to="/buttons" label="Buttons" />

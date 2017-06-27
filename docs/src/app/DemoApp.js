@@ -1,7 +1,6 @@
 import React from 'react';
 import { Router, Route, IndexRedirect, IndexRoute, browserHistory, hashHistory } from 'react-router';
 
-import Accordions from './pages/Accordion';
 import Badges from './pages/Badge';
 import Breadcrumb from './pages/Breadcrumb';
 import ButtonGroups from './pages/ButtonGroup';
@@ -36,7 +35,6 @@ import TextareaVariants from './pages/Form/Textarea';
 const routes = (
   <Route path="/" component={Page}>
     <IndexRoute component={IndexPage} />
-    <Route path="accordions" component={Accordions} />
     <Route path="badges" component={Badges} />
     <Route path="breadcrumbs" component={Breadcrumb} />
     <Route path="button-groups" component={ButtonGroups} />
