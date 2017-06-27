@@ -17,6 +17,9 @@ import spinnerExampleMediumCode from '!raw!./ExampleMedium';
 import spinnerExampleSmallCode from '!raw!./ExampleSmall';
 import spinnerExampleXSmallCode from '!raw!./ExampleXSmall';
 import spinnerExampleXXSmallCode from '!raw!./ExampleXXSmall';
+import spinnerExampleWithContainerCode from '!raw!./ExampleWithContainer';
+import spinnerExampleWithoutContainerCode from '!raw!./ExampleWithoutContainer';
+import spinnerExampleWithContainerFixedCode from '!raw!./ExampleWithContainerFixed';
 
 import CodeExample from '../../components/CodeExample';
 import DecoratorList from '../../components/DecoratorList';
@@ -39,6 +42,10 @@ import SpinnerExampleMedium from './ExampleMedium';
 import SpinnerExampleSmall from './ExampleSmall';
 import SpinnerExampleXSmall from './ExampleXSmall';
 import SpinnerExampleXXSmall from './ExampleXXSmall';
+import SpinnerExampleWithContainer from './ExampleWithContainer';
+import SpinnerExampleWithoutContainer from './ExampleWithoutContainer';
+import SpinnerExampleWithContainerFixed from './ExampleWithContainerFixed';
+
 
 require('./index.scss');
 
@@ -178,6 +185,33 @@ const Spinners = () => (
       />
       <div className="demo-spinner demo-spinner--inverse">
         <SpinnerExampleInverseLarge />
+      </div>
+    </div>
+    <div className="slds-p-around--xx-large">
+      <CodeExample
+        title="Medium Spinner without container"
+        code={spinnerExampleWithoutContainerCode}
+      />
+      <div className="demo-spinner demo-spinner--colorBackground">
+        <SpinnerExampleWithoutContainer />
+      </div>
+    </div>
+    <div className="slds-p-around--xx-large">
+      <CodeExample
+        title="Medium Spinner with container"
+        code={spinnerExampleWithContainerCode}
+      />
+      <div className="demo-spinner demo-spinner--colorBackground">
+        <SpinnerExampleWithContainer />
+      </div>
+    </div>
+    <div className="slds-p-around--xx-large">
+      <CodeExample
+        title="Medium Spinner with container fixed"
+        code={spinnerExampleWithContainerFixedCode}
+      />
+      <div className="demo-spinner demo-spinner--colorBackground">
+        <SpinnerExampleWithContainerFixed />
       </div>
     </div>
 
