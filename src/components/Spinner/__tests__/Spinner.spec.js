@@ -16,12 +16,10 @@ describe('<Spinner />', () => {
   });
 
   it('renders the correct markup', () => {
-    expect(mounted.find('.slds-spinner_container').length).toBe(1);
     expect(mounted.find('.slds-spinner').length).toBe(1);
     expect(mounted.find('.slds-spinner__dot-a').length).toBe(1);
     expect(mounted.find('.slds-spinner__dot-b').length).toBe(1);
-    expect(mounted.find('.slds-spinner_container').children().length).toBe(1);
-    expect(mounted.find('.slds-spinner').children().length).toBe(2);
+    expect(mounted.find('.slds-spinner').children().length).toBe(3);
   });
 
   it('renders sizes', () => {
@@ -36,5 +34,17 @@ describe('<Spinner />', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-spinner').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-spinner').prop('data-test')).toEqual('bar');
+  });
+
+  it('renders in container', () => {
+    mounted.setProps({ container: true });
+    expect(mounted.find('.slds-spinner_container').length).toBe(1);
+    expect(mounted.find('.slds-spinner_container').children().length).toBe(1);
+  });
+
+  it('renders in fixed container', () => {
+    mounted.setProps({ container: true, fixed: true });
+    expect(mounted.find('.slds-is-fixed .slds-spinner_container').length).toBe(1);
+    expect(mounted.find('.slds-is-fixed .slds-spinner_container').length).toBe(1);
   });
 });
