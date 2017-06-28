@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { Spinner } from 'react-lds';
+import { Spinner, SpinnerContainer } from 'react-lds';
 
 const ExampleWithContainerFixed = () => (
-  <div>
-    <p>test</p>
-    <Spinner container size="medium" />
-  </div>
+  <SpinnerContainer>
+    <Spinner size="medium" />
+  </SpinnerContainer>
 );
 
 // the example is not actually fixed, because it would cover the whole page.

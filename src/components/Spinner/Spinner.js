@@ -5,7 +5,7 @@ import cx from 'classnames';
 import { flavorable } from '../../decorators';
 
 export const Spinner = (props) => {
-  const { className, size, container, fixed, ...rest } = props;
+  const { className, size, ...rest } = props;
 
   const sldsClasses = [
     'slds-spinner',
@@ -13,28 +13,13 @@ export const Spinner = (props) => {
     className
   ];
 
-  const renderSpinner = () =>
-    (
-      <div {...rest} className={cx(sldsClasses)} role="status">
-        <span className="slds-assistive-text">Loading</span>
-        <div className="slds-spinner__dot-a" />
-        <div className="slds-spinner__dot-b" />
-      </div>
-    );
-
-  if (container) {
-    const containerClasses = [
-      'slds-spinner_container',
-      { 'slds-is-fixed': fixed },
-    ];
-    return (
-      <div className={cx(containerClasses)}>
-        {renderSpinner()}
-      </div>
-    );
-  }
-
-  return renderSpinner();
+  return (
+    <div {...rest} className={cx(sldsClasses)} role="status">
+      <span className="slds-assistive-text">Loading</span>
+      <div className="slds-spinner__dot-a" />
+      <div className="slds-spinner__dot-b" />
+    </div>
+  );
 };
 
 Spinner.flavors = [
@@ -45,16 +30,17 @@ Spinner.flavors = [
 Spinner.defaultProps = {
   className: null,
   size: 'medium',
-  container: false,
-  fixed: false,
 };
 
 Spinner.propTypes = {
-
+  /**
+   * class name
+   */
   className: PropTypes.string,
+  /**
+   * spinner size
+   */
   size: PropTypes.oneOf(['xx-small', 'x-small', 'small', 'medium', 'large']),
-  container: PropTypes.bool,
-  fixed: PropTypes.bool,
 };
 
 export default flavorable(Spinner, 'spinner');

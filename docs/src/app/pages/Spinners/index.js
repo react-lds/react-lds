@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Spinner } from 'react-lds/components/Spinner/Spinner';
 import spinnerCode from '!raw!react-lds/components/Spinner/Spinner';
+import spinnerContainerCode from '!raw!react-lds/components/Spinner/SpinnerContainer';
 import spinnerExampleBrandLargeCode from '!raw!./ExampleBrandLarge';
 import spinnerExampleBrandMediumCode from '!raw!./ExampleBrandMedium';
 import spinnerExampleBrandSmallCode from '!raw!./ExampleBrandSmall';
@@ -217,6 +218,7 @@ const Spinners = () => (
 
     <DecoratorList component={Spinner} />
     <PropTypeDescription code={spinnerCode} />
+    <PropTypeDescription code={spinnerContainerCode} />
   </div>
 );
 
