@@ -20,7 +20,6 @@ import spinnerExampleXSmallCode from '!raw!./ExampleXSmall';
 import spinnerExampleXXSmallCode from '!raw!./ExampleXXSmall';
 import spinnerExampleWithContainerCode from '!raw!./ExampleWithContainer';
 import spinnerExampleWithoutContainerCode from '!raw!./ExampleWithoutContainer';
-import spinnerExampleWithContainerFixedCode from '!raw!./ExampleWithContainerFixed';
 
 import CodeExample from '../../components/CodeExample';
 import DecoratorList from '../../components/DecoratorList';
@@ -45,8 +44,6 @@ import SpinnerExampleXSmall from './ExampleXSmall';
 import SpinnerExampleXXSmall from './ExampleXXSmall';
 import SpinnerExampleWithContainer from './ExampleWithContainer';
 import SpinnerExampleWithoutContainer from './ExampleWithoutContainer';
-import SpinnerExampleWithContainerFixed from './ExampleWithContainerFixed';
-
 
 require('./index.scss');
 
@@ -204,15 +201,6 @@ const Spinners = () => (
       />
       <div className="demo-spinner demo-spinner--colorBackground">
         <SpinnerExampleWithContainer />
-      </div>
-    </div>
-    <div className="slds-p-around--xx-large">
-      <CodeExample
-        title="Medium Spinner with container fixed"
-        code={spinnerExampleWithContainerFixedCode}
-      />
-      <div className="demo-spinner demo-spinner--colorBackground">
-        <SpinnerExampleWithContainerFixed />
       </div>
     </div>
 

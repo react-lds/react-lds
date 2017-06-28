@@ -29,6 +29,7 @@ SpinnerContainer.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * fixed positioning by adding the .slds-is-fixed class to the container,
    * needed if dynamically loading portions of component after spinner is showing
    */
   fixed: PropTypes.bool,
