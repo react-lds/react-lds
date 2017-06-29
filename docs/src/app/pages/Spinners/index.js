@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Spinner } from 'react-lds/components/Spinner/Spinner';
 import spinnerCode from '!raw!react-lds/components/Spinner/Spinner';
+import spinnerContainerCode from '!raw!react-lds/components/Spinner/SpinnerContainer';
 import spinnerExampleBrandLargeCode from '!raw!./ExampleBrandLarge';
 import spinnerExampleBrandMediumCode from '!raw!./ExampleBrandMedium';
 import spinnerExampleBrandSmallCode from '!raw!./ExampleBrandSmall';
@@ -17,6 +18,8 @@ import spinnerExampleMediumCode from '!raw!./ExampleMedium';
 import spinnerExampleSmallCode from '!raw!./ExampleSmall';
 import spinnerExampleXSmallCode from '!raw!./ExampleXSmall';
 import spinnerExampleXXSmallCode from '!raw!./ExampleXXSmall';
+import spinnerExampleWithContainerCode from '!raw!./ExampleWithContainer';
+import spinnerExampleWithoutContainerCode from '!raw!./ExampleWithoutContainer';
 
 import CodeExample from '../../components/CodeExample';
 import DecoratorList from '../../components/DecoratorList';
@@ -39,6 +42,8 @@ import SpinnerExampleMedium from './ExampleMedium';
 import SpinnerExampleSmall from './ExampleSmall';
 import SpinnerExampleXSmall from './ExampleXSmall';
 import SpinnerExampleXXSmall from './ExampleXXSmall';
+import SpinnerExampleWithContainer from './ExampleWithContainer';
+import SpinnerExampleWithoutContainer from './ExampleWithoutContainer';
 
 require('./index.scss');
 
@@ -180,9 +185,28 @@ const Spinners = () => (
         <SpinnerExampleInverseLarge />
       </div>
     </div>
+    <div className="slds-p-around--xx-large">
+      <CodeExample
+        title="Medium Spinner without container"
+        code={spinnerExampleWithoutContainerCode}
+      />
+      <div className="demo-spinner demo-spinner--colorBackground">
+        <SpinnerExampleWithoutContainer />
+      </div>
+    </div>
+    <div className="slds-p-around--xx-large">
+      <CodeExample
+        title="Medium Spinner with container"
+        code={spinnerExampleWithContainerCode}
+      />
+      <div className="demo-spinner demo-spinner--colorBackground">
+        <SpinnerExampleWithContainer />
+      </div>
+    </div>
 
     <DecoratorList component={Spinner} />
     <PropTypeDescription code={spinnerCode} />
+    <PropTypeDescription code={spinnerContainerCode} />
   </div>
 );
 

@@ -14,11 +14,10 @@ export const Spinner = (props) => {
   ];
 
   return (
-    <div className="slds-spinner_container">
-      <div {...rest} className={cx(sldsClasses)} aria-hidden="false" role="alert">
-        <div className="slds-spinner__dot-a" />
-        <div className="slds-spinner__dot-b" />
-      </div>
+    <div {...rest} className={cx(sldsClasses)} role="status">
+      <span className="slds-assistive-text">Loading</span>
+      <div className="slds-spinner__dot-a" />
+      <div className="slds-spinner__dot-b" />
     </div>
   );
 };
@@ -34,12 +33,14 @@ Spinner.defaultProps = {
 };
 
 Spinner.propTypes = {
-
+  /**
+   * class name
+   */
   className: PropTypes.string,
-
-
+  /**
+   * spinner size
+   */
   size: PropTypes.oneOf(['xx-small', 'x-small', 'small', 'medium', 'large']),
-
 };
 
 export default flavorable(Spinner, 'spinner');
