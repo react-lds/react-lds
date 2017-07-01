@@ -1,11 +1,11 @@
 import React from 'react';
-import { Notification, Grid, Column, IconSVG } from 'react-lds';
+import { Notification, Grid, Column, Icon } from 'react-lds';
 
 const ExampleToastErrorDetails = () => (
   <Notification toast title="Error" theme="info">
     <Grid className="slds-notify__content">
       <Column className="slds-m-right--small" no-flex>
-        <IconSVG sprite="utility" icon="warning" size="small" />
+        <Icon sprite="utility" icon="warning" size="small" />
       </Column>
       <Column className="slds-m-right--small">
         <h2 className="slds-text-heading--small">
