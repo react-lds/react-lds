@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { IconSVG, prefixClasses as prefix } from 'react-lds';
+import { IconSVG } from 'react-lds';
 
-const PageNavigationMenu = ({ to, children, title }, { cssPrefix, router }) => {
+const PageNavigationMenu = ({ to, children, title }, { router }) => {
   const isActive = router.isActive(to, false);
   const classes = isActive ? 'list__name site-states-parent slds-is-open slds-is-selected' : 'list__name';
   const icon = children ?
-    <IconSVG
-      className={prefix(cssPrefix, ['align-middle', 'col--bump-left', 'icon-text-default'], 'icon__svg')}
+    (<IconSVG
+      className="slds-align-middle slds-col--bump-left slds-icon-text-default slds-icon__svg"
       sprite="utility"
       icon="down"
       size="x-small"
-    /> :
+    />) :
     '';
 
   return (
