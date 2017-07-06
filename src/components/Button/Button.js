@@ -49,6 +49,7 @@ Button.flavors = [
   'icon-bare',
   'icon-x-small',
   'reset',
+  'success',
 ];
 
 Button.defaultProps = {

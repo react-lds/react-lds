@@ -8,6 +8,8 @@ const ExampleNormal = () =>
     <Button neutral title="Button Neutral" />
     <Button brand title="Button Brand" />
     <Button neutral title="Button Neutral Disabled" disabled />
+    <Button title="Button Destructive" destructive />
+    <Button title="Button Success" success />
   </div>;
 
 export default ExampleNormal;
