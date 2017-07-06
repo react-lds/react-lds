@@ -26,7 +26,6 @@ const ExpandableSectionPage = () => (
         <ExampleDefault />
       </section>
     </div>
-
     <div className="slds-p-around--xx-large">
       <section className="slds-m-bottom--xx-large slds-p-top--x-large">
         <CodeExample

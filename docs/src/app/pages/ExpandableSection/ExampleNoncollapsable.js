@@ -4,10 +4,11 @@ import { ExpandableSection } from 'react-lds';
 
 const ExampleNonCollapsable = () => (
   <ExpandableSection
-    collapsable={false}
-    open
-    id="12345"
+    className="testtest"
     title="Test Title"
+    id="NONCOLLAPSABLE"
+    open
+    collapsable={false}
   >
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
