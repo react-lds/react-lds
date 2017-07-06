@@ -10,25 +10,26 @@ const getExpandableSection = (props = {}) => shallow(<ExpandableSection id="51er
 describe('<ExpandableSection />', () => {
   it('renders right class name', () => {
     const mounted = getExpandableSection();
+    mounted.setProps({ open: true });
     expect(mounted.hasClass('slds-section')).toBeTruthy();
   });
 
   it('renders children', () => {
     const child = <div className="51ers" />;
     const mounted = getExpandableSection({ id: 'test', children: child });
+    mounted.setProps({ open: true });
     expect(mounted.contains(child)).toBeTruthy();
   });
 
   it('renders a title', () => {
     const mounted = getExpandableSection();
-    mounted.setProps({ title: 'Title' });
+    mounted.setProps({ title: 'Title', open: false });
     expect(mounted.find(Button).find('span').prop('title')).toEqual('Title');
     expect(mounted.find(Button).find('span').text()).toEqual('Title');
   });
 
   it('renders right slds-classes when open is set to true', () => {
-    const mounted = getExpandableSection();
-    mounted.setProps({ open: true });
+    const mounted = getExpandableSection({ open: true });
     expect(mounted.find('.slds-section').hasClass('slds-is-open')).toBeTruthy();
   });
   it('does not render slds-open when open is false', () => {
@@ -38,5 +39,15 @@ describe('<ExpandableSection />', () => {
   it('does render right class when collapsable is false', () => {
     const mounted = getExpandableSection({ collapsable: false });
     expect(mounted.find('.slds-truncate').hasClass('slds-p-horizontal_small')).toBeTruthy();
+  });
+  it('renders right slds-classes when defaultOpen is set to true', () => {
+    const mounted = getExpandableSection();
+    mounted.setProps({ defaultOpen: true });
+    expect(mounted.find('.slds-section').hasClass('slds-is-open')).toBeTruthy();
+  });
+  it('renders right slds-classes when defaultOpen is set to null', () => {
+    const mounted = getExpandableSection();
+    mounted.setProps({ defaultOpen: null, open: true });
+    expect(mounted.find('.slds-section').hasClass('slds-is-open')).toBeTruthy();
   });
 });
