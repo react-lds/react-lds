@@ -6,27 +6,19 @@ import {
   ModalFooter,
   Backdrop,
   Button,
- Notification,
-  Grid,
-  Column,
-  Icon,
+  Notification,
 } from 'react-lds';
 
 const ExampleModalToast = () => (
   <div className="demo-modal">
     <Modal large open>
       <ModalHeader title="Modal Header">
-        <Notification toast title="Error" theme="error">
-          <Grid className="slds-notify__content">
-            <Column className="slds-m-right--small" no-flex>
-              <Icon sprite="utility" icon="warning" size="small" />
-            </Column>
-            <Column className="slds-m-right--small">
-              <h2 className="slds-text-heading--small">
-                You&#x27;ve encountered some errors when trying to save edits to Samuel Smith.
-              </h2>
-            </Column>
-          </Grid>
+        <Notification toast icon="warning" title="Error" theme="error">
+          <div className="slds-notify__content">
+            <h2 className="slds-text-heading--small">
+              You&#x27;ve encountered some errors when trying to save edits to Samuel Smith.
+            </h2>
+          </div>
         </Notification>
       </ModalHeader>
       <ModalContent>
