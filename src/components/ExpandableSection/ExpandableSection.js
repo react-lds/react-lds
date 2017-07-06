@@ -7,25 +7,37 @@ import { Button, ButtonIcon } from '../../';
 class ExpandableSection extends Component {
   constructor(props) {
     super(props);
-
     const { open, collapsable } = props;
 
-    if (!open && !collapsable) {
-      // eslint-disable-next-line
-      console.warn(
-        '[react-lds] ExpandableSection:',
-        'When collapsable is false, open cannot be false.',
-      );
+    if (props.defaultOpen != null) {
+      if (!collapsable) this.state = { open: true };
+      const defaultOpen = this.props.defaultOpen;
+      this.state = { open: defaultOpen };
     }
 
-    this.state = {
-      open,
-    };
+    if (props.defaultOpen == null) {
+      if (open != null) {
+        if (open === false && !collapsable) {
+          // eslint-disable-next-line
+          console.warn(
+            '[react-lds] ExpandableSection:',
+            'When collapsable is false, open cannot be false.',
+          );
+        }
+        this.state = { open };
+      } else {
+        // eslint-disable-next-line
+        console.warn(
+          '[react-lds] ExpandableSection:',
+          'Either defaultOpen or open need to be != null.',
+        );
+      }
+    }
   }
 
-  onClickToggle = () => {
-    this.setState(state => ({ open: !state.open }));
-  }
+  onClickToggle = (nextOpenState) => {
+    this.setState(() => ({ open: nextOpenState }));
+  };
 
   renderUncollapsable() {
     const { title } = this.props;
@@ -38,19 +50,17 @@ class ExpandableSection extends Component {
   }
 
   renderCollapsable() {
-    const { id, title } = this.props;
-    const { open } = this.state;
-
+    const { id, title, open, defaultOpen } = this.props;
     return (
       <Button
         aria-controls={id}
-        aria-expanded={open.toString()}
+        aria-expanded={this.state.open}
         className="slds-section__title-action"
-        onClick={this.onClickToggle}
+        onClick={defaultOpen ? (() => this.onClickToggle(!this.state.open)) : (() => this.onClickToggle(open))}
       >
         <ButtonIcon
           position="left"
-          icon={open ? 'chevrondown' : 'chevronright'}
+          icon={this.state.open ? 'chevrondown' : 'chevronright'}
           sprite="utility"
           aria-hidden="true"
         />
@@ -63,11 +73,9 @@ class ExpandableSection extends Component {
 
   render() {
     const { children, className, id, collapsable } = this.props;
-    const { open } = this.state;
-
     const sldsClasses = [
       'slds-section',
-      { 'slds-is-open': open },
+      { 'slds-is-open': this.state.open },
       className,
     ];
 
@@ -75,7 +83,6 @@ class ExpandableSection extends Component {
       'slds-section__title',
       { 'slds-theme_shade': !collapsable },
     ];
-
     return (
       <div className={cx(sldsClasses)}>
         <h3 className={cx(headerClasses)}>
@@ -83,7 +90,7 @@ class ExpandableSection extends Component {
             ? this.renderCollapsable()
             : this.renderUncollapsable()}
         </h3>
-        <div aria-hidden={(!open).toString()} className="slds-section__content" id={id}>
+        <div aria-hidden={!this.state.open} className="slds-section__content" id={id}>
           {children}
         </div>
       </div>
@@ -93,8 +100,8 @@ class ExpandableSection extends Component {
 
 ExpandableSection.defaultProps = {
   className: null,
-  title: null,
-  open: true,
+  open: null,
+  defaultOpen: null,
   collapsable: true,
   onClickToggle: () => {},
   children: null,
@@ -108,9 +115,9 @@ ExpandableSection.propTypes = {
   /**
    * (optional) title
    */
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   /**
-   * id is required (to link content to button), content can be empty
+   * id is used to link content to button
    */
   id: PropTypes.string.isRequired,
   /**
@@ -118,9 +125,13 @@ ExpandableSection.propTypes = {
    */
   collapsable: PropTypes.bool,
   /**
-   * defines whether section is open or closed
+   * defines whether section is open or closed (used when in controlled mode)
    */
   open: PropTypes.bool,
+  /**
+   * defines whether component should be used as controlled or uncontrolled component
+  */
+  defaultOpen: PropTypes.bool,
   /**
    * triggered when the user clicks the expand button
    */
@@ -128,7 +139,7 @@ ExpandableSection.propTypes = {
   /**
    * content to be displayed
    */
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
 
 export default ExpandableSection;
