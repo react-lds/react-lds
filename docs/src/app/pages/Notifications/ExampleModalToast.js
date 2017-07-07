@@ -13,12 +13,14 @@ const ExampleModalToast = () => (
   <div className="demo-modal">
     <Modal large open>
       <ModalHeader title="Modal Header">
-        <Notification toast icon="warning" title="Error" theme="error">
-          <div className="slds-notify__content">
-            <h2 className="slds-text-heading--small">
-              You&#x27;ve encountered some errors when trying to save edits to Samuel Smith.
-            </h2>
-          </div>
+        <Notification
+          toast
+          title="Error"
+          theme="error"
+        >
+          <h2 className="slds-text-heading--small">
+            You&#x27;ve encountered some errors when trying to save edits to Samuel Smith.
+          </h2>
         </Notification>
       </ModalHeader>
       <ModalContent>

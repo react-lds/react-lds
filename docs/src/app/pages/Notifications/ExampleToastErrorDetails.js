@@ -1,8 +1,13 @@
 import React from 'react';
-import { Notification } from 'react-lds';
+import { Notification, IconSVG } from 'react-lds';
 
 const ExampleToastErrorDetails = () => (
-  <Notification toast icon="error" title="Error" theme="error">
+  <Notification
+    toast
+    icon={<IconSVG sprite="utility" size="small" icon="error" />}
+    title="Error"
+    theme="error"
+  >
     <h2 className="slds-text-heading--small">
       You&#x27;ve encountered some errors when trying to save edits to Samuel Smith.
     </h2>
