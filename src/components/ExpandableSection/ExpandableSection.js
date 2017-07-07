@@ -7,21 +7,29 @@ import { Button, ButtonIcon } from '../../';
 class ExpandableSection extends Component {
   constructor(props) {
     super(props);
-    const { open, collapsable } = props;
-
-    if (props.defaultOpen != null) {
-      if (!collapsable) this.state = { open: true };
-      const defaultOpen = this.props.defaultOpen;
+    const { uncollapsable, defaultOpen, open } = props;
+    if (defaultOpen && open) {
+      // eslint-disable-next-line
+      console.warn(
+        '[react-lds] ExpandableSection:',
+        'You are supplying both `defaultOpen` & `open`, ignoring `defaultOpen`',
+        'The component will work as a controlled component'
+      );
+    }
+    if (defaultOpen !== null && open === null) {
+      if (uncollapsable) {
+        this.state = { open: true };
+      }
       this.state = { open: defaultOpen };
     }
 
-    if (props.defaultOpen == null) {
-      if (open != null) {
-        if (open === false && !collapsable) {
+    if (defaultOpen === null) {
+      if (open !== null) {
+        if (open === false && uncollapsable) {
           // eslint-disable-next-line
           console.warn(
             '[react-lds] ExpandableSection:',
-            'When collapsable is false, open cannot be false.',
+            'When uncollapsable is true, open cannot be false.',
           );
         }
         this.state = { open };
@@ -35,8 +43,21 @@ class ExpandableSection extends Component {
     }
   }
 
-  onClickToggle = (nextOpenState) => {
-    this.setState(() => ({ open: nextOpenState }));
+  componentWillReceiveProps(nextProps) {
+    const { open: nextOpen } = nextProps;
+    const { defaultOpen: prevDefaultOpen } = this.props;
+
+    if (prevDefaultOpen === null) {
+      this.setState({ open: nextOpen });
+    }
+  }
+
+  onChange = () => {
+    this.setState(prevState => ({ open: !prevState.open }));
+  }
+
+  onClickToggle = () => {
+    this.setState(prevState => ({ open: !prevState.open }));
   };
 
   renderUncollapsable() {
@@ -50,13 +71,13 @@ class ExpandableSection extends Component {
   }
 
   renderCollapsable() {
-    const { id, title, open, defaultOpen } = this.props;
+    const { id, title, open } = this.props;
     return (
       <Button
         aria-controls={id}
         aria-expanded={this.state.open}
         className="slds-section__title-action"
-        onClick={defaultOpen ? (() => this.onClickToggle(!this.state.open)) : (() => this.onClickToggle(open))}
+        onClick={(open !== null) ? (() => this.onClickToggle(open)) : (() => this.onClickToggle(!this.state.open))}
       >
         <ButtonIcon
           position="left"
@@ -72,25 +93,26 @@ class ExpandableSection extends Component {
   }
 
   render() {
-    const { children, className, id, collapsable } = this.props;
+    const { children, className, id, uncollapsable } = this.props;
+    const { open } = this.state;
     const sldsClasses = [
       'slds-section',
-      { 'slds-is-open': this.state.open },
+      { 'slds-is-open': open },
       className,
     ];
-
     const headerClasses = [
       'slds-section__title',
-      { 'slds-theme_shade': !collapsable },
+      { 'slds-theme_shade': uncollapsable },
     ];
+
     return (
       <div className={cx(sldsClasses)}>
         <h3 className={cx(headerClasses)}>
-          {collapsable
+          {!uncollapsable
             ? this.renderCollapsable()
             : this.renderUncollapsable()}
         </h3>
-        <div aria-hidden={!this.state.open} className="slds-section__content" id={id}>
+        <div aria-hidden={!open} className="slds-section__content" id={id}>
           {children}
         </div>
       </div>
@@ -102,8 +124,9 @@ ExpandableSection.defaultProps = {
   className: null,
   open: null,
   defaultOpen: null,
-  collapsable: true,
+  uncollapsable: false,
   onClickToggle: () => {},
+  onChange: () => {},
   children: null,
 };
 
@@ -123,7 +146,7 @@ ExpandableSection.propTypes = {
   /**
    * defines whether section is expandable or not
    */
-  collapsable: PropTypes.bool,
+  uncollapsable: PropTypes.bool,
   /**
    * defines whether section is open or closed (used when in controlled mode)
    */
@@ -132,6 +155,10 @@ ExpandableSection.propTypes = {
    * defines whether component should be used as controlled or uncontrolled component
   */
   defaultOpen: PropTypes.bool,
+  /**
+   * used in controlled mode to react to changes in upper-level component
+   */
+  onChange: PropTypes.func,
   /**
    * triggered when the user clicks the expand button
    */
