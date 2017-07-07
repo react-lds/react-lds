@@ -6,7 +6,7 @@ const ExampleDefault = () => (
   <ExpandableSection
     className="COLLAPSABLE"
     defaultOpen
-    collapsable
+    uncollapsable={false}
     id="COLLAPSABLE"
     title="Lorem Ipsum"
     onClickToggle={() => {}}

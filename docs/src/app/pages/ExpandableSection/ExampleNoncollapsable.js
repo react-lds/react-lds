@@ -8,7 +8,7 @@ const ExampleNonCollapsable = () => (
     title="Test Title"
     id="NONCOLLAPSABLE"
     open
-    collapsable={false}
+    uncollapsable
   >
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
