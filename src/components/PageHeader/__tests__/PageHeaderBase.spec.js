@@ -15,7 +15,7 @@ describe('<PageHeaderBase />', () => {
   });
 
   it('contains info', () => {
-    expect(mounted.find('p.slds-text-body--small').text()).toEqual('foo');
+    expect(mounted.find('p.slds-text-body_small').text()).toEqual('foo');
   });
 
   it('renders the icon', () => {

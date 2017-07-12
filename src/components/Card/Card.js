@@ -32,14 +32,14 @@ const Card = (props) => {
           truncate
         >
           <h2>
-            <a className="slds-text-link--reset">
-              <span className="slds-text-heading--small">{title}</span>
+            <a className="slds-text-link_reset">
+              <span className="slds-text-heading_small">{title}</span>
             </a>
           </h2>
         </MediaObject>
         <div className="slds-no-flex">{headerRight}</div>
       </Grid>
-      <div className="slds-card__body slds-text-align--center">{body}</div>
+      <div className="slds-card__body slds-text-align_center">{body}</div>
       <div className="slds-card__footer">{footer}</div>
     </div>
   );

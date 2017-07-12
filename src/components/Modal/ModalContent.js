@@ -8,8 +8,8 @@ const ModalContent = (props) => {
   const sldsClasses = [
     { 'slds-modal__content': !menu },
     { 'slds-modal__menu': !!menu },
-    { 'slds-p-vertical--large': !menu },
-    { 'slds-p-horizontal--x-large': !menu },
+    { 'slds-p-vertical_large': !menu },
+    { 'slds-p-horizontal_x-large': !menu },
     className,
   ];
 

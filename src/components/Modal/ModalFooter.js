@@ -9,7 +9,7 @@ export const ModalFooter = (props) => {
 
   const sldsClasses = [
     'slds-modal__footer',
-    { 'slds-theme--default': !!defaultTheme },
+    { 'slds-theme_default': !!defaultTheme },
     className
   ];
 
@@ -35,7 +35,7 @@ ModalFooter.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * renders the footer with `theme--default`
+   * renders the footer with `theme_default`
    */
   defaultTheme: PropTypes.bool,
 };

@@ -10,10 +10,10 @@ const DropdownMenuListItem = (props) => {
   const leftIconElem = () => {
     if (leftIcon) {
       const iconClasses = [
-        { 'slds-icon--selected': !leftIcon.alwaysDisplay },
+        { 'slds-icon_selected': !leftIcon.alwaysDisplay },
         { 'slds-icon-text-default': !leftIcon.alwaysDisplay },
-        { 'slds-m-right--x-small': !leftIcon.alwaysDisplay },
-        { 'slds-m-right--small': leftIcon.alwaysDisplay },
+        { 'slds-m-right_x-small': !leftIcon.alwaysDisplay },
+        { 'slds-m-right_small': leftIcon.alwaysDisplay },
         { 'slds-icon': leftIcon.alwaysDisplay },
       ];
 
@@ -35,7 +35,7 @@ const DropdownMenuListItem = (props) => {
       const iconClasses = [
         'slds-icon-selected',
         'slds-icon-text-default',
-        'slds-m-left--small',
+        'slds-m-left_small',
         'slds-shrink-none',
       ];
 
@@ -54,7 +54,7 @@ const DropdownMenuListItem = (props) => {
 
   const sldsClasses = [
     'slds-dropdown__item',
-    { 'slds-has-divider--top-space': divider },
+    { 'slds-has-divider_top-space': divider },
     { 'slds-is-selected': selected },
     className,
   ];

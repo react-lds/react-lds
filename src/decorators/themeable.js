@@ -35,9 +35,9 @@ const getTheme = (theme) => {
   let classes = [];
 
   if (/\stexture/.test(theme)) {
-    classes = [`slds-theme--${theme.split(' ')[0]}`, 'slds-theme--alert-texture'];
+    classes = [`slds-theme_${theme.split(' ')[0]}`, 'slds-theme_alert-texture'];
   } else if (theme !== undefined) {
-    classes = [`slds-theme--${theme}`];
+    classes = [`slds-theme_${theme}`];
   }
 
   return classes;

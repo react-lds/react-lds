@@ -32,7 +32,7 @@ export const MediaObject = (props) => {
     <Tag {...rest} className={cx(sldsClasses)}>
       {figureLeft && renderFigure(figureLeft)}
       <div className={cx(bodyClasses)}>{children}</div>
-      {figureRight && renderFigure(figureRight, ['slds-media__figure--reverse'])}
+      {figureRight && renderFigure(figureRight, ['slds-media__figure_reverse'])}
     </Tag>
   );
 };

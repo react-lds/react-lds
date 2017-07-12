@@ -25,7 +25,7 @@ describe('<ProgressBar />', () => {
 
   it('accepts a size prop', () => {
     const mounted = getProgressBar({ size: 'x-small' });
-    expect(mounted.find('.slds-progress-bar').hasClass('slds-progress-bar--x-small')).toBeTruthy();
+    expect(mounted.find('.slds-progress-bar').hasClass('slds-progress-bar_x-small')).toBeTruthy();
   });
 
   it('passes restprops to progress-bar element', () => {

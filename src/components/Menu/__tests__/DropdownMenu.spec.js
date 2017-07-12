@@ -29,13 +29,13 @@ describe('<DropdownMenu />', () => {
   });
 
   it('renders buttons with border per default', () => {
-    expect(mounted.find('button').hasClass('slds-button--icon-border-filled')).toBeTruthy();
+    expect(mounted.find('button').hasClass('slds-button_icon-border-filled')).toBeTruthy();
   });
 
   it('renders no border when noBorder button prop was set', () => {
     button.noBorder = true;
     mounted.setProps({ button });
-    expect(mounted.find('button').hasClass('slds-button--icon-container')).toBeTruthy();
+    expect(mounted.find('button').hasClass('slds-button_icon-container')).toBeTruthy();
   });
 
   it('isOpen state override works', () => {
@@ -51,27 +51,27 @@ describe('<DropdownMenu />', () => {
 
   it('uses size class', () => {
     mounted.setProps({ size: 'small' });
-    expect(mounted.find('div').last().hasClass('slds-dropdown--small')).toBeTruthy();
+    expect(mounted.find('div').last().hasClass('slds-dropdown_small')).toBeTruthy();
   });
 
   it('uses left class', () => {
     mounted.setProps({ position: 'top-left' });
-    expect(mounted.find('div').last().hasClass('slds-dropdown--left')).toBeTruthy();
+    expect(mounted.find('div').last().hasClass('slds-dropdown_left')).toBeTruthy();
   });
 
   it('uses right class', () => {
     mounted.setProps({ position: 'top-right' });
-    expect(mounted.find('div').last().hasClass('slds-dropdown--right')).toBeTruthy();
+    expect(mounted.find('div').last().hasClass('slds-dropdown_right')).toBeTruthy();
   });
 
   it('uses bottom class', () => {
     mounted.setProps({ position: 'bottom-right' });
-    expect(mounted.find('div').last().hasClass('slds-dropdown--bottom')).toBeTruthy();
+    expect(mounted.find('div').last().hasClass('slds-dropdown_bottom')).toBeTruthy();
   });
 
   it('uses nubbin class', () => {
     mounted.setProps({ position: 'bottom-right', nubbin: true });
-    expect(mounted.find('div').last().hasClass('slds-nubbin--bottom-right')).toBeTruthy();
+    expect(mounted.find('div').last().hasClass('slds-nubbin_bottom-right')).toBeTruthy();
   });
 
   it('applies className and rest-properties', () => {

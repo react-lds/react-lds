@@ -36,7 +36,7 @@ describe('<ObjectHome />', () => {
   });
 
   it('contains the recordType', () => {
-    expect(mounted.find('p.slds-text-title--caps').first().text()).toEqual('unicornz');
+    expect(mounted.find('p.slds-text-title_caps').first().text()).toEqual('unicornz');
   });
 
   it('contains topButtons', () => {
@@ -50,7 +50,7 @@ describe('<ObjectHome />', () => {
   });
 
   it('contains info', () => {
-    expect(mounted.find('p.slds-text-body--small').text()).toEqual('yeah');
+    expect(mounted.find('p.slds-text-body_small').text()).toEqual('yeah');
   });
 
   it('contains bottomButtons', () => {

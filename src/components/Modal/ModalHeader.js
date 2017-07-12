@@ -15,7 +15,7 @@ const ModalHeader = (props) => {
   );
 
   const getTagline = () => (
-    <p className="slds-m-top--x-small">
+    <p className="slds-m-top_x-small">
       {tagline}
     </p>
   );
@@ -23,7 +23,7 @@ const ModalHeader = (props) => {
   const getTitle = () => {
     const titleID = label || null;
     return (
-      <h2 id={titleID} className="slds-text-heading--medium">
+      <h2 id={titleID} className="slds-text-heading_medium">
         {title}
       </h2>
     );
@@ -33,9 +33,9 @@ const ModalHeader = (props) => {
 
   const sldsClasses = [
     'slds-modal__header',
-    { 'slds-modal__header--empty': isEmpty },
-    { 'slds-theme--error': !!prompt },
-    { 'slds-theme--alert-texture': !!prompt },
+    { 'slds-modal__header_empty': isEmpty },
+    { 'slds-theme_error': !!prompt },
+    { 'slds-theme_alert-texture': !!prompt },
     className,
   ];
 

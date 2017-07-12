@@ -28,13 +28,13 @@ describe('<MediaObject />', () => {
 
   it('renders a right figure', () => {
     mounted.setProps({ figureRight: figure });
-    expect(mounted.find('.slds-media__figure--reverse').contains(figure)).toBeTruthy();
+    expect(mounted.find('.slds-media__figure_reverse').contains(figure)).toBeTruthy();
   });
 
   it('renders a left and right figure simultaniously', () => {
     mounted.setProps({ figureLeft: figure, figureRight: figure });
     expect(mounted.find('.slds-media__figure').length).toBe(2);
-    expect(mounted.find('.slds-media__figure--reverse').length).toBe(1);
+    expect(mounted.find('.slds-media__figure_reverse').length).toBe(1);
   });
 
   it('allows a custom tag to be used', () => {

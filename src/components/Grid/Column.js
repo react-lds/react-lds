@@ -37,7 +37,7 @@ export const Column = (props) => {
     if (sizeRegex.test(size)) {
       const from = parseInt(size.split('-')[0], 10);
       const to = parseInt(size.split('-')[1], 10);
-      sldsClasses.push(`slds-${sizeString}--${from}-of-${to}`);
+      sldsClasses.push(`slds-${sizeString}_${from}-of-${to}`);
     }
   });
 

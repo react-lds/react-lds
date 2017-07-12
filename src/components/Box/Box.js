@@ -9,7 +9,7 @@ export const Box = (props) => {
 
   const sldsClasses = [
     'slds-box',
-    { [`slds-box--${size}`]: !!size },
+    { [`slds-box_${size}`]: !!size },
     className
   ];
 

@@ -323,7 +323,7 @@ export class Datepicker extends React.Component {
           <td colSpan="7" role="gridcell">
             <a
               onClick={onClick}
-              className="slds-show--inline-block slds-p-bottom--x-small"
+              className="slds-show_inline-block slds-p-bottom_x-small"
             >
               {today}
             </a>
@@ -392,9 +392,9 @@ export class Datepicker extends React.Component {
           required={required}
         />
         {open && (
-          <div className="slds-datepicker slds-dropdown slds-dropdown--left">
+          <div className="slds-datepicker slds-dropdown slds-dropdown_left">
             <div className="slds-datepicker__filter slds-grid">
-              <div className="slds-datepicker__filter--month slds-grid slds-grid--align-spread slds-grow">
+              <div className="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
                 <div className="slds-align-middle">
                   <Button icon onClick={() => this.onMonthChange(-1)} icon-container>
                     <ButtonIcon position="left" sprite="utility" icon="left" />

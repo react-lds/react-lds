@@ -14,11 +14,11 @@ describe('<Spinner />', () => {
   });
   it('renders sizes', () => {
     const mounted = shallow(<Spinner size="large" />);
-    expect(mounted.find('.slds-spinner').hasClass('slds-spinner--large')).toBeTruthy();
+    expect(mounted.find('.slds-spinner').hasClass('slds-spinner_large')).toBeTruthy();
   });
   it('renders new sizes added in 2.3.x', () => {
     const mounted = shallow(<Spinner size="xx-small" />);
-    expect(mounted.find('.slds-spinner').hasClass('slds-spinner--xx-small')).toBeTruthy();
+    expect(mounted.find('.slds-spinner').hasClass('slds-spinner_xx-small')).toBeTruthy();
   });
   it('applies className and rest-properties to Spinner', () => {
     const mounted = shallow(<Spinner className="foo" data-test="bar" />);

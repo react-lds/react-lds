@@ -29,12 +29,12 @@ describe('<ButtonIcon />', () => {
 
   it('applies positions', () => {
     mounted.setProps({ position: 'left' });
-    expect(mounted.find('svg').hasClass('slds-button__icon--left')).toBeTruthy();
+    expect(mounted.find('svg').hasClass('slds-button__icon_left')).toBeTruthy();
   });
 
   it('applies sizes', () => {
     mounted.setProps({ size: 'small' });
-    expect(mounted.find('svg').hasClass('slds-button__icon--small')).toBeTruthy();
+    expect(mounted.find('svg').hasClass('slds-button__icon_small')).toBeTruthy();
   });
 
   it('applies className and rest-properties', () => {

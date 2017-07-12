@@ -32,7 +32,7 @@ describe('<ModalHeader />', () => {
 
   it('renders title and tagline', () => {
     expect(mounted.find('h2').first().text()).toBe(props.title);
-    expect(mounted.find('.slds-m-top--x-small').first().text()).toBe(props.tagline);
+    expect(mounted.find('.slds-m-top_x-small').first().text()).toBe(props.tagline);
   });
 
   it('renders children', () => {
@@ -41,7 +41,7 @@ describe('<ModalHeader />', () => {
 
   it('renders empty headers', () => {
     mounted.setProps({ title: undefined, tagline: undefined, children: undefined });
-    expect(mounted.find('.slds-modal__header').hasClass('slds-modal__header--empty')).toBeTruthy();
+    expect(mounted.find('.slds-modal__header').hasClass('slds-modal__header_empty')).toBeTruthy();
   });
 
   it('renders a title-ID when there is a title', () => {
@@ -50,8 +50,8 @@ describe('<ModalHeader />', () => {
 
   it('renders in error-theme if it is a prompt', () => {
     mounted.setProps({ prompt: true });
-    expect(mounted.find('.slds-modal__header').hasClass('slds-theme--error')).toBeTruthy();
-    expect(mounted.find('.slds-modal__header').hasClass('slds-theme--alert-texture')).toBeTruthy();
+    expect(mounted.find('.slds-modal__header').hasClass('slds-theme_error')).toBeTruthy();
+    expect(mounted.find('.slds-modal__header').hasClass('slds-theme_alert-texture')).toBeTruthy();
   });
 
   it('hides the close button if it is uncloseable', () => {

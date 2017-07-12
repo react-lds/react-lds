@@ -23,7 +23,7 @@ describe('<Box />', () => {
 
   it('renders different sizes', () => {
     mounted.setProps({ size: 'small' });
-    expect(mounted.hasClass('slds-box--small')).toBeTruthy();
+    expect(mounted.hasClass('slds-box_small')).toBeTruthy();
   });
 
   it('applies className and rest-properties', () => {

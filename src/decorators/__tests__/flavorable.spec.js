@@ -19,23 +19,23 @@ describe('flavorable()', () => {
 
   it('renders a valid flavor', () => {
     mounted.setProps({ strawberry: true });
-    expect(mounted.hasClass('slds-apple--strawberry')).toBeTruthy();
+    expect(mounted.hasClass('slds-apple_strawberry')).toBeTruthy();
   });
 
   it('renders multiple flavors', () => {
     mounted.setProps({ strawberry: true, cherry: true });
-    expect(mounted.hasClass('slds-apple--strawberry')).toBeTruthy();
-    expect(mounted.hasClass('slds-apple--cherry')).toBeTruthy();
+    expect(mounted.hasClass('slds-apple_strawberry')).toBeTruthy();
+    expect(mounted.hasClass('slds-apple_cherry')).toBeTruthy();
   });
 
   it('does not render invalid flavors', () => {
     mounted.setProps({ blueberry: true });
-    expect(mounted.hasClass('slds-apple--blueberry')).toBeFalsy();
+    expect(mounted.hasClass('slds-apple_blueberry')).toBeFalsy();
   });
 
   it('keeps existing sldsClasses and adds flavors', () => {
     mounted.setProps({ strawberry: true, className: 'banana' });
-    expect(mounted.hasClass('slds-apple--strawberry')).toBeTruthy();
+    expect(mounted.hasClass('slds-apple_strawberry')).toBeTruthy();
     expect(mounted.hasClass('banana')).toBeTruthy();
   });
 

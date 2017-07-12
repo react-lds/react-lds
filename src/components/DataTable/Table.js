@@ -9,7 +9,7 @@ export const Table = (props) => {
 
   const sldsClasses = [
     'slds-table',
-    'slds-table--cell-buffer',
+    'slds-table_cell-buffer',
     className,
   ];
 
@@ -25,8 +25,8 @@ Table.flavors = [
 
 Table.variations = [
   'no-row-hover',
-  'max-medium-table--stacked',
-  'max-medium-table--stacked-horizontal',
+  'max-medium-table_stacked',
+  'max-medium-table_stacked-horizontal',
 ];
 
 Table.defaultProps = {

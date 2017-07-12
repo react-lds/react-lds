@@ -27,7 +27,7 @@ describe('<Icon />', () => {
   });
 
   it('renders a square background by default', () => {
-    expect(mounted.find('.slds-icon_container').hasClass('slds-icon_container--circle')).toBeFalsy();
+    expect(mounted.find('.slds-icon_container').hasClass('slds-icon_container_circle')).toBeFalsy();
   });
 
   it('renders a title for accessebility purposes', () => {

@@ -9,8 +9,8 @@ export const Avatar = (props) => {
 
   const sldsClasses = [
     'slds-avatar',
-    { [`slds-avatar--${size}`]: !!size },
-    { 'slds-avatar--empty': !src },
+    { [`slds-avatar_${size}`]: !!size },
+    { 'slds-avatar_empty': !src },
     className
   ];
 

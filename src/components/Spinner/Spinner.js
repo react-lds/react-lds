@@ -9,7 +9,7 @@ export const Spinner = (props) => {
 
   const sldsClasses = [
     'slds-spinner',
-    { [`slds-spinner--${size}`]: !!size },
+    { [`slds-spinner_${size}`]: !!size },
     className
   ];
 

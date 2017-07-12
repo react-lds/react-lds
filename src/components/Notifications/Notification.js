@@ -7,7 +7,7 @@ import { Button, ButtonIcon } from '../../';
 
 const getThemeName = (themeStr) => {
   if (typeof themeStr === 'string') {
-    return themeStr.includes('theme--warning');
+    return themeStr.includes('theme_warning');
   }
 
   return false;
@@ -25,7 +25,7 @@ export const Notification = (props) => {
 
   const sldsClasses = [
     'slds-notify',
-    { 'slds-notify--toast': !!toast },
+    { 'slds-notify_toast': !!toast },
     className,
   ];
 

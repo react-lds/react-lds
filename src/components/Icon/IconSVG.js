@@ -12,7 +12,7 @@ const IconSVG = (props, { assetBasePath }) => {
   const sldsClasses = [
     { 'slds-icon': fill },
     { [`slds-icon-${backgroundClass}`]: !!backgroundClass },
-    { [`slds-icon--${size}`]: !!size },
+    { [`slds-icon_${size}`]: !!size },
     className
   ];
 

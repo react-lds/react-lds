@@ -73,7 +73,7 @@ export class ObjectHome extends React.Component {
       <div {...rest} className={cx(sldsClasses)} role="banner">
         <Grid>
           <Column className="slds-has-flexi-truncate">
-            <p className="slds-text-title--caps">{recordType}</p>
+            <p className="slds-text-title_caps">{recordType}</p>
             <Grid>
               <Grid className="slds-type-focus slds-no-space">
                 <h1
@@ -99,7 +99,7 @@ export class ObjectHome extends React.Component {
         </Grid>
         <Grid>
           <Column className="slds-align-bottom">
-            <p className="slds-page-header__info slds-text-body--small">{info}</p>
+            <p className="slds-page-header__info slds-text-body_small">{info}</p>
           </Column>
           <Column className="slds-align-bottom slds-no-flex slds-grid">{bottomButtons}</Column>
         </Grid>

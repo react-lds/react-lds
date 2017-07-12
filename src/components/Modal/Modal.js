@@ -38,7 +38,7 @@ export const Modal = (props) => {
 
   const sldsClasses = [
     'slds-modal',
-    { 'slds-modal--prompt': !!prompt },
+    { 'slds-modal_prompt': !!prompt },
     { 'slds-fade-in-open': isOpen },
     className,
   ];
@@ -87,7 +87,7 @@ Modal.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * id of the modal-content (required as aria-describedby). must be set for --prompts
+   * id of the modal-content (required as aria-describedby). must be set for _prompts
    */
   description: PropTypes.string,
   /**
