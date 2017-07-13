@@ -39,7 +39,7 @@ export const Notification = (props) => {
     return (
       <span className={cx(iconContainerClasses)}>
         {icon}
-        <span className="slds-assistive-text" />
+        <span className="slds-assistive-text">{title}</span>
       </span>
     );
   };
