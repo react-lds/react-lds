@@ -98,7 +98,7 @@ export const Cell = (props) => {
 
   const wrapChildren = (content) => {
     if (!!sortable && isHeader) {
-      return <a className="slds-th__action slds-text-link--reset">{content}</a>;
+      return <a className="slds-th__action slds-text-link_reset">{content}</a>;
     }
 
     return content;
@@ -112,7 +112,7 @@ export const Cell = (props) => {
 
   const sldsClasses = [
     { 'slds-is-resizable': scope === 'col' && !!resizable },
-    { 'slds-is-sorted--asc': !!sortable && sortDirection === 'asc' },
+    { 'slds-is-sorted_asc': !!sortable && sortDirection === 'asc' },
     className,
   ];
 

@@ -7,7 +7,7 @@ const NavigationListElement = ({ children, active, ...rest }) => {
   return (
     <li className={activeClass}>
       {React.cloneElement(children, {
-        className: 'slds-navigation-list--vertical__action slds-text-link--reset',
+        className: 'slds-navigation-list_vertical__action slds-text-link_reset',
         ...rest
       })}
     </li>

@@ -13,7 +13,7 @@ describe('<NavigationListElement />', () => {
 
   it('renders child with additional classNames', () => {
     const mountedChild = mounted.find('a').first();
-    expect(mountedChild.prop('className')).toEqual('slds-navigation-list--vertical__action slds-text-link--reset');
+    expect(mountedChild.prop('className')).toEqual('slds-navigation-list_vertical__action slds-text-link_reset');
   });
 
   it('sets active class', () => {

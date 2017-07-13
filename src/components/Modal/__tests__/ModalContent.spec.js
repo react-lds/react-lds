@@ -12,8 +12,8 @@ describe('<ModalContent />', () => {
   });
 
   it('renders the correct markup', () => {
-    expect(mounted.find('.slds-modal__content').hasClass('slds-p-vertical--large')).toBeTruthy();
-    expect(mounted.find('.slds-modal__content').hasClass('slds-p-horizontal--x-large')).toBeTruthy();
+    expect(mounted.find('.slds-modal__content').hasClass('slds-p-vertical_large')).toBeTruthy();
+    expect(mounted.find('.slds-modal__content').hasClass('slds-p-horizontal_x-large')).toBeTruthy();
   });
 
   it('renders children', () => {

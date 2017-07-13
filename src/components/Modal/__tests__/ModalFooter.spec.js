@@ -21,7 +21,7 @@ describe('<ModalFooter />', () => {
 
   it('applies the default theme', () => {
     mounted.setProps({ defaultTheme: true });
-    expect(mounted.find('.slds-theme--default')).toBeTruthy();
+    expect(mounted.find('.slds-theme_default')).toBeTruthy();
   });
 
   it('applies className and rest-properties', () => {

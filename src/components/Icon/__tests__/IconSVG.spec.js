@@ -28,7 +28,7 @@ describe('<IconSVG />', () => {
 
   it('supports different sizes', () => {
     mounted.setProps({ size: 'large' });
-    expect(mounted.find('svg').hasClass('slds-icon--large')).toBeTruthy();
+    expect(mounted.find('svg').hasClass('slds-icon_large')).toBeTruthy();
   });
 
   it('renders an icon with a custom background color', () => {

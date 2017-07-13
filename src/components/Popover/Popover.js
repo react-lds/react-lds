@@ -26,16 +26,16 @@ export class Popover extends React.Component {
     const { header, panels, customLayout } = this.props;
     const headerClasses = [
       'slds-popover__header',
-      { 'slds-theme--warning': customLayout === 'warning' },
-      { 'slds-theme--error': customLayout === 'error' },
-      { 'slds-theme--success': customLayout === 'success' },
-      { 'slds-theme--info': customLayout === 'info' },
+      { 'slds-theme_warning': customLayout === 'warning' },
+      { 'slds-theme_error': customLayout === 'error' },
+      { 'slds-theme_success': customLayout === 'success' },
+      { 'slds-theme_info': customLayout === 'info' },
     ];
 
     let headerContent;
     let borderRadius;
     if (!!panels && (typeof customLayout !== 'undefined') && customLayout !== '') {
-      headerContent = (<h2 className="slds-text-heading--small slds-p-around--xxx-small">{header}</h2>);
+      headerContent = (<h2 className="slds-text-heading_small slds-p-around_xxx-small">{header}</h2>);
       borderRadius = {
         borderTopLeftRadius: 'calc(0.25rem - 1px)',
         borderTopRightRadius: 'calc(0.25rem - 1px)',
@@ -77,8 +77,8 @@ export class Popover extends React.Component {
   renderCloseButton() {
     const { onClose, className, customLayout } = this.props;
     const closeButtonClasses = [
-      'slds-button--icon-small',
-      'slds-float--right',
+      'slds-button_icon-small',
+      'slds-float_right',
       'slds-popover__close',
     ];
     const invertIcon = customLayout ? Popover.getThemeName(customLayout) : Popover.getThemeName(className);
@@ -101,8 +101,8 @@ export class Popover extends React.Component {
 
     const sldsClasses = [
       'slds-popover',
-      { [`slds-nubbin--${nubbin}`]: !!nubbin },
-      { 'slds-popover--panel': (!!panels && (typeof customLayout === 'undefined' || customLayout === '')) },
+      { [`slds-nubbin_${nubbin}`]: !!nubbin },
+      { 'slds-popover_panel': (!!panels && (typeof customLayout === 'undefined' || customLayout === '')) },
       { 'slds-hide': !open },
       className,
     ];

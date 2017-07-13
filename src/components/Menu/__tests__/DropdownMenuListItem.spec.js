@@ -28,7 +28,7 @@ describe('<DropdownMenuListItem />', () => {
 
   it('renders divider', () => {
     mounted.setProps({ divider: true });
-    expect(mounted.find('li').hasClass('slds-has-divider--top-space')).toBeTruthy();
+    expect(mounted.find('li').hasClass('slds-has-divider_top-space')).toBeTruthy();
   });
 
   it('renders left and right icons', () => {

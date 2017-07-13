@@ -39,7 +39,7 @@ const InputRaw = (props) => {
       const iconClasses = [
         'slds-input__icon',
         'slds-icon-text-default',
-        { 'slds-input__icon--left': iconLeft && iconRight },
+        { 'slds-input__icon_left': iconLeft && iconRight },
       ];
 
       return (
@@ -58,7 +58,7 @@ const InputRaw = (props) => {
     if (iconRight && iconRightOnClick) {
       const iconClasses = [
         'slds-input__icon',
-        { 'slds-input__icon--right': iconLeft && iconRight },
+        { 'slds-input__icon_right': iconLeft && iconRight },
       ];
 
       return (
@@ -76,7 +76,7 @@ const InputRaw = (props) => {
       const iconClasses = [
         'slds-input__icon',
         'slds-icon-text-default',
-        { 'slds-input__icon--right': iconLeft && iconRight },
+        { 'slds-input__icon_right': iconLeft && iconRight },
       ];
 
       return (
@@ -92,7 +92,7 @@ const InputRaw = (props) => {
   };
 
   const sldsClasses = [
-    { 'slds-input--bare': bare },
+    { 'slds-input_bare': bare },
     { 'slds-input': !bare },
     className
   ];

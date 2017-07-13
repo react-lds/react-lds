@@ -39,7 +39,7 @@ const CheckboxRaw = (props) => {
 
   const renderLabel = () => (
     <label className="slds-checkbox__label" htmlFor={id}>
-      <span className="slds-checkbox--faux" />
+      <span className="slds-checkbox_faux" />
       <span className={cx(labelClasses)}>{label}</span>
     </label>
   );

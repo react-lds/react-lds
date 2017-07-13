@@ -21,7 +21,7 @@ describe('<NavigationList />', () => {
   });
 
   it('adds classNames', () => {
-    expect(mounted.find('h2').prop('className')).toEqual('slds-text-title--caps slds-p-around--medium');
+    expect(mounted.find('h2').prop('className')).toEqual('slds-text-title_caps slds-p-around_medium');
   });
 
   it('adds aria-describedby from id in child', () => {

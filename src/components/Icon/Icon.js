@@ -12,7 +12,7 @@ const Icon = (props) => {
 
   const sldsClasses = [
     { 'slds-icon_container': true },
-    { 'slds-icon_container--circle': circle },
+    { 'slds-icon_container_circle': circle },
     { [`${backgroundClass}`]: true },
     className
   ];

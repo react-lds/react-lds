@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const NavigationList = ({ id, title, children }) => (
   <div>
     <h2
-      className="slds-text-title--caps slds-p-around--medium"
+      className="slds-text-title_caps slds-p-around_medium"
       id={id}
     >
       {title}

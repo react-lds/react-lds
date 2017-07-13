@@ -44,8 +44,8 @@ class Tab extends React.Component {
     return tabs.map((tab, index) => {
       const boundClick = this.setActiveTab.bind(this, tab.id);
       const headerClasses = [
-        `slds-tabs--${variation}__item`,
-        'slds-text-title--caps',
+        `slds-tabs_${variation}__item`,
+        'slds-text-title_caps',
         { 'slds-active': activeTab === tab.id },
       ];
 
@@ -58,7 +58,7 @@ class Tab extends React.Component {
           onClick={boundClick}
         >
           <a
-            className={`slds-tabs--${variation}__link`}
+            className={`slds-tabs_${variation}__link`}
             role="tab"
             tabIndex={index}
             aria-selected={activeTab === tab.id}
@@ -78,7 +78,7 @@ class Tab extends React.Component {
 
     return tabs.map((tab) => {
       const bodyClasses = [
-        `slds-tabs--${variation}__content`,
+        `slds-tabs_${variation}__content`,
         { 'slds-show': activeTab === tab.id },
         { 'slds-hide': activeTab !== tab.id },
       ];
@@ -102,13 +102,13 @@ class Tab extends React.Component {
     const rest = omit(this.props, Object.keys(Tab.propTypes));
 
     const sldsClasses = [
-      `slds-tabs--${variation}`,
+      `slds-tabs_${variation}`,
       className
     ];
 
     return (
       <div {...rest} className={cx(sldsClasses)}>
-        <ul className={`slds-tabs--${this.props.variation}__nav`} role="tablist">
+        <ul className={`slds-tabs_${this.props.variation}__nav`} role="tablist">
           {this.renderHeader()}
         </ul>
         {this.renderBody()}

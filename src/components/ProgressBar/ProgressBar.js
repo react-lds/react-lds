@@ -9,7 +9,7 @@ export const ProgressBar = (props) => {
 
   const sldsClasses = [
     'slds-progress-bar',
-    { [`slds-progress-bar--${size}`]: !!size },
+    { [`slds-progress-bar_${size}`]: !!size },
     className
   ];
 

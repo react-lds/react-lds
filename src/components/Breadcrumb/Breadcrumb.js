@@ -12,13 +12,13 @@ const Breadcrumb = (props) => {
 
   const sldsClasses = [
     'slds-breadcrumb',
-    'slds-list--horizontal',
+    'slds-list_horizontal',
     className
   ];
 
   const liClasses = [
     'slds-breadcrumb__item',
-    'slds-text-title--caps'
+    'slds-text-title_caps'
   ];
 
   const wrapItems =

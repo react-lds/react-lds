@@ -9,7 +9,7 @@ const DropdownMenuList = (props) => {
     if (header) {
       return (
         <div className="slds-dropdown__header">
-          <span className="slds-text-title--caps">{header}</span>
+          <span className="slds-text-title_caps">{header}</span>
         </div>
       );
     }
@@ -18,8 +18,8 @@ const DropdownMenuList = (props) => {
   };
 
   const listClasses = [
-    { [`slds-dropdown--length-${height}`]: height },
-    { [`slds-dropdown--length-with-icon-${heightIcon}`]: heightIcon },
+    { [`slds-dropdown_length-${height}`]: height },
+    { [`slds-dropdown_length-with-icon-${heightIcon}`]: heightIcon },
     'slds-dropdown__list',
   ];
 

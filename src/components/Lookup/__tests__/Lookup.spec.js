@@ -86,14 +86,14 @@ describe('<Lookup />', () => {
 
   it('renders an alternate email layout', () => {
     mounted.setProps({ emailLayout: true });
-    expect(mounted.find('input').hasClass('slds-input--bare')).toBeTruthy();
+    expect(mounted.find('input').hasClass('slds-input_bare')).toBeTruthy();
     expect(mounted.find('.slds-form-element__label').length).toBe(0);
     expect(mounted.find('.slds-grid .slds-email-composer__label').length).toBe(1);
   });
 
   it('renders a list label', () => {
     mounted.setState({ open: true, loaded: sampleData });
-    expect(mounted.find('.slds-lookup__item--label').text()).toBe(props.listLabel);
+    expect(mounted.find('.slds-lookup__item_label').text()).toBe(props.listLabel);
   });
 
   it('renders a lookup list', () => {

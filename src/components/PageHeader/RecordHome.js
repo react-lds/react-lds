@@ -14,13 +14,13 @@ const RecordHome = (props) => {
     const titleClasses = [
       'slds-text-title',
       'slds-truncate',
-      'slds-m-bottom--xx-small'
+      'slds-m-bottom_xx-small'
     ];
 
     const detailItemsRendered = detailItems.map((item, index) =>
       <li className="slds-page-header__detail-block" key={`${item.title}-${index}`}>
         <p className={cx(titleClasses)}>{item.title}</p>
-        <p className="slds-text-body--regular slds-truncate">{item.content}</p>
+        <p className="slds-text-body_regular slds-truncate">{item.content}</p>
       </li>
     );
     detailRow = (
@@ -37,7 +37,7 @@ const RecordHome = (props) => {
 
   const pageHeaderTitleClasses = [
     'slds-page-header__title',
-    'slds-m-right--small',
+    'slds-m-right_small',
     'slds-truncate',
     'slds-align-middle',
   ];
@@ -51,7 +51,7 @@ const RecordHome = (props) => {
             figureLeft={iconRendered}
             className="slds-grow slds-no-space"
           >
-            <p className="slds-text-title--caps">{recordType}</p>
+            <p className="slds-text-title_caps">{recordType}</p>
             <h1 className={pageHeaderTitleClasses} title={title}>
               {title}
             </h1>

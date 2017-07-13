@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { Button, ButtonIcon } from 'react-lds';
+import { Button, ButtonIcon } from '../../';
 
 const AccordionSection = (props) => {
   const { children, className, id, open, summary, summaryOnClick, ...rest } = props;

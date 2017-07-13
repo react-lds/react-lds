@@ -17,24 +17,24 @@ describe('<FormElementControl />', () => {
 
   it('renders left icon', () => {
     mounted.setProps({ hasIconLeft: true });
-    expect(mounted.hasClass('slds-input-has-icon--right')).toBeFalsy();
+    expect(mounted.hasClass('slds-input-has-icon_right')).toBeFalsy();
     expect(mounted.find('.slds-form-element__control').hasClass('slds-input-has-icon')).toBeTruthy();
-    expect(mounted.find('.slds-form-element__control').hasClass('slds-input-has-icon--left')).toBeTruthy();
+    expect(mounted.find('.slds-form-element__control').hasClass('slds-input-has-icon_left')).toBeTruthy();
   });
 
   it('renders right icon', () => {
     mounted.setProps({ hasIconRight: true });
-    expect(mounted.hasClass('slds-input-has-icon--left')).toBeFalsy();
+    expect(mounted.hasClass('slds-input-has-icon_left')).toBeFalsy();
     expect(mounted.find('.slds-form-element__control').hasClass('slds-input-has-icon')).toBeTruthy();
-    expect(mounted.find('.slds-form-element__control').hasClass('slds-input-has-icon--right')).toBeTruthy();
+    expect(mounted.find('.slds-form-element__control').hasClass('slds-input-has-icon_right')).toBeTruthy();
   });
 
   it('renders left and right icon together', () => {
     mounted.setProps({ hasIconLeft: true, hasIconRight: true });
-    expect(mounted.hasClass('slds-input-has-icon--right')).toBeFalsy();
-    expect(mounted.hasClass('slds-input-has-icon--left')).toBeFalsy();
+    expect(mounted.hasClass('slds-input-has-icon_right')).toBeFalsy();
+    expect(mounted.hasClass('slds-input-has-icon_left')).toBeFalsy();
     expect(mounted.find('.slds-form-element__control').hasClass('slds-input-has-icon')).toBeTruthy();
-    expect(mounted.find('.slds-form-element__control').hasClass('slds-input-has-icon--left-right')).toBeTruthy();
+    expect(mounted.find('.slds-form-element__control').hasClass('slds-input-has-icon_left-right')).toBeTruthy();
   });
 
   it('applies className and rest-properties', () => {

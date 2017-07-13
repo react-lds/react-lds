@@ -8,9 +8,9 @@ const FormElementControl = (props) => {
   const sldsClasses = [
     'slds-form-element__control',
     { 'slds-input-has-icon': hasIconLeft || hasIconRight },
-    { 'slds-input-has-icon--right': hasIconRight && !hasIconLeft },
-    { 'slds-input-has-icon--left': hasIconLeft && !hasIconRight },
-    { 'slds-input-has-icon--left-right': hasIconLeft && hasIconRight },
+    { 'slds-input-has-icon_right': hasIconRight && !hasIconLeft },
+    { 'slds-input-has-icon_left': hasIconLeft && !hasIconRight },
+    { 'slds-input-has-icon_left-right': hasIconLeft && hasIconRight },
     className
   ];
 

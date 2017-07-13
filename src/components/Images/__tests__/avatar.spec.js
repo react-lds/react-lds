@@ -28,7 +28,7 @@ describe('<Avatar />', () => {
 
   it('renders different sizes', () => {
     mounted.setProps({ size: 'large' });
-    expect(mounted.find('.slds-avatar').first().hasClass('slds-avatar--large')).toBeTruthy();
+    expect(mounted.find('.slds-avatar').first().hasClass('slds-avatar_large')).toBeTruthy();
   });
 
   it('renders a src', () => {
@@ -42,7 +42,7 @@ describe('<Avatar />', () => {
   it('renders an empty avatar', () => {
     mounted.setProps({ src: undefined, alt: undefined });
     expect(mounted.find('img').length).toBe(0);
-    expect(mounted.find('.slds-avatar').hasClass('slds-avatar--empty')).toBeTruthy();
+    expect(mounted.find('.slds-avatar').hasClass('slds-avatar_empty')).toBeTruthy();
   });
 
   it('applies className and rest-properties', () => {

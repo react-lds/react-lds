@@ -8,7 +8,7 @@ export const Row = (props) => {
   const { children, className, head, ...rest } = props;
 
   const sldsClasses = [
-    { 'slds-text-title--caps': !!head },
+    { 'slds-text-title_caps': !!head },
     className
   ];
 

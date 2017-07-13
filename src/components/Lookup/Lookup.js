@@ -328,7 +328,7 @@ export class Lookup extends Component {
           aria-expanded={open}
           iconRight={emailLayout ? null : 'search'}
           bare={emailLayout}
-          className={emailLayout ? 'slds-input--height' : null}
+          className={emailLayout ? 'slds-input_height' : null}
         />
       </FormElementControl>
     );
@@ -345,7 +345,7 @@ export class Lookup extends Component {
       return (
         <Pill
           key={i}
-          className={!multi ? 'slds-size--1-of-1' : null}
+          className={!multi ? 'slds-size_1-of-1' : null}
           icon={objectType && (<Icon sprite={Lookup.getSprite(objectType)} icon={objectType} />)}
           id={id}
           title={label}
@@ -377,7 +377,7 @@ export class Lookup extends Component {
       const lookupItemClasses = [
         'slds-lookup__item-action',
         'slds-media',
-        'slds-media--center',
+        'slds-media_center',
       ];
 
       return (
@@ -397,7 +397,7 @@ export class Lookup extends Component {
             <div className="slds-media__body">
               <div className="slds-lookup__result-text">{label}</div>
               {meta && (
-                <span className="slds-lookup__result-meta slds-text-body--small">
+                <span className="slds-lookup__result-meta slds-text-body_small">
                   {meta}
                 </span>
               )}
@@ -409,7 +409,7 @@ export class Lookup extends Component {
 
     return (
       <div className="slds-lookup__menu" role="listbox">
-        <div className="slds-lookup__item--label slds-text-body--small">
+        <div className="slds-lookup__item_label slds-text-body_small">
           {listLabel}
         </div>
         <ul className="slds-lookup__list" role="presentation">
@@ -434,7 +434,7 @@ export class Lookup extends Component {
             {objectType && (
               <Icon
                 size="small"
-                className="slds-m-right--x-small"
+                className="slds-m-right_x-small"
                 sprite={Lookup.getSprite(objectType)}
                 icon={objectType}
               />
@@ -480,7 +480,7 @@ export class Lookup extends Component {
     );
 
     return (
-      <Table bordered className="slds-m-top--small">
+      <Table bordered className="slds-m-top_small">
         {header}
         {body}
       </Table>
@@ -502,7 +502,7 @@ export class Lookup extends Component {
     const wrapperClasses = [
       'slds-grid',
       'slds-grow',
-      'slds-p-horizontal--small',
+      'slds-p-horizontal_small',
     ];
 
     const scope = multi ? null : 'single';

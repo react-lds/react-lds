@@ -26,7 +26,7 @@ const PageHeaderBase = (props) => {
         <p className={cx(titleClasses)} title={title}>
           {title}
         </p>
-        <p className="slds-text-body--small slds-page-header__info">{info}</p>
+        <p className="slds-text-body_small slds-page-header__info">{info}</p>
       </MediaObject>
     </div>
   );

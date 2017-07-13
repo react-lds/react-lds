@@ -15,18 +15,18 @@ describe('themeable', () => {
 
   it('renders a theme', () => {
     mounted.setProps({ theme: 'shade' });
-    expect(mounted.hasClass('slds-theme--shade')).toBeTruthy();
+    expect(mounted.hasClass('slds-theme_shade')).toBeTruthy();
   });
 
   it('renders an alert texture', () => {
     mounted.setProps({ theme: 'shade texture' });
-    expect(mounted.hasClass('slds-theme--shade')).toBeTruthy();
-    expect(mounted.hasClass('slds-theme--alert-texture')).toBeTruthy();
+    expect(mounted.hasClass('slds-theme_shade')).toBeTruthy();
+    expect(mounted.hasClass('slds-theme_alert-texture')).toBeTruthy();
   });
 
   it('keeps existing classes and adds themes', () => {
     mounted.setProps({ theme: 'shade', className: 'yolo' });
-    expect(mounted.hasClass('slds-theme--shade')).toBeTruthy();
+    expect(mounted.hasClass('slds-theme_shade')).toBeTruthy();
     expect(mounted.hasClass('yolo')).toBeTruthy();
   });
 

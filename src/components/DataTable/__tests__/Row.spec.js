@@ -22,7 +22,7 @@ describe('<Row />', () => {
 
   it('adds a class for header rows', () => {
     mounted.setProps({ head: true });
-    expect(mounted.find('tr').hasClass('slds-text-title--caps')).toBeTruthy();
+    expect(mounted.find('tr').hasClass('slds-text-title_caps')).toBeTruthy();
   });
 
   it('applies className and rest-properties', () => {

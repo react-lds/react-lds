@@ -28,7 +28,7 @@ const getflavorClasses = (baseClass, flavors) => {
     throw new Error('"baseClass" must be a string');
   }
 
-  return flavors.map(flavor => `slds-${baseClass}--${flavor}`);
+  return flavors.map(flavor => `slds-${baseClass}_${flavor}`);
 };
 
 const filterFlavors = (props, flavors) => omit(Object.assign({}, props), flavors);

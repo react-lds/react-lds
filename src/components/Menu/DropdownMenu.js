@@ -134,17 +134,17 @@ export class DropdownMenu extends Component {
 
     this.classes = [
       'slds-dropdown-trigger',
-      'slds-dropdown-trigger--click',
-      { 'slds-button--last': last },
+      'slds-dropdown-trigger_click',
+      { 'slds-button_last': last },
     ];
 
     this.dropdownClasses = [
       'slds-dropdown',
-      { [`slds-dropdown--${size}`]: size },
-      { 'slds-dropdown--left': position.endsWith('left') },
-      { 'slds-dropdown--right': position.endsWith('right') },
-      { 'slds-dropdown--bottom': position.startsWith('bottom') },
-      { [`slds-nubbin--${position}`]: nubbin },
+      { [`slds-dropdown_${size}`]: size },
+      { 'slds-dropdown_left': position.endsWith('left') },
+      { 'slds-dropdown_right': position.endsWith('right') },
+      { 'slds-dropdown_bottom': position.startsWith('bottom') },
+      { [`slds-nubbin_${position}`]: nubbin },
       className,
     ];
 

@@ -9,8 +9,8 @@ const ButtonIcon = (props) => {
 
   const sldsClasses = [
     'slds-button__icon',
-    { [`slds-button__icon--${position}`]: !!position },
-    { [`slds-button__icon--${size}`]: !!size },
+    { [`slds-button__icon_${position}`]: !!position },
+    { [`slds-button__icon_${size}`]: !!size },
     className
   ];
 
