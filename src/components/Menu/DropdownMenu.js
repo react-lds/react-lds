@@ -7,75 +7,6 @@ import { prefixClasses } from '../../utils';
 import { Button, ButtonIcon } from '../../';
 
 export class DropdownMenu extends React.Component {
-  static contextTypes = { cssPrefix: PropTypes.string };
-
-  static defaultProps = {
-    isOpen: false,
-    nubbin: false,
-    position: 'top-left',
-    size: 'small',
-  };
-
-  static propTypes = {
-    /**
-     * The button that triggers the dropdown menu
-     * ```
-     * {
-     *    icon: 'settings',
-     *    sprite: 'utility',
-     *    title: 'Click me',
-     *    noBorder: true,
-     * }
-     * ```
-     */
-    button: PropTypes.shape({
-      icon: PropTypes.string.isRequired,
-      sprite: PropTypes.string.isRequired,
-      title: PropTypes.string,
-      noBorder: PropTypes.bool,
-      neutral: PropTypes.bool,
-      brand: PropTypes.bool,
-    }),
-    /**
-     * one DropdownMenuList or many of them
-     */
-    children: PropTypes.node.isRequired,
-    /**
-     * class name
-     */
-    className: PropTypes.string,
-    /**
-     * fully customizable dropdown trigger button, use this instead of the button
-     * shape if needed
-     */
-    customButton: PropTypes.element,
-    /**
-     * adds disabled attribute to menu button
-     */
-    disabled: PropTypes.bool,
-    /**
-     * forces open or closed state, is needed when using a custom button
-     */
-    isOpen: PropTypes.bool,
-    /**
-     * indicates that this is the last element inside a button group and renders
-     * the required css class
-     */
-    last: PropTypes.bool,
-    /**
-     * displays the nubbin at the correct position if true, hidden per default
-     */
-    nubbin: PropTypes.bool,
-    /**
-     * position relative to the menu button
-     */
-    position: PropTypes.oneOf(['top-left', 'top', 'top-right', 'bottom-left', 'bototm', 'bottom-right']),
-    /**
-     * length of the menu box
-     */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-  };
-
   constructor(props, { cssPrefix }) {
     super(props, { cssPrefix });
 
@@ -100,7 +31,8 @@ export class DropdownMenu extends React.Component {
       const title = this.props.button.title;
       return (
         <Button
-          title={this.props.button.title}
+          title={title}
+          tooltip={this.props.button.tooltip}
           disabled={this.props.disabled}
           icon-border-filled={!noBorder && !title}
           icon-container={noBorder && !title}
@@ -157,5 +89,75 @@ export class DropdownMenu extends React.Component {
     );
   }
 }
+
+DropdownMenu.contextTypes = { cssPrefix: PropTypes.string };
+
+DropdownMenu.defaultProps = {
+  isOpen: false,
+  nubbin: false,
+  position: 'top-left',
+  size: 'small',
+};
+
+DropdownMenu.propTypes = {
+  /**
+   * The button that triggers the dropdown menu
+   * ```
+   * {
+   *    icon: 'settings',
+   *    sprite: 'utility',
+   *    title: 'Click me',
+   *    noBorder: true,
+   * }
+   * ```
+   */
+  button: PropTypes.shape({
+    brand: PropTypes.bool,
+    icon: PropTypes.string.isRequired,
+    neutral: PropTypes.bool,
+    noBorder: PropTypes.bool,
+    sprite: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    tooltip: PropTypes.string,
+  }),
+  /**
+   * one DropdownMenuList or many of them
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * class name
+   */
+  className: PropTypes.string,
+  /**
+   * fully customizable dropdown trigger button, use this instead of the button
+   * shape if needed
+   */
+  customButton: PropTypes.element,
+  /**
+   * adds disabled attribute to menu button
+   */
+  disabled: PropTypes.bool,
+  /**
+   * forces open or closed state, is needed when using a custom button
+   */
+  isOpen: PropTypes.bool,
+  /**
+   * indicates that this is the last element inside a button group and renders
+   * the required css class
+   */
+  last: PropTypes.bool,
+  /**
+   * displays the nubbin at the correct position if true, hidden per default
+   */
+  nubbin: PropTypes.bool,
+  /**
+   * position relative to the menu button
+   */
+  position: PropTypes.oneOf(['top-left', 'top', 'top-right', 'bottom-left', 'bototm', 'bottom-right']),
+  /**
+   * length of the menu box
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+};
 
 export default enhanceWithClickOutside(DropdownMenu);

@@ -7,32 +7,6 @@ import { prefixClasses } from '../../utils';
 import { DropdownMenu, DropdownMenuList, DropdownMenuListItem, Button, IconSVG } from '../../';
 
 export class Picklist extends React.Component {
-  static contextTypes = { cssPrefix: PropTypes.string };
-
-  static propTypes = {
-    /**
-     * triggered whenever an item was clicked, has the items key as parameter
-     */
-    callback: PropTypes.func.isRequired,
-    /**
-     * class name
-     */
-    className: PropTypes.string,
-    /**
-     * list of displayed items
-     * `{key: 'id123', label: 'first entry', selected: false}`
-     */
-    items: PropTypes.arrayOf(PropTypes.shape({
-      key: PropTypes.any,
-      label: PropTypes.string,
-      selected: PropTypes.bool,
-    })),
-    /**
-     * label for the button. if a selection is present, you should indicate it
-     */
-    label: PropTypes.string.isRequired,
-  };
-
   constructor(props, context) {
     super(props, context);
 
@@ -44,7 +18,7 @@ export class Picklist extends React.Component {
 
   button() {
     return (
-      <Button className={this.prefix('picklist__label')} neutral onClick={this.toggle}>
+      <Button className={this.prefix('picklist__label')} neutral onClick={this.toggle} tooltip={this.props.tooltip}>
         <span className={this.prefix('prefix')}>{this.props.label}</span>
         <IconSVG sprite="utility" icon="down" />
       </Button>
@@ -88,5 +62,36 @@ export class Picklist extends React.Component {
     );
   }
 }
+
+Picklist.contextTypes = { cssPrefix: PropTypes.string };
+
+Picklist.propTypes = {
+  /**
+   * triggered whenever an item was clicked, has the items key as parameter
+   */
+  callback: PropTypes.func.isRequired,
+  /**
+   * class name
+   */
+  className: PropTypes.string,
+  /**
+   * list of displayed items
+   * `{key: 'id123', label: 'first entry', selected: false}`
+   */
+  items: PropTypes.arrayOf(PropTypes.shape({
+    key: PropTypes.any,
+    label: PropTypes.string,
+    selected: PropTypes.bool,
+  })),
+  /**
+   * label for the button. if a selection is present, you should indicate it
+   */
+  label: PropTypes.string.isRequired,
+  /**
+   * tooltip for the button
+   */
+  tooltip: PropTypes.string,
+};
+
 
 export default enhanceWithClickOutside(Picklist);
