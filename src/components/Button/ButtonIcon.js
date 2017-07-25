@@ -31,6 +31,7 @@ ButtonIcon.contextTypes = { cssPrefix: PropTypes.string };
 ButtonIcon.propTypes = {
   /**
    * class name
+   *
    */
   className: PropTypes.string,
   /**

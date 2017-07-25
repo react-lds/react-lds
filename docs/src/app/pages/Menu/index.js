@@ -57,7 +57,7 @@ const MenuPage = () =>
     <div className="slds-p-around--xx-large">
       <CodeExample
         title="Dropdowns Nubbins and Positions"
-        description="A Nubbin is useful with a borderless button."
+        description="A Nubbin is useful with a borderless button and an optional tooltip."
         code={exampleNubbinCode}
       />
       <ExampleNubbin />
