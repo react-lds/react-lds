@@ -30,7 +30,7 @@ export const Button = (props, { cssPrefix }) => {
       onClick={onClick}
       disabled={disabled}
       value={value}
-      title={tooltip}
+      title={tooltip || title}
     >
       {(children && children.props && children.props.position === 'right') ? title : null}
       {!children ? title : children}
