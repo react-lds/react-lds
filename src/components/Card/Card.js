@@ -28,7 +28,7 @@ const Card = (props) => {
           customTag="header"
           center
           className="slds-has-flexi-truncate"
-          figureLeft={<Icon sprite={sprite} icon={icon} size="small" />}
+          figureLeft={!!icon && <Icon sprite={sprite} icon={icon} size="small" />}
           truncate
         >
           <h2>
@@ -50,6 +50,8 @@ Card.defaultProps = {
   className: null,
   footer: null,
   headerRight: null,
+  icon: null,
+  sprite: null,
 };
 
 Card.propTypes = {
@@ -76,11 +78,11 @@ Card.propTypes = {
   /**
    * icon name
    */
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.string,
   /**
    * icon sprite name
    */
-  sprite: PropTypes.string.isRequired,
+  sprite: PropTypes.string,
 };
 
 export default Card;
