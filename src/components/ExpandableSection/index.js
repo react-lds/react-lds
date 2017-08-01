@@ -1,1 +1,1 @@
-export ExpandableSection from './ExpandableSection';
+export { ExpandableSection } from './ExpandableSection';

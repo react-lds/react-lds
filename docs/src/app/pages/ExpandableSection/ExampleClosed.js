@@ -2,14 +2,10 @@ import React from 'react';
 
 import { ExpandableSection } from 'react-lds';
 
-const ExampleDefault = () => (
+const ExampleClosed = () => (
   <ExpandableSection
-    className="COLLAPSABLE"
-    defaultOpen
-    uncollapsable={false}
-    id="COLLAPSABLE"
-    title="Lorem Ipsum"
-    onClickToggle={() => {}}
+    id="22"
+    title="This is the title"
   >
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
@@ -19,4 +15,4 @@ const ExampleDefault = () => (
   </ExpandableSection>
 );
 
-export default ExampleDefault;
+export default ExampleClosed;

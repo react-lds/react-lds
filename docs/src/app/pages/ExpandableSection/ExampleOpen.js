@@ -2,13 +2,11 @@ import React from 'react';
 
 import { ExpandableSection } from 'react-lds';
 
-const ExampleNonCollapsable = () => (
+const ExampleOpen = () => (
   <ExpandableSection
-    className="testtest"
-    title="Test Title"
-    id="NONCOLLAPSABLE"
     open
-    uncollapsable
+    id="01"
+    title="This is the title"
   >
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
@@ -18,4 +16,4 @@ const ExampleNonCollapsable = () => (
   </ExpandableSection>
 );
 
-export default ExampleNonCollapsable;
+export default ExampleOpen;
