@@ -7,8 +7,10 @@ import { Button, ButtonIcon } from '../../';
 export class ExpandableSection extends Component {
   static defaultProps = {
     className: null,
-    open: false,
+    open: null,
     uncollapsable: false,
+    defaultOpen: false,
+    onClick: null,
   }
 
   static propTypes = {
@@ -25,6 +27,10 @@ export class ExpandableSection extends Component {
       */
     open: PropTypes.bool,
     /**
+     * section should start open
+     */
+    defaultOpen: PropTypes.bool,
+    /**
       * uncollapsable
       */
     uncollapsable: PropTypes.bool,
@@ -36,30 +42,38 @@ export class ExpandableSection extends Component {
       * section title
       */
     title: PropTypes.string.isRequired,
+    /**
+     * function if component is controlled
+     */
+    onClick: PropTypes.func,
   }
 
   constructor(props) {
     super(props);
-    const { open, uncollapsable } = this.props;
-    this.state = uncollapsable ? { open: true } : { open };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { open } = nextProps;
-    this.state = { open };
+    const { open, defaultOpen } = this.props;
+    if (open === null) {
+      // its uncontrolled
+      this.state = { isOpen: defaultOpen };
+    }
   }
 
   toggleSection = () => {
-    this.setState(prevState => ({ open: !prevState.open }));
+    const { open, onClick } = this.props;
+    if (open !== null) {
+      onClick();
+    } else {
+      this.setState(prevState => ({ isOpen: !prevState.isOpen }));
+    }
   }
 
   render() {
-    const { className, children, id, title, uncollapsable, ...rest } = this.props;
-    const { open } = this.state;
+    const { className, children, id, title, uncollapsable, open, defaultOpen, ...rest } = this.props;
+    const isOpen = open === null ? this.state.isOpen : null;
+    // const isControlled =
 
     const sldsClasses = [
       'slds-section',
-      { 'slds-is-open': uncollapsable || open },
+      { 'slds-is-open': uncollapsable || isOpen || open },
       className,
     ];
 
@@ -78,13 +92,13 @@ export class ExpandableSection extends Component {
             :
             <Button
               aria-controls={id}
-              aria-expanded={open}
+              aria-expanded={isOpen || open}
               className="slds-section__title-action"
               onClick={() => this.toggleSection()}
             >
               <ButtonIcon
                 position="left"
-                icon={open ? 'chevrondown' : 'chevronright'}
+                icon={isOpen || open ? 'chevrondown' : 'chevronright'}
                 sprite="utility"
                 aria-hidden="true"
               />

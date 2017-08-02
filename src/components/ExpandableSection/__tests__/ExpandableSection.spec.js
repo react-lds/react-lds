@@ -15,15 +15,12 @@ describe('<ExpandableSection />', () => {
 
   it('renders children', () => {
     const child = <div className="heyo" />;
-    const mounted = getExpandableSection({ id: 'test', children: child, open: true });
+    const mounted = getExpandableSection({ id: 'test', children: child });
     expect(mounted.contains(child)).toBeTruthy();
   });
 
   it('renders a title', () => {
-    const mounted = getExpandableSection({
-      title: 'Title',
-      open: true,
-    });
+    const mounted = getExpandableSection({ title: 'Title' });
     expect(mounted.find(Button).find('span').prop('title')).toEqual('Title');
     expect(mounted.find(Button).find('span').text()).toEqual('Title');
   });
@@ -44,12 +41,10 @@ describe('<ExpandableSection />', () => {
     expect(mounted.find('.slds-truncate').hasClass('slds-p-horizontal_small')).toBeTruthy();
     expect(mounted.find('.slds-section').hasClass('slds-is-open')).toBeTruthy();
   });
-  it('renders component right in controlled mode (open: true -> open: false -> open: true)', () => {
-    const mounted = getExpandableSection({ open: true });
+  it('renders component right in controlled mode (open: true -> open: false)', () => {
+    let mounted = getExpandableSection({ open: true });
     expect(mounted.find('.slds-section').hasClass('slds-is-open')).toBeTruthy();
-    mounted.setProps({ open: false });
+    mounted = getExpandableSection({ open: false });
     expect(mounted.find('.slds-section').hasClass('slds-is-open')).toBeFalsy();
-    mounted.setProps({ open: true });
-    expect(mounted.find('.slds-section').hasClass('slds-is-open')).toBeTruthy();
   });
 });

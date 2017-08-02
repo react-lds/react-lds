@@ -2,9 +2,10 @@ import React from 'react';
 
 import { ExpandableSection } from 'react-lds';
 
-const ExampleClosed = () => (
+const ExampleDefaultOpen = () => (
   <ExpandableSection
-    id="22"
+    defaultOpen
+    id="01"
     title="This is the title"
   >
     <p>
@@ -15,4 +16,4 @@ const ExampleClosed = () => (
   </ExpandableSection>
 );
 
-export default ExampleClosed;
+export default ExampleDefaultOpen;

@@ -1,12 +1,14 @@
 import React from 'react';
 import expandableSectionCode from '!raw!react-lds/components/ExpandableSection/ExpandableSection';
 
-import exampleOpenCode from '!raw!./ExampleOpen';
-import exampleClosedCode from '!raw!./ExampleClosed';
+import exampleOpenCode from '!raw!./ExampleDefaultOpen';
+import exampleClosedCode from '!raw!./ExampleDefaultClosed';
 import exampleUncollapsableCode from '!raw!./ExampleUncollapsable';
-import ExampleOpen from './ExampleOpen';
-import ExampleClosed from './ExampleClosed';
+import exampleControlledCode from '!raw!./ExampleControlled';
+import ExampleOpen from './ExampleDefaultOpen';
+import ExampleClosed from './ExampleDefaultClosed';
 import ExampleUncollapsable from './ExampleUncollapsable';
+import ExampleControlled from './ExampleControlled';
 
 import CodeExample from '../../components/CodeExample';
 import HeaderIcon from '../../components/HeaderIcon';
@@ -20,14 +22,14 @@ const ExpandableSectionPage = () => (
     <div className="slds-p-around--xx-large">
       <section className="slds-m-bottom--xx-large slds-p-top--x-large">
         <CodeExample
-          title="ExpandableSection starting open"
+          title="ExpandableSection uncontrolled starting open"
           code={exampleOpenCode}
         />
         <ExampleOpen />
       </section>
       <section className="slds-m-bottom--xx-large slds-p-top--x-large">
         <CodeExample
-          title="ExpandableSection closed"
+          title="ExpandableSection uncontrolled starting closed"
           code={exampleClosedCode}
         />
         <ExampleClosed />
@@ -38,6 +40,13 @@ const ExpandableSectionPage = () => (
           code={exampleUncollapsableCode}
         />
         <ExampleUncollapsable />
+      </section>
+      <section className="slds-m-bottom--xx-large slds-p-top--x-large">
+        <CodeExample
+          title="ExpandableSection controlled"
+          code={exampleControlledCode}
+        />
+        <ExampleControlled />
       </section>
     </div>
     <PropTypeDescription code={expandableSectionCode} />
