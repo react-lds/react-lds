@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const ModalContent = (props) => {
-  const { children, className, menu, ...rest } = props;
+  const { children, className, menu, id, ...rest } = props;
 
   const sldsClasses = [
     { 'slds-modal__content': !menu },
@@ -13,12 +13,13 @@ const ModalContent = (props) => {
     className,
   ];
 
-  return (<div {...rest} className={cx(sldsClasses)}>{children}</div>);
+  return (<div {...rest} className={cx(sldsClasses)} id={id}>{children}</div>);
 };
 
 ModalContent.defaultProps = {
   className: null,
   menu: false,
+  id: null,
 };
 
 ModalContent.propTypes = {
@@ -34,6 +35,10 @@ ModalContent.propTypes = {
    * render as a modal__menu instead
    */
   menu: PropTypes.bool,
+  /**
+   * id, should be the same as Modal props.description
+   */
+  id: PropTypes.string,
 };
 
 

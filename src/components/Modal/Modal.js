@@ -54,7 +54,6 @@ export const Modal = (props) => {
     >
       <div
         className="slds-modal__container"
-        id={description}
         role={containerRole}
         tabIndex={isDialog ? '0' : null}
       >
@@ -87,7 +86,7 @@ Modal.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * id of the modal-content (required as aria-describedby). must be set for _prompts
+   * id of the modal-content (required as aria-describedby). must be set for _prompts.
    */
   description: PropTypes.string,
   /**

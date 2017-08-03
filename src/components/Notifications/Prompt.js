@@ -9,7 +9,7 @@ const Prompt = (props) => {
     <div>
       <Modal {...rest} className={className} label={label} description={description} open={open} dialog prompt>
         <ModalHeader title={title} />
-        <ModalContent>{children}</ModalContent>
+        <ModalContent id={description}>{children}</ModalContent>
         <ModalFooter defaultTheme>
           <Button neutral title={buttonText} />
         </ModalFooter>
