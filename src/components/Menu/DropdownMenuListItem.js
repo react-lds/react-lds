@@ -5,7 +5,7 @@ import cx from 'classnames';
 import { IconSVG } from '../../';
 
 const DropdownMenuListItem = (props) => {
-  const { children, className, onClick, selected, leftIcon, rightIcon, divider, ...rest } = props;
+  const { children, className, onClick, selected, leftIcon, rightIcon, divider, title, ...rest } = props;
 
   const leftIconElem = () => {
     if (leftIcon) {
@@ -62,7 +62,7 @@ const DropdownMenuListItem = (props) => {
   return (
     <li {...rest} className={cx(sldsClasses)} role="presentation">
       <a role="menuitem" onClick={onClick}>
-        <div className="slds-truncate">
+        <div className="slds-truncate" title={title}>
           {leftIconElem()}
           {children}
         </div>
@@ -119,6 +119,10 @@ DropdownMenuListItem.propTypes = {
    * sets this item into a selection state that displays the leftIcon
    */
   selected: PropTypes.bool,
+  /**
+   * title
+   */
+  title: PropTypes.string.isRequired
 };
 
 export default DropdownMenuListItem;
