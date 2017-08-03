@@ -74,7 +74,7 @@ MediaObject.propTypes = {
    */
   figureRight: PropTypes.node,
   /**
-   * truncates the body
+   * truncates the body, requires title
    */
   truncate: PropTypes.bool,
   /**
