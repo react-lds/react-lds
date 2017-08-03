@@ -42,14 +42,9 @@ describe('<MediaObject />', () => {
     expect(mounted.find('header').length).toBe(1);
   });
 
-  it('truncates the __body if title is set', () => {
+  it('truncates the __body', () => {
     mounted.setProps({ truncate: true, title: 'some title' });
     expect(mounted.find('.slds-media__body').hasClass('slds-truncate')).toBeTruthy();
-  });
-
-  it('does not truncate the __body if title is not set', () => {
-    mounted.setProps({ truncate: true, title: null });
-    expect(mounted.find('.slds-media__body').hasClass('slds-truncate')).toBeFalsy();
   });
 
   it('applies className and rest-properties', () => {
