@@ -10,7 +10,7 @@ export class ExpandableSection extends Component {
     open: null,
     uncollapsable: false,
     defaultOpen: false,
-    onClick: null,
+    onToggle: () => {},
   }
 
   static propTypes = {
@@ -45,7 +45,7 @@ export class ExpandableSection extends Component {
     /**
      * function if component is controlled
      */
-    onClick: PropTypes.func,
+    onToggle: PropTypes.func,
   }
 
   constructor(props) {
@@ -58,9 +58,9 @@ export class ExpandableSection extends Component {
   }
 
   toggleSection = () => {
-    const { open, onClick } = this.props;
+    const { open, onToggle } = this.props;
     if (open !== null) {
-      onClick();
+      onToggle();
     } else {
       this.setState(prevState => ({ isOpen: !prevState.isOpen }));
     }
@@ -94,7 +94,7 @@ export class ExpandableSection extends Component {
               aria-controls={id}
               aria-expanded={isOpen || open}
               className="slds-section__title-action"
-              onClick={() => this.toggleSection()}
+              onClick={this.toggleSection}
             >
               <ButtonIcon
                 position="left"

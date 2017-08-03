@@ -20,7 +20,7 @@ class SampleContainer extends Component {
       <div>
         <ExpandableSection
           open={sectionOpen}
-          onClick={() => this.onSectionToggle()}
+          onClick={this.onSectionToggle}
           id="01"
           title="This is the title"
         >
