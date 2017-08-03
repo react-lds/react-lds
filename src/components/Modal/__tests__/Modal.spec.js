@@ -33,12 +33,10 @@ describe('<Modal />', () => {
   it('renders and passes label and description', () => {
     mounted.setProps({ label: 'foo', description: 'bar' });
     const modalProps = mounted.find('.slds-modal').props();
-    const modalContainerProps = mounted.find('.slds-modal__container').props();
     const modalHeaderProps = mounted.find(ModalHeader).first().props();
 
     expect(modalProps['aria-labelledby']).toBe('foo');
     expect(modalProps['aria-describedby']).toBe('bar');
-    expect(modalContainerProps.id).toBe('bar');
     expect(modalHeaderProps.label).toBe('foo');
     expect(modalHeaderProps.prompt).toBeFalsy();
   });
