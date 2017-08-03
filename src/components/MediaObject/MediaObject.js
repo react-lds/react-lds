@@ -25,7 +25,7 @@ export const MediaObject = (props) => {
 
   const bodyClasses = [
     'slds-media__body',
-    { 'slds-truncate': !!truncate && !!title },
+    { 'slds-truncate': !!truncate },
   ];
 
   return (
