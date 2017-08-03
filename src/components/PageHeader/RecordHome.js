@@ -19,7 +19,7 @@ const RecordHome = (props) => {
 
     const detailItemsRendered = detailItems.map((item, index) =>
       <li className="slds-page-header__detail-block" key={`${item.title}-${index}`}>
-        <p className={cx(titleClasses)}>{item.title}</p>
+        <p className={cx(titleClasses)} title={title}>{item.title}</p>
         <p className="slds-text-body_regular slds-truncate">{item.content}</p>
       </li>
     );

@@ -43,10 +43,9 @@ describe('<MediaObject />', () => {
   });
 
   it('truncates the __body', () => {
-    mounted.setProps({ truncate: true });
+    mounted.setProps({ truncate: true, title: 'some title' });
     expect(mounted.find('.slds-media__body').hasClass('slds-truncate')).toBeTruthy();
   });
-
 
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
