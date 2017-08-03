@@ -16,6 +16,7 @@ describe('<Avatar />', () => {
     props = {
       src: 'foo',
       alt: 'bar',
+      title: 'myTitle'
     };
 
     mounted = shallow(<Avatar {...props} />, options);
@@ -37,6 +38,10 @@ describe('<Avatar />', () => {
 
   it('renders an alt', () => {
     expect(mounted.find('img').first().props().alt).toBe(props.alt);
+  });
+
+  it('renders a title', () => {
+    expect(mounted.find('img').first().props().title).toBe(props.title);
   });
 
   it('renders an empty avatar', () => {
