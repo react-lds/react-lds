@@ -62,7 +62,7 @@ const DropdownMenuListItem = (props) => {
   return (
     <li {...rest} className={cx(sldsClasses)} role="presentation">
       <a role="menuitem" onClick={onClick}>
-        <span className="slds-truncate">
+        <span className="slds-truncate" title={children}>
           {leftIconElem()}
           {children}
         </span>
