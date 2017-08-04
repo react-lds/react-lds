@@ -3,7 +3,7 @@ import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from 
 
 const ExampleHeaderEmpty = () =>
   <div className="demo-modal">
-    <Modal open>
+    <Modal open aria-label="Modal Label" className="slds-modal__header_empty">
       <ModalHeader />
       <ModalContent>
         <div>
