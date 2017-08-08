@@ -354,6 +354,8 @@ export class Datepicker extends React.Component {
 
     const onClick = () => inRange && this.onDatepickerChange(day);
 
+    const isToday = day.isSame(moment(), 'day');
+
     const classes = {
       'slds-is-today': day.isSame(moment(), 'day'),
       'slds-disabled-text': !inRange,
@@ -363,6 +365,7 @@ export class Datepicker extends React.Component {
     return (
       <td key={dayIndex} className={cx(classes)}>
         <span className="slds-day" onClick={onClick}>
+          {isToday && <span className="slds-assistive-text">Today: </span>}
           {day.date()}
         </span>
       </td>

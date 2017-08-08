@@ -26,7 +26,7 @@ describe('<Datepicker />', () => {
   });
 
   it('highlights the current day', () => {
-    expect(mounted.find('.slds-is-today').children().first().text()).toBe(moment().format('D'));
+    expect(mounted.find('.slds-is-today').children().first().text()).toBe(`Today: ${moment().format('D')}`);
   });
 
   it('allows the user to select the next month', () => {
