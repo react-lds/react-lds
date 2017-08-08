@@ -5,7 +5,7 @@ import cx from 'classnames';
 import { flavorable } from '../../decorators';
 
 export const Avatar = (props) => {
-  const { alt, className, src, size, ...rest } = props;
+  const { alt, className, src, size, title, ...rest } = props;
 
   const sldsClasses = [
     'slds-avatar',
@@ -16,7 +16,7 @@ export const Avatar = (props) => {
 
   return (
     <span {...rest} className={cx(sldsClasses)}>
-      {src ? <img src={src} alt={alt} /> : null}
+      {src ? <img src={src} alt={alt} title={title} /> : null}
     </span>
   );
 };
@@ -30,6 +30,7 @@ Avatar.defaultProps = {
   className: null,
   size: null,
   src: null,
+  title: null,
 };
 
 Avatar.propTypes = {
@@ -49,6 +50,10 @@ Avatar.propTypes = {
    * image size
    */
   size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
+  /**
+   * title
+   */
+  title: PropTypes.string,
 };
 
 export default flavorable(Avatar, 'avatar');
