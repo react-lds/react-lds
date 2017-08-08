@@ -372,6 +372,7 @@ export class Datepicker extends React.Component {
   render() {
     const { required } = this.props;
     const { inputValue, isValid, open, viewedDate } = this.state;
+    const viewedMonthName = moment(viewedDate).format('MMMM');
 
     const inputFieldLabel = this.getTranslations('inputFieldLabel');
     const inputFieldError = this.getTranslations('inputFieldError');
@@ -392,7 +393,11 @@ export class Datepicker extends React.Component {
           required={required}
         />
         {open && (
-          <div className="slds-datepicker slds-dropdown slds-dropdown_left">
+          <div
+            aria-label={`Date picker: ${viewedMonthName}`}
+            className="slds-datepicker slds-dropdown slds-dropdown_left"
+            role="dialog"
+          >
             <div className="slds-datepicker__filter slds-grid">
               <div className="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
                 <div className="slds-align-middle">
@@ -411,7 +416,11 @@ export class Datepicker extends React.Component {
               </div>
               {this.renderYearPicker()}
             </div>
-            <table className="slds-datepicker__month" role="grid">
+            <table
+              aria-multiselectable={inputValue !== '' ? true : null}
+              className="slds-datepicker__month"
+              role="grid"
+            >
               {Datepicker.renderWeekHeader()}
               {this.renderMonth()}
             </table>
