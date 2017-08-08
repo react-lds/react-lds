@@ -361,7 +361,7 @@ export class Datepicker extends React.Component {
     };
 
     return (
-      <td key={dayIndex} className={cx(classes)} headers={day.day()}>
+      <td key={dayIndex} className={cx(classes)}>
         <span className="slds-day" onClick={onClick}>
           {day.date()}
         </span>
