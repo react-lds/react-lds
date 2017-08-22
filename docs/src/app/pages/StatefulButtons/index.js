@@ -16,7 +16,7 @@ import ExampleUnselected from './ExampleUnselected';
 
 const StatefulButtons = () =>
   <div>
-    <Masthead figure={<HeaderIcon />} title="StatefulButtons" />
+    <Masthead figure={<HeaderIcon />} title="Stateful Buttons" />
     <div className="slds-p-around--xx-large">
       <section className="slds-m-bottom--xx-large slds-p-top--x-large">
         <CodeExample
