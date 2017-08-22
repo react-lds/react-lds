@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 
 import { flavorable } from '../../decorators';
 import { prefixClasses } from '../../utils';
-import Button from '../Button';
-import IconSVG from '../Icon';
+import { ButtonIcon } from '../../';
 
 export const StatefulButton = (props, { cssPrefix }) => {
   const {
     className,
+    disabled,
     onClick,
     selected,
     stateNotSelected,
-    stateSelectedFocus,
     stateSelected,
+    stateSelectedFocus,
+    tooltip,
     ...rest,
   } = props;
   const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
@@ -22,36 +23,49 @@ export const StatefulButton = (props, { cssPrefix }) => {
     'button',
     'button_stateful',
     selected ? 'is-selected' : 'not-selected',
-    className,
-  ]);
+  ], className);
 
   return (
-    <Button
+    <button
       {...rest}
       className={sldsButtonClasses}
+      disabled={disabled}
       onClick={onClick}
+      title={tooltip}
     >
       <span className={prefix('text-not-selected')}>
-        <IconSVG sprite={stateNotSelected.sprite} icon={stateNotSelected.icon} />
+        <ButtonIcon
+          icon={stateNotSelected.icon}
+          position="left"
+          sprite={stateNotSelected.sprite}
+        />
         {stateNotSelected.title}
       </span>
       <span className={prefix('text-selected')}>
-        <IconSVG sprite={stateSelected.sprite} icon={stateSelected.icon} />
+        <ButtonIcon
+          icon={stateSelected.icon}
+          position="left"
+          sprite={stateSelected.sprite}
+        />
         {stateSelected.title}
       </span>
       <span className={prefix('text-selected-focus')}>
-        <IconSVG sprite={stateSelectedFocus.sprite} icon={stateSelectedFocus.icon} />
+        <ButtonIcon
+          icon={stateSelectedFocus.icon}
+          position="left"
+          sprite={stateSelectedFocus.sprite}
+        />
         {stateSelectedFocus.title}
       </span>
-    </Button>
+    </button>
   );
 };
 
 StatefulButton.flavors = [
+  'neutral',
   'brand',
   'destructive',
   'inverse',
-  'neutral',
   'success',
 ];
 
@@ -64,17 +78,17 @@ StatefulButton.propTypes = {
   className: PropTypes.string,
 
   /**
-   * disables the button
+   * Is this button disabled?
    */
   disabled: PropTypes.bool,
 
   /**
-   * onClick handler to trigger an action
+   * onClick handler which is called when the button is pressed
    */
   onClick: PropTypes.func,
 
   /**
-   * renders as selected
+   * Is this button selected?
    */
   selected: PropTypes.bool,
 
@@ -85,15 +99,15 @@ StatefulButton.propTypes = {
     /**
      * SVG icon name
      */
-    icon: PropTypes.string,
+    icon: PropTypes.string.isRequired,
     /**
      * SVG icon sprite
      */
-    sprite: PropTypes.string,
+    sprite: PropTypes.string.isRequired,
     /**
      * button text
      */
-    title: PropTypes.string,
+    title: PropTypes.string.isRequired,
   }).isRequired,
 
   /**
@@ -103,15 +117,15 @@ StatefulButton.propTypes = {
     /**
      * SVG icon name
      */
-    icon: PropTypes.string,
+    icon: PropTypes.string.isRequired,
     /**
      * SVG icon sprite
      */
-    sprite: PropTypes.string,
+    sprite: PropTypes.string.isRequired,
     /**
      * button text
      */
-    title: PropTypes.string,
+    title: PropTypes.string.isRequired,
   }).isRequired,
 
   /**
@@ -121,16 +135,21 @@ StatefulButton.propTypes = {
     /**
      * SVG icon name
      */
-    icon: PropTypes.string,
+    icon: PropTypes.string.isRequired,
     /**
      * SVG icon sprite
      */
-    sprite: PropTypes.string,
+    sprite: PropTypes.string.isRequired,
     /**
      * button text
      */
-    title: PropTypes.string,
+    title: PropTypes.string.isRequired,
   }).isRequired,
+
+  /**
+   * optional tooltip
+   */
+  tooltip: PropTypes.string,
 };
 
 StatefulButton.defaultProps = {
@@ -138,6 +157,7 @@ StatefulButton.defaultProps = {
   disabled: false,
   onClick: null,
   selected: false,
+  tooltip: null,
 };
 
 export default flavorable(StatefulButton, 'button');
