@@ -22,19 +22,20 @@ export const Button = (props, { cssPrefix }) => {
     'button',
     { 'is-selected': !!selected },
   ];
+  const position = children && children.props && children.props.position;
 
   return (
     <button
       {...rest}
       className={prefix(sldsClasses, className)}
-      onClick={onClick}
       disabled={disabled}
-      value={value}
+      onClick={onClick}
       title={tooltip || title}
+      value={value}
     >
-      {(children && children.props && children.props.position === 'right') ? title : null}
-      {!children ? title : children}
-      {(children && children.props && children.props.position === 'left') ? title : null}
+      {(position === 'right') ? title : null}
+      {children || title}
+      {(position === 'left') ? title : null}
     </button>
   );
 };

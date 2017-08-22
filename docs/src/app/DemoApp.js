@@ -25,8 +25,10 @@ import PageHeader from './pages/PageHeader';
 import Pills from './pages/Pills';
 import Popovers from './pages/Popovers';
 import Radio from './pages/Form/Radio';
+import StatefulButtons from './pages/StatefulButtons';
 import SelectVariants from './pages/Form/Select';
 import CheckboxVariants from './pages/Form/Checkbox';
+
 import Spinners from './pages/Spinners';
 import Tabs from './pages/Tab';
 import TextareaVariants from './pages/Form/Textarea';
@@ -74,6 +76,7 @@ const routes = (
     <Route path="pills" component={Pills} />
     <Route path="popovers" component={Popovers} />
     <Route path="spinners" component={Spinners} />
+    <Route path="stateful-buttons" component={StatefulButtons} />
     <Route path="tabs" component={Tabs} />
   </Route>
 );
