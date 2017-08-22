@@ -1,11 +1,19 @@
 import React from 'react';
-import { Router, Route, IndexRedirect, IndexRoute, browserHistory, hashHistory } from 'react-router';
+import {
+  browserHistory,
+  hashHistory,
+  IndexRedirect,
+  IndexRoute,
+  Route,
+  Router,
+} from 'react-router';
 
 import Badges from './pages/Badge';
 import Breadcrumb from './pages/Breadcrumb';
 import ButtonGroups from './pages/ButtonGroup';
 import Buttons from './pages/Button';
 import Cards from './pages/Card';
+import CheckboxVariants from './pages/Form/Checkbox';
 import DataTable from './pages/DataTable';
 import Datepicker from './pages/Datepicker';
 import Forms from './pages/Form';
@@ -25,11 +33,9 @@ import PageHeader from './pages/PageHeader';
 import Pills from './pages/Pills';
 import Popovers from './pages/Popovers';
 import Radio from './pages/Form/Radio';
-import StatefulButtons from './pages/StatefulButtons';
 import SelectVariants from './pages/Form/Select';
-import CheckboxVariants from './pages/Form/Checkbox';
-
 import Spinners from './pages/Spinners';
+import StatefulButtons from './pages/StatefulButtons';
 import Tabs from './pages/Tab';
 import TextareaVariants from './pages/Form/Textarea';
 
