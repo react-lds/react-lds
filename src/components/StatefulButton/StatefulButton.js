@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { flavorable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 import { ButtonIcon } from '../../';
 
-export const StatefulButton = (props, { cssPrefix }) => {
+export const StatefulButton = (props) => {
   const {
     className,
     disabled,
@@ -17,13 +17,13 @@ export const StatefulButton = (props, { cssPrefix }) => {
     tooltip,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const sldsButtonClasses = prefix([
-    'button',
-    'button_stateful',
-    selected ? 'is-selected' : 'not-selected',
-  ], className);
+  const sldsButtonClasses = [
+    'slds-button',
+    'slds-button_stateful',
+    selected ? 'slds-is-selected' : 'slds-not-selected',
+    className,
+  ];
   const handleClick = typeof onClick === 'function'
     ? () => onClick(!selected)
     : null;
@@ -31,12 +31,12 @@ export const StatefulButton = (props, { cssPrefix }) => {
   return (
     <button
       {...rest}
-      className={sldsButtonClasses}
+      className={cx(sldsButtonClasses)}
       disabled={disabled}
       onClick={handleClick}
       title={tooltip}
     >
-      <span className={prefix('text-not-selected')}>
+      <span className="slds-text-not-selected">
         <ButtonIcon
           icon={stateNotSelected.icon}
           position="left"
@@ -44,7 +44,7 @@ export const StatefulButton = (props, { cssPrefix }) => {
         />
         {stateNotSelected.title}
       </span>
-      <span className={prefix('text-selected')}>
+      <span className="slds-text-selected">
         <ButtonIcon
           icon={stateSelected.icon}
           position="left"
@@ -52,7 +52,7 @@ export const StatefulButton = (props, { cssPrefix }) => {
         />
         {stateSelected.title}
       </span>
-      <span className={prefix('text-selected-focus')}>
+      <span className="slds-text-selected-focus">
         <ButtonIcon
           icon={stateSelectedFocus.icon}
           position="left"
@@ -71,8 +71,6 @@ StatefulButton.flavors = [
   'inverse',
   'success',
 ];
-
-StatefulButton.contextTypes = { cssPrefix: PropTypes.string };
 
 StatefulButton.propTypes = {
   /**
