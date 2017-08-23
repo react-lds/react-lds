@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { default as Notification } from '../Notification';
@@ -10,16 +9,12 @@ describe('<Notification />', () => {
 
   const child = <p>Foobar</p>;
 
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
     props = {
       title: 'foo',
     };
 
-    mounted = mount(<Notification {...props}>{child}</Notification>, options);
+    mounted = mount(<Notification {...props}>{child}</Notification>);
   });
 
   it('renders the correct markup', () => {
@@ -33,18 +28,18 @@ describe('<Notification />', () => {
 
   it('renders non-inverse buttons for the warning theme', () => {
     mounted.setProps({ toast: true, theme: 'info' });
-    expect(mounted.find('button').hasClass('slds-button--icon-inverse')).toBeTruthy();
+    expect(mounted.find('button').hasClass('slds-button_icon-inverse')).toBeTruthy();
 
     mounted.setProps({ theme: 'warning' });
-    expect(mounted.find('button').hasClass('slds-button--icon-inverse')).toBeFalsy();
+    expect(mounted.find('button').hasClass('slds-button_icon-inverse')).toBeFalsy();
   });
 
   it('renders large close icons for toasts', () => {
     mounted.setProps({ toast: true });
-    expect(mounted.find('button svg').hasClass('slds-button__icon--large')).toBeTruthy();
+    expect(mounted.find('button svg').hasClass('slds-button__icon_large')).toBeTruthy();
 
     mounted.setProps({ toast: false, alert: true });
-    expect(mounted.find('button svg').hasClass('slds-button__icon--large')).toBeFalsy();
+    expect(mounted.find('button svg').hasClass('slds-button__icon_large')).toBeFalsy();
   });
 
   it('applies className and rest-properties', () => {

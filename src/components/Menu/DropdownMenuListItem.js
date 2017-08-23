@@ -1,36 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
 import { IconSVG } from '../../';
 
-const DropdownMenuListItem = (props, { cssPrefix }) => {
+const DropdownMenuListItem = (props) => {
   const { children, className, onClick, selected, leftIcon, rightIcon, divider, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-
-  const classes = ['dropdown__item'];
-
-  if (divider) {
-    classes.push('has-divider--top-space');
-  }
-  if (selected) {
-    classes.push('is-selected');
-  }
 
   const leftIconElem = () => {
     if (leftIcon) {
       const iconClasses = [
-        { 'icon--selected': !leftIcon.alwaysDisplay },
-        { 'icon-text-default': !leftIcon.alwaysDisplay },
-        { 'm-right--x-small': !leftIcon.alwaysDisplay },
-        { 'm-right--small': leftIcon.alwaysDisplay },
-        { icon: leftIcon.alwaysDisplay },
+        { 'slds-icon_selected': !leftIcon.alwaysDisplay },
+        { 'slds-icon-text-default': !leftIcon.alwaysDisplay },
+        { 'slds-m-right_x-small': !leftIcon.alwaysDisplay },
+        { 'slds-m-right_small': leftIcon.alwaysDisplay },
+        { 'slds-icon': leftIcon.alwaysDisplay },
       ];
 
       return (
         <IconSVG
           background={leftIcon.background}
-          className={prefix(iconClasses)}
+          className={cx(iconClasses)}
           icon={leftIcon.icon}
           size={leftIcon.alwaysDisplay ? 'small' : 'x-small'}
           sprite={leftIcon.sprite}
@@ -43,16 +33,16 @@ const DropdownMenuListItem = (props, { cssPrefix }) => {
   const rightIconElem = () => {
     if (rightIcon) {
       const iconClasses = [
-        'icon-selected',
-        'icon-text-default',
-        'm-left--small',
-        'shrink-none',
+        'slds-icon-selected',
+        'slds-icon-text-default',
+        'slds-m-left_small',
+        'slds-shrink-none',
       ];
 
       return (
         <IconSVG
           background={rightIcon.background}
-          className={prefix(iconClasses)}
+          className={cx(iconClasses)}
           icon={rightIcon.icon}
           size="x-small"
           sprite={rightIcon.sprite}
@@ -62,10 +52,17 @@ const DropdownMenuListItem = (props, { cssPrefix }) => {
     return null;
   };
 
+  const sldsClasses = [
+    'slds-dropdown__item',
+    { 'slds-has-divider_top-space': divider },
+    { 'slds-is-selected': selected },
+    className,
+  ];
+
   return (
-    <li {...rest} className={prefix(classes, className)} role="presentation">
+    <li {...rest} className={cx(sldsClasses)} role="presentation">
       <a role="menuitem" onClick={onClick}>
-        <div className={prefix('truncate')}>
+        <div className="slds-truncate">
           {leftIconElem()}
           {children}
         </div>
@@ -75,7 +72,14 @@ const DropdownMenuListItem = (props, { cssPrefix }) => {
   );
 };
 
-DropdownMenuListItem.contextTypes = { cssPrefix: PropTypes.string };
+DropdownMenuListItem.defaultProps = {
+  className: null,
+  divider: false,
+  leftIcon: null,
+  onClick: () => {},
+  rightIcon: null,
+  selected: false,
+};
 
 DropdownMenuListItem.propTypes = {
   /**

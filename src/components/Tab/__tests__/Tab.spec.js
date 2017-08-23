@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import Tab from '../Tab';
@@ -7,10 +6,6 @@ import Tab from '../Tab';
 describe('<Tab />', () => {
   let mounted;
   let props = {};
-
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   beforeEach(() => {
     props = {
@@ -33,7 +28,7 @@ describe('<Tab />', () => {
       ],
     };
 
-    mounted = mount(<Tab {...props} />, options);
+    mounted = mount(<Tab {...props} />);
   });
 
   it('renders the first tab initially active', () => {
@@ -58,9 +53,9 @@ describe('<Tab />', () => {
     const aItem = liItem.find('a');
     const divItem = mounted.find('#tab-1');
 
-    expect(liItem.hasClass('slds-tabs--default__item')).toBeTruthy();
-    expect(aItem.hasClass('slds-tabs--default__link')).toBeTruthy();
-    expect(divItem.hasClass('slds-tabs--default__content')).toBeTruthy();
+    expect(liItem.hasClass('slds-tabs_default__item')).toBeTruthy();
+    expect(aItem.hasClass('slds-tabs_default__link')).toBeTruthy();
+    expect(divItem.hasClass('slds-tabs_default__content')).toBeTruthy();
   });
 
   it('renders scoped variation', () => {
@@ -69,14 +64,14 @@ describe('<Tab />', () => {
     const aItem = liItem.find('a');
     const divItem = mounted.find('#tab-1');
 
-    expect(liItem.hasClass('slds-tabs--scoped__item')).toBeTruthy();
-    expect(aItem.hasClass('slds-tabs--scoped__link')).toBeTruthy();
-    expect(divItem.hasClass('slds-tabs--scoped__content')).toBeTruthy();
+    expect(liItem.hasClass('slds-tabs_scoped__item')).toBeTruthy();
+    expect(aItem.hasClass('slds-tabs_scoped__link')).toBeTruthy();
+    expect(divItem.hasClass('slds-tabs_scoped__content')).toBeTruthy();
   });
 
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
-    expect(mounted.find('.slds-tabs--default').hasClass('foo')).toBeTruthy();
-    expect(mounted.find('.slds-tabs--default').prop('data-test')).toEqual('bar');
+    expect(mounted.find('.slds-tabs_default').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-tabs_default').prop('data-test')).toEqual('bar');
   });
 });

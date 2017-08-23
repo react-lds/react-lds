@@ -8,6 +8,7 @@ import {
   Router,
 } from 'react-router';
 
+import Accordions from './pages/Accordion';
 import Badges from './pages/Badge';
 import Breadcrumb from './pages/Breadcrumb';
 import ButtonGroups from './pages/ButtonGroup';
@@ -16,6 +17,7 @@ import Cards from './pages/Card';
 import CheckboxVariants from './pages/Form/Checkbox';
 import DataTable from './pages/DataTable';
 import Datepicker from './pages/Datepicker';
+import ExpandableSections from './pages/ExpandableSection';
 import Forms from './pages/Form';
 import GridSystem from './pages/GridSystem';
 import Icons from './pages/Icon';
@@ -32,6 +34,7 @@ import Page from './components/Page';
 import PageHeader from './pages/PageHeader';
 import Pills from './pages/Pills';
 import Popovers from './pages/Popovers';
+import ProgressBar from './pages/ProgressBar';
 import Radio from './pages/Form/Radio';
 import SelectVariants from './pages/Form/Select';
 import Spinners from './pages/Spinners';
@@ -42,6 +45,7 @@ import TextareaVariants from './pages/Form/Textarea';
 const routes = (
   <Route path="/" component={Page}>
     <IndexRoute component={IndexPage} />
+    <Route path="accordions" component={Accordions} />
     <Route path="badges" component={Badges} />
     <Route path="breadcrumbs" component={Breadcrumb} />
     <Route path="button-groups" component={ButtonGroups} />
@@ -49,6 +53,7 @@ const routes = (
     <Route path="cards" component={Cards} />
     <Route path="data-tables" component={DataTable} />
     <Route path="datepickers" component={Datepicker} />
+    <Route path="expandable-sections" component={ExpandableSections} />
     <Route path="forms" component={Forms}>
       <IndexRedirect to="input" />
       <Route path="input">
@@ -81,6 +86,7 @@ const routes = (
     <Route path="page-headers" component={PageHeader} />
     <Route path="pills" component={Pills} />
     <Route path="popovers" component={Popovers} />
+    <Route path="progressbar" component={ProgressBar} />
     <Route path="spinners" component={Spinners} />
     <Route path="stateful-buttons" component={StatefulButtons} />
     <Route path="tabs" component={Tabs} />

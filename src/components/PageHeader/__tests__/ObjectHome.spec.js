@@ -1,15 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { ObjectHome } from '../ObjectHome';
 
 describe('<ObjectHome />', () => {
   let mounted;
-
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   beforeEach(() => {
     mounted = mount(
@@ -20,8 +15,8 @@ describe('<ObjectHome />', () => {
         info="yeah"
         topButtons="button098"
         bottomButtons="button1234"
-      />,
-    options);
+      />
+    );
   });
 
   it('opens the menu on headline click', () => {
@@ -41,7 +36,7 @@ describe('<ObjectHome />', () => {
   });
 
   it('contains the recordType', () => {
-    expect(mounted.find('p.slds-text-title--caps').first().text()).toEqual('unicornz');
+    expect(mounted.find('p.slds-text-title_caps').first().text()).toEqual('unicornz');
   });
 
   it('contains topButtons', () => {
@@ -55,7 +50,7 @@ describe('<ObjectHome />', () => {
   });
 
   it('contains info', () => {
-    expect(mounted.find('p.slds-text-body--small').text()).toEqual('yeah');
+    expect(mounted.find('p.slds-text-body_small').text()).toEqual('yeah');
   });
 
   it('contains bottomButtons', () => {

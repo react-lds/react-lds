@@ -8,8 +8,8 @@ describe('<Card />', () => {
   let mounted = null;
   let props = {};
 
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
+  const context = { assetBasePath: '/' };
+  const childContextTypes = { assetBasePath: PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
@@ -31,7 +31,7 @@ describe('<Card />', () => {
   });
 
   it('renders the header', () => {
-    expect(mounted.find('h2 span.slds-text-heading--small').first().text()).toEqual(props.title);
+    expect(mounted.find('h2 span.slds-text-heading_small').first().text()).toEqual(props.title);
   });
 
   it('renders headerRight', () => {

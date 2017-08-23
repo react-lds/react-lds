@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { flavorable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
-export const Button = (props, { cssPrefix }) => {
+export const Button = (props) => {
   const {
     children,
     className,
@@ -16,18 +16,19 @@ export const Button = (props, { cssPrefix }) => {
     value,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const sldsClasses = [
-    'button',
-    { 'is-selected': !!selected },
+    'slds-button',
+    { 'slds-is-selected': !!selected },
+    className,
   ];
   const position = children && children.props && children.props.position;
 
   return (
     <button
       {...rest}
-      className={prefix(sldsClasses, className)}
+      className={cx(sldsClasses)}
+      onClick={onClick}
       disabled={disabled}
       onClick={onClick}
       title={tooltip || title}
@@ -50,9 +51,19 @@ Button.flavors = [
   'icon-inverse',
   'icon-border',
   'icon-bare',
+  'icon-x-small',
+  'reset',
+  'success',
 ];
 
-Button.contextTypes = { cssPrefix: PropTypes.string };
+Button.defaultProps = {
+  children: null,
+  className: null,
+  disabled: false,
+  selected: false,
+  title: null,
+  value: null,
+};
 
 Button.propTypes = {
   /**
@@ -70,7 +81,7 @@ Button.propTypes = {
   /**
    * onClick handler to trigger an action
    */
-  onClick: PropTypes.func,
+  onClick: PropTypes.func.isRequired,
   /**
    * renders as selected
    */

@@ -1,30 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
-
-const IconSVG = (props, { assetBasePath, cssPrefix }) => {
+const IconSVG = (props, { assetBasePath }) => {
   const { background, className, fill, icon, size, sprite, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   let backgroundClass = background;
   if (backgroundClass === undefined || backgroundClass === true) {
-    backgroundClass = `${sprite}-${icon}`;
+    backgroundClass = `slds-${sprite}-${icon}`;
   }
   const sldsClasses = [
-    { icon: fill },
-    { [`icon-${backgroundClass}`]: !!backgroundClass },
-    { [`icon--${size}`]: !!size },
+    { 'slds-icon': fill },
+    { [`slds-icon-${backgroundClass}`]: !!backgroundClass },
+    { [`slds-icon_${size}`]: !!size },
+    className
   ];
 
   return (
-    <svg {...rest} aria-hidden="true" className={prefix(sldsClasses, className)}>
+    <svg {...rest} aria-hidden="true" className={cx(sldsClasses)}>
       <use xlinkHref={`${assetBasePath}assets/icons/${sprite}-sprite/svg/symbols.svg#${icon}`} />
     </svg>
   );
 };
 
-IconSVG.contextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
+IconSVG.contextTypes = { assetBasePath: PropTypes.string };
+
+IconSVG.defaultProps = {
+  background: false,
+  className: null,
+  fill: true,
+  size: null,
+};
 
 IconSVG.propTypes = {
   /**
@@ -51,10 +57,6 @@ IconSVG.propTypes = {
    * icon sprite name
    */
   sprite: PropTypes.string.isRequired,
-};
-
-IconSVG.defaultProps = {
-  fill: true,
 };
 
 export default IconSVG;

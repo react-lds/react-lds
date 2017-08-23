@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import cx from 'classnames';
 import omit from 'lodash.omit';
 
 import { flavorable, variationable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
 const validBreakpoints = [
   'small',
@@ -18,14 +17,13 @@ const validBreakpoints = [
 const breakPointProp = breakpoint => `${breakpoint}-sizeOf`;
 const sizeRegex = /^([1-9]|1[0-2])-([1-9]|1[0-2])$/;
 
-export const Column = (props, { cssPrefix }) => {
+export const Column = (props) => {
   const { align, children, className, omitCol, ...rest } = props;
 
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-
   const sldsClasses = [
-    { col: !omitCol },
-    { [`align-${align}`]: !!align },
+    { 'slds-col': !omitCol },
+    { [`slds-align-${align}`]: !!align },
+    className
   ];
 
   const breakpoints = Array.from(validBreakpoints);
@@ -39,13 +37,14 @@ export const Column = (props, { cssPrefix }) => {
     if (sizeRegex.test(size)) {
       const from = parseInt(size.split('-')[0], 10);
       const to = parseInt(size.split('-')[1], 10);
-      sldsClasses.push(`${sizeString}--${from}-of-${to}`);
+      sldsClasses.push(`slds-${sizeString}_${from}-of-${to}`);
     }
   });
 
   const restProps = omit(rest, validBreakpoints.map(breakPointProp), 'sizeOf');
+
   return (
-    <div {...restProps} className={prefix(sldsClasses, className)}>{children}</div>
+    <div {...restProps} className={cx(sldsClasses)}>{children}</div>
   );
 };
 
@@ -69,8 +68,6 @@ Column.variations = [
   'shrink',
   'shrink-none',
 ];
-
-Column.contextTypes = { cssPrefix: PropTypes.string };
 
 const sizeOfPropType = (props, propName) => {
   const size = props[propName];

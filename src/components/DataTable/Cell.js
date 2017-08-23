@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { variationable } from '../../decorators';
-import { prefixClasses, uniqueId } from '../../utils';
+import { uniqueId } from '../../utils';
 import { IconSVG } from '../../';
 
-export const Cell = (props, { cssPrefix }) => {
+export const Cell = (props) => {
   const {
     children,
     className,
@@ -19,12 +20,6 @@ export const Cell = (props, { cssPrefix }) => {
     truncate,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-
-  const sldsClasses = [
-    { 'is-resizable': scope === 'col' && !!resizable },
-    { 'is-sorted--asc': !!sortable && sortDirection === 'asc' },
-  ];
 
   const getTitle = () => {
     let text = null;
@@ -57,17 +52,17 @@ export const Cell = (props, { cssPrefix }) => {
   const resizeHandle = (key) => {
     if (resizable) {
       return (
-        <div key={key} className={prefix('resizable')}>
-          <label className={prefix('assistive-text')} htmlFor={inputId}>{resizableAssistiveText}</label>
+        <div key={key} className="slds-resizable">
+          <label className="slds-assistive-text" htmlFor={inputId}>{resizableAssistiveText}</label>
           <input
-            className={prefix(['resizable__input', 'assistive-text'])}
+            className="slds-resizable__input slds-assistive-text"
             type="range"
             min="20"
             max="1000"
             id={inputId}
           />
-          <span className={prefix('resizable__handle')}>
-            <span className={prefix('resizable__divider')} />
+          <span className="slds-resizable__handle">
+            <span className="slds-resizable__divider" />
           </span>
         </div>
       );
@@ -79,9 +74,9 @@ export const Cell = (props, { cssPrefix }) => {
   const sortIcon = (key) => {
     if (!!sortable && isHeader) {
       return (
-        <div key={key} className={prefix('icon_container')} title={sortAssistiveText}>
+        <div key={key} className="slds-icon_container" title={sortAssistiveText}>
           <IconSVG
-            className={prefix(['is-sortable__icon', 'icon-text-default'])}
+            className="slds-is-sortable__icon slds-icon-text-default"
             icon={sortDirection === 'asc' ? 'arrowup' : 'arrowdown'}
             size="x-small"
             sprite="utility"
@@ -95,7 +90,7 @@ export const Cell = (props, { cssPrefix }) => {
 
   const assistiveText = (key) => {
     if (!!sortable && isHeader) {
-      return (<span key={key} className={prefix('assistive-text')}>{cellTitle}</span>);
+      return (<span key={key} className="slds-assistive-text">{cellTitle}</span>);
     }
 
     return null;
@@ -103,7 +98,7 @@ export const Cell = (props, { cssPrefix }) => {
 
   const wrapChildren = (content) => {
     if (!!sortable && isHeader) {
-      return <a className={prefix(['th__action', 'text-link--reset'])}>{content}</a>;
+      return <a className="slds-th__action slds-text-link_reset">{content}</a>;
     }
 
     return content;
@@ -115,13 +110,19 @@ export const Cell = (props, { cssPrefix }) => {
   childArray.push(sortIcon(3));
   childArray.push(assistiveText(4));
 
+  const sldsClasses = [
+    { 'slds-is-resizable': scope === 'col' && !!resizable },
+    { 'slds-is-sorted_asc': !!sortable && sortDirection === 'asc' },
+    className,
+  ];
+
   const wrappedChildren = wrapChildren(childArray);
-  const wrapperClassName = truncate ? prefix('truncate') : null;
+  const wrapperClassName = truncate ? 'slds-truncate' : null;
 
   return (
     <CellElement
       {...rest}
-      className={prefix(sldsClasses, className)}
+      className={cx(sldsClasses)}
       scope={cellScope}
       title={cellTitle}
     >
@@ -138,13 +139,17 @@ Cell.variations = [
 ];
 
 Cell.defaultProps = {
+  children: null,
+  className: null,
+  resizable: false,
   resizableAssistiveText: 'Resize Cell',
+  scope: null,
+  sortable: false,
   sortAssistiveText: 'Sort Column',
   sortDirection: 'asc',
+  title: null,
   truncate: true,
 };
-
-Cell.contextTypes = { cssPrefix: PropTypes.string };
 
 Cell.propTypes = {
   /**

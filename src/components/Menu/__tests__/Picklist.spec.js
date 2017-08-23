@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { Picklist } from '../Picklist';
@@ -8,10 +7,6 @@ describe('</Picklist />', () => {
   let mounted = null;
   let props = {};
   let callback = jest.fn();
-
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   beforeEach(() => {
     callback = jest.fn();
@@ -30,7 +25,7 @@ describe('</Picklist />', () => {
       callback,
     };
 
-    mounted = mount(<Picklist {...props} />, options);
+    mounted = mount(<Picklist {...props} />);
   });
 
   it('renders the label', () => {

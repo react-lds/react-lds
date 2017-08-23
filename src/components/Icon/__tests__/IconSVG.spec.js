@@ -8,8 +8,8 @@ describe('<IconSVG />', () => {
   let mounted = null;
   let props = {};
 
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
+  const context = { assetBasePath: '/' };
+  const childContextTypes = { assetBasePath: PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
@@ -28,7 +28,7 @@ describe('<IconSVG />', () => {
 
   it('supports different sizes', () => {
     mounted.setProps({ size: 'large' });
-    expect(mounted.find('svg').hasClass('slds-icon--large')).toBeTruthy();
+    expect(mounted.find('svg').hasClass('slds-icon_large')).toBeTruthy();
   });
 
   it('renders an icon with a custom background color', () => {

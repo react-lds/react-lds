@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import omit from 'lodash.omit';
-import { prefixClasses } from '../utils';
 
 function getVariationClasses(props, validVariations) {
   return Object.keys(props)
     .filter(variation => Object.hasOwnProperty.call(validVariations, variation))
-    .filter(variation => !!props[variation]);
+    .filter(variation => !!props[variation])
+    .map(variation => `slds-${variation}`);
 }
 
 function getValidVariations(definition) {
@@ -37,21 +38,16 @@ const filterVariations = (props, validVariations) => omit(Object.assign({}, prop
 const variationable = (C) => {
   const validVariations = getValidVariations(C.variations);
 
-  const VariationedComponent = (props, { cssPrefix }) => {
+  const VariationedComponent = (props) => {
     const { className } = props;
-    const prefix = classes => prefixClasses(cssPrefix, classes, className);
 
     const rest = filterVariations(props, C.variations);
-    const classes = prefix(getVariationClasses(props, validVariations));
+    const classes = cx([...getVariationClasses(props, validVariations), className]);
 
     return (<C {...rest} className={classes} />);
   };
 
   VariationedComponent.displayName = `Variationed_${C.displayName || C.name}`;
-
-  VariationedComponent.contextTypes = Object.assign({}, C.contextTypes, {
-    cssPrefix: PropTypes.string,
-  });
 
   VariationedComponent.propTypes = Object.assign({},
     C.propTypes,

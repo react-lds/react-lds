@@ -1,48 +1,69 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { flavorable, themeable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 import { Button, ButtonIcon } from '../../';
 
 const getThemeName = (themeStr) => {
   if (typeof themeStr === 'string') {
-    return themeStr.includes('theme--warning');
+    return themeStr.includes('theme_warning');
   }
 
   return false;
 };
 
-export const Notification = (props, { cssPrefix }) => {
+export const Notification = (props) => {
   const {
     children,
     className,
+    icon,
     title,
     toast,
     onClickClose,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const sldsClasses = [
-    'notify',
-    { 'notify--toast': !!toast },
+    'slds-notify',
+    { 'slds-notify_toast': !!toast },
+    className,
   ];
 
+  const wrapIcon = () => {
+    const iconContainerClasses = [
+      { 'slds-icon_container': true },
+      'slds-m-right_small slds-no-flex slds-align-top',
+    ];
+
+    return (
+      <span className={cx(iconContainerClasses)}>
+        {icon}
+        <span className="slds-assistive-text">{title}</span>
+      </span>
+    );
+  };
+
+  const wrapToastContent = content =>
+    <div className="slds-notify__content">
+      {content}
+    </div>;
+
   return (
-    <div className={prefix('notify_container')}>
-      <div {...rest} className={prefix(sldsClasses, className)} role="alert">
+    <div className="slds-notify_container">
+      <div {...rest} className={cx(sldsClasses)} role="alert">
+        {icon && wrapIcon(icon)}
         <Button
           icon-inverse={getThemeName(className) ? undefined : true}
-          className={prefix('notify__close')}
+          className="slds-notify__close"
           icon
           onClick={onClickClose}
         >
           <ButtonIcon sprite="utility" icon="close" size={toast ? 'large' : undefined} />
-          <span className={prefix('assistive-text')}>Close</span>
+          <span className="slds-assistive-text">Close</span>
         </Button>
-        <span className={prefix('assistive-text')}>{title}</span>
-        {children}
+        <span className="slds-assistive-text">{title}</span>
+        {toast ? wrapToastContent(children) : children }
       </div>
     </div>
   );
@@ -52,7 +73,12 @@ Notification.flavors = [
   'alert',
 ];
 
-Notification.contextTypes = { cssPrefix: PropTypes.string };
+Notification.defaultProps = {
+  className: null,
+  icon: null,
+  toast: false,
+  onClickClose: () => {},
+};
 
 Notification.propTypes = {
   /**
@@ -64,6 +90,10 @@ Notification.propTypes = {
    */
   className: PropTypes.string,
   /**
+  * IconSVG
+  */
+  icon: PropTypes.node,
+  /**
    * notification title (will be rendered as assistiveText)
    */
   title: PropTypes.string.isRequired,
@@ -74,7 +104,7 @@ Notification.propTypes = {
   /**
    * function to call when close button is clicked
    */
-  onClickClose: PropTypes.func
+  onClickClose: PropTypes.func,
 };
 
 export default themeable(

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { getUniqueHash, prefixClasses } from '../../utils';
+import { getUniqueHash } from '../../utils';
 import {
   FormElement,
   FormElementControl,
@@ -9,7 +10,7 @@ import {
   FormElementError,
 } from '../../';
 
-const Textarea = (props, { cssPrefix }) => {
+const Textarea = (props) => {
   const {
     className,
     disabled,
@@ -23,21 +24,25 @@ const Textarea = (props, { cssPrefix }) => {
     readOnly,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderContent = () => {
     if (readOnly) {
       return (
-        <div {...rest} className={prefix(['form-element__static', 'text-longform'])}>
+        <div {...rest} className="slds-form-element__static slds-text-longform">
           <p>{placeholder}</p>
         </div>
       );
     }
 
+    const sldsClasses = [
+      'slds-textarea',
+      className,
+    ];
+
     return (
       <textarea
         {...rest}
-        className={prefix('textarea', className)}
+        className={cx(sldsClasses)}
         id={id}
         onChange={onChange}
         placeholder={placeholder}
@@ -51,7 +56,7 @@ const Textarea = (props, { cssPrefix }) => {
   return (
     <FormElement required={required} error={error}>
       <FormElementLabel label={label} id={id} required={required} hideLabel={hideLabel} />
-      <FormElementControl className={prefix({ 'has-divider--bottom': readOnly })}>
+      <FormElementControl className={cx({ 'slds-has-divider_bottom': readOnly })}>
         {renderContent()}
       </FormElementControl>
       <FormElementError error={error} id={id} />
@@ -59,7 +64,15 @@ const Textarea = (props, { cssPrefix }) => {
   );
 };
 
-Textarea.contextTypes = { cssPrefix: PropTypes.string };
+Textarea.defaultProps = {
+  className: null,
+  disabled: null,
+  error: null,
+  hideLabel: false,
+  onChange: () => {},
+  readOnly: false,
+  required: false,
+};
 
 Textarea.propTypes = {
   /**

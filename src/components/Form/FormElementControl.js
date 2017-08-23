@@ -1,30 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
-
-const FormElementControl = (props, { cssPrefix }) => {
+const FormElementControl = (props) => {
   const { children, className, hasIconLeft, hasIconRight, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const classes = [
-    'form-element__control',
-    { 'input-has-icon': hasIconLeft || hasIconRight },
-    { 'input-has-icon--right': hasIconRight && !hasIconLeft },
-    { 'input-has-icon--left': hasIconLeft && !hasIconRight },
-    { 'input-has-icon--left-right': hasIconLeft && hasIconRight },
+  const sldsClasses = [
+    'slds-form-element__control',
+    { 'slds-input-has-icon': hasIconLeft || hasIconRight },
+    { 'slds-input-has-icon_right': hasIconRight && !hasIconLeft },
+    { 'slds-input-has-icon_left': hasIconLeft && !hasIconRight },
+    { 'slds-input-has-icon_left-right': hasIconLeft && hasIconRight },
+    className
   ];
 
-  return (<div {...rest} className={prefix(classes, className)}>{children}</div>);
+  return (<div {...rest} className={cx(sldsClasses)}>{children}</div>);
 };
 
-FormElementControl.contextTypes = { cssPrefix: PropTypes.string };
+FormElementControl.defaultProps = {
+  className: null,
+  hasIconLeft: false,
+  hasIconRight: false,
+};
 
 FormElementControl.propTypes = {
   /**
    * control element(s)
    */
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
