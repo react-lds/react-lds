@@ -14,6 +14,7 @@ describe('<StatefulButton />', () => {
 
   beforeEach(() => {
     props = {
+      onClick: () => {},
       stateNotSelected: {
         icon: 'add',
         sprite: 'utility',
@@ -69,33 +70,34 @@ describe('<StatefulButton />', () => {
     expect(mounted.prop('title')).toEqual('horf borf');
   });
 
-  it('attaches an onClick handler', () => {
-    const fn = jest.fn();
-    mounted.setProps({ onClick: fn });
-    mounted.simulate('click');
-    expect(fn).toBeCalled();
-  });
-
-  it('passes the right values to the onClick handler when the button is unselected', () => {
-    const fn = jest.fn();
-    mounted.setProps({ onClick: fn });
-    mounted.simulate('click');
-    expect(fn).toBeCalledWith(true);
-  });
-
-  it('passes the right values to the onClick handler when the button is unselect', () => {
-    const fn = jest.fn();
-    mounted.setProps({
-      onClick: fn,
-      selected: true,
-    });
-    mounted.simulate('click');
-    expect(fn).toBeCalledWith(false);
-  });
-
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-button').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-button').prop('data-test')).toEqual('bar');
+  });
+
+  describe('onClick handler', () => {
+    let fn;
+
+    beforeEach(() => {
+      fn = jest.fn();
+      mounted.setProps({ onClick: fn });
+    });
+
+    it('is attached', () => {
+      mounted.simulate('click');
+      expect(fn).toBeCalled();
+    });
+
+    it('receives the right value when the button is unselected', () => {
+      mounted.simulate('click');
+      expect(fn).toBeCalledWith(true);
+    });
+
+    it('receives the right value when the button is unselect', () => {
+      mounted.setProps({ selected: true });
+      mounted.simulate('click');
+      expect(fn).toBeCalledWith(false);
+    });
   });
 });
