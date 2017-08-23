@@ -13,7 +13,23 @@ describe('<StatefulButton />', () => {
   const options = { context, childContextTypes };
 
   beforeEach(() => {
-    props = {};
+    props = {
+      stateNotSelected: {
+        icon: 'add',
+        sprite: 'utility',
+        title: 'Follow',
+      },
+      stateSelected: {
+        icon: 'check',
+        sprite: 'utility',
+        title: 'Following',
+      },
+      stateSelectedFocus: {
+        icon: 'close',
+        sprite: 'utility',
+        title: 'Unfollow',
+      },
+    };
     mounted = shallow(<StatefulButton {...props} />, options);
   });
 
@@ -22,20 +38,25 @@ describe('<StatefulButton />', () => {
     expect(mounted.hasClass('slds-button')).toBeTruthy();
   });
 
-  it('renders children', () => {
-    const child = <div className="foo" />;
-    mounted.setProps({ children: child });
-    expect(mounted.contains(child)).toBeTruthy();
+  it('renders a <span/> for state "not selected"', () => {
+    const child = mounted.find('span.slds-text-not-selected');
+    expect(child.length).toEqual(1);
+    expect(child.find('ButtonIcon').length).toEqual(1);
+    expect(child.text()).toMatch(/Follow$/);
   });
 
-  it('renders a title', () => {
-    mounted.setProps({ title: 'Title' });
-    expect(mounted.text()).toEqual('Title');
+  it('renders a <span/> for state "selected"', () => {
+    const child = mounted.find('span.slds-text-selected');
+    expect(child.length).toEqual(1);
+    expect(child.find('ButtonIcon').length).toEqual(1);
+    expect(child.text()).toMatch(/Following$/);
   });
 
-  it('renders a value', () => {
-    mounted.setProps({ value: 'Value' });
-    expect(mounted.prop('value')).toEqual('Value');
+  it('renders a <span/> for state "selected" focussed/on-hover', () => {
+    const child = mounted.find('span.slds-text-selected-focus');
+    expect(child.length).toEqual(1);
+    expect(child.find('ButtonIcon').length).toEqual(1);
+    expect(child.text()).toMatch(/Unfollow$/);
   });
 
   it('renders as disabled', () => {
@@ -43,9 +64,9 @@ describe('<StatefulButton />', () => {
     expect(mounted.prop('disabled')).toBeTruthy();
   });
 
-  it('renders as selected', () => {
-    mounted.setProps({ selected: true });
-    expect(mounted.find('.slds-button').hasClass('slds-is-selected')).toBeTruthy();
+  it('renders the tooltip', () => {
+    mounted.setProps({ tooltip: 'horf borf' });
+    expect(mounted.prop('title')).toEqual('horf borf');
   });
 
   it('attaches an onClick handler', () => {
@@ -53,6 +74,23 @@ describe('<StatefulButton />', () => {
     mounted.setProps({ onClick: fn });
     mounted.simulate('click');
     expect(fn).toBeCalled();
+  });
+
+  it('passes the right values to the onClick handler when the button is unselected', () => {
+    const fn = jest.fn();
+    mounted.setProps({ onClick: fn });
+    mounted.simulate('click');
+    expect(fn).toBeCalledWith(true);
+  });
+
+  it('passes the right values to the onClick handler when the button is unselect', () => {
+    const fn = jest.fn();
+    mounted.setProps({
+      onClick: fn,
+      selected: true,
+    });
+    mounted.simulate('click');
+    expect(fn).toBeCalledWith(false);
   });
 
   it('applies className and rest-properties', () => {
