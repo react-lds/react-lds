@@ -10,8 +10,9 @@ export const Button = (props) => {
     className,
     disabled,
     onClick,
-    title,
     selected,
+    title,
+    tooltip,
     value,
     ...rest,
   } = props;
@@ -21,18 +22,20 @@ export const Button = (props) => {
     { 'slds-is-selected': !!selected },
     className,
   ];
+  const position = children && children.props && children.props.position;
 
   return (
     <button
       {...rest}
       className={cx(sldsClasses)}
-      onClick={onClick}
       disabled={disabled}
+      onClick={onClick}
+      title={tooltip || title}
       value={value}
     >
-      {(children && children.props && children.props.position === 'right') ? title : null}
-      {!children ? title : children}
-      {(children && children.props && children.props.position === 'left') ? title : null}
+      {(position === 'right') ? title : null}
+      {children || title}
+      {(position === 'left') ? title : null}
     </button>
   );
 };
@@ -86,6 +89,10 @@ Button.propTypes = {
    * button title
    */
   title: PropTypes.string,
+  /**
+   * button tooltip
+   */
+  tooltip: PropTypes.string,
   /**
    * adds optional value tag to the button
    */

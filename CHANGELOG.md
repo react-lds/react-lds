@@ -1,7 +1,9 @@
 # Changelog
 
-## 1.1.11
+## 1.1.12
+* Use title attribute as tooltip for button component
 
+## 1.1.11
 * Add onClickClose handler for Notifications (thanks @frontendloader)
 * Datepicker: Fix highlighted date
 * Datepicker: Fix required prop

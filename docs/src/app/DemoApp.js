@@ -1,5 +1,12 @@
 import React from 'react';
-import { Router, Route, IndexRedirect, IndexRoute, browserHistory, hashHistory } from 'react-router';
+import {
+  browserHistory,
+  hashHistory,
+  IndexRedirect,
+  IndexRoute,
+  Route,
+  Router,
+} from 'react-router';
 
 import Accordions from './pages/Accordion';
 import Badges from './pages/Badge';
@@ -7,6 +14,7 @@ import Breadcrumb from './pages/Breadcrumb';
 import ButtonGroups from './pages/ButtonGroup';
 import Buttons from './pages/Button';
 import Cards from './pages/Card';
+import CheckboxVariants from './pages/Form/Checkbox';
 import DataTable from './pages/DataTable';
 import Datepicker from './pages/Datepicker';
 import ExpandableSections from './pages/ExpandableSection';
@@ -29,8 +37,8 @@ import Popovers from './pages/Popovers';
 import ProgressBar from './pages/ProgressBar';
 import Radio from './pages/Form/Radio';
 import SelectVariants from './pages/Form/Select';
-import CheckboxVariants from './pages/Form/Checkbox';
 import Spinners from './pages/Spinners';
+import StatefulButtons from './pages/StatefulButtons';
 import Tabs from './pages/Tab';
 import TextareaVariants from './pages/Form/Textarea';
 
@@ -80,6 +88,7 @@ const routes = (
     <Route path="popovers" component={Popovers} />
     <Route path="progressbar" component={ProgressBar} />
     <Route path="spinners" component={Spinners} />
+    <Route path="stateful-buttons" component={StatefulButtons} />
     <Route path="tabs" component={Tabs} />
   </Route>
 );

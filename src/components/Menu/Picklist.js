@@ -88,4 +88,35 @@ export class Picklist extends React.Component {
   }
 }
 
+Picklist.contextTypes = { cssPrefix: PropTypes.string };
+
+Picklist.propTypes = {
+  /**
+   * triggered whenever an item was clicked, has the items key as parameter
+   */
+  callback: PropTypes.func.isRequired,
+  /**
+   * class name
+   */
+  className: PropTypes.string,
+  /**
+   * list of displayed items
+   * `{key: 'id123', label: 'first entry', selected: false}`
+   */
+  items: PropTypes.arrayOf(PropTypes.shape({
+    key: PropTypes.any,
+    label: PropTypes.string,
+    selected: PropTypes.bool,
+  })),
+  /**
+   * label for the button. if a selection is present, you should indicate it
+   */
+  label: PropTypes.string.isRequired,
+  /**
+   * tooltip for the button
+   */
+  tooltip: PropTypes.string,
+};
+
+
 export default enhanceWithClickOutside(Picklist);

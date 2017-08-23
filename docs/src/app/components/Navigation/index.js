@@ -37,6 +37,7 @@ const Navigation = () =>
         <NavLink to="/progressbar" label="Progress Bar" />
         <NavLink unfinished to="/publishers" label="Publishers" />
         <NavLink to="/spinners" label="Spinners" />
+        <NavLink to="/stateful-buttons" label="Stateful Buttons" />
         <NavLink to="/tabs" label="Tabs" />
         <NavLink unfinished to="/tiles" label="Tiles" />
         <NavLink unfinished to="/trees" label="Trees" />
