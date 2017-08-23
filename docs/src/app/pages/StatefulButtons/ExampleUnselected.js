@@ -3,6 +3,7 @@ import React from 'react';
 import { StatefulButton } from 'react-lds';
 
 const exampleProps = {
+  onClick: window.alert,
   stateNotSelected: {
     icon: 'add',
     sprite: 'utility',

@@ -24,13 +24,16 @@ export const StatefulButton = (props, { cssPrefix }) => {
     'button_stateful',
     selected ? 'is-selected' : 'not-selected',
   ], className);
+  const handleClick = typeof onClick === 'function'
+    ? () => onClick(!selected)
+    : null;
 
   return (
     <button
       {...rest}
       className={sldsButtonClasses}
       disabled={disabled}
-      onClick={onClick}
+      onClick={handleClick}
       title={tooltip}
     >
       <span className={prefix('text-not-selected')}>
@@ -83,7 +86,9 @@ StatefulButton.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * onClick handler which is called when the button is pressed
+   * onClick handler. Will be called with a boolean when the button is pressed,
+   * receives `true` when button is currently unselected, `false` otherwise.
+   * (The passed parameter says _"Should this button be selected now?"_)
    */
   onClick: PropTypes.func,
 
@@ -153,7 +158,7 @@ StatefulButton.propTypes = {
 };
 
 StatefulButton.defaultProps = {
-  className: '',
+  className: null,
   disabled: false,
   onClick: null,
   selected: false,
