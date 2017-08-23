@@ -28,7 +28,6 @@ export const Button = (props) => {
     <button
       {...rest}
       className={cx(sldsClasses)}
-      onClick={onClick}
       disabled={disabled}
       onClick={onClick}
       title={tooltip || title}
