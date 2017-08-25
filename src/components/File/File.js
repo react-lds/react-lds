@@ -25,15 +25,15 @@ export const File = (props) => {
   } = props;
 
   const renderActions = () => {
-    if (!hideTitle) {
-      return <div className="slds-file__actions-menu">{actions}</div>;
+    if (hideTitle) {
+      return (
+        <div className="slds-file__title slds-file__title_scrim">
+          <div className="slds-file__actions-menu">{actions}</div>
+        </div>
+      );
     }
 
-    return (
-      <div className="slds-file__title slds-file__title_scrim">
-        <div className="slds-file__actions-menu">{actions}</div>
-      </div>
-    );
+    return <div className="slds-file__actions-menu">{actions}</div>;
   };
 
   const renderCaption = () => {
