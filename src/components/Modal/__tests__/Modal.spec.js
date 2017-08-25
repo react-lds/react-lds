@@ -32,7 +32,7 @@ describe('<Modal />', () => {
   });
 
   it('renders and passes label and description', () => {
-    mounted.setProps({ label: 'foo', description: 'bar' });
+    mounted.setProps({ label: 'foo', descriptionId: 'bar' });
     const modalProps = mounted.find('.slds-modal').props();
     const modalContentProps = mounted.find(ModalContent).first().props();
     const modalHeaderProps = mounted.find(ModalHeader).first().props();
