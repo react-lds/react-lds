@@ -11,7 +11,7 @@ import {
 
 const ExampleModalToast = () => (
   <div className="demo-modal">
-    <Modal large open>
+    <Modal large open descriptionId="example-modal-toast">
       <ModalHeader title="Modal Header">
         <Notification
           toast
@@ -23,7 +23,7 @@ const ExampleModalToast = () => (
           </h2>
         </Notification>
       </ModalHeader>
-      <ModalContent>
+      <ModalContent id="example-modal-toast">
         <div>
           <p>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam
           incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse
