@@ -8,7 +8,7 @@ export const Modal = (props) => {
   const {
     children,
     className,
-    description,
+    descriptionId,
     dialog,
     label,
     open,
@@ -48,7 +48,7 @@ export const Modal = (props) => {
       {...rest}
       className={cx(sldsClasses)}
       role={role}
-      aria-describedby={description}
+      aria-describedby={descriptionId}
       aria-hidden={!isOpen}
       aria-labelledby={label}
     >
@@ -69,7 +69,7 @@ Modal.flavors = [
 
 Modal.defaultProps = {
   className: null,
-  description: null,
+  descriptionId: null,
   dialog: false,
   label: null,
   open: false,
@@ -86,9 +86,9 @@ Modal.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * id of the modal-content (required as aria-describedby). must be set for _prompts.
+   * id of the modal-content (required as aria-describedby). must be set for prompts.
    */
-  description: PropTypes.string,
+  descriptionId: PropTypes.string,
   /**
    * whether a container is a dialog (optional when `<Modal prompt>`). Needed for PromptForTouch and ModalPrompt
    */
