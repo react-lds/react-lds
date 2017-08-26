@@ -65,10 +65,10 @@ const DropdownMenuListItem = (props) => {
   return (
     <li {...rest} className={cx(sldsClasses)} role="presentation">
       <a role={role} onClick={onClick} aria-checked={selected}>
-        <div className="slds-truncate">
+        <span className="slds-truncate" title={children}>
           {leftIconElem()}
           {children}
-        </div>
+        </span>
         {rightIconElem()}
       </a>
     </li>
@@ -88,7 +88,7 @@ DropdownMenuListItem.propTypes = {
   /**
    * The content of a menu item
    */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.string.isRequired,
   /**
    * class name
    */

@@ -5,7 +5,7 @@ import cx from 'classnames';
 import { flavorable } from '../../decorators';
 
 export const PillContainer = (props) => {
-  const { children, className, onClick, ...rest } = props;
+  const { children, className, ...rest } = props;
 
   const sldsClasses = [
     'slds-pill_container',
@@ -13,7 +13,7 @@ export const PillContainer = (props) => {
   ];
 
   return (
-    <div {...rest} className={cx(sldsClasses)} onClick={onClick}>
+    <div {...rest} className={cx(sldsClasses)}>
       {children}
     </div>
   );
@@ -25,7 +25,6 @@ PillContainer.flavors = [
 
 PillContainer.defaultProps = {
   className: null,
-  onClick: () => {},
 };
 
 PillContainer.propTypes = {
@@ -37,10 +36,6 @@ PillContainer.propTypes = {
    * class name
    */
   className: PropTypes.string,
-  /**
-   * onClick handler for the pill container
-   */
-  onClick: PropTypes.func,
 };
 
 export default flavorable(PillContainer, 'pill_container');

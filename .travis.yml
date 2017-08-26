@@ -9,6 +9,7 @@ install:
   - npm install -g yarn
   - yarn install --pure-lockfile
 script:
+  - yarn lint
   - yarn test
 after_success:
 - bash deploy_docs.sh

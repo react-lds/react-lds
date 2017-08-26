@@ -20,8 +20,7 @@
     "build:copy-files": "cp ./README.md ./dist/",
     "build:docs": "rm -rf ./docs/build; webpack --config ./docs/webpack.prod.config",
     "prebuild": "rm -rf ./dist",
-    "prepublish": "yarn run prebuild; yarn run build",
-    "pretest": "yarn run lint"
+    "prepublish": "yarn run prebuild; yarn run build"
   },
   "contributors": [
     "Konstantin Krauss <konstantin@propertybase.com> (http://www.propertybase.com)",

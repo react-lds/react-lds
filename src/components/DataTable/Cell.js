@@ -124,9 +124,8 @@ export const Cell = (props) => {
       {...rest}
       className={cx(sldsClasses)}
       scope={cellScope}
-      title={cellTitle}
     >
-      <div className={wrapperClassName}>
+      <div className={wrapperClassName} title={cellTitle}>
         {wrappedChildren}
       </div>
     </CellElement>
