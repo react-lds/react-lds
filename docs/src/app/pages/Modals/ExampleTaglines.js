@@ -12,9 +12,9 @@ const modalLabel = 'example-modal';
 
 const ExampleNormal = () =>
   <div className="demo-modal">
-    <Modal label={modalLabel} open>
+    <Modal label={modalLabel} open descriptionId="example-taglines">
       <ModalHeader title="Modal Header" tagline={tagline} />
-      <ModalContent>
+      <ModalContent id="example-taglines">
         <div>
           <p>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam
           incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse
