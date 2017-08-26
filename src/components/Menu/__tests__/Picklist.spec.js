@@ -53,4 +53,8 @@ describe('</Picklist />', () => {
     expect(mounted.find('.slds-dropdown').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-dropdown').prop('data-test')).toEqual('bar');
   });
+
+  it('applies the correct role for the checkbox menu item', () => {
+    expect(mounted.find('a').first().prop('role')).toEqual('menuitemcheckbox');
+  });
 });
