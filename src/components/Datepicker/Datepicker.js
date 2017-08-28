@@ -62,6 +62,7 @@ export class Datepicker extends React.Component {
       ${moment().localeData().longDateFormat(placeholderDateFormat)}`;
 
     if (date && initialDate) {
+      // eslint-disable-next-line no-console
       console.warn(
         '[react-lds] Datepicker:',
         'You are supplying both `initialDate` & `date`, ignoring `initialDate`.',
@@ -420,7 +421,6 @@ export class Datepicker extends React.Component {
               {this.renderYearPicker()}
             </div>
             <table
-              aria-multiselectable={inputValue !== '' ? true : null}
               className="slds-datepicker__month"
               role="grid"
             >
