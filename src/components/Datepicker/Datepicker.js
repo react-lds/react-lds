@@ -357,14 +357,23 @@ export class Datepicker extends React.Component {
 
     const isToday = day.isSame(moment(), 'day');
 
+    const isSelected = day.isSame(moment(inputValue, defaultDateFormat), 'day');
+
     const classes = {
       'slds-is-today': day.isSame(moment(), 'day'),
       'slds-disabled-text': !inRange,
-      'slds-is-selected': day.isSame(moment(inputValue, defaultDateFormat), 'day'),
+      'slds-is-selected': isSelected,
     };
 
     return (
-      <td key={dayIndex} className={cx(classes)}>
+      <td
+        aria-disabled={!inRange ? 'true' : null}
+        aria-selected={isSelected}
+        className={cx(classes)}
+        key={dayIndex}
+        role="gridcell"
+        tabIndex={inRange ? '0' : null}
+      >
         <span className="slds-day" onClick={onClick}>
           {isToday && <span className="slds-assistive-text">Today: </span>}
           {day.date()}
