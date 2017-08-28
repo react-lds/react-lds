@@ -40,7 +40,7 @@ describe('<Pill />', () => {
   it('renders a portrait', () => {
     const portrait = (<Avatar src="foo" />);
     mounted.setProps({ portrait });
-    expect(mounted.find('.slds-pill__icon').length).toBe(1);
+    expect(mounted.find('.slds-pill__icon_container').length).toBe(1);
   });
 
   it('renders an icon', () => {

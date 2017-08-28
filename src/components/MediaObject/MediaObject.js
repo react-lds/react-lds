@@ -5,7 +5,7 @@ import cx from 'classnames';
 import { flavorable } from '../../decorators';
 
 export const MediaObject = (props) => {
-  const { children, className, customTag, figureLeft, figureRight, truncate, ...rest } = props;
+  const { children, className, customTag, figureLeft, figureRight, title, truncate, ...rest } = props;
 
   const renderFigure = (figure, classes = []) => {
     const figureClasses = [
@@ -31,7 +31,7 @@ export const MediaObject = (props) => {
   return (
     <Tag {...rest} className={cx(sldsClasses)}>
       {figureLeft && renderFigure(figureLeft)}
-      <div className={cx(bodyClasses)}>{children}</div>
+      <div className={cx(bodyClasses)} title={title}>{children}</div>
       {figureRight && renderFigure(figureRight, ['slds-media__figure_reverse'])}
     </Tag>
   );
@@ -49,6 +49,7 @@ MediaObject.defaultProps = {
   figureLeft: null,
   figureRight: null,
   truncate: false,
+  title: null,
 };
 
 MediaObject.propTypes = {
@@ -73,9 +74,13 @@ MediaObject.propTypes = {
    */
   figureRight: PropTypes.node,
   /**
-   * truncates the body
+   * truncates the body, requires title
    */
   truncate: PropTypes.bool,
+  /**
+   * title is necessary if truncate is used
+   */
+  title: PropTypes.string,
 };
 
 export default flavorable(MediaObject, 'media');

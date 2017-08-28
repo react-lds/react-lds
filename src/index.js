@@ -22,6 +22,7 @@ export * from './components/Pill';
 export * from './components/Popover';
 export * from './components/ProgressBar';
 export * from './components/Spinner';
+export * from './components/StatefulButton';
 export * from './components/Tab';
 export * from './components/Navigation';
 export * from './decorators';

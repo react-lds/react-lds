@@ -33,7 +33,7 @@ describe('<Cell />', () => {
 
   it('renders a title if present', () => {
     mounted.setProps({ title: 'Title' });
-    expect(mounted.find('td').prop('title')).toEqual('Title');
+    expect(mounted.find('div').prop('title')).toEqual('Title');
   });
 
   it('sets scope if a scope is present', () => {
@@ -44,13 +44,13 @@ describe('<Cell />', () => {
   it('sets the children text as title if no title-props is found', () => {
     const child = 'text';
     mounted.setProps({ children: child });
-    expect(mounted.find('td').prop('title')).toEqual(child);
+    expect(mounted.find('div').prop('title')).toEqual(child);
   });
 
   it('sets the grandchildren text as title if no title-props is found', () => {
     const child = <span key="test">text</span>;
     mounted.setProps({ children: child });
-    expect(mounted.find('td').prop('title')).toEqual('text');
+    expect(mounted.find('div').prop('title')).toEqual('text');
   });
 
   it('applies className and rest-properties', () => {

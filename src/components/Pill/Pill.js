@@ -20,22 +20,6 @@ export const Pill = (props) => {
   const isLinked = !!url;
   const LabelElement = isLinked ? 'a' : 'span';
 
-  const getIcon = () => {
-    if (icon) {
-      return React.cloneElement(icon, { className: 'slds-pill__icon_container' });
-    }
-
-    return null;
-  };
-
-  const getPortrait = () => {
-    if (portrait) {
-      return React.cloneElement(portrait, { className: 'slds-pill__icon' });
-    }
-
-    return null;
-  };
-
   const sldsClasses = [
     'slds-pill',
     className
@@ -43,8 +27,8 @@ export const Pill = (props) => {
 
   return (
     <span {...rest} className={cx(sldsClasses)}>
-      {getIcon()}
-      {getPortrait()}
+      {icon && <span className="slds-pill__icon_container">{icon}</span>}
+      {portrait && <span className="slds-pill__icon_container">{portrait}</span>}
       <LabelElement href={isLinked ? url : null} className="slds-pill__label" title={title}>
         {label}
       </LabelElement>

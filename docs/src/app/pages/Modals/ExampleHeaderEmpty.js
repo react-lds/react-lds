@@ -3,9 +3,9 @@ import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from 
 
 const ExampleHeaderEmpty = () =>
   <div className="demo-modal">
-    <Modal open>
+    <Modal open aria-label="Modal Label" className="slds-modal__header_empty" descriptionId="example-header-empty">
       <ModalHeader />
-      <ModalContent>
+      <ModalContent id="example-header-empty">
         <div>
           <p>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam
           incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse

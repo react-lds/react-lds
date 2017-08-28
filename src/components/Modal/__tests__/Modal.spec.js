@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 
 import { Modal } from '../Modal';
 import ModalHeader from '../ModalHeader';
+import ModalContent from '../ModalContent';
 
 describe('<Modal />', () => {
   let mounted = null;
@@ -11,7 +12,7 @@ describe('<Modal />', () => {
     mounted = mount(
       <Modal>
         <ModalHeader />
-        <div className="foo" />
+        <ModalContent id="bar" className="foo" />
       </Modal>
     );
   });
@@ -31,14 +32,14 @@ describe('<Modal />', () => {
   });
 
   it('renders and passes label and description', () => {
-    mounted.setProps({ label: 'foo', description: 'bar' });
+    mounted.setProps({ label: 'foo', descriptionId: 'bar' });
     const modalProps = mounted.find('.slds-modal').props();
-    const modalContainerProps = mounted.find('.slds-modal__container').props();
+    const modalContentProps = mounted.find(ModalContent).first().props();
     const modalHeaderProps = mounted.find(ModalHeader).first().props();
 
     expect(modalProps['aria-labelledby']).toBe('foo');
     expect(modalProps['aria-describedby']).toBe('bar');
-    expect(modalContainerProps.id).toBe('bar');
+    expect(modalContentProps.id).toBe('bar');
     expect(modalHeaderProps.label).toBe('foo');
     expect(modalHeaderProps.prompt).toBeFalsy();
   });
