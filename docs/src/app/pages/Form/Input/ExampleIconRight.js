@@ -5,7 +5,7 @@ import { Input } from 'react-lds';
 const ExampleIconRight = () =>
   <div>
     <Input
-      iconRight="search"
+      iconRight="clear"
       id="input-3"
       label="Input with Right Icon"
       placeholder="Enter something..."
