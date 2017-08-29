@@ -102,8 +102,6 @@ const InputRaw = (props) => {
       return null;
     }
 
-    // slds-spinner slds-spinner_brand slds-spinner_x-small slds-input__spinner
-
     return (
       <Spinner
         brand
@@ -138,10 +136,10 @@ const InputRaw = (props) => {
         type={type}
         value={value || ''}
       />
-      <div className="slds-input__icon-group slds-input__icon-group_right">
-        {renderIconRight()}
+      <span className="slds-input__icon-group slds-input__icon-group_right">
         {renderSpinner()}
-      </div>
+        {renderIconRight()}
+      </span>
     </span>
   );
 };
