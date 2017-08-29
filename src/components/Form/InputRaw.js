@@ -43,8 +43,9 @@ const InputRaw = (props) => {
 
     if (iconName) {
       const iconClasses = [
-        'slds-input__icon',
         'slds-icon-text-default',
+        'slds-icon',
+        'slds-input__icon',
         { 'slds-input__icon_left': iconLeft && iconRight },
       ];
 
@@ -80,8 +81,9 @@ const InputRaw = (props) => {
 
     if (iconRight) {
       const iconClasses = [
-        'slds-input__icon',
         'slds-icon-text-default',
+        'slds-icon',
+        'slds-input__icon',
         { 'slds-input__icon_right': iconLeft && iconRight },
       ];
 
