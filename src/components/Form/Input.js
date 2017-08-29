@@ -29,8 +29,8 @@ const Input = (props) => {
     <FormElement required={required} error={error}>
       <FormElementLabel
         hideLabel={hideLabel}
-        label={label}
         id={id}
+        label={label}
         required={required}
       />
       <FormElementControl hasIconLeft={hasIconLeft} hasIconRight={hasIconRight}>

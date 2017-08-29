@@ -92,8 +92,8 @@ const InputRaw = (props) => {
   };
 
   const sldsClasses = [
-    { 'slds-input_bare': bare },
-    { 'slds-input': !bare },
+    { 'slds-has-input-focus': isFocused },
+    bare ? 'slds-input_bare' : 'slds-input',
     className
   ];
 
@@ -103,6 +103,7 @@ const InputRaw = (props) => {
       {renderIconRight()}
       <input
         {...rest}
+        aria-describedby={error ? getUniqueHash(error, id) : null}
         className={cx(sldsClasses)}
         disabled={disabled}
         id={id}
@@ -110,12 +111,11 @@ const InputRaw = (props) => {
         onFocus={onFocus}
         onKeyPress={onKeyPress}
         placeholder={placeholder}
+        ref={(input) => { if (input && isFocused) { input.focus(); } }}
         required={required}
         role={role}
         type={type}
         value={value}
-        ref={(input) => { if (input && isFocused) { input.focus(); } }}
-        aria-describedby={error ? getUniqueHash(error, id) : null}
       />
     </span>
   );
