@@ -19,11 +19,12 @@ const Input = (props) => {
     id,
     label,
     required,
+    showSpinner,
     ...rest,
   } = props;
 
   const hasIconLeft = !!iconLeft || (error && errorIcon);
-  const hasIconRight = !!iconRight;
+  const hasIconRight = !!iconRight || !!showSpinner;
 
   return (
     <FormElement required={required} error={error}>
@@ -42,6 +43,7 @@ const Input = (props) => {
           id={id}
           label={label}
           required={required}
+          showSpinner={showSpinner}
           {...rest}
         />
       </FormElementControl>
