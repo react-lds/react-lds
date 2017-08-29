@@ -76,7 +76,7 @@ export const Cell = (props) => {
       return (
         <div key={key} className="slds-icon_container" title={sortAssistiveText}>
           <IconSVG
-            className="slds-is-sortable__icon slds-icon-text-default"
+            className="slds-is-sortable__icon slds-icon slds-icon-text-default"
             icon={sortDirection === 'asc' ? 'arrowup' : 'arrowdown'}
             size="x-small"
             sprite="utility"
