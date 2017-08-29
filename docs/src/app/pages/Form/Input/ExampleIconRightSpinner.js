@@ -10,7 +10,6 @@ const ExampleIconRightSpinner = () =>
       label="Input with Right Icon and Spinner"
       placeholder="Enter something..."
       showSpinner
-      value=""
     />
   </div>;
 

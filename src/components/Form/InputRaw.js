@@ -136,7 +136,7 @@ const InputRaw = (props) => {
         required={required}
         role={role}
         type={type}
-        value={value}
+        value={value || ''}
       />
       <div className="slds-input__icon-group slds-input__icon-group_right">
         {renderIconRight()}
