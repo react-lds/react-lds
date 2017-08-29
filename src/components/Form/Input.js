@@ -68,6 +68,7 @@ Input.defaultProps = {
   placeholder: null,
   role: null,
   required: false,
+  showSpinner: false,
   type: 'text',
   value: null,
 };
@@ -145,6 +146,10 @@ Input.propTypes = {
    * role of the input field
    */
   role: PropTypes.string,
+  /**
+   * whether to show a spinner element inside the field, on the right end
+   */
+  showSpinner: PropTypes.bool,
   /**
    * input type. all HTML5 types are allowed, defaults to "text"
    * text, password, datetime, datetime-local, date, month, time, week, number, email, url, search, tel, and color

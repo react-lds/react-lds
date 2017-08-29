@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getUniqueHash } from '../../utils';
-import { Button, ButtonIcon, IconSVG } from '../../';
+import {
+  Button,
+  ButtonIcon,
+  IconSVG,
+  Spinner,
+} from '../../';
 
 const InputRaw = (props) => {
   const {
@@ -22,6 +27,7 @@ const InputRaw = (props) => {
     placeholder,
     required,
     role,
+    showSpinner,
     type,
     value,
     isFocused,
@@ -91,6 +97,22 @@ const InputRaw = (props) => {
     return null;
   };
 
+  const renderSpinner = () => {
+    if (!showSpinner) {
+      return null;
+    }
+
+    // slds-spinner slds-spinner_brand slds-spinner_x-small slds-input__spinner
+
+    return (
+      <Spinner
+        brand
+        className="slds-input__spinner slds-m-right_xx-small"
+        size="x-small"
+      />
+    );
+  };
+
   const sldsClasses = [
     { 'slds-has-input-focus': isFocused },
     bare ? 'slds-input_bare' : 'slds-input',
@@ -100,7 +122,6 @@ const InputRaw = (props) => {
   return (
     <span>
       {renderIconLeft()}
-      {renderIconRight()}
       <input
         {...rest}
         aria-describedby={error ? getUniqueHash(error, id) : null}
@@ -117,6 +138,10 @@ const InputRaw = (props) => {
         type={type}
         value={value}
       />
+      <div className="slds-input__icon-group slds-input__icon-group_right">
+        {renderIconRight()}
+        {renderSpinner()}
+      </div>
     </span>
   );
 };
@@ -138,6 +163,7 @@ InputRaw.defaultProps = {
   placeholder: null,
   role: null,
   required: false,
+  showSpinner: false,
   type: 'text',
   value: null,
 };
@@ -211,6 +237,10 @@ InputRaw.propTypes = {
    * role of the input field
    */
   role: PropTypes.string,
+  /**
+   * whether to show a spinner element inside the field, on the right end
+   */
+  showSpinner: PropTypes.bool,
   /**
    * input type. all HTML5 types are allowed, defaults to "text"
    * text, password, datetime, datetime-local, date, month, time, week, number, email, url, search, tel, and color
