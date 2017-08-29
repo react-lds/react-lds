@@ -99,19 +99,13 @@ const InputRaw = (props) => {
     return null;
   };
 
-  const renderSpinner = () => {
-    if (!showSpinner) {
-      return null;
-    }
-
-    return (
-      <Spinner
-        brand
-        className="slds-input__spinner slds-m-right_xx-small"
-        size="x-small"
-      />
-    );
-  };
+  const renderSpinner = () => showSpinner && (
+    <Spinner
+      brand
+      className="slds-input__spinner slds-m-right_xx-small"
+      size="x-small"
+    />
+  );
 
   const sldsClasses = [
     { 'slds-has-input-focus': isFocused },
