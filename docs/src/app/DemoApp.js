@@ -24,6 +24,7 @@ import Navigation from './pages/Navigation';
 import Notifications from './pages/Notifications';
 import Page from './components/Page';
 import PageHeader from './pages/PageHeader';
+import Paths from './pages/Path';
 import Pills from './pages/Pills';
 import Popovers from './pages/Popovers';
 import ProgressBar from './pages/ProgressBar';
@@ -77,6 +78,7 @@ const routes = (
     <Route path="navigation" component={Navigation} />
     <Route path="notifications" component={Notifications} />
     <Route path="page-headers" component={PageHeader} />
+    <Route path="paths" component={Paths} />
     <Route path="pills" component={Pills} />
     <Route path="popovers" component={Popovers} />
     <Route path="progressbar" component={ProgressBar} />
