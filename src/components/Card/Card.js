@@ -40,7 +40,7 @@ const Card = (props) => {
         <div className="slds-no-flex">{headerRight}</div>
       </Grid>
       <div className="slds-card__body slds-text-align_center">{body}</div>
-      <div className="slds-card__footer">{footer}</div>
+      <footer className="slds-card__footer">{footer}</footer>
     </div>
   );
 };
