@@ -8,7 +8,7 @@ const PageNavigationMenu = ({ to, children, title }, { router }) => {
   const classes = isActive ? 'list__name site-states-parent slds-is-open slds-is-selected' : 'list__name';
   const icon = children ?
     (<IconSVG
-      className="slds-align-middle slds-col--bump-left slds-icon-text-default slds-icon__svg"
+      className="slds-align-middle slds-col--bump-left slds-icon slds-icon-text-default slds-icon__svg"
       sprite="utility"
       icon="down"
       size="x-small"
