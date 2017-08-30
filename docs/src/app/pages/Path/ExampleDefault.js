@@ -72,4 +72,7 @@ class ContactPath extends Component {
   }
 }
 
-export default ContactPath;
+const ExampleDefault = () =>
+  <ContactPath />;
+
+export default ExampleDefault;
