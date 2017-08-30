@@ -62,6 +62,7 @@ export class Datepicker extends React.Component {
       ${moment().localeData().longDateFormat(placeholderDateFormat)}`;
 
     if (date && initialDate) {
+      // eslint-disable-next-line no-console
       console.warn(
         '[react-lds] Datepicker:',
         'You are supplying both `initialDate` & `date`, ignoring `initialDate`.',
@@ -354,15 +355,27 @@ export class Datepicker extends React.Component {
 
     const onClick = () => inRange && this.onDatepickerChange(day);
 
+    const isToday = day.isSame(moment(), 'day');
+
+    const isSelected = day.isSame(moment(inputValue, defaultDateFormat), 'day');
+
     const classes = {
       'slds-is-today': day.isSame(moment(), 'day'),
       'slds-disabled-text': !inRange,
-      'slds-is-selected': day.isSame(moment(inputValue, defaultDateFormat), 'day'),
+      'slds-is-selected': isSelected,
     };
 
     return (
-      <td key={dayIndex} className={cx(classes)} headers={day.day()}>
+      <td
+        aria-disabled={!inRange ? 'true' : null}
+        aria-selected={isSelected}
+        className={cx(classes)}
+        key={dayIndex}
+        role="gridcell"
+        tabIndex={inRange ? '0' : null}
+      >
         <span className="slds-day" onClick={onClick}>
+          {isToday && <span className="slds-assistive-text">Today: </span>}
           {day.date()}
         </span>
       </td>
@@ -372,6 +385,7 @@ export class Datepicker extends React.Component {
   render() {
     const { required } = this.props;
     const { inputValue, isValid, open, viewedDate } = this.state;
+    const viewedMonthName = moment(viewedDate).format('MMMM');
 
     const inputFieldLabel = this.getTranslations('inputFieldLabel');
     const inputFieldError = this.getTranslations('inputFieldError');
@@ -392,7 +406,11 @@ export class Datepicker extends React.Component {
           required={required}
         />
         {open && (
-          <div className="slds-datepicker slds-dropdown slds-dropdown_left">
+          <div
+            aria-label={`Date picker: ${viewedMonthName}`}
+            className="slds-datepicker slds-dropdown slds-dropdown_left"
+            role="dialog"
+          >
             <div className="slds-datepicker__filter slds-grid">
               <div className="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
                 <div className="slds-align-middle">
@@ -411,7 +429,10 @@ export class Datepicker extends React.Component {
               </div>
               {this.renderYearPicker()}
             </div>
-            <table className="slds-datepicker__month" role="grid">
+            <table
+              className="slds-datepicker__month"
+              role="grid"
+            >
               {Datepicker.renderWeekHeader()}
               {this.renderMonth()}
             </table>
