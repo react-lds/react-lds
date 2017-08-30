@@ -43,7 +43,7 @@ describe('<Card />', () => {
   });
 
   it('renders footer', () => {
-    expect(mounted.find('div.slds-card__footer').first().text()).toEqual(props.footer);
+    expect(mounted.find('footer.slds-card__footer').first().text()).toEqual(props.footer);
   });
 
   it('applies className and rest-properties', () => {
