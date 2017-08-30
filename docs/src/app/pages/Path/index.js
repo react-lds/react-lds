@@ -1,12 +1,11 @@
 import React from 'react';
 
-import accordionCode from '!raw!react-lds/components/Accordion/Accordion';
-import accordionSectionCode from '!raw!react-lds/components/Accordion/AccordionSection';
+// description
 
 import exampleDefaultCode from '!raw!./ExampleDefault';
 
 import CodeExample from '../../components/CodeExample';
-import PropTypeDescription from '../../components/PropTypeDescription';
+// import PropTypeDescription from '../../components/PropTypeDescription';
 import Masthead from '../../components/MastHead';
 import HeaderIcon from '../../components/HeaderIcon';
 
@@ -24,8 +23,6 @@ const Path = () =>
         <ExampleDefault />
       </section>
     </div>
-    <PropTypeDescription code={accordionCode} />
-    <PropTypeDescription code={accordionSectionCode} />
   </div>
 ;
 

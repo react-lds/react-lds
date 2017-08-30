@@ -4,13 +4,13 @@ import cx from 'classnames';
 import { IconSVG } from '../../.';
 
 export const PathStage = (props) => {
-  const { className, assistiveText, label, status, selected, onStageClick, ...rest, } = props;
+  const { className, assistiveText, label, complete, current, selected, onStageClick, ...rest, } = props;
   const sldsClasses = [
     'slds-tabs_path__item',
-    { 'slds-is-complete': status === 'complete' },
-    { 'slds-is-current': status === 'current' },
-    { 'slds-is-incomplete': status !== 'complete' && status !== 'current' },
-    { 'slds-is-active': selected && status !== 'current' },
+    { 'slds-is-complete': complete },
+    { 'slds-is-current': current },
+    { 'slds-is-incomplete': !complete && !current },
+    { 'slds-is-active': selected && !current },
     className,
   ];
 
@@ -41,7 +41,8 @@ PathStage.propTypes = {
   assistiveText: PropTypes.string.isRequired,
   selected: PropTypes.bool.isRequired,
   label: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
+  complete: PropTypes.bool.isRequired,
+  current: PropTypes.bool.isRequired,
   onStageClick: PropTypes.func.isRequired,
 };
 

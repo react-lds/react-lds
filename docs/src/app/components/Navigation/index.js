@@ -31,6 +31,7 @@ const Navigation = () =>
         <NavLink to="/navigation" label="Navigation" />
         <NavLink to="/notifications" label="Notifications" />
         <NavLink to="/page-headers" label="Page Headers" />
+        <NavLink to="/paths" label="Path" />
         <NavLink to="/pills" label="Pills" />
         <NavLink unfinished to="/process" label="Process" />
         <NavLink to="/popovers" label="Popovers" />

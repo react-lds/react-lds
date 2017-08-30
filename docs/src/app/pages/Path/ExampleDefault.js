@@ -41,9 +41,9 @@ class ContactPath extends Component {
       <PathStage
         label={picklistValue.label}
         onStageClick={this.onStageClick}
-        isComplete={leadStatusPicklist.indexOf(i) < leadStatusPicklist.indexOf(leadStatusPicklist[current])}
-        isCurrent={picklistValue.value === current}
-        isSelected={picklistValue.value === selected}
+        complete={leadStatusPicklist.indexOf(i) < leadStatusPicklist.indexOf(leadStatusPicklist[current])}
+        current={picklistValue.value === current}
+        selected={picklistValue.value === selected}
         value={picklistValue.value}
       />
     );
@@ -72,7 +72,8 @@ class ContactPath extends Component {
   }
 }
 
-const ExampleDefault = () =>
-  <ContactPath />;
+const ExampleDefault = () => (
+  <ContactPath />
+);
 
 export default ExampleDefault;
