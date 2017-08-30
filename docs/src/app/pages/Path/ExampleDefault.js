@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import { Path, PathStage, Button, ButtonIcon } from 'react-lds';
+import cx from 'classnames';
 
 class ContactPath extends Component {
   constructor() {
     super();
     this.state = {
-      selected: 'api_bar',
-      current: 'api_baz',
-      leadStatusPicklist: [{
-        label: 'Foo',
-        value: 'api_foo',
-      }, {
-        label: 'Bar',
-        value: 'api_bar',
-      }, {
-        label: 'Baz',
-        value: 'api_baz',
-      }]
+      selected: 'floor_plan',
+      current: 'floor_plan',
+      leadStatusPicklist: [
+        {
+          active: true,
+          defaultValue: false,
+          label: 'Floorplan',
+          validFor: null,
+          value: 'floor_plan'
+        }, {
+          label: 'Bar',
+          value: 'api_bar',
+        }, {
+          label: 'Baz',
+          value: 'api_baz',
+        }
+      ],
     };
   }
 
@@ -54,13 +60,24 @@ class ContactPath extends Component {
 
     const selectedIsCurrentStep = selected === current;
 
+    const statusButtonClasses = [
+      'slds-path__mark-complete',
+      'slds-no-flex',
+      'slds-m-horizontal_small',
+    ];
+
     const pathButton = (
       <Button
         disabled={leadStatusPicklist.indexOf(current) > (leadStatusPicklist.length - 1)}
+        brand
+        icon
+        icon-inverse
+        className={cx(statusButtonClasses)}
         onClick={selectedIsCurrentStep ? this.onMarkComplete : this.onMarkCurrent}
         title={selectedIsCurrentStep ? 'Mark as complete' : 'Mark as current'}
       >
-        {selectedIsCurrentStep && <ButtonIcon />}
+        <ButtonIcon position="left" sprite="utility" icon="check" />
+        test
       </Button>
     );
 
@@ -72,8 +89,11 @@ class ContactPath extends Component {
   }
 }
 
-const ExampleDefault = () => (
-  <ContactPath />
-);
+const ExampleDefault = () => {
+  console.log('something is happening');
+  return (
+    <ContactPath />
+  );
+};
 
 export default ExampleDefault;
