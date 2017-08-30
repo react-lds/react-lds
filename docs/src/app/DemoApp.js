@@ -20,7 +20,6 @@ import Lookups from './pages/Lookups';
 import MediaObject from './pages/MediaObject';
 import Menu from './pages/Menu';
 import Modals from './pages/Modals';
-import Navigation from './pages/Navigation';
 import Notifications from './pages/Notifications';
 import Page from './components/Page';
 import PageHeader from './pages/PageHeader';
@@ -34,6 +33,7 @@ import Spinners from './pages/Spinners';
 import StatefulButtons from './pages/StatefulButton';
 import Tabs from './pages/Tab';
 import TextareaVariants from './pages/Form/Textarea';
+import VerticalNavigation from './pages/VerticalNavigation';
 
 const routes = (
   <Route path="/" component={Page}>
@@ -74,7 +74,6 @@ const routes = (
     <Route path="media-objects" component={MediaObject} />
     <Route path="menus" component={Menu} />
     <Route path="modals" component={Modals} />
-    <Route path="navigation" component={Navigation} />
     <Route path="notifications" component={Notifications} />
     <Route path="page-headers" component={PageHeader} />
     <Route path="pills" component={Pills} />
@@ -83,6 +82,7 @@ const routes = (
     <Route path="spinners" component={Spinners} />
     <Route path="stateful-buttons" component={StatefulButtons} />
     <Route path="tabs" component={Tabs} />
+    <Route path="vertical-navigation" component={VerticalNavigation} />
   </Route>
 );
 

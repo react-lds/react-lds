@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased]
+
+  - Add `<Listbox />` component, to be used in PillContainers
+  - Deprecate `<Navigation />`, add `<VerticalNavigation />`
+
 ## 1.1.11
 
 * Add onClickClose handler for Notifications (thanks @frontendloader)

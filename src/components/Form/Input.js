@@ -69,7 +69,7 @@ Input.defaultProps = {
   role: null,
   required: false,
   type: 'text',
-  value: null,
+  value: undefined,
 };
 
 Input.propTypes = {
