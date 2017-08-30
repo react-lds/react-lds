@@ -8,6 +8,7 @@ export * from './components/Card';
 export * from './components/DataTable';
 export * from './components/Datepicker';
 export * from './components/ExpandableSection';
+export * from './components/File';
 export * from './components/Form';
 export * from './components/Grid';
 export * from './components/Icon';

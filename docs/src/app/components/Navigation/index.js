@@ -20,6 +20,7 @@ const Navigation = () =>
         <NavLink to="/datepickers" label="Datepickers" />
         <NavLink to="/expandable-sections" label="Expandable Sections" />
         <NavLink unfinished to="/feeds" label="Feeds" />
+        <NavLink to="/files" label="Files" />
         <NavLink to="/forms" label="Forms" />
         <NavLink to="/grid-system" label="Grid System" />
         <NavLink to="/icons" label="Icons" />

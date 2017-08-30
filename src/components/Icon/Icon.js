@@ -7,8 +7,22 @@ import { IconSVG } from '../../';
 const iconClass = (sprite, icon) => icon.replace(/_/g, '-');
 
 const Icon = (props) => {
-  const { background, circle, className, div, icon, size, sprite, title, ...rest } = props;
-  const backgroundClass = !background ? `slds-icon-${sprite}-${iconClass(sprite, icon)}` : `slds-icon-${background}`;
+  const {
+    background,
+    circle,
+    className,
+    div,
+    icon,
+    size,
+    sprite,
+    svgClassName,
+    title,
+    ...rest
+  } = props;
+
+  const backgroundClass = !background
+    ? `slds-icon-${sprite}-${iconClass(sprite, icon)}`
+    : `slds-icon-${background}`;
 
   const sldsClasses = [
     { 'slds-icon_container': true },
@@ -21,7 +35,13 @@ const Icon = (props) => {
 
   return (
     <WrapperElement {...rest} className={cx(sldsClasses)} title={title}>
-      <IconSVG sprite={sprite} icon={icon} size={size} background={background} />
+      <IconSVG
+        background={background}
+        className={svgClassName}
+        icon={icon}
+        size={size}
+        sprite={sprite}
+      />
       <span className="slds-assistive-text">{title}</span>
     </WrapperElement>
   );
@@ -33,6 +53,7 @@ Icon.defaultProps = {
   className: null,
   div: false,
   size: null,
+  svgClassName: null,
   title: null,
 };
 
@@ -65,6 +86,10 @@ Icon.propTypes = {
    * icon sprite name
    */
   sprite: PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
+  /**
+   * iconSvg className
+   */
+  svgClassName: PropTypes.string,
   /**
    * icon title
    */

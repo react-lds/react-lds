@@ -40,6 +40,7 @@ export const MediaObject = (props) => {
 MediaObject.flavors = [
   'center',
   'responsive',
+  'small',
 ];
 
 MediaObject.defaultProps = {
