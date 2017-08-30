@@ -59,9 +59,12 @@ const DropdownMenuListItem = (props) => {
     className,
   ];
 
+  const role = (selected === null) ? 'menuitem' : 'menuitemcheckbox';
+  // if selected true or false, it's a menuitemcheckbox, else it's a menuitem
+
   return (
     <li {...rest} className={cx(sldsClasses)} role="presentation">
-      <a role="menuitem" onClick={onClick}>
+      <a role={role} onClick={onClick} aria-checked={selected}>
         <span className="slds-truncate" title={children}>
           {leftIconElem()}
           {children}
@@ -78,7 +81,7 @@ DropdownMenuListItem.defaultProps = {
   leftIcon: null,
   onClick: () => {},
   rightIcon: null,
-  selected: false,
+  selected: null,
 };
 
 DropdownMenuListItem.propTypes = {
