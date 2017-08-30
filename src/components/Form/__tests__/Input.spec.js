@@ -85,6 +85,13 @@ describe('<Input />', () => {
     expect(formElement.hasClass('slds-input-has-icon_left-right')).toBeTruthy();
   });
 
+  it('renders a spinner', () => {
+    mounted.setProps({ showSpinner: true });
+    const formElement = mounted.find('.slds-form-element__control');
+
+    expect(formElement.find('Spinner').length).toBe(1);
+  });
+
   it('iconRightOnClick handler works and renders surrounding button', () => {
     const iconRight = 'rainbow';
     mounted.setProps({ iconRight });

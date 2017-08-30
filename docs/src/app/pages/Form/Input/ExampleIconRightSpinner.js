@@ -2,14 +2,15 @@ import React from 'react';
 
 import { Input } from 'react-lds';
 
-const ExampleIconRight = () =>
+const ExampleIconRightSpinner = () =>
   <div>
     <Input
       iconRight="clear"
       id="input-3"
-      label="Input with Right Icon"
+      label="Input with Right Icon and Spinner"
       placeholder="Enter something..."
+      showSpinner
     />
   </div>;
 
-export default ExampleIconRight;
+export default ExampleIconRightSpinner;

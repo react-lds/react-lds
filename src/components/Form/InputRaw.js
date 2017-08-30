@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getUniqueHash } from '../../utils';
-import { Button, ButtonIcon, IconSVG } from '../../';
+import {
+  Button,
+  ButtonIcon,
+  IconSVG,
+  Spinner,
+} from '../../';
 
 const InputRaw = (props) => {
   const {
@@ -22,6 +27,7 @@ const InputRaw = (props) => {
     placeholder,
     required,
     role,
+    showSpinner,
     type,
     value,
     isFocused,
@@ -37,8 +43,9 @@ const InputRaw = (props) => {
 
     if (iconName) {
       const iconClasses = [
-        'slds-input__icon',
         'slds-icon-text-default',
+        'slds-icon',
+        'slds-input__icon',
         { 'slds-input__icon_left': iconLeft && iconRight },
       ];
 
@@ -74,8 +81,9 @@ const InputRaw = (props) => {
 
     if (iconRight) {
       const iconClasses = [
-        'slds-input__icon',
         'slds-icon-text-default',
+        'slds-icon',
+        'slds-input__icon',
         { 'slds-input__icon_right': iconLeft && iconRight },
       ];
 
@@ -91,18 +99,26 @@ const InputRaw = (props) => {
     return null;
   };
 
+  const renderSpinner = () => showSpinner && (
+    <Spinner
+      brand
+      className="slds-input__spinner slds-m-right_xx-small"
+      size="x-small"
+    />
+  );
+
   const sldsClasses = [
-    { 'slds-input_bare': bare },
-    { 'slds-input': !bare },
+    { 'slds-has-input-focus': isFocused },
+    bare ? 'slds-input_bare' : 'slds-input',
     className
   ];
 
   return (
     <span>
       {renderIconLeft()}
-      {renderIconRight()}
       <input
         {...rest}
+        aria-describedby={error ? getUniqueHash(error, id) : null}
         className={cx(sldsClasses)}
         disabled={disabled}
         id={id}
@@ -110,13 +126,16 @@ const InputRaw = (props) => {
         onFocus={onFocus}
         onKeyPress={onKeyPress}
         placeholder={placeholder}
+        ref={(input) => { if (input && isFocused) { input.focus(); } }}
         required={required}
         role={role}
         type={type}
-        value={value}
-        ref={(input) => { if (input && isFocused) { input.focus(); } }}
-        aria-describedby={error ? getUniqueHash(error, id) : null}
+        value={value || ''}
       />
+      <span className="slds-input__icon-group slds-input__icon-group_right">
+        {renderSpinner()}
+        {renderIconRight()}
+      </span>
     </span>
   );
 };
@@ -138,6 +157,7 @@ InputRaw.defaultProps = {
   placeholder: null,
   role: null,
   required: false,
+  showSpinner: false,
   type: 'text',
   value: undefined,
 };
@@ -211,6 +231,10 @@ InputRaw.propTypes = {
    * role of the input field
    */
   role: PropTypes.string,
+  /**
+   * whether to show a spinner element inside the field, on the right end
+   */
+  showSpinner: PropTypes.bool,
   /**
    * input type. all HTML5 types are allowed, defaults to "text"
    * text, password, datetime, datetime-local, date, month, time, week, number, email, url, search, tel, and color
