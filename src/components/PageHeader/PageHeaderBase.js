@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { IconSVG, MediaObject } from '../../';
+import { Icon, MediaObject } from '../../';
 
 const PageHeaderBase = (props) => {
   const { className, icon, info, title, ...rest } = props;
 
-  const iconRendered = <IconSVG sprite={icon.sprite} icon={icon.icon} />;
+  const iconRendered = <Icon sprite={icon.sprite} icon={icon.icon} />;
 
   const sldsClasses = [
     'slds-page-header',
