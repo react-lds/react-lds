@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { DropdownMenu } from '../DropdownMenu';
+import { Menu } from '../Menu';
 
-describe('<DropdownMenu />', () => {
+describe('<Menu />', () => {
   let mounted = null;
   let props = {};
   let button;
@@ -18,7 +18,7 @@ describe('<DropdownMenu />', () => {
       button,
     };
 
-    mounted = mount(<DropdownMenu {...props}>fakechilds</DropdownMenu>);
+    mounted = mount(<Menu {...props}>fakechilds</Menu>);
   });
 
   it('is closed by default and opens when the button was clicked', () => {

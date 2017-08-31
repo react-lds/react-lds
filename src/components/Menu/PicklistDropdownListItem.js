@@ -4,27 +4,28 @@ import cx from 'classnames';
 
 import { IconSVG } from '../../';
 
-const DropdownMenuListItem = (props) => {
+const PicklistDropdownListItem = (props) => {
   const { children, className, onClick, selected, leftIcon, rightIcon, divider, ...rest } = props;
 
   const leftIconElem = () => {
     if (leftIcon) {
       const iconClasses = [
-        { 'slds-icon_selected': !leftIcon.alwaysDisplay },
-        { 'slds-icon-text-default': !leftIcon.alwaysDisplay },
-        { 'slds-m-right_x-small': !leftIcon.alwaysDisplay },
-        { 'slds-m-right_small': leftIcon.alwaysDisplay },
+        { 'slds-listbox__icon-selected': !leftIcon.alwaysDisplay },
+        { 'slds-icon_x-small': !leftIcon.alwaysDisplay },
         { 'slds-icon': leftIcon.alwaysDisplay },
       ];
 
       return (
-        <IconSVG
-          background={leftIcon.background}
-          className={cx(iconClasses)}
-          icon={leftIcon.icon}
-          size={leftIcon.alwaysDisplay ? 'small' : 'x-small'}
-          sprite={leftIcon.sprite}
-        />);
+        <div className="slds-media__figure">
+          <IconSVG
+            background={leftIcon.background}
+            className={cx(iconClasses)}
+            icon={leftIcon.icon}
+            size={leftIcon.alwaysDisplay ? 'small' : 'x-small'}
+            sprite={leftIcon.sprite}
+          />
+        </div>
+      );
     }
 
     return null;
@@ -40,39 +41,54 @@ const DropdownMenuListItem = (props) => {
       ];
 
       return (
-        <IconSVG
-          background={rightIcon.background}
-          className={cx(iconClasses)}
-          icon={rightIcon.icon}
-          size="x-small"
-          sprite={rightIcon.sprite}
-        />);
+        <div className="slds-media__figure">
+          <IconSVG
+            background={rightIcon.background}
+            className={cx(iconClasses)}
+            icon={rightIcon.icon}
+            size="x-small"
+            sprite={rightIcon.sprite}
+          />
+        </div>
+      );
     }
 
     return null;
   };
 
   const sldsClasses = [
-    'slds-dropdown__item',
+    'slds-listbox__item',
     { 'slds-has-divider_top-space': divider },
+    className,
+  ];
+
+  const itemClasses = [
+    'slds-media',
+    'slds-listbox__option',
+    'slds-listbox__option_plain',
+    'slds-media_small',
+    'slds-media_center',
+    // { 'slds-has-focus': selected },
     { 'slds-is-selected': selected },
     className,
   ];
 
   return (
     <li {...rest} className={cx(sldsClasses)} role="presentation">
-      <a role="menuitem" onClick={onClick}>
-        <span className="slds-truncate" title={children}>
-          {leftIconElem()}
-          {children}
-        </span>
+      <span id={new Date()} className={cx(itemClasses)} role="option" onClick={onClick}>
+        {leftIconElem()}
+        <div className="slds-media__body">
+          <div className="slds-truncate" title={children}>
+            {children}
+          </div>
+        </div>
         {rightIconElem()}
-      </a>
+      </span>
     </li>
   );
 };
 
-DropdownMenuListItem.defaultProps = {
+PicklistDropdownListItem.defaultProps = {
   className: null,
   divider: false,
   leftIcon: null,
@@ -81,7 +97,7 @@ DropdownMenuListItem.defaultProps = {
   selected: false,
 };
 
-DropdownMenuListItem.propTypes = {
+PicklistDropdownListItem.propTypes = {
   /**
    * The content of a menu item
    */
@@ -121,4 +137,4 @@ DropdownMenuListItem.propTypes = {
   selected: PropTypes.bool,
 };
 
-export default DropdownMenuListItem;
+export default PicklistDropdownListItem;

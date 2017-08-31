@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-  DropdownMenu,
-  DropdownMenuList,
-  DropdownMenuListItem,
+  Menu,
+  MenuDropdownList,
+  MenuDropdownListItem,
 } from 'react-lds';
 
 const ExampleIcons = () => {
@@ -29,27 +29,27 @@ const ExampleIcons = () => {
 
   return (
     <div>
-      <DropdownMenu button={button}>
-        <DropdownMenuList>
-          <DropdownMenuListItem leftIcon={leftIcon} selected>Item 1</DropdownMenuListItem>
-          <DropdownMenuListItem leftIcon={leftIcon}>Item 2</DropdownMenuListItem>
-          <DropdownMenuListItem leftIcon={leftIcon}>Item 3</DropdownMenuListItem>
-          <DropdownMenuListItem divider>Important last item</DropdownMenuListItem>
-        </DropdownMenuList>
-      </DropdownMenu>
+      <Menu button={button}>
+        <MenuDropdownList>
+          <MenuDropdownListItem leftIcon={leftIcon} selected>Item 1</MenuDropdownListItem>
+          <MenuDropdownListItem leftIcon={leftIcon}>Item 2</MenuDropdownListItem>
+          <MenuDropdownListItem leftIcon={leftIcon}>Item 3</MenuDropdownListItem>
+          <MenuDropdownListItem divider>Important last item</MenuDropdownListItem>
+        </MenuDropdownList>
+      </Menu>
 
-      <DropdownMenu button={button}>
-        <DropdownMenuList>
-          <DropdownMenuListItem
+      <Menu button={button}>
+        <MenuDropdownList>
+          <MenuDropdownListItem
             leftIcon={leftIcon}
             rightIcon={iconTable}
             selected
-          >Item 1</DropdownMenuListItem>
-          <DropdownMenuListItem leftIcon={leftIcon} rightIcon={iconKanban}>Item 2</DropdownMenuListItem>
-          <DropdownMenuListItem leftIcon={leftIcon} rightIcon={iconSideList}>Item 3</DropdownMenuListItem>
-          <DropdownMenuListItem divider>Important last item</DropdownMenuListItem>
-        </DropdownMenuList>
-      </DropdownMenu>
+          >Item 1</MenuDropdownListItem>
+          <MenuDropdownListItem leftIcon={leftIcon} rightIcon={iconKanban}>Item 2</MenuDropdownListItem>
+          <MenuDropdownListItem leftIcon={leftIcon} rightIcon={iconSideList}>Item 3</MenuDropdownListItem>
+          <MenuDropdownListItem divider>Important last item</MenuDropdownListItem>
+        </MenuDropdownList>
+      </Menu>
     </div>
   );
 };

@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import enhanceWithClickOutside from 'react-click-outside';
-import omit from 'lodash.omit';
+// import omit from 'lodash.omit';
 
-import { Button, ButtonIcon } from '../../';
+import {
+  FormElement,
+  FormElementControl,
+  FormElementLabel,
+} from '../../';
 
-export class DropdownMenu extends Component {
+export class PicklistDropdown extends Component {
   static defaultProps = {
     button: null,
     className: null,
     customButton: null,
     disabled: false,
+    error: null,
     isOpen: false,
+    hideLabel: false,
+    labelInput: '',
     last: false,
     nubbin: false,
     position: 'top-left',
+    required: false,
     size: 'small',
   };
 
@@ -40,7 +47,7 @@ export class DropdownMenu extends Component {
       brand: PropTypes.bool,
     }),
     /**
-     * one DropdownMenuList or many of them
+     * one PicklistDropdownList or many of them
      */
     children: PropTypes.node.isRequired,
     /**
@@ -48,18 +55,33 @@ export class DropdownMenu extends Component {
      */
     className: PropTypes.string,
     /**
-     * fully customizable dropdown trigger button, use this instead of the button
-     * shape if needed
+     * input field
      */
-    customButton: PropTypes.element,
+    input: PropTypes.element.isRequired,
     /**
      * adds disabled attribute to menu button
      */
     disabled: PropTypes.bool,
     /**
+     * input error
+     */
+    error: PropTypes.string,
+    /**
+     * indicates if the label for the input is hidden
+     */
+    hideLabel: PropTypes.bool,
+    /**
+     * id of the input
+     */
+    id: PropTypes.string.isRequired,
+    /**
      * forces open or closed state, is needed when using a custom button
      */
     isOpen: PropTypes.bool,
+    /**
+     * label for the input
+     */
+    labelInput: PropTypes.string,
     /**
      * indicates that this is the last element inside a button group and renders
      * the required css class
@@ -73,6 +95,10 @@ export class DropdownMenu extends Component {
      * position relative to the menu button
      */
     position: PropTypes.oneOf(['top-left', 'top', 'top-right', 'bottom-left', 'bototm', 'bottom-right']),
+    /**
+     * indicates if the input is required
+     */
+    required: PropTypes.bool,
     /**
      * length of the menu box
      */
@@ -100,37 +126,22 @@ export class DropdownMenu extends Component {
     this.setState({ open: false });
   }
 
-  button = () => {
-    const { button, customButton, disabled } = this.props;
-
-    if (button) {
-      const noBorder = button.noBorder;
-      const title = button.title;
-      return (
-        <Button
-          aria-haspopup="true"
-          brand={button.brand}
-          disabled={disabled}
-          icon-border-filled={!noBorder && !title}
-          icon-container={noBorder && !title}
-          neutral={button.neutral}
-          onClick={this.toggle}
-          title={button.title}
-        >
-          <ButtonIcon
-            icon={button.icon}
-            position={title ? 'right' : undefined}
-            sprite={button.sprite}
-          />
-        </Button>
-      );
-    }
-
-    return customButton;
-  }
-
   render() {
-    const { children, className, last, position, nubbin, size } = this.props;
+    const {
+      children,
+      className,
+      error,
+      id,
+      isOpen,
+      hideLabel,
+      input,
+      labelInput,
+      last,
+      nubbin,
+      position,
+      required,
+      size,
+    } = this.props;
 
     this.classes = [
       'slds-dropdown-trigger',
@@ -148,17 +159,42 @@ export class DropdownMenu extends Component {
       className,
     ];
 
-    const rest = omit(this.props, Object.keys(DropdownMenu.propTypes));
+    this.comboboxContainerClasses = [
+      'slds-combobox_container',
+      'slds-size_small',
+    ];
+
+    this.comboboxClasses = [
+      'slds-combobox',
+      'slds-dropdown-trigger',
+      'slds-combobox-picklist',
+      'slds-dropdown-trigger_click',
+      { 'slds-is-open': !!isOpen },
+    ];
+
+    // const rest = omit(this.props, Object.keys(PicklistDropdown.propTypes));
 
     return (
-      <div className={cx(this.getClasses())}>
-        {this.button()}
-        <div {...rest} className={cx(this.dropdownClasses)}>
-          {children}
-        </div>
-      </div>
+      <FormElement required={required} error={error}>
+        <FormElementLabel
+          hideLabel={hideLabel}
+          id={id}
+          label={labelInput}
+          required={required}
+        />
+        <FormElementControl>
+          <div className={cx(this.comboboxContainerClasses)}>
+            <div className={cx(this.comboboxClasses)}>
+              <div className="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right">
+                {input}
+                {children}
+              </div>
+            </div>
+          </div>
+        </FormElementControl>
+      </FormElement>
     );
   }
 }
 
-export default enhanceWithClickOutside(DropdownMenu);
+export default PicklistDropdown;

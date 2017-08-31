@@ -1,13 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import DropdownMenuListItem from '../DropdownMenuListItem';
+import MenuDropdownListItem from '../MenuDropdownListItem';
 
-describe('<DropdownMenuListItem />', () => {
+describe('<MenuDropdownListItem />', () => {
   let mounted = null;
 
   beforeEach(() => {
-    mounted = mount(<DropdownMenuListItem>foobar</DropdownMenuListItem>);
+    mounted = mount(<MenuDropdownListItem>foobar</MenuDropdownListItem>);
   });
 
   it('handles onClick', () => {

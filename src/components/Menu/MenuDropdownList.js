@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const DropdownMenuList = (props) => {
-  const { children, className, header, height, heightIcon, ...rest } = props;
+const MenuDropdownList = (props) => {
+  const { checkbox, children, className, header, height, heightIcon, ...rest } = props;
 
   const renderHeader = () => {
     if (header) {
@@ -17,6 +17,11 @@ const DropdownMenuList = (props) => {
     return null;
   };
 
+  const makeChildrenCheckboxes = () =>
+    children.map(child => React.cloneElement(child, { selected: child.props.selected === true }));
+  // with this we set the selected prop to true or false (no undef or null)
+  // so that the child becomes a menuitemcheckbox (not menuitem)
+
   const listClasses = [
     { [`slds-dropdown_length-${height}`]: height },
     { [`slds-dropdown_length-with-icon-${heightIcon}`]: heightIcon },
@@ -27,13 +32,14 @@ const DropdownMenuList = (props) => {
     <div {...rest} className={className}>
       {renderHeader()}
       <ul className={cx(listClasses)} role="menu">
-        {children}
+        {checkbox ? makeChildrenCheckboxes() : children}
       </ul>
     </div>
   );
 };
 
-DropdownMenuList.defaultProps = {
+MenuDropdownList.defaultProps = {
+  checkbox: false,
   children: null,
   className: null,
   header: null,
@@ -41,7 +47,11 @@ DropdownMenuList.defaultProps = {
   heightIcon: null,
 };
 
-DropdownMenuList.propTypes = {
+MenuDropdownList.propTypes = {
+  /**
+   * make true if menuitems should be menuitemcheckboxes
+   */
+  checkbox: PropTypes.bool,
   /**
    * list content
    */
@@ -52,7 +62,7 @@ DropdownMenuList.propTypes = {
   className: PropTypes.string,
   /**
    * optional header for this list. Mostly useful is multiple
-   * DropdownMenuListItems are in use
+   * MenuDropdownListItems are in use
    */
   header: PropTypes.string,
   /**
@@ -65,4 +75,4 @@ DropdownMenuList.propTypes = {
   heightIcon: PropTypes.oneOf([5, 7, 10]),
 };
 
-export default DropdownMenuList;
+export default MenuDropdownList;

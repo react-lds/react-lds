@@ -6,20 +6,23 @@ class ExamplePicklist extends React.Component {
     super(props);
 
     this.state = {
+      id: 'picklist-1',
       items: [
-        { key: 'item1', label: 'Entry 1', selected: false },
-        { key: 'item2', label: 'Entry 2', selected: false },
-        { key: 'item3', label: 'Entry 3', selected: false },
-        { key: 'item4', label: 'Entry 4', selected: false },
-        { key: 'item5', label: 'Entry 5', selected: false },
-        { key: 'item6', label: 'Entry 6', selected: false },
+        { key: 'option1', label: 'Option 1', selected: false },
+        { key: 'option2', label: 'Option 2', selected: false },
+        { key: 'option3', label: 'Option 3', selected: false },
+        { key: 'option4', label: 'Option 4', selected: false },
+        { key: 'option5', label: 'Option 5', selected: false },
+        { key: 'option6', label: 'Option 6', selected: false },
       ],
-      label: 'Select something!',
+      label: [],
+      labelInput: 'Picklist Label',
+      labelMultiselect: 'Options selected',
+      placeholder: 'Picklist placeholder',
     };
-    this.callback = this.callback.bind(this);
   }
 
-  callback(key) {
+  callback = (key) => {
     // you are responsible for the logic of multi or single picklists
     const newItems = this.state.items.map((item) => {
       const newItem = Object.assign({}, item);
@@ -39,17 +42,21 @@ class ExamplePicklist extends React.Component {
       return prev;
     }, []);
 
-    if (newLabel.length === 0) {
-      newLabel.push('Select something!');
-    }
-
-    this.setState({ items: newItems, label: newLabel.join(', ') });
+    this.setState({ items: newItems, label: newLabel });
   }
 
   render() {
     return (
       <div>
-        <Picklist label={this.state.label} items={this.state.items} callback={this.callback} />
+        <Picklist
+          label={this.state.label}
+          labelInput={this.state.labelInput}
+          labelMultiselect={this.state.labelMultiselect}
+          id={this.state.id}
+          items={this.state.items}
+          callback={this.callback}
+          placeholder={this.state.placeholder}
+        />
       </div>
     );
   }

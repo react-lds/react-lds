@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash.omit';
 
-import { DropdownMenu, DropdownMenuList, DropdownMenuListItem, Button, IconSVG } from '../../';
+import {
+  PicklistDropdown,
+  PicklistDropdownList,
+  PicklistDropdownListItem,
+  InputRaw,
+} from '../../';
 
 export class Picklist extends React.Component {
   static propTypes = {
@@ -16,6 +21,10 @@ export class Picklist extends React.Component {
      */
     className: PropTypes.string,
     /**
+     * id for the input
+     */
+    id: PropTypes.string.isRequired,
+    /**
      * list of displayed items
      * `{key: 'id123', label: 'first entry', selected: false}`
      */
@@ -25,9 +34,21 @@ export class Picklist extends React.Component {
       selected: PropTypes.bool,
     })),
     /**
-     * label for the button. if a selection is present, you should indicate it
+     * currently selected options
      */
-    label: PropTypes.string.isRequired,
+    label: PropTypes.array,
+    /**
+     * label for input label
+     */
+    labelInput: PropTypes.string,
+    /**
+     * label for multiple selected options
+     */
+    labelMultiselect: PropTypes.string,
+    /**
+     * placeholder for the input. if a selection is present, you should indicate it
+     */
+    placeholder: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -48,14 +69,36 @@ export class Picklist extends React.Component {
     this.setState({ open: false });
   }
 
-  button() {
+  input = () => {
+    const { id, label, labelMultiselect, placeholder } = this.props;
+
+    const labelFormatted = () => {
+      const length = label.length;
+
+      if (length > 1) {
+        return `${length} ${labelMultiselect}`;
+      } else if (length === 1) {
+        return label[0];
+      }
+
+      return '';
+    };
+
     return (
-      <Button className="slds-picklist__label" neutral onClick={this.toggle}>
-        <span className="slds-prefix">{this.props.label}</span>
-        <IconSVG sprite="utility" icon="down" />
-      </Button>
+      <InputRaw
+        id={id}
+        className="slds-input slds-combobox__input"
+        aria-controls="listbox-unique-id"
+        autoComplete="off"
+        iconRight="down"
+        onClick={this.toggle}
+        role="textbox"
+        placeholder={placeholder}
+        value={labelFormatted()}
+        readOnly
+      />
     );
-  }
+  };
 
   menuItems() {
     const { callback, items } = this.props;
@@ -63,27 +106,37 @@ export class Picklist extends React.Component {
       const boundClick = callback.bind(this, item.key);
 
       return (
-        <DropdownMenuListItem
+        <PicklistDropdownListItem
           key={item.key}
           leftIcon={{ icon: 'check', sprite: 'utility' }}
           selected={item.selected}
           onClick={boundClick}
         >
           {item.label}
-        </DropdownMenuListItem>
+        </PicklistDropdownListItem>
       );
     });
   }
 
   render() {
-    const rest = omit(this.props, Object.keys(Picklist.propTypes));
+    const { id, labelInput } = this.props;
+    const rest = {
+      ...omit(this.props, Object.keys(Picklist.propTypes)),
+      id,
+      labelInput,
+    };
 
     return (
-      <DropdownMenu {...rest} className={this.props.className} customButton={this.button()} isOpen={this.state.open}>
-        <DropdownMenuList>
+      <PicklistDropdown
+        {...rest}
+        className={this.props.className}
+        input={this.input()}
+        isOpen={this.state.open}
+      >
+        <PicklistDropdownList>
           {this.menuItems()}
-        </DropdownMenuList>
-      </DropdownMenu>
+        </PicklistDropdownList>
+      </PicklistDropdown>
     );
   }
 }
