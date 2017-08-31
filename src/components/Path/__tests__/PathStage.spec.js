@@ -14,23 +14,19 @@ describe('<PathStage />', () => {
   });
 
   it('applies className and rest-properties', () => {
-    const mounted = getComponent({ className: 'foo', 'data-test': 'bar' });
+    const mounted = getComponent({ className: 'foo', 'data-test': 'bar', label: 'foo', onStageClick: () => {} });
     expect(mounted.find('li.slds-tabs_path__item').hasClass('foo')).toBeTruthy();
     expect(mounted.find('li.slds-tabs_path__item').prop('data-test')).toEqual('bar');
   });
 
-  /*
   it('applies assistiveText', () => {
-    const mounted = mount(
-      <PathStage label="testLabel" onStageClick={() => {}} assistiveText="test123" />
-    );
+    const mounted = getComponent({ assistiveText: 'test123', label: 'foo', onStageClick: () => {} });
     const node = mounted.find('.slds-assistive-text');
-    expect(node.text()).to.equal('test123');
+    expect(node.text()).toEqual('test123');
   });
-  */
 
   it('sets correct class and aria-attribute when stage is selected', () => {
-    const mounted = getComponent({ selected: true });
+    const mounted = getComponent({ selected: true, label: 'foo', onStageClick: () => {} });
     expect(mounted.find('li.slds-tabs_path__item').hasClass('slds-is-active')).toBeTruthy();
     expect(mounted.find('a.slds-tabs_path__link').prop('aria-selected')).toEqual(true);
   });
@@ -41,12 +37,12 @@ describe('<PathStage />', () => {
   });
 
   it('sets correct class when stage is current', () => {
-    const mounted = getComponent({ current: true });
+    const mounted = getComponent({ current: true, label: 'foo', onStageClick: () => {} });
     expect(mounted.find('li.slds-tabs_path__item').hasClass('slds-is-current')).toBeTruthy();
   });
 
   it('sets correct class when stage is complete', () => {
-    const mounted = getComponent({ complete: true });
+    const mounted = getComponent({ complete: true, label: 'foo', onStageClick: () => {} });
     expect(mounted.find('li.slds-tabs_path__item').hasClass('slds-is-complete')).toBeTruthy();
   });
 

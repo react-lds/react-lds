@@ -26,7 +26,7 @@ describe('<Path />', () => {
   });
 
   it('applies className and rest-properties', () => {
-    const mounted = getComponent({ className: 'foo', 'data-test': 'bar' });
+    const mounted = getComponent({ className: 'foo', 'data-test': 'bar', button: buttonConst });
     expect(mounted.find('.slds-path-coach').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-path-coach').prop('data-test')).toEqual('bar');
   });
