@@ -10,9 +10,13 @@ describe('</Picklist />', () => {
 
   beforeEach(() => {
     onSelect = jest.fn();
-
     props = {
+      id: 'picklist-1',
       items: [{
+        key: '0',
+        label: 'header',
+        isHeader: true,
+      }, {
         key: '1',
         label: 'first',
         selected: false,
@@ -42,9 +46,20 @@ describe('</Picklist />', () => {
     expect(mounted.find('ul.slds-listbox').children()).toHaveLength(props.items.length);
   });
 
+  it('renders the picklist header', () => {
+    expect(mounted.find('ul.slds-listbox').children().first().text()).toEqual(props.items[0].label);
+  });
+
   it('disables the picklist', () => {
     mounted.setProps({ isDisabled: true });
     expect(mounted.find('input').prop('disabled')).toEqual(true);
+  });
+
+  it('makes the picklist required', () => {
+    mounted.setProps({ isRequired: true });
+    expect(mounted.find('div.slds-form-element').hasClass('slds-is-required')).toBeTruthy();
+    expect(mounted.find('label > abbr').hasClass('slds-required')).toBeTruthy();
+    expect(mounted.find('input').prop('required')).toEqual(true);
   });
 
   it('limits the height of the dropdown', () => {
@@ -73,5 +88,11 @@ describe('</Picklist />', () => {
     const selectedItems = props.items.map(item => ({ ...item, selected: true }));
     mounted.setProps({ items: selectedItems });
     expect(mounted.find('input').prop('value')).toEqual(`${selectedItems.length} ${props.labelMultiselect}`);
+  });
+
+  it('calls the callback function if an item is clicked', () => {
+    const item = mounted.find('ul.slds-listbox').children().at(1);
+    item.find('span').first().simulate('click');
+    expect(onSelect).toHaveBeenCalledWith('1');
   });
 });

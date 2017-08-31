@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
-import omit from 'lodash.omit';
 
 import {
   PicklistDropdown,
@@ -26,7 +25,14 @@ export class Picklist extends React.Component {
   }
 
   input = () => {
-    const { id, isDisabled, items, labelMultiselect, placeholder } = this.props;
+    const {
+      id,
+      isDisabled,
+      isRequired,
+      items,
+      labelMultiselect,
+      placeholder,
+    } = this.props;
 
     const formatLabel = () => {
       const selectedItems = items.filter(item => item.selected === true);
@@ -38,37 +44,41 @@ export class Picklist extends React.Component {
         return selectedItems[0].label;
       }
 
-      return '';
+      return null;
     };
 
     return (
       <InputRaw
-        id={id}
-        className="slds-input slds-combobox__input"
-        aria-controls="listbox-unique-id"
+        aria-controls={`listbox-${id}`}
         autoComplete="off"
+        className="slds-input slds-combobox__input"
         disabled={isDisabled}
         iconRight="down"
+        id={`combobox-${id}`}
         onClick={this.toggle}
-        role="textbox"
         placeholder={placeholder}
-        value={formatLabel()}
         readOnly
+        required={isRequired}
+        role="textbox"
+        value={formatLabel()}
       />
     );
   };
 
   menuItems() {
     const { onSelect, items } = this.props;
+
     return items.map((item) => {
-      const boundClick = onSelect.bind(this, item.key);
+      const boundClick = () => onSelect(item.key);
 
       return (
         <PicklistDropdownListItem
+          icon={{ icon: 'check', sprite: 'utility' }}
+          id={`listbox-option-${item.key}`}
+          isHeader={item.isHeader}
           key={item.key}
-          leftIcon={{ icon: 'check', sprite: 'utility' }}
-          selected={item.selected}
           onClick={boundClick}
+          selected={item.selected}
         >
           {item.label}
         </PicklistDropdownListItem>
@@ -77,21 +87,29 @@ export class Picklist extends React.Component {
   }
 
   render() {
-    const { height, id, labelInput } = this.props;
-    const rest = {
-      ...omit(this.props, Object.keys(Picklist.propTypes)),
+    const {
+      className,
+      error,
+      height,
       id,
+      isRequired,
       labelInput,
-    };
+    } = this.props;
 
     return (
       <PicklistDropdown
-        {...rest}
-        className={this.props.className}
+        className={className}
+        error={error}
+        id={`combobox-${id}`}
         input={this.input()}
         isOpen={this.state.isOpen}
+        isRequired={isRequired}
+        labelInput={labelInput}
       >
-        <PicklistDropdownList height={height}>
+        <PicklistDropdownList
+          height={height}
+          id={id}
+        >
           {this.menuItems()}
         </PicklistDropdownList>
       </PicklistDropdown>
@@ -105,17 +123,25 @@ Picklist.propTypes = {
    */
   className: PropTypes.string,
   /**
-   *
+   * sets the number of items being displayed
+   */
+  error: PropTypes.string,
+  /**
+   * sets the number of items being displayed
    */
   height: PropTypes.number,
   /**
-   * id for the input
+   * unique id
    */
   id: PropTypes.string.isRequired,
   /**
    * whether the input is disabled
    */
   isDisabled: PropTypes.bool,
+  /**
+   * whether the picklist is required
+   */
+  isRequired: PropTypes.bool,
   /**
    * list of displayed items
    * `{ key: 'id123', label: 'first option', selected: false }`
@@ -146,8 +172,10 @@ Picklist.propTypes = {
 
 Picklist.defaultProps = {
   className: null,
+  error: null,
   height: null,
   isDisabled: false,
+  isRequired: false,
   items: [],
   labelInput: '',
   labelMultiselect: '',

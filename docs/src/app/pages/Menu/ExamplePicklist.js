@@ -9,11 +9,13 @@ class ExamplePicklist extends React.Component {
       height: 5,
       id: 'picklist-1',
       items: [
+        { key: 'header1', label: 'Header 1', isHeader: true },
         { key: 'option1', label: 'Option 1', selected: false },
         { key: 'option2', label: 'Option 2', selected: false },
         { key: 'option3', label: 'Option 3', selected: false },
         { key: 'option4', label: 'Option 4', selected: false },
         { key: 'option5', label: 'Option 5', selected: false },
+        { key: 'header2', label: 'Header 2', isHeader: true },
         { key: 'option6', label: 'Option 6', selected: false },
       ],
       labelInput: 'Picklist Label',
@@ -47,6 +49,7 @@ class ExamplePicklist extends React.Component {
           labelMultiselect={this.state.labelMultiselect}
           onSelect={this.onSelect}
           placeholder={this.state.placeholder}
+          error={'lol'}
         />
       </div>
     );

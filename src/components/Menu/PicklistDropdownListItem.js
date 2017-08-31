@@ -5,49 +5,32 @@ import cx from 'classnames';
 import { IconSVG } from '../../';
 
 const PicklistDropdownListItem = (props) => {
-  const { children, className, onClick, selected, leftIcon, rightIcon, divider, ...rest } = props;
+  const {
+    children,
+    className,
+    onClick,
+    selected,
+    id,
+    isHeader,
+    icon,
+  } = props;
 
-  const leftIconElem = () => {
-    if (leftIcon) {
+  const renderIcon = () => {
+    if (icon) {
       const iconClasses = [
-        { 'slds-listbox__icon-selected': !leftIcon.alwaysDisplay },
-        { 'slds-icon_x-small': !leftIcon.alwaysDisplay },
-        { 'slds-icon': leftIcon.alwaysDisplay },
+        { 'slds-listbox__icon-selected': !icon.alwaysDisplay },
+        { 'slds-icon_x-small': !icon.alwaysDisplay },
+        { 'slds-icon': icon.alwaysDisplay },
       ];
 
       return (
         <div className="slds-media__figure">
           <IconSVG
-            background={leftIcon.background}
+            background={icon.background}
             className={cx(iconClasses)}
-            icon={leftIcon.icon}
-            size={leftIcon.alwaysDisplay ? 'small' : 'x-small'}
-            sprite={leftIcon.sprite}
-          />
-        </div>
-      );
-    }
-
-    return null;
-  };
-
-  const rightIconElem = () => {
-    if (rightIcon) {
-      const iconClasses = [
-        'slds-icon-selected',
-        'slds-icon-text-default',
-        'slds-m-left_small',
-        'slds-shrink-none',
-      ];
-
-      return (
-        <div className="slds-media__figure">
-          <IconSVG
-            background={rightIcon.background}
-            className={cx(iconClasses)}
-            icon={rightIcon.icon}
-            size="x-small"
-            sprite={rightIcon.sprite}
+            icon={icon.icon}
+            size={icon.alwaysDisplay ? 'small' : 'x-small'}
+            sprite={icon.sprite}
           />
         </div>
       );
@@ -58,7 +41,6 @@ const PicklistDropdownListItem = (props) => {
 
   const sldsClasses = [
     'slds-listbox__item',
-    { 'slds-has-divider_top-space': divider },
     className,
   ];
 
@@ -68,23 +50,41 @@ const PicklistDropdownListItem = (props) => {
     'slds-listbox__option_plain',
     'slds-media_small',
     'slds-media_center',
-    // { 'slds-has-focus': selected },
     { 'slds-is-selected': selected },
     className,
   ];
 
-  return (
-    <li {...rest} className={cx(sldsClasses)} role="presentation">
-      <span id={new Date()} className={cx(itemClasses)} role="option" onClick={onClick}>
-        {leftIconElem()}
+  const renderHeader = () => (
+    <li className="slds-listbox__item" role="presentation">
+      <span
+        className="slds-media slds-listbox__option slds-listbox__option_plain"
+        id={id}
+        role="presentation"
+      >
+        <h3 className="slds-text-title_caps" role="presentation">
+          {children}
+        </h3>
+      </span>
+    </li>
+  );
+
+  const renderItem = () => (
+    <li className={cx(sldsClasses)} role="presentation">
+      <span id={id} className={cx(itemClasses)} role="option" onClick={onClick}>
+        {renderIcon()}
         <div className="slds-media__body">
           <div className="slds-truncate" title={children}>
             {children}
           </div>
         </div>
-        {rightIconElem()}
       </span>
     </li>
+  );
+
+  return (
+    isHeader ?
+    renderHeader() :
+    renderItem()
   );
 };
 
@@ -98,13 +98,13 @@ PicklistDropdownListItem.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * set to true if a divider should appear above this list item
+   * unique id
    */
-  divider: PropTypes.bool,
+  id: PropTypes.string.isRequired,
   /**
    * left icon that is only shown when selected is true
    */
-  leftIcon: PropTypes.shape({
+  icon: PropTypes.shape({
     icon: PropTypes.string.isRequired,
     sprite: PropTypes.string.isRequired,
     background: PropTypes.string,
@@ -115,25 +115,16 @@ PicklistDropdownListItem.propTypes = {
    */
   onClick: PropTypes.func,
   /**
-   * right icon that is always shown
-   */
-  rightIcon: PropTypes.shape({
-    icon: PropTypes.string,
-    sprite: PropTypes.string.isRequired,
-    background: PropTypes.string,
-  }),
-  /**
-   * sets this item into a selection state that displays the leftIcon
+   * sets this item into a selection state that displays the icon
    */
   selected: PropTypes.bool,
 };
 
 PicklistDropdownListItem.defaultProps = {
   className: null,
-  divider: false,
-  leftIcon: null,
+  icon: null,
+  isHeader: false,
   onClick: () => {},
-  rightIcon: null,
   selected: false,
 };
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-// import omit from 'lodash.omit';
 
 import {
   FormElement,
@@ -33,7 +32,7 @@ export class PicklistDropdown extends Component {
       input,
       isOpen,
       labelInput,
-      required,
+      isRequired,
     } = this.props;
 
     this.comboboxContainerClasses = [
@@ -49,18 +48,29 @@ export class PicklistDropdown extends Component {
       { 'slds-is-open': !!isOpen },
     ];
 
+    this.comboboxFormElementClasses = [
+      'slds-combobox__form-element',
+      'slds-input-has-icon',
+      'slds-input-has-icon_right',
+    ];
+
     return (
-      <FormElement required={required} error={error}>
+      <FormElement required={isRequired} error={error}>
         <FormElementLabel
           hideLabel={hideLabel}
           id={id}
           label={labelInput}
-          required={required}
+          required={isRequired}
         />
         <FormElementControl>
           <div className={cx(this.comboboxContainerClasses)}>
-            <div className={cx(this.comboboxClasses)}>
-              <div className="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right">
+            <div
+              aria-expanded={isOpen}
+              aria-haspopup
+              className={cx(this.comboboxClasses)}
+              role="combobox"
+            >
+              <div className={cx(this.comboboxFormElementClasses)}>
                 {input}
                 {children}
               </div>
@@ -104,7 +114,7 @@ PicklistDropdown.propTypes = {
   /**
    * indicates if the input is required
    */
-  required: PropTypes.bool,
+  isRequired: PropTypes.bool,
 };
 
 PicklistDropdown.defaultProps = {
@@ -113,8 +123,7 @@ PicklistDropdown.defaultProps = {
   isOpen: false,
   hideLabel: false,
   labelInput: '',
-  position: 'top-left',
-  required: false,
+  isRequired: false,
 };
 
 export default PicklistDropdown;

@@ -3,19 +3,11 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const PicklistDropdownList = (props) => {
-  const { children, className, header, height, ...rest } = props;
-
-  const renderHeader = () => {
-    if (header) {
-      return (
-        <div className="slds-dropdown__header">
-          <span className="slds-text-title_caps">{header}</span>
-        </div>
-      );
-    }
-
-    return null;
-  };
+  const {
+    children,
+    height,
+    id
+  } = props;
 
   const listClasses = [
     { [`slds-dropdown_length-with-icon-${height}`]: height },
@@ -26,8 +18,7 @@ const PicklistDropdownList = (props) => {
   ];
 
   return (
-    <div id="listbox-unique-id" role="listbox" {...rest} className={className}>
-      {renderHeader()}
+    <div id={`listbox-${id}`} role="listbox">
       <ul className={cx(listClasses)} role="presentation">
         {children}
       </ul>
@@ -41,10 +32,6 @@ PicklistDropdownList.propTypes = {
    */
   children: PropTypes.arrayOf(PropTypes.element),
   /**
-   * class name
-   */
-  className: PropTypes.string,
-  /**
    * optional header for this list. Mostly useful is multiple
    * PicklistDropdownListItems are in use
    */
@@ -53,11 +40,14 @@ PicklistDropdownList.propTypes = {
    * sets the number of items being displayed
    */
   height: PropTypes.oneOf([5, 7, 10]),
+  /**
+   * unique id
+   */
+  id: PropTypes.string.isRequired,
 };
 
 PicklistDropdownList.defaultProps = {
   children: null,
-  className: null,
   header: null,
   height: null,
 };
