@@ -29,8 +29,17 @@ Path.defaultProps = {
 };
 
 Path.propTypes = {
+  /*
+   * button to change selected stage status
+   */
   button: PropTypes.node.isRequired,
+  /*
+   * children should be PathStages
+   */
   children: PropTypes.node.isRequired,
+  /*
+   * class name
+   */
   className: PropTypes.string,
 };
 

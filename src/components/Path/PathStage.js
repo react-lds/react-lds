@@ -35,21 +35,42 @@ export const PathStage = (props) => {
 };
 
 PathStage.defaultProps = {
-  selected: false,
-  complete: false,
-  current: false,
   assistiveText: null,
   className: null,
+  complete: false,
+  current: false,
+  selected: false,
 };
 
 PathStage.propTypes = {
-  className: PropTypes.string,
+  /*
+   * aria assistive text
+   */
   assistiveText: PropTypes.string,
-  selected: PropTypes.bool,
-  label: PropTypes.string.isRequired,
-  complete: PropTypes.bool,
+  /*
+   * class name
+   */
+  className: PropTypes.string,
+  /*
+   * stage is current stage
+   */
   current: PropTypes.bool,
+  /*
+   * stage is complete
+   */
+  complete: PropTypes.bool,
+  /*
+   * label for stage
+   */
+  label: PropTypes.string.isRequired,
+  /*
+   * function to be called on stage click
+   */
   onStageClick: PropTypes.func.isRequired,
+  /*
+   * stage is selected
+   */
+  selected: PropTypes.bool,
 };
 
 export default PathStage;
