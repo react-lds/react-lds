@@ -62,14 +62,16 @@ class ContactPath extends Component {
 
     const selectedIsCurrentStep = selected === current;
 
+    const buttonDisabled = (leadStatusPicklist.findIndex(o => o.value === current) >= (leadStatusPicklist.length - 1))
+      && (selected === current);
+
     const statusButtonClasses = [
       'slds-path__mark-complete',
       'slds-no-flex',
       'slds-m-horizontal_small',
+      { 'slds-path__mark-current': !selectedIsCurrentStep && !buttonDisabled },
     ];
 
-    const buttonDisabled = (leadStatusPicklist.findIndex(o => o.value === current) >= (leadStatusPicklist.length - 1))
-      && (selected === current);
 
     const pathButton = (
       <Button
@@ -81,7 +83,7 @@ class ContactPath extends Component {
         onClick={selectedIsCurrentStep ? this.onMarkComplete : this.onMarkCurrent}
         title={selectedIsCurrentStep ? 'Mark as complete' : 'Mark as current'}
       >
-        <ButtonIcon position="left" sprite="utility" icon="check" />
+        {selectedIsCurrentStep && <ButtonIcon position="left" sprite="utility" icon="check" />}
         {selectedIsCurrentStep ? 'Mark as complete' : 'Mark as current'}
       </Button>
     );

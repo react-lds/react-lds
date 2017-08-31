@@ -24,7 +24,7 @@ export const PathStage = (props) => {
         onClick={onStageClick}
       >
         <span className="slds-tabs_path__stage">
-          {status === 'complete' && <IconSVG sprite="utlity" icon="check" size="x-small" />}
+          {complete && <IconSVG sprite="utlity" icon="check" size="x-small" />}
           <span className="slds-assistive-text">{assistiveText}</span>
         </span>
         <span className="slds-tabs_path__title">{label}</span>
