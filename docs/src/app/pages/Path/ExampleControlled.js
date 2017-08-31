@@ -26,13 +26,16 @@ class ContactPath extends Component {
     };
   }
 
-  onStageClick = (stage) => {
-    this.setState({ selected: stage.value });
+  onStageClickControl = (stageValue) => {
+    this.setState({ selected: stageValue });
   }
 
   onMarkComplete = () => {
     const { leadStatusPicklist, current } = this.state;
-    this.setState({ current: leadStatusPicklist[leadStatusPicklist.indexOf(current) + 1] });
+    this.setState({
+      current: leadStatusPicklist[leadStatusPicklist.findIndex(o => o.value === current) + 1].value,
+      selected: leadStatusPicklist[leadStatusPicklist.findIndex(o => o.value === current) + 1].value
+    });
   }
 
   onMarkCurrent = () => {
@@ -42,12 +45,11 @@ class ContactPath extends Component {
 
   renderPathStage = (picklistValue, i) => {
     const { leadStatusPicklist, selected, current } = this.state;
-
     return (
       <PathStage
         label={picklistValue.label}
-        onStageClick={this.onStageClick}
-        complete={leadStatusPicklist.indexOf(i) < leadStatusPicklist.indexOf(leadStatusPicklist[current])}
+        onStageClick={() => this.onStageClickControl(picklistValue.value)}
+        complete={i < leadStatusPicklist.findIndex(o => o.value === current)}
         current={picklistValue.value === current}
         selected={picklistValue.value === selected}
         value={picklistValue.value}
@@ -66,9 +68,12 @@ class ContactPath extends Component {
       'slds-m-horizontal_small',
     ];
 
+    const buttonDisabled = (leadStatusPicklist.findIndex(o => o.value === current) >= (leadStatusPicklist.length - 1))
+      && (selected === current);
+
     const pathButton = (
       <Button
-        disabled={leadStatusPicklist.indexOf(current) > (leadStatusPicklist.length - 1)}
+        disabled={buttonDisabled}
         brand
         icon={selectedIsCurrentStep}
         icon-inverse={selectedIsCurrentStep}
@@ -89,11 +94,7 @@ class ContactPath extends Component {
   }
 }
 
-const ExampleComplex = () => {
-  console.log('something is happening');
-  return (
-    <ContactPath />
-  );
-};
+const ExampleControlled = () =>
+  <ContactPath />;
 
-export default ExampleComplex;
+export default ExampleControlled;

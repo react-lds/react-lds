@@ -18,6 +18,7 @@ export * from './components/Menu';
 export * from './components/Modal';
 export * from './components/Notifications';
 export * from './components/PageHeader';
+export * from './components/Path';
 export * from './components/Pill';
 export * from './components/Popover';
 export * from './components/ProgressBar';

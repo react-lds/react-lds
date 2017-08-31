@@ -34,15 +34,20 @@ export const PathStage = (props) => {
 };
 
 PathStage.defaultProps = {
+  selected: false,
+  complete: false,
+  current: false,
+  assistiveText: null,
+  className: null,
 };
 
 PathStage.propTypes = {
-  className: PropTypes.string.isRequired,
-  assistiveText: PropTypes.string.isRequired,
-  selected: PropTypes.bool.isRequired,
+  className: PropTypes.string,
+  assistiveText: PropTypes.string,
+  selected: PropTypes.bool,
   label: PropTypes.string.isRequired,
-  complete: PropTypes.bool.isRequired,
-  current: PropTypes.bool.isRequired,
+  complete: PropTypes.bool,
+  current: PropTypes.bool,
   onStageClick: PropTypes.func.isRequired,
 };
 
