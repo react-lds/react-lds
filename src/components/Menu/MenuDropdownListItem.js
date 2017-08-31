@@ -75,15 +75,6 @@ const MenuDropdownListItem = (props) => {
   );
 };
 
-MenuDropdownListItem.defaultProps = {
-  className: null,
-  divider: false,
-  leftIcon: null,
-  onClick: () => {},
-  rightIcon: null,
-  selected: null,
-};
-
 MenuDropdownListItem.propTypes = {
   /**
    * The content of a menu item
@@ -122,6 +113,15 @@ MenuDropdownListItem.propTypes = {
    * sets this item into a selection state that displays the leftIcon
    */
   selected: PropTypes.bool,
+};
+
+MenuDropdownListItem.defaultProps = {
+  className: null,
+  divider: false,
+  leftIcon: null,
+  onClick: () => {},
+  rightIcon: null,
+  selected: null,
 };
 
 export default MenuDropdownListItem;

@@ -11,74 +11,31 @@ import {
 } from '../../';
 
 export class Picklist extends React.Component {
-  static propTypes = {
-    /**
-     * triggered whenever an item was clicked, has the items key as parameter
-     */
-    callback: PropTypes.func.isRequired,
-    /**
-     * class name
-     */
-    className: PropTypes.string,
-    /**
-     * id for the input
-     */
-    id: PropTypes.string.isRequired,
-    /**
-     * list of displayed items
-     * `{key: 'id123', label: 'first entry', selected: false}`
-     */
-    items: PropTypes.arrayOf(PropTypes.shape({
-      key: PropTypes.any,
-      label: PropTypes.string,
-      selected: PropTypes.bool,
-    })),
-    /**
-     * currently selected options
-     */
-    label: PropTypes.array,
-    /**
-     * label for input label
-     */
-    labelInput: PropTypes.string,
-    /**
-     * label for multiple selected options
-     */
-    labelMultiselect: PropTypes.string,
-    /**
-     * placeholder for the input. if a selection is present, you should indicate it
-     */
-    placeholder: PropTypes.string.isRequired,
-  };
-
-  static defaultProps = {
-    className: null,
-    items: [],
-  }
 
   constructor(props, context) {
     super(props, context);
-    this.state = { open: false };
+    this.state = { isOpen: false };
   }
 
   toggle = () => {
-    this.setState({ open: !this.state.open });
+    this.setState({ isOpen: !this.state.isOpen });
   }
 
   handleClickOutside() {
-    this.setState({ open: false });
+    this.setState({ isOpen: false });
   }
 
   input = () => {
-    const { id, label, labelMultiselect, placeholder } = this.props;
+    const { id, isDisabled, items, labelMultiselect, placeholder } = this.props;
 
-    const labelFormatted = () => {
-      const length = label.length;
+    const formatLabel = () => {
+      const selectedItems = items.filter(item => item.selected === true);
+      const count = selectedItems.length;
 
-      if (length > 1) {
-        return `${length} ${labelMultiselect}`;
-      } else if (length === 1) {
-        return label[0];
+      if (count > 1) {
+        return `${count} ${labelMultiselect}`;
+      } else if (count === 1) {
+        return selectedItems[0].label;
       }
 
       return '';
@@ -90,20 +47,21 @@ export class Picklist extends React.Component {
         className="slds-input slds-combobox__input"
         aria-controls="listbox-unique-id"
         autoComplete="off"
+        disabled={isDisabled}
         iconRight="down"
         onClick={this.toggle}
         role="textbox"
         placeholder={placeholder}
-        value={labelFormatted()}
+        value={formatLabel()}
         readOnly
       />
     );
   };
 
   menuItems() {
-    const { callback, items } = this.props;
+    const { onSelect, items } = this.props;
     return items.map((item) => {
-      const boundClick = callback.bind(this, item.key);
+      const boundClick = onSelect.bind(this, item.key);
 
       return (
         <PicklistDropdownListItem
@@ -119,7 +77,7 @@ export class Picklist extends React.Component {
   }
 
   render() {
-    const { id, labelInput } = this.props;
+    const { height, id, labelInput } = this.props;
     const rest = {
       ...omit(this.props, Object.keys(Picklist.propTypes)),
       id,
@@ -131,14 +89,68 @@ export class Picklist extends React.Component {
         {...rest}
         className={this.props.className}
         input={this.input()}
-        isOpen={this.state.open}
+        isOpen={this.state.isOpen}
       >
-        <PicklistDropdownList>
+        <PicklistDropdownList height={height}>
           {this.menuItems()}
         </PicklistDropdownList>
       </PicklistDropdown>
     );
   }
 }
+
+Picklist.propTypes = {
+  /**
+   * class name
+   */
+  className: PropTypes.string,
+  /**
+   *
+   */
+  height: PropTypes.number,
+  /**
+   * id for the input
+   */
+  id: PropTypes.string.isRequired,
+  /**
+   * whether the input is disabled
+   */
+  isDisabled: PropTypes.bool,
+  /**
+   * list of displayed items
+   * `{ key: 'id123', label: 'first option', selected: false }`
+   */
+  items: PropTypes.arrayOf(PropTypes.shape({
+    key: PropTypes.any,
+    label: PropTypes.string,
+    selected: PropTypes.bool,
+  })),
+  /**
+   * label for input label
+   */
+  labelInput: PropTypes.string,
+  /**
+   * label for multiple selected items
+   */
+  labelMultiselect: PropTypes.string,
+  /**
+   * triggered whenever an item was clicked, has the item's key as parameter
+   */
+  onSelect: PropTypes.func.isRequired,
+  /**
+   * placeholder for the input. if a selection is present,
+   * you should indicate it
+   */
+  placeholder: PropTypes.string.isRequired,
+};
+
+Picklist.defaultProps = {
+  className: null,
+  height: null,
+  isDisabled: false,
+  items: [],
+  labelInput: '',
+  labelMultiselect: '',
+};
 
 export default enhanceWithClickOutside(Picklist);

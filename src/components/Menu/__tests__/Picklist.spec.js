@@ -1,56 +1,77 @@
-// import React from 'react';
-// import { mount } from 'enzyme';
-//
-// import { Picklist } from '../Picklist';
-//
-// describe('</Picklist />', () => {
-//   let mounted = null;
-//   let props = {};
-//   let callback = jest.fn();
-//
-//   beforeEach(() => {
-//     callback = jest.fn();
-//
-//     props = {
-//       label: 'Label',
-//       items: [{
-//         key: '1',
-//         label: 'first',
-//         selected: false,
-//       }, {
-//         key: '2',
-//         label: 'second',
-//         selected: true,
-//       }],
-//       callback,
-//     };
-//
-//     mounted = mount(<Picklist {...props} />);
-//   });
-//
-//   it('renders the label', () => {
-//     expect(mounted.find('span').first().text()).toEqual(props.label);
-//   });
+import React from 'react';
+import { mount } from 'enzyme';
 
-  // it('renders all childs', () => {
-  //   const childs = mounted.find('li');
-  //   expect(childs.length).toBe(2);
-  // });
+import { Picklist } from '../Picklist';
 
-  // it('correctly sets isSelected child state', () => {
-  //   const second = mounted.find('li').at(1);
-  //   expect(second.hasClass('slds-is-selected')).toBeTruthy();
-  // });
+describe('</Picklist />', () => {
+  let mounted = null;
+  let props = {};
+  let onSelect = jest.fn();
 
-    // it('executes the callback when a child was clicked', () => {
-  //   const first = mounted.find('li > a').first();
-  //   first.simulate('click');
-  //   expect(callback.mock.calls[0][0]).toEqual('1');
-  // });
+  beforeEach(() => {
+    onSelect = jest.fn();
 
-    // it('applies className and rest-properties', () => {
-  //   mounted.setProps({ className: 'foo', 'data-test': 'bar' });
-  //   expect(mounted.find('.slds-dropdown').hasClass('foo')).toBeTruthy();
-  //   expect(mounted.find('.slds-dropdown').prop('data-test')).toEqual('bar');
-  // });
-// });
+    props = {
+      items: [{
+        key: '1',
+        label: 'first',
+        selected: false,
+      }, {
+        key: '2',
+        label: 'second',
+        selected: false,
+      }],
+      onSelect,
+      labelInput: 'Picklist label',
+      labelMultiselect: 'Options selected',
+      placeholder: 'Picklist placeholder',
+    };
+
+    mounted = mount(<Picklist {...props} />);
+  });
+
+  it('renders the picklist label', () => {
+    expect(mounted.find('FormElementLabel').first().text()).toEqual(props.labelInput);
+  });
+
+  it('renders the picklist placeholder', () => {
+    expect(mounted.find('input').prop('placeholder')).toEqual(props.placeholder);
+  });
+
+  it('renders the picklist items', () => {
+    expect(mounted.find('ul.slds-listbox').children()).toHaveLength(props.items.length);
+  });
+
+  it('disables the picklist', () => {
+    mounted.setProps({ isDisabled: true });
+    expect(mounted.find('input').prop('disabled')).toEqual(true);
+  });
+
+  it('limits the height of the dropdown', () => {
+    mounted.setProps({ height: 5 });
+    expect(mounted.find('ul.slds-listbox').hasClass('slds-dropdown_length-with-icon-5')).toBeTruthy();
+  });
+
+  it('is closed by default and opens when the input was clicked', () => {
+    const picklist = mounted.find('div.slds-combobox').first();
+    expect(picklist.hasClass('slds-is-open')).toBeFalsy();
+    picklist.find('input').simulate('click');
+    expect(picklist.hasClass('slds-is-open')).toBeTruthy();
+  });
+
+  it('sets the label of the currently selected item as input label', () => {
+    const selectedItem = {
+      key: '3',
+      label: 'third',
+      selected: true,
+    };
+    mounted.setProps({ items: [...props.items, selectedItem] });
+    expect(mounted.find('input').prop('value')).toEqual(selectedItem.label);
+  });
+
+  it('sets the multiselect label with the number of items', () => {
+    const selectedItems = props.items.map(item => ({ ...item, selected: true }));
+    mounted.setProps({ items: selectedItems });
+    expect(mounted.find('input').prop('value')).toEqual(`${selectedItems.length} ${props.labelMultiselect}`);
+  });
+});

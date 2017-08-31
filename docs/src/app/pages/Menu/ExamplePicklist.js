@@ -6,6 +6,7 @@ class ExamplePicklist extends React.Component {
     super(props);
 
     this.state = {
+      height: 5,
       id: 'picklist-1',
       items: [
         { key: 'option1', label: 'Option 1', selected: false },
@@ -15,14 +16,13 @@ class ExamplePicklist extends React.Component {
         { key: 'option5', label: 'Option 5', selected: false },
         { key: 'option6', label: 'Option 6', selected: false },
       ],
-      label: [],
       labelInput: 'Picklist Label',
       labelMultiselect: 'Options selected',
       placeholder: 'Picklist placeholder',
     };
   }
 
-  callback = (key) => {
+  onSelect = (key) => {
     // you are responsible for the logic of multi or single picklists
     const newItems = this.state.items.map((item) => {
       const newItem = Object.assign({}, item);
@@ -33,28 +33,19 @@ class ExamplePicklist extends React.Component {
       return newItem;
     });
 
-
-    const newLabel = newItems.reduce((prev, current) => {
-      if (current.selected) {
-        prev.push(current.label);
-      }
-
-      return prev;
-    }, []);
-
-    this.setState({ items: newItems, label: newLabel });
+    this.setState({ items: newItems });
   }
 
   render() {
     return (
       <div>
         <Picklist
-          label={this.state.label}
-          labelInput={this.state.labelInput}
-          labelMultiselect={this.state.labelMultiselect}
+          height={this.state.height}
           id={this.state.id}
           items={this.state.items}
-          callback={this.callback}
+          labelInput={this.state.labelInput}
+          labelMultiselect={this.state.labelMultiselect}
+          onSelect={this.onSelect}
           placeholder={this.state.placeholder}
         />
       </div>

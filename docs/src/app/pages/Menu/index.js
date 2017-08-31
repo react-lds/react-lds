@@ -81,9 +81,9 @@ const MenuPage = () =>
       <ExamplePicklist />
     </div>
 
-    <PropTypeDescription code={menuCode} header="### menuDropdown Properties" />
-    <PropTypeDescription code={menuDropdownListCode} header="### menuDropdownList Properties" />
-    <PropTypeDescription code={menuDropdownListItemCode} header="### menuDropdownListItem Properties" />
+    <PropTypeDescription code={menuCode} header="### Menu Properties" />
+    <PropTypeDescription code={menuDropdownListCode} header="### MenuDropdownList Properties" />
+    <PropTypeDescription code={menuDropdownListItemCode} header="### MenuDropdownListItem Properties" />
     <PropTypeDescription code={picklistCode} header="### Picklist Properties" />
   </div>;
 

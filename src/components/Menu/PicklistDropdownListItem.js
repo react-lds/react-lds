@@ -88,15 +88,6 @@ const PicklistDropdownListItem = (props) => {
   );
 };
 
-PicklistDropdownListItem.defaultProps = {
-  className: null,
-  divider: false,
-  leftIcon: null,
-  onClick: () => {},
-  rightIcon: null,
-  selected: false,
-};
-
 PicklistDropdownListItem.propTypes = {
   /**
    * The content of a menu item
@@ -135,6 +126,15 @@ PicklistDropdownListItem.propTypes = {
    * sets this item into a selection state that displays the leftIcon
    */
   selected: PropTypes.bool,
+};
+
+PicklistDropdownListItem.defaultProps = {
+  className: null,
+  divider: false,
+  leftIcon: null,
+  onClick: () => {},
+  rightIcon: null,
+  selected: false,
 };
 
 export default PicklistDropdownListItem;

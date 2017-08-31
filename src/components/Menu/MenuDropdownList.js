@@ -38,15 +38,6 @@ const MenuDropdownList = (props) => {
   );
 };
 
-MenuDropdownList.defaultProps = {
-  checkbox: false,
-  children: null,
-  className: null,
-  header: null,
-  height: null,
-  heightIcon: null,
-};
-
 MenuDropdownList.propTypes = {
   /**
    * make true if menuitems should be menuitemcheckboxes
@@ -75,4 +66,12 @@ MenuDropdownList.propTypes = {
   heightIcon: PropTypes.oneOf([5, 7, 10]),
 };
 
+MenuDropdownList.defaultProps = {
+  checkbox: false,
+  children: null,
+  className: null,
+  header: null,
+  height: null,
+  heightIcon: null,
+};
 export default MenuDropdownList;
