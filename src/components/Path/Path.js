@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 export const Path = (props) => {
-  const { children, button, className, ...rest } = props;
+  const { button, children, className, ...rest } = props;
+
   const sldsClasses = [
     'slds-path-coach',
     className,
   ];
+
   return (
     <div className={cx(sldsClasses)} {...rest}>
       <div className="slds-grid">

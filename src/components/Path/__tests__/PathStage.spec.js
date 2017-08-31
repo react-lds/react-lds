@@ -1,23 +1,20 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import { PathStage } from '../PathStage';
 
+const getComponent = (props = { label: 'testLabel', onStageClick: () => {} }) => shallow(<PathStage {...props} />);
+
 describe('<PathStage />', () => {
   it('renders the correct html and classes', () => {
-    const mounted = shallow(
-      <PathStage label="testLabel" onStageClick={() => {}} />
-    );
-    expect(mounted.find('li.slds-tabs_path__item').length).toBe(1);
-    expect(mounted.find('a.slds-tabs_path__link').length).toBe(1);
-    expect(mounted.find('span.slds-tabs_path__stage').length).toBe(1);
+    const mounted = getComponent();
+    expect(mounted.find('li.slds-tabs_path__item').exists()).toBeTruthy();
+    expect(mounted.find('a.slds-tabs_path__link').exists()).toBeTruthy();
+    expect(mounted.find('span.slds-tabs_path__stage').exists()).toBeTruthy();
   });
 
   it('applies className and rest-properties', () => {
-    const mounted = shallow(
-      <PathStage label="testLabel" onStageClick={() => {}} />
-    );
-    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
+    const mounted = getComponent({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('li.slds-tabs_path__item').hasClass('foo')).toBeTruthy();
     expect(mounted.find('li.slds-tabs_path__item').prop('data-test')).toEqual('bar');
   });
@@ -33,38 +30,28 @@ describe('<PathStage />', () => {
   */
 
   it('sets correct class and aria-attribute when stage is selected', () => {
-    const mounted = shallow(
-      <PathStage label="testLabel" onStageClick={() => {}} selected />
-    );
+    const mounted = getComponent({ selected: true });
     expect(mounted.find('li.slds-tabs_path__item').hasClass('slds-is-active')).toBeTruthy();
     expect(mounted.find('a.slds-tabs_path__link').prop('aria-selected')).toEqual(true);
   });
 
-  it('it sets aria aria-attribute when stage is not selected', () => {
-    const mounted = shallow(
-      <PathStage label="testLabel" onStageClick={() => {}} />
-    );
+  it('it sets aria-attribute when stage is not selected', () => {
+    const mounted = getComponent();
     expect(mounted.find('a.slds-tabs_path__link').prop('aria-selected')).toEqual(false);
   });
 
   it('sets correct class when stage is current', () => {
-    const mounted = shallow(
-      <PathStage label="testLabel" onStageClick={() => {}} current />
-    );
+    const mounted = getComponent({ current: true });
     expect(mounted.find('li.slds-tabs_path__item').hasClass('slds-is-current')).toBeTruthy();
   });
 
   it('sets correct class when stage is complete', () => {
-    const mounted = shallow(
-      <PathStage label="testLabel" onStageClick={() => {}} complete />
-    );
+    const mounted = getComponent({ complete: true });
     expect(mounted.find('li.slds-tabs_path__item').hasClass('slds-is-complete')).toBeTruthy();
   });
 
   it('sets correct class when stage is incomplete, ie no status is specified', () => {
-    const mounted = mount(
-      <PathStage label="testLabel" onStageClick={() => {}} />
-    );
+    const mounted = getComponent();
     expect(mounted.find('li.slds-tabs_path__item').hasClass('slds-is-incomplete')).toBeTruthy();
   });
 });
