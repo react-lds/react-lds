@@ -1,12 +1,13 @@
 import React from 'react';
 
-// description
+import pathCode from '!raw!react-lds/components/Path/Path';
+import pathStageCode from '!raw!react-lds/components/Path/PathStage';
 
 import exampleDefaultCode from '!raw!./ExampleDefault';
 import exampleControlledCode from '!raw!./ExampleControlled';
 
 import CodeExample from '../../components/CodeExample';
-// import PropTypeDescription from '../../components/PropTypeDescription';
+import PropTypeDescription from '../../components/PropTypeDescription';
 import Masthead from '../../components/MastHead';
 import HeaderIcon from '../../components/HeaderIcon';
 
@@ -32,6 +33,12 @@ const Path = () =>
         <ExampleControlled />
       </section>
     </div>
+    <PropTypeDescription
+      code={pathCode}
+    />
+    <PropTypeDescription
+      code={pathStageCode}
+    />
   </div>
 ;
 
