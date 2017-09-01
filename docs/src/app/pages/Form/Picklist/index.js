@@ -9,7 +9,7 @@ import PropTypeDescription from '../../../components/PropTypeDescription';
 
 import ExampleDefault from './ExampleDefault';
 
-const mapId = (id) => {
+const renderExampleById = (id) => {
   let Component = ExampleDefault;
   let componentCode = exampleDefaultCode;
 
@@ -43,7 +43,7 @@ const mapId = (id) => {
 
 const InputVariants = ({ params }) =>
   <div>
-    {mapId(params.exampleId)}
+    {renderExampleById(params.exampleId)}
   </div>;
 
 InputVariants.propTypes = {

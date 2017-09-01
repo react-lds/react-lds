@@ -81,11 +81,9 @@ const PicklistDropdownListItem = (props) => {
     </li>
   );
 
-  return (
-    isHeader ?
-    renderHeader() :
-    renderItem()
-  );
+  return isHeader
+    ? renderHeader()
+    : renderItem();
 };
 
 PicklistDropdownListItem.propTypes = {

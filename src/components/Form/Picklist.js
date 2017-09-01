@@ -13,6 +13,7 @@ export class Picklist extends React.Component {
 
   constructor(props, context) {
     super(props, context);
+
     this.state = { isOpen: false };
   }
 
@@ -24,7 +25,7 @@ export class Picklist extends React.Component {
     this.setState({ isOpen: false });
   }
 
-  input = () => {
+  renderInput = () => {
     const {
       id,
       isDisabled,
@@ -65,7 +66,7 @@ export class Picklist extends React.Component {
     );
   };
 
-  menuItems() {
+  renderPicklistItems() {
     const { onSelect, items } = this.props;
 
     return items.map((item) => {
@@ -103,7 +104,7 @@ export class Picklist extends React.Component {
         error={error}
         hideLabel={isLabelHidden}
         id={`combobox-${id}`}
-        input={this.input()}
+        input={this.renderInput()}
         isOpen={this.state.isOpen}
         isRequired={isRequired}
         labelInput={labelInput}
@@ -112,7 +113,7 @@ export class Picklist extends React.Component {
           height={height}
           id={id}
         >
-          {this.menuItems()}
+          {this.renderPicklistItems()}
         </PicklistDropdownList>
       </PicklistDropdown>
     );

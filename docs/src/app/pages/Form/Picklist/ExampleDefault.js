@@ -6,8 +6,6 @@ class ExampleDefault extends React.Component {
     super(props);
 
     this.state = {
-      height: 5,
-      id: 'picklist-1',
       items: [
         { key: 'header1', label: 'Header 1', isHeader: true },
         { key: 'option1', label: 'Option 1', selected: false },
@@ -18,9 +16,6 @@ class ExampleDefault extends React.Component {
         { key: 'header2', label: 'Header 2', isHeader: true },
         { key: 'option6', label: 'Option 6', selected: false },
       ],
-      labelInput: 'Picklist Label',
-      labelMultiselect: 'Options selected',
-      placeholder: 'Picklist placeholder',
     };
   }
 
@@ -42,8 +37,13 @@ class ExampleDefault extends React.Component {
     return (
       <div>
         <Picklist
-          {...this.state}
+          height={5}
+          id={'picklist-1'}
+          items={this.state.items}
+          labelInput={'Picklist Label'}
+          labelMultiselect={'Options selected'}
           onSelect={this.onSelect}
+          placeholder={'Picklist placeholder'}
         />
       </div>
     );
