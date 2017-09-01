@@ -26,6 +26,7 @@ export const Modal = (props) => {
 
     if (childName === 'ModalHeader') {
       return React.cloneElement(child, {
+        key: label,
         label,
         prompt,
         uncloseable: child.props.uncloseable !== undefined ? child.props.uncloseable : prompt,

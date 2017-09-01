@@ -9,12 +9,13 @@ import {
 } from 'react-lds';
 
 const button = { sprite: 'utility', icon: 'down' };
+const onClick = () => {};
 
 const ExampleMoreButton = () =>
   <ButtonGroup>
-    <Button neutral title="Button One" />
-    <Button neutral title="Button Two" />
-    <Button neutral title="Button Three" />
+    <Button neutral title="Button One" onClick={onClick} />
+    <Button neutral title="Button Two" onClick={onClick} />
+    <Button neutral title="Button Three" onClick={onClick} />
     <Menu button={button} last position="top-right">
       <MenuDropdownList>
         <MenuDropdownListItem>Item 1</MenuDropdownListItem>

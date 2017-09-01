@@ -4,7 +4,6 @@ import { ExpandableSection } from 'react-lds';
 
 const ExampleDefaultOpen = () => (
   <ExpandableSection
-    defaultOpen
     id="01"
     title="This is the title"
   >
