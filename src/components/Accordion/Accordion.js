@@ -9,7 +9,7 @@ export default class Accordion extends Component {
     styled: false,
     defaultOpen: null,
     open: null,
-    sectionClick: null,
+    onSectionClick: null,
   }
 
   static propTypes = {
@@ -36,7 +36,7 @@ export default class Accordion extends Component {
     /*
      * controlled mode: section click handler
      */
-    sectionClick: PropTypes.func,
+    onSectionClick: PropTypes.func,
   }
 
   constructor(props) {
@@ -48,11 +48,11 @@ export default class Accordion extends Component {
   }
 
   handleClick = (id) => {
-    const { open, sectionClick } = this.props;
+    const { open, onSectionClick } = this.props;
     if (open === null) {
       this.setState({ activeSection: id });
     } else {
-      sectionClick(id);
+      onSectionClick(id);
     }
   }
 
@@ -62,7 +62,7 @@ export default class Accordion extends Component {
     const sections = children.map(child =>
       React.cloneElement(child, {
         key: child.props.id,
-        open: child.props.id === activeSection,
+        isOpen: child.props.id === activeSection,
         onClick: () => this.handleClick(child.props.id),
       }));
     return sections;

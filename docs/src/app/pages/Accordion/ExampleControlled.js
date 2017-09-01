@@ -16,7 +16,7 @@ class AccordionWrapper extends Component {
     return (
       <Accordion
         open={openSection}
-        sectionClick={this.sectionClickHandler}
+        onSectionClick={this.sectionClickHandler}
       >
         <AccordionSection
           summary="summary for 1st section"
