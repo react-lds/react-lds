@@ -8,6 +8,8 @@ export default class Accordion extends Component {
     className: null,
     styled: false,
     defaultOpen: null,
+    open: null,
+    sectionClick: null,
   }
 
   static propTypes = {
@@ -27,23 +29,40 @@ export default class Accordion extends Component {
       * wraps the component in a card
       */
     styled: PropTypes.bool,
+    /*
+     * controlled mode: id of open section
+     */
+    open: PropTypes.string,
+    /*
+     * controlled mode: section click handler
+     */
+    sectionClick: PropTypes.func,
   }
 
   constructor(props) {
     super(props);
-    this.state = { activeSection: props.defaultOpen ? props.defaultOpen : props.children[0].props.id };
+    const { open } = props;
+    if (open === null) {
+      this.state = { activeSection: props.defaultOpen ? props.defaultOpen : props.children[0].props.id };
+    }
   }
 
   handleClick = (id) => {
-    this.setState({ activeSection: id });
+    const { open, sectionClick } = this.props;
+    if (open === null) {
+      this.setState({ activeSection: id });
+    } else {
+      sectionClick(id);
+    }
   }
 
   renderSections() {
-    const { children } = this.props;
+    const { children, open } = this.props;
+    const activeSection = (open === null) ? this.state.activeSection : open;
     const sections = children.map(child =>
       React.cloneElement(child, {
         key: child.props.id,
-        open: child.props.id === this.state.activeSection,
+        open: child.props.id === activeSection,
         onClick: () => this.handleClick(child.props.id),
       }));
     return sections;
