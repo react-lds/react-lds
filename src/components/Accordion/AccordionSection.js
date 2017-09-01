@@ -5,14 +5,14 @@ import cx from 'classnames';
 import { Button, ButtonIcon } from '../../';
 
 const AccordionSection = (props) => {
-  const { children, className, id, open, summary, summaryOnClick, ...rest } = props;
+  const { children, className, id, isOpen, summary, summaryOnClick, ...rest } = props;
   const liClasses = [
     'slds-accordion__list-item',
     className,
   ];
   const sectionClasses = [
     'slds-accordion__section',
-    { 'slds-is-open': open },
+    { 'slds-is-open': isOpen },
   ];
 
   return (
@@ -29,7 +29,7 @@ const AccordionSection = (props) => {
           <h3 className="slds-text-heading_small slds-accordion__summary-heading">
             <Button
               aria-controls={`accordion-details-${id}`}
-              aria-expanded={open ? 'true' : 'false'}
+              aria-expanded={isOpen ? 'true' : 'false'}
               className="slds-accordion__summary-action"
               onClick={() => {}}
               reset
@@ -37,7 +37,7 @@ const AccordionSection = (props) => {
               <ButtonIcon
                 position="left"
                 sprite="utility"
-                icon={open ? 'chevrondown' : 'chevronright'}
+                icon={isOpen ? 'chevrondown' : 'chevronright'}
               />
               <span className="slds-truncate" title={summary}>{summary}</span>
             </Button>
@@ -59,7 +59,7 @@ const AccordionSection = (props) => {
           </Button>
         </div>
         <div
-          aria-hidden={open ? 'false' : 'true'}
+          aria-hidden={isOpen ? 'false' : 'true'}
           className="slds-accordion__content" id={id}
         >
           {children}
@@ -71,7 +71,7 @@ const AccordionSection = (props) => {
 
 AccordionSection.defaultProps = {
   className: null,
-  open: false,
+  isOpen: false,
   summaryOnClick: () => {},
 };
 
@@ -91,7 +91,7 @@ AccordionSection.propTypes = {
   /**
    * section is open
    */
-  open: PropTypes.bool,
+  isOpen: PropTypes.bool,
   /**
    * section summary
    */

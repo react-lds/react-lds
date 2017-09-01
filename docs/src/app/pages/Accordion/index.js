@@ -6,6 +6,7 @@ import accordionSectionCode from '!raw!react-lds/components/Accordion/AccordionS
 import exampleNormalCode from '!raw!./ExampleNormal';
 import exampleStyledCode from '!raw!./ExampleStyled';
 import exampleOpenCode from '!raw!./ExampleOpen';
+import exampleControlledCode from '!raw!./ExampleControlled';
 
 import CodeExample from '../../components/CodeExample';
 import PropTypeDescription from '../../components/PropTypeDescription';
@@ -15,6 +16,7 @@ import HeaderIcon from '../../components/HeaderIcon';
 import ExampleNormal from './ExampleNormal';
 import ExampleStyled from './ExampleStyled';
 import ExampleOpen from './ExampleOpen';
+import ExampleControlled from './ExampleControlled';
 
 const Accordions = () =>
   <div>
@@ -40,6 +42,13 @@ const Accordions = () =>
           code={exampleStyledCode}
         />
         <ExampleStyled />
+      </section>
+      <section className="slds-m-bottom--xx-large slds-p-top--x-large">
+        <CodeExample
+          title="Accordion controlled"
+          code={exampleControlledCode}
+        />
+        <ExampleControlled />
       </section>
     </div>
     <PropTypeDescription code={accordionCode} />
