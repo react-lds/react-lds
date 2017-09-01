@@ -4,7 +4,7 @@ import cx from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash.omit';
 
-import { Grid, Column, DropdownMenu } from '../../';
+import { Grid, Column, Menu } from '../../';
 
 export class ObjectHome extends React.Component {
   static propTypes = {
@@ -30,7 +30,7 @@ export class ObjectHome extends React.Component {
     title: PropTypes.string.isRequired,
     /**
      * dropdown header menu that also get's triggered when a user clicks on the
-     * title headline. Must be one or more instances of DropdownMenuList
+     * title headline. Must be one or more instances of MenuDropdownList
      */
     titleMenu: PropTypes.node,
     /**
@@ -83,13 +83,13 @@ export class ObjectHome extends React.Component {
                 >
                   {title}
                 </h1>
-                <DropdownMenu
+                <Menu
                   button={{ sprite: 'utility', icon: 'down', noBorder: true }}
                   position="top-right"
                   isOpen={this.state.menuIsOpen}
                 >
                   {titleMenu}
-                </DropdownMenu>
+                </Menu>
               </Grid>
             </Grid>
           </Column>

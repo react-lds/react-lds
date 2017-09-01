@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-  DropdownMenu,
-  DropdownMenuList,
-  DropdownMenuListItem,
+  Menu,
+  MenuDropdownList,
+  MenuDropdownListItem,
 } from 'react-lds';
 
 const ExampleDefault = () => {
@@ -10,22 +10,22 @@ const ExampleDefault = () => {
 
   return (
     <div>
-      <DropdownMenu button={button}>
-        <DropdownMenuList>
-          <DropdownMenuListItem>Item 1</DropdownMenuListItem>
-          <DropdownMenuListItem>Item 2</DropdownMenuListItem>
-          <DropdownMenuListItem>Item 3</DropdownMenuListItem>
-          <DropdownMenuListItem divider>Important last item</DropdownMenuListItem>
-        </DropdownMenuList>
-      </DropdownMenu>
+      <Menu button={button}>
+        <MenuDropdownList>
+          <MenuDropdownListItem>Item 1</MenuDropdownListItem>
+          <MenuDropdownListItem>Item 2</MenuDropdownListItem>
+          <MenuDropdownListItem>Item 3</MenuDropdownListItem>
+          <MenuDropdownListItem divider>Important last item</MenuDropdownListItem>
+        </MenuDropdownList>
+      </Menu>
 
-      <DropdownMenu button={button} size="medium" position="top-right">
-        <DropdownMenuList>
-          <DropdownMenuListItem>Item 1</DropdownMenuListItem>
-          <DropdownMenuListItem>Item 2</DropdownMenuListItem>
-          <DropdownMenuListItem>Item 3</DropdownMenuListItem>
-        </DropdownMenuList>
-      </DropdownMenu>
+      <Menu button={button} size="medium" position="top-right">
+        <MenuDropdownList>
+          <MenuDropdownListItem>Item 1</MenuDropdownListItem>
+          <MenuDropdownListItem>Item 2</MenuDropdownListItem>
+          <MenuDropdownListItem>Item 3</MenuDropdownListItem>
+        </MenuDropdownList>
+      </Menu>
     </div>
   );
 };

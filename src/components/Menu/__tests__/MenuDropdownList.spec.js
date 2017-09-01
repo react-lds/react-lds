@@ -1,15 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import DropdownMenuList from '../DropdownMenuList';
+import MenuDropdownList from '../MenuDropdownList';
 
-describe('<DropdownMenuList />', () => {
+describe('<MenuDropdownList />', () => {
   let mounted = null;
 
   const children = [<li key="1">one</li>, <li key="2">two</li>];
 
   beforeEach(() => {
-    mounted = shallow(<DropdownMenuList>{children}</DropdownMenuList>);
+    mounted = shallow(<MenuDropdownList>{children}</MenuDropdownList>);
   });
 
   it('renders children inside <ul></ul>', () => {

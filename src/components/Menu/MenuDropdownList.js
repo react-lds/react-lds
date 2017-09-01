@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { getUniqueHash } from '../../utils';
 
-const DropdownMenuList = (props) => {
+const MenuDropdownList = (props) => {
   const { checkbox, children, className, header, height, heightIcon, ...rest } = props;
 
   const renderHeader = () => {
@@ -18,7 +19,14 @@ const DropdownMenuList = (props) => {
   };
 
   const makeChildrenCheckboxes = () =>
-    children.map(child => React.cloneElement(child, { selected: child.props.selected === true }));
+    children.map((child, i) =>
+      React.cloneElement(
+        child, {
+          selected: child.props.selected === true,
+          key: getUniqueHash('item', i),
+        }
+      )
+    );
   // with this we set the selected prop to true or false (no undef or null)
   // so that the child becomes a menuitemcheckbox (not menuitem)
 
@@ -38,16 +46,7 @@ const DropdownMenuList = (props) => {
   );
 };
 
-DropdownMenuList.defaultProps = {
-  checkbox: false,
-  children: null,
-  className: null,
-  header: null,
-  height: null,
-  heightIcon: null,
-};
-
-DropdownMenuList.propTypes = {
+MenuDropdownList.propTypes = {
   /**
    * make true if menuitems should be menuitemcheckboxes
    */
@@ -62,7 +61,7 @@ DropdownMenuList.propTypes = {
   className: PropTypes.string,
   /**
    * optional header for this list. Mostly useful is multiple
-   * DropdownMenuListItems are in use
+   * MenuDropdownListItems are in use
    */
   header: PropTypes.string,
   /**
@@ -75,4 +74,12 @@ DropdownMenuList.propTypes = {
   heightIcon: PropTypes.oneOf([5, 7, 10]),
 };
 
-export default DropdownMenuList;
+MenuDropdownList.defaultProps = {
+  checkbox: false,
+  children: null,
+  className: null,
+  header: null,
+  height: null,
+  heightIcon: null,
+};
+export default MenuDropdownList;

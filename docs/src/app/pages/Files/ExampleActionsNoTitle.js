@@ -3,9 +3,9 @@ import {
   Button,
   ButtonGroup,
   ButtonIcon,
-  DropdownMenu,
-  DropdownMenuList,
-  DropdownMenuListItem,
+  Menu,
+  MenuDropdownList,
+  MenuDropdownListItem,
   File,
 } from 'react-lds';
 
@@ -19,16 +19,16 @@ const exampleActions = (
     <Button icon icon-x-small icon-inverse>
       <ButtonIcon sprite="utility" icon="download" size="x-small" />
     </Button>
-    <DropdownMenu
+    <Menu
       customButton={<Button icon icon-x-small icon-inverse><ButtonIcon sprite="utility" icon="down" /></Button>}
       last
       position="top-right"
     >
-      <DropdownMenuList>
-        <DropdownMenuListItem>Item 1</DropdownMenuListItem>
-        <DropdownMenuListItem>Item 2</DropdownMenuListItem>
-      </DropdownMenuList>
-    </DropdownMenu>
+      <MenuDropdownList>
+        <MenuDropdownListItem>Item 1</MenuDropdownListItem>
+        <MenuDropdownListItem>Item 2</MenuDropdownListItem>
+      </MenuDropdownList>
+    </Menu>
   </ButtonGroup>
 );
 

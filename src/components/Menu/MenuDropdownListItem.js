@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import { IconSVG } from '../../';
 
-const DropdownMenuListItem = (props) => {
+const MenuDropdownListItem = (props) => {
   const { children, className, onClick, selected, leftIcon, rightIcon, divider, ...rest } = props;
 
   const leftIconElem = () => {
@@ -75,16 +75,7 @@ const DropdownMenuListItem = (props) => {
   );
 };
 
-DropdownMenuListItem.defaultProps = {
-  className: null,
-  divider: false,
-  leftIcon: null,
-  onClick: () => {},
-  rightIcon: null,
-  selected: null,
-};
-
-DropdownMenuListItem.propTypes = {
+MenuDropdownListItem.propTypes = {
   /**
    * The content of a menu item
    */
@@ -124,4 +115,13 @@ DropdownMenuListItem.propTypes = {
   selected: PropTypes.bool,
 };
 
-export default DropdownMenuListItem;
+MenuDropdownListItem.defaultProps = {
+  className: null,
+  divider: false,
+  leftIcon: null,
+  onClick: () => {},
+  rightIcon: null,
+  selected: null,
+};
+
+export default MenuDropdownListItem;
