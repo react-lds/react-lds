@@ -47,6 +47,9 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/select/disabled">Disabled</PageNavigationElement>
             <PageNavigationElement to="/forms/select/multiple">Multiple Selection</PageNavigationElement>
           </PageNavigationMenu>
+          <PageNavigationMenu title="Picklist" to="/forms/picklist">
+            <PageNavigationElement to="/forms/picklist/default">Default</PageNavigationElement>
+          </PageNavigationMenu>
           <PageNavigationMenu title="Checkbox" to="/forms/checkbox">
             <PageNavigationElement to="/forms/checkbox/default">Default</PageNavigationElement>
             <PageNavigationElement to="/forms/checkbox/required">Required</PageNavigationElement>

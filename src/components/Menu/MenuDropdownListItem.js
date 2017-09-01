@@ -59,12 +59,9 @@ const MenuDropdownListItem = (props) => {
     className,
   ];
 
-  const role = (selected === null) ? 'menuitem' : 'menuitemcheckbox';
-  // if selected true or false, it's a menuitemcheckbox, else it's a menuitem
-
   return (
     <li {...rest} className={cx(sldsClasses)} role="presentation">
-      <a role={role} onClick={onClick} aria-checked={selected}>
+      <a role="menuitem" onClick={onClick}>
         <span className="slds-truncate" title={children}>
           {leftIconElem()}
           {children}

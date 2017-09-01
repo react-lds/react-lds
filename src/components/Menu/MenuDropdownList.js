@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const MenuDropdownList = (props) => {
-  const { checkbox, children, className, header, height, heightIcon, ...rest } = props;
+  const { children, className, header, height, heightIcon, ...rest } = props;
 
   const renderHeader = () => {
     if (header) {
@@ -17,11 +17,6 @@ const MenuDropdownList = (props) => {
     return null;
   };
 
-  const makeChildrenCheckboxes = () =>
-    children.map(child => React.cloneElement(child, { selected: child.props.selected === true }));
-  // with this we set the selected prop to true or false (no undef or null)
-  // so that the child becomes a menuitemcheckbox (not menuitem)
-
   const listClasses = [
     { [`slds-dropdown_length-${height}`]: height },
     { [`slds-dropdown_length-with-icon-${heightIcon}`]: heightIcon },
@@ -32,17 +27,13 @@ const MenuDropdownList = (props) => {
     <div {...rest} className={className}>
       {renderHeader()}
       <ul className={cx(listClasses)} role="menu">
-        {checkbox ? makeChildrenCheckboxes() : children}
+        {children}
       </ul>
     </div>
   );
 };
 
 MenuDropdownList.propTypes = {
-  /**
-   * make true if menuitems should be menuitemcheckboxes
-   */
-  checkbox: PropTypes.bool,
   /**
    * list content
    */
@@ -67,7 +58,6 @@ MenuDropdownList.propTypes = {
 };
 
 MenuDropdownList.defaultProps = {
-  checkbox: false,
   children: null,
   className: null,
   header: null,

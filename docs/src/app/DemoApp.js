@@ -30,6 +30,7 @@ import ProgressBar from './pages/ProgressBar';
 import Radio from './pages/Form/Radio';
 import SelectVariants from './pages/Form/Select';
 import CheckboxVariants from './pages/Form/Checkbox';
+import PicklistVariants from './pages/Form/Picklist';
 import Spinners from './pages/Spinners';
 import StatefulButtons from './pages/StatefulButton';
 import Tabs from './pages/Tab';
@@ -63,6 +64,10 @@ const routes = (
       <Route path="select">
         <IndexRedirect to="default" />
         <Route path=":exampleId" component={SelectVariants} />
+      </Route>
+      <Route path="picklist">
+        <IndexRedirect to="default" />
+        <Route path=":exampleId" component={PicklistVariants} />
       </Route>
       <Route path="checkbox">
         <IndexRedirect to="default" />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Picklist } from 'react-lds';
 
-class ExamplePicklist extends React.Component {
+class ExampleDefault extends React.Component {
   constructor(props) {
     super(props);
 
@@ -42,18 +42,12 @@ class ExamplePicklist extends React.Component {
     return (
       <div>
         <Picklist
-          height={this.state.height}
-          id={this.state.id}
-          items={this.state.items}
-          labelInput={this.state.labelInput}
-          labelMultiselect={this.state.labelMultiselect}
+          {...this.state}
           onSelect={this.onSelect}
-          placeholder={this.state.placeholder}
-          error={'lol'}
         />
       </div>
     );
   }
 }
 
-export default ExamplePicklist;
+export default ExampleDefault;

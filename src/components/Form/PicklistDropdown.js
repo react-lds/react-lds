@@ -4,6 +4,7 @@ import cx from 'classnames';
 
 import {
   FormElement,
+  FormElementError,
   FormElementControl,
   FormElementLabel,
 } from '../../';
@@ -77,6 +78,7 @@ export class PicklistDropdown extends Component {
             </div>
           </div>
         </FormElementControl>
+        <FormElementError error={error} id={`error-${id}`} />
       </FormElement>
     );
   }

@@ -92,6 +92,7 @@ export class Picklist extends React.Component {
       error,
       height,
       id,
+      isLabelHidden,
       isRequired,
       labelInput,
     } = this.props;
@@ -100,6 +101,7 @@ export class Picklist extends React.Component {
       <PicklistDropdown
         className={className}
         error={error}
+        hideLabel={isLabelHidden}
         id={`combobox-${id}`}
         input={this.input()}
         isOpen={this.state.isOpen}
@@ -139,6 +141,10 @@ Picklist.propTypes = {
    */
   isDisabled: PropTypes.bool,
   /**
+   * whether the input lable is visible
+   */
+  isLabelHidden: PropTypes.bool,
+  /**
    * whether the picklist is required
    */
   isRequired: PropTypes.bool,
@@ -175,6 +181,7 @@ Picklist.defaultProps = {
   error: null,
   height: null,
   isDisabled: false,
+  isLabelHidden: false,
   isRequired: false,
   items: [],
   labelInput: '',
