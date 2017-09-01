@@ -31,6 +31,7 @@ const AccordionSection = (props) => {
               aria-controls={`accordion-details-${id}`}
               aria-expanded={open ? 'true' : 'false'}
               className="slds-accordion__summary-action"
+              onClick={() => {}}
               reset
             >
               <ButtonIcon

@@ -10,7 +10,6 @@ import {
   FormElementControl,
   FormElementLabel,
   Icon,
-  IconSVG,
   InputRaw,
   Pill,
   PillContainer,
@@ -389,10 +388,11 @@ export class Lookup extends Component {
             onMouseOver={() => this.highlightSelection(itemId)}
             role="option"
           >
-            <IconSVG
+            <Icon
               className="slds-media__figure"
               sprite={Lookup.getSprite(objectType)}
               icon={objectType}
+              size="small"
             />
             <div className="slds-media__body">
               <div className="slds-lookup__result-text">{label}</div>
@@ -471,7 +471,7 @@ export class Lookup extends Component {
                 onClick={() => this.addSelection(item)}
                 key={`${item.id}${index}`}
               >
-                {renderBodyCell(item[field.name], index, item.objectType)}
+                {renderBodyCell(item.label, index, item.objectType)}
               </Cell>
             )}
           </Row>

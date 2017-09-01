@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { Grid, Column, MediaObject, IconSVG } from '../../';
+import { Grid, Column, MediaObject, Icon } from '../../';
 
 const RecordHome = (props) => {
   const { className, detailItems = [], headerButtons, icon, recordType, title, ...rest } = props;
 
-  const iconRendered = <IconSVG sprite={icon.sprite} icon={icon.icon} />;
+  const iconRendered = <Icon sprite={icon.sprite} icon={icon.icon} />;
   let detailRow;
 
   if (detailItems.length > 0) {

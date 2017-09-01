@@ -64,9 +64,12 @@ const Forms = ({ children }) =>
     </Grid>
   </div>;
 
-
 Forms.propTypes = {
   children: PropTypes.node,
+};
+
+Forms.defaultProps = {
+  children: null,
 };
 
 export default Forms;
