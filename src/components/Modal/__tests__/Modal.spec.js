@@ -12,7 +12,9 @@ describe('<Modal />', () => {
     mounted = mount(
       <Modal>
         <ModalHeader />
-        <ModalContent id="bar" className="foo" />
+        <ModalContent id="bar" className="foo">
+          Content
+        </ModalContent>
       </Modal>
     );
   });
