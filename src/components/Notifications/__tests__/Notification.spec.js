@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { default as Notification } from '../Notification';
+import { Notification } from '../Notification';
 
 describe('<Notification />', () => {
   let mounted = null;

@@ -21,12 +21,11 @@ export const Modal = (props) => {
   const role = prompt ? 'alertdialog' : 'dialog';
   const containerRole = isDialog ? 'document' : null;
 
-  const childrenWithProps = [...children].map((child, i) => {
+  const childrenWithProps = [...children].map((child) => {
     const childName = child ? child.type.displayName || child.type.name : null;
 
     if (childName === 'ModalHeader') {
       return React.cloneElement(child, {
-        key: i,
         label,
         prompt,
         uncloseable: child.props.uncloseable !== undefined ? child.props.uncloseable : prompt,
