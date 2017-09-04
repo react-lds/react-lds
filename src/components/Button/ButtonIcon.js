@@ -35,6 +35,7 @@ ButtonIcon.defaultProps = {
 ButtonIcon.propTypes = {
   /**
    * class name
+   *
    */
   className: PropTypes.string,
   /**

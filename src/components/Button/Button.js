@@ -10,8 +10,9 @@ export const Button = (props) => {
     className,
     disabled,
     onClick,
-    title,
     selected,
+    title,
+    tooltip,
     value,
     ...rest,
   } = props;
@@ -29,6 +30,7 @@ export const Button = (props) => {
       onClick={onClick}
       disabled={disabled}
       value={value}
+      title={tooltip || title}
     >
       {(children && children.props && children.props.position === 'right') ? title : null}
       {!children ? title : children}
@@ -58,6 +60,7 @@ Button.defaultProps = {
   disabled: false,
   selected: false,
   title: null,
+  tooltip: null,
   value: null,
 };
 
@@ -86,6 +89,10 @@ Button.propTypes = {
    * button title
    */
   title: PropTypes.string,
+  /**
+   * button tooltip
+   */
+  tooltip: PropTypes.string,
   /**
    * adds optional value tag to the button
    */

@@ -1,9 +1,5 @@
 # Changelog
 
-## [Unreleased]
-
-  - Add `<Listbox />` component, to be used in PillContainers
-
 ## 2.0.0
 
 ### Added
@@ -31,9 +27,13 @@
 * Support new ARIA-specs
 * Use `Listbox` in PillContainers
 * Use new `combobox` markup in `Lookup`
+* Use new `combobox` markup in `Picklist`
+* Add `padded` flavor for `Column`
+
+## 1.1.12
+* Use title attribute as tooltip for button component
 
 ## 1.1.11
-
 * Add onClickClose handler for Notifications (thanks @frontendloader)
 * Datepicker: Fix highlighted date
 * Datepicker: Fix required prop

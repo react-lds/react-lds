@@ -6,7 +6,7 @@ import {
 } from 'react-lds';
 
 const ExampleNubbin = () => {
-  const button = { sprite: 'utility', icon: 'settings', noBorder: true };
+  const button = { sprite: 'utility', icon: 'settings', noBorder: true, tooltip: 'I\'m a tooltip, look at me!' };
 
   return (
     <div>

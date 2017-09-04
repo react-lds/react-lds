@@ -6,12 +6,40 @@ const onClick = () => {};
 
 const ExampleNormal = () =>
   <div>
-    <Button title="Button Reset" onClick={onClick} />
-    <Button neutral title="Button Neutral" onClick={onClick} />
-    <Button brand title="Button Brand" onClick={onClick} />
-    <Button neutral title="Button Neutral Disabled" disabled onClick={onClick} />
-    <Button title="Button Destructive" destructive onClick={onClick} />
-    <Button title="Button Success" success onClick={onClick} />
+    <Button
+      onClick={onClick}
+      title="Button Reset"
+      tooltip="I'm a tooltip, look at me!"
+    />
+    <Button
+      neutral
+      onClick={onClick}
+      title="Button Neutral"
+      tooltip="I'm a tooltip, look at me!"
+    />
+    <Button
+      brand
+      onClick={onClick}
+      title="Button Brand"
+      tooltip="I'm a tooltip, look at me!"
+    />
+    <Button
+      disabled onClick={onClick}
+      neutral
+      title="Button Neutral Disabled"
+      tooltip="I'm a tooltip, look at me!"
+    />
+    <Button
+      destructive
+      onClick={onClick}
+      title="Button Destructive"
+      tooltip="I'm a tooltip, look at me!"
+    />
+    <Button
+      success onClick={onClick}
+      title="Button Success"
+      tooltip="I'm a tooltip, look at me!"
+    />
   </div>;
 
 export default ExampleNormal;
