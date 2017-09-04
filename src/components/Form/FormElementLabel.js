@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
-
-const FormElementLabel = (props, { cssPrefix }) => {
+const FormElementLabel = (props) => {
   const {
     className,
     hideLabel,
@@ -15,13 +14,9 @@ const FormElementLabel = (props, { cssPrefix }) => {
     ...rest,
   } = props;
 
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-
   const renderRequired = () => {
     if (required) {
-      return (
-        <abbr className={prefix('required')} title="required">*</abbr>
-      );
+      return (<abbr className="slds-required" title="required">*</abbr>);
     }
 
     return null;
@@ -37,19 +32,26 @@ const FormElementLabel = (props, { cssPrefix }) => {
   }
 
   const sldsClasses = [
-    { 'form-element__legend': !!legend },
-    'form-element__label',
-    { 'assistive-text': hideLabel },
+    'slds-form-element__label',
+    { 'slds-form-element__legend': !!legend },
+    { 'slds-assistive-text': hideLabel },
+    className
   ];
 
   return (
-    <Tag {...rest} className={prefix(sldsClasses, className)} htmlFor={readOnly || legend ? null : id}>
+    <Tag {...rest} className={cx(sldsClasses)} htmlFor={readOnly || legend ? null : id}>
       {renderRequired()}{label}
     </Tag>
   );
 };
 
-FormElementLabel.contextTypes = { cssPrefix: PropTypes.string };
+FormElementLabel.defaultProps = {
+  className: null,
+  hideLabel: false,
+  legend: false,
+  readOnly: false,
+  required: false,
+};
 
 FormElementLabel.propTypes = {
   /**
@@ -59,7 +61,7 @@ FormElementLabel.propTypes = {
   /**
    * id of the corresponding input tag element
    */
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
   /**
    * sets the label to render as assistive text
    */

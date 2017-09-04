@@ -1,27 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { prefixClasses } from '../../utils';
+const NavigationList = ({ id, title, children }) => (
+  <div>
+    <h2
+      className="slds-text-title_caps slds-p-around_medium"
+      id={id}
+    >
+      {title}
+    </h2>
+    <ul>
+      {React.Children.map(children, child => React.cloneElement(child, { 'aria-describedby': id }))}
+    </ul>
+  </div>
+);
 
-const NavigationList = ({ id, title, children }, { cssPrefix }) => {
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-
-  return (
-    <div>
-      <h2
-        className={prefix(['text-title--caps', 'p-around--medium'])}
-        id={id}
-      >
-        {title}
-      </h2>
-      <ul>
-        {React.Children.map(children, child => React.cloneElement(child, { 'aria-describedby': id }))}
-      </ul>
-    </div>
-  );
+NavigationList.defaultProps = {
+  id: null,
+  children: null,
 };
-
-NavigationList.contextTypes = { cssPrefix: PropTypes.string };
 
 NavigationList.propTypes = {
   /**

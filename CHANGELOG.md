@@ -1,5 +1,35 @@
 # Changelog
 
+## 2.0.0
+
+### Added
+
+* Add support for LDS `2.3.1`, migrate to new `_flavors`
+* Add `Accordion`
+* Add `Expdandable Section`
+* Add `File`
+* Add `Path`
+* Add `ProgressBar`
+* Add `StatefulButton`
+* Add `VerticalNavigation`
+
+### Removed
+
+* **Breaking:** Remove $css-prefix and update components
+* **Breaking:** Remove `Navigation` (superseded by `VerticalNavigation`)
+* Remove `PromptForTouch`
+
+### Fixed
+
+* Make header in `Card` optional
+* Support new `Spinner` sizes
+* Support `Spinner`-containers
+* Support new ARIA-specs
+* Use `Listbox` in PillContainers
+* Use new `combobox` markup in `Lookup`
+* Use new `combobox` markup in `Picklist`
+* Add `padded` flavor for `Column`
+
 ## 1.1.12
 * Use title attribute as tooltip for button component
 

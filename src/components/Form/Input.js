@@ -19,18 +19,19 @@ const Input = (props) => {
     id,
     label,
     required,
+    showSpinner,
     ...rest,
   } = props;
 
   const hasIconLeft = !!iconLeft || (error && errorIcon);
-  const hasIconRight = !!iconRight;
+  const hasIconRight = !!iconRight || !!showSpinner;
 
   return (
     <FormElement required={required} error={error}>
       <FormElementLabel
         hideLabel={hideLabel}
-        label={label}
         id={id}
+        label={label}
         required={required}
       />
       <FormElementControl hasIconLeft={hasIconLeft} hasIconRight={hasIconRight}>
@@ -42,6 +43,7 @@ const Input = (props) => {
           id={id}
           label={label}
           required={required}
+          showSpinner={showSpinner}
           {...rest}
         />
       </FormElementControl>
@@ -50,11 +52,27 @@ const Input = (props) => {
   );
 };
 
-Input.contextTypes = { cssPrefix: PropTypes.string };
-
-Input.propDefaults = {
-  type: 'text',
+Input.defaultProps = {
+  bare: false,
+  className: null,
+  disabled: false,
+  error: null,
+  errorIcon: false,
   hideLabel: false,
+  iconLeft: null,
+  iconRight: null,
+  iconRightOnClick: () => {},
+  isFocused: false,
+  label: null,
+  onChange: () => {},
+  onFocus: () => {},
+  onKeyPress: () => {},
+  placeholder: null,
+  role: null,
+  required: false,
+  showSpinner: false,
+  type: 'text',
+  value: undefined,
 };
 
 Input.propTypes = {
@@ -130,6 +148,10 @@ Input.propTypes = {
    * role of the input field
    */
   role: PropTypes.string,
+  /**
+   * whether to show a spinner element inside the field, on the right end
+   */
+  showSpinner: PropTypes.bool,
   /**
    * input type. all HTML5 types are allowed, defaults to "text"
    * text, password, datetime, datetime-local, date, month, time, week, number, email, url, search, tel, and color

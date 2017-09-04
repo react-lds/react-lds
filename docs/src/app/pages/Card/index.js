@@ -3,6 +3,7 @@ import React from 'react';
 import cardCode from '!raw!react-lds/components/Card/Card';
 import exampleDefaultCode from '!raw!./ExampleDefault';
 import exampleTableCode from '!raw!./ExampleTable';
+import exampleWithoutIconCode from '!raw!./ExampleWithoutIcon';
 
 import CodeExample from '../../components/CodeExample';
 import HeaderIcon from '../../components/HeaderIcon';
@@ -11,6 +12,7 @@ import PropTypeDescription from '../../components/PropTypeDescription';
 
 import ExampleDefault from './ExampleDefault';
 import ExampleTable from './ExampleTable';
+import ExampleWithoutIcon from './ExampleWithoutIcon';
 
 const Cards = () =>
   <div>
@@ -30,6 +32,14 @@ const Cards = () =>
           code={exampleTableCode}
         />
         <ExampleTable />
+      </section>
+
+      <section className="slds-m-bottom--xx-large slds-p-top--x-large">
+        <CodeExample
+          title="Without Icon"
+          code={exampleWithoutIconCode}
+        />
+        <ExampleWithoutIcon />
       </section>
     </div>
 

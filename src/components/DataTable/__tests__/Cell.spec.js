@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import { Cell } from '../Cell';
@@ -11,15 +10,10 @@ describe('<Cell />', () => {
   const tbody = document.createElement('tbody');
   const trow = document.createElement('tr');
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
     const frag = table.appendChild(tbody).appendChild(trow);
-    options.attachTo = frag;
 
-    mounted = shallow(<Cell />, options);
+    mounted = shallow(<Cell />, { attachTo: frag });
   });
 
   it('renders as a td by default', () => {
@@ -39,7 +33,7 @@ describe('<Cell />', () => {
 
   it('renders a title if present', () => {
     mounted.setProps({ title: 'Title' });
-    expect(mounted.find('td').prop('title')).toEqual('Title');
+    expect(mounted.find('div').prop('title')).toEqual('Title');
   });
 
   it('sets scope if a scope is present', () => {
@@ -50,13 +44,13 @@ describe('<Cell />', () => {
   it('sets the children text as title if no title-props is found', () => {
     const child = 'text';
     mounted.setProps({ children: child });
-    expect(mounted.find('td').prop('title')).toEqual(child);
+    expect(mounted.find('div').prop('title')).toEqual(child);
   });
 
   it('sets the grandchildren text as title if no title-props is found', () => {
     const child = <span key="test">text</span>;
     mounted.setProps({ children: child });
-    expect(mounted.find('td').prop('title')).toEqual('text');
+    expect(mounted.find('div').prop('title')).toEqual('text');
   });
 
   it('applies className and rest-properties', () => {

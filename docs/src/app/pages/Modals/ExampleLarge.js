@@ -3,11 +3,13 @@ import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from 
 
 const modalLabel = 'example-large';
 
+const onClick = () => {};
+
 const ExampleLarge = () =>
   <div className="demo-modal">
-    <Modal label={modalLabel} large open>
+    <Modal label={modalLabel} large open descriptionId="example-large">
       <ModalHeader title="Modal Header" />
-      <ModalContent>
+      <ModalContent id="example-large">
         <div>
           <p>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam
           incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse
@@ -19,8 +21,8 @@ const ExampleLarge = () =>
         </div>
       </ModalContent>
       <ModalFooter>
-        <Button neutral title="Cancel" />
-        <Button brand title="Save" />
+        <Button neutral title="Cancel" onClick={onClick} />
+        <Button brand title="Save" onClick={onClick} />
       </ModalFooter>
     </Modal>
     <Backdrop open />

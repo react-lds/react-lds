@@ -7,7 +7,7 @@ const ExampleDefault = () =>
     icon="contact"
     sprite="standard"
     title="Base Card"
-    headerRight={<Button title="New" neutral />}
+    headerRight={<Button title="New" neutral onClick={() => {}} />}
     body="Body would be here"
     footer="Footer"
   />;

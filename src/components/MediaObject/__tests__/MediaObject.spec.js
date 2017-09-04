@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import { MediaObject } from '../MediaObject';
@@ -8,12 +7,8 @@ describe('<MediaObject />', () => {
   let mounted = null;
   const figure = <div className="foo" />;
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
-    mounted = shallow(<MediaObject />, options);
+    mounted = shallow(<MediaObject />);
   });
 
   it('renders the correct markup', () => {
@@ -33,13 +28,13 @@ describe('<MediaObject />', () => {
 
   it('renders a right figure', () => {
     mounted.setProps({ figureRight: figure });
-    expect(mounted.find('.slds-media__figure--reverse').contains(figure)).toBeTruthy();
+    expect(mounted.find('.slds-media__figure_reverse').contains(figure)).toBeTruthy();
   });
 
   it('renders a left and right figure simultaniously', () => {
     mounted.setProps({ figureLeft: figure, figureRight: figure });
     expect(mounted.find('.slds-media__figure').length).toBe(2);
-    expect(mounted.find('.slds-media__figure--reverse').length).toBe(1);
+    expect(mounted.find('.slds-media__figure_reverse').length).toBe(1);
   });
 
   it('allows a custom tag to be used', () => {
@@ -48,10 +43,9 @@ describe('<MediaObject />', () => {
   });
 
   it('truncates the __body', () => {
-    mounted.setProps({ truncate: true });
+    mounted.setProps({ truncate: true, title: 'some title' });
     expect(mounted.find('.slds-media__body').hasClass('slds-truncate')).toBeTruthy();
   });
-
 
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });

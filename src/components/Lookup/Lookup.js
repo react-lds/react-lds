@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
 import debounce from 'lodash.debounce';
 import omit from 'lodash.omit';
 
-import { prefixClasses } from '../../utils';
 import {
   FormElement,
   FormElementControl,
   FormElementLabel,
   Icon,
-  IconSVG,
   InputRaw,
   Pill,
   PillContainer,
@@ -20,8 +19,6 @@ import {
 } from '../../';
 
 export class Lookup extends Component {
-  static contextTypes = { cssPrefix: PropTypes.string };
-
   static propTypes = {
     /**
      * class name
@@ -127,10 +124,7 @@ export class Lookup extends Component {
   };
 
   static getSprite(objectType = '') {
-    if (objectType.startsWith('custom')) {
-      return 'custom';
-    }
-
+    if (objectType.startsWith('custom')) { return 'custom'; }
     return 'standard';
   }
 
@@ -141,11 +135,10 @@ export class Lookup extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
-
     const { initialSelection, selection } = props;
 
     if (initialSelection && selection) {
+      // eslint-disable-next-line
       console.warn(
         '[react-lds] Lookup:',
         'You are supplying both `selection` & `initialSelection`, ignoring `initialSelection`.',
@@ -335,7 +328,7 @@ export class Lookup extends Component {
           aria-expanded={open}
           iconRight={emailLayout ? null : 'search'}
           bare={emailLayout}
-          className={emailLayout ? this.prefix('input--height') : null}
+          className={emailLayout ? 'slds-input_height' : null}
         />
       </FormElementControl>
     );
@@ -347,12 +340,12 @@ export class Lookup extends Component {
 
     if (selected.length < 1) { return null; }
 
-    const renderSelection = (item, i) => {
+    const renderSelection = (item) => {
       const { id, label, objectType } = item;
       return (
         <Pill
-          key={i}
-          className={!multi ? this.prefix(['size--1-of-1']) : null}
+          key={id}
+          className={!multi ? 'slds-size_1-of-1' : null}
           icon={objectType && (<Icon sprite={Lookup.getSprite(objectType)} icon={objectType} />)}
           id={id}
           title={label}
@@ -381,24 +374,31 @@ export class Lookup extends Component {
       const { id } = this.props;
       const { objectType, label, id: itemId, meta } = item;
 
+      const lookupItemClasses = [
+        'slds-lookup__item-action',
+        'slds-media',
+        'slds-media_center',
+      ];
+
       return (
         <li key={i} role="presentation">
           <span
-            className={this.prefix(['lookup__item-action', 'media', 'media--center'])}
+            className={cx(lookupItemClasses)}
             id={`${id}-option-${i}`}
             onClick={() => this.addSelection(item)}
             onMouseOver={() => this.highlightSelection(itemId)}
             role="option"
           >
-            <IconSVG
-              className={this.prefix('media__figure')}
+            <Icon
+              className="slds-media__figure"
               sprite={Lookup.getSprite(objectType)}
               icon={objectType}
+              size="small"
             />
-            <div className={this.prefix('media__body')}>
-              <div className={this.prefix('lookup__result-text')}>{label}</div>
+            <div className="slds-media__body">
+              <div className="slds-lookup__result-text">{label}</div>
               {meta && (
-                <span className={this.prefix(['lookup__result-meta', 'text-body--small'])}>
+                <span className="slds-lookup__result-meta slds-text-body_small">
                   {meta}
                 </span>
               )}
@@ -409,11 +409,11 @@ export class Lookup extends Component {
     };
 
     return (
-      <div className={this.prefix('lookup__menu')} role="listbox">
-        <div className={this.prefix(['lookup__item--label', 'text-body--small'])}>
+      <div className="slds-lookup__menu" role="listbox">
+        <div className="slds-lookup__item_label slds-text-body_small">
           {listLabel}
         </div>
-        <ul className={this.prefix('lookup__list')} role="presentation">
+        <ul className="slds-lookup__list" role="presentation">
           {displayItems.map(renderLookupItem)}
         </ul>
       </div>
@@ -435,7 +435,7 @@ export class Lookup extends Component {
             {objectType && (
               <Icon
                 size="small"
-                className={this.prefix('m-right--x-small')}
+                className="slds-m-right_x-small"
                 sprite={Lookup.getSprite(objectType)}
                 icon={objectType}
               />
@@ -470,9 +470,9 @@ export class Lookup extends Component {
                 data-label={field.name}
                 scope={index === 0 ? 'row' : null}
                 onClick={() => this.addSelection(item)}
-                key={`${item.id}${index}`}
+                key={item.id}
               >
-                {renderBodyCell(item[field.name], index, item.objectType)}
+                {renderBodyCell(item.label, index, item.objectType)}
               </Cell>
             )}
           </Row>
@@ -481,7 +481,7 @@ export class Lookup extends Component {
     );
 
     return (
-      <Table bordered className={this.prefix('m-top--small')}>
+      <Table bordered className="slds-m-top_small">
         {header}
         {body}
       </Table>
@@ -494,20 +494,30 @@ export class Lookup extends Component {
 
     const rest = omit(this.props, Object.keys(Lookup.propTypes));
 
-    const sldsClasses = ['lookup', { 'is-open': open }];
+    const sldsClasses = [
+      'slds-lookup',
+      { 'slds-is-open': open },
+      className
+    ];
+
+    const wrapperClasses = [
+      'slds-grid',
+      'slds-grow',
+      'slds-p-horizontal_small',
+    ];
 
     const scope = multi ? null : 'single';
 
     return (
-      <div className={emailLayout ? this.prefix(['grid', 'grow', 'p-horizontal--small']) : null}>
+      <div className={emailLayout ? cx(wrapperClasses) : null}>
         {emailLayout && (
-          <label className={this.prefix(['email-composer__label', 'align-middle'])} htmlFor={id}>
+          <label className="slds-email-composer__label slds-align-middle" htmlFor={id}>
             {inputLabel}
           </label>
         )}
         <FormElement
           {...rest}
-          className={this.prefix(sldsClasses, className)}
+          className={cx(sldsClasses)}
           data-select={scope}
           data-scope={scope}
         >

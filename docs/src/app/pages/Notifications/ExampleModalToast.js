@@ -6,30 +6,26 @@ import {
   ModalFooter,
   Backdrop,
   Button,
- Notification,
-  Grid,
-  Column,
-  IconSVG,
+  Notification,
 } from 'react-lds';
+
+const onClick = () => {};
 
 const ExampleModalToast = () => (
   <div className="demo-modal">
-    <Modal large open>
+    <Modal large open descriptionId="example-modal-toast">
       <ModalHeader title="Modal Header">
-        <Notification toast title="Error" theme="error">
-          <Grid className="slds-notify__content">
-            <Column className="slds-m-right--small" no-flex>
-              <IconSVG sprite="utility" icon="warning" size="small" />
-            </Column>
-            <Column className="slds-m-right--small">
-              <h2 className="slds-text-heading--small">
-                You&#x27;ve encountered some errors when trying to save edits to Samuel Smith.
-              </h2>
-            </Column>
-          </Grid>
+        <Notification
+          toast
+          title="Error"
+          theme="error"
+        >
+          <h2 className="slds-text-heading--small">
+            You&#x27;ve encountered some errors when trying to save edits to Samuel Smith.
+          </h2>
         </Notification>
       </ModalHeader>
-      <ModalContent>
+      <ModalContent id="example-modal-toast">
         <div>
           <p>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam
           incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse
@@ -41,8 +37,8 @@ const ExampleModalToast = () => (
         </div>
       </ModalContent>
       <ModalFooter>
-        <Button neutral title="Cancel" />
-        <Button brand title="Save" />
+        <Button neutral title="Cancel" onClick={onClick} />
+        <Button brand title="Save" onClick={onClick} />
       </ModalFooter>
     </Modal>
     <Backdrop open />

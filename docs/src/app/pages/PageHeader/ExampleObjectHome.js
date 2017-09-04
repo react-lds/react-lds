@@ -2,26 +2,28 @@ import React from 'react';
 
 import {
   ObjectHome,
-  DropdownMenuList,
-  DropdownMenuListItem,
+  MenuDropdownList,
+  MenuDropdownListItem,
   ButtonGroup,
   Button,
   ButtonIcon,
 } from 'react-lds';
 
 const titleMenu = (
-  <DropdownMenuList>
-    <DropdownMenuListItem>Item 1</DropdownMenuListItem>
-    <DropdownMenuListItem>Item 2</DropdownMenuListItem>
-    <DropdownMenuListItem>Item 3</DropdownMenuListItem>
-    <DropdownMenuListItem divider>Important last item</DropdownMenuListItem>
-  </DropdownMenuList>
+  <MenuDropdownList>
+    <MenuDropdownListItem>Item 1</MenuDropdownListItem>
+    <MenuDropdownListItem>Item 2</MenuDropdownListItem>
+    <MenuDropdownListItem>Item 3</MenuDropdownListItem>
+    <MenuDropdownListItem divider>Important last item</MenuDropdownListItem>
+  </MenuDropdownList>
 );
+
+const onClick = () => {};
 
 const topButtons = (
   <ButtonGroup>
-    <Button title="New Lead" neutral />
-    <Button icon icon-border-filled>
+    <Button title="New Lead" neutral onClick={onClick} />
+    <Button icon icon-border-filled onClick={onClick}>
       <ButtonIcon sprite="utility" icon="down" />
     </Button>
   </ButtonGroup>
@@ -29,13 +31,13 @@ const topButtons = (
 
 const bottomButtons = (
   <ButtonGroup>
-    <Button icon icon-border>
+    <Button icon icon-border onClick={onClick}>
       <ButtonIcon sprite="utility" icon="chart" />
     </Button>
-    <Button icon icon-border>
+    <Button icon icon-border onClick={onClick}>
       <ButtonIcon sprite="utility" icon="filterList" />
     </Button>
-    <Button icon icon-border>
+    <Button icon icon-border onClick={onClick}>
       <ButtonIcon sprite="utility" icon="settings" />
     </Button>
   </ButtonGroup>

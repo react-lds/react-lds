@@ -5,12 +5,10 @@ import exampleHeadingsCode from '!raw!./ExampleHeadings';
 import exampleHeightCode from '!raw!./ExampleHeight';
 import exampleIconsCode from '!raw!./ExampleIcons';
 import exampleNubbinCode from '!raw!./ExampleNubbin';
-import examplePicklistCode from '!raw!./ExamplePicklist';
 
-import dropdownMenuCode from '!raw!react-lds/components/Menu/DropdownMenu';
-import dropdownMenuListCode from '!raw!react-lds/components/Menu/DropdownMenuList';
-import dropdownMenuListItemCode from '!raw!react-lds/components/Menu/DropdownMenuListItem';
-import picklistCode from '!raw!react-lds/components/Menu/Picklist';
+import menuCode from '!raw!react-lds/components/Menu/Menu';
+import menuDropdownListCode from '!raw!react-lds/components/Menu/MenuDropdownList';
+import menuDropdownListItemCode from '!raw!react-lds/components/Menu/MenuDropdownListItem';
 
 import CodeExample from '../../components/CodeExample';
 import HeaderIcon from '../../components/HeaderIcon';
@@ -22,7 +20,6 @@ import ExampleHeadings from './ExampleHeadings';
 import ExampleHeight from './ExampleHeight';
 import ExampleIcons from './ExampleIcons';
 import ExampleNubbin from './ExampleNubbin';
-import ExamplePicklist from './ExamplePicklist';
 
 const MenuPage = () =>
   <div>
@@ -39,7 +36,7 @@ const MenuPage = () =>
     <div className="slds-p-around--xx-large">
       <CodeExample
         title="Dropdown Menu Sub Headings"
-        description="Every DropdownMenuList can have a heading"
+        description="Every menuDropdownList can have a heading"
         code={exampleHeadingsCode}
       />
       <ExampleHeadings />
@@ -72,19 +69,9 @@ const MenuPage = () =>
       <ExampleHeight />
     </div>
 
-    <div className="slds-p-around--xx-large">
-      <CodeExample
-        title="Picklist and Multipicklist"
-        description="Picklists only need fixed data structure to render."
-        code={examplePicklistCode}
-      />
-      <ExamplePicklist />
-    </div>
-
-    <PropTypeDescription code={dropdownMenuCode} header="### DropdownMenu Properties" />
-    <PropTypeDescription code={dropdownMenuListCode} header="### DropdownMenuList Properties" />
-    <PropTypeDescription code={dropdownMenuListItemCode} header="### DropdownMenuListItem Properties" />
-    <PropTypeDescription code={picklistCode} header="### Picklist Properties" />
+    <PropTypeDescription code={menuCode} header="### Menu Properties" />
+    <PropTypeDescription code={menuDropdownListCode} header="### MenuDropdownList Properties" />
+    <PropTypeDescription code={menuDropdownListItemCode} header="### MenuDropdownListItem Properties" />
   </div>;
 
 export default MenuPage;

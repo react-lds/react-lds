@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import omit from 'lodash.omit';
-import { prefixClasses } from '../utils';
 
 const flavorPropType = validFlavors =>
   function validateFlavor(props, propName, componentName) {
@@ -28,29 +28,19 @@ const getflavorClasses = (baseClass, flavors) => {
     throw new Error('"baseClass" must be a string');
   }
 
-  return flavors.map(flavor => `${baseClass}--${flavor}`);
+  return flavors.map(flavor => `slds-${baseClass}_${flavor}`);
 };
 
 const filterFlavors = (props, flavors) => omit(Object.assign({}, props), flavors);
 
 const flavorable = (C, baseClass) => {
-  const FlavoredComponent = (props, { cssPrefix }) => {
-    const { className } = props;
-    const prefix = classes => prefixClasses(cssPrefix, classes, className);
-
-    const flavors = getFlavors(props, C.flavors);
-
-    const classes = prefix(getflavorClasses(baseClass, flavors));
+  const FlavoredComponent = (props) => {
+    const sldsClasses = cx([...getflavorClasses(baseClass, getFlavors(props, C.flavors)), props.className]);
     const rest = filterFlavors(props, C.flavors);
-
-    return (<C {...rest} className={classes} />);
+    return (<C {...rest} className={sldsClasses} />);
   };
 
   FlavoredComponent.displayName = `Flavored_${C.displayName || C.name}`;
-
-  FlavoredComponent.contextTypes = Object.assign({}, C.contextTypes, {
-    cssPrefix: PropTypes.string,
-  });
 
   FlavoredComponent.propTypes = Object.assign({},
     C.propTypes,

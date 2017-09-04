@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { getUniqueHash } from '../../../utils';
@@ -8,10 +7,6 @@ import Input from '../Input';
 describe('<Input />', () => {
   let props = {};
   let mounted = null;
-
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   beforeEach(() => {
     props = {
@@ -26,7 +21,7 @@ describe('<Input />', () => {
       label: 'some label',
     };
 
-    mounted = mount(<Input {...props} />, options);
+    mounted = mount(<Input {...props} />);
   });
 
   it('renders the id', () => {
@@ -62,9 +57,9 @@ describe('<Input />', () => {
     const formElement = mounted.find('.slds-form-element__control');
 
     expect(formElement.hasClass('slds-input-has-icon')).toBeTruthy();
-    expect(formElement.hasClass('slds-input-has-icon--right')).toBeFalsy();
-    expect(formElement.hasClass('slds-input-has-icon--left')).toBeTruthy();
-    expect(formElement.hasClass('slds-input-has-icon--left-right')).toBeFalsy();
+    expect(formElement.hasClass('slds-input-has-icon_right')).toBeFalsy();
+    expect(formElement.hasClass('slds-input-has-icon_left')).toBeTruthy();
+    expect(formElement.hasClass('slds-input-has-icon_left-right')).toBeFalsy();
   });
 
   it('renders single iconRight', () => {
@@ -73,9 +68,9 @@ describe('<Input />', () => {
     const formElement = mounted.find('.slds-form-element__control');
 
     expect(formElement.hasClass('slds-input-has-icon')).toBeTruthy();
-    expect(formElement.hasClass('slds-input-has-icon--right')).toBeTruthy();
-    expect(formElement.hasClass('slds-input-has-icon--left')).toBeFalsy();
-    expect(formElement.hasClass('slds-input-has-icon--left-right')).toBeFalsy();
+    expect(formElement.hasClass('slds-input-has-icon_right')).toBeTruthy();
+    expect(formElement.hasClass('slds-input-has-icon_left')).toBeFalsy();
+    expect(formElement.hasClass('slds-input-has-icon_left-right')).toBeFalsy();
   });
 
   it('renders iconLeft AND iconRight', () => {
@@ -85,9 +80,16 @@ describe('<Input />', () => {
     const formElement = mounted.find('.slds-form-element__control');
 
     expect(formElement.hasClass('slds-input-has-icon')).toBeTruthy();
-    expect(formElement.hasClass('slds-input-has-icon--right')).toBeFalsy();
-    expect(formElement.hasClass('slds-input-has-icon--left')).toBeFalsy();
-    expect(formElement.hasClass('slds-input-has-icon--left-right')).toBeTruthy();
+    expect(formElement.hasClass('slds-input-has-icon_right')).toBeFalsy();
+    expect(formElement.hasClass('slds-input-has-icon_left')).toBeFalsy();
+    expect(formElement.hasClass('slds-input-has-icon_left-right')).toBeTruthy();
+  });
+
+  it('renders a spinner', () => {
+    mounted.setProps({ showSpinner: true });
+    const formElement = mounted.find('.slds-form-element__control');
+
+    expect(formElement.find('Spinner').length).toBe(1);
   });
 
   it('iconRightOnClick handler works and renders surrounding button', () => {
@@ -117,7 +119,7 @@ describe('<Input />', () => {
   it('renders a bare input', () => {
     mounted.setProps({ bare: true });
     expect(mounted.find('.slds-input')).toHaveLength(0);
-    expect(mounted.find('.slds-input--bare')).toHaveLength(1);
+    expect(mounted.find('.slds-input_bare')).toHaveLength(1);
   });
 
   it('labels the input with an error', () => {

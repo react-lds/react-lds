@@ -45,7 +45,7 @@ const ExampleTable = () =>
     icon="contact"
     sprite="standard"
     title="Contacts (2)"
-    headerRight={<Button title="New" neutral />}
+    headerRight={<Button title="New" neutral onClick={() => {}} />}
     body={table}
     footer={<a>View all</a>}
   />;

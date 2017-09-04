@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
 import { flavorable } from '../../decorators';
 
-export const PillContainer = (props, { cssPrefix }) => {
-  const { children, className, onClick, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+export const PillContainer = (props) => {
+  const { children, className, ...rest } = props;
+
+  const sldsClasses = [
+    'slds-pill_container',
+    className,
+  ];
 
   return (
-    <div {...rest} className={prefix('pill_container', className)} onClick={onClick}>
+    <div {...rest} className={cx(sldsClasses)}>
       {children}
     </div>
   );
@@ -19,7 +23,9 @@ PillContainer.flavors = [
   'bare',
 ];
 
-PillContainer.contextTypes = { cssPrefix: PropTypes.string };
+PillContainer.defaultProps = {
+  className: null,
+};
 
 PillContainer.propTypes = {
   /**
@@ -30,10 +36,6 @@ PillContainer.propTypes = {
    * class name
    */
   className: PropTypes.string,
-  /**
-   * onClick handler for the pill container
-   */
-  onClick: PropTypes.func,
 };
 
 export default flavorable(PillContainer, 'pill_container');

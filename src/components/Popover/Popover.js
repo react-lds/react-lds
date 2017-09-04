@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import omit from 'lodash.omit';
 
 import { themeable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
 import { Button, ButtonIcon } from '../../';
 
@@ -20,24 +20,22 @@ export class Popover extends React.Component {
 
   constructor(props, { cssPrefix }) {
     super(props, { cssPrefix });
-
-    this.prefix = (classes, passThrough) => prefixClasses(this.context.cssPrefix, classes, passThrough);
   }
 
   renderHeader() {
     const { header, panels, customLayout } = this.props;
-    const sldsClassesHeader = [
-      'popover__header',
-      { 'theme--warning': customLayout === 'warning' },
-      { 'theme--error': customLayout === 'error' },
-      { 'theme--success': customLayout === 'success' },
-      { 'theme--info': customLayout === 'info' },
+    const headerClasses = [
+      'slds-popover__header',
+      { 'slds-theme_warning': customLayout === 'warning' },
+      { 'slds-theme_error': customLayout === 'error' },
+      { 'slds-theme_success': customLayout === 'success' },
+      { 'slds-theme_info': customLayout === 'info' },
     ];
 
     let headerContent;
     let borderRadius;
     if (!!panels && (typeof customLayout !== 'undefined') && customLayout !== '') {
-      headerContent = (<h2 className={this.prefix(['text-heading--small', 'p-around--xxx-small'])}>{header}</h2>);
+      headerContent = (<h2 className="slds-text-heading_small slds-p-around_xxx-small">{header}</h2>);
       borderRadius = {
         borderTopLeftRadius: 'calc(0.25rem - 1px)',
         borderTopRightRadius: 'calc(0.25rem - 1px)',
@@ -47,7 +45,7 @@ export class Popover extends React.Component {
     }
 
     return (
-      <header className={this.prefix(sldsClassesHeader)} style={borderRadius}>
+      <header className={cx(headerClasses)} style={borderRadius}>
         {headerContent}
       </header>
     );
@@ -55,12 +53,12 @@ export class Popover extends React.Component {
 
   renderBody() {
     const { body, customLayout } = this.props;
-    const sldsClassesBody = [
-      { popover__body: (typeof customLayout === 'undefined' || customLayout === '') },
+    const bodyClasses = [
+      { 'slds-popover__body': (typeof customLayout === 'undefined' || customLayout === '') },
     ];
 
     return (
-      <div className={this.prefix(sldsClassesBody)}>
+      <div className={cx(bodyClasses)}>
         {body}
       </div>
     );
@@ -68,10 +66,9 @@ export class Popover extends React.Component {
 
   renderFooter() {
     const { footer } = this.props;
-    const sldsClassesFooter = 'popover__footer';
 
     return (
-      <footer className={this.prefix(sldsClassesFooter)}>
+      <footer className="slds-popover__footer">
         <p>{footer}</p>
       </footer>
     );
@@ -79,10 +76,10 @@ export class Popover extends React.Component {
 
   renderCloseButton() {
     const { onClose, className, customLayout } = this.props;
-    const sldsClassesCloseButton = [
-      'button--icon-small',
-      'float--right',
-      'popover__close',
+    const closeButtonClasses = [
+      'slds-button_icon-small',
+      'slds-float_right',
+      'slds-popover__close',
     ];
     const invertIcon = customLayout ? Popover.getThemeName(customLayout) : Popover.getThemeName(className);
 
@@ -90,7 +87,7 @@ export class Popover extends React.Component {
       <Button
         icon
         icon-inverse={invertIcon}
-        className={this.prefix(sldsClassesCloseButton)}
+        className={cx(closeButtonClasses)}
         onClick={onClose}
       >
         <ButtonIcon sprite="utility" icon="close" />
@@ -101,17 +98,19 @@ export class Popover extends React.Component {
   render() {
     const { className, closeable, open, customLayout, nubbin, panels, header, body, footer } = this.props;
     const rest = omit(this.props, Object.keys(Popover.propTypes));
+
     const sldsClasses = [
-      'popover',
-      { [`nubbin--${nubbin}`]: !!nubbin },
-      { 'popover--panel': (!!panels && (typeof customLayout === 'undefined' || customLayout === '')) },
-      { hide: !open },
+      'slds-popover',
+      { [`slds-nubbin_${nubbin}`]: !!nubbin },
+      { 'slds-popover_panel': (!!panels && (typeof customLayout === 'undefined' || customLayout === '')) },
+      { 'slds-hide': !open },
+      className,
     ];
 
     return (
       <section
         {...rest}
-        className={this.prefix(sldsClasses, className)}
+        className={cx(sldsClasses)}
         role="dialog"
       >
         {closeable ? this.renderCloseButton() : null}
@@ -123,9 +122,12 @@ export class Popover extends React.Component {
   }
 }
 
-Popover.contextTypes = { cssPrefix: PropTypes.string };
-
 Popover.defaultProps = {
+  body: null,
+  header: null,
+  footer: null,
+  className: null,
+  customLayout: undefined,
   open: false,
   closeable: true,
   panels: false,

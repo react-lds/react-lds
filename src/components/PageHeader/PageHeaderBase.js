@@ -1,26 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
-import { IconSVG, MediaObject } from '../../';
+import { Icon, MediaObject } from '../../';
 
-const PageHeaderBase = (props, { cssPrefix }) => {
+const PageHeaderBase = (props) => {
   const { className, icon, info, title, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  const iconRendered = <IconSVG sprite={icon.sprite} icon={icon.icon} />;
+  const iconRendered = <Icon sprite={icon.sprite} icon={icon.icon} />;
+
+  const sldsClasses = [
+    'slds-page-header',
+    className
+  ];
+
+  const titleClasses = [
+    'slds-page-header__title',
+    'slds-truncate',
+    'slds-align-middle'
+  ];
 
   return (
-    <div {...rest} className={prefix('page-header', className)} role="banner">
+    <div {...rest} className={cx(sldsClasses)} role="banner">
       <MediaObject figureLeft={iconRendered} center>
-        <p className={prefix(['page-header__title', 'truncate', 'align-middle'])} title={title}>{title}</p>
-        <p className={prefix(['text-body--small', 'page-header__info'])}>{info}</p>
+        <p className={cx(titleClasses)} title={title}>
+          {title}
+        </p>
+        <p className="slds-text-body_small slds-page-header__info">{info}</p>
       </MediaObject>
     </div>
   );
 };
 
-PageHeaderBase.contextTypes = { cssPrefix: PropTypes.string };
+PageHeaderBase.defaultProps = {
+  className: null,
+};
 
 PageHeaderBase.propTypes = {
   /**

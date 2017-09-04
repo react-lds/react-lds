@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import { Backdrop } from '../Backdrop';
@@ -7,12 +6,8 @@ import { Backdrop } from '../Backdrop';
 describe('<Backdrop />', () => {
   let mounted = null;
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
-    mounted = shallow(<Backdrop />, options);
+    mounted = shallow(<Backdrop />);
   });
 
   it('renders the correct markup', () => {

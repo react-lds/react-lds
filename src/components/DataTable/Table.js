@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { flavorable, variationable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
-export const Table = (props, { cssPrefix }) => {
+export const Table = (props) => {
   const { children, className, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
-  return (<table {...rest} className={prefix(['table', 'table--cell-buffer'], className)}>{children}</table>);
+  const sldsClasses = [
+    'slds-table',
+    'slds-table_cell-buffer',
+    className,
+  ];
+
+  return (<table {...rest} className={cx(sldsClasses)}>{children}</table>);
 };
 
 Table.flavors = [
@@ -20,11 +25,14 @@ Table.flavors = [
 
 Table.variations = [
   'no-row-hover',
-  'max-medium-table--stacked',
-  'max-medium-table--stacked-horizontal',
+  'max-medium-table_stacked',
+  'max-medium-table_stacked-horizontal',
 ];
 
-Table.contextTypes = { cssPrefix: PropTypes.string };
+Table.defaultProps = {
+  children: null,
+  className: null,
+};
 
 Table.propTypes = {
   /**

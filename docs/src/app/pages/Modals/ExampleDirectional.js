@@ -3,11 +3,13 @@ import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from 
 
 const modalLabel = 'example-directional';
 
+const onClick = () => {};
+
 const ExampleDirectional = () =>
   <div className="demo-modal">
-    <Modal label={modalLabel} open>
+    <Modal label={modalLabel} open descriptionId="example-directional">
       <ModalHeader title="Modal Header" />
-      <ModalContent>
+      <ModalContent id="example-directional">
         <div>
           <p>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam
           incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse
@@ -19,8 +21,8 @@ const ExampleDirectional = () =>
         </div>
       </ModalContent>
       <ModalFooter directional>
-        <Button neutral title="Cancel" />
-        <Button brand title="Save" />
+        <Button neutral title="Cancel" onClick={onClick} />
+        <Button brand title="Save" onClick={onClick} />
       </ModalFooter>
     </Modal>
     <Backdrop open />

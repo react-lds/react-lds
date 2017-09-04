@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { prefixClasses } from '../utils';
+import cx from 'classnames';
 
 const themeNames = [
   'alt-inverse',
@@ -36,29 +35,23 @@ const getTheme = (theme) => {
   let classes = [];
 
   if (/\stexture/.test(theme)) {
-    classes = [`theme--${theme.split(' ')[0]}`, 'theme--alert-texture'];
+    classes = [`slds-theme_${theme.split(' ')[0]}`, 'slds-theme_alert-texture'];
   } else if (theme !== undefined) {
-    classes = [`theme--${theme}`];
+    classes = [`slds-theme_${theme}`];
   }
 
   return classes;
 };
 
 const themeable = (C) => {
-  const ThemedComponent = (props, { cssPrefix }) => {
+  const ThemedComponent = (props) => {
     const { className, theme, ...rest } = props;
-    const prefix = classes => prefixClasses(cssPrefix, classes, className);
-
-    const classes = prefix(getTheme(theme));
-
+    const classes = cx([...getTheme(theme)], className);
     return (<C {...rest} className={classes} />);
   };
 
   ThemedComponent.displayName = `Themed_${C.displayName || C.name}`;
 
-  ThemedComponent.contextTypes = Object.assign({}, C.contextTypes, {
-    cssPrefix: PropTypes.string,
-  });
   ThemedComponent.propTypes = Object.assign({}, C.propTypes, {
     theme: themePropType,
   });

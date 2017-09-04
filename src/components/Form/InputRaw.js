@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { getUniqueHash, prefixClasses } from '../../utils';
-import { Button, ButtonIcon, IconSVG } from '../../';
+import { getUniqueHash } from '../../utils';
+import {
+  Button,
+  ButtonIcon,
+  IconSVG,
+  Spinner,
+} from '../../';
 
-const InputRaw = (props, { cssPrefix }) => {
+const InputRaw = (props) => {
   const {
     bare,
     className,
@@ -21,29 +27,31 @@ const InputRaw = (props, { cssPrefix }) => {
     placeholder,
     required,
     role,
+    showSpinner,
     type,
     value,
     isFocused,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const renderIconLeft = () => {
     let iconName = iconLeft;
+
     if (error && errorIcon) {
       iconName = 'warning';
     }
 
     if (iconName) {
       const iconClasses = [
-        'input__icon',
-        'icon-text-default',
-        { 'input__icon--left': iconLeft && iconRight },
+        'slds-icon-text-default',
+        'slds-icon',
+        'slds-input__icon',
+        { 'slds-input__icon_left': iconLeft && iconRight },
       ];
 
       return (
         <IconSVG
-          className={prefix(iconClasses)}
+          className={cx(iconClasses)}
           icon={iconName}
           sprite="utility"
         />
@@ -56,13 +64,13 @@ const InputRaw = (props, { cssPrefix }) => {
   const renderIconRight = () => {
     if (iconRight && iconRightOnClick) {
       const iconClasses = [
-        'input__icon',
-        { 'input__icon--right': iconLeft && iconRight },
+        'slds-input__icon',
+        { 'slds-input__icon_right': iconLeft && iconRight },
       ];
 
       return (
         <Button
-          className={prefix(iconClasses)}
+          className={cx(iconClasses)}
           icon
           onClick={iconRightOnClick}
         >
@@ -73,14 +81,15 @@ const InputRaw = (props, { cssPrefix }) => {
 
     if (iconRight) {
       const iconClasses = [
-        'input__icon',
-        'icon-text-default',
-        { 'input__icon--right': iconLeft && iconRight },
+        'slds-icon-text-default',
+        'slds-icon',
+        'slds-input__icon',
+        { 'slds-input__icon_right': iconLeft && iconRight },
       ];
 
       return (
         <IconSVG
-          className={prefix(iconClasses)}
+          className={cx(iconClasses)}
           sprite="utility"
           icon={iconRight}
         />
@@ -90,35 +99,67 @@ const InputRaw = (props, { cssPrefix }) => {
     return null;
   };
 
+  const renderSpinner = () => showSpinner && (
+    <Spinner
+      brand
+      className="slds-input__spinner slds-m-right_xx-small"
+      size="x-small"
+    />
+  );
+
+  const sldsClasses = [
+    { 'slds-has-input-focus': isFocused },
+    bare ? 'slds-input_bare' : 'slds-input',
+    className
+  ];
+
   return (
     <span>
       {renderIconLeft()}
-      {renderIconRight()}
       <input
         {...rest}
-        className={prefix(bare ? 'input--bare' : 'input', className)}
+        aria-describedby={error ? getUniqueHash(error, id) : null}
+        className={cx(sldsClasses)}
         disabled={disabled}
         id={id}
         onChange={onChange}
         onFocus={onFocus}
         onKeyPress={onKeyPress}
         placeholder={placeholder}
+        ref={(input) => { if (input && isFocused) { input.focus(); } }}
         required={required}
         role={role}
         type={type}
-        value={value}
-        ref={(input) => { if (input && isFocused) { input.focus(); } }}
-        aria-describedby={error ? getUniqueHash(error, id) : null}
+        value={value || ''}
       />
+      <span className="slds-input__icon-group slds-input__icon-group_right">
+        {renderSpinner()}
+        {renderIconRight()}
+      </span>
     </span>
   );
 };
 
-InputRaw.contextTypes = { cssPrefix: PropTypes.string };
-
-InputRaw.propDefaults = {
+InputRaw.defaultProps = {
   bare: false,
+  className: null,
+  disabled: false,
+  error: null,
+  errorIcon: false,
+  iconLeft: null,
+  iconRight: null,
+  iconRightOnClick: () => {},
+  isFocused: false,
+  label: null,
+  onChange: () => {},
+  onFocus: () => {},
+  onKeyPress: () => {},
+  placeholder: null,
+  role: null,
+  required: false,
+  showSpinner: false,
   type: 'text',
+  value: undefined,
 };
 
 InputRaw.propTypes = {
@@ -190,6 +231,10 @@ InputRaw.propTypes = {
    * role of the input field
    */
   role: PropTypes.string,
+  /**
+   * whether to show a spinner element inside the field, on the right end
+   */
+  showSpinner: PropTypes.bool,
   /**
    * input type. all HTML5 types are allowed, defaults to "text"
    * text, password, datetime, datetime-local, date, month, time, week, number, email, url, search, tel, and color

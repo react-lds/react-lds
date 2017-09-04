@@ -8,8 +8,8 @@ describe('<ButtonIcon />', () => {
   let props = {};
   let mounted = null;
 
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
+  const context = { assetBasePath: '/' };
+  const childContextTypes = { assetBasePath: PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
@@ -29,12 +29,12 @@ describe('<ButtonIcon />', () => {
 
   it('applies positions', () => {
     mounted.setProps({ position: 'left' });
-    expect(mounted.find('svg').hasClass('slds-button__icon--left')).toBeTruthy();
+    expect(mounted.find('svg').hasClass('slds-button__icon_left')).toBeTruthy();
   });
 
   it('applies sizes', () => {
     mounted.setProps({ size: 'small' });
-    expect(mounted.find('svg').hasClass('slds-button__icon--small')).toBeTruthy();
+    expect(mounted.find('svg').hasClass('slds-button__icon_small')).toBeTruthy();
   });
 
   it('applies className and rest-properties', () => {

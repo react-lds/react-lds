@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
 import ModalContent from '../ModalContent';
@@ -8,17 +7,13 @@ describe('<ModalContent />', () => {
   let mounted = null;
   const child = (<div className="foo">bar</div>);
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
-
   beforeEach(() => {
-    mounted = shallow(<ModalContent>{child}</ModalContent>, options);
+    mounted = shallow(<ModalContent>{child}</ModalContent>);
   });
 
   it('renders the correct markup', () => {
-    expect(mounted.find('.slds-modal__content').hasClass('slds-p-vertical--large')).toBeTruthy();
-    expect(mounted.find('.slds-modal__content').hasClass('slds-p-horizontal--x-large')).toBeTruthy();
+    expect(mounted.find('.slds-modal__content').hasClass('slds-p-vertical_large')).toBeTruthy();
+    expect(mounted.find('.slds-modal__content').hasClass('slds-p-horizontal_x-large')).toBeTruthy();
   });
 
   it('renders children', () => {

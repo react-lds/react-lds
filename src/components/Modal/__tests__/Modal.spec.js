@@ -1,23 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { Modal } from '../Modal';
 import ModalHeader from '../ModalHeader';
+import ModalContent from '../ModalContent';
 
 describe('<Modal />', () => {
   let mounted = null;
-
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   beforeEach(() => {
     mounted = mount(
       <Modal>
         <ModalHeader />
-        <div className="foo" />
-      </Modal>, options);
+        <ModalContent id="bar" className="foo">
+          Content
+        </ModalContent>
+      </Modal>
+    );
   });
 
   it('renders the correct markup', () => {
@@ -35,14 +34,14 @@ describe('<Modal />', () => {
   });
 
   it('renders and passes label and description', () => {
-    mounted.setProps({ label: 'foo', description: 'bar' });
+    mounted.setProps({ label: 'foo', descriptionId: 'bar' });
     const modalProps = mounted.find('.slds-modal').props();
-    const modalContainerProps = mounted.find('.slds-modal__container').props();
+    const modalContentProps = mounted.find(ModalContent).first().props();
     const modalHeaderProps = mounted.find(ModalHeader).first().props();
 
     expect(modalProps['aria-labelledby']).toBe('foo');
     expect(modalProps['aria-describedby']).toBe('bar');
-    expect(modalContainerProps.id).toBe('bar');
+    expect(modalContentProps.id).toBe('bar');
     expect(modalHeaderProps.label).toBe('foo');
     expect(modalHeaderProps.prompt).toBeFalsy();
   });

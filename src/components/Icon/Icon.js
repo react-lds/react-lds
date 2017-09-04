@@ -1,33 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
 import { IconSVG } from '../../';
 
 const iconClass = (sprite, icon) => icon.replace(/_/g, '-');
 
-const Icon = (props, { cssPrefix }) => {
-  const { background, circle, className, div, icon, size, sprite, title, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-  const backgroundClass = !background ? `icon-${sprite}-${iconClass(sprite, icon)}` : `icon-${background}`;
+const Icon = (props) => {
+  const {
+    background,
+    circle,
+    className,
+    div,
+    icon,
+    size,
+    sprite,
+    svgClassName,
+    title,
+    ...rest
+  } = props;
+
+  const backgroundClass = !background
+    ? `slds-icon-${sprite}-${iconClass(sprite, icon)}`
+    : `slds-icon-${background}`;
 
   const sldsClasses = [
-    { icon_container: true },
-    { 'icon_container--circle': circle },
+    { 'slds-icon_container': true },
+    { 'slds-icon_container_circle': circle },
     { [`${backgroundClass}`]: true },
+    className
   ];
 
   const WrapperElement = div ? 'div' : 'span';
 
   return (
-    <WrapperElement {...rest} className={prefix(sldsClasses, className)} title={title}>
-      <IconSVG sprite={sprite} icon={icon} size={size} background={background} />
-      <span className={prefix('assistive-text')}>{title}</span>
+    <WrapperElement {...rest} className={cx(sldsClasses)} title={title}>
+      <IconSVG
+        background={background}
+        className={svgClassName}
+        icon={icon}
+        size={size}
+        sprite={sprite}
+      />
+      <span className="slds-assistive-text">{title}</span>
     </WrapperElement>
   );
 };
 
-Icon.contextTypes = { cssPrefix: PropTypes.string };
+Icon.defaultProps = {
+  background: null,
+  circle: false,
+  className: null,
+  div: false,
+  size: null,
+  svgClassName: null,
+  title: null,
+};
 
 Icon.propTypes = {
   /**
@@ -58,6 +86,10 @@ Icon.propTypes = {
    * icon sprite name
    */
   sprite: PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
+  /**
+   * iconSvg className
+   */
+  svgClassName: PropTypes.string,
   /**
    * icon title
    */

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { Lookup } from '../Lookup';
@@ -7,10 +6,6 @@ import { Lookup } from '../Lookup';
 describe('<Lookup />', () => {
   let mounted = null;
   let props = {};
-
-  const context = { assetBasePath: '/assets', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   const sampleData = [
     {
@@ -65,9 +60,9 @@ describe('<Lookup />', () => {
       placeholder: 'Search Accounts',
       load: loadFn,
       onChange,
-      prefix: function prefix(sldsClasses) { return sldsClasses.join(' '); },
     };
-    mounted = mount(<Lookup {...props} />, options);
+
+    mounted = mount(<Lookup {...props} />);
   });
 
   it('renders an input by default', () => {
@@ -91,14 +86,14 @@ describe('<Lookup />', () => {
 
   it('renders an alternate email layout', () => {
     mounted.setProps({ emailLayout: true });
-    expect(mounted.find('input').hasClass('slds-input--bare')).toBeTruthy();
+    expect(mounted.find('input').hasClass('slds-input_bare')).toBeTruthy();
     expect(mounted.find('.slds-form-element__label').length).toBe(0);
     expect(mounted.find('.slds-grid .slds-email-composer__label').length).toBe(1);
   });
 
   it('renders a list label', () => {
     mounted.setState({ open: true, loaded: sampleData });
-    expect(mounted.find('.slds-lookup__item--label').text()).toBe(props.listLabel);
+    expect(mounted.find('.slds-lookup__item_label').text()).toBe(props.listLabel);
   });
 
   it('renders a lookup list', () => {
@@ -164,7 +159,7 @@ describe('<Lookup />', () => {
 
   it('accepts an initial selection', () => {
     props.initialSelection = [sampleData[0]];
-    mounted = mount(<Lookup {...props} />, options);
+    mounted = mount(<Lookup {...props} />);
     expect(mounted.state('selected').length).toBe(1);
   });
 
@@ -191,7 +186,7 @@ describe('<Lookup />', () => {
 
   it('calls the load function onMount', () => {
     const mockFunction = jest.fn();
-    mounted = mount(<Lookup {...props} load={mockFunction} loadOnMount />, options);
+    mounted = mount(<Lookup {...props} load={mockFunction} loadOnMount />);
 
     setTimeout(() => {
       expect(mockFunction).toBeCalled();

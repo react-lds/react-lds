@@ -3,26 +3,27 @@ import React from 'react';
 import {
   ButtonGroup,
   Button,
-  DropdownMenu,
-  DropdownMenuList,
-  DropdownMenuListItem,
+  Menu,
+  MenuDropdownList,
+  MenuDropdownListItem,
 } from 'react-lds';
 
 const button = { sprite: 'utility', icon: 'down' };
+const onClick = () => {};
 
 const ExampleMoreButton = () =>
   <ButtonGroup>
-    <Button neutral title="Button One" />
-    <Button neutral title="Button Two" />
-    <Button neutral title="Button Three" />
-    <DropdownMenu button={button} last position="top-right">
-      <DropdownMenuList>
-        <DropdownMenuListItem>Item 1</DropdownMenuListItem>
-        <DropdownMenuListItem>Item 2</DropdownMenuListItem>
-        <DropdownMenuListItem>Item 3</DropdownMenuListItem>
-        <DropdownMenuListItem divider>Important last item</DropdownMenuListItem>
-      </DropdownMenuList>
-    </DropdownMenu>
+    <Button neutral title="Button One" onClick={onClick} />
+    <Button neutral title="Button Two" onClick={onClick} />
+    <Button neutral title="Button Three" onClick={onClick} />
+    <Menu button={button} last position="top-right">
+      <MenuDropdownList>
+        <MenuDropdownListItem>Item 1</MenuDropdownListItem>
+        <MenuDropdownListItem>Item 2</MenuDropdownListItem>
+        <MenuDropdownListItem>Item 3</MenuDropdownListItem>
+        <MenuDropdownListItem divider>Important last item</MenuDropdownListItem>
+      </MenuDropdownList>
+    </Menu>
   </ButtonGroup>;
 
 export default ExampleMoreButton;

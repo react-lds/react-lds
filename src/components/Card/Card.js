@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
 import { Grid, Icon, MediaObject } from '../../';
 
-const Card = (props, { cssPrefix }) => {
+const Card = (props) => {
   const {
     body,
     className,
@@ -15,33 +15,44 @@ const Card = (props, { cssPrefix }) => {
     title,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+
+  const sldsClasses = [
+    'slds-card',
+    className
+  ];
 
   return (
-    <div {...rest} className={prefix('card', className)}>
-      <Grid className={prefix('card__header')}>
+    <div {...rest} className={cx(sldsClasses)}>
+      <Grid className="slds-card__header">
         <MediaObject
           customTag="header"
           center
-          className={prefix('has-flexi-truncate')}
-          figureLeft={<Icon sprite={sprite} icon={icon} size="small" />}
+          className="slds-has-flexi-truncate"
+          figureLeft={!!icon && <Icon sprite={sprite} icon={icon} size="small" />}
           truncate
         >
           <h2>
-            <a className={prefix('text-link--reset')}>
-              <span className={prefix('text-heading--small')}>{title}</span>
+            <a className="slds-text-link_reset">
+              <span className="slds-text-heading_small">{title}</span>
             </a>
           </h2>
         </MediaObject>
-        <div className={prefix('no-flex')}>{headerRight}</div>
+        <div className="slds-no-flex">{headerRight}</div>
       </Grid>
-      <div className={prefix(['card__body', 'text-align--center'])}>{body}</div>
-      <div className={prefix(['card__footer'])}>{footer}</div>
+      <div className="slds-card__body slds-text-align_center">{body}</div>
+      <footer className="slds-card__footer">{footer}</footer>
     </div>
   );
 };
 
-Card.contextTypes = { cssPrefix: PropTypes.string };
+Card.defaultProps = {
+  body: null,
+  className: null,
+  footer: null,
+  headerRight: null,
+  icon: null,
+  sprite: null,
+};
 
 Card.propTypes = {
   /**
@@ -67,11 +78,11 @@ Card.propTypes = {
   /**
    * icon name
    */
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.string,
   /**
    * icon sprite name
    */
-  sprite: PropTypes.string.isRequired,
+  sprite: PropTypes.string,
 };
 
 export default Card;

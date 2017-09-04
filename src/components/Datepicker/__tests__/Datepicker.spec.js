@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import { shallow } from 'enzyme';
 import { Datepicker } from '../Datepicker';
@@ -7,13 +6,10 @@ import { Datepicker } from '../Datepicker';
 describe('<Datepicker />', () => {
   let mounted = null;
 
-  const context = { cssPrefix: 'slds-' };
-  const childContextTypes = { cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
   const changed = jest.fn();
 
   beforeEach(() => {
-    mounted = shallow(<Datepicker open onChange={changed} locale="en" />, options);
+    mounted = shallow(<Datepicker open onChange={changed} locale="en" />);
   });
 
   it('renders input field', () => {
@@ -30,7 +26,7 @@ describe('<Datepicker />', () => {
   });
 
   it('highlights the current day', () => {
-    expect(mounted.find('.slds-is-today').children().first().text()).toBe(moment().format('D'));
+    expect(mounted.find('.slds-is-today').children().first().text()).toBe(`Today: ${moment().format('D')}`);
   });
 
   it('allows the user to select the next month', () => {
@@ -51,7 +47,7 @@ describe('<Datepicker />', () => {
     sampleDate.simulate('click');
     expect(changed).toBeCalled();
     expect(changed).toHaveBeenCalledWith('2016-05-11', true);
-    expect(mounted.find('Input').first().props().error).toBeUndefined();
+    expect(mounted.find('Input').first().props().error).toBeFalsy();
   });
 
   it('calls the callback function if a date is input', () => {
@@ -60,7 +56,7 @@ describe('<Datepicker />', () => {
     input.simulate('change', { target: { value: sampleDate } });
     expect(changed).toBeCalled();
     expect(changed).toHaveBeenCalledWith('2017-01-10', true);
-    expect(mounted.find('Input').first().props().error).toBeUndefined();
+    expect(mounted.find('Input').first().props().error).toBeFalsy();
   });
 
   it('displays an error message if the input date is invalid', () => {
@@ -124,29 +120,29 @@ describe('<Datepicker />', () => {
   });
 
   it('makes the input field required', () => {
-    mounted = shallow(<Datepicker open onChange={changed} required />, options);
+    mounted = shallow(<Datepicker open onChange={changed} required />);
     const input = mounted.find('Input').first();
     expect(input.props().required).toEqual(true);
   });
 
   it('shows the correct translation strings', () => {
-    mounted = shallow(<Datepicker open onChange={changed} locale="de" translations={{ today: 'Heute' }} />, options);
+    mounted = shallow(<Datepicker open onChange={changed} locale="de" translations={{ today: 'Heute' }} />);
     const translatedTodayLink = mounted.find('a');
     expect(translatedTodayLink.text()).toEqual('Heute');
   });
 
   it('sets the correct locale', () => {
-    mounted = shallow(<Datepicker open onChange={changed} locale="de" />, options);
+    mounted = shallow(<Datepicker open onChange={changed} locale="de" />);
     expect(moment.locale()).toEqual(mounted.instance().props.locale);
   });
 
   it('sets the correct time zone', () => {
-    mounted = shallow(<Datepicker open onChange={changed} timezone="America/Los_Angeles" />, options);
+    mounted = shallow(<Datepicker open onChange={changed} timezone="America/Los_Angeles" />);
     expect(moment().tz()).toEqual(mounted.instance().props.timezone);
   });
 
   it('works as a controlled component', () => {
-    mounted = shallow(<Datepicker open onChange={changed} date="2017-10-10" />, options);
+    mounted = shallow(<Datepicker open onChange={changed} date="2017-10-10" />);
     mounted.setProps({ date: '2017-10-11' });
     expect(changed).toBeCalled();
     expect(mounted.state('viewedDate').toString()).toEqual(moment('2017-10-11', 'YYYY-MM-DD').toString());

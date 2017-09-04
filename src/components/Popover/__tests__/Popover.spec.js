@@ -1,16 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
+// eslint-disable-next-line import/no-named-default
 import { default as Popover } from '../Popover';
 
 describe('<Popover />', () => {
   let props = {};
   let mounted = null;
-
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
-  const options = { context, childContextTypes };
 
   beforeEach(() => {
     props = {
@@ -20,7 +16,7 @@ describe('<Popover />', () => {
       footer: 'Footer content',
       onClose: () => {},
     };
-    mounted = mount(<Popover {...props} />, options);
+    mounted = mount(<Popover {...props} />);
   });
 
   it('renders header content', () => {
@@ -44,25 +40,25 @@ describe('<Popover />', () => {
   it('render nubbin on the bottom left', () => {
     mounted.setProps({ nubbin: 'bottom-left' });
     const popover = mounted.find('section');
-    expect(popover.hasClass('slds-nubbin--bottom-left')).toBeTruthy();
+    expect(popover.hasClass('slds-nubbin_bottom-left')).toBeTruthy();
   });
 
   it('render error theme with inverted close button', () => {
     const mockFunction = jest.fn();
     mounted.setProps({ closeable: true, onClose: mockFunction, theme: 'error' });
     const popover = mounted.find('section');
-    expect(popover.hasClass('slds-theme--error')).toBeTruthy();
+    expect(popover.hasClass('slds-theme_error')).toBeTruthy();
     const button = mounted.find('Flavored_Button button');
-    expect(button.hasClass('slds-button--icon-inverse')).toBeTruthy();
+    expect(button.hasClass('slds-button_icon-inverse')).toBeTruthy();
   });
 
   it('render custom warning layout', () => {
     const mockFunction = jest.fn();
     mounted.setProps({ closeable: true, onClose: mockFunction, customLayout: 'warning' });
     const header = mounted.find('header.slds-popover__header');
-    expect(header.hasClass('slds-theme--warning')).toBeTruthy();
+    expect(header.hasClass('slds-theme_warning')).toBeTruthy();
     const button = mounted.find('Flavored_Button button');
-    expect(button.hasClass('slds-button--icon-inverse')).toBeFalsy();
+    expect(button.hasClass('slds-button_icon-inverse')).toBeFalsy();
   });
 
   it('hide popover', () => {

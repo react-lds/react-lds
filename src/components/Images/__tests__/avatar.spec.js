@@ -8,14 +8,15 @@ describe('<Avatar />', () => {
   let mounted = null;
   let props = {};
 
-  const context = { assetBasePath: '/', cssPrefix: 'slds-' };
-  const childContextTypes = { assetBasePath: PropTypes.string, cssPrefix: PropTypes.string };
+  const context = { assetBasePath: '/' };
+  const childContextTypes = { assetBasePath: PropTypes.string };
   const options = { context, childContextTypes };
 
   beforeEach(() => {
     props = {
       src: 'foo',
       alt: 'bar',
+      title: 'myTitle'
     };
 
     mounted = shallow(<Avatar {...props} />, options);
@@ -28,7 +29,7 @@ describe('<Avatar />', () => {
 
   it('renders different sizes', () => {
     mounted.setProps({ size: 'large' });
-    expect(mounted.find('.slds-avatar').first().hasClass('slds-avatar--large')).toBeTruthy();
+    expect(mounted.find('.slds-avatar').first().hasClass('slds-avatar_large')).toBeTruthy();
   });
 
   it('renders a src', () => {
@@ -39,10 +40,14 @@ describe('<Avatar />', () => {
     expect(mounted.find('img').first().props().alt).toBe(props.alt);
   });
 
+  it('renders a title', () => {
+    expect(mounted.find('img').first().props().title).toBe(props.title);
+  });
+
   it('renders an empty avatar', () => {
     mounted.setProps({ src: undefined, alt: undefined });
     expect(mounted.find('img').length).toBe(0);
-    expect(mounted.find('.slds-avatar').hasClass('slds-avatar--empty')).toBeTruthy();
+    expect(mounted.find('.slds-avatar').hasClass('slds-avatar_empty')).toBeTruthy();
   });
 
   it('applies className and rest-properties', () => {

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from 'react-lds';
 
+const onClick = () => {};
+
 const ExampleHeaderEmpty = () =>
   <div className="demo-modal">
-    <Modal open>
+    <Modal open aria-label="Modal Label" className="slds-modal__header_empty" descriptionId="example-header-empty">
       <ModalHeader />
-      <ModalContent>
+      <ModalContent id="example-header-empty">
         <div>
           <p>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam
           incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse
@@ -17,8 +19,8 @@ const ExampleHeaderEmpty = () =>
         </div>
       </ModalContent>
       <ModalFooter>
-        <Button neutral title="Cancel" />
-        <Button brand title="Save" />
+        <Button neutral title="Cancel" onClick={onClick} />
+        <Button brand title="Save" onClick={onClick} />
       </ModalFooter>
     </Modal>
     <Backdrop open />

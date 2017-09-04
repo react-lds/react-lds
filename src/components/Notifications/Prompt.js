@@ -7,16 +7,21 @@ const Prompt = (props) => {
   const { buttonText, children, className, description, label, open, title, ...rest } = props;
   return (
     <div>
-      <Modal {...rest} className={className} label={label} description={description} open={open} dialog prompt>
+      <Modal {...rest} className={className} label={label} open={open} dialog prompt>
         <ModalHeader title={title} />
-        <ModalContent>{children}</ModalContent>
+        <ModalContent id={description}>{children}</ModalContent>
         <ModalFooter defaultTheme>
-          <Button neutral title={buttonText} />
+          <Button neutral title={buttonText} onClick={() => {}} />
         </ModalFooter>
       </Modal>
       <Backdrop open={props.open} />
     </div>
   );
+};
+
+Prompt.defaultProps = {
+  className: null,
+  open: false,
 };
 
 Prompt.propTypes = {

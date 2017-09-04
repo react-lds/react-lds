@@ -1,38 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { flavorable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
-export const MediaObject = (props, { cssPrefix }) => {
-  const { children, className, customTag, figureLeft, figureRight, truncate, ...rest } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
+export const MediaObject = (props) => {
+  const { children, className, customTag, figureLeft, figureRight, title, truncate, ...rest } = props;
 
-  const renderFigure = (figure, classes) => {
-    if (!figure) {
-      return null;
-    }
+  const renderFigure = (figure, classes = []) => {
+    const figureClasses = [
+      'slds-media__figure',
+      ...classes,
+    ];
 
-    const sldsClasses = ['media__figure'];
-    if (classes) {
-      sldsClasses.push(classes);
-    }
-
-    return (<div className={prefix(sldsClasses)}>{figure}</div>);
+    return (<div className={cx(figureClasses)}>{figure}</div>);
   };
 
   const Tag = customTag || 'div';
 
+  const sldsClasses = [
+    'slds-media',
+    className
+  ];
+
   const bodyClasses = [
-    'media__body',
-    { truncate: !!truncate },
+    'slds-media__body',
+    { 'slds-truncate': !!truncate },
   ];
 
   return (
-    <Tag {...rest} className={prefix('media', className)}>
-      {renderFigure(figureLeft)}
-      <div className={prefix(bodyClasses)}>{children}</div>
-      {renderFigure(figureRight, 'media__figure--reverse')}
+    <Tag {...rest} className={cx(sldsClasses)}>
+      {figureLeft && renderFigure(figureLeft)}
+      <div className={cx(bodyClasses)} title={title}>{children}</div>
+      {figureRight && renderFigure(figureRight, ['slds-media__figure_reverse'])}
     </Tag>
   );
 };
@@ -40,9 +40,18 @@ export const MediaObject = (props, { cssPrefix }) => {
 MediaObject.flavors = [
   'center',
   'responsive',
+  'small',
 ];
 
-MediaObject.contextTypes = { cssPrefix: PropTypes.string };
+MediaObject.defaultProps = {
+  children: null,
+  className: null,
+  customTag: null,
+  figureLeft: null,
+  figureRight: null,
+  truncate: false,
+  title: null,
+};
 
 MediaObject.propTypes = {
   /**
@@ -66,9 +75,13 @@ MediaObject.propTypes = {
    */
   figureRight: PropTypes.node,
   /**
-   * truncates the body
+   * truncates the body, requires title
    */
   truncate: PropTypes.bool,
+  /**
+   * title is necessary if truncate is used
+   */
+  title: PropTypes.string,
 };
 
 export default flavorable(MediaObject, 'media');

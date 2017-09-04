@@ -1,39 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import { flavorable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 
-export const Modal = (props, { cssPrefix }) => {
+export const Modal = (props) => {
   const {
     children,
     className,
-    description,
+    descriptionId,
     dialog,
     label,
     open,
     prompt,
     ...rest,
   } = props;
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
 
   const isOpen = !!open;
   const isDialog = !!dialog || !!prompt;
   const role = prompt ? 'alertdialog' : 'dialog';
   const containerRole = isDialog ? 'document' : null;
 
-  const sldsClasses = [
-    'modal',
-    { 'modal--prompt': !!prompt },
-    { 'fade-in-open': isOpen },
-  ];
-
-  const childrenWithProps = [...children].map((child, i) => {
+  const childrenWithProps = [...children].map((child) => {
     const childName = child ? child.type.displayName || child.type.name : null;
 
     if (childName === 'ModalHeader') {
       return React.cloneElement(child, {
-        key: i,
+        key: label,
         label,
         prompt,
         uncloseable: child.props.uncloseable !== undefined ? child.props.uncloseable : prompt,
@@ -43,18 +36,24 @@ export const Modal = (props, { cssPrefix }) => {
     return child;
   });
 
+  const sldsClasses = [
+    'slds-modal',
+    { 'slds-modal_prompt': !!prompt },
+    { 'slds-fade-in-open': isOpen },
+    className,
+  ];
+
   return (
     <div
       {...rest}
-      className={prefix(sldsClasses, className)}
+      className={cx(sldsClasses)}
       role={role}
-      aria-describedby={description}
+      aria-describedby={descriptionId}
       aria-hidden={!isOpen}
       aria-labelledby={label}
     >
       <div
-        className={prefix('modal__container')}
-        id={description}
+        className="slds-modal__container"
         role={containerRole}
         tabIndex={isDialog ? '0' : null}
       >
@@ -68,7 +67,14 @@ Modal.flavors = [
   'large',
 ];
 
-Modal.contextTypes = { cssPrefix: PropTypes.string };
+Modal.defaultProps = {
+  className: null,
+  descriptionId: null,
+  dialog: false,
+  label: null,
+  open: false,
+  prompt: false,
+};
 
 Modal.propTypes = {
   /**
@@ -80,9 +86,9 @@ Modal.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * id of the modal-content (required as aria-describedby). must be set for --prompts
+   * id of the modal-content (required as aria-describedby). must be set for prompts.
    */
-  description: PropTypes.string,
+  descriptionId: PropTypes.string,
   /**
    * whether a container is a dialog (optional when `<Modal prompt>`). Needed for PromptForTouch and ModalPrompt
    */

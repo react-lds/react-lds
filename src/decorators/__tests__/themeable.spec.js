@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import themeable from '../themeable';
 
-describe('sizeable', () => {
+describe('themeable', () => {
   let mounted = null;
 
   const DummyComponent = () => (<div>it works</div>);
@@ -15,18 +15,18 @@ describe('sizeable', () => {
 
   it('renders a theme', () => {
     mounted.setProps({ theme: 'shade' });
-    expect(mounted.hasClass('theme--shade')).toBeTruthy();
+    expect(mounted.hasClass('slds-theme_shade')).toBeTruthy();
   });
 
   it('renders an alert texture', () => {
     mounted.setProps({ theme: 'shade texture' });
-    expect(mounted.hasClass('theme--shade')).toBeTruthy();
-    expect(mounted.hasClass('theme--alert-texture')).toBeTruthy();
+    expect(mounted.hasClass('slds-theme_shade')).toBeTruthy();
+    expect(mounted.hasClass('slds-theme_alert-texture')).toBeTruthy();
   });
 
   it('keeps existing classes and adds themes', () => {
     mounted.setProps({ theme: 'shade', className: 'yolo' });
-    expect(mounted.hasClass('theme--shade')).toBeTruthy();
+    expect(mounted.hasClass('slds-theme_shade')).toBeTruthy();
     expect(mounted.hasClass('yolo')).toBeTruthy();
   });
 
