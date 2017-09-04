@@ -67,7 +67,7 @@ export class ExpandableSection extends Component {
   }
 
   render() {
-    const { className, children, id, title, uncollapsable, open } = this.props;
+    const { className, children, id, title, uncollapsable, open, defaultOpen, onToggle, ...rest } = this.props;
     const isOpen = open === null ? this.state.isOpen : null;
 
     const sldsClasses = [
@@ -82,7 +82,7 @@ export class ExpandableSection extends Component {
     ];
 
     return (
-      <div className={cx(sldsClasses)}>
+      <div className={cx(sldsClasses)} {...rest}>
         <h3 className={cx(headerClasses)}>
           {uncollapsable ?
             <span className="slds-truncate slds-p-horizontal_small" title={title}>
