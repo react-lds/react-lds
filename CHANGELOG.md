@@ -29,6 +29,7 @@
 * Use new `combobox` markup in `Lookup`
 * Use new `combobox` markup in `Picklist`
 * Add `padded` flavor for `Column`
+* Fix `ExpandableSection`
 
 ## 1.1.12
 * Use title attribute as tooltip for button component
