@@ -344,7 +344,7 @@ export class Lookup extends Component {
       const { id, label, objectType } = item;
       return (
         <Pill
-          key={`${id}`}
+          key={id}
           className={!multi ? 'slds-size_1-of-1' : null}
           icon={objectType && (<Icon sprite={Lookup.getSprite(objectType)} icon={objectType} />)}
           id={id}
@@ -470,7 +470,7 @@ export class Lookup extends Component {
                 data-label={field.name}
                 scope={index === 0 ? 'row' : null}
                 onClick={() => this.addSelection(item)}
-                key={`${item.id}`}
+                key={item.id}
               >
                 {renderBodyCell(item.label, index, item.objectType)}
               </Cell>

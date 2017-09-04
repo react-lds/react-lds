@@ -20,7 +20,11 @@ const exampleActions = (
       <ButtonIcon sprite="utility" icon="download" size="x-small" />
     </Button>
     <Menu
-      customButton={<Button icon icon-x-small onClick={() => {}}><ButtonIcon sprite="utility" icon="down" /></Button>}
+      customButton={
+        <Button icon icon-x-small onClick={() => {}}>
+          <ButtonIcon sprite="utility" icon="down" />
+        </Button>
+      }
       last
       position="top-right"
     >
