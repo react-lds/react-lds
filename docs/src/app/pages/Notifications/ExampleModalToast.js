@@ -9,6 +9,8 @@ import {
   Notification,
 } from 'react-lds';
 
+const onClick = () => {};
+
 const ExampleModalToast = () => (
   <div className="demo-modal">
     <Modal large open descriptionId="example-modal-toast">
@@ -35,8 +37,8 @@ const ExampleModalToast = () => (
         </div>
       </ModalContent>
       <ModalFooter>
-        <Button neutral title="Cancel" />
-        <Button brand title="Save" />
+        <Button neutral title="Cancel" onClick={onClick} />
+        <Button brand title="Save" onClick={onClick} />
       </ModalFooter>
     </Modal>
     <Backdrop open />

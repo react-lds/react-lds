@@ -7,17 +7,19 @@ import {
   ButtonGroup,
 } from 'react-lds';
 
+const onClick = () => {};
+
 const RecordHomeExample = () => {
   const headerButtons = ([
-    <Button title="Follow" neutral key="follow">
+    <Button title="Follow" neutral key="follow" onClick={onClick}>
       <ButtonIcon position="left" sprite="utility" icon="add" />
     </Button>,
 
     <ButtonGroup key="btngroup">
-      <Button title="Edit" neutral />
-      <Button title="Delete" neutral />
-      <Button title="Clone" neutral />
-      <Button icon icon-border-filled>
+      <Button title="Edit" neutral onClick={onClick} />
+      <Button title="Delete" neutral onClick={onClick} />
+      <Button title="Clone" neutral onClick={onClick} />
+      <Button icon icon-border-filled onClick={onClick}>
         <ButtonIcon sprite="utility" icon="down" />
       </Button>
     </ButtonGroup>,
@@ -44,7 +46,7 @@ const RecordHomeExample = () => {
         },
         {
           title: [<span key="heading">very important</span>, (
-            <Button icon icon-bare key="icon">
+            <Button icon icon-bare key="icon" onClick={onClick}>
               <ButtonIcon sprite="utility" icon="down" size="small" />
             </Button>
           )],
