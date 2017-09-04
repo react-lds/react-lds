@@ -138,6 +138,7 @@ export class Lookup extends Component {
     const { initialSelection, selection } = props;
 
     if (initialSelection && selection) {
+      // eslint-disable-next-line
       console.warn(
         '[react-lds] Lookup:',
         'You are supplying both `selection` & `initialSelection`, ignoring `initialSelection`.',
@@ -339,11 +340,11 @@ export class Lookup extends Component {
 
     if (selected.length < 1) { return null; }
 
-    const renderSelection = (item, i) => {
+    const renderSelection = (item) => {
       const { id, label, objectType } = item;
       return (
         <Pill
-          key={i}
+          key={id}
           className={!multi ? 'slds-size_1-of-1' : null}
           icon={objectType && (<Icon sprite={Lookup.getSprite(objectType)} icon={objectType} />)}
           id={id}
@@ -469,7 +470,7 @@ export class Lookup extends Component {
                 data-label={field.name}
                 scope={index === 0 ? 'row' : null}
                 onClick={() => this.addSelection(item)}
-                key={`${item.id}${index}`}
+                key={item.id}
               >
                 {renderBodyCell(item.label, index, item.objectType)}
               </Cell>

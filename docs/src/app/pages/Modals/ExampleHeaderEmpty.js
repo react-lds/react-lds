@@ -1,6 +1,8 @@
 import React from 'react';
 import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from 'react-lds';
 
+const onClick = () => {};
+
 const ExampleHeaderEmpty = () =>
   <div className="demo-modal">
     <Modal open aria-label="Modal Label" className="slds-modal__header_empty" descriptionId="example-header-empty">
@@ -17,8 +19,8 @@ const ExampleHeaderEmpty = () =>
         </div>
       </ModalContent>
       <ModalFooter>
-        <Button neutral title="Cancel" />
-        <Button brand title="Save" />
+        <Button neutral title="Cancel" onClick={onClick} />
+        <Button brand title="Save" onClick={onClick} />
       </ModalFooter>
     </Modal>
     <Backdrop open />

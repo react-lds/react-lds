@@ -47,10 +47,11 @@ class ContactPath extends Component {
     const { leadStatusPicklist, selected, current } = this.state;
     return (
       <PathStage
-        label={picklistValue.label}
-        onStageClick={() => this.onStageClickControl(picklistValue.value)}
         complete={i < leadStatusPicklist.findIndex(o => o.value === current)}
         current={picklistValue.value === current}
+        key={leadStatusPicklist[i].value}
+        label={picklistValue.label}
+        onStageClick={() => this.onStageClickControl(picklistValue.value)}
         selected={picklistValue.value === selected}
         value={picklistValue.value}
       />

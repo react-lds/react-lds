@@ -67,9 +67,18 @@ export class ExpandableSection extends Component {
   }
 
   render() {
-    const { className, children, id, title, uncollapsable, open, defaultOpen, ...rest } = this.props;
+    const {
+      children,
+      className,
+      defaultOpen,
+      id,
+      onToggle,
+      open,
+      title,
+      uncollapsable,
+      ...rest
+    } = this.props;
     const isOpen = open === null ? this.state.isOpen : null;
-    // const isControlled =
 
     const sldsClasses = [
       'slds-section',

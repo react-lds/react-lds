@@ -33,6 +33,7 @@ class ExampleOverflow extends Component {
           id="search-results"
           isOpen={overFlowOpen}
           label="Reports"
+          title="Reports"
           onToggle={this.onOverflowToggle}
         >
           <VerticalNavigationItem href="#">Overflow Item One</VerticalNavigationItem>

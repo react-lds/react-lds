@@ -10,7 +10,7 @@ const ExampleNoTitle = () => (
   <div>
     <div className="slds-m-bottom--medium" style={{ width: '20rem' }}>
       <File
-        onClick={() => { window.alert('File clicked') }}
+        onClick={() => { window.alert('File clicked'); }} // eslint-disable-line
         fileType="image"
         hideTitle
         image={sampleImage}

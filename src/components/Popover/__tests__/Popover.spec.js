@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+// eslint-disable-next-line import/no-named-default
 import { default as Popover } from '../Popover';
 
 describe('<Popover />', () => {

@@ -10,6 +10,8 @@ const tagline = (
 
 const modalLabel = 'example-modal';
 
+const onClick = () => {};
+
 const ExampleNormal = () =>
   <div className="demo-modal">
     <Modal label={modalLabel} open descriptionId="example-taglines">
@@ -26,8 +28,8 @@ const ExampleNormal = () =>
         </div>
       </ModalContent>
       <ModalFooter>
-        <Button neutral title="Cancel" />
-        <Button brand title="Save" />
+        <Button neutral title="Cancel" onClick={onClick} />
+        <Button brand title="Save" onClick={onClick} />
       </ModalFooter>
     </Modal>
     <Backdrop open />

@@ -16,11 +16,20 @@ const sampleImage = {
 
 const exampleActions = (
   <ButtonGroup>
-    <Button icon icon-x-small icon-inverse>
+    <Button icon icon-x-small icon-inverse onClick={() => {}}>
       <ButtonIcon sprite="utility" icon="download" size="x-small" />
     </Button>
     <Menu
-      customButton={<Button icon icon-x-small icon-inverse><ButtonIcon sprite="utility" icon="down" /></Button>}
+      customButton={
+        <Button
+          icon
+          icon-x-small
+          icon-inverse
+          onClick={() => {}}
+        >
+          <ButtonIcon sprite="utility" icon="down" />
+        </Button>
+      }
       last
       position="top-right"
     >

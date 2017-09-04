@@ -16,12 +16,13 @@ class SampleContainer extends Component {
 
   render() {
     const { sectionOpen } = this.state;
+
     return (
       <div>
         <ExpandableSection
-          open={sectionOpen}
-          onClick={this.onSectionToggle}
           id="01"
+          onToggle={this.onSectionToggle}
+          open={sectionOpen}
           title="This is the title"
         >
           <p>
@@ -35,8 +36,4 @@ class SampleContainer extends Component {
   }
 }
 
-const ExampleControlled = () => (
-  <SampleContainer />
-);
-
-export default ExampleControlled;
+export default SampleContainer;
