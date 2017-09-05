@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.1
+
+* Add `skip_cleanup: true` to `.travis.yml` to prevent directory reset
+* Publish react-lds version 2.0.0 as 2.0.1
+
 ## 2.0.0
 
 ### Added
