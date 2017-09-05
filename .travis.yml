@@ -21,6 +21,7 @@ deploy:
   on:
     tags: true
     repo: propertybase/react-lds
+  skip_cleanup: true
 env:
   global:
   - GITHUB_REPO: propertybase/react-lds
