@@ -79,7 +79,7 @@ MenuDropdownListItem.propTypes = {
   /**
    * The content of a menu item
    */
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
