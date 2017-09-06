@@ -17,8 +17,11 @@ describe('<MenuDropdownListItem />', () => {
     expect(clickMock).toBeCalled();
   });
 
-  it('renders children', () => {
+  it('renders children, string or node', () => {
     expect(mounted.find('li > a span').text()).toEqual('foobar');
+    mounted.setProps({ children: <p>1234</p> });
+    expect(mounted.find('li > a span').children().first().text())
+      .toBe('1234');
   });
 
   it('renders isSelected', () => {
