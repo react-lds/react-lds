@@ -53,7 +53,7 @@ const RecordHome = (props) => {
             className="slds-grow slds-no-space"
           >
             <p className="slds-text-title_caps">{recordType}</p>
-            <h1 className={pageHeaderTitleClasses} title={title}>
+            <h1 className={cx(pageHeaderTitleClasses)} title={title}>
               {title}
             </h1>
           </MediaObject>
