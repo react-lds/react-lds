@@ -10,7 +10,7 @@ const RecordHome = (props) => {
   const iconRendered = <Icon sprite={icon.sprite} icon={icon.icon} />;
   let detailRow;
 
-  if (detailItems.length > 0) {
+  if ((detailItems !== null) && (detailItems.length > 0)) {
     const titleClasses = [
       'slds-text-title',
       'slds-truncate',
