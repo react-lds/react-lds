@@ -10,7 +10,7 @@ const RecordHome = (props) => {
   const iconRendered = <Icon sprite={icon.sprite} icon={icon.icon} />;
   let detailRow;
 
-  if (detailItems.length > 0) {
+  if ((detailItems !== null) && (detailItems.length > 0)) {
     const titleClasses = [
       'slds-text-title',
       'slds-truncate',
@@ -53,7 +53,7 @@ const RecordHome = (props) => {
             className="slds-grow slds-no-space"
           >
             <p className="slds-text-title_caps">{recordType}</p>
-            <h1 className={pageHeaderTitleClasses} title={title}>
+            <h1 className={cx(pageHeaderTitleClasses)} title={title}>
               {title}
             </h1>
           </MediaObject>
