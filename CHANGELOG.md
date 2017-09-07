@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.2
+
+* Bugfix: Fix PageHeader RecordHome
+* Bugfix: Fix DropDownMenuItem children proptype
+
 ## 2.0.1
 
 * Add `skip_cleanup: true` to `.travis.yml` to prevent directory reset
