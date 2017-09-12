@@ -6,9 +6,10 @@ const IconSVG = (props, { assetBasePath }) => {
   const { background, className, fill, icon, size, sprite, ...rest } = props;
 
   let backgroundClass = background;
-  if (backgroundClass === undefined || backgroundClass === true) {
-    backgroundClass = `slds-${sprite}-${icon}`;
+  if ((backgroundClass === null) || (backgroundClass === true)) {
+    backgroundClass = `${sprite}-${icon}`;
   }
+
   const sldsClasses = [
     { 'slds-icon': fill },
     { [`slds-icon-${backgroundClass}`]: !!backgroundClass },
@@ -26,7 +27,7 @@ const IconSVG = (props, { assetBasePath }) => {
 IconSVG.contextTypes = { assetBasePath: PropTypes.string };
 
 IconSVG.defaultProps = {
-  background: false,
+  background: null,
   className: null,
   fill: true,
   size: null,
