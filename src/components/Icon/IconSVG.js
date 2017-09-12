@@ -6,7 +6,7 @@ const IconSVG = (props, { assetBasePath }) => {
   const { background, className, fill, icon, size, sprite, ...rest } = props;
 
   let backgroundClass = background;
-  if ((backgroundClass === undefined) || (backgroundClass === true)) {
+  if ((backgroundClass === null) || (backgroundClass === true)) {
     backgroundClass = `${sprite}-${icon}`;
   }
 
@@ -27,7 +27,7 @@ const IconSVG = (props, { assetBasePath }) => {
 IconSVG.contextTypes = { assetBasePath: PropTypes.string };
 
 IconSVG.defaultProps = {
-  background: undefined,
+  background: null,
   className: null,
   fill: true,
   size: null,
