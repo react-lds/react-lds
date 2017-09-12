@@ -18,6 +18,8 @@ const Input = (props) => {
     iconRight,
     id,
     label,
+    placeholder,
+    readOnly,
     required,
     showSpinner,
     ...rest,
@@ -26,6 +28,23 @@ const Input = (props) => {
   const hasIconLeft = !!iconLeft || (error && errorIcon);
   const hasIconRight = !!iconRight || !!showSpinner;
 
+  const renderInputRaw = readOnly ?
+    <span className="slds-form-element__static">{placeholder}</span>
+    :
+    (<InputRaw
+      error={error}
+      errorIcon={errorIcon}
+      iconLeft={iconLeft}
+      iconRight={iconRight}
+      id={id}
+      label={label}
+      placeholder={placeholder}
+      required={required}
+      showSpinner={showSpinner}
+      {...rest}
+    />)
+    ;
+
   return (
     <FormElement required={required} error={error}>
       <FormElementLabel
@@ -33,19 +52,14 @@ const Input = (props) => {
         id={id}
         label={label}
         required={required}
+        readOnly={readOnly}
       />
-      <FormElementControl hasIconLeft={hasIconLeft} hasIconRight={hasIconRight}>
-        <InputRaw
-          error={error}
-          errorIcon={errorIcon}
-          iconLeft={iconLeft}
-          iconRight={iconRight}
-          id={id}
-          label={label}
-          required={required}
-          showSpinner={showSpinner}
-          {...rest}
-        />
+      <FormElementControl
+        className={readOnly ? 'slds-border_bottom' : ''}
+        hasIconLeft={hasIconLeft}
+        hasIconRight={hasIconRight}
+      >
+        {renderInputRaw}
       </FormElementControl>
       <FormElementError error={error} id={id} />
     </FormElement>
@@ -68,6 +82,7 @@ Input.defaultProps = {
   onFocus: () => {},
   onKeyPress: () => {},
   placeholder: null,
+  readOnly: false,
   role: null,
   required: false,
   showSpinner: false,
@@ -140,6 +155,10 @@ Input.propTypes = {
    * placeholder for the input
    */
   placeholder: PropTypes.string,
+  /**
+   * makes Input readOnly
+   */
+  readOnly: PropTypes.bool,
   /**
    * adds required attribute to input and label
    */
