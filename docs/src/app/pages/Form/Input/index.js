@@ -10,6 +10,7 @@ import exampleIconLeftRightCode from '!raw!./ExampleIconLeftRight';
 import exampleIconRightCode from '!raw!./ExampleIconRight';
 import exampleIconRightSpinnerCode from '!raw!./ExampleIconRightSpinner';
 import exampleRequiredCode from '!raw!./ExampleRequired';
+import exampleReadOnlyCode from '!raw!./ExampleReadOnly';
 import inputCode from '!raw!react-lds/components/Form/Input';
 
 import CodeExample from '../../../components/CodeExample';
@@ -24,6 +25,7 @@ import ExampleIconLeftRight from './ExampleIconLeftRight';
 import ExampleIconRight from './ExampleIconRight';
 import ExampleIconRightSpinner from './ExampleIconRightSpinner';
 import ExampleRequired from './ExampleRequired';
+import ExampleReadOnly from './ExampleReadOnly';
 
 const mapId = (id) => {
   let Component = ExampleDefault;
@@ -53,6 +55,10 @@ const mapId = (id) => {
     case 'required':
       Component = ExampleRequired;
       componentCode = exampleRequiredCode;
+      break;
+    case 'read-only':
+      Component = ExampleReadOnly;
+      componentCode = exampleReadOnlyCode;
       break;
     case 'disabled':
       Component = ExampleDisabled;
