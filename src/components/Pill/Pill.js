@@ -25,6 +25,12 @@ export const Pill = (props) => {
     className
   ];
 
+  const closeButton = onClose === null ? [] :
+    (<Button onClick={onClose} className="slds-pill__remove" icon>
+      <ButtonIcon sprite="utility" icon="close" />
+      <span className="slds-assistive-text">Remove</span>
+    </Button>);
+
   return (
     <span {...rest} className={cx(sldsClasses)}>
       {icon && <span className="slds-pill__icon_container">{icon}</span>}
@@ -32,10 +38,7 @@ export const Pill = (props) => {
       <LabelElement href={isLinked ? url : null} className="slds-pill__label" title={title}>
         {label}
       </LabelElement>
-      <Button onClick={onClose} className="slds-pill__remove" icon>
-        <ButtonIcon sprite="utility" icon="close" />
-        <span className="slds-assistive-text">Remove</span>
-      </Button>
+      {closeButton}
     </span>
   );
 };
@@ -47,7 +50,7 @@ Pill.flavors = [
 Pill.defaultProps = {
   className: null,
   icon: null,
-  onClose: () => {},
+  onClose: null,
   portrait: null,
   url: null,
 };
@@ -66,7 +69,7 @@ Pill.propTypes = {
    */
   label: PropTypes.string.isRequired,
   /**
-   * onClose handler for the pill
+   * onClose handler for the pill, if left out, Pill doesn't have close button
    */
   onClose: PropTypes.func,
   /**
