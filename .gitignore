@@ -1,14 +1,10 @@
 node_modules
 npm-debug.log
 dist
-docs/build
+public
 lib
 coverage
 yarn-error.log
-
-# Exclude IDE project folders
-*.sublime-project
-*.sublime-workspace
 
 # OS files
 .DS_Store
