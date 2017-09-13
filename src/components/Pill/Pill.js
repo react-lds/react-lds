@@ -25,7 +25,7 @@ export const Pill = (props) => {
     className
   ];
 
-  const closeButton = onClose === null ? [] :
+  const closeButton = onClose === null ? null :
     (<Button onClick={onClose} className="slds-pill__remove" icon>
       <ButtonIcon sprite="utility" icon="close" />
       <span className="slds-assistive-text">Remove</span>
