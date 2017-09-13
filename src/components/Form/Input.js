@@ -22,15 +22,14 @@ const Input = (props) => {
     readOnly,
     required,
     showSpinner,
+    value,
     ...rest,
   } = props;
 
   const hasIconLeft = !!iconLeft || (error && errorIcon);
   const hasIconRight = !!iconRight || !!showSpinner;
 
-  const renderInputRaw = readOnly ?
-    <span className="slds-form-element__static">{placeholder}</span>
-    :
+  const renderInputRaw =
     (<InputRaw
       error={error}
       errorIcon={errorIcon}
@@ -39,8 +38,10 @@ const Input = (props) => {
       id={id}
       label={label}
       placeholder={placeholder}
+      readOnly={readOnly ? true : null}
       required={required}
       showSpinner={showSpinner}
+      value={value}
       {...rest}
     />)
     ;
@@ -52,10 +53,8 @@ const Input = (props) => {
         id={id}
         label={label}
         required={required}
-        readOnly={readOnly}
       />
       <FormElementControl
-        className={readOnly ? 'slds-border_bottom' : ''}
         hasIconLeft={hasIconLeft}
         hasIconRight={hasIconRight}
       >
