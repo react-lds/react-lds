@@ -8,6 +8,7 @@ const Example = () => (
         url="#"
         label="Pill label that is longer than the area that contains it"
         title="Pill label that is longer than the area that contains it"
+        onClose={() => {}}
       />
     </PillContainer>
   </div>

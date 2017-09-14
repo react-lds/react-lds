@@ -25,8 +25,13 @@ describe('<Pill />', () => {
     expect(mounted.find('a.slds-pill__label').length).toBe(1);
   });
 
-  it('renders a close-button', () => {
+  it('renders a close-button when onClose prop is given', () => {
+    mounted.setProps({ onClose: () => {} });
     expect(mounted.find('.slds-pill__remove').length).toBe(1);
+  });
+
+  it('does not render a close-button when onClose prop is not given', () => {
+    expect(mounted.find('.slds-pill__remove').length).toBe(0);
   });
 
   it('renders a label', () => {

@@ -6,6 +6,7 @@ import exampleIconCode from '!raw!./ExampleIcon';
 import examplePortraitCode from '!raw!./ExamplePortrait';
 import exampleTruncatedCode from '!raw!./ExampleTruncated';
 import exampleUnlinkedCode from '!raw!./ExampleUnlinked';
+import exampleWithoutCloseButtonCode from '!raw!./ExampleWithoutCloseButton';
 import { Pill } from 'react-lds/components/Pill/Pill';
 import pillCode from '!raw!react-lds/components/Pill/Pill';
 import { PillContainer } from 'react-lds/components/Pill/PillContainer';
@@ -23,6 +24,7 @@ import ExampleIcon from './ExampleIcon';
 import ExamplePortrait from './ExamplePortrait';
 import ExampleTruncated from './ExampleTruncated';
 import ExampleUnlinked from './ExampleUnlinked';
+import ExampleWithoutCloseButton from './ExampleWithoutCloseButton';
 
 require('./index.scss');
 
@@ -76,6 +78,14 @@ const PillPage = () => (
         code={exampleContainerCode}
       />
       <ExampleContainer />
+    </div>
+
+    <div className="slds-p-around--xx-large">
+      <CodeExample
+        title="Without Close Button"
+        code={exampleWithoutCloseButtonCode}
+      />
+      <ExampleWithoutCloseButton />
     </div>
 
     <h2 className="slds-text-heading--medium slds-p-left--xx-large slds-p-bottom--small">Pill</h2>
