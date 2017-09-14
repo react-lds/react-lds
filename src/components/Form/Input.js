@@ -29,8 +29,8 @@ const Input = (props) => {
   const hasIconLeft = !!iconLeft || (error && errorIcon);
   const hasIconRight = !!iconRight || !!showSpinner;
 
-  const renderInputRaw =
-    (<InputRaw
+  const inputRaw = (
+    <InputRaw
       error={error}
       errorIcon={errorIcon}
       iconLeft={iconLeft}
@@ -38,13 +38,13 @@ const Input = (props) => {
       id={id}
       label={label}
       placeholder={placeholder}
-      readOnly={readOnly ? true : null}
+      readOnly={readOnly}
       required={required}
       showSpinner={showSpinner}
       value={value}
       {...rest}
-    />)
-    ;
+    />
+  );
 
   return (
     <FormElement required={required} error={error}>
@@ -58,7 +58,7 @@ const Input = (props) => {
         hasIconLeft={hasIconLeft}
         hasIconRight={hasIconRight}
       >
-        {renderInputRaw}
+        {inputRaw}
       </FormElementControl>
       <FormElementError error={error} id={id} />
     </FormElement>
@@ -81,7 +81,7 @@ Input.defaultProps = {
   onFocus: () => {},
   onKeyPress: () => {},
   placeholder: null,
-  readOnly: false,
+  readOnly: null,
   role: null,
   required: false,
   showSpinner: false,
