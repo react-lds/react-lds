@@ -30,7 +30,8 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/input/required">Required</PageNavigationElement>
             <PageNavigationElement to="/forms/input/disabled">Disabled</PageNavigationElement>
             <PageNavigationElement to="/forms/input/error">Error</PageNavigationElement>
-            <PageNavigationElement to="forms/input/error-icon">Error with icon</PageNavigationElement>
+            <PageNavigationElement to="/forms/input/error-icon">Error with icon</PageNavigationElement>
+            <PageNavigationElement to="/forms/input/field-level-help">Field Level Help</PageNavigationElement>
           </PageNavigationMenu>
           <PageNavigationMenu title="Textarea" to="/forms/textarea">
             <PageNavigationElement to="/forms/textarea/default">Default</PageNavigationElement>
@@ -38,6 +39,7 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/textarea/error">Error</PageNavigationElement>
             <PageNavigationElement to="/forms/textarea/disabled">Disabled</PageNavigationElement>
             <PageNavigationElement to="/forms/textarea/readonly">Read-Only</PageNavigationElement>
+            <PageNavigationElement to="/forms/textarea/field-level-help">Field Level Help</PageNavigationElement>
           </PageNavigationMenu>
           <PageNavigationMenu title="Radio" to="/forms/radio" />
           <PageNavigationMenu title="Select" to="/forms/select">
@@ -49,6 +51,7 @@ const Forms = ({ children }) =>
           </PageNavigationMenu>
           <PageNavigationMenu title="Picklist" to="/forms/picklist">
             <PageNavigationElement to="/forms/picklist/default">Default</PageNavigationElement>
+            <PageNavigationElement to="/forms/picklist/field-level-help">Field Level Help</PageNavigationElement>
           </PageNavigationMenu>
           <PageNavigationMenu title="Checkbox" to="/forms/checkbox">
             <PageNavigationElement to="/forms/checkbox/default">Default</PageNavigationElement>
