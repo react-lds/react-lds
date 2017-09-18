@@ -16,6 +16,7 @@ const Select = (props) => {
     className,
     disabled,
     error,
+    fieldLevelHelp,
     hideLabel,
     id,
     label,
@@ -56,6 +57,7 @@ const Select = (props) => {
   return (
     <FormElement required={required} error={error}>
       <FormElementLabel label={label} id={id} hideLabel={hideLabel} required={required} />
+      {fieldLevelHelp}
       <FormElementControl>
         {renderSelect()}
       </FormElementControl>
@@ -68,6 +70,7 @@ Select.defaultProps = {
   className: null,
   disabled: false,
   error: null,
+  fieldLevelHelp: null,
   hideLabel: false,
   multiple: false,
   onChange: () => {},
@@ -95,6 +98,10 @@ Select.propTypes = {
    * sets the label to render as assistive text
    */
   hideLabel: PropTypes.bool,
+  /**
+   * FieldLevelHelp (small info icon next to Label), if not given, it's not rendered
+   */
+  fieldLevelHelp: PropTypes.node,
   /**
    * id of the select
    */

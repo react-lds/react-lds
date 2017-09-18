@@ -9,6 +9,7 @@ import exampleGroupDisabledCode from '!raw!./ExampleGroupDisabled';
 import exampleGroupErrorCode from '!raw!./ExampleGroupError';
 import exampleGroupRequiredCode from '!raw!./ExampleGroupRequired';
 import exampleRequiredCode from '!raw!./ExampleRequired';
+import exampleGroupFieldLevelHelpCode from '!raw!./ExampleGroupFieldLevelHelp';
 import inputCode from '!raw!react-lds/components/Form/Input';
 
 import CodeExample from '../../../components/CodeExample';
@@ -22,6 +23,7 @@ import ExampleGroupDisabled from './ExampleGroupDisabled';
 import ExampleGroupError from './ExampleGroupError';
 import ExampleGroupRequired from './ExampleGroupRequired';
 import ExampleRequired from './ExampleRequired';
+import ExampleGroupFieldLevelHelp from './ExampleGroupFieldLevelHelp';
 
 const mapId = (id) => {
   let Component = ExampleDefault;
@@ -59,6 +61,10 @@ const mapId = (id) => {
     case 'group_required':
       Component = ExampleGroupRequired;
       componentCode = exampleGroupRequiredCode;
+      break;
+    case 'group-field-level-help':
+      Component = ExampleGroupFieldLevelHelp;
+      componentCode = exampleGroupFieldLevelHelpCode;
       break;
     default:
       break;

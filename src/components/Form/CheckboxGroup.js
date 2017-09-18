@@ -15,6 +15,7 @@ const CheckboxGroup = (props) => {
     children,
     className,
     error,
+    fieldLevelHelp,
     id,
     label,
     onChange,
@@ -44,6 +45,7 @@ const CheckboxGroup = (props) => {
       required={required}
     >
       <FormElementLabel legend required={required} label={label} id={id} />
+      {fieldLevelHelp}
       <FormElementControl>
         {wrapChildrenWithError()}
       </FormElementControl>
@@ -55,6 +57,7 @@ const CheckboxGroup = (props) => {
 CheckboxGroup.defaultProps = {
   className: null,
   error: null,
+  fieldLevelHelp: null,
   onChange: () => {},
   required: false,
 };
@@ -72,6 +75,10 @@ CheckboxGroup.propTypes = {
    * renders an error for the fieldset
    */
   error: PropTypes.string,
+  /**
+   * FieldLevelHelp (small info icon next to Label), if not given, it's not rendered
+   */
+  fieldLevelHelp: PropTypes.node,
   /**
    * id of the fieldset
    */

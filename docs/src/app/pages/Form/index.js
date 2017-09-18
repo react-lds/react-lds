@@ -48,6 +48,7 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/select/error">Error</PageNavigationElement>
             <PageNavigationElement to="/forms/select/disabled">Disabled</PageNavigationElement>
             <PageNavigationElement to="/forms/select/multiple">Multiple Selection</PageNavigationElement>
+            <PageNavigationElement to="/forms/select/field-level-help">Field Level Help</PageNavigationElement>
           </PageNavigationMenu>
           <PageNavigationMenu title="Picklist" to="/forms/picklist">
             <PageNavigationElement to="/forms/picklist/default">Default</PageNavigationElement>
@@ -61,6 +62,9 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/checkbox/group">Group</PageNavigationElement>
             <PageNavigationElement to="/forms/checkbox/group_error">Group with Error</PageNavigationElement>
             <PageNavigationElement to="/forms/checkbox/group_disabled">Group Disabled</PageNavigationElement>
+            <PageNavigationElement to="/forms/checkbox/group-field-level-help">
+              Group Field Level Help
+            </PageNavigationElement>
           </PageNavigationMenu>
         </PageNavigation>
       </Column>
