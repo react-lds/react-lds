@@ -28,7 +28,7 @@ const FieldLevelHelp = (props) => {
 
 FieldLevelHelp.propTypes = {
   /*
-   * Function for Tooltip Button
+   * Function for FieldLevelHelp Button
    */
   onClick: PropTypes.func,
   /*
@@ -36,11 +36,7 @@ FieldLevelHelp.propTypes = {
    */
   className: PropTypes.string,
   /*
-   * tooltip title
-   */
-  title: PropTypes.string,
-  /*
-   * tooltipHelp tooltip
+   * FieldLevelHelp tooltip
    */
   tooltip: PropTypes.string,
 };
@@ -48,7 +44,6 @@ FieldLevelHelp.propTypes = {
 FieldLevelHelp.defaultProps = {
   onClick: null,
   className: null,
-  title: null,
   tooltip: null,
 };
 
