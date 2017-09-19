@@ -10,6 +10,7 @@ import exampleIconLeftRightCode from '!raw!./ExampleIconLeftRight';
 import exampleIconRightCode from '!raw!./ExampleIconRight';
 import exampleIconRightSpinnerCode from '!raw!./ExampleIconRightSpinner';
 import exampleRequiredCode from '!raw!./ExampleRequired';
+import exampleFieldLevelHelpCode from '!raw!./ExampleFieldLevelHelp';
 import inputCode from '!raw!react-lds/components/Form/Input';
 
 import CodeExample from '../../../components/CodeExample';
@@ -24,6 +25,7 @@ import ExampleIconLeftRight from './ExampleIconLeftRight';
 import ExampleIconRight from './ExampleIconRight';
 import ExampleIconRightSpinner from './ExampleIconRightSpinner';
 import ExampleRequired from './ExampleRequired';
+import ExampleFieldLevelHelp from './ExampleFieldLevelHelp';
 
 const mapId = (id) => {
   let Component = ExampleDefault;
@@ -65,6 +67,10 @@ const mapId = (id) => {
     case 'error-icon':
       Component = ExampleErrorIcon;
       componentCode = exampleErrorIconCode;
+      break;
+    case 'field-level-help':
+      Component = ExampleFieldLevelHelp;
+      componentCode = exampleFieldLevelHelpCode;
       break;
     default:
       break;

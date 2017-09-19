@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 
 import { getUniqueHash } from '../../../utils';
 import CheckboxGroup from '../CheckboxGroup';
+import FieldLevelHelp from '../FieldLevelHelp';
 
 describe('<CheckboxGroup />', () => {
   let mounted = null;
@@ -44,5 +45,11 @@ describe('<CheckboxGroup />', () => {
   it('renders required', () => {
     mounted.setProps({ required: true });
     expect(mounted.find('FormElement').prop('required')).toBeTruthy();
+  });
+
+  it('renders FieldLevelHelp', () => {
+    const fieldLevelHelp = (<FieldLevelHelp onClick={() => {}} tooltip="Helpings" />);
+    mounted.setProps({ fieldLevelHelp });
+    expect(mounted.find('.slds-form-element .slds-form-element__icon').length).toBe(1);
   });
 });

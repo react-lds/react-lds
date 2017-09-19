@@ -34,6 +34,7 @@ export class PicklistDropdown extends Component {
       isOpen,
       labelInput,
       isRequired,
+      fieldLevelHelp,
     } = this.props;
 
     this.comboboxContainerClasses = [
@@ -63,6 +64,7 @@ export class PicklistDropdown extends Component {
           label={labelInput}
           required={isRequired}
         />
+        {fieldLevelHelp}
         <FormElementControl>
           <div className={cx(this.comboboxContainerClasses)}>
             <div
@@ -117,6 +119,10 @@ PicklistDropdown.propTypes = {
    * indicates if the input is required
    */
   isRequired: PropTypes.bool,
+  /**
+   * FieldLevelHelp (small info icon next to Label), if not given, it's not rendered
+   */
+  fieldLevelHelp: PropTypes.node,
 };
 
 PicklistDropdown.defaultProps = {
@@ -126,6 +132,7 @@ PicklistDropdown.defaultProps = {
   hideLabel: false,
   labelInput: '',
   isRequired: false,
+  fieldLevelHelp: null,
 };
 
 export default PicklistDropdown;

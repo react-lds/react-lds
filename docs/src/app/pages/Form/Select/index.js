@@ -6,6 +6,7 @@ import exampleDisabledCode from '!raw!./ExampleDisabled';
 import exampleErrorCode from '!raw!./ExampleError';
 import exampleMultipleCode from '!raw!./ExampleMultiple';
 import exampleRequiredCode from '!raw!./ExampleRequired';
+import exampleFieldLevelHelpCode from '!raw!./ExampleFieldLevelHelp';
 import selectCode from '!raw!react-lds/components/Form/Select';
 
 import CodeExample from '../../../components/CodeExample';
@@ -16,6 +17,7 @@ import ExampleDisabled from './ExampleDisabled';
 import ExampleError from './ExampleError';
 import ExampleMultiple from './ExampleMultiple';
 import ExampleRequired from './ExampleRequired';
+import ExampleFieldLevelHelp from './ExampleFieldLevelHelp';
 
 const mapId = (id) => {
   let Component = ExampleDefault;
@@ -41,6 +43,10 @@ const mapId = (id) => {
     case 'multiple':
       Component = ExampleMultiple;
       componentCode = exampleMultipleCode;
+      break;
+    case 'field-level-help':
+      Component = ExampleFieldLevelHelp;
+      componentCode = exampleFieldLevelHelpCode;
       break;
     default:
       break;

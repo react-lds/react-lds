@@ -2,6 +2,7 @@ export FormElement from './FormElement';
 export FormElementControl from './FormElementControl';
 export FormElementError from './FormElementError';
 export FormElementLabel from './FormElementLabel';
+export FieldLevelHelp from './FieldLevelHelp';
 export Checkbox from './Checkbox';
 export CheckboxRaw from './CheckboxRaw';
 export CheckboxGroup from './CheckboxGroup';

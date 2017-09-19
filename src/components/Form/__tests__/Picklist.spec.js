@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import { Picklist } from '../Picklist';
+import FieldLevelHelp from '../FieldLevelHelp';
 
 describe('</Picklist />', () => {
   let mounted = null;
@@ -94,5 +95,11 @@ describe('</Picklist />', () => {
     const item = mounted.find('ul.slds-listbox').children().at(1);
     item.find('span').first().simulate('click');
     expect(onSelect).toHaveBeenCalledWith('1');
+  });
+
+  it('renders FieldLevelHelp', () => {
+    const fieldLevelHelp = (<FieldLevelHelp onClick={() => {}} tooltip="Helpings" />);
+    mounted.setProps({ fieldLevelHelp });
+    expect(mounted.find('.slds-form-element .slds-form-element__icon').length).toBe(1);
   });
 });

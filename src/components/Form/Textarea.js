@@ -22,6 +22,7 @@ const Textarea = (props) => {
     placeholder,
     required,
     readOnly,
+    fieldLevelHelp,
     ...rest,
   } = props;
 
@@ -56,6 +57,7 @@ const Textarea = (props) => {
   return (
     <FormElement required={required} error={error}>
       <FormElementLabel label={label} id={id} required={required} hideLabel={hideLabel} />
+      {fieldLevelHelp}
       <FormElementControl className={cx({ 'slds-border_bottom': readOnly })}>
         {renderContent()}
       </FormElementControl>
@@ -72,6 +74,7 @@ Textarea.defaultProps = {
   onChange: () => {},
   readOnly: false,
   required: false,
+  fieldLevelHelp: null,
 };
 
 Textarea.propTypes = {
@@ -115,6 +118,10 @@ Textarea.propTypes = {
    * adds required attribute to the textarea
    */
   required: PropTypes.bool,
+  /**
+   * FieldLevelHelp (small info icon next to Label), if not given, it's not rendered
+   */
+  fieldLevelHelp: PropTypes.node,
 };
 
 export default Textarea;

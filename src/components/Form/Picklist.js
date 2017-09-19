@@ -96,6 +96,7 @@ export class Picklist extends React.Component {
       isLabelHidden,
       isRequired,
       labelInput,
+      fieldLevelHelp,
     } = this.props;
 
     return (
@@ -108,6 +109,7 @@ export class Picklist extends React.Component {
         isOpen={this.state.isOpen}
         isRequired={isRequired}
         labelInput={labelInput}
+        fieldLevelHelp={fieldLevelHelp}
       >
         <PicklistDropdownList
           height={height}
@@ -175,6 +177,10 @@ Picklist.propTypes = {
    * you should indicate it
    */
   placeholder: PropTypes.string.isRequired,
+  /**
+   * FieldLevelHelp (small info icon next to Label), if not given, it's not rendered
+   */
+  fieldLevelHelp: PropTypes.node,
 };
 
 Picklist.defaultProps = {
@@ -187,6 +193,7 @@ Picklist.defaultProps = {
   items: [],
   labelInput: '',
   labelMultiselect: '',
+  fieldLevelHelp: null,
 };
 
 export default enhanceWithClickOutside(Picklist);

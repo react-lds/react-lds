@@ -20,6 +20,7 @@ const Input = (props) => {
     label,
     required,
     showSpinner,
+    fieldLevelHelp,
     ...rest,
   } = props;
 
@@ -34,6 +35,7 @@ const Input = (props) => {
         label={label}
         required={required}
       />
+      {fieldLevelHelp}
       <FormElementControl hasIconLeft={hasIconLeft} hasIconRight={hasIconRight}>
         <InputRaw
           error={error}
@@ -73,6 +75,7 @@ Input.defaultProps = {
   showSpinner: false,
   type: 'text',
   value: undefined,
+  fieldLevelHelp: null,
 };
 
 Input.propTypes = {
@@ -161,6 +164,10 @@ Input.propTypes = {
    * value of the input field
    */
   value: PropTypes.string,
+  /**
+   * FieldLevelHelp (small info icon next to Label), if not given, it's not rendered
+   */
+  fieldLevelHelp: PropTypes.node,
 };
 
 export default Input;
