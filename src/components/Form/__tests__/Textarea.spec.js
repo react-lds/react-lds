@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 
 import { getUniqueHash } from '../../../utils';
 import Textarea from '../Textarea';
+import FieldLevelHelp from '../FieldLevelHelp';
 
 describe('<Textarea />', () => {
   let props = {};
@@ -66,5 +67,11 @@ describe('<Textarea />', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('textarea').hasClass('foo')).toBeTruthy();
     expect(mounted.find('textarea').prop('data-test')).toEqual('bar');
+  });
+
+  it('renders FieldLevelHelp', () => {
+    const fieldLevelHelp = (<FieldLevelHelp onClick={() => {}} tooltip="Helpings" />);
+    mounted.setProps({ fieldLevelHelp });
+    expect(mounted.find('.slds-form-element .slds-form-element__icon').length).toBe(1);
   });
 });
