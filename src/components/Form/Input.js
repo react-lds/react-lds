@@ -18,13 +18,33 @@ const Input = (props) => {
     iconRight,
     id,
     label,
+    placeholder,
+    readOnly,
     required,
     showSpinner,
+    value,
     ...rest,
   } = props;
 
   const hasIconLeft = !!iconLeft || (error && errorIcon);
   const hasIconRight = !!iconRight || !!showSpinner;
+
+  const inputRaw = (
+    <InputRaw
+      error={error}
+      errorIcon={errorIcon}
+      iconLeft={iconLeft}
+      iconRight={iconRight}
+      id={id}
+      label={label}
+      placeholder={placeholder}
+      readOnly={readOnly}
+      required={required}
+      showSpinner={showSpinner}
+      value={value}
+      {...rest}
+    />
+  );
 
   return (
     <FormElement required={required} error={error}>
@@ -34,18 +54,11 @@ const Input = (props) => {
         label={label}
         required={required}
       />
-      <FormElementControl hasIconLeft={hasIconLeft} hasIconRight={hasIconRight}>
-        <InputRaw
-          error={error}
-          errorIcon={errorIcon}
-          iconLeft={iconLeft}
-          iconRight={iconRight}
-          id={id}
-          label={label}
-          required={required}
-          showSpinner={showSpinner}
-          {...rest}
-        />
+      <FormElementControl
+        hasIconLeft={hasIconLeft}
+        hasIconRight={hasIconRight}
+      >
+        {inputRaw}
       </FormElementControl>
       <FormElementError error={error} id={id} />
     </FormElement>
@@ -68,6 +81,7 @@ Input.defaultProps = {
   onFocus: () => {},
   onKeyPress: () => {},
   placeholder: null,
+  readOnly: null,
   role: null,
   required: false,
   showSpinner: false,
@@ -140,6 +154,10 @@ Input.propTypes = {
    * placeholder for the input
    */
   placeholder: PropTypes.string,
+  /**
+   * makes Input readOnly
+   */
+  readOnly: PropTypes.bool,
   /**
    * adds required attribute to input and label
    */
