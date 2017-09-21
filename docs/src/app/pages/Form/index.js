@@ -59,9 +59,11 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/checkbox/required">Required</PageNavigationElement>
             <PageNavigationElement to="/forms/checkbox/error">Error</PageNavigationElement>
             <PageNavigationElement to="/forms/checkbox/disabled">Disabled</PageNavigationElement>
+            <PageNavigationElement to="/forms/checkbox/inline-help">With Inline Help</PageNavigationElement>
             <PageNavigationElement to="/forms/checkbox/group">Group</PageNavigationElement>
             <PageNavigationElement to="/forms/checkbox/group_error">Group with Error</PageNavigationElement>
             <PageNavigationElement to="/forms/checkbox/group_disabled">Group Disabled</PageNavigationElement>
+            <PageNavigationElement to="/forms/checkbox/group-inline-help">Group with Inline Help</PageNavigationElement>
           </PageNavigationMenu>
         </PageNavigation>
       </Column>

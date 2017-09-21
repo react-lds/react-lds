@@ -12,6 +12,7 @@ const Checkbox = (props) => {
   const {
     error,
     id,
+    inlineHelp,
     required,
   } = props;
 
@@ -21,6 +22,7 @@ const Checkbox = (props) => {
         <CheckboxRaw {...props} />
       </FormElementControl>
       <FormElementError error={error} id={id} />
+      {!!inlineHelp && <div className="slds-form-element__help">{inlineHelp}</div>}
     </FormElement>
   );
 };
@@ -29,6 +31,7 @@ Checkbox.defaultProps = {
   error: null,
   hideLabel: false,
   required: false,
+  inlineHelp: null,
 };
 
 Checkbox.propTypes = {
@@ -44,6 +47,10 @@ Checkbox.propTypes = {
    * id of the checkbox
    */
   id: PropTypes.string.isRequired,
+  /**
+   * inline Help, string or node
+   */
+  inlineHelp: PropTypes.node,
   /**
    * adds required attribute to the checkbox
    */

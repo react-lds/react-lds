@@ -16,6 +16,7 @@ const CheckboxGroup = (props) => {
     className,
     error,
     id,
+    inlineHelp,
     label,
     onChange,
     required,
@@ -48,6 +49,7 @@ const CheckboxGroup = (props) => {
         {wrapChildrenWithError()}
       </FormElementControl>
       <FormElementError error={error} id={id} />
+      {!!inlineHelp && <div className="slds-form-element__help">{inlineHelp}</div>}
     </FormElement>
   );
 };
@@ -57,6 +59,7 @@ CheckboxGroup.defaultProps = {
   error: null,
   onChange: () => {},
   required: false,
+  inlineHelp: null,
 };
 
 CheckboxGroup.propTypes = {
@@ -76,6 +79,10 @@ CheckboxGroup.propTypes = {
    * id of the fieldset
    */
   id: PropTypes.string.isRequired,
+  /**
+   * inline Help, node or string
+   */
+  inlineHelp: PropTypes.node,
   /**
    * label
    */
