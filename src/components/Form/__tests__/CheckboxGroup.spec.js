@@ -45,4 +45,9 @@ describe('<CheckboxGroup />', () => {
     mounted.setProps({ required: true });
     expect(mounted.find('FormElement').prop('required')).toBeTruthy();
   });
+
+  it('renders inline help', () => {
+    mounted.setProps({ inlineHelp: <p>test</p> });
+    expect(mounted.find('.slds-form-element__help').length).toBe(1);
+  });
 });
