@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import exampleDefaultCode from '!raw!./ExampleDefault';
+import exampleInlineHelpCode from '!raw!./ExampleInlineHelp';
 import inputCode from '!raw!react-lds/components/Form/Picklist';
 
 import CodeExample from '../../../components/CodeExample';
 import PropTypeDescription from '../../../components/PropTypeDescription';
 
 import ExampleDefault from './ExampleDefault';
+import ExampleInlineHelp from './ExampleInlineHelp';
 
 const renderExampleById = (id) => {
   let Component = ExampleDefault;
@@ -17,6 +19,10 @@ const renderExampleById = (id) => {
     case 'default':
       Component = ExampleDefault;
       componentCode = exampleDefaultCode;
+      break;
+    case 'inline-help':
+      Component = ExampleInlineHelp;
+      componentCode = exampleInlineHelpCode;
       break;
     default:
       break;

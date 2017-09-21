@@ -17,6 +17,7 @@ const Textarea = (props) => {
     error,
     hideLabel,
     id,
+    inlineHelp,
     label,
     onChange,
     placeholder,
@@ -60,6 +61,7 @@ const Textarea = (props) => {
         {renderContent()}
       </FormElementControl>
       <FormElementError error={error} id={id} />
+      {!!inlineHelp && <div className="slds-form-element__help">{inlineHelp}</div>}
     </FormElement>
   );
 };
@@ -69,6 +71,7 @@ Textarea.defaultProps = {
   disabled: null,
   error: null,
   hideLabel: false,
+  inlineHelp: null,
   onChange: () => {},
   readOnly: false,
   required: false,
@@ -95,6 +98,10 @@ Textarea.propTypes = {
    * id of the textarea
    */
   id: PropTypes.string.isRequired,
+  /**
+   * Inline Help, string or node
+   */
+  inlineHelp: PropTypes.node,
   /**
    * label for the textarea
    */

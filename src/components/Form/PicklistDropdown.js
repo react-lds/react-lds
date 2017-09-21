@@ -31,6 +31,7 @@ export class PicklistDropdown extends Component {
       hideLabel,
       id,
       input,
+      inlineHelp,
       isOpen,
       labelInput,
       isRequired,
@@ -79,6 +80,7 @@ export class PicklistDropdown extends Component {
           </div>
         </FormElementControl>
         <FormElementError error={error} id={`error-${id}`} />
+        {!!inlineHelp && <div className="slds-form-element__help">{inlineHelp}</div>}
       </FormElement>
     );
   }
@@ -102,6 +104,10 @@ PicklistDropdown.propTypes = {
   */
   id: PropTypes.string.isRequired,
   /**
+   * Inline Help
+   */
+  inlineHelp: PropTypes.node,
+  /**
    * input field
    */
   input: PropTypes.element.isRequired,
@@ -122,10 +128,11 @@ PicklistDropdown.propTypes = {
 PicklistDropdown.defaultProps = {
   disabled: false,
   error: null,
+  inlineHelp: null,
   isOpen: false,
+  isRequired: false,
   hideLabel: false,
   labelInput: '',
-  isRequired: false,
 };
 
 export default PicklistDropdown;

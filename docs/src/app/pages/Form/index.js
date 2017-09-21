@@ -27,6 +27,7 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/input/icon-right-spinner">
               With icon and spinner to the right
             </PageNavigationElement>
+            <PageNavigationElement to="/forms/input/inline-help">With Inline Help</PageNavigationElement>
             <PageNavigationElement to="/forms/input/required">Required</PageNavigationElement>
             <PageNavigationElement to="/forms/input/disabled">Disabled</PageNavigationElement>
             <PageNavigationElement to="/forms/input/error">Error</PageNavigationElement>
@@ -38,6 +39,7 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/textarea/error">Error</PageNavigationElement>
             <PageNavigationElement to="/forms/textarea/disabled">Disabled</PageNavigationElement>
             <PageNavigationElement to="/forms/textarea/readonly">Read-Only</PageNavigationElement>
+            <PageNavigationElement to="/forms/textarea/inline-help">With Inline Help</PageNavigationElement>
           </PageNavigationMenu>
           <PageNavigationMenu title="Radio" to="/forms/radio" />
           <PageNavigationMenu title="Select" to="/forms/select">
@@ -46,9 +48,11 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/select/error">Error</PageNavigationElement>
             <PageNavigationElement to="/forms/select/disabled">Disabled</PageNavigationElement>
             <PageNavigationElement to="/forms/select/multiple">Multiple Selection</PageNavigationElement>
+            <PageNavigationElement to="/forms/select/inline-help">With Inline Help</PageNavigationElement>
           </PageNavigationMenu>
           <PageNavigationMenu title="Picklist" to="/forms/picklist">
             <PageNavigationElement to="/forms/picklist/default">Default</PageNavigationElement>
+            <PageNavigationElement to="/forms/picklist/inline-help">With Inline Help</PageNavigationElement>
           </PageNavigationMenu>
           <PageNavigationMenu title="Checkbox" to="/forms/checkbox">
             <PageNavigationElement to="/forms/checkbox/default">Default</PageNavigationElement>
