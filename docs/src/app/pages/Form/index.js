@@ -28,6 +28,7 @@ const Forms = ({ children }) =>
               With icon and spinner to the right
             </PageNavigationElement>
             <PageNavigationElement to="/forms/input/inline-help">With Inline Help</PageNavigationElement>
+            <PageNavigationElement to="/forms/input/read-only">ReadOnly</PageNavigationElement>
             <PageNavigationElement to="/forms/input/required">Required</PageNavigationElement>
             <PageNavigationElement to="/forms/input/disabled">Disabled</PageNavigationElement>
             <PageNavigationElement to="/forms/input/error">Error</PageNavigationElement>

@@ -143,4 +143,9 @@ describe('<Input />', () => {
     expect(mounted.find('input').hasClass('foo')).toBeTruthy();
     expect(mounted.find('input').prop('data-test')).toEqual('bar');
   });
+
+  it('applies readOnly to input if set', () => {
+    mounted.setProps({ readOnly: true });
+    expect(mounted.find('input').props().readOnly).toBeTruthy();
+  });
 });
