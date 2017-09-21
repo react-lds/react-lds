@@ -9,6 +9,7 @@ import exampleIconLeftCode from '!raw!./ExampleIconLeft';
 import exampleIconLeftRightCode from '!raw!./ExampleIconLeftRight';
 import exampleIconRightCode from '!raw!./ExampleIconRight';
 import exampleIconRightSpinnerCode from '!raw!./ExampleIconRightSpinner';
+import exampleInlineHelpCode from '!raw!./ExampleInlineHelp';
 import exampleRequiredCode from '!raw!./ExampleRequired';
 import exampleReadOnlyCode from '!raw!./ExampleReadOnly';
 import inputCode from '!raw!react-lds/components/Form/Input';
@@ -24,6 +25,7 @@ import ExampleIconLeft from './ExampleIconLeft';
 import ExampleIconLeftRight from './ExampleIconLeftRight';
 import ExampleIconRight from './ExampleIconRight';
 import ExampleIconRightSpinner from './ExampleIconRightSpinner';
+import ExampleInlineHelp from './ExampleInlineHelp';
 import ExampleRequired from './ExampleRequired';
 import ExampleReadOnly from './ExampleReadOnly';
 
@@ -71,6 +73,10 @@ const mapId = (id) => {
     case 'error-icon':
       Component = ExampleErrorIcon;
       componentCode = exampleErrorIconCode;
+      break;
+    case 'inline-help':
+      Component = ExampleInlineHelp;
+      componentCode = exampleInlineHelpCode;
       break;
     default:
       break;

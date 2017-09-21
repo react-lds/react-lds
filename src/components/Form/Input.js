@@ -17,6 +17,7 @@ const Input = (props) => {
     iconLeft,
     iconRight,
     id,
+    inlineHelp,
     label,
     placeholder,
     readOnly,
@@ -61,6 +62,7 @@ const Input = (props) => {
         {inputRaw}
       </FormElementControl>
       <FormElementError error={error} id={id} />
+      {!!inlineHelp && <div className="slds-form-element__help">{inlineHelp}</div>}
     </FormElement>
   );
 };
@@ -75,6 +77,7 @@ Input.defaultProps = {
   iconLeft: null,
   iconRight: null,
   iconRightOnClick: () => {},
+  inlineHelp: null,
   isFocused: false,
   label: null,
   onChange: () => {},
@@ -130,6 +133,10 @@ Input.propTypes = {
    * id of the input field
    */
   id: PropTypes.string.isRequired,
+  /**
+   * inline Help, string or node
+   */
+  inlineHelp: PropTypes.node,
   /**
    * focuses the input field
    */

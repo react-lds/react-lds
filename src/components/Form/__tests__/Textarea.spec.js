@@ -62,6 +62,11 @@ describe('<Textarea />', () => {
     expect(mounted.find('.slds-form-element__static p').text()).toEqual(props.placeholder);
   });
 
+  it('renders inline help', () => {
+    mounted.setProps({ inlineHelp: <p>test</p> });
+    expect(mounted.find('.slds-form-element__help').length).toBe(1);
+  });
+
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('textarea').hasClass('foo')).toBeTruthy();

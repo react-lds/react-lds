@@ -93,6 +93,7 @@ export class Picklist extends React.Component {
       error,
       height,
       id,
+      inlineHelp,
       isLabelHidden,
       isRequired,
       labelInput,
@@ -104,6 +105,7 @@ export class Picklist extends React.Component {
         error={error}
         hideLabel={isLabelHidden}
         id={`combobox-${id}`}
+        inlineHelp={inlineHelp}
         input={this.renderInput()}
         isOpen={this.state.isOpen}
         isRequired={isRequired}
@@ -137,6 +139,10 @@ Picklist.propTypes = {
    * unique id
    */
   id: PropTypes.string.isRequired,
+  /**
+   * Inline Help, string or node
+   */
+  inlineHelp: PropTypes.node,
   /**
    * whether the input is disabled
    */
@@ -181,6 +187,7 @@ Picklist.defaultProps = {
   className: null,
   error: null,
   height: null,
+  inlineHelp: null,
   isDisabled: false,
   isLabelHidden: false,
   isRequired: false,

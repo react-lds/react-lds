@@ -18,6 +18,7 @@ const Select = (props) => {
     error,
     hideLabel,
     id,
+    inlineHelp,
     label,
     multiple,
     onChange,
@@ -60,6 +61,7 @@ const Select = (props) => {
         {renderSelect()}
       </FormElementControl>
       <FormElementError error={error} id={id} />
+      {!!inlineHelp && <div className="slds-form-element__help">{inlineHelp}</div>}
     </FormElement>
   );
 };
@@ -69,6 +71,7 @@ Select.defaultProps = {
   disabled: false,
   error: null,
   hideLabel: false,
+  inlineHelp: null,
   multiple: false,
   onChange: () => {},
   required: false,
@@ -99,6 +102,10 @@ Select.propTypes = {
    * id of the select
    */
   id: PropTypes.string.isRequired,
+  /**
+   * Inline Help, string or node
+   */
+  inlineHelp: PropTypes.node,
   /**
    * label for the select
    */

@@ -95,4 +95,9 @@ describe('</Picklist />', () => {
     item.find('span').first().simulate('click');
     expect(onSelect).toHaveBeenCalledWith('1');
   });
+
+  it('renders inline help', () => {
+    mounted.setProps({ inlineHelp: <p>test</p> });
+    expect(mounted.find('.slds-form-element__help').length).toBe(1);
+  });
 });
