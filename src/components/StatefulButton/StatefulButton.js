@@ -15,7 +15,7 @@ export const StatefulButton = (props) => {
     stateSelected,
     stateSelectedFocus,
     tooltip,
-    ...rest,
+    ...rest
   } = props;
 
   const sldsButtonClasses = [

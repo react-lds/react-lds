@@ -463,9 +463,9 @@ export class Lookup extends Component {
 
     const body = (
       <tbody>
-        {displayItems.map(item =>
+        {displayItems.map(item => (
           <Row key={item.id}>
-            {tableFields.map((field, index) =>
+            {tableFields.map((field, index) => (
               <Cell
                 data-label={field.name}
                 scope={index === 0 ? 'row' : null}
@@ -474,9 +474,10 @@ export class Lookup extends Component {
               >
                 {renderBodyCell(item.label, index, item.objectType)}
               </Cell>
-            )}
+
+            ))}
           </Row>
-        )}
+        ))}
       </tbody>
     );
 

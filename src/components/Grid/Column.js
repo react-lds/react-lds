@@ -95,7 +95,14 @@ const sizeOfPropType = (props, propName) => {
   return null;
 };
 
-const columnPropTypes = {
+Column.defaultProps = {
+  align: 'top',
+  className: null,
+  sizeOf: null,
+  omitCol: false,
+};
+
+Column.propTypes = {
   /**
    * alignment of columns on the main axis
    */
@@ -103,7 +110,7 @@ const columnPropTypes = {
   /**
    * column content
    */
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
@@ -116,15 +123,12 @@ const columnPropTypes = {
    * omit 'slds-col'
    */
   omitCol: PropTypes.bool,
-};
-
-Column.propTypes = Object.assign({},
-  columnPropTypes,
-  validBreakpoints.reduce((_propTypes, breakpoint) => {
+  ...validBreakpoints.reduce((_propTypes, breakpoint) => {
     const propTypes = _propTypes;
     propTypes[breakPointProp(breakpoint)] = sizeOfPropType;
     return propTypes;
-  }, {}));
+  }, {}),
+};
 
 export default variationable(
   flavorable(Column, 'col')

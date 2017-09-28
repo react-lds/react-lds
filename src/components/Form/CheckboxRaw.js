@@ -15,7 +15,7 @@ const CheckboxRaw = (props) => {
     label,
     onChange,
     required,
-    ...rest,
+    ...rest
   } = props;
 
   const renderCheckbox = () => (

@@ -8,7 +8,6 @@ import { themeable } from '../../decorators';
 import { Button, ButtonIcon } from '../../';
 
 export class Popover extends React.Component {
-
   static getThemeName(themeStr) {
     if (typeof themeStr === 'string') {
       return themeStr.includes('error') ||

@@ -13,7 +13,7 @@ export const Modal = (props) => {
     label,
     open,
     prompt,
-    ...rest,
+    ...rest
   } = props;
 
   const isOpen = !!open;

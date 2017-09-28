@@ -11,7 +11,7 @@ const FormElementLabel = (props) => {
     legend,
     readOnly,
     required,
-    ...rest,
+    ...rest
   } = props;
 
   const renderRequired = () => {

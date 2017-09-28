@@ -11,7 +11,7 @@ export const VerticalNavigationItem = (props) => {
     isActive,
     notification,
     notificationLabel,
-    ...rest,
+    ...rest
   } = props;
 
   const containerClasses = [

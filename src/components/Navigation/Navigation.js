@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import { Grid } from '../../';
 import { flavorable } from '../../decorators';
 
-export const Navigation = ({ children, className }) =>
+export const Navigation = ({ children, className }) => (
   <Grid vertical className={className}>
     {children}
-  </Grid>;
+  </Grid>
+);
 
 Navigation.flavors = [
   'vertical',

@@ -14,7 +14,7 @@ export const Button = (props) => {
     title,
     tooltip,
     value,
-    ...rest,
+    ...rest
   } = props;
 
   const sldsClasses = [

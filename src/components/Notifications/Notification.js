@@ -21,7 +21,7 @@ export const Notification = (props) => {
     title,
     toast,
     onClickClose,
-    ...rest,
+    ...rest
   } = props;
 
   const sldsClasses = [
@@ -44,10 +44,11 @@ export const Notification = (props) => {
     );
   };
 
-  const wrapToastContent = content =>
+  const wrapToastContent = content => (
     <div className="slds-notify__content">
       {content}
-    </div>;
+    </div>
+  );
 
   return (
     <div className="slds-notify_container">

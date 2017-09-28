@@ -8,7 +8,7 @@ export const VerticalNavigation = (props) => {
     children,
     className,
     prependElement,
-    ...rest,
+    ...rest
   } = props;
 
   const sldsClasses = ['slds-nav-vertical', className];

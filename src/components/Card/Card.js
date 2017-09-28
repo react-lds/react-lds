@@ -13,7 +13,7 @@ const Card = (props) => {
     icon,
     sprite,
     title,
-    ...rest,
+    ...rest
   } = props;
 
   const sldsClasses = [

@@ -10,7 +10,6 @@ import {
 } from '../../';
 
 export class Picklist extends React.Component {
-
   constructor(props, context) {
     super(props, context);
 

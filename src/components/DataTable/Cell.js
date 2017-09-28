@@ -18,7 +18,7 @@ export const Cell = (props) => {
     sortAssistiveText,
     title,
     truncate,
-    ...rest,
+    ...rest
   } = props;
 
   const getTitle = () => {

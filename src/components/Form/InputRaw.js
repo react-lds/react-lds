@@ -31,7 +31,7 @@ const InputRaw = (props) => {
     type,
     value,
     isFocused,
-    ...rest,
+    ...rest
   } = props;
 
   const renderIconLeft = () => {

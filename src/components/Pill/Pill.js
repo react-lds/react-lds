@@ -14,7 +14,7 @@ export const Pill = (props) => {
     portrait,
     title,
     url,
-    ...rest,
+    ...rest
   } = props;
 
   const isLinked = !!url;

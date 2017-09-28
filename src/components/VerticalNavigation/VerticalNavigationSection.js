@@ -8,7 +8,7 @@ export const VerticalNavigationSection = (props) => {
     className,
     id,
     title,
-    ...rest,
+    ...rest
   } = props;
 
   const sldsClasses = ['slds-nav-vertical__section', className];

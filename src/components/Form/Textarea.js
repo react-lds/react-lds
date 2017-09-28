@@ -22,7 +22,7 @@ const Textarea = (props) => {
     placeholder,
     required,
     readOnly,
-    ...rest,
+    ...rest
   } = props;
 
   const renderContent = () => {

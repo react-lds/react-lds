@@ -60,7 +60,8 @@ const AccordionSection = (props) => {
         </div>
         <div
           aria-hidden={isOpen ? 'false' : 'true'}
-          className="slds-accordion__content" id={id}
+          className="slds-accordion__content"
+          id={id}
         >
           {children}
         </div>

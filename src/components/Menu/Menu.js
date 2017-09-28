@@ -7,7 +7,6 @@ import omit from 'lodash.omit';
 import { Button, ButtonIcon } from '../../';
 
 export class Menu extends Component {
-
   constructor(props, { cssPrefix }) {
     super(props, { cssPrefix });
     this.state = { open: this.props.isOpen };

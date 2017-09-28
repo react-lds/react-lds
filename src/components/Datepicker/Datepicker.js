@@ -18,7 +18,6 @@ const defaultTranslations = {
 };
 
 export class Datepicker extends React.Component {
-
   /**
    * Renders visible weekdays
    * @return {ReactElement} thead
