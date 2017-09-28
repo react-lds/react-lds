@@ -1,0 +1,24 @@
+{
+  "presets": ["react", ["env", {
+    "targets": {
+      "browsers": [
+        "last 2 versions",
+        "not ie <= 11",
+        "not android <= 56"
+      ],
+    },
+    "loose": true,
+    "modules": false,
+    "useBuiltIns": false
+  }]],
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-class-properties",
+    "transform-export-extensions"
+  ],
+  "env": {
+    "test": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+    }
+  }
+}

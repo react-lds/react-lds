@@ -75,7 +75,7 @@ Column.variations = [
 const sizeOfPropType = (props, propName) => {
   const size = props[propName];
 
-  if (typeof size !== 'undefined' && typeof size !== 'string') {
+  if (size && typeof size !== 'string') {
     return new Error(`${propName} must be a string`);
   }
 
@@ -98,7 +98,6 @@ const sizeOfPropType = (props, propName) => {
 Column.defaultProps = {
   align: 'top',
   className: null,
-  sizeOf: null,
   omitCol: false,
 };
 
@@ -118,7 +117,7 @@ Column.propTypes = {
   /**
    * non-responsive sizeOf
    */
-  sizeOf: sizeOfPropType,
+  sizeOf: sizeOfPropType, // eslint-disable-line react/require-default-props
   /**
    * omit 'slds-col'
    */

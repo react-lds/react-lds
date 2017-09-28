@@ -12,7 +12,7 @@ describe('<Breadcrumb />', () => {
   });
 
   it('renders the correct markup', () => {
-    expect(mounted.find('nav[role="navigation"] > .slds-breadcrumb').length).toBe(1);
+    expect(mounted.find('nav > .slds-breadcrumb').length).toBe(1);
   });
 
   it('renders a single child', () => {
