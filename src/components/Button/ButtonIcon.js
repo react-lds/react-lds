@@ -17,7 +17,6 @@ const ButtonIcon = (props) => {
   return (
     <IconSVG
       {...rest}
-      background={false}
       className={cx(sldsClasses)}
       fill={false}
       icon={icon}

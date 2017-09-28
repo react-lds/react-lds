@@ -1,5 +1,10 @@
 # Changelog
 
+# Unreleased
+
+* Breaking: Disallow `IconSVG` to have a background
+* Remove circle boolean, LDS sets it automatically for `action` icons
+
 ## 2.0.2
 
 * Bugfix: Fix PageHeader RecordHome

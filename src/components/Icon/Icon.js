@@ -9,7 +9,6 @@ const iconClass = (sprite, icon) => icon.replace(/_/g, '-');
 const Icon = (props) => {
   const {
     background,
-    circle,
     className,
     div,
     icon,
@@ -26,8 +25,8 @@ const Icon = (props) => {
 
   const sldsClasses = [
     { 'slds-icon_container': true },
-    { 'slds-icon_container_circle': circle },
-    { [`${backgroundClass}`]: true },
+    { 'slds-icon_container_circle': sprite === 'action' },
+    { [`${backgroundClass}`]: background !== false },
     className
   ];
 
@@ -36,7 +35,6 @@ const Icon = (props) => {
   return (
     <WrapperElement {...rest} className={cx(sldsClasses)} title={title}>
       <IconSVG
-        background={background}
         className={svgClassName}
         icon={icon}
         size={size}
@@ -49,7 +47,6 @@ const Icon = (props) => {
 
 Icon.defaultProps = {
   background: null,
-  circle: false,
   className: null,
   div: false,
   size: null,
@@ -58,41 +55,21 @@ Icon.defaultProps = {
 };
 
 Icon.propTypes = {
-  /**
-  * optional, set this if you want to override the default background class. set to false to not set a background
-   */
-  background: PropTypes.string,
-  /**
-   * renders a circular icon
-   */
-  circle: PropTypes.bool,
-  /**
-   * class name
-   */
+  /** Set this if you want to override the default background class. set to false to not set a background */
+  background: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  /** class name */
   className: PropTypes.string,
-  /**
-   * renders the icon in a div instead of a span
-   */
+  /** <div>-container instead of a <span>-container */
   div: PropTypes.bool,
-  /**
-   * icon name
-   */
+  /** Name of the icon */
   icon: PropTypes.string.isRequired,
-  /**
-   * icon size
-   */
+  /** Size */
   size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
-  /**
-   * icon sprite name
-   */
+  /** Name of the sprite containing the icon */
   sprite: PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
-  /**
-   * iconSvg className
-   */
+  /** ClassName that will be handed over to the <svg /> */
   svgClassName: PropTypes.string,
-  /**
-   * icon title
-   */
+  /** Descriptive Title */
   title: PropTypes.string,
 };
 
