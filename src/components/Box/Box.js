@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { THEMES, getThemeClass } from '../../utils';
 
 import { themeable } from '../../decorators';
 
 export const Box = (props) => {
-  const { children, className, size, ...rest } = props;
+  const { children, className, size, theme, ...rest } = props;
 
   const sldsClasses = [
     'slds-box',
     { [`slds-box_${size}`]: !!size },
+    ...getThemeClass(theme),
     className
   ];
 
@@ -19,21 +21,18 @@ export const Box = (props) => {
 Box.defaultProps = {
   className: null,
   size: null,
+  theme: null,
 };
 
 Box.propTypes = {
-  /**
-   * box content
-   */
+  /** box content */
   children: PropTypes.node.isRequired,
-  /**
-   * class name
-   */
+  /** (optional) className */
   className: PropTypes.string,
-  /**
-   * box size
-   */
-  size: PropTypes.oneOf(['x-small', 'small']),
+  /** (optional) box size */
+  size: PropTypes.oneOf(['xx-small', 'x-small', 'small']),
+  /** SLDS theme */
+  theme: PropTypes.oneOf(THEMES),
 };
 
 export default themeable(Box);
