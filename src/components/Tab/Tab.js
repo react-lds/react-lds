@@ -6,7 +6,7 @@ import omit from 'lodash.omit';
 class Tab extends React.Component {
   static defaultProps = {
     className: null,
-    variation: 'default'
+    scoped: false,
   }
 
   static propTypes = {
@@ -25,7 +25,7 @@ class Tab extends React.Component {
     /**
      * scoped has a border around the tab
      */
-    variation: PropTypes.oneOf(['default', 'scoped']),
+    scoped: PropTypes.bool,
   };
 
   constructor(props, context) {
@@ -38,13 +38,13 @@ class Tab extends React.Component {
   }
 
   renderHeader() {
-    const { tabs, variation } = this.props;
+    const { tabs, scoped } = this.props;
     const { activeTab } = this.state;
 
     return tabs.map((tab, index) => {
       const boundClick = this.setActiveTab.bind(this, tab.id);
       const headerClasses = [
-        `slds-tabs_${variation}__item`,
+        `slds-tabs_${scoped ? 'scoped' : 'default'}__item`,
         'slds-text-title_caps',
         { 'slds-active': activeTab === tab.id },
       ];
@@ -58,7 +58,7 @@ class Tab extends React.Component {
           onClick={boundClick}
         >
           <a
-            className={`slds-tabs_${variation}__link`}
+            className={`slds-tabs_${scoped ? 'scoped' : 'default'}__link`}
             role="tab"
             tabIndex={index}
             aria-selected={activeTab === tab.id}
@@ -73,12 +73,12 @@ class Tab extends React.Component {
   }
 
   renderBody() {
-    const { tabs, variation } = this.props;
+    const { tabs, scoped } = this.props;
     const { activeTab } = this.state;
 
     return tabs.map((tab) => {
       const bodyClasses = [
-        `slds-tabs_${variation}__content`,
+        `slds-tabs_${scoped ? 'scoped' : 'default'}__content`,
         { 'slds-show': activeTab === tab.id },
         { 'slds-hide': activeTab !== tab.id },
       ];
@@ -98,17 +98,17 @@ class Tab extends React.Component {
   }
 
   render() {
-    const { className, variation } = this.props;
+    const { className, scoped } = this.props;
     const rest = omit(this.props, Object.keys(Tab.propTypes));
 
     const sldsClasses = [
-      `slds-tabs_${variation}`,
+      `slds-tabs_${scoped}`,
       className
     ];
 
     return (
       <div {...rest} className={cx(sldsClasses)}>
-        <ul className={`slds-tabs_${this.props.variation}__nav`} role="tablist">
+        <ul className={`slds-tabs_${scoped ? 'scoped' : 'default'}__nav`} role="tablist">
           {this.renderHeader()}
         </ul>
         {this.renderBody()}
