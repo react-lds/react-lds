@@ -13,6 +13,7 @@ const Breadcrumb = (props) => {
   const sldsClasses = [
     'slds-breadcrumb',
     'slds-list_horizontal',
+    'slds-wrap',
     className
   ];
 
