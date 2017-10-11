@@ -59,7 +59,7 @@ describe('<Tab />', () => {
   });
 
   it('renders scoped variation', () => {
-    mounted.setProps({ variation: 'scoped' });
+    mounted.setProps({ scoped: true });
     const liItem = mounted.find('ul > li').first();
     const aItem = liItem.find('a');
     const divItem = mounted.find('#tab-1');

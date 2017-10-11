@@ -102,7 +102,7 @@ class Tab extends React.Component {
     const rest = omit(this.props, Object.keys(Tab.propTypes));
 
     const sldsClasses = [
-      `slds-tabs_${scoped}`,
+      `slds-tabs_${scoped ? 'scoped' : 'default'}`,
       className
     ];
 
