@@ -56,6 +56,12 @@ describe('<Textarea />', () => {
     expect(mounted.find('textarea').prop('aria-describedby')).toEqual(hash);
   });
 
+  it('hides the error message', () => {
+    mounted.setProps({ error: 'shit', errorMessage: false });
+    expect(mounted.find('.slds-form-element__help').length).toEqual(0);
+    expect(mounted.find('textarea').prop('aria-describedby')).toEqual(null);
+  });
+
   it('renders a readOnly-version', () => {
     mounted.setProps({ readOnly: true });
     expect(mounted.find('textarea').length).toBe(0);

@@ -10,6 +10,7 @@ const CheckboxRaw = (props) => {
     className,
     disabled,
     error,
+    errorMessage,
     hideLabel,
     id,
     label,
@@ -20,7 +21,7 @@ const CheckboxRaw = (props) => {
 
   const renderCheckbox = () => (
     <input
-      aria-describedby={error ? getUniqueHash(error, id) : null}
+      aria-describedby={error && errorMessage ? getUniqueHash(error, id) : null}
       {...rest}
       checked={checked}
       className={className}
@@ -66,6 +67,7 @@ CheckboxRaw.defaultProps = {
   className: null,
   disabled: false,
   error: null,
+  errorMessage: true,
   hideLabel: false,
   onChange: () => {},
   required: false,
@@ -88,6 +90,10 @@ CheckboxRaw.propTypes = {
   * renders an error for the checkbox
    */
   error: PropTypes.string,
+  /**
+   * disables the error message
+   */
+  errorMessage: PropTypes.bool,
   /**
    * sets the label to render as assistive text
    */

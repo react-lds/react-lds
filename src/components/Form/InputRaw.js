@@ -17,6 +17,7 @@ const InputRaw = (props) => {
     disabled,
     error,
     errorIcon,
+    errorMessage,
     iconLeft,
     iconRight,
     iconRightOnClick,
@@ -118,7 +119,7 @@ const InputRaw = (props) => {
       {renderIconLeft()}
       <input
         {...rest}
-        aria-describedby={error ? getUniqueHash(error, id) : null}
+        aria-describedby={error && errorMessage ? getUniqueHash(error, id) : null}
         className={cx(sldsClasses)}
         disabled={disabled}
         id={id}
@@ -146,6 +147,7 @@ InputRaw.defaultProps = {
   disabled: false,
   error: null,
   errorIcon: false,
+  errorMessage: true,
   iconLeft: null,
   iconRight: null,
   iconRightOnClick: () => {},
@@ -179,6 +181,10 @@ InputRaw.propTypes = {
    * renders an error for the input
    */
   error: PropTypes.string,
+  /**
+   * disables the error message
+   */
+  errorMessage: PropTypes.bool,
   /**
    * renders an additional error icon if an error is set
    */

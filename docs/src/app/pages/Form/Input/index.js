@@ -5,6 +5,7 @@ import exampleDefaultCode from '!raw!./ExampleDefault';
 import exampleDisabledCode from '!raw!./ExampleDisabled';
 import exampleErrorCode from '!raw!./ExampleError';
 import exampleErrorIconCode from '!raw!./ExampleErrorIcon';
+import exampleErrorMessageCode from '!raw!./ExampleErrorMessage';
 import exampleIconLeftCode from '!raw!./ExampleIconLeft';
 import exampleIconLeftRightCode from '!raw!./ExampleIconLeftRight';
 import exampleIconRightCode from '!raw!./ExampleIconRight';
@@ -20,6 +21,7 @@ import ExampleDefault from './ExampleDefault';
 import ExampleDisabled from './ExampleDisabled';
 import ExampleError from './ExampleError';
 import ExampleErrorIcon from './ExampleErrorIcon';
+import ExampleErrorMessage from './ExampleErrorMessage';
 import ExampleIconLeft from './ExampleIconLeft';
 import ExampleIconLeftRight from './ExampleIconLeftRight';
 import ExampleIconRight from './ExampleIconRight';
@@ -71,6 +73,10 @@ const mapId = (id) => {
     case 'error-icon':
       Component = ExampleErrorIcon;
       componentCode = exampleErrorIconCode;
+      break;
+    case 'error-message':
+      Component = ExampleErrorMessage;
+      componentCode = exampleErrorMessageCode;
       break;
     default:
       break;
