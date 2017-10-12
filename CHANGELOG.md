@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.3
+
+* Add option for disabling error message display
+* Add read only Inputs
+* Bugfix: Pill without close Button
+* Bugfix: Fix IconSVG background
+
 ## 2.0.2
 
 * Bugfix: Fix PageHeader RecordHome
