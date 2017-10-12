@@ -15,7 +15,7 @@ const Textarea = (props) => {
     className,
     disabled,
     error,
-    errorMessage,
+    hideErrorMessage,
     hideLabel,
     id,
     label,
@@ -49,7 +49,7 @@ const Textarea = (props) => {
         placeholder={placeholder}
         disabled={disabled}
         required={required}
-        aria-describedby={error && errorMessage ? getUniqueHash(error, id) : null}
+        aria-describedby={error && !hideErrorMessage ? getUniqueHash(error, id) : null}
       />
     );
   };
@@ -60,7 +60,7 @@ const Textarea = (props) => {
       <FormElementControl className={cx({ 'slds-border_bottom': readOnly })}>
         {renderContent()}
       </FormElementControl>
-      {errorMessage && <FormElementError error={error} id={id} />}
+      {!hideErrorMessage && <FormElementError error={error} id={id} />}
     </FormElement>
   );
 };
@@ -69,7 +69,7 @@ Textarea.defaultProps = {
   className: null,
   disabled: null,
   error: null,
-  errorMessage: true,
+  hideErrorMessage: false,
   hideLabel: false,
   onChange: () => {},
   readOnly: false,
@@ -92,7 +92,7 @@ Textarea.propTypes = {
   /**
    * renders the error message
    */
-  errorMessage: PropTypes.bool,
+  hideErrorMessage: PropTypes.bool,
   /**
    * sets the label to render as assistive text
    */

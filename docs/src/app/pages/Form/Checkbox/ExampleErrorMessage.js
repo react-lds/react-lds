@@ -8,7 +8,7 @@ const ExampleErrorMessage = () =>
       id="checkbox-input-1"
       label="Checkbox Label"
       error="Something is wrong"
-      errorMessage={false}
+      hideErrorMessage
       required
     />
   </div>;

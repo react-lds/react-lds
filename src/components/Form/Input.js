@@ -13,7 +13,7 @@ const Input = (props) => {
   const {
     error,
     errorIcon,
-    errorMessage,
+    hideErrorMessage,
     hideLabel,
     iconLeft,
     iconRight,
@@ -34,7 +34,7 @@ const Input = (props) => {
     <InputRaw
       error={error}
       errorIcon={errorIcon}
-      errorMessage={errorMessage}
+      hideErrorMessage={hideErrorMessage}
       iconLeft={iconLeft}
       iconRight={iconRight}
       id={id}
@@ -62,7 +62,7 @@ const Input = (props) => {
       >
         {inputRaw}
       </FormElementControl>
-      {errorMessage && <FormElementError error={error} id={id} />}
+      {!hideErrorMessage && <FormElementError error={error} id={id} />}
     </FormElement>
   );
 };
@@ -73,7 +73,7 @@ Input.defaultProps = {
   disabled: false,
   error: null,
   errorIcon: false,
-  errorMessage: true,
+  hideErrorMessage: false,
   hideLabel: false,
   iconLeft: null,
   iconRight: null,
@@ -115,9 +115,9 @@ Input.propTypes = {
    */
   errorIcon: PropTypes.bool,
   /**
-   * renders the error message
+   * hides the error message
    */
-  errorMessage: PropTypes.bool,
+  hideErrorMessage: PropTypes.bool,
   /**
    * sets the label to render as assistive text
    */

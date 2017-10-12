@@ -4,7 +4,7 @@ import { CheckboxGroup, CheckboxRaw } from 'react-lds';
 
 const ExampleGroupErrorMessage = () =>
   <div>
-    <CheckboxGroup id="fieldset-1" label="Fieldset" error="Oops, an error" errorMessage={false}>
+    <CheckboxGroup id="fieldset-1" label="Fieldset" error="Oops, an error" hideErrorMessage>
       <CheckboxRaw
         id="checkbox-input-1"
         label="Checkbox Label"

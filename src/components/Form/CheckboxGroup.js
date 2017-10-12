@@ -15,7 +15,7 @@ const CheckboxGroup = (props) => {
     children,
     className,
     error,
-    errorMessage,
+    hideErrorMessage,
     id,
     label,
     onChange,
@@ -25,7 +25,7 @@ const CheckboxGroup = (props) => {
 
 
   const wrapChildrenWithError = () => {
-    if (!error || !errorMessage) {
+    if (!error || hideErrorMessage) {
       return children;
     }
 
@@ -48,7 +48,7 @@ const CheckboxGroup = (props) => {
       <FormElementControl>
         {wrapChildrenWithError()}
       </FormElementControl>
-      {errorMessage && <FormElementError error={error} id={id} />}
+      {!hideErrorMessage && <FormElementError error={error} id={id} />}
     </FormElement>
   );
 };
@@ -56,7 +56,7 @@ const CheckboxGroup = (props) => {
 CheckboxGroup.defaultProps = {
   className: null,
   error: null,
-  errorMessage: true,
+  hideErrorMessage: false,
   onChange: () => {},
   required: false,
 };
@@ -75,9 +75,9 @@ CheckboxGroup.propTypes = {
    */
   error: PropTypes.string,
   /**
-   * renders the error message
+   * hides the error message
    */
-  errorMessage: PropTypes.bool,
+  hideErrorMessage: PropTypes.bool,
   /**
    * id of the fieldset
    */

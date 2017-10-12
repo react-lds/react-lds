@@ -11,7 +11,7 @@ import {
 const Checkbox = (props) => {
   const {
     error,
-    errorMessage,
+    hideErrorMessage,
     id,
     required,
   } = props;
@@ -21,14 +21,14 @@ const Checkbox = (props) => {
       <FormElementControl>
         <CheckboxRaw {...props} />
       </FormElementControl>
-      {errorMessage && <FormElementError error={error} id={id} />}
+      {!hideErrorMessage && <FormElementError error={error} id={id} />}
     </FormElement>
   );
 };
 
 Checkbox.defaultProps = {
   error: null,
-  errorMessage: true,
+  hideErrorMessage: false,
   hideLabel: false,
   required: false,
 };
@@ -39,9 +39,9 @@ Checkbox.propTypes = {
    */
   error: PropTypes.string,
   /**
-   * renders the error message
+   * hides the error message
    */
-  errorMessage: PropTypes.bool,
+  hideErrorMessage: PropTypes.bool,
   /**
    * sets the label to render as assistive text
    */

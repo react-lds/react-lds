@@ -9,7 +9,7 @@ const ExampleErrorMessage = () =>
       label="Textarea Label"
       placeholder="Placeholder Text"
       error="This field is required"
-      errorMessage={false}
+      hideErrorMessage
       required
     />
   </div>;
