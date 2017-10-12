@@ -31,12 +31,14 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/input/required">Required</PageNavigationElement>
             <PageNavigationElement to="/forms/input/disabled">Disabled</PageNavigationElement>
             <PageNavigationElement to="/forms/input/error">Error</PageNavigationElement>
-            <PageNavigationElement to="forms/input/error-icon">Error with icon</PageNavigationElement>
+            <PageNavigationElement to="forms/input/error-icon">Error with Icon</PageNavigationElement>
+            <PageNavigationElement to="forms/input/error-message">Error without Message</PageNavigationElement>
           </PageNavigationMenu>
           <PageNavigationMenu title="Textarea" to="/forms/textarea">
             <PageNavigationElement to="/forms/textarea/default">Default</PageNavigationElement>
             <PageNavigationElement to="/forms/textarea/required">Required</PageNavigationElement>
             <PageNavigationElement to="/forms/textarea/error">Error</PageNavigationElement>
+            <PageNavigationElement to="/forms/textarea/error-message">Error without Message</PageNavigationElement>
             <PageNavigationElement to="/forms/textarea/disabled">Disabled</PageNavigationElement>
             <PageNavigationElement to="/forms/textarea/readonly">Read-Only</PageNavigationElement>
           </PageNavigationMenu>
@@ -45,6 +47,7 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/select/default">Default</PageNavigationElement>
             <PageNavigationElement to="/forms/select/required">Required</PageNavigationElement>
             <PageNavigationElement to="/forms/select/error">Error</PageNavigationElement>
+            <PageNavigationElement to="/forms/select/error-message">Error without Message</PageNavigationElement>
             <PageNavigationElement to="/forms/select/disabled">Disabled</PageNavigationElement>
             <PageNavigationElement to="/forms/select/multiple">Multiple Selection</PageNavigationElement>
           </PageNavigationMenu>
@@ -55,10 +58,14 @@ const Forms = ({ children }) =>
             <PageNavigationElement to="/forms/checkbox/default">Default</PageNavigationElement>
             <PageNavigationElement to="/forms/checkbox/required">Required</PageNavigationElement>
             <PageNavigationElement to="/forms/checkbox/error">Error</PageNavigationElement>
+            <PageNavigationElement to="/forms/checkbox/error-message">Error without Message</PageNavigationElement>
             <PageNavigationElement to="/forms/checkbox/disabled">Disabled</PageNavigationElement>
             <PageNavigationElement to="/forms/checkbox/group">Group</PageNavigationElement>
-            <PageNavigationElement to="/forms/checkbox/group_error">Group with Error</PageNavigationElement>
-            <PageNavigationElement to="/forms/checkbox/group_disabled">Group Disabled</PageNavigationElement>
+            <PageNavigationElement to="/forms/checkbox/group-error">Group with Error</PageNavigationElement>
+            <PageNavigationElement to="/forms/checkbox/group-error-message">
+              Group with Error without Message
+            </PageNavigationElement>
+            <PageNavigationElement to="/forms/checkbox/group-disabled">Group Disabled</PageNavigationElement>
           </PageNavigationMenu>
         </PageNavigation>
       </Column>

@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 import exampleDefaultCode from '!raw!./ExampleDefault';
 import exampleDisabledCode from '!raw!./ExampleDisabled';
 import exampleErrorCode from '!raw!./ExampleError';
+import exampleErrorMessageCode from '!raw!./ExampleErrorMessage';
 import exampleGroupCode from '!raw!./ExampleGroup';
 import exampleGroupDisabledCode from '!raw!./ExampleGroupDisabled';
 import exampleGroupErrorCode from '!raw!./ExampleGroupError';
+import exampleGroupErrorMessageCode from '!raw!./ExampleGroupErrorMessage';
 import exampleGroupRequiredCode from '!raw!./ExampleGroupRequired';
 import exampleRequiredCode from '!raw!./ExampleRequired';
 import inputCode from '!raw!react-lds/components/Form/Input';
@@ -17,9 +19,11 @@ import PropTypeDescription from '../../../components/PropTypeDescription';
 import ExampleDefault from './ExampleDefault';
 import ExampleDisabled from './ExampleDisabled';
 import ExampleError from './ExampleError';
+import ExampleErrorMessage from './ExampleErrorMessage';
 import ExampleGroup from './ExampleGroup';
 import ExampleGroupDisabled from './ExampleGroupDisabled';
 import ExampleGroupError from './ExampleGroupError';
+import ExampleGroupErrorMessage from './ExampleGroupErrorMessage';
 import ExampleGroupRequired from './ExampleGroupRequired';
 import ExampleRequired from './ExampleRequired';
 
@@ -44,19 +48,27 @@ const mapId = (id) => {
       Component = ExampleError;
       componentCode = exampleErrorCode;
       break;
+    case 'error-message':
+      Component = ExampleErrorMessage;
+      componentCode = exampleErrorMessageCode;
+      break;
     case 'group':
       Component = ExampleGroup;
       componentCode = exampleGroupCode;
       break;
-    case 'group_disabled':
+    case 'group-disabled':
       Component = ExampleGroupDisabled;
       componentCode = exampleGroupDisabledCode;
       break;
-    case 'group_error':
+    case 'group-error':
       Component = ExampleGroupError;
       componentCode = exampleGroupErrorCode;
       break;
-    case 'group_required':
+    case 'group-error-message':
+      Component = ExampleGroupErrorMessage;
+      componentCode = exampleGroupErrorMessageCode;
+      break;
+    case 'group-required':
       Component = ExampleGroupRequired;
       componentCode = exampleGroupRequiredCode;
       break;

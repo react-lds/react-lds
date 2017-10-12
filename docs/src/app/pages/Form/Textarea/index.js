@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import exampleDefaultCode from '!raw!./ExampleDefault';
 import exampleDisabledCode from '!raw!./ExampleDisabled';
 import exampleErrorCode from '!raw!./ExampleError';
+import exampleErrorMessageCode from '!raw!./ExampleErrorMessage';
 import exampleReadonlyCode from '!raw!./ExampleReadonly';
 import exampleRequiredCode from '!raw!./ExampleRequired';
 import inputCode from '!raw!react-lds/components/Form/Textarea';
@@ -14,6 +15,7 @@ import PropTypeDescription from '../../../components/PropTypeDescription';
 import ExampleDefault from './ExampleDefault';
 import ExampleDisabled from './ExampleDisabled';
 import ExampleError from './ExampleError';
+import ExampleErrorMessage from './ExampleErrorMessage';
 import ExampleReadonly from './ExampleReadonly';
 import ExampleRequired from './ExampleRequired';
 
@@ -33,6 +35,10 @@ const mapId = (id) => {
     case 'error':
       Component = ExampleError;
       componentCode = exampleErrorCode;
+      break;
+    case 'error-message':
+      Component = ExampleErrorMessage;
+      componentCode = exampleErrorMessageCode;
       break;
     case 'disabled':
       Component = ExampleDisabled;

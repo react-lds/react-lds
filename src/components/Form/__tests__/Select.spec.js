@@ -68,6 +68,12 @@ describe('<Select />', () => {
     expect(mounted.find('select').prop('aria-describedby')).toEqual(hash);
   });
 
+  it('hides the error message', () => {
+    mounted.setProps({ error: 'shit', hideErrorMessage: true });
+    expect(mounted.find('.slds-form-element__help').length).toEqual(0);
+    expect(mounted.find('select').prop('aria-describedby')).toEqual(null);
+  });
+
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('select').hasClass('foo')).toBeTruthy();
