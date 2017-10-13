@@ -383,7 +383,7 @@ export class Datepicker extends React.Component {
   }
 
   render() {
-    const { className, required } = this.props;
+    const { className, disabled, required } = this.props;
     const { inputValue, isValid, open, viewedDate } = this.state;
     const viewedMonthName = moment(viewedDate).format('MMMM');
 
@@ -395,6 +395,7 @@ export class Datepicker extends React.Component {
     return (
       <div className={className} style={{ position: 'relative' }}>
         <Input
+          disabled={disabled}
           id="date-input"
           label={inputFieldLabel}
           placeholder={placeholder}
@@ -446,6 +447,7 @@ export class Datepicker extends React.Component {
 Datepicker.defaultProps = {
   className: null,
   date: undefined,
+  disabled: false,
   initialDate: null,
   locale: 'en',
   open: false,
@@ -464,6 +466,10 @@ Datepicker.propTypes = {
    * Date in ISO 8601 format (controlled component)
    */
   date: PropTypes.string,
+  /**
+   * Disabled state
+   */
+  disabled: PropTypes.bool,
   /**
    * Optional initial date in ISO 8601 format
    */
