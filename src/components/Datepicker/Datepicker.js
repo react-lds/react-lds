@@ -383,7 +383,7 @@ export class Datepicker extends React.Component {
   }
 
   render() {
-    const { required } = this.props;
+    const { className, required } = this.props;
     const { inputValue, isValid, open, viewedDate } = this.state;
     const viewedMonthName = moment(viewedDate).format('MMMM');
 
@@ -393,7 +393,7 @@ export class Datepicker extends React.Component {
     const placeholder = moment().localeData().longDateFormat(placeholderDateFormat);
 
     return (
-      <div style={{ position: 'relative' }}>
+      <div className={className} style={{ position: 'relative' }}>
         <Input
           id="date-input"
           label={inputFieldLabel}
@@ -444,6 +444,7 @@ export class Datepicker extends React.Component {
 }
 
 Datepicker.defaultProps = {
+  className: null,
   date: undefined,
   initialDate: null,
   locale: 'en',
@@ -455,6 +456,10 @@ Datepicker.defaultProps = {
 };
 
 Datepicker.propTypes = {
+  /**
+   * Additional class name
+   */
+  className: PropTypes.string,
   /**
    * Date in ISO 8601 format (controlled component)
    */

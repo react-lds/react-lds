@@ -25,6 +25,12 @@ describe('<Datepicker />', () => {
     expect(mounted.find('h2').first().text()).toBe(moment().format('MMMM'));
   });
 
+  it('renders additional className', () => {
+    expect(mounted.hasClass('foo')).toBe(false);
+    mounted = shallow(<Datepicker className="foo" onChange={changed} />);
+    expect(mounted.hasClass('foo')).toBe(true);
+  });
+
   it('highlights the current day', () => {
     expect(mounted.find('.slds-is-today').children().first().text()).toBe(`Today: ${moment().format('D')}`);
   });
