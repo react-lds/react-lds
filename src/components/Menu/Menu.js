@@ -45,6 +45,7 @@ export class Menu extends Component {
           neutral={button.neutral}
           onClick={this.toggle}
           title={button.title}
+          tooltip={button.tooltip}
         >
           <ButtonIcon
             icon={button.icon}
@@ -103,12 +104,13 @@ Menu.propTypes = {
    * ```
    */
   button: PropTypes.shape({
+    brand: PropTypes.bool,
     icon: PropTypes.string.isRequired,
+    neutral: PropTypes.bool,
+    noBorder: PropTypes.bool,
     sprite: PropTypes.string.isRequired,
     title: PropTypes.string,
-    noBorder: PropTypes.bool,
-    neutral: PropTypes.bool,
-    brand: PropTypes.bool,
+    tooltip: PropTypes.string,
   }),
   /**
    * one MenuList or many of them
