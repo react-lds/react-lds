@@ -3,6 +3,7 @@ import React from 'react';
 import exampleDefaultCode from '!raw!./ExampleDefault';
 import exampleControlledCode from '!raw!./ExampleControlled';
 import exampleMultiCode from '!raw!./ExampleMulti';
+import exampleMultiCustomRenderingCode from '!raw!./ExampleMultiCustomRendering';
 import exampleMultiCreateCode from '!raw!./ExampleMultiCreate';
 import exampleMultiTableCode from '!raw!./ExampleMultiTable';
 import lookupCode from '!raw!react-lds/components/Lookup/Lookup';
@@ -15,6 +16,7 @@ import PropTypeDescription from '../../components/PropTypeDescription';
 import ExampleDefault from './ExampleDefault';
 import ExampleControlled from './ExampleControlled';
 import ExampleMulti from './ExampleMulti';
+import ExampleMultiCustomRendering from './ExampleMultiCustomRendering';
 import ExampleMultiCreate from './ExampleMultiCreate';
 import ExampleMultiTable from './ExampleMultiTable';
 
@@ -28,6 +30,7 @@ const LookupPage = () => (
       />
       <ExampleDefault />
     </div>
+
     <div className="slds-p-around--xx-large">
       <CodeExample
         title="Controlled Lookup"
@@ -35,12 +38,21 @@ const LookupPage = () => (
       />
       <ExampleControlled />
     </div>
+
     <div className="slds-p-around--xx-large">
       <CodeExample
         title="Multi Lookup"
         code={exampleMultiCode}
       />
       <ExampleMulti />
+    </div>
+
+    <div className="slds-p-around--xx-large">
+      <CodeExample
+        title="Multi Lookup with custom rendering"
+        code={exampleMultiCustomRenderingCode}
+      />
+      <ExampleMultiCustomRendering />
     </div>
 
     <div className="slds-p-around--xx-large">
