@@ -1,6 +1,7 @@
 import React from 'react';
 
 import datepickerCode from '!raw!react-lds/components/Datepicker/Datepicker';
+import exampleDisabledDatepickerCode from '!raw!./ExampleDisabledDatepicker';
 import exampleDatepickerCode from '!raw!./ExampleDatepicker';
 import exampleEmptyDatepickerCode from '!raw!./ExampleEmptyDatepicker';
 import exampleControlledCode from '!raw!./ExampleControlled';
@@ -11,6 +12,7 @@ import Masthead from '../../components/MastHead';
 import PropTypeDescription from '../../components/PropTypeDescription';
 
 import ExampleDatepicker from './ExampleDatepicker';
+import ExampleDisabledDatepicker from './ExampleDisabledDatepicker';
 import ExampleEmptyDatepicker from './ExampleEmptyDatepicker';
 import ExampleControlled from './ExampleControlled';
 
@@ -49,6 +51,18 @@ const Datepickers = () =>
         />
         <div style={{ position: 'relative' }}>
           <ExampleControlled />
+        </div>
+      </section>
+    </div>
+
+    <div className="slds-p-around--xx-large" style={{ height: 'auto' }}>
+      <section className="slds-m-bottom--xx-large slds-p-top--x-large">
+        <CodeExample
+          title="Controlled Datepicker"
+          code={exampleDisabledDatepickerCode}
+        />
+        <div style={{ position: 'relative' }}>
+          <ExampleDisabledDatepicker />
         </div>
       </section>
     </div>
