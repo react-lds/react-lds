@@ -25,7 +25,7 @@ const ExampleMulti = () => {
 
   const tableFields = [
     {
-      name: 'name',
+      name: 'label',
       label: 'Contact Name',
     },
     {
