@@ -21,6 +21,13 @@ import {
 export class Lookup extends Component {
   static propTypes = {
     /**
+     * if set to true, allows the creation of new elements that were not found
+     * during lookups. For example new email addresses.
+     * The new entry will not have an object type and the ID will be the current
+     * timestamp.
+     */
+    allowCreate: PropTypes.bool,
+    /**
      * class name
      */
     className: PropTypes.string,
@@ -83,12 +90,9 @@ export class Lookup extends Component {
      */
     placeholder: PropTypes.string,
     /**
-     * if set to true, allows the creation of new elements that were not found
-     * during lookups. For example new email addresses.
-     * The new entry will not have an object type and the ID will be the current
-     * timestamp.
+     * Callback for rendering a single selection pill.
      */
-    allowCreate: PropTypes.bool,
+    renderSelection: PropTypes.func,
     /**
      * if set, renders the Advanced Modal table layout
      */
@@ -118,6 +122,7 @@ export class Lookup extends Component {
     onFocus: null,
     placeholder: 'Search',
     tableResultsHeading: 'Results',
+    renderSelection: null,
     selection: null,
     table: false,
     tableFields: [],
@@ -300,6 +305,23 @@ export class Lookup extends Component {
     this.setState({ highlighted: id });
   }
 
+  defaultRenderSelection = (item, { onClose }) => {
+    const { id, label, objectType } = item;
+    const { multi } = this.props;
+
+    return (
+      <Pill
+        key={id}
+        className={!multi ? 'slds-size_1-of-1' : null}
+        icon={objectType && (<Icon sprite={Lookup.getSprite(objectType)} icon={objectType} />)}
+        id={id}
+        title={label}
+        label={label}
+        onClose={onClose}
+      />
+    );
+  };
+
   renderInput() {
     const { emailLayout, id, placeholder } = this.props;
     const {
@@ -335,25 +357,20 @@ export class Lookup extends Component {
   }
 
   renderSelections() {
-    const { emailLayout, multi } = this.props;
+    const {
+      emailLayout,
+      renderSelection: customRenderSelection
+    } = this.props;
     const { selected } = this.state;
 
     if (selected.length < 1) { return null; }
 
-    const renderSelection = (item) => {
-      const { id, label, objectType } = item;
-      return (
-        <Pill
-          key={id}
-          className={!multi ? 'slds-size_1-of-1' : null}
-          icon={objectType && (<Icon sprite={Lookup.getSprite(objectType)} icon={objectType} />)}
-          id={id}
-          title={label}
-          label={label}
-          onClose={() => this.removeSelection(item)}
-        />
-      );
+    const renderSelectionFn = customRenderSelection || this.defaultRenderSelection;
+    const renderSelection = (item, index) => {
+      const options = { index, onClose: () => this.removeSelection(item) };
+      return renderSelectionFn(item, options, this.props);
     };
+
 
     return (
       <PillContainer bare={emailLayout} onClick={this.openList}>
