@@ -465,14 +465,14 @@ export class Lookup extends Component {
       <tbody>
         {displayItems.map(item =>
           <Row key={item.id}>
-            {tableFields.map((field, index) =>
+            {tableFields.map(({ name }, index) =>
               <Cell
-                data-label={field.name}
+                data-label={name}
                 scope={index === 0 ? 'row' : null}
                 onClick={() => this.addSelection(item)}
-                key={item.id}
+                key={`${item.id}-${name}`}
               >
-                {renderBodyCell(item.label, index, item.objectType)}
+                {renderBodyCell(item[name], index, item.objectType)}
               </Cell>
             )}
           </Row>
