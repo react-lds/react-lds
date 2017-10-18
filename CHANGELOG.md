@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.0
+
+* Additional display props for Datepicker (`className` and `disabled`)
+* Enable tooltips for menu
+* Add custom renderer callback for `Lookup` pills
+* Bugfix: rendering of mulitple columns in `Lookup` in table mode
+
 ## 2.0.3
 
 * Add option for disabling error message display
