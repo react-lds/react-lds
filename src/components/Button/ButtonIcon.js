@@ -21,6 +21,7 @@ const ButtonIcon = (props) => {
       fill={false}
       icon={icon}
       sprite={sprite}
+      isButton
     />
   );
 };
