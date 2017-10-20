@@ -2,6 +2,7 @@
 
 # Unreleased
 
+* Breaking: `Box` theme usage
 * Breaking: Disallow `IconSVG` to have a background
 * Remove circle boolean, LDS sets it automatically for `action` icons
 
