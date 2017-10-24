@@ -55,7 +55,7 @@ export const Notification = (props) => {
       <div {...rest} className={cx(sldsClasses)} role="alert">
         {icon && wrapIcon(icon)}
         <Button
-          icon-inverse={getThemeName(className) ? undefined : true}
+          iconInverse={getThemeName(className) ? undefined : true}
           className="slds-notify__close"
           icon
           onClick={onClickClose}

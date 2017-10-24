@@ -8,7 +8,7 @@ const ModalHeader = (props) => {
   const { children, className, label, prompt, tagline, title, uncloseable, onClickClose, ...rest } = props;
 
   const getCloseButton = () => (
-    <Button onClick={onClickClose} className="slds-modal__close" icon-inverse size="large">
+    <Button onClick={onClickClose} className="slds-modal__close" iconInverse size="large">
       <ButtonIcon sprite="action" icon="close" size="large" />
       <span className="slds-assistive-text">Close</span>
     </Button>

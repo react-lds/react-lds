@@ -38,9 +38,9 @@ export class Menu extends Component {
         <Button
           aria-haspopup="true"
           brand={button.brand}
+          className={(noBorder && !title) ? 'slds-button_icon-container' : null}
           disabled={disabled}
-          icon-border-filled={!noBorder && !title}
-          icon-container={noBorder && !title}
+          iconBorder={(!noBorder && !title) ? 'border-filled' : null}
           neutral={button.neutral}
           onClick={this.toggle}
           title={button.title}
