@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
-import { flavorable } from '../../decorators';
 import { ButtonIcon } from '../../';
 
 export const StatefulButton = (props) => {
@@ -15,12 +13,22 @@ export const StatefulButton = (props) => {
     stateSelected,
     stateSelectedFocus,
     tooltip,
+    neutral,
+    brand,
+    destructive,
+    inverse,
+    success,
     ...rest
   } = props;
 
   const sldsButtonClasses = [
     'slds-button',
     'slds-button_stateful',
+    { 'slds-button_neutral': neutral },
+    { 'slds-button_brand': brand },
+    { 'slds-button_destructive': destructive },
+    { 'slds-button_inverse': inverse },
+    { 'slds-button_success': success },
     selected ? 'slds-is-selected' : 'slds-not-selected',
     className,
   ];
@@ -61,14 +69,6 @@ export const StatefulButton = (props) => {
     </button>
   );
 };
-
-StatefulButton.flavors = [
-  'neutral',
-  'brand',
-  'destructive',
-  'inverse',
-  'success',
-];
 
 StatefulButton.propTypes = {
   /**
@@ -146,11 +146,30 @@ StatefulButton.propTypes = {
      */
     title: PropTypes.string.isRequired,
   }).isRequired,
-
   /**
    * optional tooltip
    */
   tooltip: PropTypes.string,
+  /**
+   * neutral button
+   */
+  neutral: PropTypes.bool,
+  /**
+   * brand button
+   */
+  brand: PropTypes.bool,
+  /**
+   * destructive button
+   */
+  destructive: PropTypes.bool,
+  /**
+   * inverse button
+   */
+  inverse: PropTypes.bool,
+  /**
+   * success button
+   */
+  success: PropTypes.bool,
 };
 
 StatefulButton.defaultProps = {
@@ -158,6 +177,11 @@ StatefulButton.defaultProps = {
   disabled: false,
   selected: false,
   tooltip: null,
+  neutral: false,
+  brand: false,
+  destructive: false,
+  inverse: false,
+  success: false,
 };
 
-export default flavorable(StatefulButton, 'button');
+export default StatefulButton;

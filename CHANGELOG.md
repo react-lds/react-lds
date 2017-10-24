@@ -2,6 +2,10 @@
 
 # Unreleased
 
+* Breaking: `StatefulButton` flavor usage
+* Breaking: `Button` flavor usage
+* Breaking: `Notification` theme usage
+* Breaking: `Badge` theme usage
 * Breaking: `Box` theme usage
 * Breaking: Disallow `IconSVG` to have a background
 * Remove circle boolean, LDS sets it automatically for `action` icons
