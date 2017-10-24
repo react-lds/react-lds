@@ -75,17 +75,18 @@ export class Popover extends React.Component {
 
   renderCloseButton() {
     const { onClose, className, customLayout } = this.props;
+    const invertIcon = customLayout ? Popover.getThemeName(customLayout) : Popover.getThemeName(className);
     const closeButtonClasses = [
       'slds-button_icon-small',
       'slds-float_right',
       'slds-popover__close',
+      { 'slds-button_icon-inverse': invertIcon },
     ];
-    const invertIcon = customLayout ? Popover.getThemeName(customLayout) : Popover.getThemeName(className);
 
     return (
       <Button
         icon
-        icon-inverse={invertIcon}
+        iconInverse={invertIcon}
         className={cx(closeButtonClasses)}
         onClick={onClose}
       >
