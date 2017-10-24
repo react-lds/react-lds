@@ -30,9 +30,8 @@ const AccordionSection = (props) => {
             <Button
               aria-controls={`accordion-details-${id}`}
               aria-expanded={isOpen ? 'true' : 'false'}
-              className="slds-accordion__summary-action"
+              className="slds-accordion__summary-action slds-button_reset"
               onClick={() => {}}
-              reset
             >
               <ButtonIcon
                 position="left"
@@ -46,8 +45,8 @@ const AccordionSection = (props) => {
             aria-haspopup="true"
             className="slds-shrink-none"
             icon
-            icon-border-filled
-            icon-x-small
+            iconSize="x-small"
+            iconBorder="border-filled"
             onClick={summaryOnClick}
           >
             <ButtonIcon
