@@ -2,6 +2,7 @@
 
 # Unreleased
 
+* Breaking: `Popover` theme usage, renamed customLayout to customHeaderTheme
 * Breaking: `StatefulButton` flavor usage
 * Breaking: `Button` flavor usage
 * Breaking: `Notification` theme usage

@@ -14,6 +14,20 @@ export function getThemes() {
   return select('Theme', THEMES, 'shade');
 }
 
+export function getThemesWithoutTexture() {
+  return select('Theme', [
+    'alt-inverse',
+    'default',
+    'error',
+    'info',
+    'inverse',
+    'offline',
+    'shade',
+    'success',
+    'warning',
+  ], 'default');
+}
+
 export function getSizes() {
   return select('Size', SIZES, 'medium');
 }

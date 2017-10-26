@@ -54,7 +54,7 @@ describe('<Popover />', () => {
 
   it('render custom warning layout', () => {
     const mockFunction = jest.fn();
-    mounted.setProps({ closeable: true, onClose: mockFunction, customLayout: 'warning' });
+    mounted.setProps({ closeable: true, onClose: mockFunction, customHeaderTheme: 'warning' });
     const header = mounted.find('header.slds-popover__header');
     expect(header.hasClass('slds-theme_warning')).toBeTruthy();
     const button = mounted.find('Button button');
