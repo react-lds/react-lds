@@ -413,7 +413,7 @@ export class Datepicker extends React.Component {
             <div className="slds-datepicker__filter slds-grid">
               <div className="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
                 <div className="slds-align-middle">
-                  <Button icon onClick={() => this.onMonthChange(-1)} icon-container>
+                  <Button flavor="icon" onClick={() => this.onMonthChange(-1)} icon-container>
                     <ButtonIcon position="left" sprite="utility" icon="left" />
                   </Button>
                 </div>
@@ -421,7 +421,7 @@ export class Datepicker extends React.Component {
                   {viewedDate.format('MMMM')}
                 </h2>
                 <div className="slds-align-middle">
-                  <Button icon onClick={() => this.onMonthChange(1)} icon-container>
+                  <Button flavor="icon" onClick={() => this.onMonthChange(1)} icon-container>
                     <ButtonIcon position="right" sprite="utility" icon="right" />
                   </Button>
                 </div>
