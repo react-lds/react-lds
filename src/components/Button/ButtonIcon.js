@@ -18,7 +18,6 @@ const ButtonIcon = (props) => {
     <IconSVG
       {...rest}
       className={cx(sldsClasses)}
-      fill={false}
       icon={icon}
       sprite={sprite}
       isButton

@@ -12,30 +12,16 @@ export const Button = (props) => {
     title,
     tooltip,
     value,
-    neutral,
-    brand,
-    destructive,
-    inverse,
-    success,
-    iconSize,
-    iconBorder,
-    icon,
-    iconInverse,
+    flavor,
     ...rest
   } = props;
+
+  const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-button_${f}`) : `slds-button_${flavor}`;
 
   const sldsClasses = [
     'slds-button',
     { 'slds-is-selected': !!selected },
-    { 'slds-button_neutral': neutral },
-    { 'slds-button_brand': brand },
-    { 'slds-button_destructive': destructive },
-    { 'slds-button_inverse': inverse },
-    { 'slds-button_success': success },
-    { [`slds-button_icon-${iconSize}`]: !!iconSize },
-    { [`slds-button_icon-${iconBorder}`]: !!iconBorder },
-    { 'slds-button_icon': icon },
-    { 'slds-button_icon-inverse': iconInverse },
+    flavorClasses,
     className,
   ];
 
@@ -63,15 +49,7 @@ Button.defaultProps = {
   title: null,
   tooltip: null,
   value: null,
-  neutral: false,
-  brand: false,
-  destructive: false,
-  inverse: false,
-  success: false,
-  icon: false,
-  iconSize: null,
-  iconBorder: null,
-  iconInverse: false,
+  flavor: null,
 };
 
 Button.propTypes = {
@@ -108,42 +86,41 @@ Button.propTypes = {
    */
   value: PropTypes.string,
   /**
-   * neutral button
+   * Buttun flavor, single string or multiple strings in array
    */
-  neutral: PropTypes.bool,
-  /**
-   * brand button
-   */
-  brand: PropTypes.bool,
-  /**
-   * destructive button
-   */
-  destructive: PropTypes.bool,
-  /**
-   * inverse button
-   */
-  inverse: PropTypes.bool,
-  /**
-   * success button
-   */
-  success: PropTypes.bool,
-  /**
-   * button has icon
-   */
-  icon: PropTypes.bool,
-  /**
-   * specify icon size if not medium
-   */
-  iconSize: PropTypes.oneOf(['xx-small', 'x-small', 'small', 'large']),
-  /**
-   * specify icon button border if any
-   */
-  iconBorder: PropTypes.oneOf(['border', 'border-filled', 'border-inverse']),
-  /**
-   * invert icon
-   */
-  iconInverse: PropTypes.bool,
-
+  flavor: PropTypes.oneOfType([PropTypes.oneOf([
+    'neutral',
+    'brand',
+    'destructive',
+    'icon',
+    'icon-border-filled',
+    'icon-container',
+    'icon-inverse',
+    'icon-border',
+    'icon-bare',
+    'icon-x-small',
+    'reset',
+    'success',
+    'x-small',
+    'small',
+    'large',
+  ]), PropTypes.arrayOf(PropTypes.oneOf([
+    'neutral',
+    'brand',
+    'destructive',
+    'icon',
+    'icon-border-filled',
+    'icon-container',
+    'icon-inverse',
+    'icon-border',
+    'icon-bare',
+    'icon-x-small',
+    'reset',
+    'success',
+    'x-small',
+    'small',
+    'large',
+  ]))]),
 };
 
 export default Button;
