@@ -28,9 +28,10 @@ const AccordionSection = (props) => {
         <div className="slds-accordion__summary">
           <h3 className="slds-text-heading_small slds-accordion__summary-heading">
             <Button
+              flavor="reset"
               aria-controls={`accordion-details-${id}`}
               aria-expanded={isOpen ? 'true' : 'false'}
-              className="slds-accordion__summary-action slds-button_reset"
+              className="slds-accordion__summary-action"
               onClick={() => {}}
             >
               <ButtonIcon
@@ -43,10 +44,7 @@ const AccordionSection = (props) => {
           </h3>
           <Button
             aria-haspopup="true"
-            className="slds-shrink-none"
-            icon
-            iconSize="x-small"
-            iconBorder="border-filled"
+            className="slds-shrink-none slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
             onClick={summaryOnClick}
           >
             <ButtonIcon
