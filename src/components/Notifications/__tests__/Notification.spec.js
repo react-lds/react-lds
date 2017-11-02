@@ -39,7 +39,7 @@ describe('<Notification />', () => {
     mounted.setProps({ toast: true });
     expect(mounted.find('button svg').hasClass('slds-button__icon_large')).toBeTruthy();
 
-    mounted.setProps({ toast: false, alert: true });
+    mounted.setProps({ toast: false });
     expect(mounted.find('button svg').hasClass('slds-button__icon_large')).toBeFalsy();
   });
 

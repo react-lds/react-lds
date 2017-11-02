@@ -2,16 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { flavorable, themeable } from '../../decorators';
 import { Button, ButtonIcon } from '../../';
-
-const getThemeName = (themeStr) => {
-  if (typeof themeStr === 'string') {
-    return themeStr.includes('theme_warning');
-  }
-
-  return false;
-};
 
 export const Notification = (props) => {
   const {
@@ -20,6 +11,7 @@ export const Notification = (props) => {
     icon,
     title,
     toast,
+    theme,
     onClickClose,
     ...rest
   } = props;
@@ -27,6 +19,9 @@ export const Notification = (props) => {
   const sldsClasses = [
     'slds-notify',
     { 'slds-notify_toast': !!toast },
+    { 'slds-notify_alert': !toast },
+    'slds-theme_alert-texture',
+    { [`slds-theme_${theme}`]: !!theme },
     className,
   ];
 
@@ -55,9 +50,8 @@ export const Notification = (props) => {
       <div {...rest} className={cx(sldsClasses)} role="alert">
         {icon && wrapIcon(icon)}
         <Button
-          iconInverse={getThemeName(className) ? undefined : true}
+          flavor={[(theme === 'warning') ? null : 'icon-inverse', 'icon']}
           className="slds-notify__close"
-          icon
           onClick={onClickClose}
         >
           <ButtonIcon sprite="utility" icon="close" size={toast ? 'large' : undefined} />
@@ -70,15 +64,12 @@ export const Notification = (props) => {
   );
 };
 
-Notification.flavors = [
-  'alert',
-];
-
 Notification.defaultProps = {
   className: null,
   icon: null,
   toast: false,
   onClickClose: () => {},
+  theme: 'info',
 };
 
 Notification.propTypes = {
@@ -106,8 +97,10 @@ Notification.propTypes = {
    * function to call when close button is clicked
    */
   onClickClose: PropTypes.func,
+  /**
+   * notification flavor (warning, error, offline, info (default))
+   */
+  theme: PropTypes.oneOf(['warning', 'error', 'offline', 'info']),
 };
 
-export default themeable(
-  flavorable(Notification, 'notify')
-);
+export default Notification;
