@@ -12,7 +12,7 @@ stories
       icon={text('Icon', 'contact')}
       sprite={text('Sprite', 'standard')}
       title={text('Title', 'Base Card')}
-      headerRight={<Button title="New" neutral onClick={action('click')} />}
+      headerRight={<Button flavor="neutral" title="New" onClick={action('click')} />}
       body="Body would be here"
       footer="Footer"
     />
@@ -20,7 +20,7 @@ stories
   .add('Without Icon', () => (
     <Card
       title={text('Title', 'Base Card')}
-      headerRight={<Button title="New" neutral onClick={action('click')} />}
+      headerRight={<Button title="New" onClick={action('click')} />}
       body="Body would be here"
       footer="Footer"
     />
