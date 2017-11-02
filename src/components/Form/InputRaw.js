@@ -71,7 +71,7 @@ const InputRaw = (props) => {
       return (
         <Button
           className={cx(iconClasses)}
-          icon
+          flavor="icon"
           onClick={iconRightOnClick}
         >
           <ButtonIcon sprite="utility" icon={iconRight} />
