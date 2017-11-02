@@ -82,8 +82,7 @@ export class Popover extends React.Component {
 
     return (
       <Button
-        icon
-        iconInverse={invertIcon}
+        flavor={['icon', invertIcon ? 'icon-inverse' : null]}
         className={cx(closeButtonClasses)}
         onClick={onClose}
       >
