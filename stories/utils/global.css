@@ -1,0 +1,18 @@
+.demo-modal {
+  height: 320px;
+  position: relative;
+}
+
+.demo-modal .slds-modal,
+.demo-modal .slds-backdrop {
+  position: absolute;
+}
+
+.demo-notifications {
+  height: 2rem;
+  position: relative;
+}
+
+.demo-notifications .slds-notify_container {
+  position: absolute !important;
+}
