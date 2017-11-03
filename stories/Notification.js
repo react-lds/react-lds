@@ -1,12 +1,17 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, boolean, select } from '@storybook/addon-knobs';
+import { text, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { Notification, IconSVG, Prompt } from '../src';
+import { Notification, IconSVG } from '../src';
+
+import './utils/global.css';
+
+import { NotificationDecorator } from './utils/decorators';
 
 const stories = storiesOf('Notification', module);
 
 stories
+  .addDecorator(NotificationDecorator)
   .add('Default', () => (
     <Notification
       title={text('Title', 'info')}
@@ -31,19 +36,4 @@ stories
         This is the Notification text. <a href="#top">More Information</a>
       </h2>
     </Notification>
-  ))
-  .add('Prompt', () => (
-    <Prompt
-      title="Service Unavailable"
-      label="prompt-heading-id"
-      buttonText="Okay"
-      description="prompt-message-wrapper"
-      open={boolean('Open', true)}
-      onClickClose={action('clicked close')}
-    >
-      <p>
-        Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco
-        deserunt aute id consequat veniam incididunt duis in sint irure nisi.
-      </p>
-    </Prompt>
   ));
