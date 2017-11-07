@@ -8,6 +8,7 @@ export CheckboxGroup from './CheckboxGroup';
 export Input from './Input';
 export InputRaw from './InputRaw';
 export { default as Picklist } from './Picklist';
+export { Picklist as PicklistRaw } from './Picklist';
 export { default as PicklistDropdown } from './PicklistDropdown';
 export PicklistDropdownList from './PicklistDropdownList';
 export PicklistDropdownListItem from './PicklistDropdownListItem';
