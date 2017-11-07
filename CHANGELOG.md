@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1
+
+* Enhance Lookups with optional labels, add required and error state
+
 ## 2.1.0
 
 * Additional display props for Datepicker (`className` and `disabled`)
