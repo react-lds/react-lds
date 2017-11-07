@@ -180,6 +180,28 @@ describe('<Lookup />', () => {
     expect(mounted.state('selected').length).toBe(1);
   });
 
+  it('renders input hidden label', () => {
+    mounted.setProps({ hideLabel: true });
+    expect(mounted.find('FormElementLabel').prop('hideLabel')).toBeTruthy();
+  });
+
+  it('renders required', () => {
+    mounted.setProps({ required: true });
+    expect(mounted.find('label > abbr').length).toBe(1);
+  });
+
+  it('renders error with message', () => {
+    mounted.setProps({ error: 'Error' });
+    expect(mounted.find('.slds-form-element .slds-has-error').length).toBe(1);
+    expect(mounted.find('.slds-form-element__help').length).toBe(1);
+  });
+
+  it('renders error without error message', () => {
+    mounted.setProps({ error: 'Error', hideErrorMessage: true });
+    expect(mounted.find('.slds-form-element .slds-has-error').length).toBe(1);
+    expect(mounted.find('.slds-form-element__help').length).toBe(0);
+  });
+
   it('calls the load function onChange', () => {
     const mockFunction = jest.fn();
     mounted.setProps({ load: mockFunction });
