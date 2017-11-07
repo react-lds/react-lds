@@ -94,6 +94,10 @@ export class Lookup extends Component {
      */
     renderSelection: PropTypes.func,
     /**
+     * Marks the field as required
+     */
+    required: PropTypes.bool,
+    /**
      * if set, renders the Advanced Modal table layout
      */
     table: PropTypes.bool,
@@ -123,6 +127,7 @@ export class Lookup extends Component {
     placeholder: 'Search',
     tableResultsHeading: 'Results',
     renderSelection: null,
+    required: false,
     selection: null,
     table: false,
     tableFields: [],
@@ -506,7 +511,7 @@ export class Lookup extends Component {
   }
 
   render() {
-    const { className, emailLayout, id, inputLabel, multi } = this.props;
+    const { className, emailLayout, id, inputLabel, multi, required } = this.props;
     const { open } = this.state;
 
     const rest = omit(this.props, Object.keys(Lookup.propTypes));
@@ -529,7 +534,7 @@ export class Lookup extends Component {
       <div className={emailLayout ? cx(wrapperClasses) : null}>
         {emailLayout && (
           <label className="slds-email-composer__label slds-align-middle" htmlFor={id}>
-            {inputLabel}
+            {required && <abbr className="slds-required" title="required">*</abbr>}{inputLabel}
           </label>
         )}
         <FormElement
@@ -538,7 +543,7 @@ export class Lookup extends Component {
           data-select={scope}
           data-scope={scope}
         >
-          {!emailLayout && (<FormElementLabel id={id} label={inputLabel} />)}
+          {!emailLayout && (<FormElementLabel id={id} label={inputLabel} required={required} />)}
           {this.renderInput()}
           {this.renderSelections()}
           {this.renderLookupList()}
