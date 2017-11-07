@@ -8,6 +8,7 @@ import omit from 'lodash.omit';
 import {
   FormElement,
   FormElementControl,
+  FormElementError,
   FormElementLabel,
   Icon,
   InputRaw,
@@ -37,10 +38,21 @@ export class Lookup extends Component {
      */
     emailLayout: PropTypes.bool,
     /**
-     * id of the input field in the lookup component
+     * renders an error for the lookup. shows an error messsage if error is a string.
      */
+    error: PropTypes.string,
+    /**
+     * whether the lookup error message is hidden
+     */
+    hideErrorMessage: PropTypes.bool,
+    /**
+     * whether the lookup label is hidden
+     */
+    hideLabel: PropTypes.bool,
+    /**
+    * id of the input field in the lookup component
+    */
     id: PropTypes.string.isRequired,
-    selection: PropTypes.array,
     /**
      * initial item selection. use with uncontrolled lookup
      */
@@ -98,6 +110,10 @@ export class Lookup extends Component {
      */
     required: PropTypes.bool,
     /**
+     * current item selection. use with controlled lookup
+     */
+    selection: PropTypes.array,
+    /**
      * if set, renders the Advanced Modal table layout
      */
     table: PropTypes.bool,
@@ -117,6 +133,9 @@ export class Lookup extends Component {
     allowCreate: false,
     className: null,
     emailLayout: false,
+    error: null,
+    hideErrorMessage: false,
+    hideLabel: false,
     initialSelection: null,
     loadOnFocus: true,
     loadOnChange: true,
@@ -328,12 +347,17 @@ export class Lookup extends Component {
   };
 
   renderInput() {
-    const { emailLayout, id, placeholder } = this.props;
+    const {
+      emailLayout,
+      id,
+      placeholder,
+      required,
+    } = this.props;
     const {
       highlighted,
       open,
       searchTerm,
-      selected
+      selected,
     } = this.state;
 
     if (!open && selected.length > 0) { return null; }
@@ -341,24 +365,35 @@ export class Lookup extends Component {
     return (
       <FormElementControl hasIconRight={!emailLayout}>
         <InputRaw
-          id={id}
-          isFocused={open}
-          type="text"
-          placeholder={emailLayout ? null : placeholder}
-          role="combobox"
-          value={searchTerm}
-          onChange={this.handleInputChange}
-          onFocus={this.handleInputFocus}
-          onBlur={this.handleCreateElement}
-          onKeyPress={this.handleCreateElement}
           aria-activedescendant={highlighted}
           aria-expanded={open}
-          iconRight={emailLayout ? null : 'search'}
           bare={emailLayout}
           className={emailLayout ? 'slds-input_height' : null}
+          iconRight={emailLayout ? null : 'search'}
+          id={id}
+          isFocused={open}
+          onBlur={this.handleCreateElement}
+          onChange={this.handleInputChange}
+          onFocus={this.handleInputFocus}
+          onKeyPress={this.handleCreateElement}
+          placeholder={emailLayout ? null : placeholder}
+          required={required}
+          role="combobox"
+          type="text"
+          value={searchTerm}
         />
       </FormElementControl>
     );
+  }
+
+  renderError() {
+    const {
+      error,
+      hideErrorMessage,
+      id,
+    } = this.props;
+
+    return !hideErrorMessage && <FormElementError error={error} id={id} />;
   }
 
   renderSelections() {
@@ -511,7 +546,16 @@ export class Lookup extends Component {
   }
 
   render() {
-    const { className, emailLayout, id, inputLabel, multi, required } = this.props;
+    const {
+      className,
+      emailLayout,
+      error,
+      hideLabel,
+      id,
+      inputLabel,
+      multi,
+      required,
+    } = this.props;
     const { open } = this.state;
 
     const rest = omit(this.props, Object.keys(Lookup.propTypes));
@@ -542,10 +586,19 @@ export class Lookup extends Component {
           className={cx(sldsClasses)}
           data-select={scope}
           data-scope={scope}
+          error={error}
         >
-          {!emailLayout && (<FormElementLabel id={id} label={inputLabel} required={required} />)}
+          {!emailLayout && (
+            <FormElementLabel
+              hideLabel={hideLabel}
+              id={id}
+              label={inputLabel}
+              required={required}
+            />
+          )}
           {this.renderInput()}
           {this.renderSelections()}
+          {this.renderError()}
           {this.renderLookupList()}
         </FormElement>
         {this.renderLookupTable()}
