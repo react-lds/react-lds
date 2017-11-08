@@ -28,3 +28,11 @@ export const NotificationDecorator = storyFn => (
     { storyFn() }
   </div>
 );
+
+export const FileDecorator = storyFn => (
+  <div>
+    <div className="slds-m-bottom--medium" style={{ width: '20rem' }}>
+      { storyFn() }
+    </div>
+  </div>
+);

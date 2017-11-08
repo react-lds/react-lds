@@ -45,6 +45,18 @@ export function getUtilityIcons(propName = 'Icon') {
   return select(propName, UTILITY_ICONS, '');
 }
 
+const FILE_TYPES = [
+  '', 'ai', 'attachment', 'audio', 'box_notes', 'csv', 'eps', 'excel', 'exe',
+  'flash', 'folder', 'gdoc', 'gdocs', 'gform', 'gpres', 'gsheet', 'html',
+  'image', 'keynote', 'link', 'mp4', 'overlay', 'pack', 'pages', 'pdf', 'ppt',
+  'psd', 'quip_doc', 'rtf', 'slide', 'stypi', 'txt', 'unknown', 'video',
+  'visio', 'webex', 'word', 'xml', 'zip'
+];
+
+export function getFileTypes(propName = 'FileType') {
+  return select(propName, FILE_TYPES, '');
+}
+
 const SIZES = [
   'x-small',
   'small',
