@@ -11,7 +11,7 @@ const Prompt = (props) => {
         <ModalHeader title={title} />
         <ModalContent id={description}>{children}</ModalContent>
         <ModalFooter defaultTheme>
-          <Button neutral title={buttonText} onClick={() => {}} />
+          <Button flavor="neutral" title={buttonText} onClick={() => {}} />
         </ModalFooter>
       </Modal>
       <Backdrop open={props.open} />

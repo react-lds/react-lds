@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { Prompt } from '../src';
 
@@ -14,10 +14,10 @@ stories
   .addDecorator(PromptDecorator)
   .add('Prompt', () => (
     <Prompt
-      title="Service Unavailable"
-      label="prompt-heading-id"
-      buttonText="Okay"
-      description="prompt-message-wrapper"
+      title={text('Title', 'Tis a title')}
+      label={text('Label', 'prompt-heading-id')}
+      buttonText={text('ButtonText', 'Okay')}
+      description={text('Description', 'description text')}
       open={boolean('Open', true)}
       onClickClose={action('clicked close')}
     >
