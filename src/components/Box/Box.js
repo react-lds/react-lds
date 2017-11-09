@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { THEMES, getThemeClass } from '../../utils';
 
-import { themeable } from '../../decorators';
-
 export const Box = (props) => {
   const { children, className, size, theme, ...rest } = props;
 
@@ -35,4 +33,4 @@ Box.propTypes = {
   theme: PropTypes.oneOf(THEMES),
 };
 
-export default themeable(Box);
+export default Box;
