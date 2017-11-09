@@ -57,4 +57,12 @@ describe('<Button />', () => {
     expect(mounted.find('.slds-button').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-button').prop('data-test')).toEqual('bar');
   });
+
+  it('applies flavoring', () => {
+    mounted.setProps({ flavor: 'brand' });
+    expect(mounted.find('.slds-button').hasClass('slds-button_brand')).toBeTruthy();
+    mounted.setProps({ flavor: ['brand', 'large'] });
+    expect(mounted.find('.slds-button').hasClass('slds-button_brand')).toBeTruthy();
+    expect(mounted.find('.slds-button').hasClass('slds-button_large')).toBeTruthy();
+  });
 });

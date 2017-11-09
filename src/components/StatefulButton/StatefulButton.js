@@ -13,22 +13,14 @@ export const StatefulButton = (props) => {
     stateSelected,
     stateSelectedFocus,
     tooltip,
-    neutral,
-    brand,
-    destructive,
-    inverse,
-    success,
+    flavor,
     ...rest
   } = props;
 
   const sldsButtonClasses = [
     'slds-button',
     'slds-button_stateful',
-    { 'slds-button_neutral': neutral },
-    { 'slds-button_brand': brand },
-    { 'slds-button_destructive': destructive },
-    { 'slds-button_inverse': inverse },
-    { 'slds-button_success': success },
+    { [`slds-button_${flavor}`]: !!flavor },
     selected ? 'slds-is-selected' : 'slds-not-selected',
     className,
   ];
@@ -151,25 +143,15 @@ StatefulButton.propTypes = {
    */
   tooltip: PropTypes.string,
   /**
-   * neutral button
+   * button flavor
    */
-  neutral: PropTypes.bool,
-  /**
-   * brand button
-   */
-  brand: PropTypes.bool,
-  /**
-   * destructive button
-   */
-  destructive: PropTypes.bool,
-  /**
-   * inverse button
-   */
-  inverse: PropTypes.bool,
-  /**
-   * success button
-   */
-  success: PropTypes.bool,
+  flavor: PropTypes.oneOf([
+    'neutral',
+    'brand',
+    'destructive',
+    'inverse',
+    'success',
+  ])
 };
 
 StatefulButton.defaultProps = {
@@ -177,11 +159,7 @@ StatefulButton.defaultProps = {
   disabled: false,
   selected: false,
   tooltip: null,
-  neutral: false,
-  brand: false,
-  destructive: false,
-  inverse: false,
-  success: false,
+  flavor: null
 };
 
 export default StatefulButton;

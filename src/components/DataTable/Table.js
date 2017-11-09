@@ -2,36 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { flavorable, variationable } from '../../decorators';
-
 export const Table = (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, flavor, variation, ...rest } = props;
+
+  // TODO check for empty array and empty string
+  const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-table_${f}`) : `slds-table_${flavor}`;
+  const variationClasses = Array.isArray(variation) ? variation.map(f => `slds-${f}`) : `slds-${variation}`;
 
   const sldsClasses = [
     'slds-table',
     'slds-table_cell-buffer',
     className,
+    flavorClasses,
+    variationClasses,
   ];
 
   return (<table {...rest} className={cx(sldsClasses)}>{children}</table>);
 };
 
-Table.flavors = [
-  'bordered',
-  'col-bordered',
-  'striped',
-  'fixed-layout',
-];
-
-Table.variations = [
-  'no-row-hover',
-  'max-medium-table_stacked',
-  'max-medium-table_stacked-horizontal',
-];
-
 Table.defaultProps = {
   children: null,
   className: null,
+  variation: [],
+  flavor: [],
 };
 
 Table.propTypes = {
@@ -43,8 +36,32 @@ Table.propTypes = {
    * class name
    */
   className: PropTypes.string,
+  /**
+   * variation
+   */
+  variation: PropTypes.oneOfType([PropTypes.oneOf([
+    'no-row-hover',
+    'max-medium-table_stacked',
+    'max-medium-table_stacked-horizontal',
+  ]), PropTypes.arrayOf(PropTypes.oneOf([
+    'no-row-hover',
+    'max-medium-table_stacked',
+    'max-medium-table_stacked-horizontal',
+  ]))]),
+  /**
+   * flavor
+   */
+  flavor: PropTypes.oneOfType([PropTypes.oneOf([
+    'bordered',
+    'col-bordered',
+    'striped',
+    'fixed-layout',
+  ]), PropTypes.arrayOf(PropTypes.oneOf([
+    'bordered',
+    'col-bordered',
+    'striped',
+    'fixed-layout',
+  ]))]),
 };
 
-export default variationable(
-  flavorable(Table, 'table')
-);
+export default Table;

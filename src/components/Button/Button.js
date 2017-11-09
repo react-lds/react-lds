@@ -49,7 +49,7 @@ Button.defaultProps = {
   title: null,
   tooltip: null,
   value: null,
-  flavor: null,
+  flavor: [],
 };
 
 Button.propTypes = {

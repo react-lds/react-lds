@@ -99,5 +99,10 @@ describe('<StatefulButton />', () => {
       mounted.simulate('click');
       expect(fn).toBeCalledWith(false);
     });
+
+    it('applies flavoring', () => {
+      mounted.setProps({ flavor: 'brand' });
+      expect(mounted.find('.slds-button').hasClass('slds-button_brand')).toBeTruthy();
+    });
   });
 });

@@ -37,11 +37,11 @@ export class Menu extends Component {
       return (
         <Button
           aria-haspopup="true"
-          className={[
-            button.flavor,
+          flavor={button.flavor}
+          className={cx([
             (noBorder && !title) ? 'slds-button_icon-container' : null,
             (!noBorder && !title) ? 'slds-button_icon-border-filled' : null
-          ]}
+          ])}
           disabled={disabled}
           onClick={this.toggle}
           title={button.title}
