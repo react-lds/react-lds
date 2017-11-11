@@ -64,8 +64,8 @@ const SIZES = [
   'large',
 ];
 
-export function getThemes() {
-  return select('Theme', THEMES, 'shade');
+export function getThemes(propName = 'Theme') {
+  return select(propName, THEMES, 'shade');
 }
 
 export function getThemesWithoutTexture() {

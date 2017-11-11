@@ -5,7 +5,6 @@ import cx from 'classnames';
 export const Table = (props) => {
   const { children, className, flavor, variation, ...rest } = props;
 
-  // TODO check for empty array and empty string
   const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-table_${f}`) : `slds-table_${flavor}`;
   const variationClasses = Array.isArray(variation) ? variation.map(f => `slds-${f}`) : `slds-${variation}`;
 

@@ -21,4 +21,17 @@ describe('<Grid />', () => {
     expect(mounted.find('.slds-grid').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-grid').prop('data-test')).toEqual('bar');
   });
+
+  it('applies flavoring', () => {
+    mounted.setProps({ flavor: 'pull-padded' });
+    expect(mounted.find('.slds-grid').hasClass('slds-grid_pull-padded')).toBeTruthy();
+    mounted.setProps({ flavor: ['pull-padded', 'reverse'] });
+    expect(mounted.find('.slds-grid').hasClass('slds-grid_pull-padded')).toBeTruthy();
+    expect(mounted.find('.slds-grid').hasClass('slds-grid_reverse')).toBeTruthy();
+  });
+
+  it('applies variationing', () => {
+    mounted.setProps({ wrap: true });
+    expect(mounted.find('.slds-grid').hasClass('slds-wrap')).toBeTruthy();
+  });
 });

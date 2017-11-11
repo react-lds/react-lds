@@ -21,6 +21,6 @@ describe('<Navigation />', () => {
 
   it('inserts className prop', () => {
     mounted.setProps({ className: 'blubb' });
-    expect(mounted.find('Variationed_Flavored_Grid').prop('className')).toEqual('blubb');
+    expect(mounted.find('Grid').prop('className')).toEqual('blubb');
   });
 });

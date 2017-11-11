@@ -1,27 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { flavorable } from '../../decorators';
+import cx from 'classnames';
 
 export const Container = (props) => {
-  const { children, className, ...rest } = props;
-  return (<div {...rest} className={className}>{children}</div>);
+  const { children, className, flavor, ...rest } = props;
+  const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-container_${f}`) : `slds-container_${flavor}`;
+  return (<div {...rest} className={cx([className, flavorClasses])}>{children}</div>);
 };
-
-Container.flavors = [
-  'small',
-  'medium',
-  'large',
-  'x-large',
-  'fluid',
-  'left',
-  'center',
-  'right',
-];
 
 Container.defaultProps = {
   children: null,
   className: null,
+  flavor: ['left', 'small']
 };
 
 Container.propTypes = {
@@ -33,6 +23,28 @@ Container.propTypes = {
    * class name
    */
   className: PropTypes.string,
+  /**
+   * flavor
+   */
+  flavor: PropTypes.oneOfType([PropTypes.oneOf([
+    'small',
+    'medium',
+    'large',
+    'x-large',
+    'fluid',
+    'left',
+    'center',
+    'right',
+  ]), PropTypes.arrayOf(PropTypes.oneOf([
+    'small',
+    'medium',
+    'large',
+    'x-large',
+    'fluid',
+    'left',
+    'center',
+    'right',
+  ]))]),
 };
 
-export default flavorable(Container, 'container');
+export default Container;
