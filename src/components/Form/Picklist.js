@@ -54,6 +54,7 @@ export class Picklist extends React.Component {
         className="slds-input slds-combobox__input"
         disabled={isDisabled}
         iconRight="down"
+        iconRightOnClick={this.toggle}
         id={`combobox-${id}`}
         onClick={this.toggle}
         placeholder={placeholder}
