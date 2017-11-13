@@ -24,6 +24,11 @@ describe('<ModalFooter />', () => {
     expect(mounted.find('.slds-theme_default')).toBeTruthy();
   });
 
+  it('applies the directional flavor', () => {
+    mounted.setProps({ directional: true });
+    expect(mounted.find('.slds-modal__footer').hasClass('slds-modal__footer_directional')).toBeTruthy();
+  });
+
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-modal__footer').hasClass('foo')).toBeTruthy();

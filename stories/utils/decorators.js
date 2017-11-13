@@ -12,7 +12,7 @@ export const SpinnerDecorator = storyFn => (
   </div>
 );
 
-export const PromptDecorator = storyFn => (
+export const ModalDecorator = storyFn => (
   <div className="demo-modal">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br />
     labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris

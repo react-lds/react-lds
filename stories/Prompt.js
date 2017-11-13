@@ -6,12 +6,12 @@ import { Prompt } from '../src';
 
 import './utils/global.css';
 
-import { PromptDecorator } from './utils/decorators';
+import { ModalDecorator } from './utils/decorators';
 
 const stories = storiesOf('Prompt', module);
 
 stories
-  .addDecorator(PromptDecorator)
+  .addDecorator(ModalDecorator)
   .add('Prompt', () => (
     <Prompt
       title={text('Title', 'Tis a title')}

@@ -2,6 +2,9 @@
 
 # Unreleased
 
+* Components that use `enhanceWithClickOutside` are now importable without that functionality by using `import *Component*Raw`
+* Bugfix: Picklist down-icon now clickable
+* `Modal` and subcomponents flavor usage (not breaking)
 * Breaking: `Grid` flavor & variation usage
 * Breaking: `Column` flavor & variation usage
 * Breaking: `Container` flavor & variation usage

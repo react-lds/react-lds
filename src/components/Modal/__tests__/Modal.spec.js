@@ -72,4 +72,9 @@ describe('<Modal />', () => {
     expect(mounted.find('.slds-modal').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-modal').prop('data-test')).toEqual('bar');
   });
+
+  it('renders as large flavor', () => {
+    mounted.setProps({ large: true });
+    expect(mounted.find('.slds-modal').hasClass('slds-modal_large')).toBeTruthy();
+  });
 });
