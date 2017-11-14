@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { flavorable } from '../../decorators';
-
 export const MediaObject = (props) => {
-  const { children, className, customTag, figureLeft, figureRight, title, truncate, ...rest } = props;
+  const { children, className, customTag, figureLeft, figureRight, flavor, title, truncate, ...rest } = props;
 
   const renderFigure = (figure, classes = []) => {
     const figureClasses = [
@@ -18,9 +16,12 @@ export const MediaObject = (props) => {
 
   const Tag = customTag || 'div';
 
+  const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-media_${f}`) : `slds-media_${flavor}`;
+
   const sldsClasses = [
     'slds-media',
-    className
+    className,
+    flavorClasses,
   ];
 
   const bodyClasses = [
@@ -37,18 +38,13 @@ export const MediaObject = (props) => {
   );
 };
 
-MediaObject.flavors = [
-  'center',
-  'responsive',
-  'small',
-];
-
 MediaObject.defaultProps = {
   children: null,
   className: null,
   customTag: null,
   figureLeft: null,
   figureRight: null,
+  flavor: [],
   truncate: false,
   title: null,
 };
@@ -75,6 +71,18 @@ MediaObject.propTypes = {
    */
   figureRight: PropTypes.node,
   /**
+   * flavor
+   */
+  flavor: PropTypes.oneOfType([PropTypes.oneOf([
+    'center',
+    'responsive',
+    'small',
+  ]), PropTypes.arrayOf(PropTypes.oneOf([
+    'center',
+    'responsive',
+    'small',
+  ]))]),
+  /**
    * truncates the body, requires title
    */
   truncate: PropTypes.bool,
@@ -84,4 +92,4 @@ MediaObject.propTypes = {
   title: PropTypes.string,
 };
 
-export default flavorable(MediaObject, 'media');
+export default MediaObject;

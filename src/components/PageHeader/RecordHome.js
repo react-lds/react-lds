@@ -48,7 +48,7 @@ const RecordHome = (props) => {
       <Grid>
         <Column className="slds-has-flexi-truncate">
           <MediaObject
-            center
+            flavor="center"
             figureLeft={iconRendered}
             className="slds-grow slds-no-space"
           >

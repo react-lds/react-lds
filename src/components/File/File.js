@@ -54,7 +54,7 @@ export const File = (props) => {
 
     return (
       <figcaption className={cx(captionClasses)}>
-        <MediaObject figureLeft={fileIcon} small center>
+        <MediaObject figureLeft={fileIcon} flavor={['small', 'center']}>
           <span className="slds-file__text slds-truncate" title={title}>{title}</span>
         </MediaObject>
       </figcaption>

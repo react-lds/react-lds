@@ -52,4 +52,12 @@ describe('<MediaObject />', () => {
     expect(mounted.find('.slds-media').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-media').prop('data-test')).toEqual('bar');
   });
+
+  it('applies flavoring', () => {
+    mounted.setProps({ flavor: 'small' });
+    expect(mounted.find('.slds-media').hasClass('slds-media_small')).toBeTruthy();
+    mounted.setProps({ flavor: ['center', 'small'] });
+    expect(mounted.find('.slds-media').hasClass('slds-media_center')).toBeTruthy();
+    expect(mounted.find('.slds-media').hasClass('slds-media_small')).toBeTruthy();
+  });
 });

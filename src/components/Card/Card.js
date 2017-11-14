@@ -26,7 +26,7 @@ const Card = (props) => {
       <Grid className="slds-card__header">
         <MediaObject
           customTag="header"
-          center
+          flavor="center"
           className="slds-has-flexi-truncate"
           figureLeft={!!icon && <Icon sprite={sprite} icon={icon} size="small" />}
           truncate
