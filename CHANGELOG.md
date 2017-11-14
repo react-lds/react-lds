@@ -2,10 +2,13 @@
 
 # Unreleased
 
+* Breaking: `MediaObject` flavor usage
+* Breaking: Menu button prop usage ? maybe
+* Breaking: `DataTable` & subcomponents flavor & variation usage
 * Breaking: `VerticalNavigation` flavor usage
-* Components that use `enhanceWithClickOutside` are now importable without that functionality by using `import *Component*Raw`
+* Components that use `enhanceWithClickOutside` are now importable without that functionality by using `import *Component*Raw as *Component*`
 * Bugfix: Picklist down-icon now opens Picklist
-* `Modal` and subcomponents flavor usage (not breaking)
+* `Modal` & subcomponents flavor usage (not breaking)
 * Breaking: `Grid` flavor & variation usage
 * Breaking: `Column` flavor & variation usage
 * Breaking: `Container` flavor & variation usage

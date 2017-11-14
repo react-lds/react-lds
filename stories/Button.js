@@ -10,7 +10,7 @@ stories
   .add('Default', () => (
     <Button
       onClick={action()}
-      title={text('Title', 'Title')}
+      title={text('Title', 'Title') || undefined}
       tooltip={text('Tooltip', 'I am a tooltip!')}
       disabled={boolean('Disabled', false)}
       selected={boolean('Selected', false)}
