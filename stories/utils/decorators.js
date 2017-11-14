@@ -1,14 +1,10 @@
 import React from 'react';
 
-const spinnerStyles = {
-  height: '5rem',
-  position: 'relative',
-  background: 'rgb(247, 247, 247)',
-};
-
-export const SpinnerDecorator = storyFn => (
-  <div style={spinnerStyles}>
-    { storyFn() }
+export const FileDecorator = storyFn => (
+  <div>
+    <div className="slds-m-bottom--medium" style={{ width: '20rem' }}>
+      { storyFn() }
+    </div>
   </div>
 );
 
@@ -29,10 +25,14 @@ export const NotificationDecorator = storyFn => (
   </div>
 );
 
-export const FileDecorator = storyFn => (
-  <div>
-    <div className="slds-m-bottom--medium" style={{ width: '20rem' }}>
-      { storyFn() }
-    </div>
+export const SpinnerDecorator = storyFn => (
+  <div style={{ height: '5rem', position: 'relative', background: 'rgb(247, 247, 247)', }}>
+    { storyFn() }
+  </div>
+);
+
+export const VerticalNavigationDecorator = storyFn => (
+  <div style={{ width: '15rem', }}>
+    { storyFn() }
   </div>
 );

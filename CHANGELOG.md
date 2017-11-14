@@ -2,8 +2,9 @@
 
 # Unreleased
 
+* Breaking: `VerticalNavigation` flavor usage
 * Components that use `enhanceWithClickOutside` are now importable without that functionality by using `import *Component*Raw`
-* Bugfix: Picklist down-icon now clickable
+* Bugfix: Picklist down-icon now opens Picklist
 * `Modal` and subcomponents flavor usage (not breaking)
 * Breaking: `Grid` flavor & variation usage
 * Breaking: `Column` flavor & variation usage

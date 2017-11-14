@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { flavorable } from '../../decorators';
 
 export const VerticalNavigation = (props) => {
   const {
     children,
     className,
+    flavor,
     prependElement,
     ...rest
   } = props;
 
-  const sldsClasses = ['slds-nav-vertical', className];
+  const flavorClasses =
+    Array.isArray(flavor) ? flavor.map(f => `slds-nav-vertical_${f}`) : `slds-nav-vertical_${flavor}`;
+
+  const sldsClasses = ['slds-nav-vertical', className, flavorClasses];
 
   return (
     <nav {...rest} className={cx(sldsClasses)}>
@@ -21,13 +24,9 @@ export const VerticalNavigation = (props) => {
   );
 };
 
-VerticalNavigation.flavors = [
-  'compact',
-  'shade',
-];
-
 VerticalNavigation.defaultProps = {
   className: null,
+  flavor: [],
   prependElement: null,
 };
 
@@ -41,9 +40,19 @@ VerticalNavigation.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * flavor
+   */
+  flavor: PropTypes.oneOfType([PropTypes.oneOf([
+    'compact',
+    'shade',
+  ]), PropTypes.arrayOf(PropTypes.oneOf([
+    'compact',
+    'shade',
+  ]))]),
+  /**
    * Element that will be rendered above the navigation
    */
   prependElement: PropTypes.element,
 };
 
-export default flavorable(VerticalNavigation, 'nav-vertical');
+export default VerticalNavigation;
