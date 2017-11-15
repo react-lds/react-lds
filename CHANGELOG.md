@@ -2,8 +2,8 @@
 
 # Unreleased
 
+* ObjectHome Menu dropdown position is now default (left)
 * Breaking: `MediaObject` flavor usage
-* Breaking: Menu button prop usage ? maybe
 * Breaking: `DataTable` & subcomponents flavor & variation usage
 * Breaking: `VerticalNavigation` flavor usage
 * Components that use `enhanceWithClickOutside` are now importable without that functionality by using `import *Component*Raw as *Component*`

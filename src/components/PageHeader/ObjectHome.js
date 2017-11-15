@@ -85,7 +85,6 @@ export class ObjectHome extends React.Component {
                 </h1>
                 <Menu
                   button={{ sprite: 'utility', icon: 'down', noBorder: true }}
-                  position="top-right"
                   isOpen={this.state.menuIsOpen}
                 >
                   {titleMenu}
