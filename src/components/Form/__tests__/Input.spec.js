@@ -128,6 +128,12 @@ describe('<Input />', () => {
     expect(mounted.find('input').prop('aria-describedby')).toEqual(hash);
   });
 
+  it('hides the error message', () => {
+    mounted.setProps({ error: 'shit', hideErrorMessage: true });
+    expect(mounted.find('.slds-form-element__help').length).toEqual(0);
+    expect(mounted.find('input').prop('aria-describedby')).toEqual(null);
+  });
+
   it('applies hideLabel to the label', () => {
     mounted.setProps({ hideLabel: true });
     expect(mounted.find('FormElementLabel').prop('hideLabel')).toBeTruthy();

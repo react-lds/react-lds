@@ -10,37 +10,44 @@ describe('<Lookup />', () => {
   const sampleData = [
     {
       id: '1',
+      email: 'something@example.com',
       label: 'Something',
       meta: 'Very meta',
       objectType: 'contact',
     },
     {
       id: '2',
+      email: 'really@example.com',
       label: 'Really',
       objectType: 'contact',
     },
     {
       id: '3',
+      email: 'notso@example.com',
       label: 'Not so',
       objectType: 'contact',
     },
     {
       id: '4',
+      email: 'muchuseful@example.com',
       label: 'Much useful',
       objectType: 'contact',
     },
     {
       id: '5',
+      email: 'ofanytype@example.com',
       label: 'Of any type',
       objectType: 'contact',
     },
     {
       id: '6',
+      email: 'ofsometype@example.com',
       label: 'Of some type',
       objectType: 'account',
     },
     {
       id: '7',
+      email: 'ofsomerecordtype@example.com',
       label: 'Of some record type',
       objectType: 'record',
     },
@@ -103,9 +110,19 @@ describe('<Lookup />', () => {
 
   it('renders a lookup list with table layout', () => {
     mounted.setState({ open: true, loaded: sampleData });
-    mounted.setProps({ table: true, tableFields: [{ name: 'Name', label: 'Name' }] });
+    mounted.setProps({ table: true, tableFields: [{ name: 'label', label: 'Name' }] });
     expect(mounted.find('.slds-lookup__list .slds-lookup__item-action').length).toBe(0);
     expect(mounted.find('table tbody tr').length).toBe(7);
+  });
+
+  it('renders a lookup list with table layout and multiple columns', () => {
+    const tableFields = [{ name: 'label', label: 'Name' }, { name: 'email', label: 'Email' }];
+    mounted.setState({ open: true, loaded: sampleData });
+    mounted.setProps({ table: true, tableFields });
+    const row = mounted.find('table tbody tr').first().children();
+    expect(row.length).toBe(2);
+    expect(row.at(0).text()).toBe('Something');
+    expect(row.at(1).text()).toBe('something@example.com');
   });
 
   it('renders lookup items correctly', () => {
@@ -161,6 +178,28 @@ describe('<Lookup />', () => {
     props.initialSelection = [sampleData[0]];
     mounted = mount(<Lookup {...props} />);
     expect(mounted.state('selected').length).toBe(1);
+  });
+
+  it('renders input hidden label', () => {
+    mounted.setProps({ hideLabel: true });
+    expect(mounted.find('FormElementLabel').prop('hideLabel')).toBeTruthy();
+  });
+
+  it('renders required', () => {
+    mounted.setProps({ required: true });
+    expect(mounted.find('label > abbr').length).toBe(1);
+  });
+
+  it('renders error with message', () => {
+    mounted.setProps({ error: 'Error' });
+    expect(mounted.find('.slds-form-element .slds-has-error').length).toBe(1);
+    expect(mounted.find('.slds-form-element__help').length).toBe(1);
+  });
+
+  it('renders error without error message', () => {
+    mounted.setProps({ error: 'Error', hideErrorMessage: true });
+    expect(mounted.find('.slds-form-element .slds-has-error').length).toBe(1);
+    expect(mounted.find('.slds-form-element__help').length).toBe(0);
   });
 
   it('calls the load function onChange', () => {

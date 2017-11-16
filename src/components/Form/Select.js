@@ -16,6 +16,7 @@ const Select = (props) => {
     className,
     disabled,
     error,
+    hideErrorMessage,
     hideLabel,
     id,
     label,
@@ -40,7 +41,7 @@ const Select = (props) => {
         multiple={multiple}
         required={required}
         disabled={disabled}
-        aria-describedby={error ? getUniqueHash(error, id) : null}
+        aria-describedby={error && !hideErrorMessage ? getUniqueHash(error, id) : null}
       >
         {children}
       </select>
@@ -59,7 +60,7 @@ const Select = (props) => {
       <FormElementControl>
         {renderSelect()}
       </FormElementControl>
-      <FormElementError error={error} id={id} />
+      {!hideErrorMessage && <FormElementError error={error} id={id} />}
     </FormElement>
   );
 };
@@ -68,6 +69,7 @@ Select.defaultProps = {
   className: null,
   disabled: false,
   error: null,
+  hideErrorMessage: false,
   hideLabel: false,
   multiple: false,
   onChange: () => {},
@@ -91,6 +93,10 @@ Select.propTypes = {
   * renders an error for the select
    */
   error: PropTypes.string,
+  /**
+   * hides the error message
+   */
+  hideErrorMessage: PropTypes.bool,
   /**
    * sets the label to render as assistive text
    */

@@ -8,6 +8,7 @@ import omit from 'lodash.omit';
 import {
   FormElement,
   FormElementControl,
+  FormElementError,
   FormElementLabel,
   Icon,
   InputRaw,
@@ -21,6 +22,13 @@ import {
 export class Lookup extends Component {
   static propTypes = {
     /**
+     * if set to true, allows the creation of new elements that were not found
+     * during lookups. For example new email addresses.
+     * The new entry will not have an object type and the ID will be the current
+     * timestamp.
+     */
+    allowCreate: PropTypes.bool,
+    /**
      * class name
      */
     className: PropTypes.string,
@@ -30,10 +38,21 @@ export class Lookup extends Component {
      */
     emailLayout: PropTypes.bool,
     /**
-     * id of the input field in the lookup component
+     * renders an error for the lookup. shows an error messsage if error is a string.
      */
+    error: PropTypes.string,
+    /**
+     * whether the lookup error message is hidden
+     */
+    hideErrorMessage: PropTypes.bool,
+    /**
+     * whether the lookup label is hidden
+     */
+    hideLabel: PropTypes.bool,
+    /**
+    * id of the input field in the lookup component
+    */
     id: PropTypes.string.isRequired,
-    selection: PropTypes.array,
     /**
      * initial item selection. use with uncontrolled lookup
      */
@@ -83,12 +102,17 @@ export class Lookup extends Component {
      */
     placeholder: PropTypes.string,
     /**
-     * if set to true, allows the creation of new elements that were not found
-     * during lookups. For example new email addresses.
-     * The new entry will not have an object type and the ID will be the current
-     * timestamp.
+     * Callback for rendering a single selection pill.
      */
-    allowCreate: PropTypes.bool,
+    renderSelection: PropTypes.func,
+    /**
+     * Marks the field as required
+     */
+    required: PropTypes.bool,
+    /**
+     * current item selection. use with controlled lookup
+     */
+    selection: PropTypes.array,
     /**
      * if set, renders the Advanced Modal table layout
      */
@@ -109,6 +133,9 @@ export class Lookup extends Component {
     allowCreate: false,
     className: null,
     emailLayout: false,
+    error: null,
+    hideErrorMessage: false,
+    hideLabel: false,
     initialSelection: null,
     loadOnFocus: true,
     loadOnChange: true,
@@ -118,6 +145,8 @@ export class Lookup extends Component {
     onFocus: null,
     placeholder: 'Search',
     tableResultsHeading: 'Results',
+    renderSelection: null,
+    required: false,
     selection: null,
     table: false,
     tableFields: [],
@@ -300,13 +329,35 @@ export class Lookup extends Component {
     this.setState({ highlighted: id });
   }
 
+  defaultRenderSelection = (item, { onClose }) => {
+    const { id, label, objectType } = item;
+    const { multi } = this.props;
+
+    return (
+      <Pill
+        key={id}
+        className={!multi ? 'slds-size_1-of-1' : null}
+        icon={objectType && (<Icon sprite={Lookup.getSprite(objectType)} icon={objectType} />)}
+        id={id}
+        title={label}
+        label={label}
+        onClose={onClose}
+      />
+    );
+  };
+
   renderInput() {
-    const { emailLayout, id, placeholder } = this.props;
+    const {
+      emailLayout,
+      id,
+      placeholder,
+      required,
+    } = this.props;
     const {
       highlighted,
       open,
       searchTerm,
-      selected
+      selected,
     } = this.state;
 
     if (!open && selected.length > 0) { return null; }
@@ -314,46 +365,52 @@ export class Lookup extends Component {
     return (
       <FormElementControl hasIconRight={!emailLayout}>
         <InputRaw
-          id={id}
-          isFocused={open}
-          type="text"
-          placeholder={emailLayout ? null : placeholder}
-          role="combobox"
-          value={searchTerm}
-          onChange={this.handleInputChange}
-          onFocus={this.handleInputFocus}
-          onBlur={this.handleCreateElement}
-          onKeyPress={this.handleCreateElement}
           aria-activedescendant={highlighted}
           aria-expanded={open}
-          iconRight={emailLayout ? null : 'search'}
           bare={emailLayout}
           className={emailLayout ? 'slds-input_height' : null}
+          iconRight={emailLayout ? null : 'search'}
+          id={id}
+          isFocused={open}
+          onBlur={this.handleCreateElement}
+          onChange={this.handleInputChange}
+          onFocus={this.handleInputFocus}
+          onKeyPress={this.handleCreateElement}
+          placeholder={emailLayout ? null : placeholder}
+          required={required}
+          role="combobox"
+          type="text"
+          value={searchTerm}
         />
       </FormElementControl>
     );
   }
 
+  renderError() {
+    const {
+      error,
+      hideErrorMessage,
+      id,
+    } = this.props;
+
+    return !hideErrorMessage && <FormElementError error={error} id={id} />;
+  }
+
   renderSelections() {
-    const { emailLayout, multi } = this.props;
+    const {
+      emailLayout,
+      renderSelection: customRenderSelection
+    } = this.props;
     const { selected } = this.state;
 
     if (selected.length < 1) { return null; }
 
-    const renderSelection = (item) => {
-      const { id, label, objectType } = item;
-      return (
-        <Pill
-          key={id}
-          className={!multi ? 'slds-size_1-of-1' : null}
-          icon={objectType && (<Icon sprite={Lookup.getSprite(objectType)} icon={objectType} />)}
-          id={id}
-          title={label}
-          label={label}
-          onClose={() => this.removeSelection(item)}
-        />
-      );
+    const renderSelectionFn = customRenderSelection || this.defaultRenderSelection;
+    const renderSelection = (item, index) => {
+      const options = { index, onClose: () => this.removeSelection(item) };
+      return renderSelectionFn(item, options, this.props);
     };
+
 
     return (
       <PillContainer bare={emailLayout} onClick={this.openList}>
@@ -465,14 +522,14 @@ export class Lookup extends Component {
       <tbody>
         {displayItems.map(item => (
           <Row key={item.id}>
-            {tableFields.map((field, index) => (
+            {tableFields.map(({ name }, index) => (
               <Cell
-                data-label={field.name}
+                data-label={name}
                 scope={index === 0 ? 'row' : null}
                 onClick={() => this.addSelection(item)}
-                key={item.id}
+                key={`${item.id}-${name}`}
               >
-                {renderBodyCell(item.label, index, item.objectType)}
+                {renderBodyCell(item[name], index, item.objectType)}
               </Cell>
 
             ))}
@@ -490,7 +547,16 @@ export class Lookup extends Component {
   }
 
   render() {
-    const { className, emailLayout, id, inputLabel, multi } = this.props;
+    const {
+      className,
+      emailLayout,
+      error,
+      hideLabel,
+      id,
+      inputLabel,
+      multi,
+      required,
+    } = this.props;
     const { open } = this.state;
 
     const rest = omit(this.props, Object.keys(Lookup.propTypes));
@@ -513,7 +579,7 @@ export class Lookup extends Component {
       <div className={emailLayout ? cx(wrapperClasses) : null}>
         {emailLayout && (
           <label className="slds-email-composer__label slds-align-middle" htmlFor={id}>
-            {inputLabel}
+            {required && <abbr className="slds-required" title="required">*</abbr>}{inputLabel}
           </label>
         )}
         <FormElement
@@ -521,10 +587,19 @@ export class Lookup extends Component {
           className={cx(sldsClasses)}
           data-select={scope}
           data-scope={scope}
+          error={error}
         >
-          {!emailLayout && (<FormElementLabel id={id} label={inputLabel} />)}
+          {!emailLayout && (
+            <FormElementLabel
+              hideLabel={hideLabel}
+              id={id}
+              label={inputLabel}
+              required={required}
+            />
+          )}
           {this.renderInput()}
           {this.renderSelections()}
+          {this.renderError()}
           {this.renderLookupList()}
         </FormElement>
         {this.renderLookupTable()}
