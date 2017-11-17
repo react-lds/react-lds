@@ -1,3 +1,9 @@
-export { default as Cell } from './Cell';
-export { default as Row } from './Row';
-export { default as Table } from './Table';
+import Cell from './Cell';
+import Row from './Row';
+import Table from './Table';
+
+export {
+  Cell,
+  Row,
+  Table
+};

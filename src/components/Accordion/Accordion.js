@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import omit from 'lodash.omit';
 
-export default class Accordion extends Component {
+class Accordion extends Component {
   static defaultProps = {
     className: null,
     styled: false,
@@ -94,3 +94,5 @@ export default class Accordion extends Component {
     );
   }
 }
+
+export default Accordion;

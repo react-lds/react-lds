@@ -36,12 +36,12 @@ Head over to the [Docs](https://propertybase.github.io/react-lds) to see a list 
 In order to use React LDS, you will have to provide `assetBasePath` via the [React Context](https://facebook.github.io/react/docs/context.html).
 
 ``` js
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Page should be high in your component hierarchy
 // in order to be able to provide context
-class Page extends React.Component {
+class Page extends Component {
   getChildContext() {
     return {
       assetBasePath: '',

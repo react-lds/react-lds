@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
@@ -6,7 +6,7 @@ import omit from 'lodash.omit';
 
 import { Grid, Column, Menu } from '../../';
 
-export class ObjectHome extends React.Component {
+export class ObjectHome extends Component {
   static propTypes = {
     /**
      * bottom Buttons or ButtonGroup(s)

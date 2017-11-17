@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { MediaObject } from '../MediaObject';
+import MediaObject from '../MediaObject';
 
 describe('<MediaObject />', () => {
   let mounted = null;

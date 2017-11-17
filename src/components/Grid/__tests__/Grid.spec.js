@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Grid } from '../Grid';
+import Grid from '../Grid';
 
 describe('<Grid />', () => {
   let mounted = null;

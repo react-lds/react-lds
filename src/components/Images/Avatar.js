@@ -2,15 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { flavorable } from '../../decorators';
-
-export const Avatar = (props) => {
-  const { alt, className, src, size, title, ...rest } = props;
+const Avatar = (props) => {
+  const { alt, circle, className, src, size, title, ...rest } = props;
 
   const sldsClasses = [
     'slds-avatar',
     { [`slds-avatar_${size}`]: !!size },
     { 'slds-avatar_empty': !src },
+    { 'slds-avatar_circle': circle },
     className
   ];
 
@@ -21,12 +20,9 @@ export const Avatar = (props) => {
   );
 };
 
-Avatar.flavors = [
-  'circle',
-];
-
 Avatar.defaultProps = {
   alt: null,
+  circle: false,
   className: null,
   size: null,
   src: null,
@@ -38,6 +34,10 @@ Avatar.propTypes = {
    * img alt
    */
   alt: PropTypes.string,
+  /**
+   * renders a round avatar
+   */
+  circle: PropTypes.bool,
   /**
    * class name
    */
@@ -56,4 +56,4 @@ Avatar.propTypes = {
   title: PropTypes.string,
 };
 
-export default flavorable(Avatar, 'avatar');
+export default Avatar;

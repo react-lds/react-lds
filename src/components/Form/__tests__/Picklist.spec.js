@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { Picklist } from '../Picklist';
+import { PicklistRaw as Picklist } from '../Picklist';
 
 describe('</Picklist />', () => {
   let mounted = null;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { THEMES, getThemeClass } from '../../utils';
 
-export const Box = (props) => {
+const Box = (props) => {
   const { children, className, size, theme, ...rest } = props;
 
   const sldsClasses = [

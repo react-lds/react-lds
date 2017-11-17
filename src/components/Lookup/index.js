@@ -1,1 +1,3 @@
-export { default as Lookup } from './Lookup';
+import Lookup from './Lookup';
+
+export { Lookup };

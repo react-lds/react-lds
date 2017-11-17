@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import omit from 'lodash.omit';
 
-class Tab extends React.Component {
+class Tab extends Component {
   static defaultProps = {
     className: null,
     scoped: false,

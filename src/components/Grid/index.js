@@ -1,3 +1,5 @@
-export { default as Column } from './Column';
-export { default as Container } from './Container';
-export { default as Grid } from './Grid';
+import Column from './Column';
+import Container from './Container';
+import Grid from './Grid';
+
+export { Column, Container, Grid };

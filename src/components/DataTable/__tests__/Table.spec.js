@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Table } from '../Table';
+import Table from '../Table';
 
 describe('<Table />', () => {
   let mounted = null;

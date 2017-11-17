@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { PicklistDropdown } from '../PicklistDropdown';
+import PicklistDropdown from '../PicklistDropdown';
 
 describe('<PicklistDropdown />', () => {
   let mounted = null;

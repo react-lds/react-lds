@@ -15,7 +15,7 @@ const validBreakpoints = [
 const breakPointProp = breakpoint => `${breakpoint}-sizeOf`;
 const sizeRegex = /^([1-9]|1[0-2])-([1-9]|1[0-2])$/;
 
-export const Column = (props) => {
+const Column = (props) => {
   const { align, children, className, flavor, variation, omitCol, ...rest } = props;
 
   const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-col_${f}`) : `slds-col_${flavor}`;
