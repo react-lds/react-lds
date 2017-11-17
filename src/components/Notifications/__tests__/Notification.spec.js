@@ -1,8 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-// eslint-disable-next-line import/no-named-default
-import { default as Notification } from '../Notification';
+import Notification from '../Notification';
 
 describe('<Notification />', () => {
   let mounted = null;

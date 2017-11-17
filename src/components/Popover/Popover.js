@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import omit from 'lodash.omit';
 
 import { Button, ButtonIcon } from '../../';
 
-export class Popover extends React.Component {
+class Popover extends Component {
   static shouldInvertIcon(themeStr) {
     if (typeof themeStr === 'string') {
       return themeStr.includes('error') ||

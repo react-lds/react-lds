@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { VerticalNavigationSection } from '../VerticalNavigationSection';
+import VerticalNavigationSection from '../VerticalNavigationSection';
 
 const getComponent = (props = {}) => shallow(<VerticalNavigationSection {...props} />);
 

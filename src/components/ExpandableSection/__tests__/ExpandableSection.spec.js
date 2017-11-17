@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Button } from '../../../';
-import { ExpandableSection } from '../ExpandableSection';
+import ExpandableSection from '../ExpandableSection';
 
 const child = <div className="heyo" />;
 const getExpandableSection = (props = {

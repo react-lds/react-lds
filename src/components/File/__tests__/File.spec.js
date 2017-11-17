@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Icon } from '../../../';
-import { File } from '../File';
+import File from '../File';
 
 const getComponent = (props = {}) => shallow(
   <File

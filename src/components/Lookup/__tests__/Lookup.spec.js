@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { Lookup } from '../Lookup';
+import { LookupRaw as Lookup } from '../Lookup';
 
 describe('<Lookup />', () => {
   let mounted = null;

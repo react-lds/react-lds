@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Column } from '../Column';
+import Column from '../Column';
 
 describe('<Column />', () => {
   let mounted = null;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export const Table = (props) => {
+const Table = (props) => {
   const { children, className, flavor, variation, ...rest } = props;
 
   const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-table_${f}`) : `slds-table_${flavor}`;

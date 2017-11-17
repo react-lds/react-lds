@@ -5,7 +5,7 @@ import cx from 'classnames';
 import { uniqueId } from '../../utils';
 import { IconSVG } from '../../';
 
-export const Cell = (props) => {
+const Cell = (props) => {
   const {
     children,
     className,

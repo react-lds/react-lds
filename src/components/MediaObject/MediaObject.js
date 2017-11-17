@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export const MediaObject = (props) => {
+const MediaObject = (props) => {
   const { children, className, customTag, figureLeft, figureRight, flavor, title, truncate, ...rest } = props;
 
   const renderFigure = (figure, classes = []) => {

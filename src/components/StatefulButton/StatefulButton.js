@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { ButtonIcon } from '../../';
 
-export const StatefulButton = (props) => {
+const StatefulButton = (props) => {
   const {
     className,
     disabled,

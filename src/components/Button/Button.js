@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export const Button = (props) => {
+const Button = (props) => {
   const {
     children,
     className,

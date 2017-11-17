@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
-import { StatefulButton } from '../StatefulButton';
+import StatefulButton from '../StatefulButton';
 
 describe('<StatefulButton />', () => {
   let props = {};

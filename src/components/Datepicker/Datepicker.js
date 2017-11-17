@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
@@ -17,7 +17,7 @@ const defaultTranslations = {
   today: 'Today',
 };
 
-export class Datepicker extends React.Component {
+export class DatepickerRaw extends Component {
   /**
    * Renders visible weekdays
    * @return {ReactElement} thead
@@ -71,14 +71,14 @@ export class Datepicker extends React.Component {
 
     let initial;
     let isValid;
-    const isControlled = Datepicker.isControlled(date);
+    const isControlled = DatepickerRaw.isControlled(date);
 
     if (isControlled) {
       initial = date;
-      isValid = Datepicker.validate(date);
+      isValid = DatepickerRaw.validate(date);
     } else {
       initial = initialDate;
-      isValid = Datepicker.validate(initialDate);
+      isValid = DatepickerRaw.validate(initialDate);
     }
 
     this.state = {
@@ -97,11 +97,11 @@ export class Datepicker extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { date: nextDate } = nextProps;
     const { date: previousDate, required } = this.props;
-    const isControlled = Datepicker.isControlled(previousDate);
+    const isControlled = DatepickerRaw.isControlled(previousDate);
 
     if (isControlled) {
       const nextValidDate = moment(nextDate, [iso8601DateFormat, defaultDateFormat]);
-      const isValid = Datepicker.validate(nextDate);
+      const isValid = DatepickerRaw.validate(nextDate);
       const isEmptyDate = nextDate === null || nextDate === '';
 
       this.setState({
@@ -120,7 +120,7 @@ export class Datepicker extends React.Component {
    */
   onDatepickerChange = (day) => {
     const { date, onChange } = this.props;
-    const isControlled = Datepicker.isControlled(date);
+    const isControlled = DatepickerRaw.isControlled(date);
     const inputValue = day ?
       moment(day).format(defaultDateFormat).toString() :
       moment().format(defaultDateFormat).toString();
@@ -147,7 +147,7 @@ export class Datepicker extends React.Component {
   onInputFieldChange = (value) => {
     const { date, onChange, required } = this.props;
     const newDate = moment(value, defaultDateFormat);
-    const isControlled = Datepicker.isControlled(date);
+    const isControlled = DatepickerRaw.isControlled(date);
 
     if (moment(value, defaultDateFormat, true).isValid()) {
       if (!isControlled) {
@@ -210,7 +210,7 @@ export class Datepicker extends React.Component {
   onInputFieldClick = (value) => {
     const { required } = this.props;
     const date = moment(value, defaultDateFormat);
-    const isValid = Datepicker.validate(date);
+    const isValid = DatepickerRaw.validate(date);
 
     this.setState({
       isValid: value === null || value === '' ? !required : isValid,
@@ -433,7 +433,7 @@ export class Datepicker extends React.Component {
               className="slds-datepicker__month"
               role="grid"
             >
-              {Datepicker.renderWeekHeader()}
+              {DatepickerRaw.renderWeekHeader()}
               {this.renderMonth()}
             </table>
           </div>
@@ -443,7 +443,7 @@ export class Datepicker extends React.Component {
   }
 }
 
-Datepicker.defaultProps = {
+DatepickerRaw.defaultProps = {
   className: null,
   date: undefined,
   disabled: false,
@@ -456,7 +456,7 @@ Datepicker.defaultProps = {
   yearSpan: 2,
 };
 
-Datepicker.propTypes = {
+DatepickerRaw.propTypes = {
   /**
    * Additional class name
    */
@@ -508,4 +508,4 @@ Datepicker.propTypes = {
   yearSpan: PropTypes.number,
 };
 
-export default enhanceWithClickOutside(Datepicker);
+export default enhanceWithClickOutside(DatepickerRaw);

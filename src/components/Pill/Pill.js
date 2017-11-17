@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import { Button, ButtonIcon } from '../../';
 
-export const Pill = (props) => {
+const Pill = (props) => {
   const {
     bare,
     className,

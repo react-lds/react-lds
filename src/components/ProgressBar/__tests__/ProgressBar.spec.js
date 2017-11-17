@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { ProgressBar } from '../ProgressBar';
+import ProgressBar from '../ProgressBar';
 
 const getProgressBar = (props = {}) => shallow(<ProgressBar progress={0} {...props} />);
 

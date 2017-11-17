@@ -1,2 +1,7 @@
-export Accordion from './Accordion';
-export AccordionSection from './AccordionSection';
+import Accordion from './Accordion';
+import AccordionSection from './AccordionSection';
+
+export {
+  Accordion,
+  AccordionSection,
+};

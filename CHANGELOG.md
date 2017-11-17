@@ -2,6 +2,7 @@
 
 # Unreleased
 
+* Removed Navigation Component
 * ObjectHome Menu dropdown position is now default (left)
 * Breaking: `MediaObject` flavor usage
 * Breaking: `DataTable` & subcomponents flavor & variation usage

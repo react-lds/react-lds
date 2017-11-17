@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { THEMES, getThemeClass } from '../../utils';
 
-export const Badge = (props) => {
+const Badge = (props) => {
   const {
     className,
     label,
@@ -33,3 +33,5 @@ Badge.propTypes = {
   /** SLDS Theme */
   theme: PropTypes.oneOf(THEMES),
 };
+
+export default Badge;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export const Container = (props) => {
+const Container = (props) => {
   const { children, className, flavor, ...rest } = props;
   const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-container_${f}`) : `slds-container_${flavor}`;
   return (<div {...rest} className={cx([className, flavorClasses])}>{children}</div>);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Badge } from '../Badge';
+import Badge from '../Badge';
 
 describe('<Badge />', () => {
   let mounted = null;

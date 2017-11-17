@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
@@ -6,7 +6,7 @@ import omit from 'lodash.omit';
 
 import { Grid, Column, Menu } from '../../';
 
-export class ObjectHome extends React.Component {
+class ObjectHomeRaw extends Component {
   static propTypes = {
     /**
      * bottom Buttons or ButtonGroup(s)
@@ -62,7 +62,7 @@ export class ObjectHome extends React.Component {
 
   render() {
     const { bottomButtons, className, info, recordType, title, titleMenu, topButtons } = this.props;
-    const rest = omit(this.props, Object.keys(ObjectHome.propTypes));
+    const rest = omit(this.props, Object.keys(ObjectHomeRaw.propTypes));
 
     const sldsClasses = [
       'slds-page-header',
@@ -107,4 +107,4 @@ export class ObjectHome extends React.Component {
   }
 }
 
-export default enhanceWithClickOutside(ObjectHome);
+export default enhanceWithClickOutside(ObjectHomeRaw);

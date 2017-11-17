@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export const ModalFooter = (props) => {
+const ModalFooter = (props) => {
   const { children, className, defaultTheme, directional, ...rest } = props;
 
   const sldsClasses = [

@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Button } from '../../..';
 
-import { VerticalNavigationOverflow } from '../VerticalNavigationOverflow';
+import VerticalNavigationOverflow from '../VerticalNavigationOverflow';
 
 const getComponent = (props = {}) => shallow(
   <VerticalNavigationOverflow

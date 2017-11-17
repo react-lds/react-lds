@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { shallow } from 'enzyme';
-import { Datepicker } from '../Datepicker';
+import { DatepickerRaw as Datepicker } from '../Datepicker';
 
 describe('<Datepicker />', () => {
   let mounted = null;

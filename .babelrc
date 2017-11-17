@@ -13,8 +13,7 @@
   }]],
   "plugins": [
     "transform-object-rest-spread",
-    "transform-class-properties",
-    "transform-export-extensions"
+    "transform-class-properties"
   ],
   "env": {
     "test": {

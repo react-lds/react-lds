@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export const Grid = (props) => {
+const Grid = (props) => {
   const { children, className, flavor, wrap, ...rest } = props;
 
   const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-grid_${f}`) : `slds-grid_${flavor}`;

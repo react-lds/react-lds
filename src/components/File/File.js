@@ -1,4 +1,3 @@
-/* ./src/components/{Component}/{Component}.js */
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -10,7 +9,7 @@ const RATIOS = [
   '16-by-9'
 ];
 
-export const File = (props) => {
+const File = (props) => {
   const {
     actions,
     className,

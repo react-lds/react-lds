@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { PathStage } from '../PathStage';
+import PathStage from '../PathStage';
 
 const getComponent = (props = { label: 'testLabel', onStageClick: () => {} }) => shallow(<PathStage {...props} />);
 

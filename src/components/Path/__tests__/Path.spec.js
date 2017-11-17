@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Path } from '../Path';
-import { PathStage } from '../PathStage';
+import Path from '../Path';
+import PathStage from '../PathStage';
 
 const buttonConst = (<p className="whatishappening">test</p>);
 

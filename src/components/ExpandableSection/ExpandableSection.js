@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import { Button, ButtonIcon } from '../../';
 
-export class ExpandableSection extends Component {
+class ExpandableSection extends Component {
   static defaultProps = {
     className: null,
     open: null,

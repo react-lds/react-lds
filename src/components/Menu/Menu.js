@@ -6,7 +6,7 @@ import omit from 'lodash.omit';
 
 import { Button, ButtonIcon } from '../../';
 
-export class Menu extends Component {
+export class MenuRaw extends Component {
   constructor(props, { cssPrefix }) {
     super(props, { cssPrefix });
     this.state = { open: this.props.isOpen };
@@ -78,7 +78,7 @@ export class Menu extends Component {
       className,
     ];
 
-    const rest = omit(this.props, Object.keys(Menu.propTypes));
+    const rest = omit(this.props, Object.keys(MenuRaw.propTypes));
 
     return (
       <div className={cx(this.getClasses())}>
@@ -91,7 +91,7 @@ export class Menu extends Component {
   }
 }
 
-Menu.propTypes = {
+MenuRaw.propTypes = {
   /**
    * The button that triggers the dropdown menu
    * ```
@@ -152,7 +152,7 @@ Menu.propTypes = {
   size: PropTypes.oneOf(['small', 'medium', 'large']),
 };
 
-Menu.defaultProps = {
+MenuRaw.defaultProps = {
   button: null,
   className: null,
   customButton: null,
@@ -164,4 +164,4 @@ Menu.defaultProps = {
   size: 'small',
 };
 
-export default enhanceWithClickOutside(Menu);
+export default enhanceWithClickOutside(MenuRaw);

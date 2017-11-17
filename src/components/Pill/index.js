@@ -1,3 +1,5 @@
-export { default as Pill } from './Pill';
-export { default as PillContainer } from './PillContainer';
-export { default as Listbox } from './Listbox';
+import Pill from './Pill';
+import PillContainer from './PillContainer';
+import Listbox from './Listbox';
+
+export { Pill, PillContainer, Listbox };

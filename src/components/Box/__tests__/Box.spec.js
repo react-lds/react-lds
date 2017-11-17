@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Box } from '../Box';
+import Box from '../Box';
 
 describe('<Box />', () => {
   let mounted = null;

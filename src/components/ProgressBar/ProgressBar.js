@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export const ProgressBar = (props) => {
+const ProgressBar = (props) => {
   const { circular, className, progress, size, ...rest } = props;
 
   const sldsClasses = [
