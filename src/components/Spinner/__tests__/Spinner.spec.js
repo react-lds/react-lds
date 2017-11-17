@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow, render } from 'enzyme';
 
-import { Spinner } from '../Spinner';
-import { SpinnerContainer } from '../SpinnerContainer';
+import Spinner from '../Spinner';
+import SpinnerContainer from '../SpinnerContainer';
 
 describe('<Spinner />', () => {
   it('renders the correct markup', () => {

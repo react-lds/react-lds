@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export const VerticalNavigation = (props) => {
+const VerticalNavigation = (props) => {
   const {
     children,
     className,

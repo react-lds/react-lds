@@ -5,7 +5,7 @@ import { Button, ButtonIcon } from '../../';
 
 const getToggleHandler = (state, fn) => evt => fn(!state, evt);
 
-export const VerticalNavigationOverflow = (props) => {
+const VerticalNavigationOverflow = (props) => {
   const {
     children,
     className,

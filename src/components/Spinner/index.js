@@ -1,2 +1,4 @@
-export { default as Spinner } from './Spinner';
-export { default as SpinnerContainer } from './SpinnerContainer';
+import Spinner from './Spinner';
+import SpinnerContainer from './SpinnerContainer';
+
+export { Spinner, SpinnerContainer };

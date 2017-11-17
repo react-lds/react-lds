@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import { Button, ButtonIcon } from '../../';
 
-export const Notification = (props) => {
+const Notification = (props) => {
   const {
     children,
     className,

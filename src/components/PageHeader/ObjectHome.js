@@ -6,7 +6,7 @@ import omit from 'lodash.omit';
 
 import { Grid, Column, Menu } from '../../';
 
-export class ObjectHome extends Component {
+class ObjectHome extends Component {
   static propTypes = {
     /**
      * bottom Buttons or ButtonGroup(s)
@@ -62,7 +62,7 @@ export class ObjectHome extends Component {
 
   render() {
     const { bottomButtons, className, info, recordType, title, titleMenu, topButtons } = this.props;
-    const rest = omit(this.props, Object.keys(ObjectHome.propTypes));
+    const rest = omit(this.props, Object.keys(ObjectHomeRaw.propTypes));
 
     const sldsClasses = [
       'slds-page-header',
@@ -107,4 +107,4 @@ export class ObjectHome extends Component {
   }
 }
 
-export default enhanceWithClickOutside(ObjectHome);
+export default enhanceWithClickOutside(ObjectHomeRaw);

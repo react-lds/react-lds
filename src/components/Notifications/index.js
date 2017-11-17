@@ -1,2 +1,4 @@
-export { default as Notification } from './Notification';
-export Prompt from './Prompt';
+import Notification from './Notification';
+import Prompt from './Prompt';
+
+export { Notification, Prompt };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { IconSVG } from '../../.';
 
-export const PathStage = (props) => {
+const PathStage = (props) => {
   const { assistiveText, className, complete, current, label, onStageClick, selected, ...rest } = props;
 
   const sldsClasses = [

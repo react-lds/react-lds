@@ -1,4 +1,5 @@
-export { default as ObjectHome } from './ObjectHome';
-export { ObjectHome as ObjectHomeRaw } from './ObjectHome';
-export PageHeaderBase from './PageHeaderBase';
-export RecordHome from './RecordHome';
+import ObjectHome, { ObjectHomeRaw } from './ObjectHome';
+import PageHeaderBase from './PageHeaderBase';
+import RecordHome from './RecordHome';
+
+export { ObjectHome, ObjectHomeRaw, PageHeaderBase, RecordHome };

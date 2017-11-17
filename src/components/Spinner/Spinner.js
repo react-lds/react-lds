@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export const Spinner = (props) => {
+const Spinner = (props) => {
   const { brand, className, inverse, size, ...rest } = props;
 
   const sldsClasses = [

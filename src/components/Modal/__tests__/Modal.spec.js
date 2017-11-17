@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { Modal } from '../Modal';
+import Modal from '../Modal';
 import ModalHeader from '../ModalHeader';
 import ModalContent from '../ModalContent';
 

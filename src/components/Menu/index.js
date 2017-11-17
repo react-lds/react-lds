@@ -1,4 +1,5 @@
-export { default as Menu } from './Menu';
-export { Menu as MenuRaw } from './Menu';
-export MenuDropdownList from './MenuDropdownList';
-export MenuDropdownListItem from './MenuDropdownListItem';
+import Menu, { MenuRaw } from './Menu';
+import MenuDropdownList from './MenuDropdownList';
+import MenuDropdownListItem from './MenuDropdownListItem';
+
+export { Menu, MenuRaw, MenuDropdownList, MenuDropdownListItem };

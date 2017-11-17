@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { ObjectHome } from '../ObjectHome';
+import ObjectHome from '../ObjectHome';
 
 describe('<ObjectHome />', () => {
   let mounted;

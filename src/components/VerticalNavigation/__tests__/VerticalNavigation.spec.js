@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { VerticalNavigation } from '../VerticalNavigation';
+import VerticalNavigation from '../VerticalNavigation';
 
 const sampleEl = () => <div className="test">Foo</div>;
 

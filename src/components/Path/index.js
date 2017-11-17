@@ -1,2 +1,4 @@
-export { Path } from './Path';
-export { PathStage } from './PathStage';
+import Path from './Path';
+import PathStage from './PathStage';
+
+export { Path, PathStage };

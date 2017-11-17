@@ -539,7 +539,7 @@ export class LookupRaw extends Component {
     );
 
     return (
-      <Table bordered className="slds-m-top_small">
+      <Table flavor="bordered" className="slds-m-top_small">
         {header}
         {body}
       </Table>

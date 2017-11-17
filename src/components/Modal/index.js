@@ -1,5 +1,7 @@
-export { default as Backdrop } from './Backdrop';
-export { default as Modal } from './Modal';
-export { default as ModalFooter } from './ModalFooter';
-export ModalContent from './ModalContent';
-export ModalHeader from './ModalHeader';
+import Backdrop from './Backdrop';
+import Modal from './Modal';
+import ModalFooter from './ModalFooter';
+import ModalContent from './ModalContent';
+import ModalHeader from './ModalHeader';
+
+export { Backdrop, Modal, ModalFooter, ModalContent, ModalHeader };

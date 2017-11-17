@@ -5,7 +5,7 @@ import omit from 'lodash.omit';
 
 import { Button, ButtonIcon } from '../../';
 
-export class Popover extends Component {
+class Popover extends Component {
   static shouldInvertIcon(themeStr) {
     if (typeof themeStr === 'string') {
       return themeStr.includes('error') ||
