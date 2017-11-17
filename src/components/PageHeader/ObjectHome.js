@@ -6,7 +6,7 @@ import omit from 'lodash.omit';
 
 import { Grid, Column, Menu } from '../../';
 
-class ObjectHome extends Component {
+class ObjectHomeRaw extends Component {
   static propTypes = {
     /**
      * bottom Buttons or ButtonGroup(s)
