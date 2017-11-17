@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { PillContainer } from '../PillContainer';
+import PillContainer from '../PillContainer';
 
 describe('<PillContainer />', () => {
   let mounted = null;
@@ -23,5 +23,10 @@ describe('<PillContainer />', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-pill_container').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-pill_container').prop('data-test')).toEqual('bar');
+  });
+
+  it('renders bare flavor', () => {
+    mounted.setProps({ bare: true });
+    expect(mounted.find('.slds-pill_container_bare').exists()).toBeTruthy();
   });
 });

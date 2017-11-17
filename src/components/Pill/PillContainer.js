@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { flavorable } from '../../decorators';
-
-export const PillContainer = (props) => {
-  const { children, className, ...rest } = props;
+const PillContainer = (props) => {
+  const { bare, children, className, ...rest } = props;
 
   const sldsClasses = [
     'slds-pill_container',
+    { 'slds-pill_container_bare': !!bare },
     className,
   ];
 
@@ -19,15 +18,16 @@ export const PillContainer = (props) => {
   );
 };
 
-PillContainer.flavors = [
-  'bare',
-];
-
 PillContainer.defaultProps = {
+  bare: false,
   className: null,
 };
 
 PillContainer.propTypes = {
+  /**
+   * bare flavor
+   */
+  bare: PropTypes.bool,
   /**
    * the pill(s) passed into the component
    */
@@ -38,4 +38,4 @@ PillContainer.propTypes = {
   className: PropTypes.string,
 };
 
-export default flavorable(PillContainer, 'pill_container');
+export default PillContainer;
