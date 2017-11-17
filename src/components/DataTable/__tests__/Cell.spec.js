@@ -67,4 +67,12 @@ describe('<Cell />', () => {
     mounted.setProps({ truncate: false });
     expect(mounted.find('.slds-truncate').length).toBe(0);
   });
+
+  it('applies variationing', () => {
+    mounted.setProps({ variation: 'cell-wrap' });
+    expect(mounted.find('td').hasClass('slds-cell-wrap')).toBeTruthy();
+    mounted.setProps({ variation: ['cell-wrap', 'cell-shrink'] });
+    expect(mounted.find('td').hasClass('slds-cell-wrap')).toBeTruthy();
+    expect(mounted.find('td').hasClass('slds-cell-shrink')).toBeTruthy();
+  });
 });

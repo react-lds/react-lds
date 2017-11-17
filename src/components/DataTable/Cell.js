@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { variationable } from '../../decorators';
 import { uniqueId } from '../../utils';
 import { IconSVG } from '../../';
 
@@ -18,6 +17,7 @@ export const Cell = (props) => {
     sortAssistiveText,
     title,
     truncate,
+    variation,
     ...rest
   } = props;
 
@@ -110,9 +110,12 @@ export const Cell = (props) => {
   childArray.push(sortIcon(3));
   childArray.push(assistiveText(4));
 
+  const variationClasses = Array.isArray(variation) ? variation.map(f => `slds-${f}`) : `slds-${variation}`;
+
   const sldsClasses = [
     { 'slds-is-resizable': scope === 'col' && !!resizable },
     { 'slds-is-sorted_asc': !!sortable && sortDirection === 'asc' },
+    variationClasses,
     className,
   ];
 
@@ -132,11 +135,6 @@ export const Cell = (props) => {
   );
 };
 
-Cell.variations = [
-  'cell-wrap',
-  'cell-shrink',
-];
-
 Cell.defaultProps = {
   children: null,
   className: null,
@@ -148,6 +146,7 @@ Cell.defaultProps = {
   sortDirection: 'asc',
   title: null,
   truncate: true,
+  variation: [],
 };
 
 Cell.propTypes = {
@@ -191,6 +190,16 @@ Cell.propTypes = {
    * Whether the cell content should be truncated
    */
   truncate: PropTypes.bool,
+  /*
+   * variation
+   */
+  variation: PropTypes.oneOfType([PropTypes.oneOf([
+    'cell-wrap',
+    'cell-shrink',
+  ]), PropTypes.arrayOf(PropTypes.oneOf([
+    'cell-wrap',
+    'cell-shrink',
+  ]))]),
 };
 
-export default variationable(Cell);
+export default Cell;

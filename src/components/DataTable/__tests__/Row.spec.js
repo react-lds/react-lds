@@ -30,4 +30,12 @@ describe('<Row />', () => {
     expect(mounted.find('tr').hasClass('foo')).toBeTruthy();
     expect(mounted.find('tr').prop('data-test')).toEqual('bar');
   });
+
+  it('applies variationing', () => {
+    mounted.setProps({ variation: 'is-selected' });
+    expect(mounted.find('tr').hasClass('slds-is-selected')).toBeTruthy();
+    mounted.setProps({ variation: ['is-selected', 'hint-parent'] });
+    expect(mounted.find('tr').hasClass('slds-is-selected')).toBeTruthy();
+    expect(mounted.find('tr').hasClass('slds-hint-parent')).toBeTruthy();
+  });
 });
