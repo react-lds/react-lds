@@ -27,5 +27,4 @@ export * from './components/Spinner';
 export * from './components/StatefulButton';
 export * from './components/Tab';
 export * from './components/VerticalNavigation';
-export * from './decorators';
 export * from './utils';
