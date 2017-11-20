@@ -29,7 +29,9 @@ Box.propTypes = {
   className: PropTypes.string,
   /** (optional) box size */
   size: PropTypes.oneOf(['xx-small', 'x-small', 'small']),
-  /** SLDS theme */
+  /*
+   * theme
+   */
   theme: PropTypes.oneOf(THEMES),
 };
 

@@ -143,7 +143,7 @@ StatefulButton.propTypes = {
    */
   tooltip: PropTypes.string,
   /**
-   * button flavor
+   * flavors: neutral, brand, destructive, inverse, success
    */
   flavor: PropTypes.oneOf([
     'neutral',

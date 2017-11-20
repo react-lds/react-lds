@@ -166,7 +166,8 @@ Popover.propTypes = {
    */
   panels: PropTypes.bool,
   /**
-   * Optional position of nubbin
+   * Optional position of nubbin. Positions: left, left-top, left-bottom,
+   * top-left, top-right, right-top, right-bottom, bottom-left, bottom-right
    */
   nubbin: PropTypes.oneOf([
     'left',
@@ -180,7 +181,7 @@ Popover.propTypes = {
     'bottom-right',
   ]),
   /**
-   * Optional custom layout
+   * Optional custom Header theme. Themes: warning, error, success, info
    */
   customHeaderTheme: PropTypes.oneOf([
     'warning',
@@ -188,7 +189,7 @@ Popover.propTypes = {
     'success',
     'info']),
   /**
-   * theme
+   * themes: alt-inverse, default, error, info, inverse, offline, shade, success, warning
    */
   theme: PropTypes.oneOf([
     'alt-inverse',

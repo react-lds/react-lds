@@ -36,7 +36,8 @@ Table.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * variation
+   * variation: string or array of strings. Variations: no-row-hover, max-medium-table_stacked,
+   max-medium-table_stacked-horizontal
    */
   variation: PropTypes.oneOfType([PropTypes.oneOf([
     'no-row-hover',
@@ -48,7 +49,7 @@ Table.propTypes = {
     'max-medium-table_stacked-horizontal',
   ]))]),
   /**
-   * flavor
+   * flavor: string or array of strings. Flavors: bordered, col-bordered, striped, fixed-layout
    */
   flavor: PropTypes.oneOfType([PropTypes.oneOf([
     'bordered',

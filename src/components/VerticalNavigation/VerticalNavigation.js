@@ -40,7 +40,7 @@ VerticalNavigation.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * flavor
+   * flavor: string or array of strings. Flavors: compact, shade
    */
   flavor: PropTypes.oneOfType([PropTypes.oneOf([
     'compact',

@@ -96,7 +96,9 @@ Column.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * flavor
+   * flavor: string or array of strings. Flavors: bump-left, bump-right,
+   * bump-top, bump-bottom, padded, padded-large, padded-small, rule-right,
+   * rule-left, rule-top, rule-bottom,
    */
   flavor: PropTypes.oneOfType([PropTypes.oneOf([
     'bump-left',
@@ -124,7 +126,8 @@ Column.propTypes = {
     'rule-bottom',
   ]))]),
   /*
-   * variation
+   * variation: string or array of strings. Variations: has-flexi-truncate,
+   * no-flex, no-space, grow, grow-none, shrink, shrink-none
    */
   variation: PropTypes.oneOfType([PropTypes.oneOf([
     'has-flexi-truncate',

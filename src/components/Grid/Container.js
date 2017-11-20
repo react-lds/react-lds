@@ -24,7 +24,8 @@ Container.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * flavor
+   * flavor: string or array of strings. Flavors: small, medium, large, x-large,
+   * fluid, left, center, right
    */
   flavor: PropTypes.oneOfType([PropTypes.oneOf([
     'small',

@@ -35,7 +35,7 @@ Spinner.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * spinner size
+   * spinner sizes: xx-small, x-small, small, medium, large
    */
   size: PropTypes.oneOf(['xx-small', 'x-small', 'small', 'medium', 'large']),
   /**

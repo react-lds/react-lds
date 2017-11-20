@@ -191,7 +191,7 @@ Cell.propTypes = {
    */
   truncate: PropTypes.bool,
   /*
-   * variation
+   * Variation: string or array of strings. Variations: cell-wrap, cell-shrink
    */
   variation: PropTypes.oneOfType([PropTypes.oneOf([
     'cell-wrap',

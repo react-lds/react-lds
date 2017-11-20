@@ -71,7 +71,7 @@ MediaObject.propTypes = {
    */
   figureRight: PropTypes.node,
   /**
-   * flavor
+   * flavor: string or array of strings. Flavors: center, responsive, small
    */
   flavor: PropTypes.oneOfType([PropTypes.oneOf([
     'center',

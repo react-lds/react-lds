@@ -83,7 +83,7 @@ Pill.propTypes = {
    */
   url: PropTypes.string,
   /**
-   * bare flavorable
+   * bare flavor
    */
   bare: PropTypes.bool,
 };

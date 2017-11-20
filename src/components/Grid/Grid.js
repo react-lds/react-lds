@@ -34,7 +34,10 @@ Grid.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * flavor
+   * flavor: string or array of strings. Flavors: frame, vertical, reverse,
+   * vertical-reverse, align-center, align-spread, align-space, align-end,
+   * vertical-align-center, certical-align-end, vertical-stretch, pull-padded,
+   * pull-padded-medium, pull-padded-large,
    */
   flavor: PropTypes.oneOfType([PropTypes.oneOf([
     'frame',

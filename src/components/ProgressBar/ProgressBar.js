@@ -55,7 +55,7 @@ ProgressBar.propTypes = {
    */
   progress: PropTypes.number,
   /**
-   * height of the bar
+   * height of the bar. Sizes: x-small, small, medium, large
    */
   size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
 };

@@ -37,7 +37,7 @@ Row.propTypes = {
    */
   head: PropTypes.bool,
   /**
-   * variation
+   * variation: string or array of strings. Variations: is-selected, hint-parent
    */
   variation: PropTypes.oneOfType([PropTypes.oneOf([
     'is-selected',
