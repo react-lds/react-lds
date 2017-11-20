@@ -2,24 +2,32 @@
 
 # Unreleased
 
+* Breaking: Flavor usage
+    * `Button`
+    * DataTable/`Table`
+    * Grid/`Column`, `Container`, `Grid`
+    * Images/`Avatar`
+    * `MediaObject`
+    * Modal/`Backdrop`, `Modal`, `ModalFooter`
+    * `Notification`
+    * Pill/`Pill`, `PillContainer`
+    * `ProgressBar`
+    * `Spinner`
+    * `StatefulButton`
+    * `VerticalNavigation`
+* Breaking: Theme usage
+    * `Badge`
+    * `Box`
+    * `Notification`
+    * `Popover`
+* Breaking: Variation usage
+    * DataTable/`Row`, `Table`
+    * Grid/`Column`, `Grid`
 * Removed Navigation Component
 * ObjectHome Menu dropdown position is now default (left)
-* Breaking: `MediaObject` flavor usage
-* Breaking: `DataTable` & subcomponents flavor & variation usage
-* Breaking: `VerticalNavigation` flavor usage
 * Components that use `enhanceWithClickOutside` are now importable without that functionality by using `import *Component*Raw as *Component*`
 * Bugfix: Picklist down-icon now opens Picklist
-* `Modal` & subcomponents flavor usage (not breaking)
-* Breaking: `Grid` flavor & variation usage
-* Breaking: `Column` flavor & variation usage
-* Breaking: `Container` flavor & variation usage
-* Breaking: `Table` flavor & variation usage
-* Breaking: `Popover` theme usage, renamed customLayout to customHeaderTheme
-* Breaking: `StatefulButton` flavor usage
-* Breaking: `Button` flavor usage
-* Breaking: `Notification` theme usage
-* Breaking: `Badge` theme usage
-* Breaking: `Box` theme usage
+* Breaking: `Popover` renamed customLayout to customHeaderTheme
 * Breaking: Disallow `IconSVG` to have a background
 * Remove circle boolean, LDS sets it automatically for `action` icons
 =======
