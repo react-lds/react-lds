@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { boolean, text } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { Prompt } from '../src';
 
@@ -20,6 +20,18 @@ stories
       description={text('Description', 'description text')}
       open={boolean('Open', true)}
       onClickClose={action('clicked close')}
+      theme={select('Theme', [
+        '',
+        'alt-inverse',
+        'default',
+        'error',
+        'info',
+        'inverse',
+        'offline',
+        'shade',
+        'success',
+        'warning',
+      ], '') || undefined}
     >
       <p>
         Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco

@@ -34,7 +34,7 @@ const ModalHeader = (props) => {
   const sldsClasses = [
     'slds-modal__header',
     { 'slds-modal__header_empty': isEmpty },
-    { 'slds-theme_error': !!prompt },
+    { [`slds-theme_${prompt}`]: !!prompt },
     { 'slds-theme_alert-texture': !!prompt },
     className,
   ];
@@ -53,7 +53,7 @@ ModalHeader.defaultProps = {
   children: null,
   className: null,
   label: null,
-  prompt: false,
+  prompt: null,
   tagline: null,
   title: null,
   uncloseable: undefined,
@@ -74,9 +74,9 @@ ModalHeader.propTypes = {
    */
   label: PropTypes.string,
   /**
-   * render header as a prompt header (gets passed down from `Modal prompt`)
+   * render header as a prompt header, specify theme (gets passed down from `Modal prompt`)
    */
-  prompt: PropTypes.bool,
+  prompt: PropTypes.string,
   /**
    * (optional) modal tagline
    */
