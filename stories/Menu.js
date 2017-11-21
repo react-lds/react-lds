@@ -6,7 +6,16 @@ import { Button, ButtonIcon, MenuRaw as Menu, MenuDropdownList, MenuDropdownList
 
 const stories = storiesOf('Menu', module);
 
-const button = { sprite: 'utility', icon: 'down', brand: false, neutral: false, noBorder: false, title: '' };
+const button = {
+  sprite: 'utility',
+  icon: 'settings',
+  brand: false,
+  neutral: false,
+  noBorder: true,
+  title: '',
+  tooltip: 'heyahehyhy'
+};
+
 const customButton = (
   <Button
     onClick={action('custom Button clicked')}
@@ -26,7 +35,7 @@ stories
       button={object('Button', button)}
       disabled={boolean('Disabled', false)}
       last={boolean('Last', false)}
-      nubbin={boolean('Nubbin', false)}
+      nubbin={boolean('Nubbin', true)}
       position={select('Position', [
         '', 'top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right'
       ], '') || undefined}

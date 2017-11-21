@@ -39,6 +39,8 @@ export class MenuRaw extends Component {
           aria-haspopup="true"
           flavor={button.flavor}
           className={cx([
+            button.brand ? 'slds-button_brand' : null,
+            button.neutral ? 'slds-button_neutral' : null,
             (noBorder && !title) ? 'slds-button_icon-container' : null,
             (!noBorder && !title) ? 'slds-button_icon-border-filled' : null
           ])}
