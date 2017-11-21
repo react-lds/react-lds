@@ -105,7 +105,7 @@ Modal.propTypes = {
   /**
    * modal is a prompt
    */
-  prompt: PropTypes.bool,
+  prompt: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 export default Modal;

@@ -2,6 +2,7 @@
 
 # Unreleased
 
+* `Prompt` add theming
 * Breaking: Flavor usage
     * `Button`
     * DataTable/`Table`
