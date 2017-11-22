@@ -2,7 +2,15 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { text, boolean, select, object, array } from '@storybook/addon-knobs';
-import { Button, ButtonIcon, ButtonGroup, StatefulButton } from '../src';
+import {
+  Button,
+  ButtonIcon,
+  ButtonGroup,
+  StatefulButton,
+  Menu,
+  MenuDropdownList,
+  MenuDropdownListItem
+} from '../src';
 
 const stories = storiesOf('Button', module);
 
@@ -71,4 +79,28 @@ stories
       })}
       tooltip={text('Tooltip', 'I\'m a tooltip, look at me!')}
     />
+  ))
+  .add('Button Group with Menu', () => (
+    <ButtonGroup>
+      <Button flavor={array('Button 1 flavor', ['neutral'])} onClick={action('foo')} title="foo" />
+      <Button flavor={array('Button 2 flavor', ['neutral'])} onClick={action('bar')} title="bar" />
+      <Button flavor={array('Button 3 flavor', ['neutral'])} onClick={action('baz')} title="baz" />
+      <Menu
+        button={object('Menu button', { sprite: 'utility', icon: 'down' })}
+        last
+        nubbin={boolean('Nubbin', true)}
+        size={select('Size', ['', 'small', 'medium', 'large'], '') || undefined}
+        position={select('Position', [
+          '', 'top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right'
+        ], 'top') || undefined}
+      >
+        <MenuDropdownList>
+          <MenuDropdownListItem>Item 1</MenuDropdownListItem>
+          <MenuDropdownListItem>Item 2</MenuDropdownListItem>
+          <MenuDropdownListItem>Item 3</MenuDropdownListItem>
+          <MenuDropdownListItem divider>Important last item</MenuDropdownListItem>
+        </MenuDropdownList>
+      </Menu>
+
+    </ButtonGroup>
   ));
