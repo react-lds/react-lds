@@ -159,10 +159,6 @@ DataTableAdvanced.variations = [
   'no-row-hover',
 ];
 
-DataTableAdvanced.contextTypes = {
-  cssPrefix: React.PropTypes.string,
-};
-
 DataTableAdvanced.propTypes = {
   children: React.PropTypes.node,
 

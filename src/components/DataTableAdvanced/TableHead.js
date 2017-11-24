@@ -93,10 +93,6 @@ const TableHead = (props) => {
 
 TableHead.variations = [];
 
-TableHead.contextTypes = {
-  cssPrefix: React.PropTypes.string,
-};
-
 TableHead.propTypes = {
   /**
    * Array containing column configurations

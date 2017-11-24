@@ -5,10 +5,11 @@ const DataCell = (props) => {
     dataKey,
     renderer,
     value,
+    ...restProps,
   } = props;
 
   return (
-    <td role="gridcell">
+    <td role="gridcell" {...restProps}>
       { renderer
         ? renderer(dataKey, value)
         : (
@@ -23,10 +24,6 @@ const DataCell = (props) => {
 
 
 DataCell.variations = [];
-
-DataCell.contextTypes = {
-  cssPrefix: React.PropTypes.string,
-};
 
 DataCell.propTypes = {
   /**

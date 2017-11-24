@@ -5,6 +5,7 @@ import DataCell from './DataCell';
 
 const DataRow = (props) => {
   const {
+    className,
     columnsConf,
     isActionable,
     isSelectable,
@@ -12,6 +13,7 @@ const DataRow = (props) => {
     onToggle,
     onAction,
     rowData,
+    ...restProps,
   } = props;
 
   const dataCells = columnsConf.map(conf => (
@@ -73,12 +75,13 @@ const DataRow = (props) => {
   }
 
   const cxTr = cx([
-    'hint-parent',
-    { 'is-selected': isSelected },
+    'slds-hint-parent',
+    { 'slds-is-selected': isSelected },
+    className,
   ]);
 
   return (
-    <tr className={cxTr}>
+    <tr className={cxTr} {...restProps}>
       {checkboxCell}
       {dataCells}
       {showMoreCell}
@@ -89,11 +92,11 @@ const DataRow = (props) => {
 
 DataRow.variations = [];
 
-DataRow.contextTypes = {
-  cssPrefix: React.PropTypes.string,
-};
-
 DataRow.propTypes = {
+  /**
+   * className overrides
+   */
+  className: React.PropTypes.string,
   /**
    * row content
    */

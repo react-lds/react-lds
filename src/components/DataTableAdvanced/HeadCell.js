@@ -97,10 +97,6 @@ const HeadCell = (props) => {
 
 HeadCell.variations = [];
 
-HeadCell.contextTypes = {
-  cssPrefix: React.PropTypes.string,
-};
-
 HeadCell.propTypes = {
   /**
    * Optional cell renderer function
