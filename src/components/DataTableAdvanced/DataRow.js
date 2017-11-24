@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import DataCell from './DataCell';
@@ -92,47 +93,56 @@ const DataRow = (props) => {
 
 DataRow.variations = [];
 
+DataRow.defaultProps = {
+  className: null,
+  isActionable: false,
+  isSelected: false,
+  isSelectable: false,
+  onAction: null,
+  onToggle: null,
+};
+
 DataRow.propTypes = {
   /**
    * className overrides
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * row content
    */
-  rowData: React.PropTypes.object.isRequired,
+  rowData: PropTypes.object.isRequired,
 
   /**
    * Array containing column configurations
    */
-  columnsConf: React.PropTypes.array.isRequired,
+  columnsConf: PropTypes.array.isRequired,
 
   /**
    * Does each row have a trailing "Show more" element?
    */
-  isActionable: React.PropTypes.bool,
+  isActionable: PropTypes.bool,
+
+  /**
+  * Is this row currently selected?
+  */
+  isSelected: PropTypes.bool,
 
   /**
    * Is this row selectable, i.e. should it show a checkbox in front?
    */
-  isSelectable: React.PropTypes.bool,
-
-  /**
-   * Is this row currently selected?
-   */
-  isSelected: React.PropTypes.bool,
+  isSelectable: PropTypes.bool,
 
   /**
    * Callback triggered by clicking on the trailing "Show more" element in a
    * row. Required when `props.isActionable` is `true`.
    */
-  onAction: React.PropTypes.func,
+  onAction: PropTypes.func,
 
   /**
    * Callback triggered by activating/deactivating the row selection checkbox.
    * Required when `props.isSelectable` is `true`.
    */
-  onToggle: React.PropTypes.func,
+  onToggle: PropTypes.func,
 };
 
 

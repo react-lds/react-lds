@@ -7,7 +7,12 @@ describe('<DataCell />', () => {
   let mounted = null;
 
   beforeEach(() => {
-    mounted = shallow(<DataCell />);
+    const props = {
+      dataKey: 'foo',
+      value: 'bar',
+    };
+
+    mounted = shallow(<DataCell {...props} />);
   });
 
   it('renders as a td by default', () => {
@@ -21,8 +26,6 @@ describe('<DataCell />', () => {
 
   it('uses the custom renderer if present', () => {
     mounted.setProps({
-      dataKey: 'foo',
-      value: 'bar',
       renderer: (dataKey, value) => <span title={dataKey}>{value}</span>,
     });
     expect(mounted.find('span').prop('title')).toEqual('foo');

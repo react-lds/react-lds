@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import pick from 'lodash.pick';
 
 import { uniqueId } from '../../utils';
 import HeadCell from './HeadCell';
-
 
 const TableHead = (props) => {
   const {
@@ -93,42 +93,52 @@ const TableHead = (props) => {
 
 TableHead.variations = [];
 
+TableHead.defaultProps = {
+  isActionable: false,
+  isAllSelected: false,
+  isSelectable: false,
+  onToggle: null,
+  onChangeSorting: null,
+  sortBy: null,
+  sortDirection: null,
+};
+
 TableHead.propTypes = {
   /**
    * Array containing column configurations
    */
-  columnsConf: React.PropTypes.array.isRequired,
+  columnsConf: PropTypes.array.isRequired,
 
   /**
    * Does each row below have a trailing "Show more" element?
    */
-  isActionable: React.PropTypes.bool,
+  isActionable: PropTypes.bool,
 
   /**
    * Are all table rows selected at the moment?
    */
-  isAllSelected: React.PropTypes.bool,
+  isAllSelected: PropTypes.bool,
 
   /**
    * Is this row selectable, i.e. should it show a checkbox in front?
    */
-  isSelectable: React.PropTypes.bool,
+  isSelectable: PropTypes.bool,
 
   /**
    * Callback triggered by activating/deactivating the "all rows" selection
    * checkbox. Required when `props.isSelectable` is `true`.
    */
-  onToggle: React.PropTypes.func,
+  onToggle: PropTypes.func,
 
   /**
    * Callback triggered by clicking on a cell heading a sortable column.
    * Required when `props.isSortable` is `true`.
    */
-  onChangeSorting: React.PropTypes.func,
+  onChangeSorting: PropTypes.func,
 
-  sortBy: React.PropTypes.string,
+  sortBy: PropTypes.string,
 
-  sortDirection: React.PropTypes.oneOf(['asc', 'desc']),
+  sortDirection: PropTypes.oneOf(['asc', 'desc']),
 };
 
 

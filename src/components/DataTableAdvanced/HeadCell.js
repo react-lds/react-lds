@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const HeadCell = (props) => {
@@ -97,42 +98,51 @@ const HeadCell = (props) => {
 
 HeadCell.variations = [];
 
+HeadCell.defaultProps = {
+  renderer: null,
+  sortBy: null,
+  sortDirection: null,
+  onChangeSorting: null,
+  isResizable: false,
+  isSortable: false,
+};
+
 HeadCell.propTypes = {
   /**
    * Optional cell renderer function
    */
-  renderer: React.PropTypes.func,
+  renderer: PropTypes.func,
 
   /**
    * Key name of the data object property being displayed in this here cell
    */
-  dataKey: React.PropTypes.string.isRequired,
+  dataKey: PropTypes.string.isRequired,
 
   /**
    * Display name of the cell
    */
-  title: React.PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 
-  sortBy: React.PropTypes.string,
+  sortBy: PropTypes.string,
 
-  sortDirection: React.PropTypes.oneOf(['asc', 'desc']),
+  sortDirection: PropTypes.oneOf(['asc', 'desc']),
 
   /**
    * Callback triggered by clicking on a cell heading a sortable column.
    * Required when `props.isSortable` is `true`.
    */
-  onChangeSorting: React.PropTypes.func,
+  onChangeSorting: PropTypes.func,
 
   /**
    * Is this row resizable?
    */
-  isResizable: React.PropTypes.bool,
+  isResizable: PropTypes.bool,
 
   /**
    * Is this column sortable, i.e. should clicking it change the currently
    * displayed row order below?
    */
-  isSortable: React.PropTypes.bool,
+  isSortable: PropTypes.bool,
 };
 
 

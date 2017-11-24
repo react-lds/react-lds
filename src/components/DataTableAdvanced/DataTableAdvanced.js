@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import get from 'lodash.get';
 import omit from 'lodash.omit';
@@ -8,7 +9,6 @@ import { flavorable, variationable } from '../../decorators';
 import DataRow from './DataRow';
 import TableHead from './TableHead';
 import DataTableColumn from './DataTableColumn';
-
 
 export class DataTableAdvanced extends React.Component {
 
@@ -159,80 +159,97 @@ DataTableAdvanced.variations = [
   'no-row-hover',
 ];
 
+DataTableAdvanced.defaultProps = {
+  children: null,
+  className: null,
+  height: null,
+  hasSelectableRows: false,
+  isActionable: false,
+  isLoading: false,
+  selectedRows: null,
+  totalPages: null,
+  currentPage: null,
+  rowsPerPage: null,
+  onAction: null,
+};
+
 DataTableAdvanced.propTypes = {
-  children: React.PropTypes.node,
+  /**
+   * Table rows
+   */
+  children: PropTypes.node,
 
   /**
    * Table content, an array of objects
    */
-  data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 
   /**
    * class name
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
 
   /**
    * Height of table. Optional.
    */
-  height: React.PropTypes.number,
+  height: PropTypes.number,
 
   /**
    * Can rows be selected, i.e. should there be a leading checkbox in every row?
    * Optional, defaults to `false`.
    */
-  hasSelectableRows: React.PropTypes.bool,
+  hasSelectableRows: PropTypes.bool,
 
   /**
    * Does each row have a trailing "Show more" element?
    */
-  isActionable: React.PropTypes.bool,
+  isActionable: PropTypes.bool,
 
   /**
    * Set to `true` while the upstream component fetches new data. Optional,
    * defaults to `false`.
    */
-  isLoading: React.PropTypes.bool,
+  isLoading: PropTypes.bool,
 
   /**
    * Array of preselected row IDs. Only used when `props.hasSelectableRows` is
    * active.
    */
-  selectedRows: React.PropTypes.arrayOf(React.PropTypes.string),
+  selectedRows: PropTypes.arrayOf(PropTypes.string),
 
   /**
    * Number of available table pages. Optional.
    */
-  totalPages: React.PropTypes.number,
+  totalPages: PropTypes.number,
 
   /**
    * Number of currently visible table page. Optional.
    */
-  currentPage: React.PropTypes.number,
+  currentPage: PropTypes.number,
 
   /**
    * Number of rows per table page. Optional.
    */
-  rowsPerPage: React.PropTypes.number,
+  rowsPerPage: PropTypes.number,
 
   /**
    * Callback triggered by clicking on the trailing "Show more" element in a
    * row. Will receive the row ID as argument.
    */
-  onAction: React.PropTypes.func,
+  onAction: PropTypes.func,
 
   /**
    * Callback, triggered by clicks on sortable column headers.  Will receive
    * two arguments: a string denoting which data key to sort by and a string
    * specifying the sort order ('asc' or 'desc').
    */
-  onSorting: React.PropTypes.func.isRequired,
+  onSorting: PropTypes.func.isRequired,
 
   /**
    * Callback, triggered whenever one or more rows have been selected. Returns
    * an array containing all selected row IDs.
    */
-  onSelection: React.PropTypes.func.isRequired,
+  onSelection: PropTypes.func.isRequired,
 };
 
 

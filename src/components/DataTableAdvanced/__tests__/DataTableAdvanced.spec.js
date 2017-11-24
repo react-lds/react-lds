@@ -7,7 +7,12 @@ describe('<DataTableAdvanced />', () => {
   let mounted = null;
 
   beforeEach(() => {
-    mounted = shallow(<DataTableAdvanced data={[]} />);
+    const props = {
+      data: [],
+      onSorting: () => {},
+      onSelection: () => {},
+    };
+    mounted = shallow(<DataTableAdvanced {...props} />);
   });
 
   it('renders a table', () => {

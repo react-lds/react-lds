@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const DataCell = (props) => {
   const {
@@ -25,21 +26,25 @@ const DataCell = (props) => {
 
 DataCell.variations = [];
 
+DataCell.defaultProps = {
+  renderer: null,
+};
+
 DataCell.propTypes = {
   /**
    * Optional cell renderer function
    */
-  renderer: React.PropTypes.func,
+  renderer: PropTypes.func,
 
   /**
    * Key name of the data object property being displayed in this here cell
    */
-  dataKey: React.PropTypes.string.isRequired,
+  dataKey: PropTypes.string.isRequired,
 
   /**
    * Value to display in this here cell
    */
-  value: React.PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
 };
 
 
