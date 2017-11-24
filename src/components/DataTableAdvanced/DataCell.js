@@ -1,23 +1,18 @@
 import React from 'react';
 
-import { prefixClasses } from '../../utils';
-
-
-const DataCell = (props, { cssPrefix }) => {
+const DataCell = (props) => {
   const {
     dataKey,
     renderer,
     value,
   } = props;
 
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-
   return (
     <td role="gridcell">
       { renderer
         ? renderer(dataKey, value)
         : (
-          <div className={prefix('truncate')} title={value}>
+          <div className="slds-truncate" title={value}>
             {value}
           </div>
         )

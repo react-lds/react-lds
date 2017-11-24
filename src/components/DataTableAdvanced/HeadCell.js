@@ -1,9 +1,7 @@
 import React from 'react';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
-
-
-const HeadCell = (props, { cssPrefix }) => {
+const HeadCell = (props) => {
   const {
     dataKey,
     isResizable,
@@ -14,8 +12,6 @@ const HeadCell = (props, { cssPrefix }) => {
     title,
   } = props;
 
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
-
   const isCurrentSortColumn = isSortable && dataKey === sortBy;
   const isSortAsc = sortDirection === 'asc';
   let assistiveText = null;
@@ -24,8 +20,8 @@ const HeadCell = (props, { cssPrefix }) => {
     assistiveText = isSortAsc ? 'Sorted ascending' : 'Sorted descending';
   }
 
-  const cxTh = prefix([
-    'text-title--caps',
+  const cxTh = cx([
+    'slds-text-title--caps',
     {
       'is-resizable': isResizable,
       'is-sortable': isSortable,
@@ -43,7 +39,7 @@ const HeadCell = (props, { cssPrefix }) => {
       aria-sort={isCurrentSortColumn ? `${sortDirection}ending` : null}
     >
       { !isSortable &&
-        <div className={prefix('truncate')} title={title}>
+        <div className="slds-truncate" title={title}>
           {title}
         </div>
       }
@@ -51,23 +47,23 @@ const HeadCell = (props, { cssPrefix }) => {
       { isSortable &&
         <a
           onClick={() => onChangeSorting(dataKey)}
-          className={prefix(['th__action', 'text-link--reset'])}
+          className="slds-th__action slds-text-link--reset"
           tabIndex="0"
         >
-          <span className={prefix('assistive-text')}>Sort </span>
-          <span className={prefix('truncate')} title={title}>
+          <span className="slds-assistive-text">Sort </span>
+          <span className="slds-truncate" title={title}>
             {title}
           </span>
-          <div className={prefix('icon_container')}>
+          <div className="slds-icon_container">
             <svg
               aria-hidden="true"
-              className={prefix(['icon', 'icon--x-small', 'icon-text-default', 'is-sortable__icon'])}
+              className="slds-icon slds-icon--x-small slds-icon-text-default slds-is-sortable__icon"
             >
               <use xlinkHref="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown" />
             </svg>
           </div>
           <span
-            className={prefix('assistive-text')}
+            className="slds-assistive-text"
             aria-live="assertive"
             aria-atomic="true"
           >
@@ -77,20 +73,20 @@ const HeadCell = (props, { cssPrefix }) => {
       }
 
       { isResizable &&
-        <div className={prefix('resizable')}>
-          <label htmlFor={resizeHandleId} className={prefix('assistive-text')}>
+        <div className="slds-resizable">
+          <label htmlFor={resizeHandleId} className="slds-assistive-text">
             {title} column width
           </label>
           <input
-            className={prefix(['resizable__input', 'assistive-text'])}
+            className="slds-resizable__input slds-assistive-text"
             id={resizeHandleId}
             max="1000"
             min="20"
             tabIndex="0"
             type="range"
           />
-          <span className={prefix('resizable__handle')}>
-            <span className={prefix('resizable__divider')} />
+          <span className="slds-resizable__handle">
+            <span className="slds-resizable__divider" />
           </span>
         </div>
       }

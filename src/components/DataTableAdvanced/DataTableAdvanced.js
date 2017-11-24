@@ -1,10 +1,10 @@
 import React from 'react';
+import cx from 'classnames';
 import get from 'lodash.get';
 import omit from 'lodash.omit';
 import without from 'lodash.without';
 
 import { flavorable, variationable } from '../../decorators';
-import { prefixClasses } from '../../utils';
 import DataRow from './DataRow';
 import TableHead from './TableHead';
 import DataTableColumn from './DataTableColumn';
@@ -30,12 +30,6 @@ export class DataTableAdvanced extends React.Component {
     this.initcolumnsConf();
   }
 
-
-  componentWillMount() {
-    this.cssPrefix = get(this.context, 'cssPrefix');
-  }
-
-
   setSorting(newSortBy = '') {
     const { sortBy, sortDirection } = this.state;
     let newSortDirection = 'desc';
@@ -50,11 +44,6 @@ export class DataTableAdvanced extends React.Component {
     });
 
     this.props.onSorting(newSortBy, newSortDirection);
-  }
-
-
-  cx(classes = [], passThrough = '') {
-    return prefixClasses(this.cssPrefix, classes, passThrough);
   }
 
 
@@ -138,7 +127,7 @@ export class DataTableAdvanced extends React.Component {
     ]);
 
     return (
-      <table {...rest} className={this.cx('table', this.props.className)}>
+      <table {...rest} className={cx('slds-table', this.props.className)}>
         <TableHead
           columnsConf={this.columnsConf}
           isActionable={this.props.isActionable}

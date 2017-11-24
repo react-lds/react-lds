@@ -1,10 +1,9 @@
 import React from 'react';
+import cx from 'classnames';
 
-import { prefixClasses } from '../../utils';
 import DataCell from './DataCell';
 
-
-const DataRow = (props, { cssPrefix }) => {
+const DataRow = (props) => {
   const {
     columnsConf,
     isActionable,
@@ -15,7 +14,6 @@ const DataRow = (props, { cssPrefix }) => {
     rowData,
   } = props;
 
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
   const dataCells = columnsConf.map(conf => (
     <DataCell
       dataKey={conf.dataKey}
@@ -31,11 +29,11 @@ const DataRow = (props, { cssPrefix }) => {
 
     checkboxCell = (
       <td
-        className={prefix('text-align--right')}
+        className="slds-text-align--right"
         role="gridcell"
         style={{ width: '3.25rem' }}
       >
-        <span className={prefix('checkbox')}>
+        <span className="slds-checkbox">
           <input
             checked={isSelected}
             id={checkboxId}
@@ -43,8 +41,8 @@ const DataRow = (props, { cssPrefix }) => {
             onChange={() => onToggle(rowData.id)}
             type="checkbox"
           />
-          <label className={prefix('checkbox__label')} htmlFor={checkboxId}>
-            <span className={prefix('checkbox--faux')} />
+          <label className="slds-checkbox__label" htmlFor={checkboxId}>
+            <span className="checkbox--faux" />
             <span className="slds-form-element__label slds-assistive-text">
               Select item {rowData.id}
             </span>
@@ -59,14 +57,14 @@ const DataRow = (props, { cssPrefix }) => {
     showMoreCell = (
       <td role="gridcell" style={{ width: '3.25rem' }}>
         <button
-          className={prefix(['button', 'button--icon-border-filled', 'button--icon-x-small'])}
+          className="slds-button slds-button--icon-border-filled slds-button--icon-x-small"
           onClick={() => onAction(rowData.id)}
           title="Show More"
         >
-          <svg className={prefix(['button__icon', 'button__icon--hint', 'button__icon--small'])} aria-hidden="true">
+          <svg className="slds-button__icon slds-button__icon--hint slds-button__icon--small" aria-hidden="true">
             <use xlinkHref="/assets/icons/utility-sprite/svg/symbols.svg#down" />
           </svg>
-          <span className={prefix('assistive-text')}>
+          <span className="slds-assistive-text">
             Show More
           </span>
         </button>
@@ -74,7 +72,7 @@ const DataRow = (props, { cssPrefix }) => {
     );
   }
 
-  const cxTr = prefix([
+  const cxTr = cx([
     'hint-parent',
     { 'is-selected': isSelected },
   ]);

@@ -1,11 +1,11 @@
 import React from 'react';
 import pick from 'lodash.pick';
 
-import { prefixClasses, uniqueId } from '../../utils';
+import { uniqueId } from '../../utils';
 import HeadCell from './HeadCell';
 
 
-const TableHead = (props, { cssPrefix }) => {
+const TableHead = (props) => {
   const {
     columnsConf,
     isAllSelected,
@@ -17,7 +17,6 @@ const TableHead = (props, { cssPrefix }) => {
     sortDirection,
   } = props;
 
-  const prefix = (classes, passThrough) => prefixClasses(cssPrefix, classes, passThrough);
   let checkboxCell = null;
 
   if (isSelectable) {
@@ -25,12 +24,12 @@ const TableHead = (props, { cssPrefix }) => {
 
     checkboxCell = (
       <th
-        className={prefix('text-align--right')}
+        className="slds-text-align--right"
         scope="col"
         style={{ width: '3.25rem' }}
       >
         <div>
-          <span className={prefix('checkbox')}>
+          <span className="slds-checkbox">
             <input
               id={checkboxId}
               name="options"
@@ -38,9 +37,9 @@ const TableHead = (props, { cssPrefix }) => {
               type="checkbox"
               checked={isAllSelected}
             />
-            <label className={prefix('checkbox__label')} htmlFor={checkboxId}>
-              <span className={prefix('checkbox--faux')} />
-              <span className={prefix(['form-element__label', 'assistive-text'])}>
+            <label className="slds-checkbox__label" htmlFor={checkboxId}>
+              <span className="slds-checkbox--faux" />
+              <span className="slds-form-element__label slds-assistive-text">
                 Select All
               </span>
             </label>
@@ -54,8 +53,8 @@ const TableHead = (props, { cssPrefix }) => {
   if (isActionable) {
     actionsCell = (
       <th scope="col" style={{ width: '3.25rem' }}>
-        <div className={prefix('th__action')}>
-          <span className={prefix('assistive-text')}>Actions</span>
+        <div className="slds-th__action">
+          <span className="slds-assistive-text">Actions</span>
         </div>
       </th>
     );
@@ -82,7 +81,7 @@ const TableHead = (props, { cssPrefix }) => {
 
   return (
     <thead>
-      <tr className={prefix('line-height--reset')}>
+      <tr className="slds-line-height--reset">
         {checkboxCell}
         {headCells}
         {actionsCell}
