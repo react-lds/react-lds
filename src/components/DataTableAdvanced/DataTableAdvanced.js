@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import get from 'lodash.get';
 import omit from 'lodash.omit';
 import without from 'lodash.without';
 
-import { flavorable, variationable } from '../../decorators';
 import DataRow from './DataRow';
 import TableHead from './TableHead';
 import DataTableColumn from './DataTableColumn';
 
 export class DataTableAdvanced extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -52,7 +49,7 @@ export class DataTableAdvanced extends React.Component {
   //
   initcolumnsConf() {
     this.columnsConf = [].concat(this.props.children)
-      .filter(child => get(child, 'type') === DataTableColumn)
+      .filter(child => child && child.type === DataTableColumn)
       .map(child => child.props);
   }
 
@@ -110,10 +107,12 @@ export class DataTableAdvanced extends React.Component {
 
 
   render() {
+    const { className, flavor, variation } = this.props;
     const rest = omit(this.props, [
       'className',
       'currentPage',
       'data',
+      'flavor',
       'hasSelectableRows',
       'isActionable',
       'height',
@@ -124,10 +123,20 @@ export class DataTableAdvanced extends React.Component {
       'rowsPerPage',
       'selectedRows',
       'totalPages',
+      'variation',
     ]);
 
+    const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-table_${f}`) : `slds-table_${flavor}`;
+    const variationClasses = Array.isArray(variation) ? variation.map(f => `slds-${f}`) : `slds-${variation}`;
+    const classNames = cx(
+      'slds-table',
+      className,
+      flavorClasses,
+      variationClasses,
+    );
+
     return (
-      <table {...rest} className={cx('slds-table', this.props.className)}>
+      <table {...rest} className={classNames}>
         <TableHead
           columnsConf={this.columnsConf}
           isActionable={this.props.isActionable}
@@ -145,20 +154,6 @@ export class DataTableAdvanced extends React.Component {
   }
 }
 
-
-DataTableAdvanced.flavors = [
-  'bordered',
-  'col-bordered',
-  'fixed-layout',
-  'striped',
-];
-
-DataTableAdvanced.variations = [
-  'max-medium-table--stacked-horizontal',
-  'max-medium-table--stacked',
-  'no-row-hover',
-];
-
 DataTableAdvanced.defaultProps = {
   children: null,
   className: null,
@@ -171,7 +166,22 @@ DataTableAdvanced.defaultProps = {
   currentPage: null,
   rowsPerPage: null,
   onAction: null,
+  variation: [],
+  flavor: [],
 };
+
+const flavors = [
+  'bordered',
+  'col-bordered',
+  'fixed-layout',
+  'striped',
+];
+
+const variations = [
+  'max-medium-table--stacked-horizontal',
+  'max-medium-table--stacked',
+  'no-row-hover',
+];
 
 DataTableAdvanced.propTypes = {
   /**
@@ -250,9 +260,21 @@ DataTableAdvanced.propTypes = {
    * an array containing all selected row IDs.
    */
   onSelection: PropTypes.func.isRequired,
+  /**
+   * variation: string or array of strings. Variations: no-row-hover, max-medium-table_stacked,
+   max-medium-table_stacked-horizontal
+   */
+  variation: PropTypes.oneOfType([
+    PropTypes.oneOf(variations),
+    PropTypes.arrayOf(PropTypes.oneOf(variations))
+  ]),
+  /**
+   * flavor: string or array of strings. Flavors: bordered, col-bordered, striped, fixed-layout
+   */
+  flavor: PropTypes.oneOfType([
+    PropTypes.oneOf(flavors),
+    PropTypes.arrayOf(PropTypes.oneOf(flavors)),
+  ]),
 };
 
-
-export default variationable(
-  flavorable(DataTableAdvanced, 'table')
-);
+export default DataTableAdvanced;

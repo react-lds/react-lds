@@ -99,7 +99,6 @@ const HeadCell = (props) => {
 HeadCell.variations = [];
 
 HeadCell.defaultProps = {
-  renderer: null,
   sortBy: null,
   sortDirection: null,
   onChangeSorting: null,
@@ -108,11 +107,6 @@ HeadCell.defaultProps = {
 };
 
 HeadCell.propTypes = {
-  /**
-   * Optional cell renderer function
-   */
-  renderer: PropTypes.func,
-
   /**
    * Key name of the data object property being displayed in this here cell
    */

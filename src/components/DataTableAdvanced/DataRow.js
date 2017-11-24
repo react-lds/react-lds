@@ -14,7 +14,7 @@ const DataRow = (props) => {
     onToggle,
     onAction,
     rowData,
-    ...restProps,
+    ...restProps
   } = props;
 
   const dataCells = columnsConf.map(conf => (

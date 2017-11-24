@@ -6,7 +6,7 @@ const DataCell = (props) => {
     dataKey,
     renderer,
     value,
-    ...restProps,
+    ...restProps
   } = props;
 
   return (
