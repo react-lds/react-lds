@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import { DataTableAdvanced } from '../DataTableAdvanced';
 
@@ -12,7 +12,7 @@ describe('<DataTableAdvanced />', () => {
       onSorting: () => {},
       onSelection: () => {},
     };
-    mounted = shallow(<DataTableAdvanced {...props} />);
+    mounted = mount(<DataTableAdvanced {...props} />);
   });
 
   it('renders a table', () => {
