@@ -11,10 +11,11 @@
   ],
   "main": "./dist/index.js",
   "scripts": {
-    "build-storybook": "build-storybook",
+    "build-storybook": "yarn run prestorybook; BABEL_ENV=docs build-storybook -s ./public",
     "build:babel": "NODE_ENV=production babel ./src --ignore spec.js --out-dir ./dist",
     "build:clean": "rm -rf dist",
     "build": "yarn build:clean && yarn build:babel",
+    "deploy-storybook": "yarn run prestorybook; BABEL_ENV=docs storybook-to-ghpages -s ./public",
     "lint": "eslint src",
     "prepublishOnly": "cp ./README.md ./dist/ && cp ./LICENSE ./dist/ && cp ./CHANGELOG.md ./dist/",
     "prestorybook": "cp -r node_modules/@salesforce-ux/design-system/assets public",
@@ -29,7 +30,8 @@
     "Ben Bieker <ben@propertybase.com> (http://www.propertybase.com)",
     "Philipp Frank <philipp@propertybase.com> (http://www.propertybase.com)",
     "Felix Spöttel <felix@propertybase.com> (http://www.propertybase.com)",
-    "Carlo Zottmann <carlo@municode.de> (https://municode.de)"
+    "Carlo Zottmann <carlo@municode.de> (https://municode.de)",
+    "Bruno Péjac <bruno@propertybase.com> (http://www.propertybase.com)"
   ],
   "repository": {
     "type": "git",
@@ -60,6 +62,7 @@
     "@storybook/addon-knobs": "^3.2.10",
     "@storybook/addon-links": "^3.2.6",
     "@storybook/react": "^3.2.8",
+    "@storybook/storybook-deployer": "^2.0.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",

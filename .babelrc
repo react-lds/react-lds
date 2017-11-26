@@ -19,6 +19,18 @@
     "test": {
       "plugins": ["transform-es2015-modules-commonjs"]
     },
+    "docs": {
+      "presets": [
+        ["env", {
+          "targets": {
+            "uglify": true
+          }
+        }]
+      ],
+      "plugins": [
+        "transform-class-properties"
+      ],
+    },
     "production": {
       "plugins": [
         "transform-react-constant-elements",
