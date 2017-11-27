@@ -10,22 +10,12 @@ import TableHead from './TableHead';
 import DataTableColumn from './DataTableColumn';
 
 export class DataTableAdvanced extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      columns: [],
-
-      // When `props.isResizable` is true, the field name and sort order is
-      // stored in `state.sortBy`.
-      sortBy: '',
-
-      // Used when `props.isResizable` is true.
-      sortDirection: 'asc',
-
-      // A list containing the IDs of all currently selected rows.
-      selectedRows: [],
-    };
+  state = {
+    columns: [],
+    data: this.props.data,
+    sortBy: '',
+    sortDirection: 'asc',
+    selectedRows: [],
   }
 
   componentWillMount() {
@@ -33,30 +23,52 @@ export class DataTableAdvanced extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { children } = this.props;
+    const { children, data } = this.props;
+
     if (nextProps.children !== children) {
       this.updateColumns();
     }
+
+    if (nextProps.data !== data) {
+      this.setState({ data: nextProps.data });
+    }
   }
 
-  setSorting(newSortBy = '') {
-    const { sortBy, sortDirection } = this.state;
-    let newSortDirection = 'desc';
+  onSort = (nextSortBy = '') => {
+    const { onSort } = this.props;
+    const { data, sortBy, sortDirection } = this.state;
 
-    if (sortBy === newSortBy) {
-      newSortDirection = (sortDirection === 'asc') ? 'desc' : 'asc';
+    let nextSortDirection = 'asc';
+
+    // Same column as before => toggle sort order
+    if (sortBy === nextSortBy) {
+      nextSortDirection = (sortDirection === 'asc') ? 'desc' : 'asc';
     }
 
-    this.setState({
-      sortBy: newSortBy,
-      sortDirection: newSortDirection,
-    });
+    const nextState = {
+      sortBy: nextSortBy,
+      sortDirection: nextSortDirection,
+    };
 
-    this.props.onSorting(newSortBy, newSortDirection);
+    if (onSort) {
+      onSort({ dataKey: nextSortBy, sortDirection: nextSortDirection });
+      this.setState(nextState);
+    } else {
+      this.setState({
+        ...nextState,
+        data: [...data].sort(
+          (a, b) => (
+            nextSortDirection === 'asc'
+              ? String(a[nextSortBy]).localeCompare(b[nextSortBy])
+              : String(b[nextSortBy]).localeCompare(a[nextSortBy])
+          )
+        ),
+      });
+    }
   }
 
   // Loops over the `DataTableColumn` children and extracts their props as
-  // config objects into `this.columnsConf`.
+  // config objects into `this.state.columns`.
   updateColumns() {
     const { children } = this.props;
 
@@ -95,8 +107,7 @@ export class DataTableAdvanced extends Component {
 
 
   renderBody() {
-    const { columns } = this.state;
-    const { data } = this.props;
+    const { columns, data } = this.state;
 
     const rows = data.map((rowData, i) => {
       const { isActionable, hasSelectableRows } = this.props;
@@ -151,7 +162,7 @@ export class DataTableAdvanced extends Component {
           isActionable={this.props.isActionable}
           isAllSelected={this.areAllRowsSelected()}
           isSelectable={this.props.hasSelectableRows}
-          onChangeSorting={sortBy => this.setSorting(sortBy)}
+          onSort={this.onSort}
           onToggle={() => this.toggleAllRows()}
           sortBy={this.state.sortBy}
           sortDirection={this.state.sortDirection}
@@ -235,11 +246,11 @@ DataTableAdvanced.propTypes = {
   onAction: PropTypes.func,
 
   /**
-   * Callback, triggered by clicks on sortable column headers.  Will receive
-   * two arguments: a string denoting which data key to sort by and a string
-   * specifying the sort order ('asc' or 'desc').
+   * Callback, triggered by clicks on sortable column headers.  Receives an object
+   * which contains the `dataKey` of the column to sort by and the `sortDirection`
+   * (`asc` or `desc`). If omitted, the rows will be sorted by a `String.localeCompare`.
    */
-  onSorting: PropTypes.func.isRequired,
+  onSort: PropTypes.func,
 
   /**
    * Callback, triggered whenever one or more rows have been selected. Returns

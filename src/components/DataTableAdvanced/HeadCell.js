@@ -2,32 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+import { IconSVG } from '../../';
+
 const HeadCell = (props) => {
   const {
     dataKey,
     isResizable,
-    isSortable,
-    onChangeSorting,
+    sortable,
+    onSort,
     sortBy,
     sortDirection,
     title,
   } = props;
 
-  const isCurrentSortColumn = isSortable && dataKey === sortBy;
-  const isSortAsc = sortDirection === 'asc';
-  let assistiveText = null;
-
-  if (isCurrentSortColumn) {
-    assistiveText = isSortAsc ? 'Sorted ascending' : 'Sorted descending';
-  }
+  const isCurrentSortColumn = sortable && dataKey === sortBy;
+  const assistiveText = isCurrentSortColumn
+    ? `Sorted ${sortDirection}ending`
+    : null;
 
   const cxTh = cx([
     'slds-text-title--caps',
     {
       'is-resizable': isResizable,
-      'is-sortable': isSortable,
-      'is-sorted': isCurrentSortColumn,
-      [`is-sorted--${sortDirection}`]: isCurrentSortColumn,
+      'slds-is-sortable': sortable,
+      'slds-is-sorted': isCurrentSortColumn,
+      [`slds-is-sorted_${sortDirection}`]: isCurrentSortColumn,
     },
   ]);
   const resizeHandleId = `cell-resize-handle-${dataKey}`;
@@ -39,15 +38,15 @@ const HeadCell = (props) => {
       scope="col"
       aria-sort={isCurrentSortColumn ? `${sortDirection}ending` : null}
     >
-      { !isSortable &&
+      { !sortable &&
         <div className="slds-truncate" title={title}>
           {title}
         </div>
       }
 
-      { isSortable &&
+      { sortable &&
         <a
-          onClick={() => onChangeSorting(dataKey)}
+          onClick={() => onSort(dataKey)}
           className="slds-th__action slds-text-link--reset"
           tabIndex="0"
         >
@@ -56,12 +55,12 @@ const HeadCell = (props) => {
             {title}
           </span>
           <div className="slds-icon_container">
-            <svg
-              aria-hidden="true"
-              className="slds-icon slds-icon--x-small slds-icon-text-default slds-is-sortable__icon"
-            >
-              <use xlinkHref="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown" />
-            </svg>
+            <IconSVG
+              className="slds-is-sortable__icon"
+              icon="arrowdown"
+              size="x-small"
+              sprite="utility"
+            />
           </div>
           <span
             className="slds-assistive-text"
@@ -101,9 +100,9 @@ HeadCell.variations = [];
 HeadCell.defaultProps = {
   sortBy: null,
   sortDirection: null,
-  onChangeSorting: null,
+  onSort: null,
   isResizable: false,
-  isSortable: false,
+  sortable: false,
 };
 
 HeadCell.propTypes = {
@@ -123,9 +122,9 @@ HeadCell.propTypes = {
 
   /**
    * Callback triggered by clicking on a cell heading a sortable column.
-   * Required when `props.isSortable` is `true`.
+   * Required when `props.sortable` is `true`.
    */
-  onChangeSorting: PropTypes.func,
+  onSort: PropTypes.func,
 
   /**
    * Is this row resizable?
@@ -136,7 +135,7 @@ HeadCell.propTypes = {
    * Is this column sortable, i.e. should clicking it change the currently
    * displayed row order below?
    */
-  isSortable: PropTypes.bool,
+  sortable: PropTypes.bool,
 };
 
 

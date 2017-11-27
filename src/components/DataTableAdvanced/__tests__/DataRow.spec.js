@@ -8,8 +8,9 @@ describe('<DataRow />', () => {
 
   beforeEach(() => {
     const props = {
-      columnsConf: [],
+      columns: [],
       rowData: {},
+      rowIndex: 0,
     };
 
     mounted = shallow(<DataRow {...props} />);

@@ -11,7 +11,7 @@ const TableHead = (props) => {
     isAllSelected,
     isSelectable,
     isActionable,
-    onChangeSorting,
+    onSort,
     onToggle,
     sortBy,
     sortDirection,
@@ -61,10 +61,10 @@ const TableHead = (props) => {
   }
 
   const headCells = columns.map((conf) => {
-    const mainProps = pick(conf, ['dataKey', 'isResizable', 'isSortable', 'title']);
-    const sortProps = conf.isSortable
+    const mainProps = pick(conf, ['dataKey', 'isResizable', 'sortable', 'title']);
+    const sortProps = conf.sortable
       ? {
-        onChangeSorting,
+        onSort,
         sortBy,
         sortDirection,
       }
@@ -98,7 +98,7 @@ TableHead.defaultProps = {
   isAllSelected: false,
   isSelectable: false,
   onToggle: null,
-  onChangeSorting: null,
+  onSort: null,
   sortBy: null,
   sortDirection: null,
 };
@@ -132,9 +132,9 @@ TableHead.propTypes = {
 
   /**
    * Callback triggered by clicking on a cell heading a sortable column.
-   * Required when `props.isSortable` is `true`.
+   * Required when any columns `sortable` is `true`.
    */
-  onChangeSorting: PropTypes.func,
+  onSort: PropTypes.func,
 
   sortBy: PropTypes.string,
 
