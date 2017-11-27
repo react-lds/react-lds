@@ -7,7 +7,7 @@ import HeadCell from './HeadCell';
 
 const TableHead = (props) => {
   const {
-    columnsConf,
+    columns,
     isAllSelected,
     isSelectable,
     isActionable,
@@ -60,7 +60,7 @@ const TableHead = (props) => {
     );
   }
 
-  const headCells = columnsConf.map((conf) => {
+  const headCells = columns.map((conf) => {
     const mainProps = pick(conf, ['dataKey', 'isResizable', 'isSortable', 'title']);
     const sortProps = conf.isSortable
       ? {
@@ -107,7 +107,7 @@ TableHead.propTypes = {
   /**
    * Array containing column configurations
    */
-  columnsConf: PropTypes.array.isRequired,
+  columns: PropTypes.array.isRequired,
 
   /**
    * Does each row below have a trailing "Show more" element?

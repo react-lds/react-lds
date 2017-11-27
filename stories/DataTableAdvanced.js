@@ -52,10 +52,12 @@ stories
         dataKey="col4"
         title="Column w/ custom renderer"
         isSortable
-        renderer={(key, val) => (
-          <span>
-            <strong>{key}:</strong> {val}
-          </span>
+        cellRenderer={({ dataKey, cellData, defaultProps }) => (
+          <td {...defaultProps}>
+            <span>
+              <strong>{dataKey}:</strong> {cellData}
+            </span>
+          </td>
         )}
       />
     </DataTableAdvanced>

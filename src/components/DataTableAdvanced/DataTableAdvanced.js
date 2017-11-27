@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash.omit';
 import without from 'lodash.without';
@@ -9,11 +9,13 @@ import DataRow from './DataRow';
 import TableHead from './TableHead';
 import DataTableColumn from './DataTableColumn';
 
-export class DataTableAdvanced extends React.Component {
+export class DataTableAdvanced extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      columns: [],
+
       // When `props.isResizable` is true, the field name and sort order is
       // stored in `state.sortBy`.
       sortBy: '',
@@ -24,8 +26,17 @@ export class DataTableAdvanced extends React.Component {
       // A list containing the IDs of all currently selected rows.
       selectedRows: [],
     };
+  }
 
-    this.initcolumnsConf();
+  componentWillMount() {
+    this.updateColumns();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { children } = this.props;
+    if (nextProps.children !== children) {
+      this.updateColumns();
+    }
   }
 
   setSorting(newSortBy = '') {
@@ -44,16 +55,19 @@ export class DataTableAdvanced extends React.Component {
     this.props.onSorting(newSortBy, newSortDirection);
   }
 
-
   // Loops over the `DataTableColumn` children and extracts their props as
   // config objects into `this.columnsConf`.
-  //
-  initcolumnsConf() {
-    this.columnsConf = [].concat(this.props.children)
-      .filter(child => child && child.type === DataTableColumn)
-      .map(child => child.props);
-  }
+  updateColumns() {
+    const { children } = this.props;
 
+    this.setState({
+      columns: children
+        ? children
+          .filter(child => child && child.type === DataTableColumn)
+          .map(child => child.props)
+        : []
+    });
+  }
 
   toggleRow(rowId = '') {
     const selectedRows = this.state.selectedRows.includes(rowId)
@@ -81,13 +95,16 @@ export class DataTableAdvanced extends React.Component {
 
 
   renderBody() {
-    const rows = this.props.data.map((rowData) => {
+    const { columns } = this.state;
+    const { data } = this.props;
+
+    const rows = data.map((rowData, i) => {
       const { isActionable, hasSelectableRows } = this.props;
       const { id } = rowData;
 
       return (
         <DataRow
-          columnsConf={this.columnsConf}
+          columns={columns}
           isActionable={isActionable}
           isSelectable={hasSelectableRows}
           isSelected={this.state.selectedRows.includes(id)}
@@ -95,6 +112,7 @@ export class DataTableAdvanced extends React.Component {
           onAction={rowId => this.props.onAction(rowId)}
           onToggle={rowId => this.toggleRow(rowId)}
           rowData={rowData}
+          rowIndex={i}
         />
       );
     });
@@ -108,6 +126,8 @@ export class DataTableAdvanced extends React.Component {
 
 
   render() {
+    const { columns } = this.state;
+
     const rest = omit(this.props, [
       'children',
       'currentPage',
@@ -127,7 +147,7 @@ export class DataTableAdvanced extends React.Component {
     return (
       <Table {...rest}>
         <TableHead
-          columnsConf={this.columnsConf}
+          columns={columns}
           isActionable={this.props.isActionable}
           isAllSelected={this.areAllRowsSelected()}
           isSelectable={this.props.hasSelectableRows}
@@ -163,7 +183,7 @@ DataTableAdvanced.propTypes = {
   /**
    * Table content, an array of objects
    */
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.any).isRequired,
 
   /**
    * Height of table. Optional.

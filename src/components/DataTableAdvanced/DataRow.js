@@ -2,29 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import DataCell from './DataCell';
-
 const DataRow = (props) => {
   const {
     className,
-    columnsConf,
+    columns,
     isActionable,
     isSelectable,
     isSelected,
     onToggle,
     onAction,
     rowData,
+    rowIndex,
     ...restProps
   } = props;
 
-  const dataCells = columnsConf.map(conf => (
-    <DataCell
-      dataKey={conf.dataKey}
-      key={conf.dataKey}
-      renderer={conf.renderer}
-      value={rowData[conf.dataKey]}
-    />
-  ));
+  const dataCells = columns.map(({ cellRenderer, dataKey }) =>
+    cellRenderer({
+      cellData: rowData[dataKey],
+      dataKey,
+      rowData,
+      rowIndex,
+      defaultProps: {
+        key: `${rowIndex}-${dataKey}`,
+        role: 'gridcell',
+      },
+    })
+  );
 
   let checkboxCell = null;
   if (isSelectable) {
@@ -113,9 +116,14 @@ DataRow.propTypes = {
   rowData: PropTypes.object.isRequired,
 
   /**
+   * Row index within the table
+   */
+  rowIndex: PropTypes.number.isRequired,
+
+  /**
    * Array containing column configurations
    */
-  columnsConf: PropTypes.array.isRequired,
+  columns: PropTypes.array.isRequired,
 
   /**
    * Does each row have a trailing "Show more" element?
