@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash.omit';
-import without from 'lodash.without';
 
+import { uniqueId } from '../../';
 import { Table } from '../DataTable';
 
-import DataRow from './DataRow';
-import TableHead from './TableHead';
-import DataTableColumn from './DataTableColumn';
+import defaultRowRenderer from './defaultRowRenderer';
 
 export class DataTableAdvanced extends Component {
   state = {
+    id: uniqueId('data-table-advanced-'),
     columns: [],
     data: this.props.data,
+    selection: [],
     sortBy: '',
     sortDirection: 'asc',
-    selectedRows: [],
   }
 
   componentWillMount() {
@@ -23,7 +22,7 @@ export class DataTableAdvanced extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { children, data } = this.props;
+    const { children, data, selection } = this.props;
 
     if (nextProps.children !== children) {
       this.updateColumns();
@@ -32,6 +31,47 @@ export class DataTableAdvanced extends Component {
     if (nextProps.data !== data) {
       this.setState({ data: nextProps.data });
     }
+
+    if (nextProps.selection !== selection) {
+      this.setState({ selection: nextProps.selection });
+    }
+  }
+
+  onSelect = (rowIndex) => {
+    const { onSelect } = this.props;
+    const { selection } = this.state;
+
+    const nextSelection = [...selection];
+
+    if (nextSelection.includes(rowIndex)) {
+      nextSelection.splice(nextSelection.indexOf(rowIndex), 1);
+    } else {
+      nextSelection.push(rowIndex);
+    }
+
+    if (onSelect) {
+      onSelect(nextSelection, rowIndex);
+    }
+
+    this.setState({ selection: nextSelection });
+  }
+
+  onSelectAll = () => {
+    const { onSelect } = this.props;
+    const { data } = this.state;
+    const allSelected = this.areAllRowsSelected();
+    const nextSelection = allSelected
+      ? []
+      : data.map((row, i) => i);
+
+    if (onSelect) {
+      onSelect(nextSelection);
+    }
+
+    this.setState({
+      allSelected: !allSelected,
+      selection: nextSelection,
+    });
   }
 
   onSort = (nextSortBy = '') => {
@@ -74,100 +114,96 @@ export class DataTableAdvanced extends Component {
 
     this.setState({
       columns: children
-        ? children
-          .filter(child => child && child.type === DataTableColumn)
-          .map(child => child.props)
+        ? children.map(child => child.props)
         : []
     });
   }
 
-  toggleRow(rowId = '') {
-    const selectedRows = this.state.selectedRows.includes(rowId)
-      ? without(this.state.selectedRows, rowId)
-      : [...this.state.selectedRows, rowId];
-
-    this.setState({ selectedRows });
-    this.props.onSelection(selectedRows);
-  }
-
-
-  toggleAllRows() {
-    const selectedRows = this.areAllRowsSelected()
-      ? []
-      : this.props.data.map(d => d.id);
-
-    this.setState({ selectedRows });
-    this.props.onSelection(selectedRows);
-  }
-
-
   areAllRowsSelected() {
-    return this.state.selectedRows.length === this.props.data.length;
+    return this.state.selection.length === this.state.data.length;
   }
 
+  renderRow(rowData, rowIndex) {
+    const { columns, id, selection } = this.state;
+    const { rowRenderer } = this.props;
+
+    const cells = columns.map(({ cellRenderer, dataKey }) =>
+      cellRenderer({
+        cellData: rowData[dataKey],
+        dataKey,
+        rowData,
+        rowIndex,
+        selected: selection.includes(rowIndex),
+        onSelect: this.onSelect,
+        tableId: id,
+        defaultProps: {
+          key: `${rowIndex}-${dataKey}`,
+          role: 'gridcell',
+        },
+      })
+    );
+
+    return rowRenderer({
+      cells,
+      onSelect: this.onSelect,
+      rowData,
+      rowIndex,
+      tableId: id,
+    });
+  }
+
+  renderHead() {
+    const { columns, id, sortBy, sortDirection } = this.state;
+
+    return (
+      <thead>
+        <tr>
+          {columns.map(({ headRenderer, ...restProps }) =>
+            headRenderer({
+              allSelected: this.areAllRowsSelected(),
+              onSelectAll: this.onSelectAll,
+              onSort: this.onSort,
+              sortBy,
+              sortDirection,
+              tableId: id,
+              ...restProps
+            })
+          )}
+        </tr>
+      </thead>
+    );
+  }
 
   renderBody() {
-    const { columns, data } = this.state;
-
-    const rows = data.map((rowData, i) => {
-      const { isActionable, hasSelectableRows } = this.props;
-      const { id } = rowData;
-
-      return (
-        <DataRow
-          columns={columns}
-          isActionable={isActionable}
-          isSelectable={hasSelectableRows}
-          isSelected={this.state.selectedRows.includes(id)}
-          key={id}
-          onAction={rowId => this.props.onAction(rowId)}
-          onToggle={rowId => this.toggleRow(rowId)}
-          rowData={rowData}
-          rowIndex={i}
-        />
-      );
-    });
+    const { data } = this.state;
 
     return (
       <tbody>
-        {rows}
+        {data.map((row, i) => this.renderRow(row, i))}
       </tbody>
     );
   }
 
-
   render() {
-    const { columns } = this.state;
-
     const rest = omit(this.props, [
       'children',
       'currentPage',
       'data',
-      'hasSelectableRows',
       'isActionable',
       'height',
       'isLoading',
       'onAction',
-      'onSelection',
-      'onSorting',
+      'onSelect',
+      'onSort',
       'rowsPerPage',
-      'selectedRows',
+      'rowRenderer',
+      'selection',
       'totalPages',
     ]);
 
     return (
       <Table {...rest}>
-        <TableHead
-          columns={columns}
-          isActionable={this.props.isActionable}
-          isAllSelected={this.areAllRowsSelected()}
-          isSelectable={this.props.hasSelectableRows}
-          onSort={this.onSort}
-          onToggle={() => this.toggleAllRows()}
-          sortBy={this.state.sortBy}
-          sortDirection={this.state.sortDirection}
-        />
-
+        {this.renderHead()}
         {this.renderBody()}
       </Table>
     );
@@ -178,14 +214,15 @@ DataTableAdvanced.defaultProps = {
   ...Table.defaultProps,
 
   height: null,
-  hasSelectableRows: false,
   isActionable: false,
   isLoading: false,
-  selectedRows: null,
   totalPages: null,
   currentPage: null,
   rowsPerPage: null,
+  onSelect: null,
   onAction: null,
+  rowRenderer: defaultRowRenderer,
+  selection: [],
 };
 
 DataTableAdvanced.propTypes = {
@@ -202,12 +239,6 @@ DataTableAdvanced.propTypes = {
   height: PropTypes.number,
 
   /**
-   * Can rows be selected, i.e. should there be a leading checkbox in every row?
-   * Optional, defaults to `false`.
-   */
-  hasSelectableRows: PropTypes.bool,
-
-  /**
    * Does each row have a trailing "Show more" element?
    */
   isActionable: PropTypes.bool,
@@ -217,12 +248,6 @@ DataTableAdvanced.propTypes = {
    * defaults to `false`.
    */
   isLoading: PropTypes.bool,
-
-  /**
-   * Array of preselected row IDs. Only used when `props.hasSelectableRows` is
-   * active.
-   */
-  selectedRows: PropTypes.arrayOf(PropTypes.string),
 
   /**
    * Number of available table pages. Optional.
@@ -256,7 +281,17 @@ DataTableAdvanced.propTypes = {
    * Callback, triggered whenever one or more rows have been selected. Returns
    * an array containing all selected row IDs.
    */
-  onSelection: PropTypes.func.isRequired,
+  onSelect: PropTypes.func,
+
+  /**
+   * Callback used for rendering rows. See `defaultRowRenderer` for a sample.
+   */
+  rowRenderer: PropTypes.func,
+
+  /**
+   * Array of indexes of selected rows.
+   */
+  selection: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default DataTableAdvanced;

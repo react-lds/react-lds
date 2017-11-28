@@ -2,7 +2,12 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { array, boolean, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { DataTableAdvanced, DataTableColumn } from '../src';
+import {
+  DataTableAdvanced,
+  DataTableColumn,
+  defaultSelectAllRenderer,
+  defaultSelectRenderer,
+} from '../src';
 
 const stories = storiesOf('DataTableAdvanced', module);
 const sampleData = [
@@ -30,11 +35,10 @@ stories
       flavor={array('Flavor', ['bordered', 'striped'])}
       variation={array('Variation', [])}
       data={object('Data', sampleData)}
-      hasSelectableRows={boolean('Has selectable rows', false)}
       isActionable={boolean('Is actionable', false)}
       onAction={action()}
-      onSelection={action()}
-      onSorting={action()}
+      onSelect={action()}
+      onSort={action()}
     >
       <DataTableColumn
         dataKey="col1"
@@ -64,6 +68,29 @@ stories
       data={object('Data', sampleData)}
       flavor="fixed-layout"
     >
+      <DataTableColumn
+        dataKey="col1"
+        sortable
+        title="Column 1"
+      />
+      <DataTableColumn
+        dataKey="col3"
+        sortable
+        title="Column 3"
+      />
+    </DataTableAdvanced>
+  ))
+  .add('Selectable table', () => (
+    <DataTableAdvanced
+      data={object('Data', sampleData)}
+      flavor="fixed-layout"
+      onSelect={action()}
+    >
+      <DataTableColumn
+        dataKey="select-all"
+        headRenderer={defaultSelectAllRenderer}
+        cellRenderer={defaultSelectRenderer}
+      />
       <DataTableColumn
         dataKey="col1"
         sortable

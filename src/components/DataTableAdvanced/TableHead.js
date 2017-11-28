@@ -90,9 +90,6 @@ const TableHead = (props) => {
   );
 };
 
-
-TableHead.variations = [];
-
 TableHead.defaultProps = {
   isActionable: false,
   isAllSelected: false,
@@ -136,8 +133,15 @@ TableHead.propTypes = {
    */
   onSort: PropTypes.func,
 
+  /**
+   * The column's `dataKey` which is currently used for sorting. Empty string
+   * if no sorting is applied.
+   */
   sortBy: PropTypes.string,
 
+  /**
+   * Current sort direction (`asc` or `desc`), defaults to `asc`.
+   */
   sortDirection: PropTypes.oneOf(['asc', 'desc']),
 };
 
