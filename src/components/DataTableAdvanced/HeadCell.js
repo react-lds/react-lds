@@ -7,7 +7,6 @@ import { IconSVG } from '../../';
 const HeadCell = (props) => {
   const {
     dataKey,
-    isResizable,
     sortable,
     onSort,
     sortBy,
@@ -23,13 +22,11 @@ const HeadCell = (props) => {
   const cxTh = cx([
     'slds-text-title--caps',
     {
-      'is-resizable': isResizable,
       'slds-is-sortable': sortable,
       'slds-is-sorted': isCurrentSortColumn,
       [`slds-is-sorted_${sortDirection}`]: isCurrentSortColumn,
     },
   ]);
-  const resizeHandleId = `cell-resize-handle-${dataKey}`;
 
   return (
     <th
@@ -71,25 +68,6 @@ const HeadCell = (props) => {
           </span>
         </a>
       }
-
-      { isResizable &&
-        <div className="slds-resizable">
-          <label htmlFor={resizeHandleId} className="slds-assistive-text">
-            {title} column width
-          </label>
-          <input
-            className="slds-resizable__input slds-assistive-text"
-            id={resizeHandleId}
-            max="1000"
-            min="20"
-            tabIndex="0"
-            type="range"
-          />
-          <span className="slds-resizable__handle">
-            <span className="slds-resizable__divider" />
-          </span>
-        </div>
-      }
     </th>
   );
 };
@@ -112,30 +90,31 @@ HeadCell.propTypes = {
   dataKey: PropTypes.string.isRequired,
 
   /**
-   * Display name of the cell
-   */
-  title: PropTypes.string.isRequired,
-
-  sortBy: PropTypes.string,
-
-  sortDirection: PropTypes.oneOf(['asc', 'desc']),
-
-  /**
-   * Callback triggered by clicking on a cell heading a sortable column.
-   * Required when `props.sortable` is `true`.
-   */
+  * Callback triggered by clicking on a cell heading a sortable column.
+  * Required when `props.sortable` is `true`.
+  */
   onSort: PropTypes.func,
 
   /**
-   * Is this row resizable?
-   */
-  isResizable: PropTypes.bool,
+  * Is this column sortable, i.e. should clicking it change the currently
+  * displayed row order below?
+  */
+  sortable: PropTypes.bool,
 
   /**
-   * Is this column sortable, i.e. should clicking it change the currently
-   * displayed row order below?
+   * The column which is currently used for sorting the table.
    */
-  sortable: PropTypes.bool,
+  sortBy: PropTypes.string,
+
+  /**
+   * The current sort direction, defaults to `asc`.
+   */
+  sortDirection: PropTypes.oneOf(['asc', 'desc']),
+
+  /**
+   * Display name of the cell
+   */
+  title: PropTypes.string.isRequired,
 };
 
 
