@@ -6,7 +6,7 @@ import { Table, uniqueId } from '../../';
 
 import defaultRowRenderer from './defaultRowRenderer';
 
-export class DataTableAdvanced extends Component {
+export class DataTable extends Component {
   state = {
     id: uniqueId('data-table-advanced-'),
     columns: [],
@@ -205,7 +205,7 @@ export class DataTableAdvanced extends Component {
   }
 }
 
-DataTableAdvanced.defaultProps = {
+DataTable.defaultProps = {
   ...Table.defaultProps,
 
   totalPages: null,
@@ -217,7 +217,7 @@ DataTableAdvanced.defaultProps = {
   selection: [],
 };
 
-DataTableAdvanced.propTypes = {
+DataTable.propTypes = {
   ...Table.propTypes,
 
   /**
@@ -264,4 +264,4 @@ DataTableAdvanced.propTypes = {
   selection: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default DataTableAdvanced;
+export default DataTable;

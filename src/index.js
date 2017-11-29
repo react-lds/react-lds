@@ -6,7 +6,7 @@ export * from './components/Button';
 export * from './components/ButtonGroup';
 export * from './components/Card';
 export * from './components/Table';
-export * from './components/DataTableAdvanced';
+export * from './components/DataTable';
 export * from './components/Datepicker';
 export * from './components/ExpandableSection';
 export * from './components/File';

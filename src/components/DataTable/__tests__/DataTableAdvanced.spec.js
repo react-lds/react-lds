@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { DataTableAdvanced } from '../DataTableAdvanced';
+import { DataTable } from '../DataTable';
 
-describe('<DataTableAdvanced />', () => {
+describe('<DataTable />', () => {
   let mounted = null;
 
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe('<DataTableAdvanced />', () => {
       data: [],
       onSelect: () => {},
     };
-    mounted = mount(<DataTableAdvanced {...props} />);
+    mounted = mount(<DataTable {...props} />);
   });
 
   it('renders a table', () => {

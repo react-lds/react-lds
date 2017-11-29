@@ -4,13 +4,13 @@ import { array, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import {
   Button,
-  DataTableAdvanced,
+  DataTable,
   DataTableColumn,
   DataTableActionColumn,
   DataTableSelectColumn,
 } from '../src';
 
-const stories = storiesOf('DataTableAdvanced', module);
+const stories = storiesOf('DataTable', module);
 const sampleData = [
   {
     id: 1,
@@ -32,7 +32,7 @@ const sampleData = [
 
 stories
   .add('Basic example', () => (
-    <DataTableAdvanced
+    <DataTable
       flavor={array('Flavor', ['bordered', 'striped'])}
       variation={array('Variation', [])}
       data={object('Data', sampleData)}
@@ -58,10 +58,10 @@ stories
           </td>
         )}
       />
-    </DataTableAdvanced>
+    </DataTable>
   ))
   .add('Sortable table', () => (
-    <DataTableAdvanced
+    <DataTable
       data={object('Data', sampleData)}
       flavor="fixed-layout"
     >
@@ -75,10 +75,10 @@ stories
         sortable
         title="Column 3"
       />
-    </DataTableAdvanced>
+    </DataTable>
   ))
   .add('Selectable table', () => (
-    <DataTableAdvanced
+    <DataTable
       data={object('Data', sampleData)}
       flavor="fixed-layout"
       onSelect={action()}
@@ -96,10 +96,10 @@ stories
         sortable
         title="Column 3"
       />
-    </DataTableAdvanced>
+    </DataTable>
   ))
   .add('Actionable table', () => (
-    <DataTableAdvanced
+    <DataTable
       data={object('Data', sampleData)}
       flavor="fixed-layout"
       onSelect={action()}
@@ -125,5 +125,5 @@ stories
           </td>
         )}
       />
-    </DataTableAdvanced>
+    </DataTable>
   ));
