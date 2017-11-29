@@ -77,7 +77,7 @@ const Cell = (props) => {
         <div key={key} className="slds-icon_container" title={sortAssistiveText}>
           <IconSVG
             className="slds-is-sortable__icon slds-icon-text-default"
-            icon={sortDirection === 'asc' ? 'arrowup' : 'arrowdown'}
+            icon="arrowdown"
             size="x-small"
             sprite="utility"
           />
@@ -114,6 +114,7 @@ const Cell = (props) => {
 
   const sldsClasses = [
     { 'slds-is-resizable': scope === 'col' && !!resizable },
+    { 'slds-is-sortable': !!sortable },
     { 'slds-is-sorted_asc': !!sortable && sortDirection === 'asc' },
     variationClasses,
     className,
