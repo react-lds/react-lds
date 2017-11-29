@@ -9,7 +9,7 @@ describe('<DataTableAdvanced />', () => {
   beforeEach(() => {
     const props = {
       data: [],
-      onSelection: () => {},
+      onSelect: () => {},
     };
     mounted = mount(<DataTableAdvanced {...props} />);
   });
