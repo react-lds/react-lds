@@ -213,14 +213,11 @@ export class DataTableAdvanced extends Component {
 DataTableAdvanced.defaultProps = {
   ...Table.defaultProps,
 
-  height: null,
-  isActionable: false,
-  isLoading: false,
   totalPages: null,
   currentPage: null,
   rowsPerPage: null,
+  onSort: null,
   onSelect: null,
-  onAction: null,
   rowRenderer: defaultRowRenderer,
   selection: [],
 };
@@ -232,22 +229,6 @@ DataTableAdvanced.propTypes = {
    * Table content, an array of objects
    */
   data: PropTypes.arrayOf(PropTypes.any).isRequired,
-
-  /**
-   * Height of table. Optional.
-   */
-  height: PropTypes.number,
-
-  /**
-   * Does each row have a trailing "Show more" element?
-   */
-  isActionable: PropTypes.bool,
-
-  /**
-   * Set to `true` while the upstream component fetches new data. Optional,
-   * defaults to `false`.
-   */
-  isLoading: PropTypes.bool,
 
   /**
    * Number of available table pages. Optional.
@@ -263,12 +244,6 @@ DataTableAdvanced.propTypes = {
    * Number of rows per table page. Optional.
    */
   rowsPerPage: PropTypes.number,
-
-  /**
-   * Callback triggered by clicking on the trailing "Show more" element in a
-   * row. Will receive the row ID as argument.
-   */
-  onAction: PropTypes.func,
 
   /**
    * Callback, triggered by clicks on sortable column headers.  Receives an object
