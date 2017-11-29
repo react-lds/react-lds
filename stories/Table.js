@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { array, boolean } from '@storybook/addon-knobs';
 import { Table, Row, Cell } from '../src';
 
-const stories = storiesOf('DataTable', module);
+const stories = storiesOf('Table', module);
 
 stories
   .add('Basic example', () => (

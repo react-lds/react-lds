@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash.omit';
 
-import { uniqueId } from '../../';
-import { Table } from '../DataTable';
+import { Table, uniqueId } from '../../';
 
 import defaultRowRenderer from './defaultRowRenderer';
 
