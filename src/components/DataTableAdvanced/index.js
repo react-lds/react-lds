@@ -1,4 +1,4 @@
 export { default as DataTableColumn } from './DataTableColumn';
+export { default as DataTableSelectColumn } from './DataTableSelectColumn';
+export { default as DataTableActionColumn } from './DataTableActionColumn';
 export { default as DataTableAdvanced } from './DataTableAdvanced';
-export { default as defaultSelectAllRenderer } from './defaultSelectAllRenderer';
-export { default as defaultSelectRenderer } from './defaultSelectRenderer';

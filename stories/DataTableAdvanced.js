@@ -3,10 +3,11 @@ import { storiesOf } from '@storybook/react';
 import { array, boolean, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import {
+  Button,
   DataTableAdvanced,
   DataTableColumn,
-  defaultSelectAllRenderer,
-  defaultSelectRenderer,
+  DataTableActionColumn,
+  DataTableSelectColumn,
 } from '../src';
 
 const stories = storiesOf('DataTableAdvanced', module);
@@ -86,10 +87,8 @@ stories
       flavor="fixed-layout"
       onSelect={action()}
     >
-      <DataTableColumn
+      <DataTableSelectColumn
         dataKey="select-all"
-        headRenderer={defaultSelectAllRenderer}
-        cellRenderer={defaultSelectRenderer}
       />
       <DataTableColumn
         dataKey="col1"
@@ -100,6 +99,35 @@ stories
         dataKey="col3"
         sortable
         title="Column 3"
+      />
+    </DataTableAdvanced>
+  ))
+  .add('Actionable table', () => (
+    <DataTableAdvanced
+      data={object('Data', sampleData)}
+      flavor="fixed-layout"
+      onSelect={action()}
+    >
+      <DataTableColumn
+        dataKey="col1"
+        sortable
+        title="Column 1"
+      />
+      <DataTableColumn
+        dataKey="col3"
+        sortable
+        title="Column 3"
+      />
+      <DataTableActionColumn
+        dataKey="stuff"
+        cellRenderer={({ dataKey, rowIndex, defaultProps }) => (
+          <td {...defaultProps}>
+            <Button
+              onClick={action(`click ${dataKey}@${rowIndex}`)}
+              title="Do stuff"
+            />
+          </td>
+        )}
       />
     </DataTableAdvanced>
   ));
