@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { array, boolean, object } from '@storybook/addon-knobs';
+import { array, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import {
   Button,
@@ -36,19 +36,15 @@ stories
       flavor={array('Flavor', ['bordered', 'striped'])}
       variation={array('Variation', [])}
       data={object('Data', sampleData)}
-      isActionable={boolean('Is actionable', false)}
-      onAction={action()}
       onSelect={action()}
       onSort={action()}
     >
       <DataTableColumn
         dataKey="col1"
-        isResizable={false}
         title="Column 1"
       />
       <DataTableColumn
         dataKey="col2"
-        isResizable
         title="Column 2"
       />
       <DataTableColumn
