@@ -11,7 +11,6 @@ export class DataTable extends Component {
     id: uniqueId('data-table-advanced-'),
     columns: [],
     data: this.props.data,
-    selection: [],
     sortBy: '',
     sortDirection: 'asc',
   }
@@ -21,7 +20,7 @@ export class DataTable extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { children, data, selection } = this.props;
+    const { children, data } = this.props;
 
     if (nextProps.children !== children) {
       this.updateColumns();
@@ -30,29 +29,22 @@ export class DataTable extends Component {
     if (nextProps.data !== data) {
       this.setState({ data: nextProps.data });
     }
-
-    if (nextProps.selection !== selection) {
-      this.setState({ selection: nextProps.selection });
-    }
   }
 
-  onSelect = (rowIndex) => {
-    const { onSelect } = this.props;
-    const { selection } = this.state;
-
-    const nextSelection = [...selection];
-
-    if (nextSelection.includes(rowIndex)) {
-      nextSelection.splice(nextSelection.indexOf(rowIndex), 1);
-    } else {
-      nextSelection.push(rowIndex);
-    }
+  onSelect = (rowId) => {
+    const { onSelect, selection } = this.props;
 
     if (onSelect) {
-      onSelect(nextSelection, rowIndex);
-    }
+      const nextSelection = [...selection];
 
-    this.setState({ selection: nextSelection });
+      if (nextSelection.includes(rowId)) {
+        nextSelection.splice(nextSelection.indexOf(rowId), 1);
+      } else {
+        nextSelection.push(rowId);
+      }
+
+      onSelect(nextSelection, rowId);
+    }
   }
 
   onSelectAll = () => {
@@ -67,10 +59,7 @@ export class DataTable extends Component {
       onSelect(nextSelection);
     }
 
-    this.setState({
-      allSelected: !allSelected,
-      selection: nextSelection,
-    });
+    this.setState({ allSelected: !allSelected });
   }
 
   onSort = (nextSortBy = '') => {
@@ -119,24 +108,25 @@ export class DataTable extends Component {
   }
 
   areAllRowsSelected() {
-    return this.state.selection.length === this.state.data.length;
+    return this.props.selection.length === this.state.data.length;
   }
 
   renderRow(rowData, rowIndex) {
-    const { columns, id, selection } = this.state;
-    const { rowRenderer } = this.props;
+    const { columns, id } = this.state;
+    const { getRowId, rowRenderer, selection } = this.props;
+    const rowId = getRowId({ rowIndex, rowData });
 
     const cells = columns.map(({ cellRenderer, dataKey }) =>
       cellRenderer({
         cellData: rowData[dataKey],
         dataKey,
         rowData,
-        rowIndex,
-        selected: selection.includes(rowIndex),
+        rowId,
+        selected: selection.includes(rowId),
         onSelect: this.onSelect,
         tableId: id,
         defaultProps: {
-          key: `${rowIndex}-${dataKey}`,
+          key: `${rowId}-${dataKey}`,
           role: 'gridcell',
         },
       })
@@ -146,7 +136,7 @@ export class DataTable extends Component {
       cells,
       onSelect: this.onSelect,
       rowData,
-      rowIndex,
+      rowId,
       tableId: id,
     });
   }
@@ -188,6 +178,7 @@ export class DataTable extends Component {
       'children',
       'currentPage',
       'data',
+      'getRowId',
       'onSelect',
       'onSort',
       'rowsPerPage',
@@ -208,6 +199,7 @@ export class DataTable extends Component {
 DataTable.defaultProps = {
   ...Table.defaultProps,
 
+  getRowId: ({ rowIndex }) => rowIndex,
   totalPages: null,
   currentPage: null,
   rowsPerPage: null,
@@ -224,6 +216,13 @@ DataTable.propTypes = {
    * Table content, an array of objects
    */
   data: PropTypes.arrayOf(PropTypes.any).isRequired,
+
+  /**
+   * Getter which returns a unique id for a row. The default implementation will
+   * just use the row index. Overwrite this with a better id if you plan on
+   * using a variable `data` array.
+   */
+  getRowId: PropTypes.func,
 
   /**
    * Number of available table pages. Optional.
@@ -261,7 +260,7 @@ DataTable.propTypes = {
   /**
    * Array of indexes of selected rows.
    */
-  selection: PropTypes.arrayOf(PropTypes.string),
+  selection: PropTypes.array,
 };
 
 export default DataTable;

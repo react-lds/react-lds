@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { array, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
@@ -29,6 +30,31 @@ const sampleData = [
     moo: false,
   },
 ];
+
+class StatefulWrapper extends Component {
+  static propTypes = {
+    children: PropTypes.node.isRequired,
+  }
+
+  state = {
+    selection: [],
+  }
+
+  onSelect = (selection) => {
+    const { onSelect } = this.props.children.props; // eslint-disable-line react/prop-types
+    if (onSelect) onSelect(selection);
+    this.setState({ selection });
+  }
+
+  render() {
+    const { children, ...restProps } = this.props;
+    return React.cloneElement(children, {
+      ...restProps,
+      ...this.state,
+      onSelect: this.onSelect,
+    });
+  }
+}
 
 stories
   .add('Basic example', () => (
@@ -78,25 +104,26 @@ stories
     </DataTable>
   ))
   .add('Selectable table', () => (
-    <DataTable
-      data={object('Data', sampleData)}
-      flavor="fixed-layout"
-      onSelect={action()}
-    >
-      <DataTableSelectColumn
-        dataKey="select-all"
-      />
-      <DataTableColumn
-        dataKey="col1"
-        sortable
-        title="Column 1"
-      />
-      <DataTableColumn
-        dataKey="col3"
-        sortable
-        title="Column 3"
-      />
-    </DataTable>
+    <StatefulWrapper data={object('Data', sampleData)}>
+      <DataTable
+        flavor="fixed-layout"
+        onSelect={action()}
+      >
+        <DataTableSelectColumn
+          dataKey="select-all"
+        />
+        <DataTableColumn
+          dataKey="col1"
+          sortable
+          title="Column 1"
+        />
+        <DataTableColumn
+          dataKey="col3"
+          sortable
+          title="Column 3"
+        />
+      </DataTable>
+    </StatefulWrapper>
   ))
   .add('Actionable table', () => (
     <DataTable
