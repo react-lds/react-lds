@@ -48,12 +48,12 @@ export class DataTable extends Component {
   }
 
   onSelectAll = () => {
-    const { onSelect } = this.props;
+    const { onSelect, getRowId } = this.props;
     const { data } = this.state;
     const allSelected = this.areAllRowsSelected();
     const nextSelection = allSelected
       ? []
-      : data.map((row, i) => i);
+      : data.map((rowData, rowIndex) => getRowId({ rowData, rowIndex }));
 
     if (onSelect) {
       onSelect(nextSelection);
