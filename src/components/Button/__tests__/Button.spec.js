@@ -61,8 +61,13 @@ describe('<Button />', () => {
   it('applies flavoring', () => {
     mounted.setProps({ flavor: 'brand' });
     expect(mounted.find('.slds-button').hasClass('slds-button_brand')).toBeTruthy();
-    mounted.setProps({ flavor: ['brand', 'large'] });
+    mounted.setProps({ flavor: ['brand', 'icon'] });
     expect(mounted.find('.slds-button').hasClass('slds-button_brand')).toBeTruthy();
-    expect(mounted.find('.slds-button').hasClass('slds-button_large')).toBeTruthy();
+    expect(mounted.find('.slds-button').hasClass('slds-button_icon')).toBeTruthy();
+  });
+
+  it('applies sizes', () => {
+    mounted.setProps({ size: 'x-small' });
+    expect(mounted.find('.slds-button').hasClass('slds-button_x-small')).toBeTruthy();
   });
 });

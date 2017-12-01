@@ -3,7 +3,17 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const MediaObject = (props) => {
-  const { children, className, customTag, figureLeft, figureRight, flavor, title, truncate, ...rest } = props;
+  const {
+    children,
+    className,
+    customTag,
+    figureLeft,
+    figureRight,
+    flavor,
+    size,
+    title,
+    truncate,
+    ...rest } = props;
 
   const renderFigure = (figure, classes = []) => {
     const figureClasses = [
@@ -22,6 +32,7 @@ const MediaObject = (props) => {
     'slds-media',
     className,
     flavorClasses,
+    { [`slds-media_${size}`]: !!size },
   ];
 
   const bodyClasses = [
@@ -45,6 +56,7 @@ MediaObject.defaultProps = {
   figureLeft: null,
   figureRight: null,
   flavor: [],
+  size: null,
   truncate: false,
   title: null,
 };
@@ -76,12 +88,14 @@ MediaObject.propTypes = {
   flavor: PropTypes.oneOfType([PropTypes.oneOf([
     'center',
     'responsive',
-    'small',
   ]), PropTypes.arrayOf(PropTypes.oneOf([
     'center',
     'responsive',
-    'small',
   ]))]),
+  /**
+   * Sizes: small
+   */
+  size: PropTypes.oneOf(['small', 'large']),
   /**
    * truncates the body, requires title
    */

@@ -2,6 +2,7 @@
 
 # Unreleased
 
+* `MediaObject` add large size
 * `Prompt` add theming
 * Breaking: Flavor usage
     * `Button`
@@ -16,6 +17,10 @@
     * `Spinner`
     * `StatefulButton`
     * `VerticalNavigation`
+* Breaking: Size usage
+    * `Button`
+    * Grid/`Container`
+    * `MediaObject`
 * Breaking: Theme usage
     * `Badge`
     * `Box`

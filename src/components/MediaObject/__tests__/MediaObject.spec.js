@@ -54,10 +54,15 @@ describe('<MediaObject />', () => {
   });
 
   it('applies flavoring', () => {
-    mounted.setProps({ flavor: 'small' });
-    expect(mounted.find('.slds-media').hasClass('slds-media_small')).toBeTruthy();
-    mounted.setProps({ flavor: ['center', 'small'] });
+    mounted.setProps({ flavor: 'center' });
     expect(mounted.find('.slds-media').hasClass('slds-media_center')).toBeTruthy();
+    mounted.setProps({ flavor: ['center', 'responsive'] });
+    expect(mounted.find('.slds-media').hasClass('slds-media_center')).toBeTruthy();
+    expect(mounted.find('.slds-media').hasClass('slds-media_responsive')).toBeTruthy();
+  });
+
+  it('applies sizing', () => {
+    mounted.setProps({ size: 'small' });
     expect(mounted.find('.slds-media').hasClass('slds-media_small')).toBeTruthy();
   });
 });

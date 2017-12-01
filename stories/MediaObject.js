@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { array, boolean, text } from '@storybook/addon-knobs';
+import { array, boolean, select, text } from '@storybook/addon-knobs';
 import { Icon, MediaObject } from '../src';
 
 const stories = storiesOf('MediaObject', module);
@@ -16,7 +16,8 @@ stories
     <MediaObject
       customTag={text('Custom HTML-tag', '') || undefined}
       figureLeft={icon}
-      flavor={array('Flavor', ['center', 'responsive', 'small'])}
+      flavor={array('Flavor', ['center', 'responsive'])}
+      size={select('Size', ['', 'small', 'large'], 'small') || undefined}
       truncate={boolean('Truncate', false)}
       title={text('Title', 'This is a tooltip displayed on mouseover, necessary when truncate is used') || undefined}
     >
@@ -29,6 +30,7 @@ stories
       figureLeft={icon}
       figureRight={icon}
       flavor={array('Flavor', ['center'])}
+      size={select('Size', ['', 'small', 'large'], '') || undefined}
       truncate={boolean('Truncate', false)}
       title={text('Title', 'This is a tooltip displayed on mouseover, necessary when truncate is used') || undefined}
     >

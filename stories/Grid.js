@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { array, text } from '@storybook/addon-knobs';
+import { array, select, text } from '@storybook/addon-knobs';
 import { Box, Column, Grid, Container } from '../src';
 import { getThemes } from './utils/helpers';
 
@@ -78,28 +78,107 @@ stories
   ))
   .add('Containers', () => (
     <div>
-      <Container flavor={array('Flavor0', ['small'])}>
+      <Container
+        flavor={array('Flavor0', [])}
+        size={select('Size0', [
+          '',
+          'small',
+          'medium',
+          'large',
+          'x-large'
+        ], 'small') || undefined}
+      >
         <Box theme="default" size="small">Max Width: 480px</Box>
       </Container>
-      <Container flavor={array('Flavor1', ['medium'])} className="slds-m-top--medium">
+      <Container
+        flavor={array('Flavor1', [])}
+        className="slds-m-top--medium"
+        size={select('Size1', [
+          '',
+          'small',
+          'medium',
+          'large',
+          'x-large'
+        ], 'medium') || undefined}
+      >
         <Box theme="default" size="small">Max Width: 768px</Box>
       </Container>
-      <Container flavor={array('Flavor2', ['large'])} className="slds-m-top--medium">
+      <Container
+        flavor={array('Flavor2', [])}
+        className="slds-m-top--medium"
+        size={select('Size2', [
+          '',
+          'small',
+          'medium',
+          'large',
+          'x-large'
+        ], 'large') || undefined}
+      >
         <Box theme="default" size="small">Max Width: 1024px</Box>
       </Container>
-      <Container flavor={array('Flavor3', ['x-large'])} className="slds-m-top--medium">
+      <Container
+        flavor={array('Flavor3', [])}
+        className="slds-m-top--medium"
+        size={select('Size3', [
+          '',
+          'small',
+          'medium',
+          'large',
+          'x-large'
+        ], 'x-large') || undefined}
+      >
         <Box theme="default" size="small">Max Width: 1280px</Box>
       </Container>
-      <Container flavor={array('Flavor4', ['fluid'])} className="slds-m-top--medium">
+      <Container
+        flavor={array('Flavor4', ['fluid'])}
+        className="slds-m-top--medium"
+        size={select('Size4', [
+          '',
+          'small',
+          'medium',
+          'large',
+          'x-large'
+        ], '') || undefined}
+      >
         <Box theme="default" size="small">Width: 100%</Box>
       </Container>
-      <Container flavor={array('Flavor5', ['fluid', 'small'])} className="slds-m-top--medium">
+      <Container
+        flavor={array('Flavor5', ['fluid'])}
+        className="slds-m-top--medium"
+        size={select('Size5', [
+          '',
+          'small',
+          'medium',
+          'large',
+          'x-large'
+        ], 'small') || undefined}
+      >
         <Box theme="default" size="small">Left Aligned</Box>
       </Container>
-      <Container flavor={array('Flavor6', ['center', 'small'])} className="slds-m-top--medium">
+      <Container
+        flavor={array('Flavor6', ['center'])}
+        className="slds-m-top--medium"
+        size={select('Size6', [
+          '',
+          'small',
+          'medium',
+          'large',
+          'x-large'
+        ], 'small') || undefined}
+      >
         <Box theme="default" size="small">Center Aligned</Box>
       </Container>
-      <Container flavor={array('Flavor7', ['right', 'small'])} className="slds-m-top--medium">
+      <Container
+        flavor={array('Flavor7', ['right'])}
+        className="slds-m-top--medium"
+        size={select('Size7', [
+          '',
+          'small',
+          'medium',
+          'large',
+          'x-large'
+        ], 'small') || undefined}
+      >
         <Box theme="default" size="small">Right Aligned</Box>
       </Container>
     </div>

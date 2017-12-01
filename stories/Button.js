@@ -17,12 +17,13 @@ const stories = storiesOf('Button', module);
 stories
   .add('Default', () => (
     <Button
+      disabled={boolean('Disabled', false)}
+      flavor={array('Flavor', ['neutral'])}
       onClick={action()}
+      selected={boolean('Selected', false)}
+      size={select('Size', ['', 'x-small', 'small', 'large'], '') || undefined}
       title={text('Title', 'Title') || undefined}
       tooltip={text('Tooltip', 'I am a tooltip!')}
-      disabled={boolean('Disabled', false)}
-      selected={boolean('Selected', false)}
-      flavor={array('Flavor', ['neutral'])}
     />
   ))
   .add('With Icon', () => (

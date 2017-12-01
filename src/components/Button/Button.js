@@ -9,6 +9,7 @@ const Button = (props) => {
     disabled,
     onClick,
     selected,
+    size,
     title,
     tooltip,
     value,
@@ -21,6 +22,7 @@ const Button = (props) => {
   const sldsClasses = [
     'slds-button',
     { 'slds-is-selected': !!selected },
+    { [`slds-button_${size}`]: !!size },
     flavorClasses,
     className,
   ];
@@ -46,6 +48,7 @@ Button.defaultProps = {
   className: null,
   disabled: false,
   selected: false,
+  size: null,
   title: null,
   tooltip: null,
   value: null,
@@ -78,6 +81,10 @@ Button.propTypes = {
    */
   title: PropTypes.string,
   /**
+   * Button size, may not have any effect
+   */
+  size: PropTypes.oneOf(['x-small', 'small', 'large']),
+  /**
    * button tooltip
    */
   tooltip: PropTypes.string,
@@ -103,9 +110,6 @@ Button.propTypes = {
     'icon-x-small',
     'reset',
     'success',
-    'x-small',
-    'small',
-    'large',
   ]), PropTypes.arrayOf(PropTypes.oneOf([
     'neutral',
     'brand',
@@ -119,9 +123,6 @@ Button.propTypes = {
     'icon-x-small',
     'reset',
     'success',
-    'x-small',
-    'small',
-    'large',
   ]))]),
 };
 

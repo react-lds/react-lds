@@ -22,9 +22,14 @@ describe('<Container />', () => {
   });
 
   it('applies flavoring', () => {
-    mounted.setProps({ flavor: 'small' });
-    expect(mounted.find('.slds-container_small').length).toEqual(1);
-    mounted.setProps({ flavor: ['center', 'small'] });
-    expect(mounted.find('.slds-container_small').hasClass('slds-container_center')).toBeTruthy();
+    mounted.setProps({ flavor: 'left' });
+    expect(mounted.find('.slds-container_left').length).toEqual(1);
+    mounted.setProps({ flavor: ['center', 'fluid'] });
+    expect(mounted.find('.slds-container_fluid').hasClass('slds-container_center')).toBeTruthy();
+  });
+
+  it('applies sizing', () => {
+    mounted.setProps({ size: 'small' });
+    expect(mounted.find('div').hasClass('slds-container_small')).toBeTruthy();
   });
 });
