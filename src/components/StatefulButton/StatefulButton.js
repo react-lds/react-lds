@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { flavorProp } from '../../utils';
 import { ButtonIcon } from '../../';
 
 const StatefulButton = (props) => {
@@ -145,7 +146,7 @@ StatefulButton.propTypes = {
   /**
    * flavors: neutral, brand, destructive, inverse, success
    */
-  flavor: PropTypes.oneOf([
+  flavor: flavorProp([
     'neutral',
     'brand',
     'destructive',

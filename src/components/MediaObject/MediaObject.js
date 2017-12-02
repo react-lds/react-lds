@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { flavorProp } from '../../utils';
 
 const MediaObject = (props) => {
   const {
@@ -85,13 +86,10 @@ MediaObject.propTypes = {
   /**
    * flavor: string or array of strings. Flavors: center, responsive, small
    */
-  flavor: PropTypes.oneOfType([PropTypes.oneOf([
+  flavor: flavorProp([
     'center',
     'responsive',
-  ]), PropTypes.arrayOf(PropTypes.oneOf([
-    'center',
-    'responsive',
-  ]))]),
+  ]),
   /**
    * Sizes: small
    */

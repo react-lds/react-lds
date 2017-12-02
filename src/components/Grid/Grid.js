@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { flavorProp } from '../../utils';
 
 const Grid = (props) => {
   const { children, className, flavor, wrap, ...rest } = props;
@@ -39,7 +40,7 @@ Grid.propTypes = {
    * vertical-align-center, certical-align-end, vertical-stretch, pull-padded,
    * pull-padded-medium, pull-padded-large,
    */
-  flavor: PropTypes.oneOfType([PropTypes.oneOf([
+  flavor: flavorProp([
     'frame',
     'vertical',
     'reverse',
@@ -54,22 +55,7 @@ Grid.propTypes = {
     'pull-padded',
     'pull-padded-medium',
     'pull-padded-large',
-  ]), PropTypes.arrayOf(PropTypes.oneOf([
-    'frame',
-    'vertical',
-    'reverse',
-    'vertical-reverse',
-    'align-center',
-    'align-spread',
-    'align-space',
-    'align-end',
-    'vertical-align-center',
-    'certical-align-end',
-    'vertical-stretch',
-    'pull-padded',
-    'pull-padded-medium',
-    'pull-padded-large',
-  ]))]),
+  ]),
   /*
    * wrap variation
    */

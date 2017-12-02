@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { flavorProp } from '../../utils';
 
 const Button = (props) => {
   const {
@@ -97,7 +98,7 @@ Button.propTypes = {
    brand, destructive, icon, icon-border-filled, icon-container, icon-inverse,
    icon-border, icon-bare, icon-x-small, reset, success, x-small, small, large
    */
-  flavor: PropTypes.oneOfType([PropTypes.oneOf([
+  flavor: flavorProp([
     'neutral',
     'brand',
     'destructive',
@@ -109,21 +110,8 @@ Button.propTypes = {
     'icon-bare',
     'icon-x-small',
     'reset',
-    'success',
-  ]), PropTypes.arrayOf(PropTypes.oneOf([
-    'neutral',
-    'brand',
-    'destructive',
-    'icon',
-    'icon-border-filled',
-    'icon-container',
-    'icon-inverse',
-    'icon-border',
-    'icon-bare',
-    'icon-x-small',
-    'reset',
-    'success',
-  ]))]),
+    'success'
+  ]),
 };
 
 export default Button;

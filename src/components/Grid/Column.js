@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import omit from 'lodash.omit';
+import { flavorProp } from '../../utils';
 
 const validBreakpoints = [
   'small',
@@ -100,7 +101,7 @@ Column.propTypes = {
    * bump-top, bump-bottom, padded, padded-large, padded-small, rule-right,
    * rule-left, rule-top, rule-bottom,
    */
-  flavor: PropTypes.oneOfType([PropTypes.oneOf([
+  flavor: flavorProp([
     'bump-left',
     'bump-right',
     'bump-top',
@@ -112,24 +113,12 @@ Column.propTypes = {
     'rule-left',
     'rule-top',
     'rule-bottom',
-  ]), PropTypes.arrayOf(PropTypes.oneOf([
-    'bump-left',
-    'bump-right',
-    'bump-top',
-    'bump-bottom',
-    'padded',
-    'padded-large',
-    'padded-small',
-    'rule-right',
-    'rule-left',
-    'rule-top',
-    'rule-bottom',
-  ]))]),
+  ]),
   /*
    * variation: string or array of strings. Variations: has-flexi-truncate,
    * no-flex, no-space, grow, grow-none, shrink, shrink-none
    */
-  variation: PropTypes.oneOfType([PropTypes.oneOf([
+  variation: flavorProp([
     'has-flexi-truncate',
     'no-flex',
     'no-space',
@@ -137,15 +126,7 @@ Column.propTypes = {
     'grow-none',
     'shrink',
     'shrink-none',
-  ]), PropTypes.arrayOf(PropTypes.oneOf([
-    'has-flexi-truncate',
-    'no-flex',
-    'no-space',
-    'grow',
-    'grow-none',
-    'shrink',
-    'shrink-none',
-  ]))]),
+  ]),
   /**
    * non-responsive sizeOf
    */

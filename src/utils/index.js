@@ -1,6 +1,7 @@
 import uniqueId from './uniqueId';
 import getUniqueHash from './hashFromString';
+import flavorProp from './flavorProp';
 
 export * from './theme';
 
-export { uniqueId, getUniqueHash };
+export { flavorProp, uniqueId, getUniqueHash };

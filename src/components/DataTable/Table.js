@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { flavorProp } from '../../utils';
 
 const Table = (props) => {
   const { children, className, flavor, variation, ...rest } = props;
@@ -39,29 +40,20 @@ Table.propTypes = {
    * variation: string or array of strings. Variations: no-row-hover, max-medium-table_stacked,
    max-medium-table_stacked-horizontal
    */
-  variation: PropTypes.oneOfType([PropTypes.oneOf([
+  variation: flavorProp([
     'no-row-hover',
     'max-medium-table_stacked',
     'max-medium-table_stacked-horizontal',
-  ]), PropTypes.arrayOf(PropTypes.oneOf([
-    'no-row-hover',
-    'max-medium-table_stacked',
-    'max-medium-table_stacked-horizontal',
-  ]))]),
+  ]),
   /**
    * flavor: string or array of strings. Flavors: bordered, col-bordered, striped, fixed-layout
    */
-  flavor: PropTypes.oneOfType([PropTypes.oneOf([
+  flavor: flavorProp([
     'bordered',
     'col-bordered',
     'striped',
     'fixed-layout',
-  ]), PropTypes.arrayOf(PropTypes.oneOf([
-    'bordered',
-    'col-bordered',
-    'striped',
-    'fixed-layout',
-  ]))]),
+  ]),
 };
 
 export default Table;

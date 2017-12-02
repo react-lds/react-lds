@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { flavorProp } from '../../utils';
 
 const VerticalNavigation = (props) => {
   const {
@@ -42,13 +43,10 @@ VerticalNavigation.propTypes = {
   /**
    * flavor: string or array of strings. Flavors: compact, shade
    */
-  flavor: PropTypes.oneOfType([PropTypes.oneOf([
+  flavor: flavorProp([
     'compact',
     'shade',
-  ]), PropTypes.arrayOf(PropTypes.oneOf([
-    'compact',
-    'shade',
-  ]))]),
+  ]),
   /**
    * Element that will be rendered above the navigation
    */

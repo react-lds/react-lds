@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { flavorProp } from '../../utils';
 
 const Container = (props) => {
   const { children, className, flavor, size, ...rest } = props;
@@ -32,17 +33,12 @@ Container.propTypes = {
   /**
    * flavor: string or array of strings. Flavors: fluid, left, center, right
    */
-  flavor: PropTypes.oneOfType([PropTypes.oneOf([
+  flavor: flavorProp([
     'fluid',
     'left',
     'center',
     'right',
-  ]), PropTypes.arrayOf(PropTypes.oneOf([
-    'fluid',
-    'left',
-    'center',
-    'right',
-  ]))]),
+  ]),
   /*
    * sizes: small, medium, large, x-large
    */
