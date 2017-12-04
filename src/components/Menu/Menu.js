@@ -34,16 +34,16 @@ export class MenuRaw extends Component {
     if (button) {
       const noBorder = button.noBorder;
       const title = button.title;
+      const buttonFlavors = [];
+      if (button.brand) { buttonFlavors.push('slds-button_brand'); }
+      if (button.neutral) { buttonFlavors.push('slds-button_neutral'); }
+      if (noBorder && !title) { buttonFlavors.push('slds-button_icon-container'); }
+      if (!noBorder && !title) { buttonFlavors.push('slds-button_icon-border-filled'); }
       return (
         <Button
           aria-haspopup="true"
           flavor={button.flavor}
-          className={cx([
-            button.brand ? 'slds-button_brand' : null,
-            button.neutral ? 'slds-button_neutral' : null,
-            (noBorder && !title) ? 'slds-button_icon-container' : null,
-            (!noBorder && !title) ? 'slds-button_icon-border-filled' : null
-          ])}
+          className={cx(buttonFlavors)}
           disabled={disabled}
           onClick={this.toggle}
           title={button.title}
