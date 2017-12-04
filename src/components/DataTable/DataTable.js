@@ -164,7 +164,11 @@ export class DataTable extends Component {
   }
 
   renderBody() {
-    const { data } = this.state;
+    const { columns, data, id } = this.state;
+
+    if (!Array.isArray(data) || data.length === 0) {
+      return this.props.noRowsRenderer({ columns, tableId: id });
+    }
 
     return (
       <tbody>
@@ -176,15 +180,13 @@ export class DataTable extends Component {
   render() {
     const rest = omit(this.props, [
       'children',
-      'currentPage',
       'data',
       'getRowId',
+      'noRowsRenderer',
       'onSelect',
       'onSort',
-      'rowsPerPage',
       'rowRenderer',
       'selection',
-      'totalPages',
     ]);
 
     return (
@@ -200,12 +202,10 @@ DataTable.defaultProps = {
   ...Table.defaultProps,
 
   getRowId: ({ rowIndex }) => rowIndex,
-  totalPages: null,
-  currentPage: null,
-  rowsPerPage: null,
   onSort: null,
   onSelect: null,
   rowRenderer: defaultRowRenderer,
+  noRowsRenderer: () => {},
   selection: [],
 };
 
@@ -225,19 +225,10 @@ DataTable.propTypes = {
   getRowId: PropTypes.func,
 
   /**
-   * Number of available table pages. Optional.
+   * Render callback which is called if the data array is empty. Should return a
+   * table body.
    */
-  totalPages: PropTypes.number,
-
-  /**
-   * Number of currently visible table page. Optional.
-   */
-  currentPage: PropTypes.number,
-
-  /**
-   * Number of rows per table page. Optional.
-   */
-  rowsPerPage: PropTypes.number,
+  noRowsRenderer: PropTypes.func,
 
   /**
    * Callback, triggered by clicks on sortable column headers.  Receives an object
