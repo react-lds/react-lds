@@ -108,7 +108,13 @@ export class DataTable extends Component {
   }
 
   areAllRowsSelected() {
-    return this.props.selection.length === this.state.data.length;
+    const { getRowId, selection } = this.props;
+    const { data } = this.state;
+    const allSelectedReducer = (acc, rowData, rowIndex) => (
+      acc && selection.includes(getRowId({ rowIndex, rowData }))
+    );
+
+    return data.reduce(allSelectedReducer, true);
   }
 
   renderRow(rowData, rowIndex) {
@@ -122,6 +128,7 @@ export class DataTable extends Component {
         dataKey,
         rowData,
         rowId,
+        rowIndex,
         selected: selection.includes(rowId),
         onSelect: this.onSelect,
         tableId: id,
