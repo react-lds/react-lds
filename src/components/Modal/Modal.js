@@ -28,7 +28,7 @@ const Modal = (props) => {
         key: label,
         label,
         prompt,
-        uncloseable: child.props.uncloseable !== undefined ? child.props.uncloseable : prompt,
+        uncloseable: child.props.uncloseable !== undefined ? child.props.uncloseable : !!prompt,
       });
     }
 
