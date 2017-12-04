@@ -69,8 +69,7 @@ class Popover extends Component {
 
   renderCloseButton() {
     const { onClose, customHeaderTheme, theme } = this.props;
-    const invertIcon =
-      customHeaderTheme ? Popover.shouldInvertIcon(customHeaderTheme) : Popover.shouldInvertIcon(theme);
+    const invertIcon = Popover.shouldInvertIcon(customHeaderTheme || theme);
     const closeButtonClasses = [
       'slds-button_icon-small',
       'slds-float_right',
