@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { THEMES, getThemeClass } from '../../utils';
 
 import { Button, ButtonIcon } from '../../';
 
@@ -21,7 +22,7 @@ const Notification = (props) => {
     { 'slds-notify_toast': !!toast },
     { 'slds-notify_alert': !toast },
     'slds-theme_alert-texture',
-    { [`slds-theme_${theme}`]: !!theme },
+    getThemeClass(theme),
     className,
   ];
 
@@ -100,7 +101,7 @@ Notification.propTypes = {
   /**
    * notification flavor (warning, error, offline, info (default))
    */
-  theme: PropTypes.oneOf(['warning', 'error', 'offline', 'info']),
+  theme: PropTypes.oneOf(THEMES),
 };
 
 export default Notification;

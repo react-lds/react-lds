@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import omit from 'lodash.omit';
+import { THEMES, getThemeClass } from '../../utils';
 
 import { Button, ButtonIcon } from '../../';
 
@@ -24,10 +25,7 @@ class Popover extends Component {
     const { header, panels, customHeaderTheme } = this.props;
     const headerClasses = [
       'slds-popover__header',
-      { 'slds-theme_warning': customHeaderTheme === 'warning' },
-      { 'slds-theme_error': customHeaderTheme === 'error' },
-      { 'slds-theme_success': customHeaderTheme === 'success' },
-      { 'slds-theme_info': customHeaderTheme === 'info' },
+      getThemeClass(customHeaderTheme),
     ];
 
     let headerContent;
@@ -100,7 +98,7 @@ class Popover extends Component {
       { [`slds-nubbin_${nubbin}`]: !!nubbin },
       { 'slds-popover_panel': (!!panels && (typeof customHeaderTheme === 'undefined' || customHeaderTheme === '')) },
       { 'slds-hide': !open },
-      { [`slds-theme_${theme}`]: !!theme },
+      getThemeClass(theme),
       className,
     ];
 
@@ -183,25 +181,11 @@ Popover.propTypes = {
   /**
    * Optional custom Header theme. Themes: warning, error, success, info
    */
-  customHeaderTheme: PropTypes.oneOf([
-    'warning',
-    'error',
-    'success',
-    'info']),
+  customHeaderTheme: PropTypes.oneOf(THEMES),
   /**
    * themes: alt-inverse, default, error, info, inverse, offline, shade, success, warning
    */
-  theme: PropTypes.oneOf([
-    'alt-inverse',
-    'default',
-    'error',
-    'info',
-    'inverse',
-    'offline',
-    'shade',
-    'success',
-    'warning',
-  ]),
+  theme: PropTypes.oneOf(THEMES),
 };
 
 export default Popover;
