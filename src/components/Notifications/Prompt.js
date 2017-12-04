@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { THEMES } from '../../utils';
 
 import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from '../../';
 
@@ -53,17 +54,7 @@ Prompt.propTypes = {
   /**
    * slds theme
    */
-  theme: PropTypes.oneOf([
-    'alt-inverse',
-    'default',
-    'error',
-    'info',
-    'inverse',
-    'offline',
-    'shade',
-    'success',
-    'warning',
-  ]),
+  theme: PropTypes.oneOf(THEMES),
   /**
    * prompt content
    */
