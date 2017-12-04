@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import omit from 'lodash.omit';
-import { flavorProp } from '../../utils';
+import { applyDecorators, decoratorProp } from '../../utils';
 
 const validBreakpoints = [
   'small',
@@ -19,15 +19,12 @@ const sizeRegex = /^([1-9]|1[0-2])-([1-9]|1[0-2])$/;
 const Column = (props) => {
   const { align, children, className, flavor, variation, omitCol, ...rest } = props;
 
-  const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-col_${f}`) : `slds-col_${flavor}`;
-  const variationClasses = Array.isArray(variation) ? variation.map(f => `slds-${f}`) : `slds-${variation}`;
-
   const sldsClasses = [
     { 'slds-col': !omitCol },
     { [`slds-align-${align}`]: !!align },
     className,
-    flavorClasses,
-    variationClasses,
+    applyDecorators(flavor, 'col'),
+    applyDecorators(variation),
   ];
 
   const breakpoints = Array.from(validBreakpoints);
@@ -101,7 +98,7 @@ Column.propTypes = {
    * bump-top, bump-bottom, padded, padded-large, padded-small, rule-right,
    * rule-left, rule-top, rule-bottom,
    */
-  flavor: flavorProp([
+  flavor: decoratorProp([
     'bump-left',
     'bump-right',
     'bump-top',
@@ -118,7 +115,7 @@ Column.propTypes = {
    * variation: string or array of strings. Variations: has-flexi-truncate,
    * no-flex, no-space, grow, grow-none, shrink, shrink-none
    */
-  variation: flavorProp([
+  variation: decoratorProp([
     'has-flexi-truncate',
     'no-flex',
     'no-space',

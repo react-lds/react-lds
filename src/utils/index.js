@@ -1,7 +1,7 @@
 import uniqueId from './uniqueId';
 import getUniqueHash from './hashFromString';
-import flavorProp from './flavorProp';
+import { decoratorProp, applyDecorators } from './decoratorProp';
 
 export * from './theme';
 
-export { flavorProp, uniqueId, getUniqueHash };
+export { applyDecorators, decoratorProp, uniqueId, getUniqueHash };

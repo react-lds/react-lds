@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { flavorProp } from '../../utils';
+import { applyDecorators, decoratorProp } from '../../utils';
 
 const Container = (props) => {
   const { children, className, flavor, size, ...rest } = props;
-  const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-container_${f}`) : `slds-container_${flavor}`;
   const sldsClasses = [
     className,
-    flavorClasses,
+    applyDecorators(flavor, 'container'),
     { [`slds-container_${size}`]: !!size }
   ];
   return (<div {...rest} className={cx(sldsClasses)}>{children}</div>);
@@ -33,7 +32,7 @@ Container.propTypes = {
   /**
    * flavor: string or array of strings. Flavors: fluid, left, center, right
    */
-  flavor: flavorProp([
+  flavor: decoratorProp([
     'fluid',
     'left',
     'center',

@@ -1,20 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { flavorProp } from '../../utils';
+import { applyDecorators, decoratorProp } from '../../utils';
 
 const Table = (props) => {
   const { children, className, flavor, variation, ...rest } = props;
-
-  const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-table_${f}`) : `slds-table_${flavor}`;
-  const variationClasses = Array.isArray(variation) ? variation.map(f => `slds-${f}`) : `slds-${variation}`;
 
   const sldsClasses = [
     'slds-table',
     'slds-table_cell-buffer',
     className,
-    flavorClasses,
-    variationClasses,
+    applyDecorators(flavor, 'table'),
+    applyDecorators(variation),
   ];
 
   return (<table {...rest} className={cx(sldsClasses)}>{children}</table>);
@@ -40,7 +37,7 @@ Table.propTypes = {
    * variation: string or array of strings. Variations: no-row-hover, max-medium-table_stacked,
    max-medium-table_stacked-horizontal
    */
-  variation: flavorProp([
+  variation: decoratorProp([
     'no-row-hover',
     'max-medium-table_stacked',
     'max-medium-table_stacked-horizontal',
@@ -48,7 +45,7 @@ Table.propTypes = {
   /**
    * flavor: string or array of strings. Flavors: bordered, col-bordered, striped, fixed-layout
    */
-  flavor: flavorProp([
+  flavor: decoratorProp([
     'bordered',
     'col-bordered',
     'striped',

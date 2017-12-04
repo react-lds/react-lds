@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { flavorProp } from '../../utils';
+import { applyDecorators, decoratorProp } from '../../utils';
 
 const VerticalNavigation = (props) => {
   const {
@@ -12,10 +12,7 @@ const VerticalNavigation = (props) => {
     ...rest
   } = props;
 
-  const flavorClasses =
-    Array.isArray(flavor) ? flavor.map(f => `slds-nav-vertical_${f}`) : `slds-nav-vertical_${flavor}`;
-
-  const sldsClasses = ['slds-nav-vertical', className, flavorClasses];
+  const sldsClasses = ['slds-nav-vertical', className, applyDecorators(flavor, 'nav-vertical')];
 
   return (
     <nav {...rest} className={cx(sldsClasses)}>
@@ -43,7 +40,7 @@ VerticalNavigation.propTypes = {
   /**
    * flavor: string or array of strings. Flavors: compact, shade
    */
-  flavor: flavorProp([
+  flavor: decoratorProp([
     'compact',
     'shade',
   ]),

@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { flavorProp } from '../../utils';
+import { applyDecorators, decoratorProp } from '../../utils';
 
 const Grid = (props) => {
   const { children, className, flavor, wrap, ...rest } = props;
 
-  const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-grid_${f}`) : `slds-grid_${flavor}`;
-
   const sldsClasses = [
     'slds-grid',
     className,
-    flavorClasses,
+    applyDecorators(flavor, 'grid'),
     { 'slds-wrap': !!wrap }
   ];
 
@@ -40,7 +38,7 @@ Grid.propTypes = {
    * vertical-align-center, certical-align-end, vertical-stretch, pull-padded,
    * pull-padded-medium, pull-padded-large,
    */
-  flavor: flavorProp([
+  flavor: decoratorProp([
     'frame',
     'vertical',
     'reverse',

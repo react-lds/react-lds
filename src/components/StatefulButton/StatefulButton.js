@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { flavorProp } from '../../utils';
+import { applyDecorators, decoratorProp } from '../../utils';
 import { ButtonIcon } from '../../';
 
 const StatefulButton = (props) => {
@@ -21,7 +21,7 @@ const StatefulButton = (props) => {
   const sldsButtonClasses = [
     'slds-button',
     'slds-button_stateful',
-    { [`slds-button_${flavor}`]: !!flavor },
+    applyDecorators(flavor, 'button'),
     selected ? 'slds-is-selected' : 'slds-not-selected',
     className,
   ];
@@ -146,7 +146,7 @@ StatefulButton.propTypes = {
   /**
    * flavors: neutral, brand, destructive, inverse, success
    */
-  flavor: flavorProp([
+  flavor: decoratorProp([
     'neutral',
     'brand',
     'destructive',

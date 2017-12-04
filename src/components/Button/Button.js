@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { flavorProp } from '../../utils';
+import { applyDecorators, decoratorProp } from '../../utils';
 
 const Button = (props) => {
   const {
@@ -18,13 +18,11 @@ const Button = (props) => {
     ...rest
   } = props;
 
-  const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-button_${f}`) : `slds-button_${flavor}`;
-
   const sldsClasses = [
     'slds-button',
     { 'slds-is-selected': !!selected },
     { [`slds-button_${size}`]: !!size },
-    flavorClasses,
+    applyDecorators(flavor, 'button'),
     className,
   ];
 
@@ -98,7 +96,7 @@ Button.propTypes = {
    brand, destructive, icon, icon-border-filled, icon-container, icon-inverse,
    icon-border, icon-bare, icon-x-small, reset, success, x-small, small, large
    */
-  flavor: flavorProp([
+  flavor: decoratorProp([
     'neutral',
     'brand',
     'destructive',

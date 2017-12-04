@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { flavorProp } from '../../utils';
+import { applyDecorators, decoratorProp } from '../../utils';
 
 const MediaObject = (props) => {
   const {
@@ -27,12 +27,10 @@ const MediaObject = (props) => {
 
   const Tag = customTag || 'div';
 
-  const flavorClasses = Array.isArray(flavor) ? flavor.map(f => `slds-media_${f}`) : `slds-media_${flavor}`;
-
   const sldsClasses = [
     'slds-media',
     className,
-    flavorClasses,
+    applyDecorators(flavor, 'media'),
     { [`slds-media_${size}`]: !!size },
   ];
 
@@ -86,7 +84,7 @@ MediaObject.propTypes = {
   /**
    * flavor: string or array of strings. Flavors: center, responsive, small
    */
-  flavor: flavorProp([
+  flavor: decoratorProp([
     'center',
     'responsive',
   ]),
