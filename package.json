@@ -11,7 +11,7 @@
   ],
   "main": "./dist/index.js",
   "scripts": {
-    "build-storybook": "yarn run prestorybook; BABEL_ENV=docs build-storybook -s ./public -o .react-lds",
+    "build-storybook": "yarn run prestorybook; BABEL_ENV=docs build-storybook -s ./public -o react-lds",
     "build:babel": "NODE_ENV=production babel ./src --ignore spec.js --out-dir ./dist",
     "build:clean": "rm -rf dist",
     "build": "yarn build:clean && yarn build:babel",
