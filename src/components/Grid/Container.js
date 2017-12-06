@@ -30,7 +30,8 @@ Container.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * flavor: string or array of strings. Flavors: fluid, left, center, right
+   * flavor: array of flavors, you can also provide a single flavor as string.
+   * Flavors: fluid, left, center, right
    */
   flavor: decoratorProp([
     'fluid',

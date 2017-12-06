@@ -144,6 +144,7 @@ StatefulButton.propTypes = {
    */
   tooltip: PropTypes.string,
   /**
+   * array of flavors, you can also provide a single flavor as a string.
    * flavors: neutral, brand, destructive, inverse, success
    */
   flavor: decoratorProp([

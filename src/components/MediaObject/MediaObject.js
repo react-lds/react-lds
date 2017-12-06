@@ -82,14 +82,15 @@ MediaObject.propTypes = {
    */
   figureRight: PropTypes.node,
   /**
-   * flavor: string or array of strings. Flavors: center, responsive, small
+   * flavor: array of flavors, you can also provide a single flavor as a string.
+   * Flavors: center, responsive
    */
   flavor: decoratorProp([
     'center',
     'responsive',
   ]),
   /**
-   * Sizes: small
+   * Sizes: small, large
    */
   size: PropTypes.oneOf(['small', 'large']),
   /**

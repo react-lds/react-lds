@@ -38,7 +38,8 @@ VerticalNavigation.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * flavor: string or array of strings. Flavors: compact, shade
+   * flavor: array of flavors, you can also provide a single flavor as a string.
+   * Flavors: compact, shade
    */
   flavor: decoratorProp([
     'compact',

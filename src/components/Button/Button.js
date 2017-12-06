@@ -92,7 +92,7 @@ Button.propTypes = {
    */
   value: PropTypes.string,
   /**
-   * Button flavor: string or strings in array. Flavors: neutral,
+   * Button flavor: array of flavors, you can also provide a single flavor string. Flavors: neutral,
    brand, destructive, icon, icon-border-filled, icon-container, icon-inverse,
    icon-border, icon-bare, icon-x-small, reset, success, x-small, small, large
    */

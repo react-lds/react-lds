@@ -34,7 +34,8 @@ Table.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * variation: string or array of strings. Variations: no-row-hover, max-medium-table_stacked,
+   * variation: array of variations, you can also provide a single variation string.
+   * Variations: no-row-hover, max-medium-table_stacked,
    max-medium-table_stacked-horizontal
    */
   variation: decoratorProp([
@@ -43,7 +44,8 @@ Table.propTypes = {
     'max-medium-table_stacked-horizontal',
   ]),
   /**
-   * flavor: string or array of strings. Flavors: bordered, col-bordered, striped, fixed-layout
+   * flavor: array of flavors, you can also provide a single flavor string.
+   * Flavors: bordered, col-bordered, striped, fixed-layout
    */
   flavor: decoratorProp([
     'bordered',
