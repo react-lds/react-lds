@@ -46,12 +46,15 @@ const Notification = (props) => {
     </div>
   );
 
+  const flavors = ['icon'];
+  if (theme !== 'warning') flavors.push('icon-inverse');
+
   return (
     <div className="slds-notify_container">
       <div {...rest} className={cx(sldsClasses)} role="alert">
         {icon && wrapIcon(icon)}
         <Button
-          flavor={[(theme === 'warning') ? null : 'icon-inverse', 'icon']}
+          flavor={flavors}
           className="slds-notify__close"
           onClick={onClickClose}
         >
