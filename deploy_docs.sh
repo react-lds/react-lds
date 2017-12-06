@@ -13,7 +13,7 @@ set -o errexit -o nounset
 git config --global user.email "propertybase-ci@propertybase.com"
 git config --global user.name "Propertybase CI"
 
-# Rebuild docs with webpack
+# Build docs
 yarn build-storybook
 
 # Initialize an empty repository, fetch upstream and reset it

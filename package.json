@@ -15,7 +15,6 @@
     "build:babel": "NODE_ENV=production babel ./src --ignore spec.js --out-dir ./dist",
     "build:clean": "rm -rf dist",
     "build": "yarn build:clean && yarn build:babel",
-    "deploy-storybook": "yarn run prestorybook; BABEL_ENV=docs storybook-to-ghpages -s ./public",
     "lint": "eslint src",
     "prepublishOnly": "cp ./README.md ./dist/ && cp ./LICENSE ./dist/ && cp ./CHANGELOG.md ./dist/",
     "prestorybook": "cp -r node_modules/@salesforce-ux/design-system/assets public",
@@ -81,10 +80,5 @@
     "eslint-plugin-react": "^7.4.0",
     "jest-cli": "^21.2.1",
     "react-test-renderer": "^15.0.0"
-  },
-  "storybook-deployer": {
-    "gitUsername": "Propertybase CI",
-    "gitEmail": "propertybase-ci@propertybase.com",
-    "commitMessage": "Deploy Storybook to GitHub Pages"
   }
 }
