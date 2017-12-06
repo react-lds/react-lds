@@ -161,7 +161,7 @@ StatefulButton.defaultProps = {
   disabled: false,
   selected: false,
   tooltip: null,
-  flavor: null
+  flavor: []
 };
 
 export default StatefulButton;
