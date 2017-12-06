@@ -30,7 +30,7 @@ class Popover extends Component {
 
     let headerContent;
     let borderRadius;
-    if (!!panels && (typeof customHeaderTheme !== 'undefined') && customHeaderTheme !== '') {
+    if (panels && !customHeaderTheme) {
       headerContent = (<h2 className="slds-text-heading_small slds-p-around_xxx-small">{header}</h2>);
       borderRadius = {
         borderTopLeftRadius: 'calc(0.25rem - 1px)',
@@ -95,7 +95,7 @@ class Popover extends Component {
     const sldsClasses = [
       'slds-popover',
       { [`slds-nubbin_${nubbin}`]: !!nubbin },
-      { 'slds-popover_panel': (!!panels && (typeof customHeaderTheme === 'undefined' || customHeaderTheme === '')) },
+      { 'slds-popover_panel': (panels && !customHeaderTheme) },
       { 'slds-hide': !open },
       getThemeClass(theme),
       className,
@@ -121,7 +121,7 @@ Popover.defaultProps = {
   header: null,
   footer: null,
   className: null,
-  customHeaderTheme: undefined,
+  customHeaderTheme: null,
   open: false,
   closeable: true,
   panels: false,
