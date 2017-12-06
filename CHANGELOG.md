@@ -1,10 +1,15 @@
 # Changelog
 
-# Unreleased
+## 3.0.0
+
+### Added
 
 * `MediaObject` add large size
 * `Prompt` add theming
-* Breaking: Flavor usage
+
+### Changed / Fixed
+
+* **Breaking:** Flavor usage
     * `Button`
     * DataTable/`Table`
     * Grid/`Column`, `Container`, `Grid`
@@ -17,24 +22,31 @@
     * `Spinner`
     * `StatefulButton`
     * `VerticalNavigation`
-* Breaking: Size usage
+
+* **Breaking:** Size usage
     * `Button`
     * Grid/`Container`
     * `MediaObject`
-* Breaking: Theme usage
+
+* **Breaking:** Theme usage
     * `Badge`
     * `Box`
     * `Notification`
     * `Popover`
-* Breaking: Variation usage
+
+* **Breaking:** Variation usage
     * DataTable/`Row`, `Table`
     * Grid/`Column`, `Grid`
-* Removed Navigation Component
+    
 * ObjectHome Menu dropdown position is now default (left)
 * Components that use `enhanceWithClickOutside` are now importable without that functionality by using `import *Component*Raw as *Component*`
 * Bugfix: Picklist down-icon now opens Picklist
-* Breaking: `Popover` renamed customLayout to customHeaderTheme
-* Breaking: Disallow `IconSVG` to have a background
+* **Breaking:** `Popover` renamed customLayout to customHeaderTheme
+* **Breaking:** Disallow `IconSVG` to have a background
+
+### Removed
+
+* Removed Navigation Component
 * Remove circle boolean, LDS sets it automatically for `action` icons
 =======
 ## 2.1.1
