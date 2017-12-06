@@ -18,7 +18,7 @@ yarn build-storybook
 
 # Initialize an empty repository, fetch upstream and reset it
 rev=$(git rev-parse --short HEAD)
-cd ./storybook-static
+cd ./react-lds
 git init
 
 # Add all changes in push them to gh-pages
