@@ -3,11 +3,11 @@
 set -o errexit -o nounset
 
 # Do nothing if the commit was not pushed to master
-# if [ "$TRAVIS_PULL_REQUEST" != "false" ] || [ "$TRAVIS_BRANCH" != "master" ]
-# then
-#  echo "This commit was either a pull request or made against the $TRAVIS_BRANCH and not the master! No deploy!"
-#  exit 0
-#fi
+if [ "$TRAVIS_PULL_REQUEST" != "false" ] || [ "$TRAVIS_BRANCH" != "master" ]
+then
+  echo "This commit was either a pull request or made against the $TRAVIS_BRANCH and not the master! No deploy!"
+  exit 0
+fi
 
 #  Set Travis as commiter git user
 git config --global user.email "propertybase-ci@propertybase.com"
