@@ -83,8 +83,8 @@
     "react-test-renderer": "^15.0.0"
   },
   "storybook-deployer": {
-    "gitUsername": "Custom Username",
-    "gitEmail": "custom@email.com",
-    "commitMessage": "Deploy Storybook [skip ci]"
+    "gitUsername": "Propertybase CI",
+    "gitEmail": "propertybase-ci@propertybase.com",
+    "commitMessage": "Deploy Storybook to GitHub Pages"
   }
 }
