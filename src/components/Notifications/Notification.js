@@ -1,32 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { THEMES, getThemeClass } from '../../utils';
 
-import { flavorable, themeable } from '../../decorators';
 import { Button, ButtonIcon } from '../../';
 
-const getThemeName = (themeStr) => {
-  if (typeof themeStr === 'string') {
-    return themeStr.includes('theme_warning');
-  }
-
-  return false;
-};
-
-export const Notification = (props) => {
+const Notification = (props) => {
   const {
     children,
     className,
     icon,
     title,
     toast,
+    theme,
     onClickClose,
-    ...rest,
+    ...rest
   } = props;
 
   const sldsClasses = [
     'slds-notify',
     { 'slds-notify_toast': !!toast },
+    { 'slds-notify_alert': !toast },
+    'slds-theme_alert-texture',
+    getThemeClass(theme),
     className,
   ];
 
@@ -44,19 +40,19 @@ export const Notification = (props) => {
     );
   };
 
-  const wrapToastContent = content =>
+  const wrapToastContent = content => (
     <div className="slds-notify__content">
       {content}
-    </div>;
+    </div>
+  );
 
   return (
     <div className="slds-notify_container">
       <div {...rest} className={cx(sldsClasses)} role="alert">
         {icon && wrapIcon(icon)}
         <Button
-          icon-inverse={getThemeName(className) ? undefined : true}
+          flavor={[(theme === 'warning') ? null : 'icon-inverse', 'icon']}
           className="slds-notify__close"
-          icon
           onClick={onClickClose}
         >
           <ButtonIcon sprite="utility" icon="close" size={toast ? 'large' : undefined} />
@@ -69,15 +65,12 @@ export const Notification = (props) => {
   );
 };
 
-Notification.flavors = [
-  'alert',
-];
-
 Notification.defaultProps = {
   className: null,
   icon: null,
   toast: false,
   onClickClose: () => {},
+  theme: 'info',
 };
 
 Notification.propTypes = {
@@ -105,8 +98,10 @@ Notification.propTypes = {
    * function to call when close button is clicked
    */
   onClickClose: PropTypes.func,
+  /**
+   * notification flavor (warning, error, offline, info (default))
+   */
+  theme: PropTypes.oneOf(THEMES),
 };
 
-export default themeable(
-  flavorable(Notification, 'notify')
-);
+export default Notification;

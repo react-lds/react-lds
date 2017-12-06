@@ -2,18 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { flavorable } from '../../decorators';
-
-export const Modal = (props) => {
+const Modal = (props) => {
   const {
     children,
     className,
     descriptionId,
     dialog,
     label,
+    large,
     open,
     prompt,
-    ...rest,
+    ...rest
   } = props;
 
   const isOpen = !!open;
@@ -29,7 +28,7 @@ export const Modal = (props) => {
         key: label,
         label,
         prompt,
-        uncloseable: child.props.uncloseable !== undefined ? child.props.uncloseable : prompt,
+        uncloseable: child.props.uncloseable !== undefined ? child.props.uncloseable : !!prompt,
       });
     }
 
@@ -40,6 +39,7 @@ export const Modal = (props) => {
     'slds-modal',
     { 'slds-modal_prompt': !!prompt },
     { 'slds-fade-in-open': isOpen },
+    { 'slds-modal_large': !!large },
     className,
   ];
 
@@ -63,15 +63,12 @@ export const Modal = (props) => {
   );
 };
 
-Modal.flavors = [
-  'large',
-];
-
 Modal.defaultProps = {
   className: null,
   descriptionId: null,
   dialog: false,
   label: null,
+  large: false,
   open: false,
   prompt: false,
 };
@@ -98,13 +95,17 @@ Modal.propTypes = {
    */
   label: PropTypes.string,
   /**
+   * large flavor
+   */
+  large: PropTypes.bool,
+  /**
    * opens the modal
    */
   open: PropTypes.bool,
   /**
-   * opens the modal
+   * modal is a prompt
    */
-  prompt: PropTypes.bool,
+  prompt: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
-export default flavorable(Modal, 'modal');
+export default Modal;

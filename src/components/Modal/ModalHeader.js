@@ -8,7 +8,7 @@ const ModalHeader = (props) => {
   const { children, className, label, prompt, tagline, title, uncloseable, onClickClose, ...rest } = props;
 
   const getCloseButton = () => (
-    <Button onClick={onClickClose} className="slds-modal__close" icon-inverse size="large">
+    <Button onClick={onClickClose} className="slds-modal__close" flavor="icon-inverse" size="large">
       <ButtonIcon sprite="action" icon="close" size="large" />
       <span className="slds-assistive-text">Close</span>
     </Button>
@@ -30,11 +30,12 @@ const ModalHeader = (props) => {
   };
 
   const isEmpty = !children && !tagline && !title;
+  const theme = prompt === true ? 'error' : prompt;
 
   const sldsClasses = [
     'slds-modal__header',
     { 'slds-modal__header_empty': isEmpty },
-    { 'slds-theme_error': !!prompt },
+    { [`slds-theme_${theme}`]: !!theme },
     { 'slds-theme_alert-texture': !!prompt },
     className,
   ];
@@ -53,7 +54,7 @@ ModalHeader.defaultProps = {
   children: null,
   className: null,
   label: null,
-  prompt: false,
+  prompt: null,
   tagline: null,
   title: null,
   uncloseable: undefined,
@@ -74,9 +75,9 @@ ModalHeader.propTypes = {
    */
   label: PropTypes.string,
   /**
-   * render header as a prompt header (gets passed down from `Modal prompt`)
+   * render header as a prompt header, specify theme(gets passed down from `Modal prompt`)
    */
-  prompt: PropTypes.bool,
+  prompt: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   /**
    * (optional) modal tagline
    */

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Button } from '../Button';
+import Button from '../Button';
 
 describe('<Button />', () => {
   let props = {};
@@ -56,5 +56,18 @@ describe('<Button />', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-button').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-button').prop('data-test')).toEqual('bar');
+  });
+
+  it('applies flavoring', () => {
+    mounted.setProps({ flavor: 'brand' });
+    expect(mounted.find('.slds-button').hasClass('slds-button_brand')).toBeTruthy();
+    mounted.setProps({ flavor: ['brand', 'icon'] });
+    expect(mounted.find('.slds-button').hasClass('slds-button_brand')).toBeTruthy();
+    expect(mounted.find('.slds-button').hasClass('slds-button_icon')).toBeTruthy();
+  });
+
+  it('applies sizes', () => {
+    mounted.setProps({ size: 'x-small' });
+    expect(mounted.find('.slds-button').hasClass('slds-button_x-small')).toBeTruthy();
   });
 });

@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import omit from 'lodash.omit';
-
-import { themeable } from '../../decorators';
+import { THEMES, getThemeClass } from '../../utils';
 
 import { Button, ButtonIcon } from '../../';
 
-export class Popover extends React.Component {
-
-  static getThemeName(themeStr) {
+class Popover extends Component {
+  static shouldInvertIcon(themeStr) {
     if (typeof themeStr === 'string') {
       return themeStr.includes('error') ||
         themeStr.includes('success') ||
-        themeStr.includes('info');
+        themeStr.includes('info') ||
+        themeStr.includes('offline');
     }
     return false;
   }
@@ -23,18 +22,15 @@ export class Popover extends React.Component {
   }
 
   renderHeader() {
-    const { header, panels, customLayout } = this.props;
+    const { header, panels, customHeaderTheme } = this.props;
     const headerClasses = [
       'slds-popover__header',
-      { 'slds-theme_warning': customLayout === 'warning' },
-      { 'slds-theme_error': customLayout === 'error' },
-      { 'slds-theme_success': customLayout === 'success' },
-      { 'slds-theme_info': customLayout === 'info' },
+      getThemeClass(customHeaderTheme),
     ];
 
     let headerContent;
     let borderRadius;
-    if (!!panels && (typeof customLayout !== 'undefined') && customLayout !== '') {
+    if (panels && !customHeaderTheme) {
       headerContent = (<h2 className="slds-text-heading_small slds-p-around_xxx-small">{header}</h2>);
       borderRadius = {
         borderTopLeftRadius: 'calc(0.25rem - 1px)',
@@ -52,13 +48,10 @@ export class Popover extends React.Component {
   }
 
   renderBody() {
-    const { body, customLayout } = this.props;
-    const bodyClasses = [
-      { 'slds-popover__body': (typeof customLayout === 'undefined' || customLayout === '') },
-    ];
+    const { body } = this.props;
 
     return (
-      <div className={cx(bodyClasses)}>
+      <div className="slds-popover__body">
         {body}
       </div>
     );
@@ -75,18 +68,18 @@ export class Popover extends React.Component {
   }
 
   renderCloseButton() {
-    const { onClose, className, customLayout } = this.props;
+    const { onClose, customHeaderTheme, theme } = this.props;
+    const invertIcon = Popover.shouldInvertIcon(customHeaderTheme || theme);
     const closeButtonClasses = [
       'slds-button_icon-small',
       'slds-float_right',
       'slds-popover__close',
+      { 'slds-button_icon-inverse': invertIcon },
     ];
-    const invertIcon = customLayout ? Popover.getThemeName(customLayout) : Popover.getThemeName(className);
 
     return (
       <Button
-        icon
-        icon-inverse={invertIcon}
+        flavor={['icon', invertIcon ? 'icon-inverse' : null]}
         className={cx(closeButtonClasses)}
         onClick={onClose}
       >
@@ -96,14 +89,15 @@ export class Popover extends React.Component {
   }
 
   render() {
-    const { className, closeable, open, customLayout, nubbin, panels, header, body, footer } = this.props;
+    const { className, closeable, open, customHeaderTheme, nubbin, panels, header, body, footer, theme } = this.props;
     const rest = omit(this.props, Object.keys(Popover.propTypes));
 
     const sldsClasses = [
       'slds-popover',
       { [`slds-nubbin_${nubbin}`]: !!nubbin },
-      { 'slds-popover_panel': (!!panels && (typeof customLayout === 'undefined' || customLayout === '')) },
+      { 'slds-popover_panel': (panels && !customHeaderTheme) },
       { 'slds-hide': !open },
+      getThemeClass(theme),
       className,
     ];
 
@@ -127,11 +121,12 @@ Popover.defaultProps = {
   header: null,
   footer: null,
   className: null,
-  customLayout: undefined,
+  customHeaderTheme: null,
   open: false,
   closeable: true,
   panels: false,
   nubbin: 'bottom-left',
+  theme: null,
 };
 
 Popover.propTypes = {
@@ -150,24 +145,15 @@ Popover.propTypes = {
   /**
    * Popover header content
    */
-  header: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-  ]),
+  header: PropTypes.node,
   /**
    * Popover body content
    */
-  body: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-  ]),
+  body: PropTypes.node,
   /**
    * Popover footer content
    */
-  footer: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-  ]),
+  footer: PropTypes.node,
   /**
    * Additional css classes
    */
@@ -177,13 +163,28 @@ Popover.propTypes = {
    */
   panels: PropTypes.bool,
   /**
-   * Optional position of nubbin
+   * Optional position of nubbin. Positions: left, left-top, left-bottom,
+   * top-left, top-right, right-top, right-bottom, bottom-left, bottom-right
    */
-  nubbin: PropTypes.string,
+  nubbin: PropTypes.oneOf([
+    'left',
+    'left-top',
+    'left-bottom',
+    'top-left',
+    'top-right',
+    'right-top',
+    'right-bottom',
+    'bottom-left',
+    'bottom-right',
+  ]),
   /**
-   * Optional custom layout (warning, error, success, info)
+   * Optional custom Header theme. Themes: warning, error, success, info
    */
-  customLayout: PropTypes.string,
+  customHeaderTheme: PropTypes.oneOf(THEMES),
+  /**
+   * themes: alt-inverse, default, error, info, inverse, offline, shade, success, warning
+   */
+  theme: PropTypes.oneOf(THEMES),
 };
 
-export default themeable(Popover);
+export default Popover;

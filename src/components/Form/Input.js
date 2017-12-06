@@ -24,7 +24,7 @@ const Input = (props) => {
     required,
     showSpinner,
     value,
-    ...rest,
+    ...rest
   } = props;
 
   const hasIconLeft = !!iconLeft || (error && errorIcon);

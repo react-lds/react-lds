@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Container } from '../Container';
+import Container from '../Container';
 
 describe('<Container />', () => {
   let mounted = null;
@@ -19,5 +19,17 @@ describe('<Container />', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('div').hasClass('foo')).toBeTruthy();
     expect(mounted.find('div').prop('data-test')).toEqual('bar');
+  });
+
+  it('applies flavoring', () => {
+    mounted.setProps({ flavor: 'left' });
+    expect(mounted.find('.slds-container_left').length).toEqual(1);
+    mounted.setProps({ flavor: ['center', 'fluid'] });
+    expect(mounted.find('.slds-container_fluid').hasClass('slds-container_center')).toBeTruthy();
+  });
+
+  it('applies sizing', () => {
+    mounted.setProps({ size: 'small' });
+    expect(mounted.find('div').hasClass('slds-container_small')).toBeTruthy();
   });
 });

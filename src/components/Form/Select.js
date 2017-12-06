@@ -23,7 +23,7 @@ const Select = (props) => {
     multiple,
     onChange,
     required,
-    ...rest,
+    ...rest
   } = props;
 
   const sldsClasses = [

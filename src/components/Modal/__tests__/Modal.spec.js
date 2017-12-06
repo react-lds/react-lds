@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { Modal } from '../Modal';
+import Modal from '../Modal';
 import ModalHeader from '../ModalHeader';
 import ModalContent from '../ModalContent';
 
@@ -71,5 +71,10 @@ describe('<Modal />', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-modal').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-modal').prop('data-test')).toEqual('bar');
+  });
+
+  it('renders as large flavor', () => {
+    mounted.setProps({ large: true });
+    expect(mounted.find('.slds-modal').hasClass('slds-modal_large')).toBeTruthy();
   });
 });

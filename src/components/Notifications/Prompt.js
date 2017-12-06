@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { THEMES } from '../../utils';
 
 import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from '../../';
 
 const Prompt = (props) => {
-  const { buttonText, children, className, description, label, open, title, ...rest } = props;
+  const { buttonText, children, className, description, label, open, theme, title, ...rest } = props;
   return (
     <div>
-      <Modal {...rest} className={className} label={label} open={open} dialog prompt>
+      <Modal {...rest} className={className} label={label} open={open} dialog prompt={theme}>
         <ModalHeader title={title} />
         <ModalContent id={description}>{children}</ModalContent>
         <ModalFooter defaultTheme>
-          <Button neutral title={buttonText} onClick={() => {}} />
+          <Button flavor="neutral" title={buttonText} onClick={() => {}} />
         </ModalFooter>
       </Modal>
       <Backdrop open={props.open} />
@@ -22,6 +23,7 @@ const Prompt = (props) => {
 Prompt.defaultProps = {
   className: null,
   open: false,
+  theme: 'error',
 };
 
 Prompt.propTypes = {
@@ -49,6 +51,10 @@ Prompt.propTypes = {
    * opens the prompt
    */
   open: PropTypes.bool,
+  /**
+   * slds theme
+   */
+  theme: PropTypes.oneOf(THEMES),
   /**
    * prompt content
    */

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export const Path = (props) => {
+const Path = (props) => {
   const { button, children, className, ...rest } = props;
 
   const sldsClasses = [

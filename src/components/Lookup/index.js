@@ -1,1 +1,3 @@
-export { default as Lookup } from './Lookup';
+import Lookup, { LookupRaw } from './Lookup';
+
+export { Lookup, LookupRaw };

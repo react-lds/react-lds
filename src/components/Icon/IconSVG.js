@@ -3,16 +3,10 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const IconSVG = (props, { assetBasePath }) => {
-  const { background, className, fill, icon, size, sprite, ...rest } = props;
-
-  let backgroundClass = background;
-  if ((backgroundClass === null) || (backgroundClass === true)) {
-    backgroundClass = `${sprite}-${icon}`;
-  }
+  const { className, icon, size, sprite, isButton, ...rest } = props;
 
   const sldsClasses = [
-    { 'slds-icon': fill },
-    { [`slds-icon-${backgroundClass}`]: !!backgroundClass },
+    { 'slds-icon': !isButton },
     { [`slds-icon_${size}`]: !!size },
     className
   ];
@@ -27,25 +21,16 @@ const IconSVG = (props, { assetBasePath }) => {
 IconSVG.contextTypes = { assetBasePath: PropTypes.string };
 
 IconSVG.defaultProps = {
-  background: null,
   className: null,
-  fill: true,
   size: null,
+  isButton: false,
 };
 
 IconSVG.propTypes = {
   /**
-   * optional, set this if you want to override the default background class. set to false to not set a background
-   */
-  background: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  /**
    * class name
    */
   className: PropTypes.string,
-  /**
-   * adds the slds-icon class, on by default
-   */
-  fill: PropTypes.bool,
   /**
    * icon name
    */
@@ -58,6 +43,10 @@ IconSVG.propTypes = {
    * icon sprite name
    */
   sprite: PropTypes.string.isRequired,
+  /**
+   * removes slds_icon class (done internally by ButtonIcon)
+   */
+  isButton: PropTypes.bool,
 };
 
 export default IconSVG;

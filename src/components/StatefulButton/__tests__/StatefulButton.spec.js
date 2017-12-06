@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
-import { StatefulButton } from '../StatefulButton';
+import StatefulButton from '../StatefulButton';
 
 describe('<StatefulButton />', () => {
   let props = {};
@@ -98,6 +98,11 @@ describe('<StatefulButton />', () => {
       mounted.setProps({ selected: true });
       mounted.simulate('click');
       expect(fn).toBeCalledWith(false);
+    });
+
+    it('applies flavoring', () => {
+      mounted.setProps({ flavor: 'brand' });
+      expect(mounted.find('.slds-button').hasClass('slds-button_brand')).toBeTruthy();
     });
   });
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Row } from '../Row';
+import Row from '../Row';
 
 describe('<Row />', () => {
   let mounted = null;
@@ -29,5 +29,13 @@ describe('<Row />', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('tr').hasClass('foo')).toBeTruthy();
     expect(mounted.find('tr').prop('data-test')).toEqual('bar');
+  });
+
+  it('applies variationing', () => {
+    mounted.setProps({ variation: 'is-selected' });
+    expect(mounted.find('tr').hasClass('slds-is-selected')).toBeTruthy();
+    mounted.setProps({ variation: ['is-selected', 'hint-parent'] });
+    expect(mounted.find('tr').hasClass('slds-is-selected')).toBeTruthy();
+    expect(mounted.find('tr').hasClass('slds-hint-parent')).toBeTruthy();
   });
 });

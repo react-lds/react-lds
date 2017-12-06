@@ -1,1 +1,3 @@
-export { default as Datepicker } from './Datepicker';
+import Datepicker, { DatepickerRaw } from './Datepicker';
+
+export { DatepickerRaw, Datepicker };

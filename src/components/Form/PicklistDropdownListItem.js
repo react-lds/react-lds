@@ -26,7 +26,6 @@ const PicklistDropdownListItem = (props) => {
       return (
         <div className="slds-media__figure">
           <IconSVG
-            background={icon.background}
             className={cx(iconClasses)}
             icon={icon.icon}
             size={icon.alwaysDisplay ? 'small' : 'x-small'}
@@ -105,7 +104,6 @@ PicklistDropdownListItem.propTypes = {
   icon: PropTypes.shape({
     icon: PropTypes.string.isRequired,
     sprite: PropTypes.string.isRequired,
-    background: PropTypes.string,
     alwaysDisplay: PropTypes.bool,
   }),
   /**

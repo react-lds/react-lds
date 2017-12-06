@@ -13,6 +13,7 @@ const Breadcrumb = (props) => {
   const sldsClasses = [
     'slds-breadcrumb',
     'slds-list_horizontal',
+    'slds-wrap',
     className
   ];
 
@@ -25,7 +26,7 @@ const Breadcrumb = (props) => {
     filtered.map(child => <li className={cx(liClasses)} key={child.key}>{child}</li>);
 
   return (
-    <nav {...rest} className={className} role="navigation" aria-label="Breadcrumbs">
+    <nav {...rest} className={className} aria-label="Breadcrumbs">
       <ol className={cx(sldsClasses)}>
         {wrapItems}
       </ol>

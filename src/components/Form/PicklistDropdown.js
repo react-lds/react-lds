@@ -9,10 +9,9 @@ import {
   FormElementLabel,
 } from '../../';
 
-export class PicklistDropdown extends Component {
-
-  constructor(props, { cssPrefix }) {
-    super(props, { cssPrefix });
+class PicklistDropdown extends Component {
+  constructor(props) {
+    super(props);
     this.state = { open: this.props.isOpen };
   }
 

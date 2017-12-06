@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { flavorable } from '../../decorators';
-
-export const ProgressBar = (props) => {
-  const { className, progress, size, ...rest } = props;
+const ProgressBar = (props) => {
+  const { circular, className, progress, size, ...rest } = props;
 
   const sldsClasses = [
     'slds-progress-bar',
     { [`slds-progress-bar_${size}`]: !!size },
+    { 'slds-progress-bar_circular': circular },
     className
   ];
 
@@ -35,17 +34,18 @@ export const ProgressBar = (props) => {
   );
 };
 
-ProgressBar.flavors = [
-  'circular',
-];
-
 ProgressBar.defaultProps = {
+  circular: false,
   className: null,
   progress: 0,
   size: null,
 };
 
 ProgressBar.propTypes = {
+  /**
+   * ProgressBar with circular ends
+   */
+  circular: PropTypes.bool,
   /**
    * (optional) class name
    */
@@ -55,9 +55,9 @@ ProgressBar.propTypes = {
    */
   progress: PropTypes.number,
   /**
-   * height of the bar
+   * height of the bar. Sizes: x-small, small, medium, large
    */
   size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
 };
 
-export default flavorable(ProgressBar, 'progress-bar');
+export default ProgressBar;

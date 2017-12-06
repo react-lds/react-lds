@@ -28,11 +28,11 @@ const AccordionSection = (props) => {
         <div className="slds-accordion__summary">
           <h3 className="slds-text-heading_small slds-accordion__summary-heading">
             <Button
+              flavor="reset"
               aria-controls={`accordion-details-${id}`}
               aria-expanded={isOpen ? 'true' : 'false'}
               className="slds-accordion__summary-action"
               onClick={() => {}}
-              reset
             >
               <ButtonIcon
                 position="left"
@@ -44,10 +44,7 @@ const AccordionSection = (props) => {
           </h3>
           <Button
             aria-haspopup="true"
-            className="slds-shrink-none"
-            icon
-            icon-border-filled
-            icon-x-small
+            className="slds-shrink-none slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
             onClick={summaryOnClick}
           >
             <ButtonIcon
@@ -60,7 +57,8 @@ const AccordionSection = (props) => {
         </div>
         <div
           aria-hidden={isOpen ? 'false' : 'true'}
-          className="slds-accordion__content" id={id}
+          className="slds-accordion__content"
+          id={id}
         >
           {children}
         </div>

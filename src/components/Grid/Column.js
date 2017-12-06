@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import omit from 'lodash.omit';
-
-import { flavorable, variationable } from '../../decorators';
+import { applyDecorators, decoratorProp } from '../../utils';
 
 const validBreakpoints = [
   'small',
@@ -17,13 +16,15 @@ const validBreakpoints = [
 const breakPointProp = breakpoint => `${breakpoint}-sizeOf`;
 const sizeRegex = /^([1-9]|1[0-2])-([1-9]|1[0-2])$/;
 
-export const Column = (props) => {
-  const { align, children, className, omitCol, ...rest } = props;
+const Column = (props) => {
+  const { align, children, className, flavor, variation, omitCol, ...rest } = props;
 
   const sldsClasses = [
     { 'slds-col': !omitCol },
     { [`slds-align-${align}`]: !!align },
-    className
+    className,
+    applyDecorators(flavor, 'col'),
+    applyDecorators(variation),
   ];
 
   const breakpoints = Array.from(validBreakpoints);
@@ -48,34 +49,10 @@ export const Column = (props) => {
   );
 };
 
-Column.flavors = [
-  'bump-left',
-  'bump-right',
-  'bump-top',
-  'bump-bottom',
-  'padded',
-  'padded-large',
-  'padded-small',
-  'rule-right',
-  'rule-left',
-  'rule-top',
-  'rule-bottom',
-];
-
-Column.variations = [
-  'has-flexi-truncate',
-  'no-flex',
-  'no-space',
-  'grow',
-  'grow-none',
-  'shrink',
-  'shrink-none',
-];
-
 const sizeOfPropType = (props, propName) => {
   const size = props[propName];
 
-  if (typeof size !== 'undefined' && typeof size !== 'string') {
+  if (size && typeof size !== 'string') {
     return new Error(`${propName} must be a string`);
   }
 
@@ -95,7 +72,15 @@ const sizeOfPropType = (props, propName) => {
   return null;
 };
 
-const columnPropTypes = {
+Column.defaultProps = {
+  align: 'top',
+  className: null,
+  flavor: [],
+  variation: [],
+  omitCol: false,
+};
+
+Column.propTypes = {
   /**
    * alignment of columns on the main axis
    */
@@ -103,29 +88,55 @@ const columnPropTypes = {
   /**
    * column content
    */
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
   /**
    * class name
    */
   className: PropTypes.string,
   /**
+   * flavor: string or array of strings. Flavors: bump-left, bump-right,
+   * bump-top, bump-bottom, padded, padded-large, padded-small, rule-right,
+   * rule-left, rule-top, rule-bottom,
+   */
+  flavor: decoratorProp([
+    'bump-left',
+    'bump-right',
+    'bump-top',
+    'bump-bottom',
+    'padded',
+    'padded-large',
+    'padded-small',
+    'rule-right',
+    'rule-left',
+    'rule-top',
+    'rule-bottom',
+  ]),
+  /*
+   * variation: string or array of strings. Variations: has-flexi-truncate,
+   * no-flex, no-space, grow, grow-none, shrink, shrink-none
+   */
+  variation: decoratorProp([
+    'has-flexi-truncate',
+    'no-flex',
+    'no-space',
+    'grow',
+    'grow-none',
+    'shrink',
+    'shrink-none',
+  ]),
+  /**
    * non-responsive sizeOf
    */
-  sizeOf: sizeOfPropType,
+  sizeOf: sizeOfPropType, // eslint-disable-line react/require-default-props
   /**
    * omit 'slds-col'
    */
   omitCol: PropTypes.bool,
-};
-
-Column.propTypes = Object.assign({},
-  columnPropTypes,
-  validBreakpoints.reduce((_propTypes, breakpoint) => {
+  ...validBreakpoints.reduce((_propTypes, breakpoint) => {
     const propTypes = _propTypes;
     propTypes[breakPointProp(breakpoint)] = sizeOfPropType;
     return propTypes;
-  }, {}));
+  }, {}),
+};
 
-export default variationable(
-  flavorable(Column, 'col')
-);
+export default Column;

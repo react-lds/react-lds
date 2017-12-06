@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { flavorable } from '../../decorators';
-
-export const Spinner = (props) => {
-  const { className, size, ...rest } = props;
+const Spinner = (props) => {
+  const { brand, className, inverse, size, ...rest } = props;
 
   const sldsClasses = [
     'slds-spinner',
     { [`slds-spinner_${size}`]: !!size },
+    { 'slds-spinner_brand': brand },
+    { 'slds-spinner_inverse': inverse },
     className
   ];
 
@@ -22,14 +22,11 @@ export const Spinner = (props) => {
   );
 };
 
-Spinner.flavors = [
-  'brand',
-  'inverse',
-];
-
 Spinner.defaultProps = {
+  brand: null,
   className: null,
-  size: 'medium',
+  inverse: null,
+  size: 'medium'
 };
 
 Spinner.propTypes = {
@@ -38,9 +35,17 @@ Spinner.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * spinner size
+   * spinner sizes: xx-small, x-small, small, medium, large
    */
   size: PropTypes.oneOf(['xx-small', 'x-small', 'small', 'medium', 'large']),
+  /**
+   * brand flavor
+   */
+  brand: PropTypes.bool,
+  /**
+   * inverse flavor
+   */
+  inverse: PropTypes.bool,
 };
 
-export default flavorable(Spinner, 'spinner');
+export default Spinner;

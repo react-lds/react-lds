@@ -32,7 +32,7 @@ const InputRaw = (props) => {
     type,
     value,
     isFocused,
-    ...rest,
+    ...rest
   } = props;
 
   const renderIconLeft = () => {
@@ -72,7 +72,7 @@ const InputRaw = (props) => {
       return (
         <Button
           className={cx(iconClasses)}
-          icon
+          flavor="icon"
           onClick={iconRightOnClick}
         >
           <ButtonIcon sprite="utility" icon={iconRight} />

@@ -1,1 +1,3 @@
-export { default as StatefulButton } from './StatefulButton';
+import StatefulButton from './StatefulButton';
+
+export { StatefulButton };

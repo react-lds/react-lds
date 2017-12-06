@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export const VerticalNavigationSection = (props) => {
+const VerticalNavigationSection = (props) => {
   const {
     children,
     className,
     id,
     title,
-    ...rest,
+    ...rest
   } = props;
 
   const sldsClasses = ['slds-nav-vertical__section', className];

@@ -1,3 +1,43 @@
 {
-  "presets": ["es2015", "stage-0", "react"]
+  "presets": ["react", ["env", {
+    "targets": {
+      "browsers": [
+        "last 2 versions",
+        "not ie <= 11",
+        "not android <= 56"
+      ],
+    },
+    "loose": true,
+    "modules": false,
+    "useBuiltIns": false
+  }]],
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-class-properties"
+  ],
+  "env": {
+    "test": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+    },
+    "docs": {
+      "presets": [
+        ["env", {
+          "targets": {
+            "uglify": true
+          }
+        }]
+      ],
+      "plugins": [
+        "transform-class-properties"
+      ],
+    },
+    "production": {
+      "plugins": [
+        ["transform-react-remove-prop-types", {
+          "mode": "wrap",
+          "ignoreFilenames": ["node_modules"]
+        }]],
+    }
+
+  }
 }

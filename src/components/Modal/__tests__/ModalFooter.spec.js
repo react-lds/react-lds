@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { ModalFooter } from '../ModalFooter';
+import ModalFooter from '../ModalFooter';
 
 describe('<ModalFooter />', () => {
   let mounted = null;
@@ -22,6 +22,11 @@ describe('<ModalFooter />', () => {
   it('applies the default theme', () => {
     mounted.setProps({ defaultTheme: true });
     expect(mounted.find('.slds-theme_default')).toBeTruthy();
+  });
+
+  it('applies the directional flavor', () => {
+    mounted.setProps({ directional: true });
+    expect(mounted.find('.slds-modal__footer').hasClass('slds-modal__footer_directional')).toBeTruthy();
   });
 
   it('applies className and rest-properties', () => {

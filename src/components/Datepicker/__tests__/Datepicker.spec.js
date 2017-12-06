@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { shallow } from 'enzyme';
-import { Datepicker } from '../Datepicker';
+import { DatepickerRaw as Datepicker } from '../Datepicker';
 
 describe('<Datepicker />', () => {
   let mounted = null;
@@ -41,13 +41,13 @@ describe('<Datepicker />', () => {
   });
 
   it('allows the user to select the next month', () => {
-    const lastButton = mounted.find('Flavored_Button').last();
+    const lastButton = mounted.find('Button').last();
     lastButton.simulate('click');
     expect(mounted.find('h2').first().text()).toBe(moment().add(1, 'month').format('MMMM'));
   });
 
   it('allows the user to select the previous month', () => {
-    const firstButton = mounted.find('Flavored_Button').first();
+    const firstButton = mounted.find('Button').first();
     firstButton.simulate('click');
     expect(mounted.find('h2').first().text()).toBe(moment().subtract(1, 'month').format('MMMM'));
   });

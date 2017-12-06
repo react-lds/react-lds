@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { IconSVG } from '../../';
 
-export const VerticalNavigationItem = (props) => {
+const VerticalNavigationItem = (props) => {
   const {
     children,
     className,
@@ -11,7 +11,7 @@ export const VerticalNavigationItem = (props) => {
     isActive,
     notification,
     notificationLabel,
-    ...rest,
+    ...rest
   } = props;
 
   const containerClasses = [

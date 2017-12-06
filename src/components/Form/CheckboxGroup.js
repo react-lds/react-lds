@@ -20,7 +20,7 @@ const CheckboxGroup = (props) => {
     label,
     onChange,
     required,
-    ...rest,
+    ...rest
   } = props;
 
 

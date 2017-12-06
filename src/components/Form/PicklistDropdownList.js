@@ -32,11 +32,6 @@ PicklistDropdownList.propTypes = {
    */
   children: PropTypes.arrayOf(PropTypes.element),
   /**
-   * optional header for this list. Mostly useful is multiple
-   * PicklistDropdownListItems are in use
-   */
-  header: PropTypes.string,
-  /**
    * sets the number of items being displayed
    */
   height: PropTypes.oneOf([5, 7, 10]),

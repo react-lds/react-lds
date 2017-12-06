@@ -2,28 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { variationable } from '../../decorators';
+const Row = (props) => {
+  const { children, className, head, variation, ...rest } = props;
 
-export const Row = (props) => {
-  const { children, className, head, ...rest } = props;
+  const variationClasses = Array.isArray(variation) ? variation.map(f => `slds-${f}`) : `slds-${variation}`;
 
   const sldsClasses = [
     { 'slds-text-title_caps': !!head },
+    variationClasses,
     className
   ];
 
   return (<tr {...rest} className={cx(sldsClasses)}>{children}</tr>);
 };
 
-Row.variations = [
-  'is-selected',
-  'hint-parent',
-];
-
 Row.defaultProps = {
   children: null,
   className: null,
   head: false,
+  variation: [],
 };
 
 Row.propTypes = {
@@ -39,6 +36,16 @@ Row.propTypes = {
    * marks a header row
    */
   head: PropTypes.bool,
+  /**
+   * variation: string or array of strings. Variations: is-selected, hint-parent
+   */
+  variation: PropTypes.oneOfType([PropTypes.oneOf([
+    'is-selected',
+    'hint-parent',
+  ]), PropTypes.arrayOf(PropTypes.oneOf([
+    'is-selected',
+    'hint-parent',
+  ]))]),
 };
 
-export default variationable(Row);
+export default Row;

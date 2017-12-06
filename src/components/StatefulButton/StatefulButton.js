@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
-import { flavorable } from '../../decorators';
+import { applyDecorators, decoratorProp } from '../../utils';
 import { ButtonIcon } from '../../';
 
-export const StatefulButton = (props) => {
+const StatefulButton = (props) => {
   const {
     className,
     disabled,
@@ -15,12 +14,14 @@ export const StatefulButton = (props) => {
     stateSelected,
     stateSelectedFocus,
     tooltip,
-    ...rest,
+    flavor,
+    ...rest
   } = props;
 
   const sldsButtonClasses = [
     'slds-button',
     'slds-button_stateful',
+    applyDecorators(flavor, 'button'),
     selected ? 'slds-is-selected' : 'slds-not-selected',
     className,
   ];
@@ -61,14 +62,6 @@ export const StatefulButton = (props) => {
     </button>
   );
 };
-
-StatefulButton.flavors = [
-  'neutral',
-  'brand',
-  'destructive',
-  'inverse',
-  'success',
-];
 
 StatefulButton.propTypes = {
   /**
@@ -146,11 +139,21 @@ StatefulButton.propTypes = {
      */
     title: PropTypes.string.isRequired,
   }).isRequired,
-
   /**
    * optional tooltip
    */
   tooltip: PropTypes.string,
+  /**
+   * array of flavors, you can also provide a single flavor as a string.
+   * flavors: neutral, brand, destructive, inverse, success
+   */
+  flavor: decoratorProp([
+    'neutral',
+    'brand',
+    'destructive',
+    'inverse',
+    'success',
+  ])
 };
 
 StatefulButton.defaultProps = {
@@ -158,6 +161,7 @@ StatefulButton.defaultProps = {
   disabled: false,
   selected: false,
   tooltip: null,
+  flavor: []
 };
 
-export default flavorable(StatefulButton, 'button');
+export default StatefulButton;

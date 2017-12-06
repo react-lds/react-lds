@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 
-import { Avatar } from '../Avatar';
+import Avatar from '../Avatar';
 
 describe('<Avatar />', () => {
   let mounted = null;

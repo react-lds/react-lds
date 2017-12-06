@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { flavorable } from '../../decorators';
 import { Button, ButtonIcon } from '../../';
 
-export const Pill = (props) => {
+const Pill = (props) => {
   const {
+    bare,
     className,
     icon,
     label,
@@ -14,7 +14,7 @@ export const Pill = (props) => {
     portrait,
     title,
     url,
-    ...rest,
+    ...rest
   } = props;
 
   const isLinked = !!url;
@@ -22,11 +22,12 @@ export const Pill = (props) => {
 
   const sldsClasses = [
     'slds-pill',
+    { 'slds-pill_bare': bare },
     className
   ];
 
   const closeButton = onClose === null ? null :
-    (<Button onClick={onClose} className="slds-pill__remove" icon>
+    (<Button onClick={onClose} className="slds-pill__remove" flavor="icon">
       <ButtonIcon sprite="utility" icon="close" />
       <span className="slds-assistive-text">Remove</span>
     </Button>);
@@ -43,16 +44,13 @@ export const Pill = (props) => {
   );
 };
 
-Pill.flavors = [
-  'bare',
-];
-
 Pill.defaultProps = {
   className: null,
   icon: null,
   onClose: null,
   portrait: null,
   url: null,
+  bare: false,
 };
 
 Pill.propTypes = {
@@ -84,6 +82,10 @@ Pill.propTypes = {
    * optional url for the link label
    */
   url: PropTypes.string,
+  /**
+   * bare flavor
+   */
+  bare: PropTypes.bool,
 };
 
-export default flavorable(Pill, 'pill');
+export default Pill;

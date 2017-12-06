@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { IconSVG } from '../../../';
 
-import { VerticalNavigationItem } from '../VerticalNavigationItem';
+import VerticalNavigationItem from '../VerticalNavigationItem';
 
 const getComponent = (props = {}) => shallow(
   <VerticalNavigationItem {...props}>Sample</VerticalNavigationItem>

@@ -5,7 +5,7 @@ import { Button, ButtonIcon } from '../../';
 
 const getToggleHandler = (state, fn) => evt => fn(!state, evt);
 
-export const VerticalNavigationOverflow = (props) => {
+const VerticalNavigationOverflow = (props) => {
   const {
     children,
     className,
@@ -27,7 +27,7 @@ export const VerticalNavigationOverflow = (props) => {
       <Button
         className="slds-nav-vertical__action slds-nav-vertical__action_overflow"
         onClick={getToggleHandler(isOpen, onToggle)}
-        reset
+        flavor="reset"
         aria-controls={id}
         aria-expanded={isOpen}
       >

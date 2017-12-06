@@ -19,7 +19,6 @@ const MenuDropdownListItem = (props) => {
 
       return (
         <IconSVG
-          background={leftIcon.background}
           className={cx(iconClasses)}
           icon={leftIcon.icon}
           size={leftIcon.alwaysDisplay ? 'small' : 'x-small'}
@@ -41,7 +40,6 @@ const MenuDropdownListItem = (props) => {
 
       return (
         <IconSVG
-          background={rightIcon.background}
           className={cx(iconClasses)}
           icon={rightIcon.icon}
           size="x-small"
@@ -94,7 +92,6 @@ MenuDropdownListItem.propTypes = {
   leftIcon: PropTypes.shape({
     icon: PropTypes.string.isRequired,
     sprite: PropTypes.string.isRequired,
-    background: PropTypes.string,
     alwaysDisplay: PropTypes.bool,
   }),
   /**
@@ -107,7 +104,6 @@ MenuDropdownListItem.propTypes = {
   rightIcon: PropTypes.shape({
     icon: PropTypes.string,
     sprite: PropTypes.string.isRequired,
-    background: PropTypes.string,
   }),
   /**
    * sets this item into a selection state that displays the leftIcon

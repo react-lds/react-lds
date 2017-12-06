@@ -1,4 +1,6 @@
-export { default as VerticalNavigation } from './VerticalNavigation';
-export { default as VerticalNavigationItem } from './VerticalNavigationItem';
-export { default as VerticalNavigationSection } from './VerticalNavigationSection';
-export { default as VerticalNavigationOverflow } from './VerticalNavigationOverflow';
+import VerticalNavigation from './VerticalNavigation';
+import VerticalNavigationItem from './VerticalNavigationItem';
+import VerticalNavigationSection from './VerticalNavigationSection';
+import VerticalNavigationOverflow from './VerticalNavigationOverflow';
+
+export { VerticalNavigation, VerticalNavigationItem, VerticalNavigationSection, VerticalNavigationOverflow };

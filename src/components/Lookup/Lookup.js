@@ -19,7 +19,7 @@ import {
   Cell,
 } from '../../';
 
-export class Lookup extends Component {
+export class LookupRaw extends Component {
   static propTypes = {
     /**
      * if set to true, allows the creation of new elements that were not found
@@ -337,7 +337,7 @@ export class Lookup extends Component {
       <Pill
         key={id}
         className={!multi ? 'slds-size_1-of-1' : null}
-        icon={objectType && (<Icon sprite={Lookup.getSprite(objectType)} icon={objectType} />)}
+        icon={objectType && (<Icon sprite={LookupRaw.getSprite(objectType)} icon={objectType} />)}
         id={id}
         title={label}
         label={label}
@@ -423,7 +423,7 @@ export class Lookup extends Component {
     const { listLabel, table } = this.props;
     const { loaded, selected } = this.state;
 
-    const displayItems = Lookup.filterDisplayItems(loaded, selected);
+    const displayItems = LookupRaw.filterDisplayItems(loaded, selected);
 
     if (table || !open || displayItems.length < 1) { return null; }
 
@@ -448,7 +448,7 @@ export class Lookup extends Component {
           >
             <Icon
               className="slds-media__figure"
-              sprite={Lookup.getSprite(objectType)}
+              sprite={LookupRaw.getSprite(objectType)}
               icon={objectType}
               size="small"
             />
@@ -481,7 +481,7 @@ export class Lookup extends Component {
     const { table, tableFields, tableResultsHeading } = this.props;
     const { loaded, selected } = this.state;
 
-    const displayItems = Lookup.filterDisplayItems(loaded, selected);
+    const displayItems = LookupRaw.filterDisplayItems(loaded, selected);
 
     if (!table || displayItems.length < 1) { return null; }
 
@@ -493,7 +493,7 @@ export class Lookup extends Component {
               <Icon
                 size="small"
                 className="slds-m-right_x-small"
-                sprite={Lookup.getSprite(objectType)}
+                sprite={LookupRaw.getSprite(objectType)}
                 icon={objectType}
               />
             )}
@@ -520,9 +520,9 @@ export class Lookup extends Component {
 
     const body = (
       <tbody>
-        {displayItems.map(item =>
+        {displayItems.map(item => (
           <Row key={item.id}>
-            {tableFields.map(({ name }, index) =>
+            {tableFields.map(({ name }, index) => (
               <Cell
                 data-label={name}
                 scope={index === 0 ? 'row' : null}
@@ -531,14 +531,15 @@ export class Lookup extends Component {
               >
                 {renderBodyCell(item[name], index, item.objectType)}
               </Cell>
-            )}
+
+            ))}
           </Row>
-        )}
+        ))}
       </tbody>
     );
 
     return (
-      <Table bordered className="slds-m-top_small">
+      <Table flavor="bordered" className="slds-m-top_small">
         {header}
         {body}
       </Table>
@@ -558,7 +559,7 @@ export class Lookup extends Component {
     } = this.props;
     const { open } = this.state;
 
-    const rest = omit(this.props, Object.keys(Lookup.propTypes));
+    const rest = omit(this.props, Object.keys(LookupRaw.propTypes));
 
     const sldsClasses = [
       'slds-lookup',
@@ -607,4 +608,4 @@ export class Lookup extends Component {
   }
 }
 
-export default enhanceWithClickOutside(Lookup);
+export default enhanceWithClickOutside(LookupRaw);

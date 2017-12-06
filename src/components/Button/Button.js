@@ -1,25 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { applyDecorators, decoratorProp } from '../../utils';
 
-import { flavorable } from '../../decorators';
-
-export const Button = (props) => {
+const Button = (props) => {
   const {
     children,
     className,
     disabled,
     onClick,
     selected,
+    size,
     title,
     tooltip,
     value,
-    ...rest,
+    flavor,
+    ...rest
   } = props;
 
   const sldsClasses = [
     'slds-button',
     { 'slds-is-selected': !!selected },
+    { [`slds-button_${size}`]: !!size },
+    applyDecorators(flavor, 'button'),
     className,
   ];
 
@@ -39,29 +42,16 @@ export const Button = (props) => {
   );
 };
 
-Button.flavors = [
-  'neutral',
-  'brand',
-  'destructive',
-  'icon',
-  'icon-border-filled',
-  'icon-container',
-  'icon-inverse',
-  'icon-border',
-  'icon-bare',
-  'icon-x-small',
-  'reset',
-  'success',
-];
-
 Button.defaultProps = {
   children: null,
   className: null,
   disabled: false,
   selected: false,
+  size: null,
   title: null,
   tooltip: null,
   value: null,
+  flavor: [],
 };
 
 Button.propTypes = {
@@ -90,6 +80,10 @@ Button.propTypes = {
    */
   title: PropTypes.string,
   /**
+   * Button size, may not have any effect
+   */
+  size: PropTypes.oneOf(['x-small', 'small', 'large']),
+  /**
    * button tooltip
    */
   tooltip: PropTypes.string,
@@ -97,6 +91,25 @@ Button.propTypes = {
    * adds optional value tag to the button
    */
   value: PropTypes.string,
+  /**
+   * Button flavor: array of flavors, you can also provide a single flavor string. Flavors: neutral,
+   brand, destructive, icon, icon-border-filled, icon-container, icon-inverse,
+   icon-border, icon-bare, icon-x-small, reset, success, x-small, small, large
+   */
+  flavor: decoratorProp([
+    'neutral',
+    'brand',
+    'destructive',
+    'icon',
+    'icon-border-filled',
+    'icon-container',
+    'icon-inverse',
+    'icon-border',
+    'icon-bare',
+    'icon-x-small',
+    'reset',
+    'success'
+  ]),
 };
 
-export default flavorable(Button, 'button');
+export default Button;

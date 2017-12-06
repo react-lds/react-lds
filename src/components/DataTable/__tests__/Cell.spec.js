@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Cell } from '../Cell';
+import Cell from '../Cell';
 
 describe('<Cell />', () => {
   let mounted = null;
@@ -66,5 +66,13 @@ describe('<Cell />', () => {
   it('won\'t truncate if truncate prop is set to false', () => {
     mounted.setProps({ truncate: false });
     expect(mounted.find('.slds-truncate').length).toBe(0);
+  });
+
+  it('applies variationing', () => {
+    mounted.setProps({ variation: 'cell-wrap' });
+    expect(mounted.find('td').hasClass('slds-cell-wrap')).toBeTruthy();
+    mounted.setProps({ variation: ['cell-wrap', 'cell-shrink'] });
+    expect(mounted.find('td').hasClass('slds-cell-wrap')).toBeTruthy();
+    expect(mounted.find('td').hasClass('slds-cell-shrink')).toBeTruthy();
   });
 });

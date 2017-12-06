@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
 
@@ -9,8 +9,7 @@ import {
   InputRaw,
 } from '../../';
 
-export class Picklist extends React.Component {
-
+export class PicklistRaw extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -55,6 +54,7 @@ export class Picklist extends React.Component {
         className="slds-input slds-combobox__input"
         disabled={isDisabled}
         iconRight="down"
+        iconRightOnClick={this.toggle}
         id={`combobox-${id}`}
         onClick={this.toggle}
         placeholder={placeholder}
@@ -120,7 +120,7 @@ export class Picklist extends React.Component {
   }
 }
 
-Picklist.propTypes = {
+PicklistRaw.propTypes = {
   /**
    * class name
    */
@@ -177,7 +177,7 @@ Picklist.propTypes = {
   placeholder: PropTypes.string.isRequired,
 };
 
-Picklist.defaultProps = {
+PicklistRaw.defaultProps = {
   className: null,
   error: null,
   height: null,
@@ -189,4 +189,4 @@ Picklist.defaultProps = {
   labelMultiselect: '',
 };
 
-export default enhanceWithClickOutside(Picklist);
+export default enhanceWithClickOutside(PicklistRaw);

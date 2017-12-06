@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { MediaObject } from '../MediaObject';
+import MediaObject from '../MediaObject';
 
 describe('<MediaObject />', () => {
   let mounted = null;
@@ -51,5 +51,18 @@ describe('<MediaObject />', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-media').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-media').prop('data-test')).toEqual('bar');
+  });
+
+  it('applies flavoring', () => {
+    mounted.setProps({ flavor: 'center' });
+    expect(mounted.find('.slds-media').hasClass('slds-media_center')).toBeTruthy();
+    mounted.setProps({ flavor: ['center', 'responsive'] });
+    expect(mounted.find('.slds-media').hasClass('slds-media_center')).toBeTruthy();
+    expect(mounted.find('.slds-media').hasClass('slds-media_responsive')).toBeTruthy();
+  });
+
+  it('applies sizing', () => {
+    mounted.setProps({ size: 'small' });
+    expect(mounted.find('.slds-media').hasClass('slds-media_small')).toBeTruthy();
   });
 });

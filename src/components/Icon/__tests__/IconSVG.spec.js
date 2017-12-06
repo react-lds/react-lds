@@ -31,11 +31,6 @@ describe('<IconSVG />', () => {
     expect(mounted.find('svg').hasClass('slds-icon_large')).toBeTruthy();
   });
 
-  it('renders an icon with a custom background color', () => {
-    mounted.setProps({ background: 'custom-custom89' });
-    expect(mounted.find('svg').hasClass('slds-icon-custom-custom89')).toBeTruthy();
-  });
-
   it('renders an icon without a background color', () => {
     mounted.setProps({ background: false });
     expect(mounted.find('svg').hasClass('slds-icon-standard-account')).toBeFalsy();

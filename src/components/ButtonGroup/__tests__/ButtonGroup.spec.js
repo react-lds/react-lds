@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import ButtonGroup from '../ButtonGroup';
-import { Button } from '../../Button/Button';
+import { Button } from '../../Button';
 
 describe('<ButtonGroup />', () => {
   let mounted = null;

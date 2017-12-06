@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { Menu } from '../Menu';
+import Menu from '../Menu';
 
 describe('<Menu />', () => {
   let mounted = null;

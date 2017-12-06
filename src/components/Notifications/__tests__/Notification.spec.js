@@ -1,8 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-// eslint-disable-next-line import/no-named-default
-import { default as Notification } from '../Notification';
+import Notification from '../Notification';
 
 describe('<Notification />', () => {
   let mounted = null;
@@ -39,7 +38,7 @@ describe('<Notification />', () => {
     mounted.setProps({ toast: true });
     expect(mounted.find('button svg').hasClass('slds-button__icon_large')).toBeTruthy();
 
-    mounted.setProps({ toast: false, alert: true });
+    mounted.setProps({ toast: false });
     expect(mounted.find('button svg').hasClass('slds-button__icon_large')).toBeFalsy();
   });
 
