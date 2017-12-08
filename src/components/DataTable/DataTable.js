@@ -6,7 +6,7 @@ import { Table, uniqueId } from '../../';
 
 import defaultRowRenderer from './defaultRowRenderer';
 
-export class DataTable extends Component {
+class DataTable extends Component {
   state = {
     id: uniqueId('data-table-advanced-'),
     columns: [],

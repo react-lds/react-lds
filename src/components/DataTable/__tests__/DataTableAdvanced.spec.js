@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { DataTable } from '../DataTable';
+import DataTable from '../DataTable';
 
 describe('<DataTable />', () => {
   let mounted = null;
