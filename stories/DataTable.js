@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { storiesOf } from '@storybook/react';
-import { array, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
+import { array, object } from '@storybook/addon-knobs';
+import { storiesOf } from '@storybook/react';
 import {
   Button,
   DataTable,
@@ -94,7 +95,12 @@ stories
       />
     </DataTable>
   ))
-  .add('Selectable table', () => (
+  .add('Selectable table', withInfo(`
+    Adding a **DataTableSelectColumn** to the columns will add a column of checkboxes
+    to the table.
+    Ticking one of the checkboxes will result in the **onSelect** callback being called
+    with a list of currently selected rows (identified by **rowId**).
+  `)(() => (
     <StatefulWrapper data={object('Data', sampleData.slice(0, 5))}>
       <DataTable
         flavor="fixed-layout"
@@ -115,7 +121,7 @@ stories
         />
       </DataTable>
     </StatefulWrapper>
-  ))
+  )))
   .add('Actionable table', () => (
     <DataTable
       data={object('Data', sampleData)}
