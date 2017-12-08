@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { CheckboxRaw } from '../../';
+
 export default ({ allSelected, dataKey, onSelectAll, tableId }) => { // eslint-disable-line react/prop-types
   const checkboxId = `${tableId}-${dataKey}`;
 
@@ -10,23 +12,14 @@ export default ({ allSelected, dataKey, onSelectAll, tableId }) => { // eslint-d
       scope="col"
       style={{ width: '3.25rem' }}
     >
-      <div>
-        <span className="slds-checkbox">
-          <input
-            checked={allSelected}
-            id={checkboxId}
-            name="options"
-            onChange={onSelectAll}
-            type="checkbox"
-          />
-          <label className="slds-checkbox__label" htmlFor={checkboxId}>
-            <span className="slds-checkbox--faux" />
-            <span className="slds-form-element__label slds-assistive-text">
-              Select All
-            </span>
-          </label>
-        </span>
-      </div>
+      <CheckboxRaw
+        checked={allSelected}
+        hideLabel
+        id={checkboxId}
+        label="Select All"
+        name="options"
+        onChange={onSelectAll}
+      />
     </th>
   );
 };

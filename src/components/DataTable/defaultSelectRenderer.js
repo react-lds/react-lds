@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { CheckboxRaw } from '../../';
+
 export default ({ dataKey, rowId, selected, onSelect, tableId }) => { // eslint-disable-line react/prop-types
   const checkboxId = `${tableId}-${dataKey}-${rowId}`;
 
@@ -10,21 +12,14 @@ export default ({ dataKey, rowId, selected, onSelect, tableId }) => { // eslint-
       role="gridcell"
       style={{ width: '3.25rem' }}
     >
-      <span className="slds-checkbox">
-        <input
-          checked={selected}
-          id={checkboxId}
-          name="options"
-          onChange={() => onSelect(rowId)}
-          type="checkbox"
-        />
-        <label className="slds-checkbox__label" htmlFor={checkboxId}>
-          <span className="slds-checkbox--faux" />
-          <span className="slds-form-element__label slds-assistive-text">
-            Select item {rowId}
-          </span>
-        </label>
-      </span>
+      <CheckboxRaw
+        checked={selected}
+        hideLabel
+        id={checkboxId}
+        label={`Select item ${rowId}`}
+        name="options"
+        onChange={() => onSelect(rowId)}
+      />
     </td>
   );
 };
