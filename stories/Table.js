@@ -10,7 +10,6 @@ stories
     <Table
       flavor={array('Flavor', ['bordered', 'striped']) || undefined}
       variation={array('Variation', [])}
-
     >
       <thead>
         <Row
