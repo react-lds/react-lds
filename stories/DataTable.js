@@ -10,26 +10,9 @@ import {
   DataTableActionColumn,
   DataTableSelectColumn,
 } from '../src';
+import sampleData from './utils/sampleUsers';
 
 const stories = storiesOf('DataTable', module);
-const sampleData = [
-  {
-    id: 1,
-    col1: 'herp hero',
-    col2: 'hello',
-    col3: 123,
-    col4: 'pjqe e129 osfnoejfo oief oiwe',
-    moo: true,
-  },
-  {
-    id: 2,
-    col1: 'bork',
-    col2: 'hej hej',
-    col3: 246,
-    col4: 'osfnoejfo oief oiwe',
-    moo: false,
-  },
-];
 
 class StatefulWrapper extends Component {
   static propTypes = {
@@ -61,26 +44,24 @@ stories
     <DataTable
       flavor={array('Flavor', ['bordered', 'striped'])}
       variation={array('Variation', [])}
-      data={object('Data', sampleData)}
+      data={object('Data', sampleData.slice(0, 5))}
       onSelect={action()}
       onSort={action()}
     >
       <DataTableColumn
-        dataKey="col1"
-        title="Column 1"
+        dataKey="name"
+        title="Name"
       />
       <DataTableColumn
-        dataKey="col2"
-        title="Column 2"
+        dataKey="city"
+        title="City"
       />
       <DataTableColumn
-        dataKey="col4"
-        title="Column w/ custom renderer"
-        cellRenderer={({ dataKey, cellData, defaultProps }) => (
+        dataKey="dob"
+        title="Date of birth (local date format)"
+        cellRenderer={({ cellData, defaultProps }) => (
           <td {...defaultProps}>
-            <span>
-              <strong>{dataKey}:</strong> {cellData}
-            </span>
+            <span>{new Date(cellData).toLocaleString()}</span>
           </td>
         )}
       />
@@ -92,19 +73,29 @@ stories
       flavor="fixed-layout"
     >
       <DataTableColumn
-        dataKey="col1"
+        dataKey="name"
         sortable
-        title="Column 1"
+        title="Name"
       />
       <DataTableColumn
-        dataKey="col3"
+        dataKey="city"
         sortable
-        title="Column 3"
+        title="City"
+      />
+      <DataTableColumn
+        dataKey="dob"
+        sortable
+        title="Date of birth"
+      />
+      <DataTableColumn
+        dataKey="nationality"
+        sortable
+        title="Nationality"
       />
     </DataTable>
   ))
   .add('Selectable table', () => (
-    <StatefulWrapper data={object('Data', sampleData)}>
+    <StatefulWrapper data={object('Data', sampleData.slice(0, 5))}>
       <DataTable
         flavor="fixed-layout"
         onSelect={action()}
@@ -113,14 +104,14 @@ stories
           dataKey="select-all"
         />
         <DataTableColumn
-          dataKey="col1"
+          dataKey="name"
           sortable
-          title="Column 1"
+          title="Name"
         />
         <DataTableColumn
-          dataKey="col3"
+          dataKey="city"
           sortable
-          title="Column 3"
+          title="City"
         />
       </DataTable>
     </StatefulWrapper>
@@ -132,14 +123,14 @@ stories
       onSelect={action()}
     >
       <DataTableColumn
-        dataKey="col1"
+        dataKey="name"
         sortable
-        title="Column 1"
+        title="Name"
       />
       <DataTableColumn
-        dataKey="col3"
+        dataKey="email"
         sortable
-        title="Column 3"
+        title="Email"
       />
       <DataTableActionColumn
         dataKey="stuff"
@@ -147,7 +138,7 @@ stories
           <td {...defaultProps}>
             <Button
               onClick={action(`click ${dataKey}@${rowIndex}`)}
-              title="Do stuff"
+              title="Send message"
             />
           </td>
         )}
