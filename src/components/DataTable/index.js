@@ -1,9 +1,11 @@
-import Cell from './Cell';
-import Row from './Row';
-import Table from './Table';
+import DataTableColumn from './DataTableColumn';
+import DataTableSelectColumn from './DataTableSelectColumn';
+import DataTableActionColumn from './DataTableActionColumn';
+import DataTable from './DataTable';
 
 export {
-  Cell,
-  Row,
-  Table
+  DataTableColumn,
+  DataTableSelectColumn,
+  DataTableActionColumn,
+  DataTable,
 };

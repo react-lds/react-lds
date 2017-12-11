@@ -1,68 +1,153 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
+import { array, object } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { array, boolean } from '@storybook/addon-knobs';
-import { Table, Row, Cell } from '../src';
+import {
+  Button,
+  DataTable,
+  DataTableColumn,
+  DataTableActionColumn,
+  DataTableSelectColumn,
+} from '../src';
+import sampleData from './utils/sampleUsers';
 
 const stories = storiesOf('DataTable', module);
 
+class StatefulWrapper extends Component {
+  static propTypes = {
+    children: PropTypes.node.isRequired,
+  }
+
+  state = {
+    selection: [],
+  }
+
+  onSelect = (selection) => {
+    const { onSelect } = this.props.children.props; // eslint-disable-line react/prop-types
+    if (onSelect) onSelect(selection);
+    this.setState({ selection });
+  }
+
+  render() {
+    const { children, ...restProps } = this.props;
+    return React.cloneElement(children, {
+      ...restProps,
+      ...this.state,
+      onSelect: this.onSelect,
+    });
+  }
+}
+
 stories
   .add('Basic example', () => (
-    <Table
-      flavor={array('Flavor', ['bordered', 'striped']) || undefined}
+    <DataTable
+      flavor={array('Flavor', ['bordered', 'striped'])}
       variation={array('Variation', [])}
-
+      data={object('Data', sampleData.slice(0, 5))}
+      onSelect={action()}
+      onSort={action()}
     >
-      <thead>
-        <Row
-          head={boolean('Row 1 is Head', true)}
-          variation={array('Row 1 variation', []) || undefined}
-        >
-          <Cell scope="col" truncate>Opportunity Name</Cell>
-          <Cell scope="col" truncate>Account Name</Cell>
-          <Cell scope="col" truncate>Close Date</Cell>
-          <Cell scope="col" truncate>Stage</Cell>
-          <Cell scope="col" truncate>Confidence</Cell>
-          <Cell scope="col" truncate>Amount</Cell>
-          <Cell scope="col" truncate>Contact</Cell>
-        </Row>
-      </thead>
-      <tbody>
-        <Row variation={array('Row 2 variation', ['hint-parent']) || undefined}>
-          <Cell truncate data-label="Opportunity Name" scope="row"><a href="#top">Cloudhub</a></Cell>
-          <Cell truncate data-label="Account Name">Cloudhub</Cell>
-          <Cell truncate data-label="Close Date">4/14/2015</Cell>
-          <Cell truncate data-label="Stage">Prospecting</Cell>
-          <Cell truncate data-label="Confidence">20%</Cell>
-          <Cell truncate data-label="Amount">$25k</Cell>
-          <Cell truncate data-label="Contact">jrogers@cloudhub.com</Cell>
-        </Row>
-        <Row variation={array('Row 3 variation', []) || undefined}>
-          <Cell
-            variation={array('Cell 3-1 variation', ['cell-shrink']) || undefined}
-            truncate
-            data-label="Opportunity Name"
-            scope="row"
-          ><a href="#top">
-          Cloudhub + Anypoint Connectors + Some other guys with a long name</a>
-          </Cell>
-          <Cell truncate data-label="Account Name">Cloudhub</Cell>
-          <Cell truncate data-label="Close Date">4/14/2015</Cell>
-          <Cell truncate data-label="Stage">Prospecting</Cell>
-          <Cell truncate data-label="Confidence">20%</Cell>
-          <Cell truncate data-label="Amount">$25k</Cell>
-          <Cell truncate data-label="Contact">jrogers@cloudhub.com</Cell>
-        </Row>
-        <Row variation={array('Row 4 variation', []) || undefined}>
-          <Cell truncate data-label="Opportunity Name" scope="row"><a href="#top">
-          Mr. B</a>
-          </Cell>
-          <Cell truncate data-label="Account Name">B-Man</Cell>
-          <Cell truncate data-label="Close Date">5/14/2015</Cell>
-          <Cell truncate data-label="Stage">Winning</Cell>
-          <Cell truncate data-label="Confidence">&gt;99%</Cell>
-          <Cell truncate data-label="Amount">$25k</Cell>
-          <Cell truncate data-label="Contact">jrogers@cloudhub.com</Cell>
-        </Row>
-      </tbody>
-    </Table>
+      <DataTableColumn
+        dataKey="name"
+        title="Name"
+      />
+      <DataTableColumn
+        dataKey="city"
+        title="City"
+      />
+      <DataTableColumn
+        dataKey="dob"
+        title="Date of birth (local date format)"
+        cellRenderer={({ cellData, defaultProps }) => (
+          <td {...defaultProps}>
+            <span>{new Date(cellData).toLocaleString()}</span>
+          </td>
+        )}
+      />
+    </DataTable>
+  ))
+  .add('Sortable table', () => (
+    <DataTable
+      data={object('Data', sampleData)}
+      flavor="fixed-layout"
+    >
+      <DataTableColumn
+        dataKey="name"
+        sortable
+        title="Name"
+      />
+      <DataTableColumn
+        dataKey="city"
+        sortable
+        title="City"
+      />
+      <DataTableColumn
+        dataKey="dob"
+        sortable
+        title="Date of birth"
+      />
+      <DataTableColumn
+        dataKey="nationality"
+        sortable
+        title="Nationality"
+      />
+    </DataTable>
+  ))
+  .add('Selectable table', withInfo(`
+    Adding a **DataTableSelectColumn** to the columns will add a column of checkboxes
+    to the table.
+    Ticking one of the checkboxes will result in the **onSelect** callback being called
+    with a list of currently selected rows (identified by **rowId**).
+  `)(() => (
+    <StatefulWrapper data={object('Data', sampleData.slice(0, 5))}>
+      <DataTable
+        flavor="fixed-layout"
+        onSelect={action()}
+      >
+        <DataTableSelectColumn
+          dataKey="select-all"
+        />
+        <DataTableColumn
+          dataKey="name"
+          sortable
+          title="Name"
+        />
+        <DataTableColumn
+          dataKey="city"
+          sortable
+          title="City"
+        />
+      </DataTable>
+    </StatefulWrapper>
+  )))
+  .add('Actionable table', () => (
+    <DataTable
+      data={object('Data', sampleData)}
+      flavor="fixed-layout"
+      onSelect={action()}
+    >
+      <DataTableColumn
+        dataKey="name"
+        sortable
+        title="Name"
+      />
+      <DataTableColumn
+        dataKey="email"
+        sortable
+        title="Email"
+      />
+      <DataTableActionColumn
+        dataKey="stuff"
+        cellRenderer={({ dataKey, rowIndex, defaultProps }) => (
+          <td {...defaultProps}>
+            <Button
+              onClick={action(`click ${dataKey}@${rowIndex}`)}
+              title="Send message"
+            />
+          </td>
+        )}
+      />
+    </DataTable>
   ));
