@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.0
+
+* Fix empty npm release, use this instead of `3.0.0`
+
 ## 3.0.0
 
 ### Added
