@@ -26,19 +26,12 @@ const Notification = (props) => {
     className,
   ];
 
-  const wrapIcon = () => {
-    const iconContainerClasses = [
-      { 'slds-icon_container': true },
-      'slds-m-right_small slds-no-flex slds-align-top',
-    ];
-
-    return (
-      <span className={cx(iconContainerClasses)}>
-        {icon}
-        <span className="slds-assistive-text">{title}</span>
-      </span>
-    );
-  };
+  const wrapIcon = () => (
+    <span className={'slds-icon_container slds-m-right_small slds-no-flex slds-align-top'}>
+      {icon}
+      <span className="slds-assistive-text">{title}</span>
+    </span>
+  );
 
   const wrapToastContent = content => (
     <div className="slds-notify__content">
@@ -102,7 +95,7 @@ Notification.propTypes = {
    */
   onClickClose: PropTypes.func,
   /**
-   * notification flavor (warning, error, offline, info (default))
+   * notification theme (warning, error, offline, info (default))
    */
   theme: PropTypes.oneOf(THEMES),
 };
