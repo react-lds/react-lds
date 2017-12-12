@@ -26,8 +26,8 @@
     * `Spinner`
     * `StatefulButton`
     * `VerticalNavigation`
-
 * **Breaking:** Size usage
+    * `Box`
     * `Button`
     * Grid/`Container`
     * `MediaObject`
@@ -41,7 +41,7 @@
 * **Breaking:** Variation usage
     * DataTable/`Row`, `Table`
     * Grid/`Column`, `Grid`
-    
+
 * ObjectHome Menu dropdown position is now default (left)
 * Components that use `enhanceWithClickOutside` are now importable without that functionality by using `import *Component*Raw as *Component*`
 * Bugfix: Picklist down-icon now opens Picklist
