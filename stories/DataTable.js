@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
-import { array, object } from '@storybook/addon-knobs';
+import { array, object, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import {
   Button,
@@ -68,9 +68,17 @@ stories
       />
     </DataTable>
   ))
-  .add('Sortable table', () => (
+  .add('Sortable table', withInfo(`
+    Marking a column **sortable** will make the table header clickable. On click, the
+    data array is sorted by that column. If an **onSort** callback is provided, sorting the
+    data array is left to that callback.
+    If the data array is externally sorted, you can use the **sortBy** and **sortDirection**
+    props to indicate the current sort column and direction.
+  `)(() => (
     <DataTable
-      data={object('Data', sampleData)}
+      sortBy={text('Sorted by', 'name')}
+      sortDirection={select('Sort direction', ['asc', 'desc'])}
+      data={object('Data', sampleData.slice(0, 5))}
       flavor="fixed-layout"
     >
       <DataTableColumn
@@ -94,7 +102,7 @@ stories
         title="Nationality"
       />
     </DataTable>
-  ))
+  )))
   .add('Selectable table', withInfo(`
     Adding a **DataTableSelectColumn** to the columns will add a column of checkboxes
     to the table.
