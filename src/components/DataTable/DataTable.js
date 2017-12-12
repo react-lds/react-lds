@@ -11,8 +11,8 @@ class DataTable extends Component {
     id: uniqueId('data-table-advanced-'),
     columns: [],
     data: this.props.data,
-    sortBy: '',
-    sortDirection: 'asc',
+    sortBy: this.props.sortBy,
+    sortDirection: this.props.sortDirection,
   }
 
   componentWillMount() {
@@ -20,7 +20,7 @@ class DataTable extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { children, data } = this.props;
+    const { children, data, sortBy, sortDirection } = this.props;
 
     if (nextProps.children !== children) {
       this.updateColumns();
@@ -28,6 +28,13 @@ class DataTable extends Component {
 
     if (nextProps.data !== data) {
       this.setState({ data: nextProps.data });
+    }
+
+    if (nextProps.sortBy !== sortBy || nextProps.sortDirection !== sortDirection) {
+      this.setState({
+        sortBy: nextProps.sortBy,
+        sortDirection: nextProps.sortDirection,
+      });
     }
   }
 
@@ -194,6 +201,8 @@ class DataTable extends Component {
       'onSort',
       'rowRenderer',
       'selection',
+      'sortBy',
+      'sortDirection',
     ]);
 
     return (
@@ -214,6 +223,8 @@ DataTable.defaultProps = {
   rowRenderer: defaultRowRenderer,
   noRowsRenderer: () => {},
   selection: [],
+  sortBy: '',
+  sortDirection: 'asc',
 };
 
 DataTable.propTypes = {
@@ -259,6 +270,16 @@ DataTable.propTypes = {
    * Array of indexes of selected rows.
    */
   selection: PropTypes.array,
+
+  /**
+   * Initial sort column, identified by `dataKey`.
+   */
+  sortBy: PropTypes.string,
+
+  /**
+   * Initial sort direction (`asc` or `desc`).
+   */
+  sortDirection: PropTypes.string,
 };
 
 export default DataTable;
