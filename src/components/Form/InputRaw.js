@@ -102,7 +102,7 @@ const InputRaw = (props) => {
 
   const renderSpinner = () => showSpinner && (
     <Spinner
-      brand
+      flavor="brand"
       className="slds-input__spinner slds-m-right_xx-small"
       size="x-small"
     />
