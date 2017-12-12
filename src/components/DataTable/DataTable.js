@@ -112,7 +112,9 @@ class DataTable extends Component {
         ? children
         : [children];
       this.setState({
-        columns: childrenArray.map(child => child.props),
+        columns: childrenArray
+          .filter(child => React.isValidElement(child))
+          .map(child => child.props),
       });
     } else {
       this.setState({ columns: [] });
