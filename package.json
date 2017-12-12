@@ -16,7 +16,7 @@
     "build:clean": "rm -rf dist",
     "build": "yarn build:clean && yarn build:babel",
     "lint": "eslint src",
-    "prepublishOnly": "rm -rf dist && mkdir dist && cp ./README.md ./dist/ && cp ./LICENSE ./dist/ && cp ./CHANGELOG.md ./dist/",
+    "prepublishOnly": "yarn build && cp ./README.md ./dist/ && cp ./LICENSE ./dist/ && cp ./CHANGELOG.md ./dist/",
     "prestorybook": "rm -rf public && mkdir public && cp -R node_modules/@salesforce-ux/design-system/assets ./public/",
     "start": "yarn storybook",
     "storybook": "yarn run prestorybook; start-storybook -p 6006 -s ./public",
