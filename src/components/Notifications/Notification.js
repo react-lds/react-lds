@@ -27,7 +27,7 @@ const Notification = (props) => {
   ];
 
   const wrapIcon = () => (
-    <span className={'slds-icon_container slds-m-right_small slds-no-flex slds-align-top'}>
+    <span className="slds-icon_container slds-m-right_small slds-no-flex slds-align-top">
       {icon}
       <span className="slds-assistive-text">{title}</span>
     </span>
