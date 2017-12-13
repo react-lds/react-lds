@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const Spinner = (props) => {
-  const { brand, className, inverse, size, ...rest } = props;
+  const { className, flavor, size, ...rest } = props;
 
   const sldsClasses = [
     'slds-spinner',
     { [`slds-spinner_${size}`]: !!size },
-    { 'slds-spinner_brand': brand },
-    { 'slds-spinner_inverse': inverse },
+    { [`slds-spinner_${flavor}`]: !!flavor },
     className
   ];
 
@@ -23,9 +22,8 @@ const Spinner = (props) => {
 };
 
 Spinner.defaultProps = {
-  brand: null,
   className: null,
-  inverse: null,
+  flavor: null,
   size: 'medium'
 };
 
@@ -35,17 +33,13 @@ Spinner.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * flavor
+   */
+  flavor: PropTypes.oneOf(['brand', 'inverse']),
+  /**
    * spinner sizes: xx-small, x-small, small, medium, large
    */
   size: PropTypes.oneOf(['xx-small', 'x-small', 'small', 'medium', 'large']),
-  /**
-   * brand flavor
-   */
-  brand: PropTypes.bool,
-  /**
-   * inverse flavor
-   */
-  inverse: PropTypes.bool,
 };
 
 export default Spinner;
