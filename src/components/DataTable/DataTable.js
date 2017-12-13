@@ -107,11 +107,18 @@ class DataTable extends Component {
   updateColumns() {
     const { children } = this.props;
 
-    this.setState({
-      columns: children
-        ? children.map(child => child.props)
-        : []
-    });
+    if (children) {
+      const childrenArray = Array.isArray(children)
+        ? children
+        : [children];
+      this.setState({
+        columns: childrenArray
+          .filter(child => React.isValidElement(child))
+          .map(child => child.props),
+      });
+    } else {
+      this.setState({ columns: [] });
+    }
   }
 
   areAllRowsSelected() {
