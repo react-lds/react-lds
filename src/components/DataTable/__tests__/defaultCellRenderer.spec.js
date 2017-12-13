@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 
 import defaultCellRenderer from '../defaultCellRenderer';
 
-describe('<DataCell />', () => {
+describe('defaultCellRenderer', () => {
   const defaultProps = {
     dataKey: 'foo',
     cellData: 'bar',
