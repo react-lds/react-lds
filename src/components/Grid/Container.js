@@ -16,7 +16,7 @@ const Container = (props) => {
 Container.defaultProps = {
   children: null,
   className: null,
-  flavor: ['left'],
+  flavor: [],
   size: 'small',
 };
 
