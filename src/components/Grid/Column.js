@@ -73,7 +73,7 @@ const sizeOfPropType = (props, propName) => {
 };
 
 Column.defaultProps = {
-  align: 'top',
+  align: null,
   className: null,
   flavor: [],
   variation: [],
