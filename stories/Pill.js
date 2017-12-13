@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { text, boolean } from '@storybook/addon-knobs';
-import { Pill, Avatar, Icon } from '../src';
+import { Pill, PillContainer, Avatar, Icon } from '../src';
 
 const stories = storiesOf('Pill', module);
 
@@ -57,4 +57,15 @@ stories
       label={text('Label', 'Pill Label')}
       title={text('Title', 'Full pill label verbiage mirrored here')}
     />
+  ))
+  .add('With Container', () => (
+    <PillContainer>
+      <Pill
+        onClick={action('clicked')}
+        url="#lightningOut"
+        icon={icon}
+        label="test"
+        title="test"
+      />
+    </PillContainer>
   ));
