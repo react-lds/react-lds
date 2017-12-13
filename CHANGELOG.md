@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.1
+
+* Support sort indicator prop in `DataTable`
+* Fix: missing export of `ObjectHomeRaw`
+* Fix: usage of flavors and wrong default props in several places
+
 ## 3.1.0
 
 * Fix empty npm release, use this instead of `3.0.0`
