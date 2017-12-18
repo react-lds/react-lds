@@ -6,7 +6,81 @@ import { THEMES, getThemeClass } from '../../utils';
 
 import { Button, ButtonIcon } from '../../';
 
+// https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
+const propTypes = {
+  /**
+   * Open popover
+   */
+  open: PropTypes.bool,
+  /**
+   * Show close button
+   */
+  closeable: PropTypes.bool,
+  /**
+   * onClose handler
+   */
+  onClose: PropTypes.func.isRequired,
+  /**
+   * Popover header content
+   */
+  header: PropTypes.node,
+  /**
+   * Popover body content
+   */
+  body: PropTypes.node,
+  /**
+   * Popover footer content
+   */
+  footer: PropTypes.node,
+  /**
+   * Additional css classes
+   */
+  className: PropTypes.string,
+  /**
+   * Optional panel layout
+   */
+  panels: PropTypes.bool,
+  /**
+   * Optional position of nubbin. Positions: left, left-top, left-bottom,
+   * top-left, top-right, right-top, right-bottom, bottom-left, bottom-right
+   */
+  nubbin: PropTypes.oneOf([
+    'left',
+    'left-top',
+    'left-bottom',
+    'top-left',
+    'top-right',
+    'right-top',
+    'right-bottom',
+    'bottom-left',
+    'bottom-right',
+  ]),
+  /**
+   * Optional custom Header theme. Themes: warning, error, success, info
+   */
+  customHeaderTheme: PropTypes.oneOf(THEMES),
+  /**
+   * themes: alt-inverse, default, error, info, inverse, offline, shade, success, warning
+   */
+  theme: PropTypes.oneOf(THEMES),
+};
+
 class Popover extends Component {
+  static propTypes = propTypes
+
+  static defaultProps = {
+    body: null,
+    header: null,
+    footer: null,
+    className: null,
+    customHeaderTheme: null,
+    open: false,
+    closeable: true,
+    panels: false,
+    nubbin: 'bottom-left',
+    theme: null,
+  }
+
   static shouldInvertIcon(themeStr) {
     if (typeof themeStr === 'string') {
       return themeStr.includes('error') ||
@@ -90,7 +164,7 @@ class Popover extends Component {
 
   render() {
     const { className, closeable, open, customHeaderTheme, nubbin, panels, header, body, footer, theme } = this.props;
-    const rest = omit(this.props, Object.keys(Popover.propTypes));
+    const rest = omit(this.props, Object.keys(propTypes));
 
     const sldsClasses = [
       'slds-popover',
@@ -115,76 +189,5 @@ class Popover extends Component {
     );
   }
 }
-
-Popover.defaultProps = {
-  body: null,
-  header: null,
-  footer: null,
-  className: null,
-  customHeaderTheme: null,
-  open: false,
-  closeable: true,
-  panels: false,
-  nubbin: 'bottom-left',
-  theme: null,
-};
-
-Popover.propTypes = {
-  /**
-   * Open popover
-   */
-  open: PropTypes.bool,
-  /**
-   * Show close button
-   */
-  closeable: PropTypes.bool,
-  /**
-   * onClose handler
-   */
-  onClose: PropTypes.func.isRequired,
-  /**
-   * Popover header content
-   */
-  header: PropTypes.node,
-  /**
-   * Popover body content
-   */
-  body: PropTypes.node,
-  /**
-   * Popover footer content
-   */
-  footer: PropTypes.node,
-  /**
-   * Additional css classes
-   */
-  className: PropTypes.string,
-  /**
-   * Optional panel layout
-   */
-  panels: PropTypes.bool,
-  /**
-   * Optional position of nubbin. Positions: left, left-top, left-bottom,
-   * top-left, top-right, right-top, right-bottom, bottom-left, bottom-right
-   */
-  nubbin: PropTypes.oneOf([
-    'left',
-    'left-top',
-    'left-bottom',
-    'top-left',
-    'top-right',
-    'right-top',
-    'right-bottom',
-    'bottom-left',
-    'bottom-right',
-  ]),
-  /**
-   * Optional custom Header theme. Themes: warning, error, success, info
-   */
-  customHeaderTheme: PropTypes.oneOf(THEMES),
-  /**
-   * themes: alt-inverse, default, error, info, inverse, offline, shade, success, warning
-   */
-  theme: PropTypes.oneOf(THEMES),
-};
 
 export default Popover;

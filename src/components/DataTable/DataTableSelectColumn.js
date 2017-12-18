@@ -1,12 +1,12 @@
 import { Component } from 'react';
 
-import DataTableColumn from './DataTableColumn';
+import DataTableColumn, { propTypes as columnPropTypes } from './DataTableColumn';
 import defaultSelectAllRenderer from './defaultSelectAllRenderer';
 import defaultSelectRenderer from './defaultSelectRenderer';
 
 class DataTableSelectColumn extends Component {
   static propTypes = {
-    ...DataTableColumn.propTypes
+    ...columnPropTypes
   }
 
   static defaultProps = {
