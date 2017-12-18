@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.1.2
+
+* Fix: bugs relating to removed `propTypes`:
+  * `Accordion`
+  * `DataTable`
+  * `Lookup`
+  * `Menu`
+  * `PageHeader`
+  * `Popover`
+  * `Tab`
+
 ## 3.1.1
 
 * Support sort indicator prop in `DataTable`
