@@ -1,11 +1,11 @@
 import { Component } from 'react';
 
-import DataTableColumn from './DataTableColumn';
+import DataTableColumn, { propTypes as columnPropTypes } from './DataTableColumn';
 import defaultActionHeadRenderer from './defaultActionHeadRenderer';
 
 class DataTableActionColumn extends Component {
   static propTypes = {
-    ...DataTableColumn.propTypes
+    ...columnPropTypes
   }
 
   static defaultProps = {

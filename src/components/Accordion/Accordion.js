@@ -3,6 +3,34 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import omit from 'lodash.omit';
 
+// https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
+const propTypes = {
+  /**
+   * sections
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * class name
+   */
+  className: PropTypes.string,
+  /**
+    * which section should be open by default, defaults to first
+    */
+  defaultOpen: PropTypes.string,
+  /**
+    * wraps the component in a card
+    */
+  styled: PropTypes.bool,
+  /*
+   * controlled mode: id of open section
+   */
+  open: PropTypes.string,
+  /*
+   * controlled mode: section click handler
+   */
+  onSectionClick: PropTypes.func,
+};
+
 class Accordion extends Component {
   static defaultProps = {
     className: null,
@@ -12,32 +40,7 @@ class Accordion extends Component {
     onSectionClick: null,
   }
 
-  static propTypes = {
-    /**
-     * sections
-     */
-    children: PropTypes.node.isRequired,
-    /**
-     * class name
-     */
-    className: PropTypes.string,
-    /**
-      * which section should be open by default, defaults to first
-      */
-    defaultOpen: PropTypes.string,
-    /**
-      * wraps the component in a card
-      */
-    styled: PropTypes.bool,
-    /*
-     * controlled mode: id of open section
-     */
-    open: PropTypes.string,
-    /*
-     * controlled mode: section click handler
-     */
-    onSectionClick: PropTypes.func,
-  }
+  static propTypes = propTypes;
 
   constructor(props) {
     super(props);
@@ -70,7 +73,7 @@ class Accordion extends Component {
 
   render() {
     const { className, styled } = this.props;
-    const rest = omit(this.props, Object.keys(Accordion.propTypes));
+    const rest = omit(this.props, Object.keys(propTypes));
 
     const sldsClasses = [
       'slds-accordion',

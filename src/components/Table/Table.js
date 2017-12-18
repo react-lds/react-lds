@@ -17,14 +17,8 @@ const Table = (props) => {
   return (<table {...rest} className={cx(sldsClasses)}>{children}</table>);
 };
 
-Table.defaultProps = {
-  children: null,
-  className: null,
-  variation: [],
-  flavor: [],
-};
-
-Table.propTypes = {
+// https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
+export const propTypes = {
   /**
    * table content
    */
@@ -54,5 +48,14 @@ Table.propTypes = {
     'fixed-layout',
   ]),
 };
+
+Table.defaultProps = {
+  children: null,
+  className: null,
+  variation: [],
+  flavor: [],
+};
+
+Table.propTypes = propTypes;
 
 export default Table;

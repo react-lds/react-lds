@@ -3,30 +3,33 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import omit from 'lodash.omit';
 
+// https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
+const propTypes = {
+  /**
+   * class name
+   */
+  className: PropTypes.string,
+  /**
+   * array of tabs
+   */
+  tabs: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    content: PropTypes.node.isRequired,
+  })).isRequired,
+  /**
+   * scoped has a border around the tab
+   */
+  scoped: PropTypes.bool,
+};
+
 class Tab extends Component {
   static defaultProps = {
     className: null,
     scoped: false,
   }
 
-  static propTypes = {
-    /**
-     * class name
-     */
-    className: PropTypes.string,
-    /**
-     * array of tabs
-     */
-    tabs: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-      content: PropTypes.node.isRequired,
-    })).isRequired,
-    /**
-     * scoped has a border around the tab
-     */
-    scoped: PropTypes.bool,
-  };
+  static propTypes = propTypes
 
   constructor(props, context) {
     super(props, context);
@@ -99,7 +102,7 @@ class Tab extends Component {
 
   render() {
     const { className, scoped } = this.props;
-    const rest = omit(this.props, Object.keys(Tab.propTypes));
+    const rest = omit(this.props, Object.keys(propTypes));
 
     const sldsClasses = [
       `slds-tabs_${scoped ? 'scoped' : 'default'}`,

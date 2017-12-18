@@ -19,115 +19,119 @@ import {
   Cell,
 } from '../../';
 
+
+// https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
+const propTypes = {
+  /**
+   * if set to true, allows the creation of new elements that were not found
+   * during lookups. For example new email addresses.
+   * The new entry will not have an object type and the ID will be the current
+   * timestamp.
+   */
+  allowCreate: PropTypes.bool,
+  /**
+   * class name
+   */
+  className: PropTypes.string,
+  /**
+   * renders a different layour without borders (bare) for email docked
+   * composer
+   */
+  emailLayout: PropTypes.bool,
+  /**
+   * renders an error for the lookup. shows an error messsage if error is a string.
+   */
+  error: PropTypes.string,
+  /**
+   * whether the lookup error message is hidden
+   */
+  hideErrorMessage: PropTypes.bool,
+  /**
+   * whether the lookup label is hidden
+   */
+  hideLabel: PropTypes.bool,
+  /**
+  * id of the input field in the lookup component
+  */
+  id: PropTypes.string.isRequired,
+  /**
+   * initial item selection. use with uncontrolled lookup
+   */
+  initialSelection: PropTypes.array,
+  /**
+   * label for the input field in the lookup component
+   */
+  inputLabel: PropTypes.string.isRequired,
+  /**
+   * label for the dropdown in the lookup component
+   */
+  listLabel: PropTypes.string.isRequired,
+  /**
+   * loads items into the lookup component
+   */
+  load: PropTypes.func.isRequired,
+  /**
+   * set true to call load() onInputChange (defaults to true)
+   */
+  loadOnChange: PropTypes.bool,
+  /**
+   * set true to call load() onInputFocus (defaults to false)
+   */
+  loadOnFocus: PropTypes.bool,
+  /**
+   * set true to call load() onComponentDidMount (defaults to false)
+   */
+  loadOnMount: PropTypes.bool,
+  /**
+   * renders the lookup in multiple mode
+   */
+  multi: PropTypes.bool,
+  /**
+   * type of object that is queried via the lookup. if it changes, loaded items will be reset
+   */
+  objectType: PropTypes.string,
+  /**
+   * onChange handler for the lookup. has selected items as first argument
+   */
+  onChange: PropTypes.func.isRequired,
+  /**
+   * onFocus handler for the input field in the lookup
+   */
+  onFocus: PropTypes.func,
+  /**
+   * placeholder for the input field in lookup
+   */
+  placeholder: PropTypes.string,
+  /**
+   * Callback for rendering a single selection pill.
+   */
+  renderSelection: PropTypes.func,
+  /**
+   * Marks the field as required
+   */
+  required: PropTypes.bool,
+  /**
+   * current item selection. use with controlled lookup
+   */
+  selection: PropTypes.array,
+  /**
+   * if set, renders the Advanced Modal table layout
+   */
+  table: PropTypes.bool,
+  tableFields: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ),
+  /**
+   * Label behind the number of Results in the table header
+   */
+  tableResultsHeading: PropTypes.string,
+};
+
 export class LookupRaw extends Component {
-  static propTypes = {
-    /**
-     * if set to true, allows the creation of new elements that were not found
-     * during lookups. For example new email addresses.
-     * The new entry will not have an object type and the ID will be the current
-     * timestamp.
-     */
-    allowCreate: PropTypes.bool,
-    /**
-     * class name
-     */
-    className: PropTypes.string,
-    /**
-     * renders a different layour without borders (bare) for email docked
-     * composer
-     */
-    emailLayout: PropTypes.bool,
-    /**
-     * renders an error for the lookup. shows an error messsage if error is a string.
-     */
-    error: PropTypes.string,
-    /**
-     * whether the lookup error message is hidden
-     */
-    hideErrorMessage: PropTypes.bool,
-    /**
-     * whether the lookup label is hidden
-     */
-    hideLabel: PropTypes.bool,
-    /**
-    * id of the input field in the lookup component
-    */
-    id: PropTypes.string.isRequired,
-    /**
-     * initial item selection. use with uncontrolled lookup
-     */
-    initialSelection: PropTypes.array,
-    /**
-     * label for the input field in the lookup component
-     */
-    inputLabel: PropTypes.string.isRequired,
-    /**
-     * label for the dropdown in the lookup component
-     */
-    listLabel: PropTypes.string.isRequired,
-    /**
-     * loads items into the lookup component
-     */
-    load: PropTypes.func.isRequired,
-    /**
-     * set true to call load() onInputChange (defaults to true)
-     */
-    loadOnChange: PropTypes.bool,
-    /**
-     * set true to call load() onInputFocus (defaults to false)
-     */
-    loadOnFocus: PropTypes.bool,
-    /**
-     * set true to call load() onComponentDidMount (defaults to false)
-     */
-    loadOnMount: PropTypes.bool,
-    /**
-     * renders the lookup in multiple mode
-     */
-    multi: PropTypes.bool,
-    /**
-     * type of object that is queried via the lookup. if it changes, loaded items will be reset
-     */
-    objectType: PropTypes.string,
-    /**
-     * onChange handler for the lookup. has selected items as first argument
-     */
-    onChange: PropTypes.func.isRequired,
-    /**
-     * onFocus handler for the input field in the lookup
-     */
-    onFocus: PropTypes.func,
-    /**
-     * placeholder for the input field in lookup
-     */
-    placeholder: PropTypes.string,
-    /**
-     * Callback for rendering a single selection pill.
-     */
-    renderSelection: PropTypes.func,
-    /**
-     * Marks the field as required
-     */
-    required: PropTypes.bool,
-    /**
-     * current item selection. use with controlled lookup
-     */
-    selection: PropTypes.array,
-    /**
-     * if set, renders the Advanced Modal table layout
-     */
-    table: PropTypes.bool,
-    tableFields: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
-      })
-    ),
-    /**
-     * Label behind the number of Results in the table header
-     */
-    tableResultsHeading: PropTypes.string,
-  };
+  static propTypes = propTypes;
 
   static defaultProps = {
     allowCreate: false,
@@ -559,7 +563,7 @@ export class LookupRaw extends Component {
     } = this.props;
     const { open } = this.state;
 
-    const rest = omit(this.props, Object.keys(LookupRaw.propTypes));
+    const rest = omit(this.props, Object.keys(propTypes));
 
     const sldsClasses = [
       'slds-lookup',

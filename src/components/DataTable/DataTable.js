@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import omit from 'lodash.omit';
 
 import { Table, uniqueId } from '../../';
+import { propTypes as tablePropTypes } from '../Table/Table';
 
 import defaultRowRenderer from './defaultRowRenderer';
 
@@ -235,7 +236,7 @@ DataTable.defaultProps = {
 };
 
 DataTable.propTypes = {
-  ...Table.propTypes,
+  ...tablePropTypes,
 
   /**
    * Table content, an array of objects

@@ -6,38 +6,41 @@ import omit from 'lodash.omit';
 
 import { Grid, Column, Menu } from '../../';
 
+// https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
+const propTypes = {
+  /**
+   * bottom Buttons or ButtonGroup(s)
+   */
+  bottomButtons: PropTypes.node,
+  /**
+   * class name
+   */
+  className: PropTypes.string,
+  /**
+   * info that is displayed below the title
+   */
+  info: PropTypes.string,
+  /**
+   * record type header above the title
+   */
+  recordType: PropTypes.string.isRequired,
+  /**
+   * title
+   */
+  title: PropTypes.string.isRequired,
+  /**
+   * dropdown header menu that also get's triggered when a user clicks on the
+   * title headline. Must be one or more instances of MenuDropdownList
+   */
+  titleMenu: PropTypes.node,
+  /**
+   * top Buttons or ButtonGroup(s)
+   */
+  topButtons: PropTypes.node,
+};
+
 export class ObjectHomeRaw extends Component {
-  static propTypes = {
-    /**
-     * bottom Buttons or ButtonGroup(s)
-     */
-    bottomButtons: PropTypes.node,
-    /**
-     * class name
-     */
-    className: PropTypes.string,
-    /**
-     * info that is displayed below the title
-     */
-    info: PropTypes.string,
-    /**
-     * record type header above the title
-     */
-    recordType: PropTypes.string.isRequired,
-    /**
-     * title
-     */
-    title: PropTypes.string.isRequired,
-    /**
-     * dropdown header menu that also get's triggered when a user clicks on the
-     * title headline. Must be one or more instances of MenuDropdownList
-     */
-    titleMenu: PropTypes.node,
-    /**
-     * top Buttons or ButtonGroup(s)
-     */
-    topButtons: PropTypes.node,
-  };
+  static propTypes = propTypes;
 
   static defaultProps = {
     bottomButtons: null,
@@ -62,7 +65,7 @@ export class ObjectHomeRaw extends Component {
 
   render() {
     const { bottomButtons, className, info, recordType, title, titleMenu, topButtons } = this.props;
-    const rest = omit(this.props, Object.keys(ObjectHomeRaw.propTypes));
+    const rest = omit(this.props, Object.keys(propTypes));
 
     const sldsClasses = [
       'slds-page-header',
