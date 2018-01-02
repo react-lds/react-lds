@@ -109,11 +109,8 @@ class DataTable extends Component {
     const { children } = this.props;
 
     if (children) {
-      const childrenArray = Array.isArray(children)
-        ? children
-        : [children];
       this.setState({
-        columns: childrenArray
+        columns: React.Children.toArray(children)
           .filter(child => React.isValidElement(child))
           .map(child => child.props),
       });
