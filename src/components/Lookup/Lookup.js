@@ -61,7 +61,10 @@ const propTypes = {
   /**
    * label for the input field in the lookup component
    */
-  inputLabel: PropTypes.string.isRequired,
+  inputLabel: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]).isRequired,
   /**
    * label for the dropdown in the lookup component
    */

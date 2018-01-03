@@ -85,7 +85,10 @@ CheckboxGroup.propTypes = {
   /**
    * label
    */
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]).isRequired,
   /**
    * onchange handler
    */

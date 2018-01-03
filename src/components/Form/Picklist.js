@@ -161,7 +161,10 @@ PicklistRaw.propTypes = {
   /**
    * label for input label
    */
-  labelInput: PropTypes.string,
+  labelInput: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]),
   /**
    * label for multiple selected items
    */
