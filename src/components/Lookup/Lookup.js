@@ -5,6 +5,7 @@ import enhanceWithClickOutside from 'react-click-outside';
 import debounce from 'lodash.debounce';
 import omit from 'lodash.omit';
 
+// import shallowCompare from '../../utils';
 import {
   FormElement,
   FormElementControl,
@@ -216,6 +217,45 @@ export class LookupRaw extends Component {
     if (nextProps.selection) {
       this.setState({ selected: nextProps.selection });
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    function shallowEqual(objA: mixed, objB: mixed): boolean {
+      if (objA === objB) {
+        return true;
+      }
+
+      if (typeof objA !== 'object' || objA === null ||
+          typeof objB !== 'object' || objB === null) {
+        return false;
+      }
+
+      const keysA = Object.keys(objA);
+      const keysB = Object.keys(objB);
+
+      if (keysA.length !== keysB.length) {
+        return false;
+      }
+
+      // Test for A's keys different from B.
+      const bHasOwnProperty = hasOwnProperty.bind(objB);
+      // eslint-disable-next-line
+      for (var i = 0; i < keysA.length; i++) {
+        if (!bHasOwnProperty(keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    function shallowCompare(instance, nP, nS) {
+      return (
+        !shallowEqual(instance.props, nP) ||
+        !shallowEqual(instance.state, nS)
+      );
+    }
+    return shallowCompare(this, nextProps, nextState);
   }
 
   handleClickOutside = () => {
