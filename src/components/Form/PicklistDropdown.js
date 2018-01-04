@@ -111,7 +111,10 @@ PicklistDropdown.propTypes = {
   /**
    * label for the input
    */
-  labelInput: PropTypes.string,
+  labelInput: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]),
   /**
    * indicates if the input is required
    */

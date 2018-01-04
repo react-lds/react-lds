@@ -109,11 +109,8 @@ class DataTable extends Component {
     const { children } = this.props;
 
     if (children) {
-      const childrenArray = Array.isArray(children)
-        ? children
-        : [children];
       this.setState({
-        columns: childrenArray
+        columns: React.Children.toArray(children)
           .filter(child => React.isValidElement(child))
           .map(child => child.props),
       });
@@ -134,12 +131,12 @@ class DataTable extends Component {
 
   renderRow(rowData, rowIndex) {
     const { columns, id } = this.state;
-    const { getRowId, rowRenderer, selection } = this.props;
+    const { getCellData, getRowId, rowRenderer, selection } = this.props;
     const rowId = getRowId({ rowIndex, rowData });
 
     const cells = columns.map(({ cellRenderer, dataKey }) =>
       cellRenderer({
-        cellData: rowData[dataKey],
+        cellData: getCellData({ rowData, dataKey }),
         dataKey,
         rowData,
         rowId,
@@ -203,6 +200,7 @@ class DataTable extends Component {
     const rest = omit(this.props, [
       'children',
       'data',
+      'getCellData',
       'getRowId',
       'noRowsRenderer',
       'onSelect',
@@ -225,6 +223,7 @@ class DataTable extends Component {
 DataTable.defaultProps = {
   ...Table.defaultProps,
 
+  getCellData: ({ rowData, dataKey }) => rowData[dataKey],
   getRowId: ({ rowIndex }) => rowIndex,
   onSort: null,
   onSelect: null,
@@ -249,6 +248,12 @@ DataTable.propTypes = {
    * using a variable `data` array.
    */
   getRowId: PropTypes.func,
+
+  /**
+   * Getter which returns the value for a single cell. Receives the current row
+   * and the column's data key.
+   */
+  getCellData: PropTypes.func,
 
   /**
    * Render callback which is called if the data array is empty. Should return a

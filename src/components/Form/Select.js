@@ -108,7 +108,10 @@ Select.propTypes = {
   /**
    * label for the select
    */
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]).isRequired,
   /**
    * adds the multiple attribute to the select
    */
