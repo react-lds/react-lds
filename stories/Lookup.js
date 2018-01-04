@@ -58,6 +58,7 @@ stories
       emailLayout={boolean('EmailLayout', false)}
       error={text('Error', '') || undefined}
       hideErrorMessage={boolean('HideErrorMessage', false)}
+      hideLabel={boolean('HideLabel', false)}
       id="lookup"
       initialSelection={object('InitialSelection', [{
         id: '6',
@@ -84,6 +85,7 @@ stories
       emailLayout={boolean('EmailLayout', false)}
       error={text('Error', '') || undefined}
       hideErrorMessage={boolean('HideErrorMessage', false)}
+      hideLabel={boolean('HideLabel', false)}
       id="lookup"
       inputLabel={text('InputLabel', 'Accounts')}
       listLabel={text('ListLabel', 'Recent Accounts')}
@@ -115,6 +117,7 @@ stories
       emailLayout={boolean('EmailLayout', false)}
       error={text('Error', '') || undefined}
       hideErrorMessage={boolean('HideErrorMessage', false)}
+      hideLabel={boolean('HideLabel', false)}
       id="lookup"
       initialSelection={object('InitialSelection', [
         {
