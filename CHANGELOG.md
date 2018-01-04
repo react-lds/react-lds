@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.2.0
+
+* Improve storybook (new Story for Lookup)
+* DataTable now supports a cell data getter
+* Form element labels can include JSX now
+* Fix: DataTable wasn't rendering some columns in certain situations
+
 ## 3.1.2
 
 * Fix: bugs relating to removed `propTypes`:
