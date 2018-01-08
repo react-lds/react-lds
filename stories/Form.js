@@ -117,4 +117,66 @@ stories
         label="Checkbox Label"
       />
     </CheckboxGroup>
+  ))
+  .add('Horizontal form', () => (
+    <div className={text('className', 'slds-form slds-form_horizontal')}>
+      <Input
+        id="input-1"
+        placeholder="Placeholder"
+        label="Input label"
+      />
+      <Textarea
+        id="textarea-1"
+        placeholder="Placeholder"
+        label="Textarea label"
+      />
+      <CheckboxGroup
+        id="fieldset-1"
+        label="Fieldset"
+      >
+        <CheckboxRaw
+          id="checkbox-input-1"
+          label="Checkbox Label"
+        />
+        <CheckboxRaw
+          id="checkbox-input-2"
+          label="Checkbox Label"
+        />
+        <CheckboxRaw
+          id="checkbox-input-3"
+          label="Checkbox Label"
+        />
+      </CheckboxGroup>
+    </div>
+  ))
+  .add('Stacked form', () => (
+    <div className={text('className', 'slds-form slds-form_stacked')}>
+      <Input
+        id="input-1"
+        placeholder="Placeholder"
+        label="Input label"
+      />
+      <Textarea
+        id="textarea-1"
+        placeholder="Placeholder"
+        label="Textarea label"
+      />
+      <CheckboxGroup
+        id="fieldset-1"
+        label="Fieldset"
+      >
+        <CheckboxRaw
+          id="checkbox-input-1"
+          label="Checkbox Label"
+        />
+        <CheckboxRaw
+          id="checkbox-input-2"
+          label="Checkbox Label"
+        />
+        <CheckboxRaw
+          id="checkbox-input-3"
+          label="Checkbox Label"
+        />
+      </CheckboxGroup>
+    </div>
   ));
