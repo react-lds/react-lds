@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
@@ -133,7 +133,7 @@ const propTypes = {
   tableResultsHeading: PropTypes.string,
 };
 
-export class LookupRaw extends Component {
+export class LookupRaw extends PureComponent {
   static propTypes = propTypes;
 
   static defaultProps = {
