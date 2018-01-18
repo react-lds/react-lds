@@ -5,9 +5,11 @@ import { applyDecorators, decoratorProp } from '../../utils';
 
 const Button = (props) => {
   const {
+    a,
     children,
     className,
     disabled,
+    href,
     onClick,
     selected,
     size,
@@ -26,26 +28,32 @@ const Button = (props) => {
     className,
   ];
 
+  const Tag = a ? 'a' : 'button';
+
   return (
-    <button
+    <Tag
       {...rest}
       className={cx(sldsClasses)}
-      onClick={onClick}
       disabled={disabled}
+      href={href}
+      onClick={onClick}
       value={value}
       title={tooltip || title}
     >
       {(children && children.props && children.props.position === 'right') ? title : null}
       {!children ? title : children}
       {(children && children.props && children.props.position === 'left') ? title : null}
-    </button>
+    </Tag>
   );
 };
 
 Button.defaultProps = {
+  a: false,
   children: null,
   className: null,
   disabled: false,
+  href: null,
+  onClick: null,
   selected: false,
   size: null,
   title: null,
@@ -55,6 +63,10 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
+  /**
+   * render as a-tag
+   */
+  a: PropTypes.bool,
   /**
    * button content
    */
@@ -67,10 +79,14 @@ Button.propTypes = {
    * disables the button
    */
   disabled: PropTypes.bool,
+  /*
+   * Link for when using a-tag
+   */
+  href: PropTypes.string,
   /**
    * onClick handler to trigger an action
    */
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   /**
    * renders as selected
    */
