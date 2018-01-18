@@ -74,7 +74,7 @@ Button.propTypes = {
    */
   disabled: PropTypes.bool,
   /*
-   * Link for when using a-tag
+   * renders with a-tag when using href
    */
   href: PropTypes.string,
   /**
