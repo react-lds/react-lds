@@ -102,6 +102,13 @@ stories
           <MenuDropdownListItem divider>Important last item</MenuDropdownListItem>
         </MenuDropdownList>
       </Menu>
-
     </ButtonGroup>
+  ))
+  .add('Button with a tag and href', () => (
+    <Button
+      a={boolean('a', true)}
+      href={text('href', '#')}
+      flavor={array('Flavor', ['brand'])}
+      title={text('Title', 'hyperlink')}
+    />
   ));
