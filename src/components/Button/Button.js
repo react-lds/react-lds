@@ -5,7 +5,6 @@ import { applyDecorators, decoratorProp } from '../../utils';
 
 const Button = (props) => {
   const {
-    a,
     children,
     className,
     disabled,
@@ -28,7 +27,7 @@ const Button = (props) => {
     className,
   ];
 
-  const Tag = a ? 'a' : 'button';
+  const Tag = href ? 'a' : 'button';
 
   return (
     <Tag
@@ -48,7 +47,6 @@ const Button = (props) => {
 };
 
 Button.defaultProps = {
-  a: false,
   children: null,
   className: null,
   disabled: false,
@@ -63,10 +61,6 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  /**
-   * render as a-tag
-   */
-  a: PropTypes.bool,
   /**
    * button content
    */

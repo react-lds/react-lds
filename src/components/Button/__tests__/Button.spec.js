@@ -72,7 +72,7 @@ describe('<Button />', () => {
   });
 
   it('renders with a tag as well', () => {
-    mounted.setProps({ a: true });
+    mounted.setProps({ href: '#' });
     expect(mounted.hasClass('slds-button')).toBeTruthy();
     expect(mounted.type()).toBe('a');
   });

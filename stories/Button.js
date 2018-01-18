@@ -106,8 +106,7 @@ stories
   ))
   .add('Button with a tag and href', () => (
     <Button
-      a={boolean('a', true)}
-      href={text('href', '#')}
+      href={text('href', '#linkylink')}
       flavor={array('Flavor', ['brand'])}
       title={text('Title', 'hyperlink')}
     />
