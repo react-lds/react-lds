@@ -70,4 +70,10 @@ describe('<Button />', () => {
     mounted.setProps({ size: 'x-small' });
     expect(mounted.find('.slds-button').hasClass('slds-button_x-small')).toBeTruthy();
   });
+
+  it('renders with a tag as well', () => {
+    mounted.setProps({ href: '#' });
+    expect(mounted.hasClass('slds-button')).toBeTruthy();
+    expect(mounted.type()).toBe('a');
+  });
 });
