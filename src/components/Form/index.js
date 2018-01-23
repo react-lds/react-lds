@@ -11,6 +11,9 @@ import Picklist, { PicklistRaw } from './Picklist';
 import PicklistDropdown from './PicklistDropdown';
 import PicklistDropdownList from './PicklistDropdownList';
 import PicklistDropdownListItem from './PicklistDropdownListItem';
+import Radio from './Radio';
+import RadioRaw from './RadioRaw';
+import RadioGroup from './RadioGroup';
 import Select from './Select';
 import Textarea from './Textarea';
 
@@ -29,6 +32,9 @@ export {
   PicklistDropdown,
   PicklistDropdownList,
   PicklistDropdownListItem,
+  Radio,
+  RadioRaw,
+  RadioGroup,
   Select,
   Textarea
 };

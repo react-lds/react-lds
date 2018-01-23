@@ -2,7 +2,17 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { text, boolean, select, number, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { Input, Textarea, Select, PicklistRaw as Picklist, Checkbox, CheckboxRaw, CheckboxGroup } from '../src';
+import {
+  Input,
+  Textarea,
+  Select,
+  PicklistRaw as Picklist,
+  Checkbox,
+  CheckboxRaw,
+  CheckboxGroup,
+  RadioRaw,
+  RadioGroup,
+} from '../src';
 import { getUtilityIcons } from './utils/helpers';
 
 const stories = storiesOf('Form', module);
@@ -117,6 +127,31 @@ stories
         label="Checkbox Label"
       />
     </CheckboxGroup>
+  ))
+  .add('Radio Group', () => (
+    <RadioGroup
+      error={text('Error', '') || undefined}
+      id="fieldset-2"
+      label="Fieldset"
+      onChange={action()}
+      required={boolean('Required', false) || undefined}
+    >
+      <RadioRaw
+        id="radio-input-1"
+        label="Radio Label"
+        name="group-1"
+      />
+      <RadioRaw
+        id="radio-input-2"
+        label="Radio Label"
+        name="group-1"
+      />
+      <RadioRaw
+        id="radio-input-3"
+        label="Radio Label"
+        name="group-1"
+      />
+    </RadioGroup>
   ))
   .add('Horizontal form', () => (
     <div className={text('className', 'slds-form slds-form_horizontal')}>
