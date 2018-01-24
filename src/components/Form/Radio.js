@@ -35,7 +35,7 @@ Radio.defaultProps = {
 
 Radio.propTypes = {
   /**
-  * renders an error for the radio
+   * renders an error for the radio
    */
   error: PropTypes.string,
   /**

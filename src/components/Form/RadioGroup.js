@@ -23,7 +23,6 @@ const RadioGroup = (props) => {
     ...rest
   } = props;
 
-
   const wrapChildrenWithError = () => {
     if (!error || hideErrorMessage) {
       return children;
@@ -63,7 +62,7 @@ RadioGroup.defaultProps = {
 
 RadioGroup.propTypes = {
   /**
-   * The radio buttons to render
+   * the radio buttons to render
    */
   children: PropTypes.node.isRequired,
   /**
