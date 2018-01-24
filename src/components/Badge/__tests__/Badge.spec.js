@@ -7,7 +7,7 @@ describe('<Badge />', () => {
   let mounted = null;
 
   beforeEach(() => {
-    mounted = shallow(<Badge label="Foo" />);
+    mounted = shallow(<Badge>Foo</Badge>);
   });
 
   it('renders a label', () => {

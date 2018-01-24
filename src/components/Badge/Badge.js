@@ -30,13 +30,13 @@ Badge.defaultProps = {
 };
 
 Badge.propTypes = {
-  /** Text that will be displayed */
+  /** Either a string or a string & an icon */
   children: PropTypes.node.isRequired,
   /** (optional) className */
   className: PropTypes.string,
   /**
-   * Badge flavor: array of flavors, you can also provide a single flavor string. Flavors: inverse,
-   * lightest
+   * Badge flavor: array of flavors, you can also provide a single flavor string.
+   * Flavors: inverse, lightest
   */
   flavor: decoratorProp([
     'inverse',

@@ -10,7 +10,7 @@ const IconOnlyBadge = ({ children, title, ...rest }) => (
 );
 
 IconOnlyBadge.propTypes = {
-  /** The Icon to display */
+  /** The Icon to display. Can also be a string for notification-badges */
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
   /** Description of the Icon */
   title: PropTypes.string.isRequired,
