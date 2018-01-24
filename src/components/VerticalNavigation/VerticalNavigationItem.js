@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { IconSVG } from '../../';
+import { IconOnlyBadge, IconSVG } from '../../';
 
 const VerticalNavigationItem = (props) => {
   const {
@@ -25,10 +25,9 @@ const VerticalNavigationItem = (props) => {
   ];
 
   const renderNotification = () => (
-    <span className="slds-badge slds-col_bump-left">
-      {notification}
-      <span className="slds-assistive-text">{notificationLabel || notification}</span>
-    </span>
+    <IconOnlyBadge className="slds-col_bump-left" title={notificationLabel || `${notification}`}>
+      {`${notification}`}
+    </IconOnlyBadge>
   );
 
   const renderIcon = () => {
@@ -58,7 +57,7 @@ const VerticalNavigationItem = (props) => {
       <a className={cx(sldsClasses)} aria-current={isActive ? 'page' : null} {...rest}>
         {icon && renderIcon()}
         {children}
-        {notification && renderNotification()}
+        {notification != null && renderNotification()}
       </a>
     </li>
   );
