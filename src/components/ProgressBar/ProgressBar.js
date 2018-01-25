@@ -2,21 +2,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+const getBarValueStyle = num => ({
+  width: `${num}%`,
+});
+
 const ProgressBar = (props) => {
-  const { circular, className, progress, size, ...rest } = props;
+  const {
+    circular,
+    className,
+    progress,
+    size,
+    success,
+    ...rest
+  } = props;
+
+  const baseClass = 'slds-progress-bar';
 
   const sldsClasses = [
-    'slds-progress-bar',
-    { [`slds-progress-bar_${size}`]: !!size },
-    { 'slds-progress-bar_circular': circular },
+    baseClass,
+    { [`${baseClass}_${size}`]: !!size },
+    { [`${baseClass}_circular`]: circular },
     className
   ];
 
-  const clampedProgress = Math.min(Math.max(progress, 0), 100);
+  const valueClasses = [
+    `${baseClass}__value`,
+    { [`${baseClass}__value_success`]: success },
+  ];
 
-  const barValueStyle = {
-    width: `${clampedProgress}%`,
-  };
+  const clampedProgress = Math.min(Math.max(progress, 0), 100);
 
   return (
     <div
@@ -27,8 +41,8 @@ const ProgressBar = (props) => {
       aria-valuenow={clampedProgress}
       role="progressbar"
     >
-      <span className="slds-progress-bar__value" style={barValueStyle}>
         <span className="slds-assistive-text">{`Progress: ${clampedProgress}%`}</span>
+      <span className={cx(valueClasses)} style={getBarValueStyle(clampedProgress)}>
       </span>
     </div>
   );
@@ -39,6 +53,7 @@ ProgressBar.defaultProps = {
   className: null,
   progress: 0,
   size: null,
+  success: false,
 };
 
 ProgressBar.propTypes = {
@@ -51,13 +66,17 @@ ProgressBar.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * progress value
+   * Progress value (between 0-100)
    */
   progress: PropTypes.number,
   /**
-   * height of the bar. Sizes: x-small, small, medium, large
+   * Available sizes: x-small, small, medium, large
    */
   size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
+  /**
+   * Render a green progress bar
+   */
+  success: PropTypes.bool,
 };
 
 export default ProgressBar;
