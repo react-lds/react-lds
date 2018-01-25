@@ -2,27 +2,52 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+import { Button, ButtonIcon } from '../../';
+
 class Carousel extends Component {
   state = {
     activeIndex: 0,
     panels: [],
   }
 
-  componentWillMount() {
-    this.updatePanels(this.props.children);
-  }
+  autoPlayId = null // eslint-disable-line react/sort-comp
+  autoPlayFlavors = ['icon-border-filled', 'icon-x-small'];
 
-  componentWillReceiveProps({ children: nextChildren }) {
-    const { children: prevChildren } = this.props;
-    if (nextChildren !== prevChildren) {
-      this.updatePanels(nextChildren);
+  componentWillMount() {
+    const { autoPlayActive, children } = this.props;
+
+    this.updatePanels(children);
+
+    if (autoPlayActive) {
+      this.startAutoPlay();
     }
   }
 
-  onClickIndicator = (e) => {
+  componentWillUnmount() {
+    if (this.autoPlayId) {
+      clearInterval(this.autoPlayId);
+    }
+  }
+
+  componentWillReceiveProps({ autoPlayActive: nextAutoPlayActive, children: nextChildren }) {
+    const { children: prevChildren } = this.props;
+    const { autoPlayActive: prevAutoPlayActive } = this.state;
+
+    if (nextChildren !== prevChildren) {
+      this.updatePanels(nextChildren);
+    }
+
+    if (!!nextAutoPlayActive !== !!prevAutoPlayActive) {
+      if (nextAutoPlayActive) this.startAutoPlay();
+      else this.stopAutoPlay();
+    }
+  }
+
+  onClickIndicator = e => this.setActivePanel(Number(e.target.dataset.index));
+
+  setActivePanel(nextActiveIndex) {
     const { activeIndex, panels } = this.state;
 
-    const nextActiveIndex = Number(e.target.dataset.index);
     const nextPanels = [...panels];
 
     nextPanels[activeIndex] = React.cloneElement(
@@ -39,7 +64,7 @@ class Carousel extends Component {
       activeIndex: nextActiveIndex,
       panels: nextPanels,
     });
-  };
+  }
 
   updatePanels(panels) {
     const { activeIndex } = this.state;
@@ -53,6 +78,62 @@ class Carousel extends Component {
     });
   }
 
+  toggleAutoPlay = () => {
+    if (this.autoPlayId) {
+      this.stopAutoPlay();
+    } else {
+      this.startAutoPlay();
+    }
+  }
+
+  startAutoPlay() {
+    const { autoPlayInterval } = this.props;
+    this.autoPlayId = setInterval(this.advanceAutoPlay, autoPlayInterval);
+    this.setState({ autoPlayActive: true });
+  }
+
+  stopAutoPlay() {
+    clearInterval(this.autoPlayId);
+    this.autoPlayId = null;
+    this.setState({ autoPlayActive: false });
+  }
+
+  advanceAutoPlay = () => {
+    const { activeIndex, panels } = this.state;
+
+    const nextActiveIndex = activeIndex + 1;
+
+    if (nextActiveIndex >= panels.length) {
+      this.setActivePanel(0);
+    } else {
+      this.setActivePanel(nextActiveIndex);
+    }
+  }
+
+  renderAutoPlay() {
+    const { autoPlayStartText, autoPlayStopText } = this.props;
+    const { autoPlayActive } = this.state;
+
+    const icon = autoPlayActive ? 'pause' : 'right';
+    const assistiveText = autoPlayActive
+      ? autoPlayStopText
+      : autoPlayStartText;
+
+    return (
+      <span className="slds-carousel__autoplay">
+        <Button
+          flavor={this.autoPlayFlavors}
+          onClick={this.toggleAutoPlay}
+          size="x-small"
+          title={assistiveText}
+        >
+          <ButtonIcon sprite="utility" icon={icon} />
+          <span className="slds-assistive-text">{assistiveText}</span>
+        </Button>
+      </span>
+    );
+  }
+
   renderIndicator = ({ props: { active, id, title } }, index) => {
     const tabIndex = active ? 0 : -1;
 
@@ -62,7 +143,7 @@ class Carousel extends Component {
     );
 
     return (
-      <li className="slds-carousel__indicator" role="presentation">
+      <li className="slds-carousel__indicator" key={id} role="presentation">
         <a
           className={actionClasses}
           role="tab"
@@ -81,8 +162,8 @@ class Carousel extends Component {
 
   render() {
     const {
+      autoPlay,
       className,
-      ...rest
     } = this.props;
 
     const {
@@ -98,8 +179,9 @@ class Carousel extends Component {
     const translateX = `translateX(-${activeIndex * 100}%)`;
 
     return (
-      <div {...rest} className={cx(sldsClasses)}>
+      <div className={cx(sldsClasses)}>
         <div className="slds-carousel__stage">
+          {autoPlay && this.renderAutoPlay()}
           <div className="slds-carousel__panels" style={{ transform: translateX }}>
             {panels}
           </div>
@@ -113,11 +195,36 @@ class Carousel extends Component {
 }
 
 Carousel.defaultProps = {
+  autoPlay: false,
+  autoPlayActive: false,
+  autoPlayInterval: 4000,
+  autoPlayStartText: 'Start auto-play',
+  autoPlayStopText: 'Stop auto-play',
   children: [],
   className: null,
 };
 
 Carousel.propTypes = {
+  /**
+   * toggle autoplay mode
+   */
+  autoPlay: PropTypes.bool,
+  /**
+   * control whether autoplay is active or not
+   */
+  autoPlayActive: PropTypes.bool,
+  /**
+   * assistive text for autoplay button
+   */
+  autoPlayStartText: PropTypes.string,
+  /**
+   * assistive text for autoplay button
+   */
+  autoPlayStopText: PropTypes.string,
+  /**
+   * change autoplay interval, defaults to 4000ms
+   */
+  autoPlayInterval: PropTypes.number,
   /**
    * list of carousel panels
    */

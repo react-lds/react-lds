@@ -1,20 +1,16 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { text } from '@storybook/addon-knobs';
-import { Carousel, CarouselPanel, Button } from '../src';
+import { boolean, number } from '@storybook/addon-knobs';
+import { Carousel, CarouselPanel } from '../src';
 
 const stories = storiesOf('Carousel', module);
 
 stories
   .add('Default', () => (
     <Carousel
-      icon={text('Icon', 'contact')}
-      sprite={text('Sprite', 'standard')}
-      title={text('Title', 'Base Carousel')}
-      headerRight={<Button flavor="neutral" title="New" onClick={action('click')} />}
-      body="Body would be here"
-      footer="Footer"
+      autoPlay={boolean('Auto play', false)}
+      autoPlayActive={boolean('Auto play active', false)}
+      autoPlayInterval={number('Auto play interval', 4000)}
     >
       <CarouselPanel id="panel-1" imageUrl="/assets/images/carousel/carousel-01.jpg" title="Visit App Exchange">
         Extend Salesforce with the #1 business marketplace.
