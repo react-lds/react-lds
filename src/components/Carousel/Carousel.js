@@ -37,13 +37,21 @@ class Carousel extends Component {
       this.updatePanels(nextChildren);
     }
 
-    if (!!nextAutoPlayActive !== !!prevAutoPlayActive) {
+    if (!!nextAutoPlayActive !== prevAutoPlayActive) {
       if (nextAutoPlayActive) this.startAutoPlay();
       else this.stopAutoPlay();
     }
   }
 
   onClickIndicator = e => this.setActivePanel(Number(e.target.dataset.index));
+
+  onKeyboardInteraction = (e) => {
+    if (e.keyCode === 37) {
+      this.activatePreviousPanel();
+    } else if (e.keyCode === 39) {
+      this.activateNextPanel();
+    }
+  }
 
   setActivePanel(nextActiveIndex) {
     const { activeIndex, panels } = this.state;
@@ -88,7 +96,7 @@ class Carousel extends Component {
 
   startAutoPlay() {
     const { autoPlayInterval } = this.props;
-    this.autoPlayId = setInterval(this.advanceAutoPlay, autoPlayInterval);
+    this.autoPlayId = setInterval(this.activateNextPanel, autoPlayInterval);
     this.setState({ autoPlayActive: true });
   }
 
@@ -98,13 +106,25 @@ class Carousel extends Component {
     this.setState({ autoPlayActive: false });
   }
 
-  advanceAutoPlay = () => {
+  activateNextPanel = () => {
     const { activeIndex, panels } = this.state;
 
     const nextActiveIndex = activeIndex + 1;
 
     if (nextActiveIndex >= panels.length) {
       this.setActivePanel(0);
+    } else {
+      this.setActivePanel(nextActiveIndex);
+    }
+  }
+
+  activatePreviousPanel = () => {
+    const { activeIndex, panels } = this.state;
+
+    const nextActiveIndex = activeIndex - 1;
+
+    if (nextActiveIndex < 0) {
+      this.setActivePanel(panels.length - 1);
     } else {
       this.setActivePanel(nextActiveIndex);
     }
@@ -179,7 +199,7 @@ class Carousel extends Component {
     const translateX = `translateX(-${activeIndex * 100}%)`;
 
     return (
-      <div className={cx(sldsClasses)}>
+      <div className={cx(sldsClasses)} onKeyDown={this.onKeyboardInteraction}>
         <div className="slds-carousel__stage">
           {autoPlay && this.renderAutoPlay()}
           <div className="slds-carousel__panels" style={{ transform: translateX }}>
