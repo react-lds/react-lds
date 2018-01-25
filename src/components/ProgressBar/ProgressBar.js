@@ -8,6 +8,7 @@ const getBarValueStyle = num => ({
 
 const ProgressBar = (props) => {
   const {
+    assistiveLabel,
     circular,
     className,
     progress,
@@ -41,14 +42,15 @@ const ProgressBar = (props) => {
       aria-valuenow={clampedProgress}
       role="progressbar"
     >
-        <span className="slds-assistive-text">{`Progress: ${clampedProgress}%`}</span>
       <span className={cx(valueClasses)} style={getBarValueStyle(clampedProgress)}>
+        <span className="slds-assistive-text">{`${assistiveLabel}: ${clampedProgress}%`}</span>
       </span>
     </div>
   );
 };
 
 ProgressBar.defaultProps = {
+  assistiveLabel: 'Progress',
   circular: false,
   className: null,
   progress: 0,
@@ -58,7 +60,11 @@ ProgressBar.defaultProps = {
 
 ProgressBar.propTypes = {
   /**
-   * ProgressBar with circular ends
+   * Assistive label. Interpolates to `${label}: x%`
+   */
+  assistiveLabel: PropTypes.string,
+  /**
+   * Render progress bar with round edges instead
    */
   circular: PropTypes.bool,
   /**
