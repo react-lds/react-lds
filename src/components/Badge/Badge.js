@@ -10,6 +10,7 @@ const Badge = (props) => {
     className,
     flavor,
     theme,
+    title,
     ...rest
   } = props;
 
@@ -20,13 +21,19 @@ const Badge = (props) => {
     className,
   ];
 
-  return <span {...rest} className={cx(sldsClasses)}>{children}</span>;
+  return (
+    <span {...rest} className={cx(sldsClasses)} title={title}>
+      {children}
+      {title && <span className="slds-assistive-text">{title}</span>}
+    </span>
+  );
 };
 
 Badge.defaultProps = {
   className: null,
   flavor: null,
   theme: null,
+  title: null,
 };
 
 Badge.propTypes = {
@@ -44,6 +51,8 @@ Badge.propTypes = {
   ]),
   /** DEPRECTATED: SLDS Theme */
   theme: PropTypes.oneOf(THEMES),
+  /** Optional title that will be rendered as assistive-text */
+  title: PropTypes.string,
 };
 
 export default Badge;

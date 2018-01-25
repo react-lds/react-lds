@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { applyDecorators, decoratorProp } from '../../utils';
 
 const Spinner = (props) => {
   const { className, flavor, size, ...rest } = props;
@@ -8,7 +9,7 @@ const Spinner = (props) => {
   const sldsClasses = [
     'slds-spinner',
     { [`slds-spinner_${size}`]: !!size },
-    { [`slds-spinner_${flavor}`]: !!flavor },
+    applyDecorators(flavor, 'spinner'),
     className
   ];
 
@@ -33,9 +34,10 @@ Spinner.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * flavor
+   * Spinner flavor: array of flavors, you can also provide a single flavor string. Flavors: neutral,
+   brand, inverse, delayed
    */
-  flavor: PropTypes.oneOf(['brand', 'inverse']),
+  flavor: decoratorProp(['brand', 'delayed', 'inverse']),
   /**
    * spinner sizes: xx-small, x-small, small, medium, large
    */

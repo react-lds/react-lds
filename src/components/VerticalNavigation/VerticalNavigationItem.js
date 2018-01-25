@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { IconOnlyBadge, IconSVG } from '../../';
+import { Badge, IconSVG } from '../../';
 
 const VerticalNavigationItem = (props) => {
   const {
@@ -25,9 +25,9 @@ const VerticalNavigationItem = (props) => {
   ];
 
   const renderNotification = () => (
-    <IconOnlyBadge className="slds-col_bump-left" title={notificationLabel || `${notification}`}>
+    <Badge className="slds-col_bump-left" title={notificationLabel || `${notification}`}>
       {`${notification}`}
-    </IconOnlyBadge>
+    </Badge>
   );
 
   const renderIcon = () => {
