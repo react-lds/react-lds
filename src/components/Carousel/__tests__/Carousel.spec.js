@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
-import Card from '../Card';
+import Carousel from '../Carousel';
 
-describe('<Card />', () => {
+describe('<Carousel />', () => {
   let mounted = null;
   let props = {};
 
@@ -14,41 +14,13 @@ describe('<Card />', () => {
 
   beforeEach(() => {
     props = {
-      icon: 'contact',
-      sprite: 'standard',
-      title: 'Base Card',
-      headerRight: 'Right Header',
-      body: 'Body',
-      footer: 'footer',
     };
 
     mounted = mount(
-      <Card {...props} />, options);
+      <Carousel {...props} />, options);
   });
 
-  it('renders the icon', () => {
-    expect(mounted.find('svg').length).toEqual(1);
-  });
-
-  it('renders the header', () => {
-    expect(mounted.find('h2 span.slds-text-heading_small').first().text()).toEqual(props.title);
-  });
-
-  it('renders headerRight', () => {
-    expect(mounted.find('div.slds-no-flex').first().text()).toEqual(props.headerRight);
-  });
-
-  it('renders body', () => {
-    expect(mounted.find('div.slds-card__body').first().text()).toEqual(props.body);
-  });
-
-  it('renders footer', () => {
-    expect(mounted.find('footer.slds-card__footer').first().text()).toEqual(props.footer);
-  });
-
-  it('applies className and rest-properties', () => {
-    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
-    expect(mounted.find('.slds-card').hasClass('foo')).toBeTruthy();
-    expect(mounted.find('.slds-card').prop('data-test')).toEqual('bar');
+  it('renders without', () => {
+    expect(mounted.find('.slds-carousel').length).toEqual(1);
   });
 });
