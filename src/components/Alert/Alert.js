@@ -5,7 +5,7 @@ import { THEMES, getThemeClass } from '../../utils';
 
 import { Button, ButtonIcon } from '../../';
 
-const Notification = (props) => {
+const Alert = (props) => {
   const {
     children,
     className,
@@ -61,7 +61,7 @@ const Notification = (props) => {
   );
 };
 
-Notification.defaultProps = {
+Alert.defaultProps = {
   className: null,
   icon: null,
   toast: false,
@@ -69,7 +69,7 @@ Notification.defaultProps = {
   theme: 'info',
 };
 
-Notification.propTypes = {
+Alert.propTypes = {
   /**
    * notification content
    */
@@ -100,4 +100,4 @@ Notification.propTypes = {
   theme: PropTypes.oneOf(THEMES),
 };
 
-export default Notification;
+export default Alert;

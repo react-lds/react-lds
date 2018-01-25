@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import Notification from '../Notification';
+import Alert from '../Alert';
 
-describe('<Notification />', () => {
+describe('<Alert />', () => {
   let mounted = null;
   let props = {};
 
@@ -14,7 +14,7 @@ describe('<Notification />', () => {
       title: 'foo',
     };
 
-    mounted = mount(<Notification {...props}>{child}</Notification>);
+    mounted = mount(<Alert {...props}>{child}</Alert>);
   });
 
   it('renders the correct markup', () => {
