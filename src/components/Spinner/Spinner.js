@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { applyDecorators, decoratorProp } from '../../utils';
 
 const Spinner = (props) => {
   const {
@@ -13,10 +12,13 @@ const Spinner = (props) => {
     ...rest
   } = props;
 
+  const baseClass = 'slds-spinner';
+
   const sldsClasses = [
-    'slds-spinner',
-    { [`slds-spinner_${size}`]: !!size },
-    applyDecorators(flavor, 'spinner'),
+    baseClass,
+    { [`${baseClass}_${size}`]: !!size },
+    { [`${baseClass}_${flavor}`]: !!flavor },
+    { [`${baseClass}_delayed`]: !!delayed },
     className
   ];
 
@@ -32,6 +34,7 @@ const Spinner = (props) => {
 Spinner.defaultProps = {
   assistiveLabel: 'Loading',
   className: null,
+  delayed: false,
   flavor: null,
   size: 'medium'
 };
@@ -46,10 +49,13 @@ Spinner.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Spinner flavor: array of flavors, you can also provide a single flavor string. Flavors: neutral,
-   brand, inverse, delayed
+   * Adds a 300ms start delay
    */
-  flavor: decoratorProp(['brand', 'delayed', 'inverse']),
+  delayed: PropTypes.bool,
+  /**
+   * Flavor. Can be either 'brand' or 'inverse'
+   */
+  flavor: PropTypes.oneOf(['brand', 'inverse']),
   /**
    * spinner sizes: xx-small, x-small, small, medium, large
    */
