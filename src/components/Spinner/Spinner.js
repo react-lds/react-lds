@@ -4,7 +4,14 @@ import cx from 'classnames';
 import { applyDecorators, decoratorProp } from '../../utils';
 
 const Spinner = (props) => {
-  const { className, flavor, size, ...rest } = props;
+  const {
+    assistiveLabel,
+    className,
+    delayed,
+    flavor,
+    size,
+    ...rest
+  } = props;
 
   const sldsClasses = [
     'slds-spinner',
@@ -14,8 +21,8 @@ const Spinner = (props) => {
   ];
 
   return (
-    <div {...rest} className={cx(sldsClasses)} role="status">
-      <span className="slds-assistive-text">Loading</span>
+    <div {...rest} role="status" className={cx(sldsClasses)}>
+      <span className="slds-assistive-text">{assistiveLabel}</span>
       <div className="slds-spinner__dot-a" />
       <div className="slds-spinner__dot-b" />
     </div>
@@ -23,12 +30,17 @@ const Spinner = (props) => {
 };
 
 Spinner.defaultProps = {
+  assistiveLabel: 'Loading',
   className: null,
   flavor: null,
   size: 'medium'
 };
 
 Spinner.propTypes = {
+  /**
+   * Label that will be shown on hover
+   */
+  assistiveLabel: PropTypes.string,
   /**
    * class name
    */
