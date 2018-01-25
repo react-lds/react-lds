@@ -3,12 +3,24 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { applyDecorators, decoratorProp } from '../../utils';
 
+export const gutterSizes = [
+  'xxx-small',
+  'xx-small',
+  'x-small',
+  'small',
+  'medium',
+  'large',
+  'x-large',
+  'xx-large',
+];
+
 const Grid = (props) => {
   const {
     align,
     children,
     className,
     flavor,
+    gutters,
     pullPadding,
     verticalAlign,
     wrap,
@@ -27,13 +39,22 @@ const Grid = (props) => {
     className,
   ];
 
-  return (<div {...rest} className={cx(sldsClasses)}>{children}</div>);
+  if (gutters === true) {
+    sldsClasses.push('slds-gutters');
+  }
+
+  if (gutters && gutters !== true) {
+    sldsClasses.push(`slds-gutters_${gutters}`);
+  }
+
+  return <div {...rest} className={cx(sldsClasses)}>{children}</div>;
 };
 
 Grid.defaultProps = {
   align: null,
   children: null,
   className: null,
+  gutters: null,
   flavor: [],
   pullPadding: null,
   verticalAlign: null,
@@ -65,6 +86,11 @@ Grid.propTypes = {
    * Can either either: center, end, space, spread
    */
   align: PropTypes.oneOf(['center', 'end', 'space', 'spread']),
+  /**
+   * Automatic gutters for all children.
+   * Can either be true or any valid slds size string (xxx-small to xx-large)
+   */
+  gutters: PropTypes.oneOf([true, false, ...gutterSizes]),
   /**
    * Controls how columns are aligned vertically.
    * Can either either: center, end, space

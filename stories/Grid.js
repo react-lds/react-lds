@@ -6,21 +6,47 @@ import { getThemes } from './utils/helpers';
 
 const stories = storiesOf('Grid System', module);
 
+const sizeOptions = [
+  'xxx-small',
+  'xx-small',
+  'x-small',
+  'small',
+  'medium',
+  'large',
+  'x-large',
+  'xx-large',
+];
+
+const alignOptions = ['center', 'end', 'space', 'spread', 'start'];
+const vAlignOptions = ['center', 'end', 'start'];
+
 stories
   .add('Automatic sizing', () => (
-    <Grid flavor={array('Grid Flavor', ['pull-padded', 'reverse'])} className="slds-m-bottom--large">
-      <Column flavor={array('Column Flavor', ['padded'])}>
+    <Grid
+      className="slds-m-bottom--large"
+      flavor={array('Grid Flavor', [])}
+      gutters={select('Gutters', sizeOptions, 'small')}
+      align={select('Horizontal Alignment', alignOptions, 'start')}
+      verticalAlign={select('Vertical Alignment', vAlignOptions, 'start')}
+    >
+      <Column flavor={array('Column Flavor', [])}>
         <Box theme={getThemes('Box Theme')}>col 1 lalalalallala</Box>
       </Column>
-      <Column flavor={array('Column Flavor', ['padded'])}>
+      <Column flavor={array('Column Flavor', [])}>
         <Box className="pb-test" theme={getThemes('Box Theme')}>col 2 lololololollo</Box>
       </Column>
     </Grid>
   ))
   .add('Manual sizing', () => (
-    <Grid flavor={array('Grid Flavor', ['pull-padded'])} wrap>
+    <Grid
+      flavor={array('Grid Flavor', [])}
+      pullPadding="small"
+      align={select('Horizontal Alignment', alignOptions, 'start')}
+      verticalAlign={select('Vertical Alignment', vAlignOptions, 'start')}
+      wrap
+    >
       <Column
-        className="slds-m-bottom--large"
+        className="slds-m-bottom--large slds-p-horizontal_small"
         variation={array('Column Variation', [])}
         flavor={array('Column Flavor', ['padded'])}
         sizeOf={text('SizeOf Column 1', '1-1')}
@@ -33,8 +59,8 @@ stories
         id est laborum.</Box>
       </Column>
       <Column
-        className="slds-m-bottom--large"
         flavor={array('Column Flavor', ['padded'])}
+        className="slds-m-bottom--large slds-p-horizontal_small"
         sizeOf={text('SizeOf Column 2', '1-2')}
         medium-sizeOf={text('Medium-sizeOf Column 2', '5-6')}
         large-sizeOf={text('Large-sizeOf Column 2', '8-12')}
@@ -47,8 +73,8 @@ stories
         id est laborum.</Box>
       </Column>
       <Column
-        className="slds-m-bottom--large"
         flavor={array('Column Flavor', ['padded'])}
+        className="slds-m-bottom--large slds-p-horizontal_small"
         sizeOf={text('SizeOf Column 3', '1-2')}
         medium-sizeOf={text('Medium-sizeOf Column 3', '1-6')}
         large-sizeOf={text('Large-sizeOf Column 3', '4-12')}
@@ -61,8 +87,8 @@ stories
         id est laborum.</Box>
       </Column>
       <Column
-        className="slds-m-bottom--large"
         flavor={array('Column Flavor', ['padded'])}
+        className="slds-m-bottom--large slds-p-horizontal_small"
         sizeOf={text('SizeOf Column 4', '1-2')}
         medium-sizeOf={text('Medium-sizeOf Column 4', '1-2')}
         large-sizeOf={text('Large-sizeOf Column 4', '1-3')}
