@@ -16,7 +16,7 @@ stories
     <Alert
       title={text('Title', 'info')}
       theme={select('Theme', ['', 'warning', 'error', 'offline'], '') || undefined}
-      icon={<IconSVG sprite="utility" size="x-small" icon="warning" />}
+      icon={<IconSVG sprite="utility" icon="warning" />}
       onClickClose={action('clicked close')}
     >
       <h2>
@@ -28,7 +28,7 @@ stories
     <Alert
       title={text('Title', 'info')}
       theme={select('Theme', ['', 'warning', 'error', 'offline'], '') || undefined}
-      icon={<IconSVG sprite="utility" size="small" icon="warning" />}
+      icon={<IconSVG sprite="utility" icon="warning" />}
       toast
       onClickClose={action('clicked close')}
     >

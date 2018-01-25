@@ -21,31 +21,28 @@ const Alert = (props) => {
     'slds-notify',
     { 'slds-notify_toast': !!toast },
     { 'slds-notify_alert': !toast },
-    'slds-theme_alert-texture',
+    { 'slds-theme_alert-texture': !toast },
     getThemeClass(theme),
     className,
   ];
 
-  const wrapIcon = () => (
-    <span className="slds-icon_container slds-m-right_small slds-no-flex slds-align-top">
-      {icon}
-      <span className="slds-assistive-text">{title}</span>
-    </span>
-  );
+  const flavors = ['icon', 'icon-inverse'];
 
-  const wrapToastContent = content => (
-    <div className="slds-notify__content">
-      {content}
-    </div>
-  );
+  let iconEl = null;
 
-  const flavors = ['icon'];
-  if (theme !== 'warning') flavors.push('icon-inverse');
+  if (React.isValidElement(icon)) {
+    iconEl = React.cloneElement(icon, { size: toast ? 'small' : 'x-small' });
+  }
 
   return (
     <div className="slds-notify_container">
       <div {...rest} className={cx(sldsClasses)} role="alert">
-        {icon && wrapIcon(icon)}
+        {iconEl && (
+          <span className="slds-icon_container slds-m-right_small slds-no-flex slds-align-top">
+            {iconEl}
+            <span className="slds-assistive-text">{title}</span>
+          </span>
+        )}
         <Button
           flavor={flavors}
           className="slds-notify__close"
@@ -55,7 +52,7 @@ const Alert = (props) => {
           <span className="slds-assistive-text">Close</span>
         </Button>
         <span className="slds-assistive-text">{title}</span>
-        {toast ? wrapToastContent(children) : children }
+        {toast ? <div className="slds-notify__content">{children}</div> : children }
       </div>
     </div>
   );
