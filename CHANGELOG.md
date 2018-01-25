@@ -19,6 +19,8 @@
 * _Card_: passing `icon` names, `sprite` and `body` has been deprecated
 * _Card_: Added `boundary` prop
 * _Tabs_: It is now possible to render Tabs as Card by passing the `styled` prop
+* _Alert_: **Breaking** `Notification` is now `Alert`
+* _Alert_: Icon sizes are automatically applied to Alert/Toast icons
 
 ## 3.2.0
 

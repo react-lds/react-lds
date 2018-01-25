@@ -26,14 +26,6 @@ describe('<Alert />', () => {
     expect(notification.contains(child)).toBeTruthy();
   });
 
-  it('renders non-inverse buttons for the warning theme', () => {
-    mounted.setProps({ toast: true, theme: 'info' });
-    expect(mounted.find('button').hasClass('slds-button_icon-inverse')).toBeTruthy();
-
-    mounted.setProps({ theme: 'warning' });
-    expect(mounted.find('button').hasClass('slds-button_icon-inverse')).toBeFalsy();
-  });
-
   it('renders large close icons for toasts', () => {
     mounted.setProps({ toast: true });
     expect(mounted.find('button svg').hasClass('slds-button__icon_large')).toBeTruthy();
