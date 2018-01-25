@@ -2,9 +2,11 @@
 
 ## UNRELEASED
 
-* **BREAKING**: `<Badge />` now uses `children` instead of `label`
-* Add support for icons in Badges, add `<IconOnlyBadge />`
-* Add `xx-small` size to `Icon` & `IconSVG`
+* _Badge_: **BREAKING** `<Badge />` now uses `children` instead of `label`
+* _Badge_: Add support for icons in Badges
+* _Icon/IconSVG_: Add `xx-small` size
+* _Spinner_: Add `delayed` prop
+* _Spinner_: Add support for configuring `assistiveLabel`
 
 ## 3.2.0
 
