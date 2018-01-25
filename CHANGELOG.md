@@ -7,6 +7,11 @@
 * _Icon/IconSVG_: Add `xx-small` size
 * _Spinner_: Add `delayed` prop
 * _Spinner_: Add support for configuring `assistiveLabel`
+* _Grid_: Added `gutters` prop
+* _Grid_: **Breaking** Alignment flavors have been moved to `align` prop
+* _Grid_: **Breaking** Vertical alignment flavors have been moved to `verticalAlign`
+* _Grid_: **Breaking** pullPadding flavors have been moved to `pullPadding` prop
+* _Column_: **Breaking** `flavors` & `align` have been deprecated
 
 ## 3.2.0
 

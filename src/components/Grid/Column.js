@@ -85,11 +85,11 @@ Column.defaultProps = {
 
 Column.propTypes = {
   /**
-   * column content
+   * Column content
    */
   children: PropTypes.node.isRequired,
   /**
-   * class name
+   * (Optional) class name. Usually used to apply `slds-p_horizontal` classes
    */
   className: PropTypes.string,
   /*
@@ -105,15 +105,15 @@ Column.propTypes = {
     'shrink',
     'shrink-none',
   ]),
-  /**
-   * non-responsive sizeOf
-   */
-  sizeOf: sizeOfPropType, // eslint-disable-line react/require-default-props
+
   /**
    * omit 'slds-col'
    */
   omitCol: PropTypes.bool,
-
+  /**
+   * non-responsive sizeOf
+   */
+  sizeOf: sizeOfPropType, // eslint-disable-line react/require-default-props
   ...validBreakpoints.reduce((_propTypes, breakpoint) => {
     const propTypes = _propTypes;
     propTypes[breakPointProp(breakpoint)] = sizeOfPropType;
