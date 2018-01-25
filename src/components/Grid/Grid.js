@@ -9,6 +9,7 @@ const Grid = (props) => {
     children,
     className,
     flavor,
+    verticalAlign,
     wrap,
     ...rest
   } = props;
@@ -16,9 +17,10 @@ const Grid = (props) => {
   const baseClass = 'slds-grid';
 
   const sldsClasses = [
+    baseClass,
     { [`${baseClass}_align-${align}`]: !!align },
+    { [`${baseClass}_vertical-align-${verticalAlign}`]: !!verticalAlign },
     applyDecorators(flavor, 'grid'),
-    { 'slds-wrap': !!wrap }
     { 'slds-wrap': !!wrap },
     className,
   ];
@@ -31,7 +33,8 @@ Grid.defaultProps = {
   children: null,
   className: null,
   flavor: [],
-  wrap: null
+  verticalAlign: null,
+  wrap: false,
 };
 
 Grid.propTypes = {
@@ -55,8 +58,6 @@ Grid.propTypes = {
     'vertical',
     'reverse',
     'vertical-reverse',
-    'vertical-align-center',
-    'certical-align-end',
     'vertical-stretch',
     'pull-padded',
     'pull-padded-medium',
@@ -69,6 +70,11 @@ Grid.propTypes = {
    * Can either either: center, end, space, spread
    */
   align: PropTypes.oneOf(['center', 'end', 'space', 'spread']),
+  /**
+   * Controls how columns are aligned vertically.
+   * Can either either: center, end, space
+   */
+  verticalAlign: PropTypes.oneOf(['center', 'end', 'start']),
    */
   wrap: PropTypes.bool,
 };
