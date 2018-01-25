@@ -28,6 +28,11 @@ describe('<ProgressBar />', () => {
     expect(mounted.find('.slds-progress-bar').hasClass('slds-progress-bar_x-small')).toBeTruthy();
   });
 
+  it('accepts a success prop', () => {
+    const mounted = getProgressBar({ success: true });
+    expect(mounted.find('.slds-progress-bar__value').hasClass('slds-progress-bar__value_success')).toBeTruthy();
+  });
+
   it('passes restprops to progress-bar element', () => {
     const mounted = getProgressBar({ min: 10 });
     expect(mounted.find('.slds-progress-bar').prop('min')).toEqual(10);
