@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { IconOnlyBadge, IconSVG } from '../../../';
+import { Badge, IconSVG } from '../../../';
 
 import VerticalNavigationItem from '../VerticalNavigationItem';
 
@@ -16,7 +16,7 @@ describe('<VerticalNavigationSection />', () => {
 
   it('renders a notification badge', () => {
     const mounted = getComponent({ notification: 3, notificationLabel: 'foo' });
-    const $badge = mounted.find(IconOnlyBadge);
+    const $badge = mounted.find(Badge);
     expect($badge.exists()).toBeTruthy();
     expect($badge.prop('title')).toEqual('foo');
   });
