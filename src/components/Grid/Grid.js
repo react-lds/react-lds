@@ -4,19 +4,30 @@ import cx from 'classnames';
 import { applyDecorators, decoratorProp } from '../../utils';
 
 const Grid = (props) => {
-  const { children, className, flavor, wrap, ...rest } = props;
+  const {
+    align,
+    children,
+    className,
+    flavor,
+    wrap,
+    ...rest
+  } = props;
+
+  const baseClass = 'slds-grid';
 
   const sldsClasses = [
-    'slds-grid',
-    className,
+    { [`${baseClass}_align-${align}`]: !!align },
     applyDecorators(flavor, 'grid'),
     { 'slds-wrap': !!wrap }
+    { 'slds-wrap': !!wrap },
+    className,
   ];
 
   return (<div {...rest} className={cx(sldsClasses)}>{children}</div>);
 };
 
 Grid.defaultProps = {
+  align: null,
   children: null,
   className: null,
   flavor: [],
@@ -44,10 +55,6 @@ Grid.propTypes = {
     'vertical',
     'reverse',
     'vertical-reverse',
-    'align-center',
-    'align-spread',
-    'align-space',
-    'align-end',
     'vertical-align-center',
     'certical-align-end',
     'vertical-stretch',
@@ -57,6 +64,11 @@ Grid.propTypes = {
   ]),
   /*
    * wrap variation
+  /**
+   * Controls how columns are aligned horizontally.
+   * Can either either: center, end, space, spread
+   */
+  align: PropTypes.oneOf(['center', 'end', 'space', 'spread']),
    */
   wrap: PropTypes.bool,
 };
