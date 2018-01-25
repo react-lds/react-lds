@@ -12,6 +12,8 @@
 * _Grid_: **Breaking** Vertical alignment flavors have been moved to `verticalAlign`
 * _Grid_: **Breaking** pullPadding flavors have been moved to `pullPadding` prop
 * _Column_: **Breaking** `flavors` & `align` have been deprecated
+* _ProgressBar_: Add `success` prop
+* _ProgressBar_: Add support for configuring `assistiveLabel`
 
 ## 3.2.0
 
