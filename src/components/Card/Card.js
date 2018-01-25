@@ -7,6 +7,7 @@ import { Grid, Icon, MediaObject } from '../../';
 const Card = (props) => {
   const {
     body,
+    boundary,
     children,
     className,
     footer,
@@ -19,7 +20,8 @@ const Card = (props) => {
 
   const sldsClasses = [
     'slds-card',
-    className
+    { 'slds-card_boundary': boundary },
+    className,
   ];
 
   let iconEl = null;
@@ -58,6 +60,7 @@ const Card = (props) => {
 
 Card.defaultProps = {
   body: null,
+  boundary: false,
   children: null,
   className: null,
   footer: null,
@@ -71,6 +74,11 @@ Card.propTypes = {
    * DEPRECATED: card body, could be a table for example
    */
   body: PropTypes.node,
+  /**
+   * When the Card is used inside Tabs, .Modal, or another Card, it no longer has the drop-shadow card look.
+   * This restored said look
+   */
+  boundary: PropTypes.bool,
   /**
    * Card body, could be a table for example
    */

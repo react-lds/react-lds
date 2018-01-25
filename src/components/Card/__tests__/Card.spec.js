@@ -15,6 +15,7 @@ describe('<Card />', () => {
 
   beforeEach(() => {
     props = {
+      boundary: true,
       icon: <Icon icon="contact" sprite="standard" />,
       title: 'Base Card',
       headerRight: 'Right Header',
@@ -45,6 +46,11 @@ describe('<Card />', () => {
   it('renders footer', () => {
     expect(mounted.find('footer.slds-card__footer').first().text()).toEqual(props.footer);
   });
+
+  it('allows passing boundary flag', () => {
+    expect(mounted.find('.slds-card').hasClass('slds-card_boundary')).toBeTruthy();
+  });
+
 
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
