@@ -1,5 +1,11 @@
 # Changelog
 
+## UNRELEASED
+
+* **BREAKING**: `<Badge />` now uses `children` instead of `label`
+* Add support for icons in Badges, add `<IconOnlyBadge />`
+* Add `xx-small` size to `Icon` & `IconSVG`
+
 ## 3.2.0
 
 * Improve storybook (new Story for Lookup)

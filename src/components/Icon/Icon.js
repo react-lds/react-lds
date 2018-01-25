@@ -64,7 +64,7 @@ Icon.propTypes = {
   /** Name of the icon */
   icon: PropTypes.string.isRequired,
   /** Size */
-  size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
+  size: PropTypes.oneOf(['xx-small', 'x-small', 'small', 'medium', 'large']),
   /** Name of the sprite containing the icon */
   sprite: PropTypes.oneOf(['action', 'custom', 'doctype', 'standard', 'utility']).isRequired,
   /** ClassName that will be handed over to the <svg /> */
