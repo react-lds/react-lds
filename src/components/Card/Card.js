@@ -7,6 +7,7 @@ import { Grid, Icon, MediaObject } from '../../';
 const Card = (props) => {
   const {
     body,
+    children,
     className,
     footer,
     headerRight,
@@ -21,14 +22,24 @@ const Card = (props) => {
     className
   ];
 
+  let iconEl = null;
+
+  if (typeof icon === 'string' && sprite) {
+    iconEl = <Icon sprite={sprite} icon={icon} size="small" />;
+  }
+
+  if (React.isValidElement(icon)) {
+    iconEl = React.cloneElement(icon, { size: 'small' });
+  }
+
   return (
     <div {...rest} className={cx(sldsClasses)}>
       <Grid className="slds-card__header">
         <MediaObject
+          className="slds-has-flexi-truncate"
           customTag="header"
           flavor="center"
-          className="slds-has-flexi-truncate"
-          figureLeft={!!icon && <Icon sprite={sprite} icon={icon} size="small" />}
+          figureLeft={iconEl}
           truncate
         >
           <h2>
@@ -39,7 +50,7 @@ const Card = (props) => {
         </MediaObject>
         <div className="slds-no-flex">{headerRight}</div>
       </Grid>
-      <div className="slds-card__body slds-text-align_center">{body}</div>
+      <div className="slds-card__body slds-text-align_center">{children || body}</div>
       <footer className="slds-card__footer">{footer}</footer>
     </div>
   );
@@ -47,6 +58,7 @@ const Card = (props) => {
 
 Card.defaultProps = {
   body: null,
+  children: null,
   className: null,
   footer: null,
   headerRight: null,
@@ -56,9 +68,13 @@ Card.defaultProps = {
 
 Card.propTypes = {
   /**
-   * card body, could be a table for example
+   * DEPRECATED: card body, could be a table for example
    */
   body: PropTypes.node,
+  /**
+   * Card body, could be a table for example
+   */
+  children: PropTypes.node,
   /**
    * class name
    */
@@ -76,11 +92,12 @@ Card.propTypes = {
    */
   headerRight: PropTypes.node,
   /**
-   * icon name
+   * Favored: Pass an <Icon /> (element)
+   * DEPRECATED: icon name (string) in combination with sprite prop
    */
-  icon: PropTypes.string,
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   /**
-   * icon sprite name
+   * DEPRECATED: icon sprite name
    */
   sprite: PropTypes.string,
 };

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import Card from '../Card';
+import { Icon } from '../../..';
 
 describe('<Card />', () => {
   let mounted = null;
@@ -14,11 +15,10 @@ describe('<Card />', () => {
 
   beforeEach(() => {
     props = {
-      icon: 'contact',
-      sprite: 'standard',
+      icon: <Icon icon="contact" sprite="standard" />,
       title: 'Base Card',
       headerRight: 'Right Header',
-      body: 'Body',
+      children: 'Body',
       footer: 'footer',
     };
 
@@ -27,7 +27,7 @@ describe('<Card />', () => {
   });
 
   it('renders the icon', () => {
-    expect(mounted.find('svg').length).toEqual(1);
+    expect(mounted.find(Icon).exists()).toBeTruthy();
   });
 
   it('renders the header', () => {
@@ -39,7 +39,7 @@ describe('<Card />', () => {
   });
 
   it('renders body', () => {
-    expect(mounted.find('div.slds-card__body').first().text()).toEqual(props.body);
+    expect(mounted.find('div.slds-card__body').first().text()).toEqual(props.children);
   });
 
   it('renders footer', () => {
