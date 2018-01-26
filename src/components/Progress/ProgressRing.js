@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { clamp } from './utils';
+import { clamp, fraction } from './utils';
 import { Icon } from '../../';
 
 const getIconForStatus = (status, labels) => {
@@ -18,8 +18,8 @@ const getPath = (progress, isComplete) => {
   let d = `${prefix} 1 1 1 -2.4492935982947064e-16 ${postfix}`;
 
   if (!isComplete) {
-    const deg = 2 * Math.PI * (progress / 100);
-    const isLong = progress >= 50 ? '1' : '0';
+    const deg = 2 * Math.PI * progress;
+    const isLong = progress >= 0.5 ? '1' : '0';
     d = `${prefix} ${isLong} 1 ${Math.cos(deg)} ${Math.sin(deg)} ${postfix}`;
   }
 
@@ -32,6 +32,8 @@ const ProgressRing = (props) => {
     className,
     complete,
     customIcon,
+    min,
+    max,
     progress,
     status,
     ...rest
@@ -39,9 +41,9 @@ const ProgressRing = (props) => {
 
   const baseClass = 'slds-progress-ring';
 
-  const clampedProgress = clamp(progress);
+  const percComplete = fraction(clamp(progress, min, max), min, max);
 
-  const isForceComplete = complete === true || (complete === 'auto' && clampedProgress === 100);
+  const isForceComplete = complete === true || (complete === 'auto' && percComplete === 1);
   const currentStatus = isForceComplete ? 'complete' : status;
 
   const iconEl = !currentStatus && customIcon
@@ -62,11 +64,11 @@ const ProgressRing = (props) => {
       <div
         className="slds-progress-ring__progress"
         role="progressbar"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        aria-valuenow={clampedProgress}
+        aria-valuemin={min}
+        aria-valuemax={max}
+        aria-valuenow={percComplete * 100}
       >
-        <svg viewBox="-1 -1 2 2">{getPath(clampedProgress, isForceComplete)}</svg>
+        <svg viewBox="-1 -1 2 2">{getPath(percComplete, isForceComplete)}</svg>
       </div>
       <div className="slds-progress-ring__content">{iconEl}</div>
     </div>
@@ -82,6 +84,8 @@ ProgressRing.defaultProps = {
   complete: 'auto',
   className: null,
   customIcon: null,
+  min: 0,
+  max: 100,
   status: null,
 };
 
@@ -108,9 +112,17 @@ ProgressRing.propTypes = {
    */
   customIcon: PropTypes.element,
   /**
-   * Progress value (between 0-100)
+   * Progress value (between min-max)
    */
   progress: PropTypes.number.isRequired,
+  /**
+   * Progress min
+   */
+  min: PropTypes.number,
+  /**
+   * Progress max
+   */
+  max: PropTypes.number,
   /**
    * Progress status. Can be: 'expired' or 'warning'
    */

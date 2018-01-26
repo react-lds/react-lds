@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { clamp } from './utils';
+import { clamp, fraction } from './utils';
 
 const getBarValueStyle = num => ({
   width: `${num}%`,
@@ -12,6 +12,8 @@ const ProgressBar = (props) => {
     assistiveLabel,
     circular,
     className,
+    min,
+    max,
     progress,
     size,
     success,
@@ -32,14 +34,14 @@ const ProgressBar = (props) => {
     { [`${baseClass}__value_success`]: success },
   ];
 
-  const clampedProgress = clamp(progress);
+  const clampedProgress = fraction(clamp(progress, min, max), min, max) * 100;
 
   return (
     <div
       {...rest}
       className={cx(sldsClasses)}
-      aria-valuemin="0"
-      aria-valuemax="100"
+      aria-valuemin={min}
+      aria-valuemax={max}
       aria-valuenow={clampedProgress}
       role="progressbar"
     >
@@ -55,6 +57,8 @@ ProgressBar.defaultProps = {
   circular: false,
   className: null,
   progress: 0,
+  min: 0,
+  max: 100,
   size: null,
   success: false,
 };
@@ -73,9 +77,17 @@ ProgressBar.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Progress value (between 0-100)
+   * Progress value (between min-max)
    */
-  progress: PropTypes.number,
+  progress: PropTypes.number.isRequired,
+  /**
+   * Progress min
+   */
+  min: PropTypes.number,
+  /**
+   * Progress max
+   */
+  max: PropTypes.number,
   /**
    * Available sizes: x-small, small, medium, large
    */

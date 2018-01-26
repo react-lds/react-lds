@@ -55,4 +55,9 @@ describe('<ProgressRing />', () => {
     const cmp = getCmp({ customIcon: icon, status: 'warning' });
     expect(cmp.contains(icon)).toBeFalsy();
   });
+
+  it('supports setting min & max', () => {
+    const cmp = getCmp({ progress: 100, min: -200, max: 200 });
+    expect(cmp.find('.slds-progress-ring__progress').prop('aria-valuenow')).toEqual(75);
+  });
 });
