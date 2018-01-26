@@ -4,10 +4,10 @@ import cx from 'classnames';
 import { clamp } from './utils';
 import { Icon } from '../../';
 
-const getIconForVariation = (variation, labels) => {
-  if (!variation) return null;
-  if (variation === 'expired') return <Icon sprite="utility" icon="error" title={labels.expired} />;
-  if (variation === 'warning') return <Icon sprite="utility" icon="warning" title={labels.warning} />;
+const getIconForStatus = (status, labels) => {
+  if (!status) return null;
+  if (status === 'expired') return <Icon sprite="utility" icon="error" title={labels.expired} />;
+  if (status === 'warning') return <Icon sprite="utility" icon="warning" title={labels.warning} />;
   return <Icon sprite="utility" icon="check" title={labels.complete} />;
 };
 
@@ -33,7 +33,7 @@ const ProgressRing = (props) => {
     complete,
     customIcon,
     progress,
-    variation,
+    status,
     ...rest
   } = props;
 
@@ -42,15 +42,15 @@ const ProgressRing = (props) => {
   const clampedProgress = clamp(progress);
 
   const isForceComplete = complete === true || (complete === 'auto' && clampedProgress === 100);
-  const currentVariation = isForceComplete ? 'complete' : variation;
+  const currentStatus = isForceComplete ? 'complete' : status;
 
-  const iconEl = (!complete || !isForceComplete) && customIcon
+  const iconEl = !currentStatus && customIcon
     ? customIcon
-    : getIconForVariation(currentVariation, assistiveLabels);
+    : getIconForStatus(currentStatus, assistiveLabels);
 
   const sldsClasses = [
     baseClass,
-    { [`${baseClass}_${currentVariation}`]: !!currentVariation },
+    { [`${baseClass}_${currentStatus}`]: !!currentStatus },
     className,
   ];
 
@@ -82,20 +82,39 @@ ProgressRing.defaultProps = {
   complete: 'auto',
   className: null,
   customIcon: null,
-  variation: null,
+  status: null,
 };
 
 ProgressRing.propTypes = {
+  /**
+   * Assistive labels for statuses
+   */
   assistiveLabels: PropTypes.shape({
-    expired: PropTypes.string,
-    warning: PropTypes.string,
-    complete: PropTypes.string,
+    expired: PropTypes.string.isRequired,
+    warning: PropTypes.string.isRequired,
+    complete: PropTypes.string.isRequired,
   }),
+  /**
+   * Controls when the complete state is rendered. Can either be a boolean value or 'auto'
+   * 'auto': Sets complete once progress >= max
+   */
   complete: PropTypes.oneOf([true, false, 'auto']),
+  /**
+   * (Optional) ClassName
+   */
   className: PropTypes.string,
+  /**
+   * Custom Icon that will be rendered inside the ProgressRing. Will be overwritten by status icons.
+   */
   customIcon: PropTypes.element,
+  /**
+   * Progress value (between 0-100)
+   */
   progress: PropTypes.number.isRequired,
-  variation: PropTypes.oneOf(['expired', 'warning']),
+  /**
+   * Progress status. Can be: 'expired' or 'warning'
+   */
+  status: PropTypes.oneOf(['expired', 'warning']),
 };
 
 export default ProgressRing;

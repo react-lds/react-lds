@@ -9,7 +9,7 @@ stories
   .add('Default', () => (
     <ProgressRing
       complete="auto"
-      variation={select('Variation', ['', 'expired', 'warning'], '') || undefined}
+      status={select('Status', ['', 'expired', 'warning'], '') || undefined}
       progress={number('Progress', 88, { range: true, min: 0, max: 100, step: 1, })}
 
     />
@@ -17,8 +17,8 @@ stories
   .add('With Custom Icon & Manual Completion', () => (
     <ProgressRing
       complete={boolean('Complete?', false)}
-      customIcon={<Icon className="slds-current-color" sprite="utility" icon="save" />}
-      variation={select('Variation', ['', 'expired', 'warning'], '') || undefined}
+      customIcon={<Icon className="slds-current-color" sprite="doctype" icon="attachment" />}
+      status={select('Status', ['', 'expired', 'warning'], '') || undefined}
       progress={number('Progress', 88, { range: true, min: 0, max: 100, step: 1, })}
     />
   ))
