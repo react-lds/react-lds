@@ -5,27 +5,29 @@
 * Add _BrandBand_
 * Add _Carousel_
 * Add _ProgressRing_
+* _Alert_: **Breaking** `Notification` is now `Alert`
+* _Alert_: Icon sizes are automatically applied to Alert/Toast icons
+* _Prompt_: Add missing `onClickClose` prompt
 * _Badge_: **BREAKING** `<Badge />` now uses `children` instead of `label`
 * _Badge_: Add support for icons in Badges
-* _Icon/IconSVG_: Add `xx-small` size
-* _Spinner_: Add `delayed` prop
-* _Spinner_: Add support for configuring `assistiveLabel`
+* _Card_: It is now possible to pass `<Icon />`s as `icon`
+* _Card_: It is now possible to pass `children` instead of `body`
+* _Card_: passing `icon` names, `sprite` and `body` has been deprecated
+* _Card_: Added `boundary` prop
+* _DatePicker_: Fix flavor usage in `Icons`
 * _Grid_: Added `gutters` prop
 * _Grid_: **Breaking** Alignment flavors have been moved to `align` prop
 * _Grid_: **Breaking** Vertical alignment flavors have been moved to `verticalAlign`
 * _Grid_: **Breaking** pullPadding flavors have been moved to `pullPadding` prop
 * _Column_: **Breaking** `flavors` & `align` have been deprecated
+* _Container_: Fix fluid containers not filling the container
+* _Icon/IconSVG_: Add `xx-small` size, add missing `medium` size
 * _ProgressBar_: Add `success` prop
 * _ProgressBar_: Add support for configuring `assistiveLabel`
 * _ProgressBar_: Add support for settin `min` & `max`
-* _Card_: It is now possible to pass `<Icon />`s as `icon`
-* _Card_: It is now possible to pass `children` instead of `body`
-* _Card_: passing `icon` names, `sprite` and `body` has been deprecated
-* _Card_: Added `boundary` prop
+* _Spinner_: Add `delayed` prop
+* _Spinner_: Add support for configuring `assistiveLabel`
 * _Tabs_: It is now possible to render Tabs as Card by passing the `styled` prop
-* _Alert_: **Breaking** `Notification` is now `Alert`
-* _Alert_: Icon sizes are automatically applied to Alert/Toast icons
-* _Prompt_: Add missing `onClickClose` prompt
 
 ## 3.2.0
 
