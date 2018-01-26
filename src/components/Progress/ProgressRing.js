@@ -12,18 +12,18 @@ const getIconForStatus = (status, labels) => {
 };
 
 const getPath = (progress, isComplete) => {
-  const pathPrefix = 'M 1 0 A';
-  const pathPostfix = 'L 0 0';
+  const prefix = 'M 1 0 A 1 1 0';
+  const postfix = 'L 0 0';
 
-  let d = `${pathPrefix} 1 1 0 1 1 1 -2.4492935982947064e-16 ${pathPostfix}`;
+  let d = `${prefix} 1 1 1 -2.4492935982947064e-16 ${postfix}`;
 
   if (!isComplete) {
     const deg = 2 * Math.PI * (progress / 100);
     const isLong = progress >= 50 ? '1' : '0';
-    d = `${pathPrefix} 1 1 0 ${isLong} 1 ${Math.cos(deg)} ${Math.sin(deg)} ${pathPostfix}`;
+    d = `${prefix} ${isLong} 1 ${Math.cos(deg)} ${Math.sin(deg)} ${postfix}`;
   }
 
-  return <path className="slds-progress-ring__path" id="slds-progress-ring-path" d={d} />;
+  return <path className="slds-progress-ring__path" d={d} />;
 };
 
 const ProgressRing = (props) => {
