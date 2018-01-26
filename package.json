@@ -56,12 +56,12 @@
     "react-dom": "^15.6.2"
   },
   "devDependencies": {
-    "@salesforce-ux/design-system": "2.3.1",
-    "@storybook/addon-actions": "^3.2.16",
-    "@storybook/addon-info": "^3.2.16",
-    "@storybook/addon-knobs": "^3.2.16",
-    "@storybook/addon-links": "^3.2.16",
-    "@storybook/react": "^3.2.16",
+    "@salesforce-ux/design-system": "2.5.0",
+    "@storybook/addon-actions": "~3.2.16",
+    "@storybook/addon-info": "~3.2.16",
+    "@storybook/addon-knobs": "~3.2.16",
+    "@storybook/addon-links": "~3.2.16",
+    "@storybook/react": "~3.2.16",
     "@storybook/storybook-deployer": "^2.0.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",

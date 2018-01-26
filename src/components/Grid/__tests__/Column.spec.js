@@ -19,11 +19,6 @@ describe('<Column />', () => {
     expect(mounted.contains(child)).toBeTruthy();
   });
 
-  it('renders alignments', () => {
-    mounted.setProps({ align: 'top' });
-    expect(mounted.find('.slds-col').hasClass('slds-align-top')).toBeTruthy();
-  });
-
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-col').hasClass('foo')).toBeTruthy();
@@ -33,14 +28,6 @@ describe('<Column />', () => {
   it('omits .slds-col', () => {
     mounted.setProps({ omitCol: true });
     expect(mounted.find('.slds-col').length).toBe(0);
-  });
-
-  it('applies flavoring', () => {
-    mounted.setProps({ flavor: 'padded' });
-    expect(mounted.find('.slds-col').hasClass('slds-col_padded')).toBeTruthy();
-    mounted.setProps({ flavor: ['padded', 'bump-right'] });
-    expect(mounted.find('.slds-col').hasClass('slds-col_padded')).toBeTruthy();
-    expect(mounted.find('.slds-col').hasClass('slds-col_bump-right')).toBeTruthy();
   });
 
   it('applies variationing', () => {

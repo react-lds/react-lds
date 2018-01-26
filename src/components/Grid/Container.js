@@ -17,7 +17,7 @@ Container.defaultProps = {
   children: null,
   className: null,
   flavor: [],
-  size: 'small',
+  size: null,
 };
 
 Container.propTypes = {

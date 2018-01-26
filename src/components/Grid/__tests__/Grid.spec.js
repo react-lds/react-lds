@@ -23,10 +23,10 @@ describe('<Grid />', () => {
   });
 
   it('applies flavoring', () => {
-    mounted.setProps({ flavor: 'pull-padded' });
-    expect(mounted.find('.slds-grid').hasClass('slds-grid_pull-padded')).toBeTruthy();
-    mounted.setProps({ flavor: ['pull-padded', 'reverse'] });
-    expect(mounted.find('.slds-grid').hasClass('slds-grid_pull-padded')).toBeTruthy();
+    mounted.setProps({ flavor: 'reverse' });
+    expect(mounted.find('.slds-grid').hasClass('slds-grid_reverse')).toBeTruthy();
+    mounted.setProps({ flavor: ['vertical', 'reverse'] });
+    expect(mounted.find('.slds-grid').hasClass('slds-grid_vertical')).toBeTruthy();
     expect(mounted.find('.slds-grid').hasClass('slds-grid_reverse')).toBeTruthy();
   });
 

@@ -21,12 +21,17 @@ const propTypes = {
    * scoped has a border around the tab
    */
   scoped: PropTypes.bool,
+  /**
+   * Renders the tabs in card look
+   */
+  styled: PropTypes.bool,
 };
 
 class Tab extends Component {
   static defaultProps = {
     className: null,
     scoped: false,
+    styled: false,
   }
 
   static propTypes = propTypes
@@ -101,11 +106,12 @@ class Tab extends Component {
   }
 
   render() {
-    const { className, scoped } = this.props;
+    const { className, scoped, styled } = this.props;
     const rest = omit(this.props, Object.keys(propTypes));
 
     const sldsClasses = [
       `slds-tabs_${scoped ? 'scoped' : 'default'}`,
+      { 'slds-tabs_card': styled },
       className
     ];
 

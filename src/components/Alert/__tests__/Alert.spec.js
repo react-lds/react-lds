@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import Notification from '../Notification';
+import Alert from '../Alert';
 
-describe('<Notification />', () => {
+describe('<Alert />', () => {
   let mounted = null;
   let props = {};
 
@@ -14,7 +14,7 @@ describe('<Notification />', () => {
       title: 'foo',
     };
 
-    mounted = mount(<Notification {...props}>{child}</Notification>);
+    mounted = mount(<Alert {...props}>{child}</Alert>);
   });
 
   it('renders the correct markup', () => {
@@ -24,14 +24,6 @@ describe('<Notification />', () => {
     expect(notification.find('button > .slds-assistive-text').length).toBe(1);
     expect(notification.find('> .slds-assistive-text').length).toBe(1);
     expect(notification.contains(child)).toBeTruthy();
-  });
-
-  it('renders non-inverse buttons for the warning theme', () => {
-    mounted.setProps({ toast: true, theme: 'info' });
-    expect(mounted.find('button').hasClass('slds-button_icon-inverse')).toBeTruthy();
-
-    mounted.setProps({ theme: 'warning' });
-    expect(mounted.find('button').hasClass('slds-button_icon-inverse')).toBeFalsy();
   });
 
   it('renders large close icons for toasts', () => {

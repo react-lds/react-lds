@@ -19,7 +19,7 @@ export const ModalDecorator = storyFn => (
   </div>
 );
 
-export const NotificationDecorator = storyFn => (
+export const AlertDecorator = storyFn => (
   <div className="demo-notifications">
     { storyFn() }
   </div>

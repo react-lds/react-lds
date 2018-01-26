@@ -8,7 +8,7 @@ const stories = storiesOf('Accordion', module);
 
 stories
   .add('Default', () => (
-    <Accordion styled={boolean('Styled', false)}>
+    <Accordion styled={boolean('Styled', true)}>
       <AccordionSection summary="Section 1 summary" id="01">
         <p>test 123</p>
       </AccordionSection>
@@ -22,7 +22,7 @@ stories
   ))
   .add('Controlled', () => (
     <Accordion
-      styled={boolean('Styled', false)}
+      styled={boolean('Styled', true)}
       open={select('Open', ['01', '02', '03'], '01')}
       onSectionClick={action()}
     >
