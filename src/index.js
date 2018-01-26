@@ -5,6 +5,7 @@ export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/ButtonGroup';
 export * from './components/Card';
+export * from './components/Carousel';
 export * from './components/Table';
 export * from './components/DataTable';
 export * from './components/Datepicker';
