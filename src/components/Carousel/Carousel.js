@@ -43,7 +43,10 @@ class Carousel extends Component {
     }
   }
 
-  onClickIndicator = e => this.setActivePanel(Number(e.target.dataset.index));
+  onClickIndicator = ({ target }) => {
+    target.blur();
+    this.setActivePanel(Number(target.dataset.index));
+  }
 
   onKeyboardInteraction = (e) => {
     if (e.keyCode === 37) {
