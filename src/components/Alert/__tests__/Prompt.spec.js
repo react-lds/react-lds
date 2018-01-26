@@ -1,20 +1,14 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import Prompt from '../Notification';
+import Prompt from '../Prompt';
 
 describe('<Prompt />', () => {
   let mounted = null;
-  let props = {};
-
+  const props = { buttonText: 'foo', description: 'bar', label: 'baz', title: 'foobar' };
   const child = <p>Foobar</p>;
 
   beforeEach(() => {
-    props = {
-      title: 'foo',
-      label: 'lel',
-    };
-
     mounted = mount(<Prompt {...props}>{child}</Prompt>);
   });
 

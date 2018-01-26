@@ -20,7 +20,7 @@ export * from './components/Lookup';
 export * from './components/MediaObject';
 export * from './components/Menu';
 export * from './components/Modal';
-export * from './components/Notifications';
+export * from './components/Alert';
 export * from './components/PageHeader';
 export * from './components/Path';
 export * from './components/Pill';
