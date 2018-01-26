@@ -29,6 +29,13 @@
 * _Spinner_: Add support for configuring `assistiveLabel`
 * _Tabs_: It is now possible to render Tabs as Card by passing the `styled` prop
 
+## 3.3.0
+
+* Feature: add Radio, RadioGroup and RadioRaw components
+* Feature: Button can render as `a` DOM element if given a `href` prop
+* Improvement: new story for horizontal and stacked forms
+* Fix: Lookup did unnecessary re-renderings on click outside
+
 ## 3.2.0
 
 * Improve storybook (new Story for Lookup)
