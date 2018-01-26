@@ -1,6 +1,7 @@
 export * from './components/Accordion';
 export * from './components/Badge';
 export * from './components/Box';
+export * from './components/BrandBand';
 export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/ButtonGroup';
