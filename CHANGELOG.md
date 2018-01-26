@@ -14,6 +14,11 @@
 * _Column_: **Breaking** `flavors` & `align` have been deprecated
 * _ProgressBar_: Add `success` prop
 * _ProgressBar_: Add support for configuring `assistiveLabel`
+* _Card_: It is now possible to pass `<Icon />`s as `icon`
+* _Card_: It is now possible to pass `children` instead of `body`
+* _Card_: passing `icon` names, `sprite` and `body` has been deprecated
+* _Card_: Added `boundary` prop
+* _Tabs_: It is now possible to render Tabs as Card by passing the `styled` prop
 
 ## 3.2.0
 

@@ -28,5 +28,6 @@ stories
     <Tab
       tabs={tabs}
       scoped={boolean('Scoped', false)}
+      styled={boolean('Card-Look', false)}
     />
   ));
