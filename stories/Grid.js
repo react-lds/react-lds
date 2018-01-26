@@ -25,7 +25,7 @@ const containerSizes = [
   'x-large'
 ];
 
-const alignOptions = ['center', 'end', 'space', 'spread', 'start'];
+const alignOptions = ['', 'center', 'end', 'space', 'spread'];
 const vAlignOptions = ['center', 'end', 'start'];
 
 stories
@@ -34,7 +34,7 @@ stories
       className="slds-m-bottom--large"
       flavor={array('Grid Flavor', [])}
       gutters={select('Gutters', sizeOptions, 'small')}
-      align={select('Horizontal Alignment', alignOptions, 'start')}
+      align={select('Horizontal Alignment', alignOptions) || undefined}
       verticalAlign={select('Vertical Alignment', vAlignOptions, 'start')}
     >
       <Column flavor={array('Column Flavor', [])}>
@@ -49,7 +49,7 @@ stories
     <Grid
       flavor={array('Grid Flavor', [])}
       pullPadding="small"
-      align={select('Horizontal Alignment', alignOptions, 'start')}
+      align={select('Horizontal Alignment', alignOptions) || undefined}
       verticalAlign={select('Vertical Alignment', vAlignOptions, 'start')}
       wrap
     >

@@ -55,7 +55,6 @@ const exampleData = [
 stories
   .add('Uncontrolled', () => (
     <Lookup
-      emailLayout={boolean('EmailLayout', false)}
       error={text('Error', '') || undefined}
       hideErrorMessage={boolean('HideErrorMessage', false)}
       hideLabel={boolean('HideLabel', false)}
@@ -82,7 +81,6 @@ stories
   ))
   .add('Controlled', () => (
     <Lookup
-      emailLayout={boolean('EmailLayout', false)}
       error={text('Error', '') || undefined}
       hideErrorMessage={boolean('HideErrorMessage', false)}
       hideLabel={boolean('HideLabel', false)}
@@ -114,7 +112,6 @@ stories
   ))
   .add('With custom ', () => (
     <Lookup
-      emailLayout={boolean('EmailLayout', false)}
       error={text('Error', '') || undefined}
       hideErrorMessage={boolean('HideErrorMessage', false)}
       hideLabel={boolean('HideLabel', false)}

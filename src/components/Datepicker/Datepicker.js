@@ -414,7 +414,7 @@ export class DatepickerRaw extends Component {
             <div className="slds-datepicker__filter slds-grid">
               <div className="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
                 <div className="slds-align-middle">
-                  <Button flavor="icon" onClick={() => this.onMonthChange(-1)} icon-container>
+                  <Button flavor={['icon', 'icon-container']} onClick={() => this.onMonthChange(-1)}>
                     <ButtonIcon position="left" sprite="utility" icon="left" />
                   </Button>
                 </div>
@@ -422,7 +422,7 @@ export class DatepickerRaw extends Component {
                   {viewedDate.format('MMMM')}
                 </h2>
                 <div className="slds-align-middle">
-                  <Button flavor="icon" onClick={() => this.onMonthChange(1)} icon-container>
+                  <Button flavor={['icon', 'icon-container']} onClick={() => this.onMonthChange(1)}>
                     <ButtonIcon position="right" sprite="utility" icon="right" />
                   </Button>
                 </div>

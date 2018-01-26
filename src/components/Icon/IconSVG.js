@@ -38,7 +38,7 @@ IconSVG.propTypes = {
   /**
    * icon size
    */
-  size: PropTypes.oneOf(['xx-small', 'x-small', 'small', 'large']),
+  size: PropTypes.oneOf(['xx-small', 'x-small', 'small', 'medium', 'large']),
   /**
    * icon sprite name
    */

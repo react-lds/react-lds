@@ -20,7 +20,7 @@ stories
   .add('Without Icon', () => (
     <Card
       title={text('Title', 'Base Card')}
-      headerRight={<Button title="New" onClick={action('click')} />}
+      headerRight={<Button flavor="neutral" title="New" onClick={action('click')} />}
       footer="Footer"
     >
       Body would be here
