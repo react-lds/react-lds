@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { clamp } from './utils';
 
 const getBarValueStyle = num => ({
   width: `${num}%`,
@@ -31,7 +32,7 @@ const ProgressBar = (props) => {
     { [`${baseClass}__value_success`]: success },
   ];
 
-  const clampedProgress = Math.min(Math.max(progress, 0), 100);
+  const clampedProgress = clamp(progress);
 
   return (
     <div
