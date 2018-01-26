@@ -21,6 +21,7 @@
 * _Tabs_: It is now possible to render Tabs as Card by passing the `styled` prop
 * _Alert_: **Breaking** `Notification` is now `Alert`
 * _Alert_: Icon sizes are automatically applied to Alert/Toast icons
+* _Prompt_: Add missing `onClickClose` prompt
 
 ## 3.2.0
 
