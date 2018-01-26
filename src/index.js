@@ -25,7 +25,7 @@ export * from './components/PageHeader';
 export * from './components/Path';
 export * from './components/Pill';
 export * from './components/Popover';
-export * from './components/ProgressBar';
+export * from './components/Progress';
 export * from './components/Spinner';
 export * from './components/StatefulButton';
 export * from './components/Tab';
