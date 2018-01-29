@@ -10,7 +10,7 @@ stories
   .add('Default', () => (
     <Avatar
       alt={text('Alt', 'alt text')}
-      src={text('Src', '/assets/images/avatar2.jpg')}
+      src={text('Src', 'assets/images/avatar2.jpg')}
       size={getSizes()}
       title={text('Title', 'Mr Nobody avatar')}
       circle={boolean('Circle', false)}
