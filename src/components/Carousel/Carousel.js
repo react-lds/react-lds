@@ -43,9 +43,10 @@ class Carousel extends Component {
     }
   }
 
-  onClickIndicator = ({ target }) => {
-    target.blur();
-    this.setActivePanel(Number(target.dataset.index));
+  onClickIndicator = (e) => {
+    e.stopPropagation();
+    e.target.blur();
+    this.setActivePanel(Number(e.target.dataset.index));
   }
 
   onKeyboardInteraction = (e) => {
