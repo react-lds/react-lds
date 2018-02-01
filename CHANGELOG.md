@@ -1,5 +1,9 @@
 # Changelog
 
+## UNRELEASED
+
+* _Accordion_: allow multiple sections to be open simultaneously
+
 ## 4.0.0
 
 This version is compatible with SLDS 2.5.0 aka `Winter '18` ⛄
