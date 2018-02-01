@@ -222,4 +222,36 @@ describe('<Accordion />', () => {
     expect(mounted.find('#section-2').first().hasClass('slds-is-open')).toBeTruthy();
     expect(mounted.find('#section-1').first().hasClass('slds-is-open')).toBeFalsy();
   });
+
+  it('takes array as defaultOpen and renders those sections open', () => {
+    const mounted = mount(
+      <Accordion styled defaultOpen={['section-2', 'section-1']}>
+        <AccordionSection
+          summary="summary for 1st section"
+          id="section-1"
+        >
+          <p>Testing testing 123</p>
+        </AccordionSection>
+        <AccordionSection
+          summary="summary for 2nd section"
+          id="section-2"
+        >
+          <div>
+            <p>One little paragraph</p>
+            <p>Two little paragraphs</p>
+          </div>
+        </AccordionSection>
+        <AccordionSection
+          summary="summary for 1st section"
+          id="section-3"
+        >
+          <p>Testing testing 123</p>
+        </AccordionSection>
+      </Accordion>
+    );
+
+    expect(mounted.find('#section-1').first().hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('#section-2').first().hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('#section-3').first().hasClass('slds-is-open')).toBeFalsy();
+  });
 });
