@@ -87,11 +87,11 @@ CheckboxToggle.propTypes = {
    */
   hideLabel: PropTypes.bool,
   /**
-   * Hide the status labels beneath the checkbox
+   * Hide the status labels beneath the checkbox (still visible for screen readers)
    */
   hideStatusLabels: PropTypes.bool,
   /**
-   * Status labels beneath the checkbox (still visible for screen readers)
+   * Status labels beneath the checkbox
    */
   statusLabels: PropTypes.shape({
     unchecked: PropTypes.string.isRequired,

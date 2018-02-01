@@ -25,4 +25,4 @@ stories
       checked={null}
       onChange={action('Change')}
     />
-  ))
+  ));
