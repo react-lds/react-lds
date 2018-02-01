@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { IconSVG } from '../../../';
+import { Badge, IconSVG } from '../../../';
 
 import VerticalNavigationItem from '../VerticalNavigationItem';
 
@@ -16,9 +16,9 @@ describe('<VerticalNavigationSection />', () => {
 
   it('renders a notification badge', () => {
     const mounted = getComponent({ notification: 3, notificationLabel: 'foo' });
-    const $badge = mounted.find('.slds-badge');
+    const $badge = mounted.find(Badge);
     expect($badge.exists()).toBeTruthy();
-    expect($badge.find('.slds-assistive-text').text()).toEqual('foo');
+    expect($badge.prop('title')).toEqual('foo');
   });
 
   it('renders an icon', () => {

@@ -5,14 +5,26 @@ import { THEMES } from '../../utils';
 import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from '../../';
 
 const Prompt = (props) => {
-  const { buttonText, children, className, description, label, open, theme, title, ...rest } = props;
+  const {
+    buttonText,
+    children,
+    className,
+    description,
+    label,
+    onClickClose,
+    open,
+    theme,
+    title,
+    ...rest
+  } = props;
+
   return (
     <div>
       <Modal {...rest} className={className} label={label} open={open} dialog prompt={theme}>
         <ModalHeader title={title} />
         <ModalContent id={description}>{children}</ModalContent>
         <ModalFooter defaultTheme>
-          <Button flavor="neutral" title={buttonText} onClick={() => {}} />
+          <Button flavor="neutral" title={buttonText} onClick={onClickClose} />
         </ModalFooter>
       </Modal>
       <Backdrop open={props.open} />
@@ -23,6 +35,7 @@ const Prompt = (props) => {
 Prompt.defaultProps = {
   className: null,
   open: false,
+  onClickClose: null,
   theme: 'error',
 };
 
@@ -47,6 +60,10 @@ Prompt.propTypes = {
    * prompt label
    */
   label: PropTypes.string.isRequired,
+  /**
+   * prompt close onClick
+   */
+  onClickClose: PropTypes.func,
   /**
    * opens the prompt
    */

@@ -43,13 +43,6 @@ stories
       />
     </Button>
   ))
-  .add('Button Group', () => (
-    <ButtonGroup>
-      <Button flavor={array('Button 1 flavor', ['neutral'])} onClick={action('foo')} title="foo" />
-      <Button flavor={array('Button 2 flavor', ['neutral'])} onClick={action('bar')} title="bar" />
-      <Button flavor={array('Button 3 flavor', ['brand'])} onClick={action('baz')} title="baz" />
-    </ButtonGroup>
-  ))
   .add('Stateful Button', () => (
     <StatefulButton
       onClick={action()}
@@ -81,6 +74,13 @@ stories
       tooltip={text('Tooltip', 'I\'m a tooltip, look at me!')}
     />
   ))
+  .add('Button Group', () => (
+    <ButtonGroup>
+      <Button flavor={array('Button 1 flavor', ['neutral'])} onClick={action('foo')} title="foo" />
+      <Button flavor={array('Button 2 flavor', ['neutral'])} onClick={action('bar')} title="bar" />
+      <Button flavor={array('Button 3 flavor', ['brand'])} onClick={action('baz')} title="baz" />
+    </ButtonGroup>
+  ))
   .add('Button Group with Menu', () => (
     <ButtonGroup>
       <Button flavor={array('Button 1 flavor', ['neutral'])} onClick={action('foo')} title="foo" />
@@ -102,6 +102,32 @@ stories
           <MenuDropdownListItem divider>Important last item</MenuDropdownListItem>
         </MenuDropdownList>
       </Menu>
+    </ButtonGroup>
+  ))
+  .add('Icon-only ButtonGroup', () => (
+    <ButtonGroup>
+      <Button
+        flavor={['icon', 'icon-border-filled']}
+        onClick={action('foo')}
+        selected
+        title="foo"
+      >
+        <ButtonIcon sprite="utility" icon="chart" />
+      </Button>
+      <Button
+        flavor={['icon', 'icon-border-filled']}
+        onClick={action('foo')}
+        title="foo"
+      >
+        <ButtonIcon sprite="utility" icon="filterList" />
+      </Button>
+      <Button
+        flavor={['icon', 'icon-border-filled']}
+        onClick={action('foo')}
+        title="foo"
+      >
+        <ButtonIcon sprite="utility" icon="settings" />
+      </Button>
     </ButtonGroup>
   ))
   .add('Button with a tag and href', () => (

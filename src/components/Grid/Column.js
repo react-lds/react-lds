@@ -17,13 +17,18 @@ const breakPointProp = breakpoint => `${breakpoint}-sizeOf`;
 const sizeRegex = /^([1-9]|1[0-2])-([1-9]|1[0-2])$/;
 
 const Column = (props) => {
-  const { align, children, className, flavor, variation, omitCol, ...rest } = props;
+  const {
+    children,
+    className,
+    flavor,
+    variation,
+    omitCol,
+    ...rest
+  } = props;
 
   const sldsClasses = [
-    { 'slds-col': !omitCol },
-    { [`slds-align-${align}`]: !!align },
     className,
-    applyDecorators(flavor, 'col'),
+    { 'slds-col': !omitCol },
     applyDecorators(variation),
   ];
 
@@ -73,44 +78,20 @@ const sizeOfPropType = (props, propName) => {
 };
 
 Column.defaultProps = {
-  align: null,
   className: null,
-  flavor: [],
   variation: [],
   omitCol: false,
 };
 
 Column.propTypes = {
   /**
-   * alignment of columns on the main axis
-   */
-  align: PropTypes.oneOf(['top', 'middle', 'bottom']),
-  /**
-   * column content
+   * Column content
    */
   children: PropTypes.node.isRequired,
   /**
-   * class name
+   * (Optional) class name. Usually used to apply `slds-p_horizontal` classes
    */
   className: PropTypes.string,
-  /**
-   * flavor: string or array of strings. Flavors: bump-left, bump-right,
-   * bump-top, bump-bottom, padded, padded-large, padded-small, rule-right,
-   * rule-left, rule-top, rule-bottom,
-   */
-  flavor: decoratorProp([
-    'bump-left',
-    'bump-right',
-    'bump-top',
-    'bump-bottom',
-    'padded',
-    'padded-large',
-    'padded-small',
-    'rule-right',
-    'rule-left',
-    'rule-top',
-    'rule-bottom',
-  ]),
   /*
    * variation: string or array of strings. Variations: has-flexi-truncate,
    * no-flex, no-space, grow, grow-none, shrink, shrink-none
@@ -124,14 +105,15 @@ Column.propTypes = {
     'shrink',
     'shrink-none',
   ]),
-  /**
-   * non-responsive sizeOf
-   */
-  sizeOf: sizeOfPropType, // eslint-disable-line react/require-default-props
+
   /**
    * omit 'slds-col'
    */
   omitCol: PropTypes.bool,
+  /**
+   * non-responsive sizeOf
+   */
+  sizeOf: sizeOfPropType, // eslint-disable-line react/require-default-props
   ...validBreakpoints.reduce((_propTypes, breakpoint) => {
     const propTypes = _propTypes;
     propTypes[breakPointProp(breakpoint)] = sizeOfPropType;

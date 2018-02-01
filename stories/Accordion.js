@@ -35,7 +35,7 @@ stories
   ))
   .add('Controlled', () => (
     <Accordion
-      styled={boolean('Styled', false)}
+      styled={boolean('Styled', true)}
       open={select('Open', ['01', '02', '03'], '01')}
       onSectionClick={action()}
     >

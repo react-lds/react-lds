@@ -1,5 +1,48 @@
 # Changelog
 
+## 4.0.0
+
+This version is compatible with SLDS 2.5.0 aka `Winter '18` ⛄
+
+### New Components
+
+* add _BrandBand_
+* add _Carousel_
+* add _ProgressRing_
+
+### Breaking Changes
+
+* _Alert_: **Breaking** `Notification` is now correctly named as `Alert`
+* _Badge_: **Breaking** `<Badge />` now uses `children` instead of `label`
+* _Grid_: **Breaking** alignment flavors have been moved to `align` prop
+* _Grid_: **Breaking** vertical alignment flavors have been moved to `verticalAlign`
+* _Grid_: **Breaking** pullPadding flavors have been moved to `pullPadding` prop
+* _Column_: **Breaking** `flavors` & `align` have been deprecated
+
+### Improvements
+
+* _Alert_: icon sizes are automatically applied to `Alert` icons
+* _Alert_: `Toasts` no longer are forced to display a texture
+* _Badge_: add support for icons in Badges
+* _Card_: passing `icon` names, `sprite` and `body` has been deprecated
+* _Card_: it is now possible to pass `<Icon />`s as `icon`
+* _Card_: it is now possible to pass `children` instead of `body`
+* _Card_: added `boundary` prop
+* _Grid_: added `gutters` prop
+* _Icon/IconSVG_: add `xx-small` size, add missing `medium` size
+* _ProgressBar_: add `success` prop
+* _ProgressBar_: add support for configuring `assistiveLabel`
+* _ProgressBar_: add support for settin `min` & `max`
+* _Spinner_: add `delayed` prop
+* _Spinner_: add support for configuring `assistiveLabel`
+* _Tabs_: it is now possible to render Tabs as Card by passing the `styled` prop
+
+### Fixes
+
+* _Container_: Fix fluid containers not filling the container
+* _DatePicker_: Fix flavor usage in `Icons`
+* _Prompt_: Add missing `onClickClose` prompt
+
 ## 3.3.0
 
 * Feature: add Radio, RadioGroup and RadioRaw components
