@@ -22,6 +22,7 @@ const CheckboxToggle = (props) => {
 
 
   const descId = `${id}-description`;
+  const statusHidden = hiddenWhen(hideStatusLabels);
 
   return (
     <FormElement>
@@ -45,8 +46,8 @@ const CheckboxToggle = (props) => {
           aria-live="assertive"
         >
           <span className="slds-checkbox_faux" />
-          <span className={cx('slds-checkbox_on', hiddenWhen(hideStatusLabels))}>{labelChecked}</span>
-          <span className={cx('slds-checkbox_off', hiddenWhen(hideStatusLabels))}>{labelUnchecked}</span>
+          <span className={cx('slds-checkbox_on', statusHidden)}>{labelChecked}</span>
+          <span className={cx('slds-checkbox_off', statusHidden)}>{labelUnchecked}</span>
         </span>
       </label>
     </FormElement>
@@ -72,7 +73,6 @@ CheckboxToggle.propTypes = {
   /**
    * Checkbox label
    */
-
   label: PropTypes.string.isRequired,
   /**
    * :checked state. Pass `null` for an uncontrolled checkbox
