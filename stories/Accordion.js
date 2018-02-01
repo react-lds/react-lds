@@ -21,7 +21,7 @@ stories
     </Accordion>
   ))
   .add('Uncontrolled with multiple sections open', () => (
-    <Accordion defaultOpen={['02', '03']} styled={boolean('Styled', false)} >
+    <Accordion defaultOpen={['02', '03']} styled={boolean('Styled', false)} multiple>
       <AccordionSection summary="Section 1 summary" id="01">
         <p>test 123</p>
       </AccordionSection>

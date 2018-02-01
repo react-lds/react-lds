@@ -75,12 +75,12 @@ class Accordion extends Component {
       onSectionClick(id); return;
     }
     // uncontrolled
-    this.setState((prevState) => {
-      if (!prevState.activeSections.includes(id)) {
-        if (multiple) return { activeSections: [...prevState.activeSections, id] };
+    this.setState(({ activeSections }) => {
+      if (!activeSections.includes(id)) {
+        if (multiple) return { activeSections: [...activeSections, id] };
         return { activeSections: [id] };
       }
-      return { activeSections: prevState.activeSections.filter(a => a !== id) };
+      return { activeSections: activeSections.filter(a => a !== id) };
     });
   }
 
