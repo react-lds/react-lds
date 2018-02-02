@@ -14,17 +14,27 @@ const propTypes = {
    */
   className: PropTypes.string,
   /**
-    * which section should be open by default, defaults to first
+    * which section(s) should be open by default, defaults to first
     */
-  defaultOpen: PropTypes.string,
+  defaultOpen: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string)
+  ]),
+  /**
+   * support opening multiple sections simultaneously
+   */
+  multiple: PropTypes.bool,
   /**
     * wraps the component in a card
     */
   styled: PropTypes.bool,
   /*
-   * controlled mode: id of open section
+   * controlled mode: id(s) of open section(s)
    */
-  open: PropTypes.string,
+  open: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string)
+  ]),
   /*
    * controlled mode: section click handler
    */
@@ -36,6 +46,7 @@ class Accordion extends Component {
     className: null,
     styled: false,
     defaultOpen: null,
+    multiple: false,
     open: null,
     onSectionClick: null,
   }
@@ -44,28 +55,43 @@ class Accordion extends Component {
 
   constructor(props) {
     super(props);
-    const { open } = props;
-    if (open === null) {
-      this.state = { activeSection: props.defaultOpen ? props.defaultOpen : props.children[0].props.id };
+    const { children, defaultOpen, open } = props;
+    if (open === null) { // controlled
+      if (defaultOpen) {
+        if (typeof defaultOpen === 'string') {
+          this.state = { activeSections: [defaultOpen] };
+        } else { // is array of strings
+          this.state = { activeSections: defaultOpen };
+        }
+      } else {
+        this.state = { activeSections: [children[0].props.id] };
+      }
     }
   }
 
   handleClick = (id) => {
-    const { open, onSectionClick } = this.props;
-    if (open === null) {
-      this.setState({ activeSection: id });
-    } else {
-      onSectionClick(id);
+    const { open, onSectionClick, multiple } = this.props;
+    if (open !== null) { // controlled
+      onSectionClick(id); return;
     }
+    // uncontrolled
+    this.setState(({ activeSections }) => {
+      if (!activeSections.includes(id)) {
+        if (multiple) return { activeSections: [...activeSections, id] };
+        return { activeSections: [id] };
+      }
+      return { activeSections: activeSections.filter(a => a !== id) };
+    });
   }
 
   renderSections() {
     const { children, open } = this.props;
-    const activeSection = (open === null) ? this.state.activeSection : open;
+    let activeSections = open || this.state.activeSections;
+    if (typeof activeSections === 'string') { activeSections = [activeSections]; }
     const sections = children.map(child =>
       React.cloneElement(child, {
         key: child.props.id,
-        isOpen: child.props.id === activeSection,
+        isOpen: activeSections.includes(child.props.id),
         onClick: () => this.handleClick(child.props.id),
       }));
     return sections;
