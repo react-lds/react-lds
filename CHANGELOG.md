@@ -1,8 +1,10 @@
 # Changelog
 
-## UNRELEASED
+## 4.1.0
 
+* add _CheckboxToggle_
 * _Accordion_: allow multiple sections to be open simultaneously
+* _Carousel_: prevent indicator click event from leaking outside the carousel
 
 ## 4.0.0
 
