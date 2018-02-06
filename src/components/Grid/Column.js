@@ -55,7 +55,9 @@ const Column = (props) => {
     }
   });
 
-  const restProps = omit(rest, validBreakpoints.map(a => breakPointProp(a, 'sizeOf')), 'sizeOf');
+  let restProps = rest;
+  restProps = omit(restProps, validBreakpoints.map(a => breakPointProp(a, 'sizeOf')), 'sizeOf');
+  restProps = omit(restProps, validBreakpoints.map(a => breakPointProp(a, 'order')), 'order');
 
   return (
     <div {...restProps} className={cx(sldsClasses)}>{children}</div>
