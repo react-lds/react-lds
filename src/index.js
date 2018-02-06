@@ -29,6 +29,6 @@ export * from './components/Popover';
 export * from './components/Progress';
 export * from './components/Spinner';
 export * from './components/StatefulButton';
-export * from './components/Tab';
+export * from './components/Tabs';
 export * from './components/VerticalNavigation';
 export * from './utils';
