@@ -55,7 +55,7 @@ describe('<Carousel />', () => {
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    mounted.simulate('keydown', { keyCode: 39 });
+    mounted.find('CarouselPanel').at(0).find('a').simulate('keydown', { keyCode: 39 });
 
     expect(mounted.find('CarouselPanel').at(0).prop('active'))
       .toBe(false);
@@ -69,8 +69,8 @@ describe('<Carousel />', () => {
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    mounted.simulate('keydown', { keyCode: 39 });
-    mounted.simulate('keydown', { keyCode: 39 });
+    mounted.find('CarouselPanel').at(0).find('a').simulate('keydown', { keyCode: 39 });
+    mounted.find('CarouselPanel').at(1).find('a').simulate('keydown', { keyCode: 39 });
 
     expect(mounted.find('CarouselPanel').at(0).prop('active'))
       .toBe(true);
