@@ -1,4 +1,3 @@
-
 export const getTabsClass = (str, scoped = false) => {
   const postfix = str || '';
   const modifier = scoped ? 'scoped' : 'default';

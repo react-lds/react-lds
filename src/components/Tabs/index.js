@@ -1,4 +1,5 @@
+import ControlledTabs from './ControlledTabs';
 import Tabs from './Tabs';
 import Tab from './Tab';
 
-export { Tab, Tabs };
+export { ControlledTabs, Tab, Tabs };

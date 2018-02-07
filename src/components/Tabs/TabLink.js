@@ -9,6 +9,10 @@ class TabLink extends Component {
     this.link = null;
   }
 
+  setRef = (c) => {
+    this.link = c;
+  }
+
   render() {
     const {
       children,
@@ -38,7 +42,7 @@ class TabLink extends Component {
           className={getTabsClass('__link', scoped)}
           id={getAriaLabel(id)}
           role="tab"
-          ref={(c) => { this.link = c; }}
+          ref={this.setRef}
           tabIndex={isActive ? 0 : -1}
         >
           {children}
