@@ -71,9 +71,11 @@ class ControlledTabs extends PureComponent {
   }
 
   onChangeTab(nextActiveTab) {
-    const { onChangeTab } = this.props;
-    this.setState({ focusedTab: nextActiveTab });
-    onChangeTab(nextActiveTab);
+    const { activeTab, onChangeTab } = this.props;
+    if (nextActiveTab !== activeTab) {
+      this.setState({ focusedTab: nextActiveTab });
+      onChangeTab(nextActiveTab);
+    }
   }
 
 
@@ -110,7 +112,8 @@ class ControlledTabs extends PureComponent {
 
       this.onChangeTab(nextId);
       /** Accesses the ref defined in <TabLink /> */
-      linkNodes.get(nextId).link.focus();
+      const linkNode = linkNodes.get(nextId);
+      if (linkNode && linkNode.link) { linkNode.link.focus(); }
     };
   }
 
@@ -144,7 +147,7 @@ class ControlledTabs extends PureComponent {
     const { focusedTab } = this.state;
     const { activeTab, scoped } = this.props;
 
-    return (child, i) => {
+    return (child) => {
       const { tabTitle, id, title } = child.props;
 
       return (
@@ -153,7 +156,7 @@ class ControlledTabs extends PureComponent {
           isFocused={focusedTab === id}
           id={id}
           onFocus={this.getOnLinkFocus(id)}
-          onKeyUp={this.getOnLinkKeyup(i)}
+          onKeyUp={this.getOnLinkKeyup()}
           /* Focus is triggered before click but after mouseDown, using mouseDown to prevent a render-cycle */
           onMouseDown={this.getOnLinkClick(id)}
           ref={this.getLinkRefSetter(id)}
