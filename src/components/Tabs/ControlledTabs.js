@@ -13,9 +13,9 @@ class ControlledTabs extends PureComponent {
 
   static propTypes = {
     /**
-     * Index of the currently active tab
+     * Id of the currently active tab
      */
-    activeIndex: PropTypes.number.isRequired,
+    activeTab: PropTypes.string.isRequired,
     /**
      * One or more Tab components
      */
@@ -38,41 +38,54 @@ class ControlledTabs extends PureComponent {
     styled: PropTypes.bool,
   };
 
+  static getPanelState(children) {
+    const positionReducer = (acc, curr, i) => ({
+      ...acc,
+      [`${curr.props.id}`]: i,
+    });
+
+    const childrenArray = React.Children.toArray(children);
+
+    const nextState = {
+      positions: childrenArray.reduce(positionReducer, {}),
+      focusedTab: false,
+      length: childrenArray.length,
+    };
+
+    return nextState;
+  }
 
   constructor(props) {
     super(props);
-
-    const { children } = props;
-
-    this.state = {
-      focusedIndex: false,
-      length: children.length,
-    };
-
+    this.state = ControlledTabs.getPanelState(props.children);
     /** refs are used to focus links after keyboard navigation occured */
     this.linkNodes = new Map();
   }
 
   componentWillReceiveProps({ children: nextChildren }) {
-    if (nextChildren.length !== this.state.length) {
-      const nextState = {
-        focusedIndex: false,
-        length: nextChildren.length,
-      };
+    const { children: prevChildren } = this.props;
 
-      this.setState(nextState);
+    if (nextChildren !== prevChildren) {
+      this.setState(ControlledTabs.getPanelState(nextChildren));
     }
   }
 
-  onChangeTab(nextActiveIndex) {
+  onChangeTab(nextActiveTab) {
     const { onChangeTab } = this.props;
-    this.setState({ focusedIndex: nextActiveIndex });
-    onChangeTab(nextActiveIndex);
+    this.setState({ focusedTab: nextActiveTab });
+    onChangeTab(nextActiveTab);
   }
 
-  getCurrentTab() {
-    const { activeIndex } = this.props;
-    return activeIndex;
+
+  getCurrentPosition() {
+    const { activeTab } = this.props;
+    const { positions } = this.state;
+    return positions[activeTab];
+  }
+
+  getIdForPosition(position) {
+    const { positions } = this.state;
+    return Object.keys(positions).find(key => positions[key] === position);
   }
 
   getOnLinkKeyup() {
@@ -85,68 +98,65 @@ class ControlledTabs extends PureComponent {
       if (!isLeftKey && !isRightKey) return;
 
       const { length } = this.state;
-
-      const currentTab = this.getCurrentTab();
+      const currentPosition = this.getCurrentPosition();
 
       /* eslint-disable no-nested-ternary */
       const nextIndex = isLeftKey
-        ? (currentTab > 0) ? currentTab - 1 : Math.max(length - 1, 0)
-        : (currentTab < length - 1) ? currentTab + 1 : 0;
+        ? (currentPosition > 0) ? currentPosition - 1 : Math.max(length - 1, 0)
+        : (currentPosition < length - 1) ? currentPosition + 1 : 0;
       /* eslint-enable */
-      this.onChangeTab(nextIndex);
+
+      const nextId = this.getIdForPosition(nextIndex);
+
+      this.onChangeTab(nextId);
       /** Accesses the ref defined in <TabLink /> */
-      const linkRef = linkNodes.get(nextIndex);
-      linkRef.link.focus();
+      linkNodes.get(nextId).link.focus();
     };
   }
 
-  getLinkRefSetter(i) {
-    return (c) => { this.linkNodes.set(i, c); };
+  getLinkRefSetter(id) {
+    return (c) => { this.linkNodes.set(id, c); };
   }
 
-  getOnLinkFocus(i) {
-    return () => { this.setState({ focusedIndex: i }); };
+  getOnLinkFocus(id) {
+    return () => { this.setState({ focusedTab: id }); };
   }
 
   getOnBlur() {
-    return (evt) => {
-      const currentTarget = evt.currentTarget;
-
+    return ({ currentTarget }) => {
       /** Workaround to only fire blur when the whole navigation is unfocused */
       setTimeout(() => {
         if (!currentTarget.contains(document.activeElement)) {
-          this.setState({ focusedIndex: false });
+          this.setState({ focusedTab: false });
         }
       }, 0);
     };
   }
 
-  getOnLinkClick(i) {
+  getOnLinkClick(id) {
     return (evt) => {
       evt.stopPropagation();
-      this.onChangeTab(i);
+      this.onChangeTab(id);
     };
   }
 
   getLinkRenderer() {
-    const { focusedIndex } = this.state;
-    const { scoped } = this.props;
-
-    const currentTab = this.getCurrentTab();
+    const { focusedTab } = this.state;
+    const { activeTab, scoped } = this.props;
 
     return (child, i) => {
       const { tabTitle, id, title } = child.props;
 
       return (
         <TabLink
-          isActive={currentTab === i}
-          isFocused={focusedIndex === i}
+          isActive={activeTab === id}
+          isFocused={focusedTab === id}
           id={id}
-          onFocus={this.getOnLinkFocus(i)}
-          onKeyUp={this.getOnLinkKeyup()}
+          onFocus={this.getOnLinkFocus(id)}
+          onKeyUp={this.getOnLinkKeyup(i)}
           /* Focus is triggered before click but after mouseDown, using mouseDown to prevent a render-cycle */
-          onMouseDown={this.getOnLinkClick(i)}
-          ref={this.getLinkRefSetter(i)}
+          onMouseDown={this.getOnLinkClick(id)}
+          ref={this.getLinkRefSetter(id)}
           scoped={scoped}
           title={tabTitle || title}
         >
@@ -157,11 +167,11 @@ class ControlledTabs extends PureComponent {
   }
 
   getActiveTabRenderer() {
-    const { renderInactiveTabs, scoped } = this.props;
-    const currentTab = this.getCurrentTab();
+    const { activeTab, renderInactiveTabs, scoped } = this.props;
 
-    return (child, i) => {
-      const isActive = i === currentTab;
+    return (child) => {
+      const { id } = child.props;
+      const isActive = id === activeTab;
       const hideTab = !isActive && !renderInactiveTabs;
 
       return React.cloneElement(child, {

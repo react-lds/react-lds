@@ -10,8 +10,8 @@ const Tab = (props) => {
     id,
     isActive,
     scoped,
-    tabTitle: __,
-    title: _,
+    tabTitle: _,
+    title: __,
     ...rest
   } = props;
 

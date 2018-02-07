@@ -4,6 +4,7 @@ import ControlledTabs from './ControlledTabs';
 
 class Tabs extends Component {
   static defaultProps = {
+    defaultActiveTab: null,
     onChangeTab: null,
     renderInactiveTabs: false,
     scoped: false,
@@ -15,6 +16,11 @@ class Tabs extends Component {
      * One or more Tab components
      */
     children: PropTypes.node.isRequired,
+    /**
+     * Id of the Tab that should be rendered first. Uses first tab of not passed
+     *
+     */
+    defaultActiveTab: PropTypes.number,
     /**
      * Callback triggered when the Tab is changed. Receives (nextIndex)
      */
@@ -33,14 +39,38 @@ class Tabs extends Component {
     styled: PropTypes.bool,
   }
 
-  state = {
-    activeIndex: 0,
+  static getFirstChildId = (children) => {
+    const childArray = React.Children.toArray(children);
+    const firstChild = childArray[0];
+
+    if (!firstChild) return null;
+
+    const { props: { id } } = firstChild;
+    return id;
   }
 
-  getOnTabChange = () => (i) => {
+  constructor(props) {
+    super(props);
+
+    const { children, defaultActiveTab } = this.props;
+
+    const firstId = defaultActiveTab || Tabs.getFirstChildId(children);
+
+    this.state = {
+      activeTab: firstId,
+    };
+  }
+
+  componentWillReceiveProps({ children: nextChildren }) {
+    if (nextChildren !== this.props.children) {
+      this.setState({ activeTab: Tabs.getFirstChildId(nextChildren) });
+    }
+  }
+
+  getOnTabChange = () => (id) => {
     const { onChangeTab } = this.props;
-    this.setState({ activeIndex: i });
-    if (onChangeTab) { onChangeTab(i); }
+    this.setState({ activeTab: id });
+    if (onChangeTab) { onChangeTab(id); }
   }
 
   render() {
@@ -48,7 +78,7 @@ class Tabs extends Component {
       <ControlledTabs
         {...this.props}
         onChangeTab={this.getOnTabChange()}
-        activeIndex={this.state.activeIndex}
+        activeTab={this.state.activeTab}
       />
     );
   }

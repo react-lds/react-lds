@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { boolean, number } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
 import { ControlledTabs, Tabs, Tab } from '../src';
 
 const stories = storiesOf('Tabs', module);
@@ -26,7 +26,7 @@ stories
   .add('Controlled', () => (
     <ControlledTabs
       onChangeTab={action('change-tab')}
-      activeIndex={number('Tab Open', 2, { range: false, min: 0, max: 2 })}
+      activeTab={select('Tab Open', ['tab-1', 'tab-2', 'tab-3'], 'tab-2')}
     >
       <Tab id="tab-1" title="Tab 1">Tab One</Tab>
       <Tab id="tab-2" title="Tab 2">
