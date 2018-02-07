@@ -11,7 +11,7 @@ class Carousel extends Component {
   }
 
   autoPlayId = null // eslint-disable-line react/sort-comp
-  autoPlayFlavors = ['icon-border-filled', 'icon-x-small'];
+  autoPlayFlavors = ['icon-border-filled', 'icon-x-small']
 
   componentWillMount() {
     const { autoPlayActive, children } = this.props;
@@ -80,11 +80,13 @@ class Carousel extends Component {
 
   updatePanels(panels) {
     const { activeIndex } = this.state;
+
     this.setState({
       activeIndex: Math.min(panels.length, activeIndex),
       panels: React.Children.map(panels, (panel, index) => (
         React.cloneElement(panel, {
           active: activeIndex === index,
+          onKeyboardInteraction: this.onKeyboardInteraction,
         })
       )),
     });
@@ -203,7 +205,7 @@ class Carousel extends Component {
     const translateX = `translateX(-${activeIndex * 100}%)`;
 
     return (
-      <div className={cx(sldsClasses)} onKeyDown={this.onKeyboardInteraction}>
+      <div className={cx(sldsClasses)}>
         <div className="slds-carousel__stage">
           {autoPlay && this.renderAutoPlay()}
           <div className="slds-carousel__panels" style={{ transform: translateX }}>
