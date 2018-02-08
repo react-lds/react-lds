@@ -36,28 +36,32 @@ const Column = (props) => {
   const breakpoints = Array.from(validBreakpoints);
   breakpoints.unshift('');
 
+  const generatedProps = [];
+
   breakpoints.forEach((breakpoint) => {
-    const sizePropName = breakpoint === '' ? 'sizeOf' : breakPointProp(breakpoint, 'sizeOf');
-    const sizeString = breakpoint === '' ? 'size' : `${breakpoint}-size`;
+    const emptyBreakPoint = breakpoint === '';
+
+    const sizePropName = emptyBreakPoint ? 'sizeOf' : breakPointProp(breakpoint, 'sizeOf');
+    const sizeString = emptyBreakPoint ? 'size' : `${breakpoint}-size`;
     const size = props[sizePropName];
-    if (sizeRegex.test(size)) {
+    if (size && sizeRegex.test(size)) {
       const from = parseInt(size.split('-')[0], 10);
       const to = parseInt(size.split('-')[1], 10);
       sldsClasses.push(`slds-${sizeString}_${from}-of-${to}`);
     }
 
-    const orderPropName = breakpoint === '' ? 'order' : breakPointProp(breakpoint, 'order');
-    const orderString = breakpoint === '' ? 'order' : `${breakpoint}-order`;
+    const orderPropName = emptyBreakPoint ? 'order' : breakPointProp(breakpoint, 'order');
+    const orderString = emptyBreakPoint ? 'order' : `${breakpoint}-order`;
     const order = props[orderPropName];
-    if (orderRegex.test(order)) {
+    if (order && orderRegex.test(order)) {
       const position = parseInt(order.split('-')[0], 10);
       sldsClasses.push(`slds-${orderString}_${position}`);
     }
+
+    generatedProps.push(sizePropName, orderPropName);
   });
 
-  let restProps = rest;
-  restProps = omit(restProps, validBreakpoints.map(a => breakPointProp(a, 'sizeOf')), 'sizeOf');
-  restProps = omit(restProps, validBreakpoints.map(a => breakPointProp(a, 'order')), 'order');
+  const restProps = omit(rest, generatedProps);
 
   return (
     <div {...restProps} className={cx(sldsClasses)}>{children}</div>

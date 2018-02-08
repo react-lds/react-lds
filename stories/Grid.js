@@ -106,7 +106,9 @@ stories
     <Grid wrap>
       <Column
         className="slds-m-bottom--large slds-p-horizontal_small"
-        sizeOf="1-2"
+        sizeOf="1-1"
+        small-sizeOf="1-2"
+        medium-sizeOf="1-4"
         order="1"
         small-order="2"
         medium-order="3"
@@ -115,7 +117,9 @@ stories
       </Column>
       <Column
         className="slds-m-bottom--large slds-p-horizontal_small"
-        sizeOf="1-2"
+        sizeOf="1-1"
+        small-sizeOf="1-2"
+        medium-sizeOf="1-4"
         order="2"
         small-order="1"
         medium-order="2"
@@ -124,7 +128,9 @@ stories
       </Column>
       <Column
         className="slds-m-bottom--large slds-p-horizontal_small"
-        sizeOf="1-2"
+        sizeOf="1-1"
+        small-sizeOf="1-2"
+        medium-sizeOf="1-4"
         order="3"
         small-order="4"
         medium-order="1"
@@ -133,7 +139,9 @@ stories
       </Column>
       <Column
         className="slds-m-bottom--large slds-p-horizontal_small"
-        sizeOf="1-2"
+        sizeOf="1-1"
+        small-sizeOf="1-2"
+        medium-sizeOf="1-4"
         order="4"
         small-order="3"
         medium-order="4"
