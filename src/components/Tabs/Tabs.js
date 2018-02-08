@@ -20,7 +20,7 @@ class Tabs extends Component {
      * Id of the Tab that should be rendered first. Uses first tab of not passed
      *
      */
-    defaultActiveTab: PropTypes.number,
+    defaultActiveTab: PropTypes.string,
     /**
      * Callback triggered when the Tab is changed. Receives (nextIndex)
      */
