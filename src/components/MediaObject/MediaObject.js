@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const renderFigure = (figure, classes = []) => (
+const renderFigure = (figure, ...classes) => (
   <div className={cx('slds-media__figure', ...classes)}>{figure}</div>
 );
 
@@ -27,20 +27,20 @@ const MediaObject = (props) => {
       {...rest}
       className={cx(
         'slds-media',
-        center && 'slds-media_center',
-        responsive && 'slds-media_responsive',
-        size && `slds-media_${size}`,
+        { 'slds-media_center': center },
+        { 'slds-media_responsive': responsive },
+        { [`slds-media_${size}`]: !!size },
         className
       )}
     >
       {figureLeft && renderFigure(figureLeft)}
       <div
-        className={cx('slds-media__body', truncate && 'slds-truncate')}
+        className={cx('slds-media__body', { 'slds-truncate': truncate })}
         title={title}
       >
         {children}
       </div>
-      {figureRight && renderFigure(figureRight, ['slds-media__figure_reverse'])}
+      {figureRight && renderFigure(figureRight, 'slds-media__figure_reverse')}
     </Tag>
   );
 };
