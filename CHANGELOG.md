@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.2.0
+
+* _Carousel_: carousel image can be rendered as background image
+
 ## 4.1.0
 
 * add _CheckboxToggle_
