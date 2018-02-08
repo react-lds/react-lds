@@ -1,66 +1,68 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { applyDecorators, decoratorProp } from '../../utils';
+
+const renderFigure = (figure, classes = []) => (
+  <div className={cx('slds-media__figure', ...classes)}>{figure}</div>
+);
 
 const MediaObject = (props) => {
   const {
+    center,
     children,
     className,
     customTag,
     figureLeft,
     figureRight,
-    flavor,
+    responsive,
     size,
     title,
     truncate,
     ...rest } = props;
 
-  const renderFigure = (figure, classes = []) => {
-    const figureClasses = [
-      'slds-media__figure',
-      ...classes,
-    ];
-
-    return (<div className={cx(figureClasses)}>{figure}</div>);
-  };
-
   const Tag = customTag || 'div';
 
-  const sldsClasses = [
-    'slds-media',
-    className,
-    applyDecorators(flavor, 'media'),
-    { [`slds-media_${size}`]: !!size },
-  ];
-
-  const bodyClasses = [
-    'slds-media__body',
-    { 'slds-truncate': !!truncate },
-  ];
-
   return (
-    <Tag {...rest} className={cx(sldsClasses)}>
+    <Tag
+      {...rest}
+      className={cx(
+        'slds-media',
+        center && 'slds-media_center',
+        responsive && 'slds-media_responsive',
+        size && `slds-media_${size}`,
+        className
+      )}
+    >
       {figureLeft && renderFigure(figureLeft)}
-      <div className={cx(bodyClasses)} title={title}>{children}</div>
+      <div
+        className={cx('slds-media__body', truncate && 'slds-truncate')}
+        title={title}
+      >
+        {children}
+      </div>
       {figureRight && renderFigure(figureRight, ['slds-media__figure_reverse'])}
     </Tag>
   );
 };
 
 MediaObject.defaultProps = {
+  center: true,
   children: null,
   className: null,
   customTag: null,
   figureLeft: null,
   figureRight: null,
-  flavor: [],
+  responsive: false,
   size: null,
   truncate: false,
   title: null,
 };
 
 MediaObject.propTypes = {
+  /**
+   * horizontally centers figures with content
+   */
+  center: PropTypes.bool,
   /**
    * mediaObject content
    */
@@ -82,13 +84,9 @@ MediaObject.propTypes = {
    */
   figureRight: PropTypes.node,
   /**
-   * flavor: array of flavors, you can also provide a single flavor as a string.
-   * Flavors: center, responsive
+   * renders a responsive variant of the MediaObject
    */
-  flavor: decoratorProp([
-    'center',
-    'responsive',
-  ]),
+  responsive: PropTypes.bool,
   /**
    * Sizes: small, large
    */
