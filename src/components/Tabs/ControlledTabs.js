@@ -146,14 +146,12 @@ class ControlledTabs extends PureComponent {
   getLinkRenderer() {
     const { focusedTab } = this.state;
     const { activeTab, scoped } = this.props;
+    const { id, renderTitle, title } = child.props;
 
     return (child) => {
-      const { tabTitle, id, title } = child.props;
 
       return (
         <TabLink
-          isActive={activeTab === id}
-          isFocused={focusedTab === id}
           id={id}
           onFocus={this.getOnLinkFocus(id)}
           onKeyUp={this.getOnLinkKeyup()}
@@ -161,12 +159,16 @@ class ControlledTabs extends PureComponent {
           onMouseDown={this.getOnLinkClick(id)}
           ref={this.getLinkRefSetter(id)}
           scoped={scoped}
-          title={tabTitle || title}
         >
-          {title}
         </TabLink>
       );
     };
+    const isActive = activeTab === id;
+    const isFocused = focusedTab === id;
+        isActive={isActive}
+        isFocused={isFocused}
+        title={title}
+        {renderTitle ? renderTitle({ id, isActive, isFocused, title }) : title}
   }
 
   getActiveTabRenderer() {

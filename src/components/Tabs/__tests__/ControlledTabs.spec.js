@@ -4,8 +4,6 @@ import ControlledTabs from '../ControlledTabs';
 import Tab from '../Tab';
 import TabLink from '../TabLink';
 
-const sampleTitle = <p>Sample</p>;
-
 const getComponent = (props = {}) => shallow(
   <ControlledTabs
     activeTab="foo"
@@ -14,7 +12,7 @@ const getComponent = (props = {}) => shallow(
   >
     <Tab id="foo" title="foo">Foo</Tab>
     <Tab id="bar" title="bar">Bar</Tab>
-    <Tab id="baz" title={sampleTitle} tabTitle="baz">Baz</Tab>
+    <Tab id="baz" title="baz" tabTitle="baz">Baz</Tab>
   </ControlledTabs>
 );
 
@@ -39,10 +37,22 @@ describe('<ControlledTabs />', () => {
   });
 
   it('renders links with a custom title', () => {
+    const mockFn = jest.fn(({ title }) => <p>{title}</p>);
     const mounted = getComponent();
-    const lastLink = getTabLink(mounted, 2);
-    expect(lastLink.prop('children')).toEqual(sampleTitle);
-    expect(lastLink.prop('title')).toEqual('baz');
+    mounted.setProps({
+      children: <Tab id="baz" renderTitle={mockFn} title="foobar">Baz</Tab>
+    });
+
+    const lastLink = getTabLink(mounted, 0);
+
+    expect(mockFn).toHaveBeenCalledWith({
+      title: 'foobar',
+      isActive: false,
+      isFocused: false,
+      id: 'baz',
+    });
+    expect(lastLink.find('p').text()).toEqual('foobar');
+    expect(lastLink.prop('title')).toEqual('foobar');
   });
 
   it('renders a panel for every tab passed', () => {

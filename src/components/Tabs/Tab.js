@@ -10,7 +10,7 @@ const Tab = (props) => {
     id,
     isActive,
     scoped,
-    tabTitle: _,
+    renderTitle: _,
     title: __,
     ...rest
   } = props;
@@ -34,6 +34,7 @@ const Tab = (props) => {
 Tab.defaultProps = {
   className: null,
   isActive: false,
+  renderTitle: null,
   scoped: false,
   tabTitle: null,
 };
@@ -52,13 +53,13 @@ Tab.propTypes = {
    */
   id: PropTypes.string.isRequired,
   /**
-   * Title in Navigation. Can be a React.Element or a string
+   * Function to render `title`. Called with ({ id, isActive, isFocused, title})
    */
-  title: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
+  renderTitle: PropTypes.func,
   /**
-   * Only needed when `title` is a React.Element, used as accessibility label
+   * Title in Navigation
    */
-  tabTitle: PropTypes.string,
+  title: PropTypes.string.isRequired,
   /**
    * (PRIVATE) Set by parent Tabs
    */
