@@ -37,4 +37,18 @@ describe('<Column />', () => {
     expect(mounted.find('.slds-col').hasClass('slds-shrink')).toBeTruthy();
     expect(mounted.find('.slds-col').hasClass('slds-no-flex')).toBeTruthy();
   });
+
+  it('applies sizeOf classes, with breakpoint and without', () => {
+    mounted.setProps({ sizeOf: '10-12' });
+    expect(mounted.find('.slds-col').hasClass('slds-size_10-of-12')).toBeTruthy();
+    mounted.setProps({ 'small-sizeOf': '10-12' });
+    expect(mounted.find('.slds-col').hasClass('slds-small-size_10-of-12')).toBeTruthy();
+  });
+
+  it('applies order classes, with breakpoint and without', () => {
+    mounted.setProps({ order: '10' });
+    expect(mounted.find('.slds-col').hasClass('slds-order_10')).toBeTruthy();
+    mounted.setProps({ 'small-order': '3' });
+    expect(mounted.find('.slds-col').hasClass('slds-small-order_3')).toBeTruthy();
+  });
 });
