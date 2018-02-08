@@ -22,7 +22,7 @@ const PageHeaderBase = (props) => {
 
   return (
     <div {...rest} className={cx(sldsClasses)} role="banner">
-      <MediaObject figureLeft={iconRendered} flavor="center">
+      <MediaObject figureLeft={iconRendered} center>
         <p className={cx(titleClasses)} title={title}>
           {title}
         </p>
