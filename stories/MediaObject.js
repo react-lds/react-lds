@@ -30,7 +30,8 @@ stories
       customTag={text('Custom HTML-tag', '') || undefined}
       figureLeft={icon}
       figureRight={icon}
-      flavor={array('Flavor', ['center'])}
+      center={boolean('Center?', true)}
+      responsive={boolean('Responsive?', false)}
       size={select('Size', ['', 'small', 'large'], '') || undefined}
       truncate={boolean('Truncate', false)}
       title={text('Title', 'This is a tooltip displayed on mouseover, necessary when truncate is used') || undefined}
