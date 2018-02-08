@@ -36,7 +36,6 @@ Tab.defaultProps = {
   isActive: false,
   renderTitle: null,
   scoped: false,
-  tabTitle: null,
 };
 
 Tab.propTypes = {
