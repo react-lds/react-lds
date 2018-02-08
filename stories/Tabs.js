@@ -10,6 +10,7 @@ const stories = storiesOf('Tabs', module);
 stories
   .add('Default', () => (
     <Tabs
+      defaultActiveTab="tab-3"
       styled={boolean('Card Look?', true)}
       scoped={boolean('Scoped?', false)}
       onChangeTab={action('change-tab')}
@@ -25,7 +26,10 @@ stories
     </Tabs>
   ))
   .add('Controlled', withInfo(`
-    **ControlledTabs** are the underlying implementation of **Tabs**. They receive the active tab id via the prop _activeTab_ and hand off changes via _onChangeTab_. Note that this demo does not implement any event handling and focus styles will appear off because of this.
+    **ControlledTabs** are the underlying implementation of **Tabs**.
+    They receive the active tab id via the prop _activeTab_ and hand off changes via _onChangeTab_.
+    Note that this demo does not implement any event handling
+    and focus styles will appear off because of this.
   `)(() => (
     <ControlledTabs
       onChangeTab={action('change-tab')}
