@@ -20,7 +20,7 @@ class Tabs extends Component {
      * Id of the Tab that should be rendered first. Uses first tab of not passed
      *
      */
-    defaultActiveTab: PropTypes.number,
+    defaultActiveTab: PropTypes.string,
     /**
      * Callback triggered when the Tab is changed. Receives (nextIndex)
      */
@@ -62,8 +62,10 @@ class Tabs extends Component {
   }
 
   componentWillReceiveProps({ children: nextChildren }) {
-    if (nextChildren !== this.props.children) {
-      this.setState({ activeTab: Tabs.getFirstChildId(nextChildren) });
+    if (nextChildren.length !== this.props.children.length) {
+      this.setState({
+        activeTab: Tabs.getFirstChildId(nextChildren),
+      });
     }
   }
 
@@ -74,11 +76,18 @@ class Tabs extends Component {
   }
 
   render() {
+    const {
+      defaultActiveTab: _,
+      ...rest
+    } = this.props;
+
+    const { activeTab } = this.state;
+
     return (
       <ControlledTabs
-        {...this.props}
+        {...rest}
         onChangeTab={this.getOnTabChange()}
-        activeTab={this.state.activeTab}
+        activeTab={activeTab}
       />
     );
   }
