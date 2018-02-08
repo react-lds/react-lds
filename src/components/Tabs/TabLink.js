@@ -28,8 +28,8 @@ class TabLink extends Component {
       <li
         className={cx(
           getTabsClass('__item', scoped),
-          isActive && 'slds-is-active',
-          isFocused && 'slds-has-focus'
+          { 'slds-is-active': isActive },
+          { 'slds-has-focus': isFocused }
         )}
         key={id}
         role="presentation"

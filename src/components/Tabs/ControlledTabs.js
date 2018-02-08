@@ -63,9 +63,7 @@ class ControlledTabs extends PureComponent {
   }
 
   componentWillReceiveProps({ children: nextChildren }) {
-    const { children: prevChildren } = this.props;
-
-    if (nextChildren !== prevChildren) {
+    if (ControlledTabs.getPanelState(nextChildren) !== ControlledTabs.getPanelState(this.props.children)) {
       this.setState(ControlledTabs.getPanelState(nextChildren));
     }
   }
@@ -184,7 +182,7 @@ class ControlledTabs extends PureComponent {
       <div
         className={cx(
           getTabsClass('', scoped),
-          styled && 'slds-tabs_card'
+          { 'slds-tabs_card': styled }
         )}
       >
         <ul
