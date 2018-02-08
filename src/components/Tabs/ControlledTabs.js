@@ -182,7 +182,7 @@ class ControlledTabs extends PureComponent {
       <div
         className={cx(
           getTabsClass('', scoped),
-          styled && 'slds-tabs_card'
+          { 'slds-tabs_card': styled }
         )}
       >
         <ul
