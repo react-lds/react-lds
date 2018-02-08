@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.0.0-alpha.1
+
+* _Tab_ is deprecated and replaced by _Tabs_
+* _Grid_ new supports responsive `order` prop
+* `react-lds` now depends on `lodash` instead of `lodash.x`
+
 ## 4.2.0
 
 * _Carousel_: carousel image can be rendered as background image
