@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
-import omit from 'lodash.omit';
+import omit from 'lodash/omit';
 
 import { Button, ButtonIcon } from '../../';
 

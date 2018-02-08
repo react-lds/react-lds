@@ -5,7 +5,7 @@
         "last 2 versions",
         "not ie <= 11",
         "not android <= 56"
-      ],
+      ]
     },
     "loose": true,
     "modules": "commonjs",
@@ -36,8 +36,7 @@
         ["transform-react-remove-prop-types", {
           "mode": "wrap",
           "ignoreFilenames": ["node_modules"]
-        }]],
+        }]]
     }
-
   }
 }
