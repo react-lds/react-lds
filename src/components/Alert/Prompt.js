@@ -2,16 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { THEMES } from '../../utils';
 
-import { Modal, ModalHeader, ModalContent, ModalFooter, Backdrop, Button } from '../../';
+import { Modal, ModalContent, ModalFooter } from '../../';
 
 const Prompt = (props) => {
   const {
-    buttonText,
     children,
     className,
-    description,
-    label,
-    onClickClose,
+    id,
+    labels,
+    onClose,
     open,
     theme,
     title,
@@ -20,30 +19,35 @@ const Prompt = (props) => {
 
   return (
     <div>
-      <Modal {...rest} className={className} label={label} open={open} dialog prompt={theme}>
-        <ModalHeader title={title} />
-        <ModalContent id={description}>{children}</ModalContent>
-        <ModalFooter defaultTheme>
-          <Button flavor="neutral" title={buttonText} onClick={onClickClose} />
-        </ModalFooter>
+      <Modal
+        {...rest}
+        className={className}
+        id={id}
+        open={open}
+        onClose={onClose}
+        prompt={theme}
+        title={title}
+      >
+        <ModalContent>{children}</ModalContent>
+        <ModalFooter
+          className="slds-theme_default"
+          labels={labels}
+        />
       </Modal>
-      <Backdrop open={props.open} />
     </div>
   );
 };
 
 Prompt.defaultProps = {
   className: null,
+  labels: {
+    close: 'Okay'
+  },
   open: false,
-  onClickClose: null,
   theme: 'error',
 };
 
 Prompt.propTypes = {
-  /**
-   * prompt close button text
-   */
-  buttonText: PropTypes.string.isRequired,
   /**
    * prompt content
    */
@@ -53,17 +57,19 @@ Prompt.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * prompt description
+   * Prompt Id
    */
-  description: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   /**
-   * prompt label
+   * Prompt text labels
    */
-  label: PropTypes.string.isRequired,
+  labels: PropTypes.shape({
+    close: PropTypes.string.isRequired,
+  }),
   /**
-   * prompt close onClick
+   * fires when close is clicked or when esc is pressed when the prompt is visible
    */
-  onClickClose: PropTypes.func,
+  onClose: PropTypes.func.isRequired,
   /**
    * opens the prompt
    */
@@ -73,7 +79,7 @@ Prompt.propTypes = {
    */
   theme: PropTypes.oneOf(THEMES),
   /**
-   * prompt content
+   * prompt title
    */
   title: PropTypes.string.isRequired,
 };

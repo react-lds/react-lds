@@ -43,6 +43,14 @@ describe('<Modal />', () => {
     expect(mounted.find('.slds-modal').hasClass('slds-slide-up-open')).toBeTruthy();
   });
 
+  it('renders as prompt', () => {
+    const mounted = getComponent();
+    expect(mounted.find('.slds-modal').prop('role')).toEqual('dialog');
+    mounted.setProps({ prompt: 'error' });
+    expect(mounted.find('.slds-modal').prop('role')).toEqual('alertdialog');
+    expect(mounted.find(ModalHeader).prop('theme')).toEqual('error');
+  });
+
   it('links ModalHeader with aria-labelledby', () => {
     const mounted = getComponent({ title: 'foo' });
     expect(mounted.find('.slds-modal').prop('aria-labelledby')).toEqual(mounted.find(ModalHeader).prop('id'));

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, ButtonIcon } from '../Button';
+import { THEMES, getThemeClass } from '../../utils';
 
 const buttonFlavors = [
   'icon',
@@ -9,11 +10,17 @@ const buttonFlavors = [
 ];
 
 const ModalHeader = (props) => {
-  const { id, onClose, title, tagline } = props;
+  const { id, onClose, theme, title, tagline } = props;
   const isEmpty = !tagline && !title;
 
   return (
-    <header className={cx('slds-modal__header', { 'slds-modal__header_empty': isEmpty })}>
+    <header
+      className={cx(
+        'slds-modal__header',
+        { 'slds-modal__header_empty': isEmpty },
+        ...getThemeClass(theme),
+      )}
+    >
       <Button
         className="slds-modal__close"
         flavor={buttonFlavors}
@@ -43,11 +50,13 @@ ModalHeader.defaultProps = {
   id: null,
   title: null,
   tagline: null,
+  theme: null,
 };
 
 ModalHeader.propTypes = {
   id: PropTypes.string,
   onClose: PropTypes.func.isRequired,
+  theme: PropTypes.oneOf(THEMES),
   title: PropTypes.string,
   tagline: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };

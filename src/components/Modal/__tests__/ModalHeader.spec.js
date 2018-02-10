@@ -40,4 +40,9 @@ describe('<ModalHeader />', () => {
     mounted.find(Button).simulate('click');
     expect(mockFn).toHaveBeenCalled();
   });
+
+  it('applies theme', () => {
+    const mounted = getComponent({ theme: 'error' });
+    expect(mounted.find('.slds-modal__header').hasClass('slds-theme_error')).toBeTruthy();
+  });
 });

@@ -35,6 +35,7 @@ class Modal extends Component {
       id,
       open,
       onClose: _,
+      prompt,
       tagline,
       title,
       transitionStyle,
@@ -51,9 +52,10 @@ class Modal extends Component {
           className={cx(
             'slds-modal',
             { [`slds-${transitionStyle}`]: open },
+            { 'slds-modal_prompt': !!prompt },
             className
           )}
-          role="dialog"
+          role={prompt ? 'alertdialog' : 'dialog'}
           tabIndex={-1}
           aria-modal="true"
           aria-describedby={contentId}
@@ -63,6 +65,7 @@ class Modal extends Component {
             <ModalHeader
               id={titleId}
               onClose={this.onClose}
+              theme={prompt}
               tagline={tagline}
               title={title}
             />
@@ -78,6 +81,7 @@ class Modal extends Component {
 Modal.defaultProps = {
   className: null,
   open: false,
+  prompt: null,
   tagline: null,
   title: null,
   transitionStyle: 'fade-in-open',
@@ -95,6 +99,7 @@ Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   open: PropTypes.bool,
+  prompt: PropTypes.string,
   tagline: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   title: PropTypes.string,
 };
