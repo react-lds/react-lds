@@ -1,80 +1,55 @@
 import React from 'react';
-import { mount } from 'enzyme';
-
+import { shallow } from 'enzyme';
 import Modal from '../Modal';
-import ModalHeader from '../ModalHeader';
 import ModalContent from '../ModalContent';
+import ModalFooter from '../ModalFooter';
+import ModalHeader from '../ModalHeader';
+
+const getComponent = (props = {}) => shallow(
+  <Modal
+    id="modal"
+    onClose={() => {}}
+    {...props}
+  >
+    <ModalContent>foo</ModalContent>
+    <ModalFooter />
+  </Modal>
+);
 
 describe('<Modal />', () => {
-  let mounted = null;
-
-  beforeEach(() => {
-    mounted = mount(
-      <Modal>
-        <ModalHeader />
-        <ModalContent id="bar" className="foo">
-          Content
-        </ModalContent>
-      </Modal>
-    );
+  it('applies extra classNames and rest properties', () => {
+    const mounted = getComponent({ className: 'foo', 'aria-hidden': true });
+    const el = mounted.find('.slds-modal');
+    expect(el.prop('aria-hidden')).toBeTruthy();
+    expect(el.hasClass('foo')).toBeTruthy();
   });
 
-  it('renders the correct markup', () => {
-    expect(mounted.find('.slds-modal').find('.slds-modal__container').length).toBe(1);
-
-    const modalProps = mounted.find('.slds-modal').props();
-    expect(modalProps.role).toBe('dialog');
-    expect(modalProps['aria-hidden']).toBeTruthy();
+  it('renders as closed', () => {
+    const mounted = getComponent();
+    expect(mounted.find('.slds-modal').hasClass('slds-fade-in-open')).toBeFalsy();
+    expect(mounted.find('.slds-backdrop').hasClass('slds-backdrop_open')).toBeFalsy();
+    expect(mounted.find('FocusTrap').prop('active')).toBeFalsy();
   });
 
-  it('renders opened', () => {
-    mounted.setProps({ open: true });
+  it('renders as open', () => {
+    const mounted = getComponent({ open: true });
     expect(mounted.find('.slds-modal').hasClass('slds-fade-in-open')).toBeTruthy();
-    expect(mounted.find('.slds-modal').prop('aria-hidden')).toBeFalsy();
+    expect(mounted.find('.slds-backdrop').hasClass('slds-backdrop_open')).toBeTruthy();
+    expect(mounted.find('FocusTrap').prop('active')).toBeTruthy();
   });
 
-  it('renders and passes label and description', () => {
-    mounted.setProps({ label: 'foo', descriptionId: 'bar' });
-    const modalProps = mounted.find('.slds-modal').props();
-    const modalContentProps = mounted.find(ModalContent).first().props();
-    const modalHeaderProps = mounted.find(ModalHeader).first().props();
-
-    expect(modalProps['aria-labelledby']).toBe('foo');
-    expect(modalProps['aria-describedby']).toBe('bar');
-    expect(modalContentProps.id).toBe('bar');
-    expect(modalHeaderProps.label).toBe('foo');
-    expect(modalHeaderProps.prompt).toBeFalsy();
+  it('renders with a different transitionStyle', () => {
+    const mounted = getComponent({ open: true, transitionStyle: 'slide-up-open' });
+    expect(mounted.find('.slds-modal').hasClass('slds-slide-up-open')).toBeTruthy();
   });
 
-  it('renders as a dialog', () => {
-    mounted.setProps({ dialog: true });
-
-    const modalContainerProps = mounted.find('.slds-modal__container').props();
-    expect(modalContainerProps.tabIndex).toBe('0');
-    expect(modalContainerProps.role).toBe('document');
+  it('links ModalHeader with aria-labelledby', () => {
+    const mounted = getComponent({ title: 'foo' });
+    expect(mounted.find('.slds-modal').prop('aria-labelledby')).toEqual(mounted.find(ModalHeader).prop('id'));
   });
 
-  it('renders and passes prompt', () => {
-    mounted.setProps({ prompt: true });
-    expect(mounted.find('.slds-modal').props().role).toBe('alertdialog');
-
-    const modalHeaderProps = mounted.find(ModalHeader).first().props();
-    const modalContainerProps = mounted.find('.slds-modal__container').props();
-    expect(modalContainerProps.tabIndex).toBe('0');
-    expect(modalContainerProps.role).toBe('document');
-
-    expect(modalHeaderProps.prompt).toBe(true);
-    expect(modalHeaderProps.uncloseable).toBe(true);
-  });
-
-  it('applies className and rest-properties', () => {
-    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
-    expect(mounted.find('.slds-modal').hasClass('foo')).toBeTruthy();
-    expect(mounted.find('.slds-modal').prop('data-test')).toEqual('bar');
-  });
-
-  it('renders as large flavor', () => {
-    mounted.setProps({ large: true });
-    expect(mounted.find('.slds-modal').hasClass('slds-modal_large')).toBeTruthy();
+  it('links ModalContent with aria-describeby', () => {
+    const mounted = getComponent();
+    expect(mounted.find('.slds-modal').prop('aria-describedby')).toEqual(mounted.find(ModalContent).prop('id'));
   });
 });

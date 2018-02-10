@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { boolean, text } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { Button, Modal, ModalContent, ModalFooter } from '../src';
 import { ModalDecorator } from './utils/decorators';
@@ -17,6 +17,12 @@ stories
         open={boolean('Open', true)}
         tagline={text('ModalHeader Tagline', '') || undefined}
         title={text('ModalHeader Title', 'Modal Header')}
+        transitionStyle={select('Transition', [
+          'fade-in-open',
+          'slide-up-saving',
+          'slide-up-open',
+          'slide-down-cancel'
+        ], 'fade-in-open')}
       >
         <ModalContent>
           <div>
@@ -30,7 +36,6 @@ stories
         <ModalFooter directional={boolean('ModalFooter Directional', false)}>
           <Button
             flavor="brand"
-            tabIndex={0}
             title="Save"
             onClick={action('Button \'Save\' clicked')}
           />

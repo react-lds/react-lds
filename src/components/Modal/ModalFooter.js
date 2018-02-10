@@ -1,43 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { Button } from '../Button';
 
-const ModalFooter = (props) => {
-  const { children, className, defaultTheme, directional, ...rest } = props;
-
-  const sldsClasses = [
-    'slds-modal__footer',
-    { 'slds-theme_default': !!defaultTheme },
-    { 'slds-modal__footer_directional': !!directional },
-    className
-  ];
-
-  return (<div {...rest} className={cx(sldsClasses)}>{children}</div>);
-};
+const ModalFooter = ({
+  children,
+  className,
+  labels,
+  directional,
+  onClose,
+  ...rest
+}) => (
+  <footer
+    {...rest}
+    className={cx(
+      'slds-modal__footer',
+      { 'slds-modal__footer_directional': directional },
+      className
+    )}
+  >
+    <Button flavor="neutral" onClick={onClose}>{labels.close}</Button>
+    {children}
+  </footer>
+);
 
 ModalFooter.defaultProps = {
+  children: null,
   className: null,
-  defaultTheme: false,
   directional: false,
+  labels: {
+    close: 'Cancel',
+  },
+  onClose: null,
 };
 
 ModalFooter.propTypes = {
-  /**
-   * modal footer content
-   */
-  children: PropTypes.node.isRequired,
-  /**
-   * class name
-   */
+  children: PropTypes.node,
   className: PropTypes.string,
-  /**
-   * renders the footer with `theme_default`
-   */
-  defaultTheme: PropTypes.bool,
-  /**
-   * directional flavor
-   */
   directional: PropTypes.bool,
+  labels: PropTypes.shape({
+    close: PropTypes.string.isRequired,
+  }),
+  onClose: PropTypes.func,
 };
 
 export default ModalFooter;
