@@ -12,6 +12,11 @@ class Modal extends Component {
     onClose();
   }
 
+  onKeyUp = (evt) => {
+    const { key } = evt;
+    if (key === 'Escape') { this.onClose(evt); }
+  }
+
   cloneWithProps = (child) => {
     const name = child.type.displayName || child.type.name;
 
@@ -55,6 +60,7 @@ class Modal extends Component {
             { 'slds-modal_prompt': !!prompt },
             className
           )}
+          onKeyUp={this.onKeyUp}
           role={prompt ? 'alertdialog' : 'dialog'}
           tabIndex={-1}
           aria-modal="true"

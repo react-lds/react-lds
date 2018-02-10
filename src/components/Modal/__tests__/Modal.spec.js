@@ -60,4 +60,11 @@ describe('<Modal />', () => {
     const mounted = getComponent();
     expect(mounted.find('.slds-modal').prop('aria-describedby')).toEqual(mounted.find(ModalContent).prop('id'));
   });
+
+  it('closes the modal when esc is pressed', () => {
+    const mockFn = jest.fn();
+    const mounted = getComponent({ onClose: mockFn });
+    mounted.find('section').simulate('keyUp', { key: 'Escape', stopPropagation: jest.fn() });
+    expect(mockFn).toHaveBeenCalled();
+  });
 });
