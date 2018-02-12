@@ -8,6 +8,7 @@ import {
   FormElementControl,
   FormElementLabel,
 } from '../../';
+import { PICK_LIST_SIZE, picklistSizeProp } from './constants';
 
 class PicklistDropdown extends Component {
   constructor(props) {
@@ -84,11 +85,7 @@ class PicklistDropdown extends Component {
   }
 }
 
-PicklistDropdown.size = {
-  SMALL: 'small',
-  MEDIUM: 'medium',
-  LARGE: 'large'
-};
+PicklistDropdown.size = PICK_LIST_SIZE;
 
 PicklistDropdown.propTypes = {
   /**
@@ -126,7 +123,7 @@ PicklistDropdown.propTypes = {
    * indicates if the input is required
    */
   isRequired: PropTypes.bool,
-  size: PropTypes.oneOf(Object.keys(PicklistDropdown.size).map(key => PicklistDropdown.size[key])),
+  size: picklistSizeProp,
 };
 
 PicklistDropdown.defaultProps = {

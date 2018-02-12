@@ -8,6 +8,7 @@ import {
   PicklistDropdownListItem,
   InputRaw,
 } from '../../';
+import { PICK_LIST_SIZE, picklistSizeProp } from './constants';
 
 export class PicklistRaw extends Component {
   constructor(props, context) {
@@ -122,7 +123,7 @@ export class PicklistRaw extends Component {
   }
 }
 
-PicklistRaw.size = PicklistDropdown.size;
+PicklistRaw.size = PICK_LIST_SIZE;
 
 PicklistRaw.propTypes = {
   /**
@@ -182,7 +183,7 @@ PicklistRaw.propTypes = {
    * you should indicate it
    */
   placeholder: PropTypes.string.isRequired,
-  size: PicklistDropdown.propTypes.size, // eslint-disable-line react/forbid-foreign-prop-types
+  size: picklistSizeProp,
 };
 
 PicklistRaw.defaultProps = {
