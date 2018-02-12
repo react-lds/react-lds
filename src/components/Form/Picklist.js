@@ -8,7 +8,6 @@ import {
   PicklistDropdownListItem,
   InputRaw,
 } from '../../';
-import { PICK_LIST_SIZE, picklistSizeProp } from './constants';
 
 export class PicklistRaw extends Component {
   constructor(props, context) {
@@ -123,8 +122,6 @@ export class PicklistRaw extends Component {
   }
 }
 
-PicklistRaw.size = PICK_LIST_SIZE;
-
 PicklistRaw.propTypes = {
   /**
    * class name
@@ -184,10 +181,9 @@ PicklistRaw.propTypes = {
    */
   placeholder: PropTypes.string.isRequired,
   /**
-   * Size of Picklist component,
-   * Can be: Picklist.size.SMALL | Picklist.size.MEDIUM | Picklist.size.LARGE
+   * Picklist sizes: small, medium, large
    */
-  size: picklistSizeProp,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
 };
 
 PicklistRaw.defaultProps = {
@@ -200,7 +196,7 @@ PicklistRaw.defaultProps = {
   items: [],
   labelInput: '',
   labelMultiselect: '',
-  size: PicklistRaw.size.SMALL,
+  size: 'small',
 };
 
 export default enhanceWithClickOutside(PicklistRaw);
