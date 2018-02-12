@@ -38,7 +38,7 @@ class PicklistDropdown extends Component {
 
     this.comboboxContainerClasses = [
       'slds-combobox_container',
-      `slds-size_${size}`,
+      { [`slds-size_${size}`]: !!size },
     ];
 
     this.comboboxClasses = [
@@ -133,7 +133,6 @@ PicklistDropdown.defaultProps = {
   hideLabel: false,
   labelInput: '',
   isRequired: false,
-  size: 'small',
 };
 
 export default PicklistDropdown;
