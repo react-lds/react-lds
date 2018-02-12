@@ -123,6 +123,10 @@ PicklistDropdown.propTypes = {
    * indicates if the input is required
    */
   isRequired: PropTypes.bool,
+  /**
+   * Size of PicklistDropdown component,
+   * Can be: PicklistDropdown.size.SMALL | PicklistDropdown.size.MEDIUM | PicklistDropdown.size.LARGE
+   */
   size: picklistSizeProp,
 };
 

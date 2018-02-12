@@ -183,6 +183,10 @@ PicklistRaw.propTypes = {
    * you should indicate it
    */
   placeholder: PropTypes.string.isRequired,
+  /**
+   * Size of Picklist component,
+   * Can be: Picklist.size.SMALL | Picklist.size.MEDIUM | Picklist.size.LARGE
+   */
   size: picklistSizeProp,
 };
 
