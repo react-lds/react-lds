@@ -6,7 +6,7 @@ import { Button } from '../Button';
 const ModalFooter = ({
   children,
   className,
-  labels,
+  closeButtonLabel,
   directional,
   onClose,
   ...rest
@@ -19,7 +19,7 @@ const ModalFooter = ({
       className
     )}
   >
-    <Button flavor="neutral" onClick={onClose}>{labels.close}</Button>
+    <Button flavor="neutral" onClick={onClose}>{closeButtonLabel}</Button>
     {children}
   </footer>
 );
@@ -28,19 +28,30 @@ ModalFooter.defaultProps = {
   children: null,
   className: null,
   directional: false,
-  labels: {
-    close: 'Cancel',
-  },
+  closeButtonLabel: 'Cancel',
   onClose: null,
 };
 
 ModalFooter.propTypes = {
+  /**
+   * Additional content in ModalFooter. Usually used to add a confirm button
+   */
   children: PropTypes.node,
+  /**
+   * className that will be merged
+   */
   className: PropTypes.string,
+  /**
+   * Renders a directional footer
+   */
   directional: PropTypes.bool,
-  labels: PropTypes.shape({
-    close: PropTypes.string.isRequired,
-  }),
+  /**
+   * Label for the closeButton that will be rendered
+   */
+  closeButtonLabel: PropTypes.string,
+  /**
+   * (PRIVATE) Passed down from Modal
+   */
   onClose: PropTypes.func,
 };
 

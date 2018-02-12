@@ -10,7 +10,11 @@ const ModalContent = ({
 }) => (
   <div
     {...rest}
-    className={cx('slds-modal__content', 'slds-p-around_medium', className)}
+    className={cx(
+      'slds-modal__content',
+      'slds-p-around_medium',
+      className
+    )}
     id={id}
   >
     {children}
@@ -25,8 +29,17 @@ ModalContent.defaultProps = {
 };
 
 ModalContent.propTypes = {
+  /**
+   * Modal content
+   */
   children: PropTypes.node.isRequired,
+  /**
+   * className that will be merged
+   */
   className: PropTypes.string,
+  /**
+   * (PRIVATE) passed down from Modal
+   */
   id: PropTypes.string,
 };
 

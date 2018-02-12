@@ -8,8 +8,8 @@ const Prompt = (props) => {
   const {
     children,
     className,
+    closeButtonLabel,
     id,
-    labels,
     onClose,
     open,
     theme,
@@ -31,7 +31,7 @@ const Prompt = (props) => {
         <ModalContent>{children}</ModalContent>
         <ModalFooter
           className="slds-theme_default"
-          labels={labels}
+          closeButtonLabel={closeButtonLabel}
         />
       </Modal>
     </div>
@@ -40,9 +40,7 @@ const Prompt = (props) => {
 
 Prompt.defaultProps = {
   className: null,
-  labels: {
-    close: 'Okay'
-  },
+  closeButtonLabel: 'Okay',
   open: false,
   theme: 'error',
 };
@@ -61,11 +59,9 @@ Prompt.propTypes = {
    */
   id: PropTypes.string.isRequired,
   /**
-   * Prompt text labels
+   * Close button label
    */
-  labels: PropTypes.shape({
-    close: PropTypes.string.isRequired,
-  }),
+  closeButtonLabel: PropTypes.string,
   /**
    * fires when close is clicked or when esc is pressed when the prompt is visible
    */

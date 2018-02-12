@@ -50,16 +50,18 @@ class Modal extends Component {
     const titleId = title ? getTitleId(id) : null;
     const contentId = getContentId(id);
 
+    const sldsClasses = cx(
+      'slds-modal',
+      { [`slds-${transitionStyle}`]: open },
+      { 'slds-modal_prompt': !!prompt },
+      className
+    );
+
     return (
       <div>
         <section
           {...rest}
-          className={cx(
-            'slds-modal',
-            { [`slds-${transitionStyle}`]: open },
-            { 'slds-modal_prompt': !!prompt },
-            className
-          )}
+          className={sldsClasses}
           onKeyUp={this.onKeyUp}
           role={prompt ? 'alertdialog' : 'dialog'}
           tabIndex={-1}
@@ -78,7 +80,12 @@ class Modal extends Component {
             {React.Children.map(children, this.cloneWithProps)}
           </FocusTrap>
         </section>
-        <div className={cx('slds-backdrop', { 'slds-backdrop_open': open })} />
+        <div
+          className={cx(
+            'slds-backdrop',
+            { 'slds-backdrop_open': open }
+          )}
+        />
       </div>
     );
   }
@@ -94,20 +101,48 @@ Modal.defaultProps = {
 };
 
 Modal.propTypes = {
+  /**
+   * Sets the animation style when the modal open.
+   * Can be one of: 'fade-in-open', 'slide-up-saving', 'slide-up-open', 'slide-down-cancel'
+   */
   transitionStyle: PropTypes.oneOf([
     'fade-in-open',
     'slide-up-saving',
     'slide-up-open',
     'slide-down-cancel'
   ]),
+  /**
+   * ModalContent and optionally a ModalFooter
+   */
   children: PropTypes.node.isRequired,
+  /**
+   * className that will be merged
+   */
   className: PropTypes.string,
+  /**
+   * Callback that is triggered when `x` is clicked or `esc` is pressed. Will be passed to a `ModalFooter` if present
+   */
   onClose: PropTypes.func.isRequired,
+  /**
+   * id that is used to link Moal aria-tags to each other
+   */
   id: PropTypes.string.isRequired,
+  /**
+   * Opens the Modal and renders the backdrop
+   */
   open: PropTypes.bool,
-  prompt: PropTypes.string,
+  /**
+   * Tagline. Can be a string or an element
+   */
   tagline: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Title
+   */
   title: PropTypes.string,
+  /**
+   * (PRIVATE) used by Prompt component
+   */
+  prompt: PropTypes.string,
 };
 
 export default Modal;

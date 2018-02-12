@@ -6,7 +6,7 @@ import { Button } from '../../../';
 const sampleChild = <p>Sample</p>;
 
 const getComponent = (props = {}) => shallow(
-  <ModalFooter labels={{ close: 'foo' }} {...props}>
+  <ModalFooter closeButtonLabel="foo" {...props}>
     {sampleChild}
   </ModalFooter>
 );
