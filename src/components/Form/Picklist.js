@@ -96,6 +96,7 @@ export class PicklistRaw extends Component {
       isLabelHidden,
       isRequired,
       labelInput,
+      size,
     } = this.props;
 
     return (
@@ -108,6 +109,7 @@ export class PicklistRaw extends Component {
         isOpen={this.state.isOpen}
         isRequired={isRequired}
         labelInput={labelInput}
+        size={size}
       >
         <PicklistDropdownList
           height={height}
@@ -119,6 +121,8 @@ export class PicklistRaw extends Component {
     );
   }
 }
+
+PicklistRaw.size = PicklistDropdown.size;
 
 PicklistRaw.propTypes = {
   /**
@@ -178,6 +182,7 @@ PicklistRaw.propTypes = {
    * you should indicate it
    */
   placeholder: PropTypes.string.isRequired,
+  size: PicklistDropdown.propTypes.size, // eslint-disable-line react/forbid-foreign-prop-types
 };
 
 PicklistRaw.defaultProps = {
@@ -190,6 +195,7 @@ PicklistRaw.defaultProps = {
   items: [],
   labelInput: '',
   labelMultiselect: '',
+  size: PicklistRaw.size.SMALL,
 };
 
 export default enhanceWithClickOutside(PicklistRaw);

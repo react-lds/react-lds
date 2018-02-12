@@ -33,11 +33,12 @@ class PicklistDropdown extends Component {
       isOpen,
       labelInput,
       isRequired,
+      size,
     } = this.props;
 
     this.comboboxContainerClasses = [
       'slds-combobox_container',
-      'slds-size_small',
+      `slds-size_${size}`,
     ];
 
     this.comboboxClasses = [
@@ -83,6 +84,12 @@ class PicklistDropdown extends Component {
   }
 }
 
+PicklistDropdown.size = {
+  SMALL: 'small',
+  MEDIUM: 'medium',
+  LARGE: 'large'
+};
+
 PicklistDropdown.propTypes = {
   /**
    * one PicklistDropdownList or many of them
@@ -119,6 +126,7 @@ PicklistDropdown.propTypes = {
    * indicates if the input is required
    */
   isRequired: PropTypes.bool,
+  size: PropTypes.oneOf(Object.keys(PicklistDropdown.size).map(key => PicklistDropdown.size[key])),
 };
 
 PicklistDropdown.defaultProps = {
@@ -128,6 +136,7 @@ PicklistDropdown.defaultProps = {
   hideLabel: false,
   labelInput: '',
   isRequired: false,
+  size: PicklistDropdown.size.SMALL,
 };
 
 export default PicklistDropdown;
