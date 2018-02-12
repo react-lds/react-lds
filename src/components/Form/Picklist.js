@@ -96,6 +96,7 @@ export class PicklistRaw extends Component {
       isLabelHidden,
       isRequired,
       labelInput,
+      size,
     } = this.props;
 
     return (
@@ -108,6 +109,7 @@ export class PicklistRaw extends Component {
         isOpen={this.state.isOpen}
         isRequired={isRequired}
         labelInput={labelInput}
+        size={size}
       >
         <PicklistDropdownList
           height={height}
@@ -178,6 +180,10 @@ PicklistRaw.propTypes = {
    * you should indicate it
    */
   placeholder: PropTypes.string.isRequired,
+  /**
+   * Picklist sizes: small, medium, large
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
 };
 
 PicklistRaw.defaultProps = {
@@ -190,6 +196,7 @@ PicklistRaw.defaultProps = {
   items: [],
   labelInput: '',
   labelMultiselect: '',
+  size: 'small',
 };
 
 export default enhanceWithClickOutside(PicklistRaw);
