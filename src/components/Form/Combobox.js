@@ -230,6 +230,7 @@ export class ComboboxRaw extends Component {
 
   render() {
     const {
+      className,
       error,
       height,
       hideLabel,
@@ -243,6 +244,7 @@ export class ComboboxRaw extends Component {
     const { open } = this.state;
 
     const containerClasses = [
+      className,
       'slds-combobox_container',
       { 'slds-has-inline-listbox': !!inlineListbox,
         'slds-has-object-switcher': !!multiEntity, },
