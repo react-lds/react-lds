@@ -122,6 +122,7 @@ export class ComboboxRaw extends Component {
       required,
       labelMultiselect,
       placeholder,
+      readOnly,
     } = this.props;
 
     const formatLabel = () => {
@@ -148,13 +149,15 @@ export class ComboboxRaw extends Component {
       { 'slds-combobox__input-value': !!label },
     );
 
+    const iconRight = readOnly ? 'down' : 'search';
+
     return (
       <InputRaw
         aria-controls={`listbox-${id}`}
         autoComplete="off"
         className={classNames}
         disabled={isDisabled}
-        iconRight="down"
+        iconRight={iconRight}
         iconRightOnClick={this.onToggle}
         id={`combobox-${id}`}
         onClick={this.onToggle}
