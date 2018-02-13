@@ -44,9 +44,9 @@ export class ComboboxRaw extends Component {
      */
     hideLabel: PropTypes.bool,
     /**
-     * whether the combobox is required
+     * toggle inline listbox mode
      */
-    required: PropTypes.bool,
+    inlineListbox: PropTypes.bool,
     /**
      * list of displayed items
      * `{ key: 'id123', label: 'first option', selected: false }`
@@ -76,11 +76,14 @@ export class ComboboxRaw extends Component {
      * you should indicate it
      */
     placeholder: PropTypes.string.isRequired,
-
-
-    inlineListbox: PropTypes.bool,
-    multiEntity: PropTypes.bool,
+    /**
+     * toggle readonly mode
+     */
     readOnly: PropTypes.bool,
+    /**
+     * whether the combobox is required
+     */
+    required: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -89,15 +92,13 @@ export class ComboboxRaw extends Component {
     height: null,
     isDisabled: false,
     hideLabel: false,
-    required: false,
+    inlineListbox: false,
     items: [],
     labelInput: '',
     labelMultiselect: '',
-
-
-    inlineListbox: false,
     multiEntity: false,
     readOnly: false,
+    required: false,
   }
 
   state = { open: false };
@@ -240,7 +241,6 @@ export class ComboboxRaw extends Component {
       id,
       inlineListbox,
       labelInput,
-      multiEntity,
       required,
     } = this.props;
 
@@ -249,8 +249,7 @@ export class ComboboxRaw extends Component {
     const containerClasses = [
       className,
       'slds-combobox_container',
-      { 'slds-has-inline-listbox': !!inlineListbox,
-        'slds-has-object-switcher': !!multiEntity, },
+      { 'slds-has-inline-listbox': !!inlineListbox },
     ];
 
     const comboboxClasses = [

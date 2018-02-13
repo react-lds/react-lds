@@ -103,7 +103,6 @@ stories
   .add('Combobox', () => (
     <Combobox
       inlineListbox={boolean('Inline listbox variant', false)}
-      multiEntity={boolean('Multi entity variant', false)}
       readOnly={boolean('Read-only variant', false)}
 
       error={text('Error', '') || undefined}
