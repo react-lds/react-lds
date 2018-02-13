@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.2.1
+
+* import lodash modules from main package
+* add `Grid` + `Column` order prop
+* add size property to `Picklist`
+* add full-width support to `PicklistDropdown`
+
 ## 4.2.0
 
 * _Carousel_: carousel image can be rendered as background image
