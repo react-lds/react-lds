@@ -131,7 +131,7 @@ const InputRaw = (props) => {
         required={required}
         role={role}
         type={type}
-        value={value || ''}
+        value={value}
       />
       <span className="slds-input__icon-group slds-input__icon-group_right">
         {renderSpinner()}
