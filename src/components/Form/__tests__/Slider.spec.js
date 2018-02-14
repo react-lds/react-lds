@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { getUniqueHash } from '../../../utils';
 import Slider from '../Slider';
 import {
   FormElement,
