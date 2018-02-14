@@ -1,43 +1,58 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { Button } from '../Button';
 
-const ModalFooter = (props) => {
-  const { children, className, defaultTheme, directional, ...rest } = props;
-
-  const sldsClasses = [
-    'slds-modal__footer',
-    { 'slds-theme_default': !!defaultTheme },
-    { 'slds-modal__footer_directional': !!directional },
-    className
-  ];
-
-  return (<div {...rest} className={cx(sldsClasses)}>{children}</div>);
-};
+const ModalFooter = ({
+  children,
+  className,
+  closeButtonLabel,
+  directional,
+  onClose,
+  ...rest
+}) => (
+  <footer
+    {...rest}
+    className={cx(
+      'slds-modal__footer',
+      { 'slds-modal__footer_directional': directional },
+      className
+    )}
+  >
+    <Button flavor="neutral" onClick={onClose}>{closeButtonLabel}</Button>
+    {children}
+  </footer>
+);
 
 ModalFooter.defaultProps = {
+  children: null,
   className: null,
-  defaultTheme: false,
   directional: false,
+  closeButtonLabel: 'Cancel',
+  onClose: null,
 };
 
 ModalFooter.propTypes = {
   /**
-   * modal footer content
+   * Additional content in ModalFooter. Usually used to add a confirm button
    */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   /**
-   * class name
+   * className that will be merged
    */
   className: PropTypes.string,
   /**
-   * renders the footer with `theme_default`
-   */
-  defaultTheme: PropTypes.bool,
-  /**
-   * directional flavor
+   * Renders a directional footer
    */
   directional: PropTypes.bool,
+  /**
+   * Label for the closeButton that will be rendered
+   */
+  closeButtonLabel: PropTypes.string,
+  /**
+   * (PRIVATE) Passed down from Modal
+   */
+  onClose: PropTypes.func,
 };
 
 export default ModalFooter;

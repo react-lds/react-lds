@@ -1,111 +1,148 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import FocusTrap from 'focus-trap-react';
+import ModalHeader from './ModalHeader';
+import { getContentId, getTitleId } from './utils';
 
-const Modal = (props) => {
-  const {
-    children,
-    className,
-    descriptionId,
-    dialog,
-    label,
-    large,
-    open,
-    prompt,
-    ...rest
-  } = props;
+class Modal extends Component {
+  onClose = (evt) => {
+    evt.stopPropagation();
+    const { onClose } = this.props;
+    onClose();
+  }
 
-  const isOpen = !!open;
-  const isDialog = !!dialog || !!prompt;
-  const role = prompt ? 'alertdialog' : 'dialog';
-  const containerRole = isDialog ? 'document' : null;
+  onKeyUp = (evt) => {
+    const { key } = evt;
+    if (key === 'Escape') { this.onClose(evt); }
+  }
 
-  const childrenWithProps = [...children].map((child) => {
-    const childName = child ? child.type.displayName || child.type.name : null;
+  cloneWithProps = (child) => {
+    const name = child.type.displayName || child.type.name;
 
-    if (childName === 'ModalHeader') {
-      return React.cloneElement(child, {
-        key: label,
-        label,
-        prompt,
-        uncloseable: child.props.uncloseable !== undefined ? child.props.uncloseable : !!prompt,
-      });
+    if (name === 'ModalContent') {
+      const { id } = this.props;
+      const contentId = getContentId(id);
+      return React.cloneElement(child, { id: contentId });
+    }
+
+    if (name === 'ModalFooter') {
+      return React.cloneElement(child, { onClose: this.onClose });
     }
 
     return child;
-  });
+  }
 
-  const sldsClasses = [
-    'slds-modal',
-    { 'slds-modal_prompt': !!prompt },
-    { 'slds-fade-in-open': isOpen },
-    { 'slds-modal_large': !!large },
-    className,
-  ];
+  render() {
+    const {
+      children,
+      className,
+      id,
+      open,
+      onClose: _,
+      prompt,
+      tagline,
+      title,
+      transitionStyle,
+      ...rest
+    } = this.props;
 
-  return (
-    <div
-      {...rest}
-      className={cx(sldsClasses)}
-      role={role}
-      aria-describedby={descriptionId}
-      aria-hidden={!isOpen}
-      aria-labelledby={label}
-    >
-      <div
-        className="slds-modal__container"
-        role={containerRole}
-        tabIndex={isDialog ? '0' : null}
-      >
-        {childrenWithProps}
+    const titleId = title ? getTitleId(id) : null;
+    const contentId = getContentId(id);
+
+    const sldsClasses = cx(
+      'slds-modal',
+      { [`slds-${transitionStyle}`]: open },
+      { 'slds-modal_prompt': !!prompt },
+      className
+    );
+
+    return (
+      <div>
+        <section
+          {...rest}
+          className={sldsClasses}
+          onKeyUp={this.onKeyUp}
+          role={prompt ? 'alertdialog' : 'dialog'}
+          tabIndex={-1}
+          aria-modal="true"
+          aria-describedby={contentId}
+          aria-labelledby={titleId}
+        >
+          <FocusTrap className="slds-modal__container" active={open}>
+            <ModalHeader
+              id={titleId}
+              onClose={this.onClose}
+              theme={prompt}
+              tagline={tagline}
+              title={title}
+            />
+            {React.Children.map(children, this.cloneWithProps)}
+          </FocusTrap>
+        </section>
+        <div
+          className={cx(
+            'slds-backdrop',
+            { 'slds-backdrop_open': open }
+          )}
+        />
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 Modal.defaultProps = {
   className: null,
-  descriptionId: null,
-  dialog: false,
-  label: null,
-  large: false,
   open: false,
-  prompt: false,
+  prompt: null,
+  tagline: null,
+  title: null,
+  transitionStyle: 'fade-in-open',
 };
 
 Modal.propTypes = {
   /**
-   * modal content
+   * Sets the animation style when the modal open.
+   * Can be one of: 'fade-in-open', 'slide-up-saving', 'slide-up-open', 'slide-down-cancel'
+   */
+  transitionStyle: PropTypes.oneOf([
+    'fade-in-open',
+    'slide-up-saving',
+    'slide-up-open',
+    'slide-down-cancel'
+  ]),
+  /**
+   * ModalContent and optionally a ModalFooter
    */
   children: PropTypes.node.isRequired,
   /**
-   * class name
+   * className that will be merged
    */
   className: PropTypes.string,
   /**
-   * id of the modal-content (required as aria-describedby). must be set for prompts.
+   * Callback that is triggered when `x` is clicked or `esc` is pressed. Will be passed to a `ModalFooter` if present
    */
-  descriptionId: PropTypes.string,
+  onClose: PropTypes.func.isRequired,
   /**
-   * whether a container is a dialog (optional when `<Modal prompt>`). Needed for PromptForTouch and ModalPrompt
+   * id that is used to link Moal aria-tags to each other
    */
-  dialog: PropTypes.bool,
+  id: PropTypes.string.isRequired,
   /**
-   * id of the modal-heading
-   */
-  label: PropTypes.string,
-  /**
-   * large flavor
-   */
-  large: PropTypes.bool,
-  /**
-   * opens the modal
+   * Opens the Modal and renders the backdrop
    */
   open: PropTypes.bool,
   /**
-   * modal is a prompt
+   * Tagline. Can be a string or an element
    */
-  prompt: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  tagline: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * Title
+   */
+  title: PropTypes.string,
+  /**
+   * (PRIVATE) used by Prompt component
+   */
+  prompt: PropTypes.string,
 };
 
 export default Modal;
