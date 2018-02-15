@@ -40,7 +40,7 @@ ButtonIcon.defaultProps = {
 ButtonIcon.propTypes = {
   className: PropTypes.string,
   icon: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['small', 'x-small']),
+  size: PropTypes.oneOf(['x-small', 'small', 'large']),
   sprite: PropTypes.string.isRequired,
   position: PropTypes.oneOf(['left', 'right']),
 };

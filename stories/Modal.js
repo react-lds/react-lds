@@ -38,7 +38,9 @@ stories
             flavor="brand"
             title="Save"
             onClick={action('Button \'Save\' clicked')}
-          />
+          >
+            Save
+          </Button>
         </ModalFooter>
       </Modal>
     </div>

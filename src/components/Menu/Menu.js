@@ -4,7 +4,7 @@ import cx from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash/omit';
 
-import { Button, ButtonIcon } from '../../';
+import { Button, ButtonIcon, IconButton } from '../../';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {
@@ -107,34 +107,41 @@ export class MenuRaw extends Component {
   button = () => {
     const { button, customButton, disabled } = this.props;
 
-    if (button) {
-      const noBorder = button.noBorder;
-      const title = button.title;
-      const buttonFlavors = [];
-      if (button.brand) { buttonFlavors.push('slds-button_brand'); }
-      if (button.neutral) { buttonFlavors.push('slds-button_neutral'); }
-      if (noBorder && !title) { buttonFlavors.push('slds-button_icon-container'); }
-      if (!noBorder && !title) { buttonFlavors.push('slds-button_icon-border-filled'); }
+    if (customButton) return customButton;
+
+    let buttonFlavor = null;
+
+    if (button.brand) { buttonFlavor = 'brand'; }
+    if (button.neutral) { buttonFlavor = 'neutral'; }
+
+    if (!button.title) {
       return (
-        <Button
+        <IconButton
           aria-haspopup="true"
-          flavor={button.flavor}
-          className={cx(buttonFlavors)}
+          icon={button.icon}
           disabled={disabled}
+          flavor={buttonFlavor}
           onClick={this.toggle}
-          title={button.title}
-          tooltip={button.tooltip}
-        >
-          <ButtonIcon
-            icon={button.icon}
-            position={title ? 'right' : undefined}
-            sprite={button.sprite}
-          />
-        </Button>
+          sprite={button.sprite}
+          border={button.noBorder ? null : 'filled'}
+          container={!button.noBorder}
+          title={button.tooltip}
+        />
       );
     }
 
-    return customButton;
+    return (
+      <Button>
+        {button.title}
+        <ButtonIcon
+          aria-haspopup="true"
+          flavor={buttonFlavor}
+          icon={button.icon}
+          position="right"
+          sprite={button.sprite}
+        />
+      </Button>
+    );
   }
 
   render() {

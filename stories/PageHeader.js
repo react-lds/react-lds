@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import {
   Button,
   ButtonGroup,
-  ButtonIcon,
+  IconButton,
   PageHeaderBase,
   RecordHome,
   MenuDropdownList,
@@ -16,16 +16,11 @@ import {
 const stories = storiesOf('PageHeader', module);
 
 const headerButtons = ([
-  <Button title="Follow" flavor="neutral" key="follow" onClick={action()}>
-    <ButtonIcon position="left" sprite="utility" icon="add" />
-  </Button>,
+  <Button sprite="utility" icon="add" key="follow" onClick={action()}>Follow</Button>,
   <ButtonGroup key="btngroup">
-    <Button title="Edit" flavor="neutral" onClick={action()} />
-    <Button title="Delete" flavor="neutral" onClick={action()} />
-    <Button title="Clone" flavor="neutral" onClick={action()} />
-    <Button flavor={['icon', 'icon-border-filled']} onClick={action()}>
-      <ButtonIcon sprite="utility" icon="down" />
-    </Button>
+    <Button>Refresh</Button>
+    <Button>Edit</Button>
+    <Button>Save</Button>
   </ButtonGroup>,
 ]);
 
@@ -40,24 +35,32 @@ const titleMenu = (
 
 const topButtons = (
   <ButtonGroup>
-    <Button title="New Lead" flavor="neutral" onClick={action()} />
-    <Button flavor={['icon', 'icon-border-filled']} onClick={action()}>
-      <ButtonIcon sprite="utility" icon="down" />
-    </Button>
+    <Button>New Lead</Button>
+    <IconButton border="filled" sprite="utility" icon="down" />
   </ButtonGroup>
 );
 
 const bottomButtons = (
   <ButtonGroup>
-    <Button flavor={['icon', 'icon-border']} onClick={action()}>
-      <ButtonIcon sprite="utility" icon="chart" />
-    </Button>
-    <Button flavor={['icon', 'icon-border']} onClick={action()}>
-      <ButtonIcon sprite="utility" icon="filterList" />
-    </Button>
-    <Button flavor={['icon', 'icon-border']} onClick={action()}>
-      <ButtonIcon sprite="utility" icon="settings" />
-    </Button>
+    <IconButton
+      border="filled"
+      title="Charts"
+      icon="chart"
+      sprite="utility"
+    />
+    <IconButton
+      border="filled"
+      title="Filter List"
+      icon="filterList"
+      sprite="utility"
+    />
+    <IconButton
+      more
+      border="filled"
+      title="Setting"
+      icon="settings"
+      sprite="utility"
+    />
   </ButtonGroup>
 );
 
@@ -90,9 +93,13 @@ stories
         },
         {
           title: [<span key="heading">very important</span>, (
-            <Button flavor={['icon', 'icon-bare']} key="icon" onClick={action()}>
-              <ButtonIcon sprite="utility" icon="down" size="small" />
-            </Button>
+            <IconButton
+              icon="down"
+              sprite="utility"
+              size="small"
+              key="icon"
+              onClick={action()}
+            />
           )],
           content: 'Whatever',
         },

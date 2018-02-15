@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ModalHeader from '../ModalHeader';
-import { Button } from '../../..';
+import { IconButton } from '../../..';
 
 const sampleChild = <p>Sample</p>;
 
@@ -37,7 +37,7 @@ describe('<ModalHeader />', () => {
   it('renders a close button and binds onClose to it', () => {
     const mockFn = jest.fn();
     const mounted = getComponent({ onClose: mockFn });
-    mounted.find(Button).simulate('click');
+    mounted.find(IconButton).simulate('click');
     expect(mockFn).toHaveBeenCalled();
   });
 

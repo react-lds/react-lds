@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
-import { Button, ButtonIcon } from '../../';
+import { Button, IconButton } from '../Button';
 
 const AccordionSection = (props) => {
   const { children, className, id, isOpen, summary, summaryOnClick, ...rest } = props;
+
   const liClasses = [
     'slds-accordion__list-item',
     className,
   ];
+
   const sectionClasses = [
     'slds-accordion__section',
     { 'slds-is-open': isOpen },
@@ -28,32 +29,26 @@ const AccordionSection = (props) => {
         <div className="slds-accordion__summary">
           <h3 className="slds-text-heading_small slds-accordion__summary-heading">
             <Button
-              flavor="reset"
+              sprite="utility"
+              icon={isOpen ? 'chevrondown' : 'chevronright'}
+              className="slds-button_reset slds-accordion__summary-action"
+              flavor={null}
               aria-controls={`accordion-details-${id}`}
               aria-expanded={isOpen ? 'true' : 'false'}
-              className="slds-accordion__summary-action"
-              onClick={() => {}}
             >
-              <ButtonIcon
-                position="left"
-                sprite="utility"
-                icon={isOpen ? 'chevrondown' : 'chevronright'}
-              />
               <span className="slds-truncate" title={summary}>{summary}</span>
             </Button>
           </h3>
-          <Button
+          <IconButton
+            sprite="utility"
+            icon="down"
             aria-haspopup="true"
-            className="slds-shrink-none slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
+            border="filled"
+            className="slds-shrink-none"
             onClick={summaryOnClick}
-          >
-            <ButtonIcon
-              sprite="utility"
-              icon="down"
-              size="x-small"
-            />
-            <span className="slds-assistive-text">More Options</span>
-          </Button>
+            size="x-small"
+            title="More Options"
+          />
         </div>
         <div
           aria-hidden={isOpen ? 'false' : 'true'}

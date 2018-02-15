@@ -151,9 +151,9 @@ stories
         cellRenderer={({ dataKey, rowIndex, defaultProps }) => (
           <td {...defaultProps}>
             <Button
+              flavor={null}
               onClick={action(`click ${dataKey}@${rowIndex}`)}
-              title="Send message"
-            />
+            >Send Message</Button>
           </td>
         )}
       />

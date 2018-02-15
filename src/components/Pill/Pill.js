@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { Button, ButtonIcon } from '../../';
+import { IconButton } from '../../';
 
 const Pill = (props) => {
   const {
@@ -26,11 +26,15 @@ const Pill = (props) => {
     className
   ];
 
-  const closeButton = onClose === null ? null :
-    (<Button onClick={onClose} className="slds-pill__remove" flavor="icon">
-      <ButtonIcon sprite="utility" icon="close" />
-      <span className="slds-assistive-text">Remove</span>
-    </Button>);
+  const closeButton = onClose === null ? null : (
+    <IconButton
+      onClick={onClose}
+      className="slds-pill__remove"
+      sprite="utility"
+      icon="close"
+      title="Remove"
+    />
+  );
 
   return (
     <span {...rest} className={cx(sldsClasses)}>
