@@ -71,7 +71,13 @@ Button.propTypes = {
    * Can be either `neutral`, `brand`, `destructive`, `success` or `inverse`
    * Default to `neutral`, set to `null` explicitely to render a plain button
    */
-  flavor: PropTypes.oneOf(['neutral', 'brand', 'destructive', 'success', 'inverse']),
+  flavor: PropTypes.oneOf([
+    'neutral',
+    'brand',
+    'destructive',
+    'success',
+    'inverse'
+  ]),
   /**
    * Optional href, renders as `a` when set.
    */

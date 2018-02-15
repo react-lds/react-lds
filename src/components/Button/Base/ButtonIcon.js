@@ -34,6 +34,7 @@ const ButtonIcon = (props) => {
 ButtonIcon.defaultProps = {
   className: null,
   position: null,
+  size: null,
 };
 
 ButtonIcon.propTypes = {

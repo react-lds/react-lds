@@ -23,7 +23,7 @@ const StatefulIconButton = (props) => {
       className={sldsClasses}
       aria-pressed={selected}
       flavor={flavor}
-      border={flavor === 'inverse' ? true : 'filled'}
+      border="filled"
     >
       {children}
     </IconButton>
