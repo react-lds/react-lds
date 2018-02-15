@@ -90,7 +90,6 @@ stories
       label={text('Label', 'This is a label')}
       vertical={boolean('Vertical', false) || undefined}
       onChange={action('slider value changed')}
-      required={boolean('Required', false) || undefined}
       size={getSizes()}
     />
   ))

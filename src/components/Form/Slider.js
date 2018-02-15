@@ -55,7 +55,6 @@ const Slider = (props) => {
     size,
     disabled,
     vertical,
-    required,
     error,
     hideLabel,
     hideErrorMessage,
@@ -63,8 +62,8 @@ const Slider = (props) => {
   } = props;
 
   return (
-    <FormElement required={required} error={error} className={className}>
-      <FormElementLabel label={renderLabel(label, min, max)} id={id} hideLabel={hideLabel} required={required} />
+    <FormElement error={error} className={className}>
+      <FormElementLabel label={renderLabel(label, min, max)} id={id} hideLabel={hideLabel} />
       <FormElementControl>
         {renderControl(onChange, id, value, min, max, step, size, disabled, vertical)}
       </FormElementControl>
@@ -127,10 +126,6 @@ Slider.propTypes = {
    */
   onChange: PropTypes.func,
   /**
-   * adds required attribute to the slider field and label
-   */
-  required: PropTypes.bool,
-  /**
    * slider sizes: x-small, small, medium, large
    */
   size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
@@ -150,7 +145,6 @@ Slider.defaultProps = {
   hideLabel: false,
   multiple: false,
   onChange: Function.prototype,
-  required: false,
 };
 
 export default Slider;
