@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { isEqual } from 'lodash';
 
 import { Button, ButtonIcon } from '../../';
 
@@ -33,7 +34,10 @@ class Carousel extends Component {
     const { children: prevChildren } = this.props;
     const { autoPlayActive: prevAutoPlayActive } = this.state;
 
-    if (nextChildren !== prevChildren) {
+    const childrenChanged = nextChildren.length !== prevChildren.length ||
+      !isEqual(nextChildren.map(({ props }) => props), prevChildren.map(({ props }) => props));
+
+    if (childrenChanged) {
       this.updatePanels(nextChildren);
     }
 
