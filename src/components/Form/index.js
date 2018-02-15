@@ -15,6 +15,7 @@ import Radio from './Radio';
 import RadioRaw from './RadioRaw';
 import RadioGroup from './RadioGroup';
 import Select from './Select';
+import Slider from './Slider';
 import Textarea from './Textarea';
 
 export {
@@ -36,5 +37,6 @@ export {
   RadioRaw,
   RadioGroup,
   Select,
-  Textarea
+  Slider,
+  Textarea,
 };
