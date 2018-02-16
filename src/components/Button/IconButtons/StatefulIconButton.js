@@ -5,7 +5,6 @@ import IconButton from './IconButton';
 
 const StatefulIconButton = (props) => {
   const {
-    children,
     className,
     flavor,
     selected,
@@ -24,23 +23,28 @@ const StatefulIconButton = (props) => {
       aria-pressed={selected}
       flavor={flavor}
       border="filled"
-    >
-      {children}
-    </IconButton>
+    />
   );
 };
 
 StatefulIconButton.defaultProps = {
-  children: null,
   className: null,
   flavor: null,
   selected: false,
 };
 
 StatefulIconButton.propTypes = {
-  children: PropTypes.node,
+  /**
+   * Optional additional className
+   */
   className: PropTypes.string,
+  /**
+   * Button flavor. Can be `inverse`
+   */
   flavor: PropTypes.oneOf(['inverse']),
+  /**
+   * Whether the `IconButton` should render as selected
+   */
   selected: PropTypes.bool,
 };
 
