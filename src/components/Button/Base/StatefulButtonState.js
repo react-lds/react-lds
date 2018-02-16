@@ -41,11 +41,26 @@ StatefulButtonState.defaultProps = {
 };
 
 StatefulButtonState.propTypes = {
-  className: PropTypes.string,
-  icon: PropTypes.string.isRequired,
-  sprite: PropTypes.string.isRequired,
+  /**
+   * Button state described by this component. A `StatefulButton` needs all states present
+   */
   state: PropTypes.oneOf(['selected', 'not-selected', 'focus']).isRequired,
+  /**
+   * Icon rendered in this state
+   */
+  icon: PropTypes.string.isRequired,
+  /**
+   * Sprite containing `icon`
+   */
+  sprite: PropTypes.string.isRequired,
+  /**
+   * Button content for `state`
+   */
   title: PropTypes.string.isRequired,
+  /**
+   * Optional additional className
+   */
+  className: PropTypes.string,
 };
 
 export default StatefulButtonState;

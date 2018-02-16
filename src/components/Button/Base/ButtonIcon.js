@@ -38,11 +38,26 @@ ButtonIcon.defaultProps = {
 };
 
 ButtonIcon.propTypes = {
-  className: PropTypes.string,
+  /**
+   * Icon that will be rendered
+   */
   icon: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['x-small', 'small', 'large']),
+  /**
+   * Sprite containing `icon`
+   */
   sprite: PropTypes.string.isRequired,
+  /**
+   * Optional size. Either `x-small`, `small` or `large`
+   */
+  size: PropTypes.oneOf(['x-small', 'small', 'large']),
+  /**
+   * Position in `Button`. Either left or right, can also be `null`
+   */
   position: PropTypes.oneOf(['left', 'right']),
+  /**
+   * Optional additional className
+   */
+  className: PropTypes.string,
 };
 
 export default ButtonIcon;

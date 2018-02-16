@@ -38,10 +38,22 @@ CheckboxButton.defaultProps = {
 };
 
 CheckboxButton.propTypes = {
+  /**
+   * Checkbox state
+   */
   checked: PropTypes.bool.isRequired,
-  className: PropTypes.string,
+  /**
+   * `id` of input. Links input and label
+   */
   id: PropTypes.string.isRequired,
+  /**
+   * Input label, will be present for screen readers
+   */
   label: PropTypes.string.isRequired,
+  /**
+   * Optional additional className
+   */
+  className: PropTypes.string,
 };
 
 export default CheckboxButton;

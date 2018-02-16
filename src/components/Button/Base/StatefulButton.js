@@ -30,9 +30,18 @@ StatefulButton.defaultProps = {
 };
 
 StatefulButton.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
+  /**
+   * Determines which state to render
+   */
   selected: PropTypes.bool,
+  /**
+   * `StatefulButtonState` components for: selected, not-selected & focus
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * Optional additional className
+   */
+  className: PropTypes.string,
 };
 
 export default StatefulButton;
