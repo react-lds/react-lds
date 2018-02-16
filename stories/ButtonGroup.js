@@ -4,7 +4,6 @@ import { action } from '@storybook/addon-actions';
 import { boolean } from '@storybook/addon-knobs';
 import {
   Button,
-  ButtonIcon,
   ButtonGroup,
   IconButton,
   Menu,
@@ -18,9 +17,9 @@ const stories = storiesOf('ButtonGroup', module);
 stories
   .add('Default', () => (
     <ButtonGroup list={boolean('Render as list', false)}>
-      <Button>Refresh</Button>
-      <Button>Edit</Button>
-      <Button disabled={boolean('Disable last button', false)}>Save</Button>
+      <Button title="Refresh" />
+      <Button title="Edit" />
+      <Button title="Save" disabled={boolean('Disable last button', false)} />
     </ButtonGroup>
   ))
   .add('Overflow Menu', () => {
@@ -38,9 +37,9 @@ stories
 
     return (
       <ButtonGroup>
-        <Button>Refresh</Button>
-        <Button>Edit</Button>
-        <Button>Save</Button>
+        <Button title="Refresh" />
+        <Button title="Edit" />
+        <Button title="Save" />
         <Menu
           customButton={menuButton}
           isOpen={boolean('Open menu', false)}
@@ -55,14 +54,14 @@ stories
           </MenuDropdownList>
         </Menu>
       </ButtonGroup>
-    )
+    );
   })
   .add('Inverse', () => (
     <div style={{ padding: '0.5rem', 'background-color': 'rgb(22, 50, 92)' }}>
       <ButtonGroup>
-        <Button flavor="inverse">Refresh</Button>
-        <Button flavor="inverse" disabled={boolean('Disable middle', false)}>Edit</Button>
-        <Button flavor="inverse">Save</Button>
+        <Button flavor="inverse" title="Refresh" />
+        <Button flavor="inverse" title="Edit" disabled={boolean('Disable last button', false)} />
+        <Button flavor="inverse" title="Save" />
       </ButtonGroup>
     </div>
   ))
@@ -95,4 +94,4 @@ stories
       <StatefulIconButton icon="filterList" sprite="utility" />
       <StatefulIconButton icon="settings" sprite="utility" />
     </ButtonGroup>
-  ))
+  ));

@@ -12,7 +12,12 @@ import {
   StatefulButtonState,
 } from '../src';
 
-const buttonFlavors = ['', 'neutral', 'brand', 'success', 'destructive'];
+const buttonFlavors = [
+  'neutral',
+  'brand',
+  'success',
+  'destructive',
+];
 
 const buttonStories = storiesOf('Button', module);
 
@@ -27,13 +32,18 @@ buttonStories
       {text('Button Text', 'Click Me')}
     </Button>
   ))
+  .add('Shortcut: Infer Button content from title', () => (
+    <Button title={text('Title', 'Hover me')} />
+  ))
   .add('Shortcut: Button with left icon', () => (
-    <Button onClick={action()} icon="download" sprite="utility">
-      {text('Button Text', 'Click Me')}
-    </Button>
+    <Button
+      icon="download"
+      sprite="utility"
+      title={text('Button Text', 'Click Me')}
+    />
   ))
   .add('With right icon', () => (
-    <Button onClick={action()}>
+    <Button>
       {text('Button Text', 'Click Me')}
       <ButtonIcon
         position="right"

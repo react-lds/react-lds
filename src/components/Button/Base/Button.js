@@ -11,6 +11,7 @@ const Button = (props) => {
     href,
     icon,
     sprite,
+    title,
     ...rest
   } = props;
 
@@ -24,11 +25,14 @@ const Button = (props) => {
 
   const isShortcut = !!icon && !!sprite;
 
+  const content = children || title;
+
   return (
     <ButtonEl
       {...rest}
       className={sldsClasses}
       href={href}
+      title={title}
     >
       {isShortcut && (
         <ButtonIcon
@@ -37,20 +41,30 @@ const Button = (props) => {
           sprite={sprite}
         />
       )}
-      {children}
+      {content}
     </ButtonEl>
   );
 };
 
 Button.defaultProps = {
+  children: null,
   className: null,
   flavor: 'neutral',
   href: null,
   icon: null,
   sprite: null,
+  title: null,
 };
 
 Button.propTypes = {
+  /**
+   * Used to set content. Can be a string, a `ButtonIcon` or a combination of those
+   */
+  children: PropTypes.node,
+  /**
+   * Title attribute. Will be button content if no children are set
+   */
+  title: PropTypes.string,
   /**
    * Shortcut to render a left-positioned icon. Used together with `sprite`
    */
@@ -59,10 +73,6 @@ Button.propTypes = {
    * Shortcut to render a left-positioned icon. Used together with `icon`
    */
   sprite: PropTypes.string,
-  /**
-   * Used to set content. Can be a string, a `ButtonIcon` or a combination of those
-   */
-  children: PropTypes.node.isRequired,
   /**
    * Optional additional className
    */

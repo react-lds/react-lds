@@ -18,6 +18,12 @@ describe('<Button />', () => {
     expect(mounted.text()).toEqual('Download');
   });
 
+  it('uses title as children if no children are set', () => {
+    const mounted = getComponent({ title: 'foo' });
+    mounted.setProps({ children: null });
+    expect(mounted.find('button').text()).toEqual('foo');
+  });
+
   it('renders as button by default', () => {
     const mounted = getComponent();
     const el = mounted.find('button');
