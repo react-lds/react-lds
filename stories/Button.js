@@ -42,13 +42,22 @@ buttonStories
       title={text('Button Text', 'Click Me')}
     />
   ))
-  .add('With right icon', () => (
-    <Button>
-      {text('Button Text', 'Click Me')}
+  .add('Shortcut: With right icon', () => (
+    <Button
+      icon="download"
+      sprite="utility"
+      iconPosition="right"
+      title={text('Button Text', 'Click Me')}
+    />
+  ))
+  .add('Button: Advanced usage', () => (
+    <Button flavor={null}>
+      <span>Label</span>
       <ButtonIcon
         position="right"
         sprite="utility"
         icon="download"
+        size="small"
       />
     </Button>
   ))

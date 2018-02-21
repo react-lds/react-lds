@@ -44,6 +44,8 @@ describe('<Button />', () => {
     expect(iconEl.prop('icon')).toEqual('foo');
     expect(iconEl.prop('sprite')).toEqual('standard');
     expect(iconEl.prop('position')).toEqual('left');
+    mounted.setProps({ iconPosition: 'right' });
+    expect(mounted.find(ButtonIcon).prop('position')).toEqual('right');
   });
 
   it('renders flavors', () => {

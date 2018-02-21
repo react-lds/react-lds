@@ -6,9 +6,6 @@ import ButtonIcon from '../Base/ButtonIcon';
 
 const prefix = 'slds-button_icon';
 
-/**
- * Test Comment
- */
 const IconButton = (props) => {
   const {
     border,

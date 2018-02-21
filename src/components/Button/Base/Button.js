@@ -10,6 +10,7 @@ const Button = (props) => {
     flavor,
     href,
     icon,
+    iconPosition,
     sprite,
     title,
     ...rest
@@ -22,10 +23,11 @@ const Button = (props) => {
   );
 
   const ButtonEl = href ? 'a' : 'button';
+  const position = iconPosition || 'left';
+  const content = children || title;
 
   const isShortcut = !!icon && !!sprite;
-
-  const content = children || title;
+  const isRightShortcut = isShortcut && position !== 'left';
 
   return (
     <ButtonEl
@@ -34,14 +36,15 @@ const Button = (props) => {
       href={href}
       title={title}
     >
+      {isRightShortcut ? content : null}
       {isShortcut && (
         <ButtonIcon
-          position="left"
+          position={position}
           icon={icon}
           sprite={sprite}
         />
       )}
-      {content}
+      {!isRightShortcut ? content : null}
     </ButtonEl>
   );
 };
@@ -52,6 +55,7 @@ Button.defaultProps = {
   flavor: 'neutral',
   href: null,
   icon: null,
+  iconPosition: null,
   sprite: null,
   title: null,
 };
@@ -66,13 +70,17 @@ Button.propTypes = {
    */
   title: PropTypes.string,
   /**
-   * Shortcut to render a left-positioned icon. Used together with `sprite`
+   * Shortcut to render a button with an icon. Used together with `sprite`
    */
   icon: PropTypes.string,
   /**
-   * Shortcut to render a left-positioned icon. Used together with `icon`
+   * Shortcut to render a button with an icon. Used together with `icon`
    */
   sprite: PropTypes.string,
+  /**
+   *  Shortcut to render a button with an icon. Can be "left" or "right". Used together with `icon`
+   */
+  iconPosition: PropTypes.oneOf(['left', 'right']),
   /**
    * Optional additional className
    */
