@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash/omit';
-
-import { Button, ButtonIcon } from '../../';
+import ControlledMenu from './ControlledMenu';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {
@@ -68,7 +66,7 @@ const propTypes = {
   size: PropTypes.oneOf(['small', 'medium', 'large']),
 };
 
-export class MenuRaw extends Component {
+class Menu extends Component {
   static propTypes = propTypes
 
   static defaultProps = {
@@ -88,14 +86,6 @@ export class MenuRaw extends Component {
     this.state = { open: this.props.isOpen };
   }
 
-  getClasses() {
-    if (!this.props.isOpen && !this.state.open) {
-      return this.classes;
-    }
-
-    return [...this.classes, 'slds-is-open'];
-  }
-
   toggle = () => {
     this.setState(prevState => ({ open: !prevState.open }));
   }
@@ -104,69 +94,17 @@ export class MenuRaw extends Component {
     this.setState({ open: false });
   }
 
-  button = () => {
-    const { button, customButton, disabled } = this.props;
-
-    if (button) {
-      const noBorder = button.noBorder;
-      const title = button.title;
-      const buttonFlavors = [];
-      if (button.brand) { buttonFlavors.push('slds-button_brand'); }
-      if (button.neutral) { buttonFlavors.push('slds-button_neutral'); }
-      if (noBorder && !title) { buttonFlavors.push('slds-button_icon-container'); }
-      if (!noBorder && !title) { buttonFlavors.push('slds-button_icon-border-filled'); }
-      return (
-        <Button
-          aria-haspopup="true"
-          flavor={button.flavor}
-          className={cx(buttonFlavors)}
-          disabled={disabled}
-          onClick={this.toggle}
-          title={button.title}
-          tooltip={button.tooltip}
-        >
-          <ButtonIcon
-            icon={button.icon}
-            position={title ? 'right' : undefined}
-            sprite={button.sprite}
-          />
-        </Button>
-      );
-    }
-
-    return customButton;
-  }
-
   render() {
     const { children, className, last, position, nubbin, size } = this.props;
-
-    this.classes = [
-      'slds-dropdown-trigger',
-      'slds-dropdown-trigger_click',
-      { 'slds-button_last': last },
-    ];
-
-    this.dropdownClasses = [
-      'slds-dropdown',
-      { [`slds-dropdown_${size}`]: size },
-      { 'slds-dropdown_left': position.endsWith('left') },
-      { 'slds-dropdown_right': position.endsWith('right') },
-      { 'slds-dropdown_bottom': position.startsWith('bottom') },
-      { [`slds-nubbin_${position}`]: nubbin },
-      className,
-    ];
 
     const rest = omit(this.props, Object.keys(propTypes));
 
     return (
-      <div className={cx(this.getClasses())}>
-        {this.button()}
-        <div {...rest} className={cx(this.dropdownClasses)}>
-          {children}
-        </div>
-      </div>
+      <ControlledMenu>
+        {children}
+      </ControlledMenu>
     );
   }
 }
 
-export default enhanceWithClickOutside(MenuRaw);
+export default Menu;
