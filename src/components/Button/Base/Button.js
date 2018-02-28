@@ -62,7 +62,7 @@ Button.defaultProps = {
 
 Button.propTypes = {
   /**
-   * Used to set content. Can be a string, a `ButtonIcon` or a combination of those
+   * Used to set content in advanced use cases
    */
   children: PropTypes.node,
   /**
@@ -97,7 +97,7 @@ Button.propTypes = {
     'inverse'
   ]),
   /**
-   * Optional href, renders as `a` when set.
+   * Optional href, renders as `a` when set
    */
   href: PropTypes.string,
 };

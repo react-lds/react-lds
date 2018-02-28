@@ -22,11 +22,18 @@ const StatefulButtonState = (props) => {
     ...rest
   } = props;
 
-  /* eslint-disable no-nested-ternary */
-  const selectedClass = state === 'selected'
-    ? 'slds-text-selected'
-    : state === 'focus' ? 'slds-text-selected-focus' : 'slds-text-not-selected';
-  /* eslint-enable */
+  let selectedClass = null;
+
+  switch (state) {
+    case 'selected':
+      selectedClass = 'slds-text-selected';
+      break;
+    case 'focus':
+      selectedClass = 'slds-text-selected-focus';
+      break;
+    default:
+      selectedClass = 'slds-text-not-selected';
+  }
 
   return (
     <span {...rest} className={cx(selectedClass, className)}>
