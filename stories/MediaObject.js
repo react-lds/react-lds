@@ -16,7 +16,8 @@ stories
     <MediaObject
       customTag={text('Custom HTML-tag', '') || undefined}
       figureLeft={icon}
-      flavor={array('Flavor', ['center', 'responsive'])}
+      center={boolean('Center?', false)}
+      responsive={boolean('Responsive?', true)}
       size={select('Size', ['', 'small', 'large'], 'small') || undefined}
       truncate={boolean('Truncate', false)}
       title={text('Title', 'This is a tooltip displayed on mouseover, necessary when truncate is used') || undefined}

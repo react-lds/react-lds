@@ -35,7 +35,7 @@ describe('<Menu />', () => {
   it('renders no border when noBorder button prop was set', () => {
     button.noBorder = true;
     mounted.setProps({ button });
-    expect(mounted.find('button').hasClass('slds-button_icon-container')).toBeTruthy();
+    expect(mounted.find('button').hasClass('slds-button_icon-container')).not.toBeTruthy();
   });
 
   it('isOpen state override works', () => {

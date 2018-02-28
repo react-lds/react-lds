@@ -1,67 +1,48 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-
 import ModalHeader from '../ModalHeader';
+import { IconButton } from '../../..';
+
+const sampleChild = <p>Sample</p>;
+
+const getComponent = (props = {}) => shallow(
+  <ModalHeader onClose={() => {}} {...props}>
+    {sampleChild}
+  </ModalHeader>
+);
 
 describe('<ModalHeader />', () => {
-  let mounted = null;
-  let props = {};
-
-  const child = (<div className="foobar" />);
-
-  beforeEach(() => {
-    props = {
-      label: 'foo',
-      title: 'bar',
-      tagline: 'baz',
-    };
-
-    mounted = shallow(<ModalHeader {...props}>{child}</ModalHeader>);
+  it('renders the title with the id if both present', () => {
+    const mounted = getComponent({ id: 'foo', title: 'bar' });
+    const titleEl = mounted.find('h2');
+    expect(titleEl.prop('id')).toEqual('foo');
+    expect(titleEl.text()).toEqual('bar');
   });
 
-  it('renders a close-button by default', () => {
-    expect(mounted.find('.slds-modal__close').length).toBe(1);
+  it('renders a string tagline if present', () => {
+    const mounted = getComponent({ tagline: 'foo' });
+    expect(mounted.find('p').text()).toEqual('foo');
   });
 
-  it('onClickClose triggers when close button was clicked', () => {
-    const closeCallback = jest.fn();
-    mounted.setProps({ onClickClose: closeCallback });
-    mounted.find('.slds-modal__close').simulate('click');
-    expect(closeCallback).toBeCalled();
+  it('renders an element tagline if present', () => {
+    const mounted = getComponent({ tagline: sampleChild });
+    expect(mounted.find('p').contains(sampleChild)).toBeTruthy();
   });
 
-  it('renders title and tagline', () => {
-    expect(mounted.find('h2').first().text()).toBe(props.title);
-    expect(mounted.find('.slds-m-top_x-small').first().text()).toBe(props.tagline);
-  });
-
-  it('renders children', () => {
-    expect(mounted.contains(child)).toBeTruthy();
-  });
-
-  it('renders empty headers', () => {
-    mounted.setProps({ title: undefined, tagline: undefined, children: undefined });
+  it('renders with empty class when no title and tagline are passed', () => {
+    const mounted = getComponent();
     expect(mounted.find('.slds-modal__header').hasClass('slds-modal__header_empty')).toBeTruthy();
   });
 
-  it('renders a title-ID when there is a title', () => {
-    expect(mounted.find(`#${props.label}`).first().text()).toBe(props.title);
+  it('renders a close button and binds onClose to it', () => {
+    const mockFn = jest.fn();
+    const mounted = getComponent({ onClose: mockFn });
+    mounted.find(IconButton).simulate('click');
+    expect(mockFn).toHaveBeenCalled();
   });
 
-  it('renders in error-theme if it is a prompt', () => {
-    mounted.setProps({ prompt: true });
+  it('applies theme', () => {
+    const mounted = getComponent({ theme: 'error' });
     expect(mounted.find('.slds-modal__header').hasClass('slds-theme_error')).toBeTruthy();
-    expect(mounted.find('.slds-modal__header').hasClass('slds-theme_alert-texture')).toBeTruthy();
-  });
-
-  it('hides the close button if it is uncloseable', () => {
-    mounted.setProps({ uncloseable: true });
-    expect(mounted.find('.slds-modal__close').length).toBe(0);
-  });
-
-  it('applies className and rest-properties', () => {
-    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
-    expect(mounted.find('.slds-modal__header').hasClass('foo')).toBeTruthy();
-    expect(mounted.find('.slds-modal__header').prop('data-test')).toEqual('bar');
   });
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button, ButtonIcon } from '../../';
+import { Button } from '../../';
 
 const getToggleHandler = (state, fn) => evt => fn(!state, evt);
 
@@ -25,13 +25,14 @@ const VerticalNavigationOverflow = (props) => {
   return (
     <div className={cx(sldsClasses)} {...rest}>
       <Button
-        className="slds-nav-vertical__action slds-nav-vertical__action_overflow"
+        icon="chevronright"
+        sprite="utility"
+        className="slds-button_reset slds-nav-vertical__action slds-nav-vertical__action_overflow"
+        flavor={null}
         onClick={getToggleHandler(isOpen, onToggle)}
-        flavor="reset"
         aria-controls={id}
         aria-expanded={isOpen}
       >
-        <ButtonIcon position="left" icon="chevronright" sprite="utility" />
         <span className="slds-nav-vertical__action-text">
           {isOpen ? labelOpen : labelClosed}
           <span className="slds-assistive-text">{title}</span>
