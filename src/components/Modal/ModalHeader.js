@@ -1,13 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button, ButtonIcon } from '../Button';
+import { IconButton, ButtonIcon } from '../Button';
 import { THEMES, getThemeClass } from '../../utils';
-
-const buttonFlavors = [
-  'icon',
-  'icon-inverse'
-];
 
 const ModalHeader = (props) => {
   const { id, onClose, theme, title, tagline } = props;
@@ -21,9 +16,9 @@ const ModalHeader = (props) => {
         ...getThemeClass(theme),
       )}
     >
-      <Button
+      <IconButton
         className="slds-modal__close"
-        flavor={buttonFlavors}
+        flavor="inverse"
         onClick={onClose}
         tabIndex={0}
       >
@@ -32,7 +27,7 @@ const ModalHeader = (props) => {
           icon="close"
           size="large"
         />
-      </Button>
+      </IconButton>
       {title && (
         <h2
           className="slds-text-heading_medium slds-hyphenate"

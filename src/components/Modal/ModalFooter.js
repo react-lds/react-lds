@@ -19,7 +19,7 @@ const ModalFooter = ({
       className
     )}
   >
-    <Button flavor="neutral" onClick={onClose}>{closeButtonLabel}</Button>
+    <Button onClick={onClose}>{closeButtonLabel}</Button>
     {children}
   </footer>
 );

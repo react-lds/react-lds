@@ -164,7 +164,7 @@ stories
             f = 'brand';
             break;
           default:
-            f = 'neutral';
+            f = null;
             break;
         }
         return (

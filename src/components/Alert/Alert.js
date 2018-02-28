@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { THEMES, getThemeClass } from '../../utils';
 
-import { Button, ButtonIcon } from '../../';
+import { IconButton, ButtonIcon } from '../Button';
 
 const Alert = (props) => {
   const {
@@ -26,8 +26,6 @@ const Alert = (props) => {
     className,
   ];
 
-  const flavors = ['icon', 'icon-inverse'];
-
   let iconEl = null;
 
   if (React.isValidElement(icon)) {
@@ -43,14 +41,18 @@ const Alert = (props) => {
             <span className="slds-assistive-text">{title}</span>
           </span>
         )}
-        <Button
-          flavor={flavors}
+        <IconButton
+          flavor="inverse"
           className="slds-notify__close"
           onClick={onClickClose}
+          title="Close"
         >
-          <ButtonIcon sprite="utility" icon="close" size={toast ? 'large' : undefined} />
-          <span className="slds-assistive-text">Close</span>
-        </Button>
+          <ButtonIcon
+            sprite="utility"
+            icon="close"
+            size={toast ? 'large' : undefined}
+          />
+        </IconButton>
         <span className="slds-assistive-text">{title}</span>
         {toast ? <div className="slds-notify__content">{children}</div> : children }
       </div>
