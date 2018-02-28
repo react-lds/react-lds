@@ -9,9 +9,9 @@ const MenuDropdownList = (props) => {
   const renderHeader = () => {
     if (header) {
       return (
-        <div className="slds-dropdown__header">
+        <li className="slds-dropdown__header slds-truncate" role="separator">
           <span className="slds-text-title_caps">{header}</span>
-        </div>
+        </li>
       );
     }
 
@@ -38,8 +38,8 @@ const MenuDropdownList = (props) => {
 
   return (
     <div {...rest} className={className}>
-      {renderHeader()}
       <ul className={cx(listClasses)} role="menu">
+        {renderHeader()}
         {checkbox ? makeChildrenCheckboxes() : children}
       </ul>
     </div>

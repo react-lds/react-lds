@@ -64,9 +64,9 @@ const propTypes = {
    */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   /**
-   * Callback triggered when the Menu Button is clicked
+   * Callback triggered when the Menu Button is clicked. With custom button put it directly on the button
    */
-  onMenuClick: PropTypes.func.isRequired,
+  onMenuClick: PropTypes.func,
 };
 
 const ControlledMenu = (props) => {
@@ -157,6 +157,7 @@ ControlledMenu.defaultProps = {
   nubbin: false,
   position: 'top-left',
   size: 'small',
+  onMenuClick: null,
 };
 
 export default ControlledMenu;

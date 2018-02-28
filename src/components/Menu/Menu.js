@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
-import omit from 'lodash/omit';
 import ControlledMenu from './ControlledMenu';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
@@ -95,14 +93,16 @@ class Menu extends Component {
   }
 
   render() {
-    const { children, className, last, position, nubbin, size } = this.props;
+    const { isOpen, ...rest } = this.props;
 
-    const rest = omit(this.props, Object.keys(propTypes));
+    const { open } = this.state;
 
     return (
-      <ControlledMenu>
-        {children}
-      </ControlledMenu>
+      <ControlledMenu
+        isOpen={isOpen || open}
+        onMenuClick={this.toggle}
+        {...rest}
+      />
     );
   }
 }
