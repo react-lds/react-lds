@@ -12,14 +12,15 @@ const statusButtonClasses = [
   'slds-no-flex',
   'slds-m-horizontal_small',
 ];
+
 const statusButton = (
   <Button
-    flavor={['brand', 'icon', 'icon-inverse']}
+    flavor="brand"
     className={cx(statusButtonClasses)}
     onClick={() => {}}
-    title="Mark as complete"
+    sprite="utility"
+    icon="check"
   >
-    <ButtonIcon position="left" sprite="utility" icon="check" />
     Mark as complete
   </Button>
 );
@@ -91,14 +92,9 @@ class ContactPath extends Component {
     const pathButton = (
       <Button
         disabled={buttonDisabled}
-        flavor={[
-          'brand',
-          selectedIsCurrentStep ? 'icon' : undefined,
-          selectedIsCurrentStep ? 'icon-inverse' : undefined
-        ]}
+        flavor="brand"
         className={cx(statusButtonClasses)}
         onClick={selectedIsCurrentStep ? this.onMarkComplete : this.onMarkCurrent}
-        title={selectedIsCurrentStep ? 'Mark as complete' : 'Mark as current'}
       >
         {selectedIsCurrentStep && <ButtonIcon position="left" sprite="utility" icon="check" />}
         {selectedIsCurrentStep ? 'Mark as complete' : 'Mark as current'}

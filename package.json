@@ -1,6 +1,6 @@
 {
   "name": "react-lds",
-  "version": "4.2.1",
+  "version": "5.0.0",
   "description": "Salesforce Lightning Design System React Components",
   "keywords": [
     "react",
@@ -43,6 +43,7 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.5",
+    "focus-trap-react": "^3.1.2",
     "lodash": "^4.17.5",
     "moment": "^2.16.0",
     "moment-range": "^2.2.0",

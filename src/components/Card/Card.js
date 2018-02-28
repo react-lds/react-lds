@@ -38,9 +38,9 @@ const Card = (props) => {
     <div {...rest} className={cx(sldsClasses)}>
       <Grid className="slds-card__header">
         <MediaObject
+          center
           className="slds-has-flexi-truncate"
           customTag="header"
-          flavor="center"
           figureLeft={iconEl}
           truncate
         >

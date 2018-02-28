@@ -1,139 +1,192 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { text, boolean, select, object, array } from '@storybook/addon-knobs';
+import { text, boolean, select } from '@storybook/addon-knobs';
 import {
   Button,
   ButtonIcon,
-  ButtonGroup,
+  CheckboxButton,
+  IconButton,
   StatefulButton,
-  Menu,
-  MenuDropdownList,
-  MenuDropdownListItem
+  StatefulIconButton,
+  StatefulButtonState,
 } from '../src';
 
-const stories = storiesOf('Button', module);
+const buttonFlavors = [
+  'neutral',
+  'brand',
+  'success',
+  'destructive',
+];
 
-stories
+const buttonStories = storiesOf('Button', module);
+
+buttonStories
   .add('Default', () => (
     <Button
-      disabled={boolean('Disabled', false)}
-      flavor={array('Flavor', ['neutral'])}
       onClick={action()}
-      selected={boolean('Selected', false)}
-      size={select('Size', ['', 'x-small', 'small', 'large'], '') || undefined}
-      title={text('Title', 'Title') || undefined}
-      tooltip={text('Tooltip', 'I am a tooltip!')}
+      disabled={boolean('Disabled', false)}
+      flavor={select('Flavor', buttonFlavors, 'neutral') || undefined}
+      title={text('Title', 'Hover me')}
+    >
+      {text('Button Text', 'Click Me')}
+    </Button>
+  ))
+  .add('Shortcut: Infer Button content from title', () => (
+    <Button title={text('Title', 'Hover me')} />
+  ))
+  .add('Shortcut: Button with left icon', () => (
+    <Button
+      icon="download"
+      sprite="utility"
+      title={text('Button Text', 'Click Me')}
     />
   ))
-  .add('With Icon', () => (
+  .add('Shortcut: With right icon', () => (
     <Button
-      onClick={action()}
-      title={text('Title', 'Title')}
-      tooltip={text('Tooltip', 'I am a tooltip!')}
-      disabled={boolean('Disabled', false)}
-      selected={boolean('Selected', false)}
-      flavor={array('Flavor', ['brand'])}
-    >
+      icon="download"
+      sprite="utility"
+      iconPosition="right"
+      title={text('Button Text', 'Click Me')}
+    />
+  ))
+  .add('Button: Advanced usage', () => (
+    <Button flavor={null}>
+      <span>Label</span>
       <ButtonIcon
-        position={select('Position', ['left', 'right'], 'left')}
+        position="right"
         sprite="utility"
         icon="download"
-        size={select('Size', ['x-small', 'small', 'large', ''], '') || undefined}
+        size="small"
       />
     </Button>
   ))
   .add('Stateful Button', () => (
     <StatefulButton
       onClick={action()}
-      disabled={boolean('Disabled', false)}
-      selected={boolean('Selected', false)}
-      flavor={select('Flavor', [
-        '',
-        'neutral',
-        'brand',
-        'destructive',
-        'inverse',
-        'success',
-      ], 'neutral') || undefined}
-      stateNotSelected={object('StateNotSelected', {
-        icon: 'add',
-        sprite: 'utility',
-        title: 'Follow',
-      })}
-      stateSelected={object('StateSelected', {
-        icon: 'check',
-        sprite: 'utility',
-        title: 'Following',
-      })}
-      stateSelectedFocus={object('StateSelectedFocus', {
-        icon: 'close',
-        sprite: 'utility',
-        title: 'Unfollow',
-      })}
-      tooltip={text('Tooltip', 'I\'m a tooltip, look at me!')}
+      selected={boolean('Selected?', false)}
+      flavor={select('Flavor', buttonFlavors, 'neutral') || undefined}
+    >
+      <StatefulButtonState
+        state="selected"
+        icon="check"
+        sprite="utility"
+        title="Following"
+      />
+      <StatefulButtonState
+        state="not-selected"
+        icon="add"
+        sprite="utility"
+        title="Follow"
+      />
+      <StatefulButtonState
+        state="focus"
+        icon="close"
+        sprite="utility"
+        title="Unfollow"
+      />
+    </StatefulButton>
+  ))
+  .add('As a link', () => (
+    <Button
+      href="https://google.com"
+      target="_blank"
+      flavor="brand"
+      title={text('Title', 'Google.com')}
+    >
+      Link to Google
+    </Button>
+  ));
+
+const iconButtonStories = storiesOf('IconButton', module);
+
+iconButtonStories
+  .add('Default', () => (
+    <IconButton
+      sprite="utility"
+      icon="settings"
+      disabled={boolean('Disabled?', false)}
+      flavor={select('Flavor', ['brand', 'error'], '') || undefined}
+      onClick={action()}
+      size={select('Size', ['', 'small', 'x-small', 'xx-small'], '') || undefined}
+      title={text('Title', 'Hover Me')}
     />
   ))
-  .add('Button Group', () => (
-    <ButtonGroup>
-      <Button flavor={array('Button 1 flavor', ['neutral'])} onClick={action('foo')} title="foo" />
-      <Button flavor={array('Button 2 flavor', ['neutral'])} onClick={action('bar')} title="bar" />
-      <Button flavor={array('Button 3 flavor', ['brand'])} onClick={action('baz')} title="baz" />
-    </ButtonGroup>
+  .add('Border filled with container', () => (
+    <IconButton
+      sprite="utility"
+      icon="search"
+      onClick={action()}
+      border="filled"
+    />
   ))
-  .add('Button Group with Menu', () => (
-    <ButtonGroup>
-      <Button flavor={array('Button 1 flavor', ['neutral'])} onClick={action('foo')} title="foo" />
-      <Button flavor={array('Button 2 flavor', ['neutral'])} onClick={action('bar')} title="bar" />
-      <Button flavor={array('Button 3 flavor', ['neutral'])} onClick={action('baz')} title="baz" />
-      <Menu
-        button={object('Menu button', { sprite: 'utility', icon: 'down' })}
-        last
-        nubbin={boolean('Nubbin', true)}
-        size={select('Size', ['', 'small', 'medium', 'large'], '') || undefined}
-        position={select('Position', [
-          '', 'top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right'
-        ], 'top') || undefined}
-      >
-        <MenuDropdownList>
-          <MenuDropdownListItem>Item 1</MenuDropdownListItem>
-          <MenuDropdownListItem>Item 2</MenuDropdownListItem>
-          <MenuDropdownListItem>Item 3</MenuDropdownListItem>
-          <MenuDropdownListItem divider>Important last item</MenuDropdownListItem>
-        </MenuDropdownList>
-      </Menu>
-    </ButtonGroup>
+  .add('Transparent Container', () => (
+    <IconButton
+      sprite="utility"
+      icon="search"
+      onClick={action()}
+      container
+    />
   ))
-  .add('Icon-only ButtonGroup', () => (
-    <ButtonGroup>
-      <Button
-        flavor={['icon', 'icon-border-filled']}
-        onClick={action('foo')}
-        selected
-        title="foo"
-      >
-        <ButtonIcon sprite="utility" icon="chart" />
-      </Button>
-      <Button
-        flavor={['icon', 'icon-border-filled']}
-        onClick={action('foo')}
-        title="foo"
-      >
-        <ButtonIcon sprite="utility" icon="filterList" />
-      </Button>
-      <Button
-        flavor={['icon', 'icon-border-filled']}
-        onClick={action('foo')}
-        title="foo"
-      >
-        <ButtonIcon sprite="utility" icon="settings" />
-      </Button>
-    </ButtonGroup>
+  .add('Bordered Transparent Container', () => (
+    <IconButton
+      sprite="utility"
+      icon="search"
+      onClick={action()}
+      border
+    />
   ))
-  .add('Button with a tag and href', () => (
-    <Button
-      href={text('href', '#linkylink')}
-      flavor={array('Flavor', ['brand'])}
-      title={text('Title', 'hyperlink')}
+  .add('Inverse', () => (
+    <div style={{ padding: '0.5rem', 'background-color': 'rgb(22, 50, 92)' }}>
+      <IconButton
+        sprite="utility"
+        icon="search"
+        onClick={action()}
+        flavor="inverse"
+      />
+    </div>
+  ))
+  .add('Bordered Inverse', () => (
+    <div style={{ padding: '0.5rem', 'background-color': 'rgb(22, 50, 92)' }}>
+      <IconButton
+        sprite="utility"
+        icon="search"
+        onClick={action()}
+        border
+        flavor="inverse"
+      />
+    </div>
+  ))
+  .add('Stateful', () => (
+    <StatefulIconButton
+      selected={boolean('Selected?', false)}
+      sprite="utility"
+      icon="download"
+    />
+  ))
+  .add('With Custom ButtonIcon', () => (
+    <IconButton
+      sprite="utility"
+      icon="search"
+      onClick={action()}
+      border
+    >
+      <ButtonIcon
+        className="some-class"
+        icon="settings"
+        sprite="utility"
+      />
+    </IconButton>
+  ));
+
+const checkboxButtonStories = storiesOf('Checkbox Button', module);
+
+checkboxButtonStories
+  .add('Default', () => (
+    <CheckboxButton
+      checked={boolean('Selected', false)}
+      onChange={action()}
+      label={text('Label', 'Label')}
+      id="checkbox-toggle-1"
     />
   ));
