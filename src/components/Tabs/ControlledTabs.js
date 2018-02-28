@@ -64,11 +64,14 @@ class ControlledTabs extends PureComponent {
   }
 
   componentWillReceiveProps({ children: nextChildren }) {
-    const { positions: prevPositions } = this.state;
-    const nextPositions = ControlledTabs.getPanelState(nextChildren).positions;
+    const nextChildrenArr = React.Children.toArray(nextChildren);
+    const prevChildrenArr = React.Children.toArray(this.children);
 
-    if (!isEqual(prevPositions, nextPositions)) {
-      this.setState(ControlledTabs.getPanelState(nextChildren));
+    const isEqualLength = nextChildrenArr.length !== prevChildrenArr.length;
+    const nextState = ControlledTabs.getPanelState(nextChildrenArr);
+
+    if (!isEqualLength || !isEqual(nextState.positions, this.state.positions)) {
+      this.setState(nextState);
     }
   }
 
