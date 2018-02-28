@@ -43,24 +43,22 @@ stories
       onMenuClick={action()}
       isOpen={boolean('isOpen', true)}
     >
-      <MenuDropdownList header={text('Menu sub header', 'Menu sub heading') || undefined}>
-        <MenuDropdownListItem
-          divider={boolean('Divider item 1', false)}
-          onClick={action('clicked menu item 1')}
-        >Item 1</MenuDropdownListItem>
-        <MenuDropdownListItem
-          divider={boolean('Divider item 2', false)}
-          onClick={action('clicked menu item 2')}
-        >Item 2</MenuDropdownListItem>
-        <MenuDropdownListItem
-          divider={boolean('Divider item 3', false)}
-          onClick={action('clicked menu item 3')}
-        >Item 3</MenuDropdownListItem>
-        <MenuDropdownListItem
-          divider={boolean('Divider item 4', true)}
-          onClick={() => console.log(event)}
-        >Important last item</MenuDropdownListItem>
-      </MenuDropdownList>
+      <MenuDropdownListItem
+        divider={boolean('Divider item 1', false)}
+        onClick={action('clicked menu item 1')}
+      >Item 1</MenuDropdownListItem>
+      <MenuDropdownListItem
+        divider={boolean('Divider item 2', false)}
+        onClick={action('clicked menu item 2')}
+      >Item 2</MenuDropdownListItem>
+      <MenuDropdownListItem
+        divider={boolean('Divider item 3', false)}
+        onClick={action('clicked menu item 3')}
+      >Item 3</MenuDropdownListItem>
+      <MenuDropdownListItem
+        divider={boolean('Divider item 4', true)}
+        onClick={() => console.log(event)}
+      >Important last item</MenuDropdownListItem>
     </ControlledMenu>
   ))
   .add('Uncontrolled', () => (
@@ -75,19 +73,17 @@ stories
       size={select('Size', ['', 'small', 'medium', 'large'], '') || undefined}
       isOpen={boolean('isOpen', false) || undefined}
     >
-      <MenuDropdownList header={text('Menu sub header', 'Menu sub heading') || undefined}>
-        <MenuDropdownListItem
-          divider={boolean('Divider item 1', false)}
-        >Item 1</MenuDropdownListItem>
-        <MenuDropdownListItem
-          divider={boolean('Divider item 2', false)}
-        >Item 2</MenuDropdownListItem>
-        <MenuDropdownListItem
-          divider={boolean('Divider item 3', false)}
-        >Item 3</MenuDropdownListItem>
-        <MenuDropdownListItem
-          divider={boolean('Divider item 4', true)}
-        >Important last item</MenuDropdownListItem>
-      </MenuDropdownList>
+      <MenuDropdownListItem
+        divider={boolean('Divider item 1', false)}
+      >Item 1</MenuDropdownListItem>
+      <MenuDropdownListItem
+        divider={boolean('Divider item 2', false)}
+      >Item 2</MenuDropdownListItem>
+      <MenuDropdownListItem
+        divider={boolean('Divider item 3', false)}
+      >Item 3</MenuDropdownListItem>
+      <MenuDropdownListItem
+        divider={boolean('Divider item 4', true)}
+      >Important last item</MenuDropdownListItem>
     </Menu>
   ));

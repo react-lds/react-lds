@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
 import { IconSVG } from '../../';
 
 const MenuDropdownListItem = (props) => {
-  const { children, className, onClick, selected, leftIcon, rightIcon, divider, ...rest } = props;
+  const { children, className, onClick, selected, leftIcon, rightIcon, divider, id, ...rest } = props;
 
   const leftIconElem = () => {
     if (leftIcon) {
@@ -62,8 +61,8 @@ const MenuDropdownListItem = (props) => {
 
   return (
     <li {...rest} className={cx(sldsClasses)} role="presentation">
-      <a role={role} onClick={onClick} aria-checked={selected}>
-        <span className="slds-truncate" title={children}>
+      <a role={role} aria-checked={selected} id={id}>
+        <span className="slds-truncate" title={children} id={id}>
           {leftIconElem()}
           {children}
         </span>
@@ -109,6 +108,10 @@ MenuDropdownListItem.propTypes = {
    * sets this item into a selection state that displays the leftIcon
    */
   selected: PropTypes.bool,
+  /**
+   * id should be set by parent element
+   */
+  id: PropTypes.string.isRequired,
 };
 
 MenuDropdownListItem.defaultProps = {

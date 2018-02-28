@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import omit from 'lodash/omit';
+import { getUniqueHash } from '../../utils';
 import { Button, ButtonIcon } from '../../';
 
 const propTypes = {
@@ -67,6 +68,18 @@ const propTypes = {
    * Callback triggered when the Menu Button is clicked. With custom button put it directly on the button
    */
   onMenuClick: PropTypes.func,
+  /**
+   * sets the number of items being displayed
+   */
+  height: PropTypes.oneOf([5, 7, 10]),
+  /**
+   * use this instead of height if an leftIcon is on every item
+   */
+  heightIcon: PropTypes.oneOf([5, 7, 10]),
+  /**
+   * make true if menuitems should be menuitemcheckboxes
+   */
+  checkbox: PropTypes.bool,
 };
 
 const ControlledMenu = (props) => {
@@ -131,7 +144,35 @@ const ControlledMenu = (props) => {
     return customButton;
   };
 
-  const { children, isOpen } = props;
+  const { children, checkbox, isOpen, height, heightIcon } = props;
+
+  const renderChildren = () =>
+    children.map((child, i) => {
+      const id = getUniqueHash('item', i);
+      return React.cloneElement(
+        child, {
+          selected: checkbox ? child.props.selected === true : null,
+          // with this we set the selected prop to true or false (no undef or null)
+          // so that the child becomes a menuitemcheckbox (not menuitem)
+          key: id,
+          id: i,
+        }
+      );
+    });
+
+  const handleItemClick = (event) => {
+    const index = event.target.id;
+    if (index) {
+      children[index].props.onClick();
+    }
+    event.stopPropagation();
+  };
+
+  const listClasses = [
+    { [`slds-dropdown_length-${height}`]: height },
+    { [`slds-dropdown_length-with-icon-${heightIcon}`]: heightIcon },
+    'slds-dropdown__list',
+  ];
 
   const rest = omit(props, Object.keys(propTypes));
 
@@ -139,7 +180,9 @@ const ControlledMenu = (props) => {
     <div className={cx(getClasses())}>
       {getButton()}
       {isOpen && <div {...rest} className={cx(getDropdownClasses())}>
-        {children}
+        <ul className={cx(listClasses)} role="menu" onClick={handleItemClick}>
+          {renderChildren()}
+        </ul>
       </div>}
     </div>
   );
@@ -151,6 +194,7 @@ ControlledMenu.defaultProps = {
   button: null,
   className: null,
   customButton: null,
+  checkbox: false,
   disabled: false,
   isOpen: false,
   last: false,
@@ -158,6 +202,8 @@ ControlledMenu.defaultProps = {
   position: 'top-left',
   size: 'small',
   onMenuClick: null,
+  height: null,
+  heightIcon: null,
 };
 
 export default ControlledMenu;
