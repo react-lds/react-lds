@@ -1,10 +1,21 @@
 # Changelog
 
-## 5.0.0-alpha.1
+## 5.0.0
 
-* _Tab_ is deprecated and replaced by _Tabs_
-* _Grid_ new supports responsive `order` prop
-* `react-lds` now depends on `lodash` instead of `lodash.x`
+This version is compatible with SLDS 2.5.2 aka `Spring '18` 🌸
+
+* _Tabs:_ **Breaking** Reimplement `Tabs`, `ControlledTabs`
+* _Tabs_: Support keyboard interactions for `Tabs`
+* _Button:_ **Breaking** Reimplement `Button`s, add `IconButton`, `StatefulButton`, `StatefulIconButton` components
+* _Modal:_ **Breaking** Reimplement `Modal`
+* _Modal:_ Trap focus inside `Modal`, support keyboard interactions
+
+## 4.2.1
+
+* import lodash modules from main package
+* add `Grid` + `Column` order prop
+* add size property to `Picklist`
+* add full-width support to `PicklistDropdown`
 
 ## 4.2.0
 

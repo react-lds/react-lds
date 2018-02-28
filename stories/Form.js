@@ -12,8 +12,9 @@ import {
   CheckboxGroup,
   RadioRaw,
   RadioGroup,
+  Slider,
 } from '../src';
-import { getUtilityIcons } from './utils/helpers';
+import { getUtilityIcons, getSizes } from './utils/helpers';
 
 const stories = storiesOf('Form', module);
 
@@ -75,6 +76,23 @@ stories
       <option>Option Three</option>
     </Select>
   ))
+  .add('Slider', () => (
+    <Slider
+      value={number('Value', 33, { range: true, min: 0, max: 100, step: 1, })}
+      min={number('Min', 0) || undefined}
+      max={number('Max', 100) || undefined}
+      step={number('Step', 1) || undefined}
+      disabled={boolean('Disabled', false) || undefined}
+      error={text('Error', '')}
+      hideLabel={boolean('HideLabel', false) || undefined}
+      hideErrorMessage={boolean('HideErrorMessage', false) || undefined}
+      id="slider-1"
+      label={text('Label', 'This is a label')}
+      vertical={boolean('Vertical', false) || undefined}
+      onChange={action('slider value changed')}
+      size={getSizes()}
+    />
+  ))
   .add('Picklist', () => (
     <Picklist
       error={text('Error', '') || undefined}
@@ -97,6 +115,7 @@ stories
       labelMultiselect={text('MultiSelect', '*multiselect label*')}
       onSelect={action('selected')}
       placeholder={text('Placeholder', 'Tis a placeholder')}
+      size={select('Size', ['small', 'medium', 'large'], 'text')}
     />
   ))
   .add('Checkbox', () => (
