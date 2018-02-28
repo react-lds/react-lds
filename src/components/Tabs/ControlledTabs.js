@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { isEqual } from 'lodash';
 import { getAriaLabel, getTabsClass } from './utils';
 import TabLink from './TabLink';
 
@@ -63,8 +64,14 @@ class ControlledTabs extends PureComponent {
   }
 
   componentWillReceiveProps({ children: nextChildren }) {
-    if (ControlledTabs.getPanelState(nextChildren) !== ControlledTabs.getPanelState(this.props.children)) {
-      this.setState(ControlledTabs.getPanelState(nextChildren));
+    const nextChildrenArr = React.Children.toArray(nextChildren);
+    const prevChildrenArr = React.Children.toArray(this.children);
+
+    const isEqualLength = nextChildrenArr.length !== prevChildrenArr.length;
+    const nextState = ControlledTabs.getPanelState(nextChildrenArr);
+
+    if (!isEqualLength || !isEqual(nextState.positions, this.state.positions)) {
+      this.setState(nextState);
     }
   }
 
