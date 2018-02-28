@@ -1,6 +1,6 @@
 import Menu from './Menu';
 import ControlledMenu from './ControlledMenu';
-import MenuDropdownList from './MenuDropdownList';
-import MenuDropdownListItem from './MenuDropdownListItem';
+import MenuItem from './MenuItem';
+import MenuSubHeader from './MenuSubHeader';
 
-export { Menu, ControlledMenu, MenuDropdownList, MenuDropdownListItem };
+export { Menu, ControlledMenu, MenuItem, MenuSubHeader };

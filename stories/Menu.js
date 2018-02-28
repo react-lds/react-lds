@@ -1,8 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { boolean, object, select, text } from '@storybook/addon-knobs';
+import { boolean, object, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { Button, ButtonIcon, ControlledMenu, Menu, MenuDropdownList, MenuDropdownListItem } from '../src';
+import { Button, ButtonIcon, ControlledMenu, Menu, MenuItem, MenuSubHeader } from '../src';
 
 const stories = storiesOf('Menu', module);
 
@@ -43,22 +43,28 @@ stories
       onMenuClick={action()}
       isOpen={boolean('isOpen', true)}
     >
-      <MenuDropdownListItem
+      <MenuSubHeader>
+        SubHeading 1
+      </MenuSubHeader>
+      <MenuItem
         divider={boolean('Divider item 1', false)}
         onClick={action('clicked menu item 1')}
-      >Item 1</MenuDropdownListItem>
-      <MenuDropdownListItem
+      >Item 1</MenuItem>
+      <MenuItem
         divider={boolean('Divider item 2', false)}
         onClick={action('clicked menu item 2')}
-      >Item 2</MenuDropdownListItem>
-      <MenuDropdownListItem
+      >Item 2</MenuItem>
+      <MenuSubHeader>
+        SubHeading 2
+      </MenuSubHeader>
+      <MenuItem
         divider={boolean('Divider item 3', false)}
         onClick={action('clicked menu item 3')}
-      >Item 3</MenuDropdownListItem>
-      <MenuDropdownListItem
+      >Item 3</MenuItem>
+      <MenuItem
         divider={boolean('Divider item 4', true)}
-        onClick={() => console.log(event)}
-      >Important last item</MenuDropdownListItem>
+        onClick={action('clicked menu item 4')}
+      >Important last item</MenuItem>
     </ControlledMenu>
   ))
   .add('Uncontrolled', () => (
@@ -73,17 +79,21 @@ stories
       size={select('Size', ['', 'small', 'medium', 'large'], '') || undefined}
       isOpen={boolean('isOpen', false) || undefined}
     >
-      <MenuDropdownListItem
+      <MenuItem
         divider={boolean('Divider item 1', false)}
-      >Item 1</MenuDropdownListItem>
-      <MenuDropdownListItem
+        onClick={action('clicked menu item 1')}
+      >Item 1</MenuItem>
+      <MenuItem
         divider={boolean('Divider item 2', false)}
-      >Item 2</MenuDropdownListItem>
-      <MenuDropdownListItem
+        onClick={action('clicked menu item 2')}
+      >Item 2</MenuItem>
+      <MenuItem
         divider={boolean('Divider item 3', false)}
-      >Item 3</MenuDropdownListItem>
-      <MenuDropdownListItem
+        onClick={action('clicked menu item 3')}
+      >Item 3</MenuItem>
+      <MenuItem
         divider={boolean('Divider item 4', true)}
-      >Important last item</MenuDropdownListItem>
+        onClick={action('clicked menu item 4')}
+      >Important last item</MenuItem>
     </Menu>
   ));

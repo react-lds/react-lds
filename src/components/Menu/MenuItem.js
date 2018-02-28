@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { IconSVG } from '../../';
 
-const MenuDropdownListItem = (props) => {
+const MenuItem = (props) => {
   const { children, className, onClick, selected, leftIcon, rightIcon, divider, id, ...rest } = props;
 
   const leftIconElem = () => {
@@ -72,7 +72,7 @@ const MenuDropdownListItem = (props) => {
   );
 };
 
-MenuDropdownListItem.propTypes = {
+MenuItem.propTypes = {
   /**
    * The content of a menu item
    */
@@ -114,7 +114,7 @@ MenuDropdownListItem.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-MenuDropdownListItem.defaultProps = {
+MenuItem.defaultProps = {
   className: null,
   divider: false,
   leftIcon: null,
@@ -123,4 +123,4 @@ MenuDropdownListItem.defaultProps = {
   selected: null,
 };
 
-export default MenuDropdownListItem;
+export default MenuItem;
