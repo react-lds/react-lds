@@ -11,7 +11,7 @@ class Modal extends Component {
   onClose = (evt) => {
     evt.stopPropagation();
     const { onClose } = this.props;
-    if (onClose) { onClose(); }
+    if (onClose) { onClose(evt); }
   }
 
   onKeyUp = (evt) => {
