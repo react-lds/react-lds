@@ -56,7 +56,7 @@ ModalFooter.propTypes = {
    */
   closeButtonLabel: PropTypes.string,
   /**
-   * (PRIVATE) Passed down from Modal. Renders
+   * (PRIVATE) Passed down from Modal. Renders a close button with `closeButtonLabel`
    */
   onClose: PropTypes.func,
 };
