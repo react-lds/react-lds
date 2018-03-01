@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import ModalHeader from './ModalHeader';
+import ModalFooter from './ModalFooter';
+import ModalContent from './ModalContent';
 import { getContentId, getTitleId } from './utils';
 
 class Modal extends Component {
@@ -18,16 +20,15 @@ class Modal extends Component {
   }
 
   cloneWithProps = (child) => {
-    const { onClose } = this.props;
-    const name = child.type.displayName || child.type.name;
+    const { id, onClose } = this.props;
+    const type = child.type;
 
-    if (name === 'ModalContent') {
-      const { id } = this.props;
+    if (type === ModalContent) {
       const contentId = getContentId(id);
       return React.cloneElement(child, { id: contentId });
     }
 
-    if (name === 'ModalFooter') {
+    if (type === ModalFooter) {
       return React.cloneElement(child, {
         onClose: onClose ? this.onClose : null
       });
