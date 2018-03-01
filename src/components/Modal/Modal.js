@@ -9,7 +9,7 @@ class Modal extends Component {
   onClose = (evt) => {
     evt.stopPropagation();
     const { onClose } = this.props;
-    onClose();
+    if (onClose) { onClose(); }
   }
 
   onKeyUp = (evt) => {
@@ -18,6 +18,7 @@ class Modal extends Component {
   }
 
   cloneWithProps = (child) => {
+    const { onClose } = this.props;
     const name = child.type.displayName || child.type.name;
 
     if (name === 'ModalContent') {
@@ -27,7 +28,9 @@ class Modal extends Component {
     }
 
     if (name === 'ModalFooter') {
-      return React.cloneElement(child, { onClose: this.onClose });
+      return React.cloneElement(child, {
+        onClose: onClose ? this.onClose : null
+      });
     }
 
     return child;
@@ -39,8 +42,9 @@ class Modal extends Component {
       className,
       id,
       open,
-      onClose: _,
+      onClose,
       prompt,
+      size,
       tagline,
       title,
       transitionStyle,
@@ -53,6 +57,7 @@ class Modal extends Component {
     const sldsClasses = cx(
       'slds-modal',
       { [`slds-${transitionStyle}`]: open },
+      { [`slds-modal_${size}`]: !!size },
       { 'slds-modal_prompt': !!prompt },
       className
     );
@@ -62,7 +67,7 @@ class Modal extends Component {
         <section
           {...rest}
           className={sldsClasses}
-          onKeyUp={this.onKeyUp}
+          onKeyUp={onClose ? this.onKeyUp : null}
           role={prompt ? 'alertdialog' : 'dialog'}
           tabIndex={-1}
           aria-modal="true"
@@ -72,7 +77,7 @@ class Modal extends Component {
           <FocusTrap className="slds-modal__container" active={open}>
             <ModalHeader
               id={titleId}
-              onClose={this.onClose}
+              onClose={onClose ? this.onClose : null}
               theme={prompt}
               tagline={tagline}
               title={title}
@@ -95,6 +100,8 @@ Modal.defaultProps = {
   className: null,
   open: false,
   prompt: null,
+  onClose: null,
+  size: null,
   tagline: null,
   title: null,
   transitionStyle: 'fade-in-open',
@@ -122,7 +129,7 @@ Modal.propTypes = {
   /**
    * Callback that is triggered when `x` is clicked or `esc` is pressed. Will be passed to a `ModalFooter` if present
    */
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
   /**
    * id that is used to link Moal aria-tags to each other
    */
@@ -131,6 +138,10 @@ Modal.propTypes = {
    * Opens the Modal and renders the backdrop
    */
   open: PropTypes.bool,
+  /**
+   * Size of modal. Can be `medium` or `large`
+   */
+  size: PropTypes.oneOf(['medium', 'large']),
   /**
    * Tagline. Can be a string or an element
    */
