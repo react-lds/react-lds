@@ -8,6 +8,7 @@ const ModalFooter = ({
   className,
   closeButtonLabel,
   directional,
+  hideCloseButton,
   onClose,
   ...rest
 }) => (
@@ -19,7 +20,7 @@ const ModalFooter = ({
       className
     )}
   >
-    <Button onClick={onClose}>{closeButtonLabel}</Button>
+    {!hideCloseButton && !!onClose && <Button onClick={onClose}>{closeButtonLabel}</Button>}
     {children}
   </footer>
 );
@@ -28,6 +29,7 @@ ModalFooter.defaultProps = {
   children: null,
   className: null,
   directional: false,
+  hideCloseButton: false,
   closeButtonLabel: 'Cancel',
   onClose: null,
 };
@@ -46,11 +48,15 @@ ModalFooter.propTypes = {
    */
   directional: PropTypes.bool,
   /**
+   * Hides the closeButton when `onClose` is set
+   */
+  hideCloseButton: PropTypes.bool,
+  /**
    * Label for the closeButton that will be rendered
    */
   closeButtonLabel: PropTypes.string,
   /**
-   * (PRIVATE) Passed down from Modal
+   * (PRIVATE) Passed down from Modal. Renders a close button with `closeButtonLabel`
    */
   onClose: PropTypes.func,
 };

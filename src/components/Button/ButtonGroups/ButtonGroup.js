@@ -17,7 +17,7 @@ const ButtonGroup = (props) => {
     className
   );
 
-  const GroupEl = list ? 'ul' : 'li';
+  const GroupEl = list ? 'ul' : 'div';
   const childEls = list ? React.Children.map(children, wrapLi) : children;
 
   return (

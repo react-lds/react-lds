@@ -4,7 +4,7 @@ import cx from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash/omit';
 
-import { Button, ButtonIcon, IconButton } from '../../';
+import { Button, IconButton } from '../../';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {
@@ -124,23 +124,22 @@ export class MenuRaw extends Component {
           onClick={this.toggle}
           sprite={button.sprite}
           border={button.noBorder ? null : 'filled'}
-          container={!button.noBorder}
+          container={button.noBorder}
           title={button.tooltip}
         />
       );
     }
 
     return (
-      <Button>
-        {button.title}
-        <ButtonIcon
-          aria-haspopup="true"
-          flavor={buttonFlavor}
-          icon={button.icon}
-          position="right"
-          sprite={button.sprite}
-        />
-      </Button>
+      <Button
+        aria-haspopup="true"
+        flavor={buttonFlavor}
+        icon={button.icon}
+        iconPosition="right"
+        sprite={button.sprite}
+        onClick={this.toggle}
+        title={button.title}
+      />
     );
   }
 

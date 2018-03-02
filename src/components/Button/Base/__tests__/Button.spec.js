@@ -53,8 +53,15 @@ describe('<Button />', () => {
     expect(mounted.hasClass('slds-button_success')).toBeTruthy();
   });
 
+  it('renders neutral', () => {
+    const mounted = getComponent({ flavor: 'success' });
+    expect(mounted.hasClass('slds-button_success')).toBeTruthy();
+  });
+
   it('renders without a flavor', () => {
-    const mounted = getComponent({ flavor: null });
+    const mounted = getComponent({ flavor: 'none' });
+    expect(mounted.hasClass('slds-button_none')).not.toBeTruthy();
+    mounted.setProps({ flavor: null });
     expect(mounted.hasClass('slds-button_neutral')).not.toBeTruthy();
   });
 });

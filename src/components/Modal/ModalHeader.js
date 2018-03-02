@@ -16,18 +16,20 @@ const ModalHeader = (props) => {
         ...getThemeClass(theme),
       )}
     >
-      <IconButton
-        className="slds-modal__close"
-        flavor="inverse"
-        onClick={onClose}
-        tabIndex={0}
-      >
-        <ButtonIcon
-          sprite="utility"
-          icon="close"
-          size="large"
-        />
-      </IconButton>
+      {onClose && (
+        <IconButton
+          className="slds-modal__close"
+          flavor="inverse"
+          onClick={onClose}
+          tabIndex={0}
+        >
+          <ButtonIcon
+            sprite="utility"
+            icon="close"
+            size="large"
+          />
+        </IconButton>
+      )}
       {title && (
         <h2
           className="slds-text-heading_medium slds-hyphenate"
@@ -43,6 +45,7 @@ const ModalHeader = (props) => {
 
 ModalHeader.defaultProps = {
   id: null,
+  onClose: null,
   title: null,
   tagline: null,
   theme: null,
@@ -50,7 +53,7 @@ ModalHeader.defaultProps = {
 
 ModalHeader.propTypes = {
   id: PropTypes.string,
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
   theme: PropTypes.oneOf(THEMES),
   title: PropTypes.string,
   tagline: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
