@@ -1,26 +1,16 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { boolean, object, select } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { IconButton, ControlledMenu, Menu, MenuItem, MenuSubHeader } from '../src';
 
 const stories = storiesOf('Menu', module);
 
-const button = {
-  sprite: 'utility',
-  icon: 'settings',
-  brand: false,
-  neutral: false,
-  noBorder: true,
-  title: '',
-  tooltip: 'heyahehyhy'
-};
-
 const customButton = (
   <IconButton
     icon="warning"
     sprite="utility"
-    onClick={action('custom Button clicked')}
+    onClick={action('Menu Button clicked')}
     aria-haspopup="true"
     className="slds-button_icon-border-filled"
   />
@@ -29,15 +19,14 @@ const customButton = (
 stories
   .add('Controlled', () => (
     <ControlledMenu
-      button={object('Button', button)}
-      disabled={boolean('Disabled', false)}
+      button={customButton}
       last={boolean('Last', false)}
       nubbin={boolean('Nubbin', true)}
       position={select('Position', [
         '', 'top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right'
       ], '') || undefined}
       size={select('Size', ['', 'small', 'medium', 'large'], '') || undefined}
-      onMenuClick={action()}
+      onMenuClick={action('Clicked menu button')}
       isOpen={boolean('isOpen', true)}
     >
       <MenuSubHeader>
@@ -66,7 +55,7 @@ stories
   ))
   .add('Uncontrolled', () => (
     <Menu
-      button={object('Button', button)}
+      button={customButton}
       disabled={boolean('Disabled', false)}
       last={boolean('Last', false)}
       nubbin={boolean('Nubbin', true)}

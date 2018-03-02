@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+ * _Menu_: **Breaking** `Menu` and `ControlledMenu` take `MenuItem` and `MenuSubHeader` as children. `Button` *must* be passed as prop. 
+
 ## 5.0.0
 
 This version is compatible with SLDS 2.5.2 aka `Spring'18` 🌸

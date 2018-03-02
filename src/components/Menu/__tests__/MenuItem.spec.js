@@ -1,15 +1,16 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import MenuDropdownListItem from '../MenuDropdownListItem';
+import MenuItem from '../MenuItem';
 
-describe('<MenuDropdownListItem />', () => {
+describe('<MenuItem />', () => {
   let mounted = null;
 
   beforeEach(() => {
-    mounted = mount(<MenuDropdownListItem>foobar</MenuDropdownListItem>);
+    mounted = mount(<MenuItem>foobar</MenuItem>);
   });
 
+  // TODO move this to Menu.spec.js
   it('handles onClick', () => {
     const clickMock = jest.fn();
     mounted.setProps({ onClick: clickMock });

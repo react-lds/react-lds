@@ -3,31 +3,14 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import omit from 'lodash/omit';
 import { getUniqueHash } from '../../utils';
-import { Button, ButtonIcon } from '../../';
 
 const propTypes = {
   /**
    * The button that triggers the dropdown menu
-   * ```
-   * {
-   *    icon: 'settings',
-   *    sprite: 'utility',
-   *    title: 'Click me',
-   *    noBorder: true,
-   * }
-   * ```
    */
-  button: PropTypes.shape({
-    brand: PropTypes.bool,
-    icon: PropTypes.string.isRequired,
-    neutral: PropTypes.bool,
-    noBorder: PropTypes.bool,
-    sprite: PropTypes.string.isRequired,
-    title: PropTypes.string,
-    tooltip: PropTypes.string,
-  }),
+  button: PropTypes.element.isRequired,
   /**
-   * one MenuDropDownList or many of them
+   * should be MenuItems or MenuSubHeaders
    */
   children: PropTypes.node.isRequired,
   /**
@@ -35,16 +18,7 @@ const propTypes = {
    */
   className: PropTypes.string,
   /**
-   * fully customizable dropdown trigger button, use this instead of the button
-   * shape if needed
-   */
-  customButton: PropTypes.element,
-  /**
-   * adds disabled attribute to menu button
-   */
-  disabled: PropTypes.bool,
-  /**
-   * forces open or closed state, is needed when using a custom button
+   * open or closed menu dropdown
    */
   isOpen: PropTypes.bool,
   /**
@@ -64,10 +38,6 @@ const propTypes = {
    * length of the menu box
    */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Callback triggered when the Menu Button is clicked. With custom button put it directly on the button
-   */
-  onMenuClick: PropTypes.func,
   /**
    * sets the number of items being displayed
    */
@@ -111,40 +81,7 @@ const ControlledMenu = (props) => {
     return dropdownClasses;
   };
 
-  const getButton = () => {
-    const { button, customButton, disabled, onMenuClick } = props;
-
-    if (button) {
-      const noBorder = button.noBorder;
-      const title = button.title;
-      const buttonFlavors = [];
-      if (button.brand) { buttonFlavors.push('slds-button_brand'); }
-      if (button.neutral) { buttonFlavors.push('slds-button_neutral'); }
-      if (noBorder && !title) { buttonFlavors.push('slds-button_icon-container'); }
-      if (!noBorder && !title) { buttonFlavors.push('slds-button_icon-border-filled'); }
-      return (
-        <Button
-          aria-haspopup="true"
-          flavor={button.flavor}
-          className={cx(buttonFlavors)}
-          disabled={disabled}
-          onClick={onMenuClick}
-          title={button.title}
-          tooltip={button.tooltip}
-        >
-          <ButtonIcon
-            icon={button.icon}
-            position={title ? 'right' : undefined}
-            sprite={button.sprite}
-          />
-        </Button>
-      );
-    }
-
-    return customButton;
-  };
-
-  const { children, checkbox, isOpen, height, heightIcon } = props;
+  const { children, checkbox, button, isOpen, height, heightIcon } = props;
 
   const renderChildren = () =>
     children.map((child, i) => {
@@ -165,7 +102,7 @@ const ControlledMenu = (props) => {
     if (index) {
       children[index].props.onClick();
     }
-    event.stopPropagation();
+    event.stopPropagation(); // stopPropagation so we can have nested menus
   };
 
   const listClasses = [
@@ -178,7 +115,7 @@ const ControlledMenu = (props) => {
 
   return (
     <div className={cx(getClasses())}>
-      {getButton()}
+      {button}
       {isOpen && <div {...rest} className={cx(getDropdownClasses())}>
         <ul className={cx(listClasses)} role="menu" onClick={handleItemClick}>
           {renderChildren()}
@@ -191,11 +128,8 @@ const ControlledMenu = (props) => {
 ControlledMenu.propTypes = propTypes;
 
 ControlledMenu.defaultProps = {
-  button: null,
   className: null,
-  customButton: null,
   checkbox: false,
-  disabled: false,
   isOpen: false,
   last: false,
   nubbin: false,
