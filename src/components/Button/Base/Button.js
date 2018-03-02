@@ -16,9 +16,11 @@ const Button = (props) => {
     ...rest
   } = props;
 
+  const hasFlavor = flavor != null && flavor !== 'none';
+
   const sldsClasses = cx(
     'slds-button',
-    { [`slds-button_${flavor}`]: !!flavor },
+    { [`slds-button_${flavor}`]: hasFlavor },
     className,
   );
 
@@ -87,9 +89,10 @@ Button.propTypes = {
   className: PropTypes.string,
   /**
    * Can be either `neutral`, `brand`, `destructive`, `success` or `inverse`
-   * Default to `neutral`, set to `null` explicitely to render a plain button
+   * Default to `neutral`, set to "none" or `null` explicitely to render a plain button
    */
   flavor: PropTypes.oneOf([
+    'none',
     'neutral',
     'brand',
     'destructive',

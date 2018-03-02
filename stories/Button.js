@@ -13,6 +13,7 @@ import {
 } from '../src';
 
 const buttonFlavors = [
+  'none',
   'neutral',
   'brand',
   'success',
@@ -39,25 +40,30 @@ buttonStories
     <Button
       icon="download"
       sprite="utility"
-      title={text('Button Text', 'Click Me')}
-    />
+      title={text('Title', 'Hover Me')}
+    >
+      {text('Button Text', 'Click Me')}
+    </Button>
   ))
   .add('Shortcut: With right icon', () => (
     <Button
       icon="download"
       sprite="utility"
       iconPosition="right"
-      title={text('Button Text', 'Click Me')}
-    />
+      title={text('Title', 'Hover Me')}
+    >
+      {text('Button Text', 'Click Me')}
+    </Button>
   ))
   .add('Button: Advanced usage', () => (
-    <Button flavor={null}>
-      <span>Label</span>
+    <Button title="Advanced Button">
+      <span className="slds-text-color_weak">Advanced Button API</span>
       <ButtonIcon
+        className="slds-icon-text-default"
         position="right"
         sprite="utility"
         icon="download"
-        size="small"
+        size="x-small"
       />
     </Button>
   ))
