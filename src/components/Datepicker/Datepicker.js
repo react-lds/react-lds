@@ -6,7 +6,7 @@ import enhanceWithClickOutside from 'react-click-outside';
 import moment from 'moment-timezone';
 import 'moment-range';
 
-import { Button, ButtonIcon, Input } from '../../';
+import { Input, IconButton } from '../../';
 
 const defaultDateFormat = 'l';
 const placeholderDateFormat = 'L';
@@ -414,17 +414,23 @@ export class DatepickerRaw extends Component {
             <div className="slds-datepicker__filter slds-grid">
               <div className="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
                 <div className="slds-align-middle">
-                  <Button flavor={['icon', 'icon-container']} onClick={() => this.onMonthChange(-1)}>
-                    <ButtonIcon position="left" sprite="utility" icon="left" />
-                  </Button>
+                  <IconButton
+                    onClick={() => this.onMonthChange(-1)}
+                    sprite="utility"
+                    icon="left"
+                    container
+                  />
                 </div>
                 <h2 id="month" className="slds-align-middle">
                   {viewedDate.format('MMMM')}
                 </h2>
                 <div className="slds-align-middle">
-                  <Button flavor={['icon', 'icon-container']} onClick={() => this.onMonthChange(1)}>
-                    <ButtonIcon position="right" sprite="utility" icon="right" />
-                  </Button>
+                  <IconButton
+                    onClick={() => this.onMonthChange(1)}
+                    sprite="utility"
+                    icon="right"
+                    container
+                  />
                 </div>
               </div>
               {this.renderYearPicker()}

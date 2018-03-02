@@ -14,12 +14,11 @@ stories
   .addDecorator(ModalDecorator)
   .add('Prompt', () => (
     <Prompt
-      title={text('Title', 'Tis a title')}
-      label={text('Label', 'prompt-heading-id')}
-      buttonText={text('ButtonText', 'Okay')}
-      description={text('Description', 'description text')}
+      id="prompt"
+      title={text('Title', 'Error')}
+      labels={{ close: text('Label', 'Okay') }}
       open={boolean('Open', true)}
-      onClickClose={action('clicked close')}
+      onClose={action('clicked close')}
       theme={select('Theme', [
         '',
         'alt-inverse',

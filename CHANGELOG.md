@@ -1,5 +1,66 @@
 # Changelog
 
+## 5.0.0
+
+This version is compatible with SLDS 2.5.2 aka `Spring'18` 🌸
+
+### Modal
+
+[Storybook Docs](https://propertybase.github.io/react-lds/?selectedKind=Modal&selectedStory=Default)
+
+Modals have been reimplemented to require less code and support keyboard interactions:
+
+* Modals now trap focus when open and can be closed via `esc`-key
+* `Backdrop` has been removed and is now implemented by `Modal`
+* `ModalHeader` has been removed. Setting a `title` or `onClose` function in `Modal` will now render a header automatically
+* `Modal` now requires an `id`. `ModalContent` will be automatically linked for screenreaders
+* `ModalFooter` now will render a `cancel` button automatically when an `onClose` callback is present on `Modal`. You can set the button label via `closeButtonLabel` or hide the button via `hideCloseButton`
+* The `Modal` is assumed to be uncloseable if no `onClose` callback is present. No close buttons will be rendered in this case
+* Modals now support setting the `transitionStyle` that controls animations when opening and closing
+* `Prompt` has been updated to reflect the changes to `Modal`
+
+### Tabs
+
+[Storybook Docs](https://propertybase.github.io/react-lds/?selectedKind=Tabs&selectedStory=Default)
+
+Tabs have been reimplented and now support keyboard interactions:
+
+* Added a `Tabs` component that renders an arbitrary number of `Tab` children. Each `Tab` should have an `id`, `title` and `children`
+* Added a `ControlledTabs` component that does not handle events itself. `ControlledTabs` is the underlying implementation of `Tabs`
+* Invisible tabs now render `null` instead of their `children`. You can change that behavior by setting `renderInvisibleTabs` to `true`
+* The Tab title can be rendered via a `renderTitle` function, allowing icons and other content in the tab links
+* Tabs now handle focus correctly and can be navigated via the `arrow` keys
+
+### Buttons
+
+[Storybook Docs: Button](https://propertybase.github.io/react-lds/?selectedKind=Button&selectedStory=Default) | [Storybook Docs: IconButton](https://propertybase.github.io/react-lds/?selectedKind=IconButton&selectedStory=Default)
+
+Buttons have been reimplemented to have a more consistent and declarative API. New shortcut props and better defaults require less boilerplate code:
+
+* The library now exports `Button` and `IconButton` components. `IconButton` handles buttons that only consist of icons while `Button` handles standard buttons and buttons that render a combination of text and icons. All icon-related flavors have been moved to `IconButton` and have been consolidated in the props `border`, `size`, `container` and `more`. Stories have been added to document correct handling of common use cases
+* `Button` and `IconButton` now support rendering icons via shortcut props. You can render an icon by setting `icon` and `sprite` props on the `Button` or `IconButton`. `Button` also supports setting an `iconPosition` this way
+* Setting `title` will automatically set `Button` text and a `title`-tooltip. If you want to render another piece of text, use `children` to set it
+* `StatefulButton` now exports a `StatefulButtonState` to set `selected`, `not-selected` and `focus` states. Configuration objects have been removed
+* `StatefulIconButton` has been added to handle `IconButton`s with a `selected` prop
+* `CheckboxButton` has been added
+* `ButtonGroup` can now be renders as a `list`
+
+### MediaObject
+
+[Storybook Docs](https://propertybase.github.io/react-lds/?selectedKind=MediaObject&selectedStory=Default)
+
+* Removed `flavor` in favor of `center` and `responsive` props
+
+### Slider
+
+[Storybook Docs](https://propertybase.github.io/react-lds/?selectedKind=Form&selectedStory=Slider)
+
+* `Slider` has been added to support range inputs
+
+### Bugfixes
+
+* _Carousel_: only update `children` if their content changes
+
 ## 4.2.1
 
 * import lodash modules from main package
@@ -19,7 +80,7 @@
 
 ## 4.0.0
 
-This version is compatible with SLDS 2.5.0 aka `Winter '18` ⛄
+This version is compatible with SLDS 2.5.0 aka `Winter'18` ⛄
 
 ### New Components
 

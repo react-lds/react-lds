@@ -36,6 +36,7 @@ describe('<Menu />', () => {
     button.noBorder = true;
     mounted.setProps({ button });
     expect(mounted.find('button').hasClass('slds-button_icon-container')).toBeTruthy();
+    expect(mounted.find('button').hasClass('slds-button_icon-border-filled')).not.toBeTruthy();
   });
 
   it('isOpen state override works', () => {

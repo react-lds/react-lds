@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean, object, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { Button, ButtonIcon, ControlledMenu, Menu, MenuItem, MenuSubHeader } from '../src';
+import { IconButton, ControlledMenu, Menu, MenuItem, MenuSubHeader } from '../src';
 
 const stories = storiesOf('Menu', module);
 
@@ -17,16 +17,13 @@ const button = {
 };
 
 const customButton = (
-  <Button
+  <IconButton
+    icon="warning"
+    sprite="utility"
     onClick={action('custom Button clicked')}
     aria-haspopup="true"
     className="slds-button_icon-border-filled"
-  >
-    <ButtonIcon
-      icon="warning"
-      sprite="utility"
-    />
-  </Button>
+  />
 );
 
 stories

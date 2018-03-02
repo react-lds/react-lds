@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ControlledMenu from './ControlledMenu';
+import cx from 'classnames';
+import enhanceWithClickOutside from 'react-click-outside';
+import omit from 'lodash/omit';
+import { Button, IconButton } from '../../';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {
@@ -90,6 +94,45 @@ class Menu extends Component {
 
   handleClickOutside() {
     this.setState({ open: false });
+  }
+
+  button = () => {
+    const { button, customButton, disabled } = this.props;
+
+    if (customButton) return customButton;
+
+    let buttonFlavor = null;
+
+    if (button.brand) { buttonFlavor = 'brand'; }
+    if (button.neutral) { buttonFlavor = 'neutral'; }
+
+    if (!button.title) {
+      return (
+        <IconButton
+          aria-haspopup="true"
+          icon={button.icon}
+          disabled={disabled}
+          flavor={buttonFlavor}
+          onClick={this.toggle}
+          sprite={button.sprite}
+          border={button.noBorder ? null : 'filled'}
+          container={button.noBorder}
+          title={button.tooltip}
+        />
+      );
+    }
+
+    return (
+      <Button
+        aria-haspopup="true"
+        flavor={buttonFlavor}
+        icon={button.icon}
+        iconPosition="right"
+        sprite={button.sprite}
+        onClick={this.toggle}
+        title={button.title}
+      />
+    );
   }
 
   render() {
