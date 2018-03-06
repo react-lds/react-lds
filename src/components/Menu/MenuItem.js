@@ -61,8 +61,8 @@ const MenuItem = (props) => {
 
   return (
     <li {...rest} className={cx(sldsClasses)} role="presentation">
-      <a role={role} aria-checked={selected} id={id}>
-        <span className="slds-truncate" title={children} id={id}>
+      <a role={role} aria-checked={selected} id={`a_${id}`}>
+        <span className="slds-truncate" title={children} id={`span_${id}`}>
           {leftIconElem()}
           {children}
         </span>
@@ -111,7 +111,7 @@ MenuItem.propTypes = {
   /**
    * id should be set by parent element
    */
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
 };
 
 MenuItem.defaultProps = {
@@ -121,6 +121,7 @@ MenuItem.defaultProps = {
   onClick: () => {},
   rightIcon: null,
   selected: null,
+  id: null,
 };
 
 export default MenuItem;

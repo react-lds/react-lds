@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import omit from 'lodash/omit';
 import ControlledMenu from './ControlledMenu';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
@@ -45,7 +46,6 @@ class Menu extends Component {
   static defaultProps = {
     button: null,
     className: null,
-    customButton: null,
     defaultOpen: false,
     last: false,
     nubbin: false,
@@ -73,13 +73,12 @@ class Menu extends Component {
 
   render() {
     const { open } = this.state;
-
+    const rest = omit(this.props, ['button', 'defaultOpen']);
     return (
       <ControlledMenu
-        {...this.props}
+        {...rest}
         button={this.getButton()}
         isOpen={open}
-        onMenuClick={this.toggle}
       />
     );
   }
