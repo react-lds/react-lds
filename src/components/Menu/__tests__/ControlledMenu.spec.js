@@ -1,92 +1,72 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from 'enzyme';
 
-import { IconButton, Menu, MenuItem } from '../';
+import ControlledMenu from '../ControlledMenu';
+import MenuItem from '../MenuItem';
 
-describe('<Menu />', () => {
-  let mounted = null;
-  let props = {};
-  let button;
+const mockFn = jest.fn();
 
-  beforeEach(() => {
-    button = {
-      icon: 'unicorn',
-      sprite: 'utility',
-    };
+const getComponent = (props = {}) => render(
+  <ControlledMenu button={<div className="fakeButton">fakebutton</div>} {...props}>
+    <MenuItem onClick={mockFn}>testststst</MenuItem>
+  </ControlledMenu>
+);
 
-    props = {
-      button,
-    };
-
-    mounted = mount(<Menu {...props}><MenuItem>foo</MenuItem></Menu>);
+describe('<ControlledMenu />', () => {
+  it('renders correct markup and classes', () => {
+    const mounted = getComponent();
+    expect(mounted.find('div.slds-dropdown-trigger.slds-dropdown-trigger_click').length).toBe(1);
+    expect(mounted.find('div.fakeButton').length).toBe(1);
   });
 
-  it('is closed by default and opens when the button was clicked', () => {
-    const menu = mounted.find('div').first();
-    expect(menu.hasClass('slds-is-open')).toBeFalsy();
-    menu.find('button').simulate('click');
-    expect(menu.hasClass('slds-is-open')).toBeTruthy();
-  });
-
-  it('renders buttons with border per default', () => {
-    expect(mounted.find('button').hasClass('slds-button_icon-border-filled')).toBeTruthy();
-  });
-
-  it('renders no border when noBorder button prop was set', () => {
-    button.noBorder = true;
-    mounted.setProps({ button });
-    expect(mounted.find('button').hasClass('slds-button_icon-container')).toBeTruthy();
-  });
-
-  it('isOpen state override works', () => {
-    mounted.setProps({ isOpen: true });
-    expect(mounted.find('div').first().hasClass('is-open'));
-  });
-
-  it('customButtom is used when provided', () => {
-    const customButton = <div>im a button!</div>;
-    mounted.setProps({ button: undefined, customButton });
-    expect(mounted.contains(customButton)).toBeTruthy();
+  it('renders as open when isOpen is set, otherwise it does not render the dropdown', () => {
+    let mounted = getComponent();
+    expect(mounted.find('div.slds-dropdown').length).toBe(0);
+    mounted = getComponent({ isOpen: true });
+    expect(mounted.find('div.slds-is-open').length).toBe(1);
+    expect(mounted.find('div.slds-dropdown').length).toBe(1);
+    expect(mounted.find('div > ul > li.slds-dropdown__item').length).toBe(1);
   });
 
   it('uses size class', () => {
-    mounted.setProps({ size: 'small' });
-    expect(mounted.find('div').last().hasClass('slds-dropdown_small')).toBeTruthy();
+    let mounted = getComponent({ isOpen: true });
+    expect(mounted.find('div.slds-dropdown_small').length).toBe(1);
+    mounted = getComponent({ isOpen: true, size: 'medium' });
+    expect(mounted.find('div.slds-dropdown_small').length).toBe(0);
+    expect(mounted.find('div.slds-dropdown_medium').length).toBe(1);
   });
 
-  it('uses left class', () => {
-    mounted.setProps({ position: 'top-left' });
-    expect(mounted.find('div').last().hasClass('slds-dropdown_left')).toBeTruthy();
-  });
-
-  it('uses right class', () => {
-    mounted.setProps({ position: 'top-right' });
-    expect(mounted.find('div').last().hasClass('slds-dropdown_right')).toBeTruthy();
-  });
-
-  it('uses bottom class', () => {
-    mounted.setProps({ position: 'bottom-right' });
-    expect(mounted.find('div').last().hasClass('slds-dropdown_bottom')).toBeTruthy();
+  it('uses position classes', () => {
+    let mounted = getComponent({ isOpen: true, position: 'top-left' });
+    expect(mounted.find('div.slds-dropdown_left').length).toBe(1);
+    mounted = getComponent({ isOpen: true, position: 'bottom' });
+    expect(mounted.find('div.slds-dropdown_bottom').length).toBe(1);
   });
 
   it('uses nubbin class', () => {
-    mounted.setProps({ position: 'bottom-right', nubbin: true });
-    expect(mounted.find('div').last().hasClass('slds-nubbin_bottom-right')).toBeTruthy();
+    let mounted = getComponent({ nubbin: true, isOpen: true });
+    expect(mounted.find('div.slds-nubbin_top-left').length).toBe(1);
+    mounted = getComponent({ isOpen: true, nubbin: true, position: 'bottom' });
+    expect(mounted.find('div.slds-nubbin_bottom').length).toBe(1);
   });
 
-  it('adds optional height class', () => {
-    mounted.setProps({ height: 5 });
-    expect(mounted.find('ul').hasClass('slds-dropdown_length-5')).toBeTruthy();
-  });
-
-  it('adds optional heightIcon class', () => {
-    mounted.setProps({ heightIcon: 5 });
-    expect(mounted.find('ul').hasClass('slds-dropdown_length-with-icon-5')).toBeTruthy();
+  it('renders closed dropdown only renderClosedDropdown is true', () => {
+    let mounted = getComponent();
+    expect(mounted.find('slds-dropdown').length).toBe(0);
+    mounted = getComponent({ renderClosedDropdown: true });
+    expect(mounted.find('.slds-dropdown').length).toBe(1);
   });
 
   it('applies className and rest-properties', () => {
-    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
-    expect(mounted.find('.slds-dropdown').hasClass('foo')).toBeTruthy();
-    expect(mounted.find('.slds-dropdown').prop('data-test')).toEqual('bar');
+    const mounted = getComponent({ className: 'foo', 'data-test': 'bar', renderClosedDropdown: true });
+    expect(mounted.find('.slds-dropdown').first().hasClass('foo')).toBeTruthy();
+    expect(mounted.find('.slds-dropdown-trigger').prop('data-test')).toEqual('bar');
   });
+  /* TODO
+  it('calls the appropriate function when an item is clicked', () => {
+    const mounted = getComponent();
+    mounted.find('li').last().simulate('click');
+    expect(mockFn).toHaveBeenCalled();
+  });
+  */
 });
