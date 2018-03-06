@@ -135,6 +135,7 @@ class ControlledMenu extends Component {
           selected: checkbox ? child.props.selected === true : null,
           key: id,
           id: `${id}_${index}`,
+          onClick: null,
         }
       );
     });
