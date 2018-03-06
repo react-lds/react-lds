@@ -120,7 +120,6 @@ class ControlledMenu extends Component {
 
   renderChildren = () => {
     const { children, checkbox } = this.props;
-    if (!children) return null;
     return React.Children.map(children, (child, index) => {
       const id = getUniqueHash('item', index);
 
@@ -131,9 +130,9 @@ class ControlledMenu extends Component {
       }
       return React.cloneElement(
         child, {
+          // if checkbox is true then
+          // childs selected prop becomes false if it was null, stays true if it was true
           selected: checkbox ? child.props.selected === true : null,
-          // with this we set the selected prop to true or false (no undef or null)
-          // so that the child becomes a menuitemcheckbox (not menuitem)
           key: id,
           id: `${id}_${index}`,
         }
