@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import ObjectHome from '../ObjectHome';
+import MenuItem from '../../Menu/MenuItem';
 
 describe('<ObjectHome />', () => {
   let mounted;
@@ -10,7 +11,7 @@ describe('<ObjectHome />', () => {
     mounted = mount(
       <ObjectHome
         title="foo"
-        titleMenu="test123"
+        titleMenu={<MenuItem>test123</MenuItem>}
         recordType="unicornz"
         info="yeah"
         topButtons="button098"
@@ -32,7 +33,9 @@ describe('<ObjectHome />', () => {
   });
 
   it('contains the titleMenu', () => {
-    expect(mounted.find('div.slds-dropdown-trigger').first().text()).toEqual('test123');
+    const headline = mounted.find('h1').first();
+    headline.simulate('click');
+    expect(mounted.find('.slds-dropdown').exists()).toBeTruthy();
   });
 
   it('contains the recordType', () => {

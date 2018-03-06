@@ -8,8 +8,7 @@ import {
   IconButton,
   PageHeaderBase,
   RecordHome,
-  MenuDropdownList,
-  MenuDropdownListItem,
+  MenuItem,
   ObjectHomeRaw as ObjectHome
 } from '../src';
 
@@ -24,14 +23,12 @@ const headerButtons = ([
   </ButtonGroup>,
 ]);
 
-const titleMenu = (
-  <MenuDropdownList>
-    <MenuDropdownListItem>Item 1</MenuDropdownListItem>
-    <MenuDropdownListItem>Item 2</MenuDropdownListItem>
-    <MenuDropdownListItem>Item 3</MenuDropdownListItem>
-    <MenuDropdownListItem divider>Important last item</MenuDropdownListItem>
-  </MenuDropdownList>
-);
+const titleMenu = [
+  <MenuItem>Item 1</MenuItem>,
+  <MenuItem>Item 2</MenuItem>,
+  <MenuItem>Item 3</MenuItem>,
+  <MenuItem divider>Important last item</MenuItem>,
+];
 
 const topButtons = (
   <ButtonGroup>
