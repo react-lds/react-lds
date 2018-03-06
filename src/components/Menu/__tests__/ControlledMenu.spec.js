@@ -62,7 +62,10 @@ describe('<ControlledMenu />', () => {
     expect(mounted.find('.slds-dropdown').first().hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-dropdown-trigger').prop('data-test')).toEqual('bar');
   });
-  /* TODO
+
+  // Enzymes simulate() only calls the function in onClick-prop,
+  // but can't simulate event bubbling, so this doesn't work for now.
+  /*
   it('calls the appropriate function when an item is clicked', () => {
     const mounted = getComponent();
     mounted.find('li').last().simulate('click');
