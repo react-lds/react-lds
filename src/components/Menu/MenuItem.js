@@ -7,9 +7,11 @@ const MenuItem = (props) => {
   const {
     children,
     className,
+    dataValue,
     divider,
     id,
     leftIcon,
+    onClick,
     rightIcon,
     selected,
     ...rest
@@ -72,17 +74,18 @@ const MenuItem = (props) => {
     <li
       className={cx(sldsClasses)}
       role="presentation"
+      onClick={onClick}
       {...rest}
     >
       <a
         aria-checked={selected}
         role={role}
-        id={`a_${id}`}
+        data-value={dataValue}
       >
         <span
           className="slds-truncate"
           title={children}
-          id={`span_${id}`}
+          data-value={dataValue}
         >
           {leftIconElem()}
           {children}
@@ -103,6 +106,10 @@ MenuItem.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * dataValue is required when using onSelect on parent
+   */
+  dataValue: PropTypes.string,
+  /**
    * set to true if a divider should appear above this list item
    */
   divider: PropTypes.bool,
@@ -115,7 +122,7 @@ MenuItem.propTypes = {
     alwaysDisplay: PropTypes.bool,
   }),
   /**
-   * onClick handler
+   * optional onClick handler
    */
   onClick: PropTypes.func,
   /**
@@ -137,6 +144,7 @@ MenuItem.propTypes = {
 
 MenuItem.defaultProps = {
   className: null,
+  dataValue: null,
   divider: false,
   leftIcon: null,
   onClick: () => {},

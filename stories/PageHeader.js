@@ -24,10 +24,10 @@ const headerButtons = ([
 ]);
 
 const titleMenu = [
-  <MenuItem>Item 1</MenuItem>,
-  <MenuItem>Item 2</MenuItem>,
-  <MenuItem>Item 3</MenuItem>,
-  <MenuItem divider>Important last item</MenuItem>,
+  <MenuItem key="01">Item 1</MenuItem>,
+  <MenuItem key="02">Item 2</MenuItem>,
+  <MenuItem key="03">Item 3</MenuItem>,
+  <MenuItem key="04" divider>Important last item</MenuItem>,
 ];
 
 const topButtons = (

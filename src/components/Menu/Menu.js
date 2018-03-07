@@ -10,6 +10,10 @@ const propTypes = {
    */
   button: PropTypes.element.isRequired,
   /**
+   * make true if menuitems should be menuitemcheckboxes
+   */
+  checkbox: PropTypes.bool,
+  /**
    * should be MenuItems or MenuSubHeaders
    */
   children: PropTypes.node.isRequired,
@@ -22,6 +26,14 @@ const propTypes = {
    */
   defaultOpen: PropTypes.bool,
   /**
+   * sets the number of items being displayed
+   */
+  height: PropTypes.oneOf([5, 7, 10]),
+  /**
+   * use this instead of height if an leftIcon is on every item
+   */
+  heightIcon: PropTypes.oneOf([5, 7, 10]),
+  /**
    * indicates that this is the last element inside a button group and renders
    * the required css class
    */
@@ -30,6 +42,10 @@ const propTypes = {
    * displays the nubbin at the correct position if true, hidden per default
    */
   nubbin: PropTypes.bool,
+  /*
+   * use onSelect instead of onClick on the MenuItems if you want reduce the number of event listeners
+   */
+  onSelect: PropTypes.func,
   /**
    * position relative to the menu button
    */
@@ -45,10 +61,14 @@ class Menu extends Component {
 
   static defaultProps = {
     button: null,
+    checkbox: false,
     className: null,
     defaultOpen: false,
+    height: null,
+    heightIcon: null,
     last: false,
     nubbin: false,
+    onSelect: null,
     position: 'top-left',
     size: 'small',
   }

@@ -11,6 +11,10 @@ const propTypes = {
    */
   button: PropTypes.element.isRequired,
   /**
+   * make true if menuitems should be menuitemcheckboxes
+   */
+  checkbox: PropTypes.bool,
+  /**
    * should be MenuItems or MenuSubHeaders
    */
   children: PropTypes.node.isRequired,
@@ -18,6 +22,14 @@ const propTypes = {
    * class name
    */
   className: PropTypes.string,
+  /**
+   * sets the number of items being displayed
+   */
+  height: PropTypes.oneOf([5, 7, 10]),
+  /**
+   * use this instead of height if an leftIcon is on every item
+   */
+  heightIcon: PropTypes.oneOf([5, 7, 10]),
   /**
    * open or closed menu dropdown
    */
@@ -31,30 +43,22 @@ const propTypes = {
    * displays the nubbin at the correct position if true, hidden per default
    */
   nubbin: PropTypes.bool,
+  /*
+   * use onSelect instead of onClick on the MenuItems if you want reduce the number of event listeners
+   */
+  onSelect: PropTypes.func,
   /**
    * position relative to the menu button
    */
   position: PropTypes.oneOf(['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right']),
   /**
-   * length of the menu box
-   */
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * sets the number of items being displayed
-   */
-  height: PropTypes.oneOf([5, 7, 10]),
-  /**
-   * use this instead of height if an leftIcon is on every item
-   */
-  heightIcon: PropTypes.oneOf([5, 7, 10]),
-  /**
-   * make true if menuitems should be menuitemcheckboxes
-   */
-  checkbox: PropTypes.bool,
-  /**
    * render the dropdown even when it is closed
    */
   renderClosedDropdown: PropTypes.bool,
+  /**
+   * length of the menu box
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
 };
 
 class ControlledMenu extends Component {
@@ -63,14 +67,15 @@ class ControlledMenu extends Component {
   static defaultProps = {
     className: null,
     checkbox: false,
+    height: null,
+    heightIcon: null,
     isOpen: false,
     last: false,
     nubbin: false,
+    onSelect: null,
     position: 'top-left',
-    size: 'small',
-    height: null,
-    heightIcon: null,
     renderClosedDropdown: false,
+    size: 'small',
   };
 
   getClasses = () => {
@@ -109,13 +114,12 @@ class ControlledMenu extends Component {
   };
 
   handleItemClick = (event) => {
-    /* TODO NO SURE IF GOOD WAY TO DO IT */
-    const { children } = this.props;
-    const index = event.target.id.split('_')[2];
-    if (index && (index < React.Children.count(children))) {
-      React.Children.toArray(children)[index].props.onClick();
+    const { onSelect } = this.props;
+    const dataValue = event.target.dataset.value;
+    if (dataValue) {
+      onSelect(dataValue, event);
+      event.stopPropagation(); // stopPropagation so we can have nested menus
     }
-    event.stopPropagation(); // stopPropagation so we can have nested menus
   };
 
   renderChildren = () => {
@@ -134,8 +138,6 @@ class ControlledMenu extends Component {
           // childs selected prop becomes false if it was null, stays true if it was true
           selected: checkbox ? child.props.selected === true : null,
           key: id,
-          id: `${id}_${index}`,
-          onClick: null,
         }
       );
     });
@@ -147,7 +149,8 @@ class ControlledMenu extends Component {
       height,
       heightIcon,
       isOpen,
-      renderClosedDropdown
+      renderClosedDropdown,
+      onSelect,
     } = this.props;
 
     const listClasses = [
@@ -162,7 +165,7 @@ class ControlledMenu extends Component {
       <div className={cx(this.getClasses())} {...rest}>
         {button}
         {(isOpen || renderClosedDropdown) && <div className={cx(this.getDropdownClasses())}>
-          <ul className={cx(listClasses)} role="menu" onClick={this.handleItemClick}>
+          <ul className={cx(listClasses)} role="menu" onClick={onSelect ? this.handleItemClick : null}>
             {this.renderChildren()}
           </ul>
         </div>}
