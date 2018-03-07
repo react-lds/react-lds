@@ -4,7 +4,16 @@ import cx from 'classnames';
 import { IconSVG } from '../../';
 
 const MenuItem = (props) => {
-  const { children, className, onClick, selected, leftIcon, rightIcon, divider, id, ...rest } = props;
+  const {
+    children,
+    className,
+    divider,
+    id,
+    leftIcon,
+    rightIcon,
+    selected,
+    ...rest
+  } = props;
 
   const leftIconElem = () => {
     if (leftIcon) {
@@ -60,9 +69,21 @@ const MenuItem = (props) => {
   // if selected true or false, it's a menuitemcheckbox, else it's a menuitem
 
   return (
-    <li {...rest} className={cx(sldsClasses)} role="presentation">
-      <a role={role} aria-checked={selected} id={`a_${id}`}>
-        <span className="slds-truncate" title={children} id={`span_${id}`}>
+    <li
+      className={cx(sldsClasses)}
+      role="presentation"
+      {...rest}
+    >
+      <a
+        aria-checked={selected}
+        role={role}
+        id={`a_${id}`}
+      >
+        <span
+          className="slds-truncate"
+          title={children}
+          id={`span_${id}`}
+        >
           {leftIconElem()}
           {children}
         </span>

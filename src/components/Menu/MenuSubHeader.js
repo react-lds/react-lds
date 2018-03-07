@@ -11,7 +11,12 @@ const MenuSubHeader = (props) => {
     className,
   ];
   return (
-    <li className={cx(sldsClasses)} title={children} role="separator" {...rest}>
+    <li
+      className={cx(sldsClasses)}
+      title={children}
+      role="separator"
+      {...rest}
+    >
       <span className="slds-text-title_caps">{children}</span>
     </li>
   );
