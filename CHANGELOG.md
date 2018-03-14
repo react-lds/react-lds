@@ -2,6 +2,7 @@
 
 ## Unreleased
  * _Menu_: **Breaking** `Menu` and `ControlledMenu` take `MenuItem` and `MenuSubHeader` as children. `Button` *must* be passed as prop. 
+ * `Picklist` default size is now full-width, was `small`
 
 ## 5.0.0
 
