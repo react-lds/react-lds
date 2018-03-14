@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* `Picklist` default size is now full-width, was `small`
+
 ## 5.0.0
 
 This version is compatible with SLDS 2.5.2 aka `Spring'18` 🌸
