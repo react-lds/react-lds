@@ -116,7 +116,7 @@ stories
       labelMultiselect={text('MultiSelect', '*multiselect label*')}
       onSelect={action('selected')}
       placeholder={text('Placeholder', 'Tis a placeholder')}
-      size={select('Size', ['small', 'medium', 'large'], 'text')}
+      size={select('Size', ['', 'small', 'medium', 'large'], '') || undefined}
     />
   ))
   .add('Checkbox', () => (

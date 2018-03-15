@@ -209,7 +209,7 @@ PicklistRaw.defaultProps = {
   items: [],
   labelInput: '',
   labelMultiselect: '',
-  size: 'small',
+  size: null,
 };
 
 export default enhanceWithClickOutside(PicklistRaw);
