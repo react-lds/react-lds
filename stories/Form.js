@@ -95,6 +95,7 @@ stories
   ))
   .add('Picklist', () => (
     <Picklist
+      closeOnSelect={boolean('Close on select', false)}
       error={text('Error', '') || undefined}
       height={number('Height', 0) || undefined}
       id="picklist-1"

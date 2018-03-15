@@ -16,6 +16,14 @@ export class PicklistRaw extends Component {
     this.state = { isOpen: false };
   }
 
+  onSelect(key) {
+    const { closeOnSelect, onSelect } = this.props;
+
+    onSelect(key);
+
+    if (closeOnSelect) this.setState({ isOpen: false });
+  }
+
   toggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
   }
@@ -67,10 +75,10 @@ export class PicklistRaw extends Component {
   };
 
   renderPicklistItems() {
-    const { onSelect, items } = this.props;
+    const { items } = this.props;
 
     return items.map((item) => {
-      const boundClick = () => onSelect(item.key);
+      const boundClick = () => this.onSelect(item.key);
 
       return (
         <PicklistDropdownListItem
@@ -127,6 +135,10 @@ PicklistRaw.propTypes = {
    * class name
    */
   className: PropTypes.string,
+  /**
+   * close the picklist when selecting an item
+   */
+  closeOnSelect: PropTypes.bool,
   /**
    * sets the number of items being displayed
    */
@@ -188,6 +200,7 @@ PicklistRaw.propTypes = {
 
 PicklistRaw.defaultProps = {
   className: null,
+  closeOnSelect: false,
   error: null,
   height: null,
   isDisabled: false,
