@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { select, text } from '@storybook/addon-knobs';
-import { Icon } from '../src';
+import { Icon, ScoreIcon} from '../src';
 import { getSizes } from './utils/helpers';
 
 const stories = storiesOf('Icon', module);
@@ -49,4 +49,12 @@ stories
       svgClassName={select('SVG Class Name', svgIconTextSelect, 'slds-icon-text-default')}
       title={text('Icon Title')}
     />
+  ))
+  .add('Dynamic Icons: Score', () => (
+    <ScoreIcon
+      className="slds-m-right_small"
+      title={text('Title attribute', 'Hover me')}
+      score={select('Score', ['positive', 'negative'], 'positive')}
+    />
   ));
+
