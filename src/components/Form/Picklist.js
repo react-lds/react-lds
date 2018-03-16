@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
+import { memoize } from 'lodash';
 
 import {
   PicklistDropdown,
@@ -23,6 +24,8 @@ export class PicklistRaw extends Component {
 
     if (closeOnSelect) this.setState({ isOpen: false });
   }
+
+  getSelectHandler = itemKey => memoize(() => this.onSelect(itemKey));
 
   toggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
@@ -77,22 +80,18 @@ export class PicklistRaw extends Component {
   renderPicklistItems() {
     const { items } = this.props;
 
-    return items.map((item) => {
-      const boundClick = () => this.onSelect(item.key);
-
-      return (
-        <PicklistDropdownListItem
-          icon={{ icon: 'check', sprite: 'utility' }}
-          id={`listbox-option-${item.key}`}
-          isHeader={item.isHeader}
-          key={item.key}
-          onClick={boundClick}
-          selected={item.selected}
-        >
-          {item.label}
-        </PicklistDropdownListItem>
-      );
-    });
+    return items.map(({ isHeader, key, label, selected }) => (
+      <PicklistDropdownListItem
+        icon={{ icon: 'check', sprite: 'utility' }}
+        id={`listbox-option-${key}`}
+        isHeader={isHeader}
+        key={key}
+        onClick={this.getSelectHandler(key)}
+        selected={selected}
+      >
+        {label}
+      </PicklistDropdownListItem>
+    ));
   }
 
   render() {
