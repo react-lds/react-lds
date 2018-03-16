@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
-import { memoize } from 'lodash';
+import memoize from 'lodash/memoize';
 
 import {
   PicklistDropdown,
