@@ -112,4 +112,13 @@ stories
       info={text('Info', '10 items • sorted by name')}
       bottomButtons={bottomButtons}
     />
+  ))
+  .add('ObjectHome without menu', () => (
+    <ObjectHome
+      title={text('Title', 'My Leads')}
+      recordType={text('RecordType', 'Leads')}
+      topButtons={topButtons}
+      info={text('Info', '10 items • sorted by name')}
+      bottomButtons={bottomButtons}
+    />
   ));

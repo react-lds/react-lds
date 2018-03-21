@@ -70,31 +70,38 @@ export class ObjectHomeRaw extends Component {
       className,
     ];
 
+    const titleClasses = [
+      { 'slds-type-focus': !!titleMenu },
+      'slds-no-space'
+    ];
+
     return (
       <div {...rest} className={cx(sldsClasses)} role="banner">
         <Grid>
           <Column className="slds-has-flexi-truncate">
             <p className="slds-text-title_caps">{recordType}</p>
             <Grid>
-              <Grid className="slds-type-focus slds-no-space">
+              <Grid className={cx(titleClasses)}>
                 <h1
-                  onClick={this.toggleMenu}
+                  onClick={titleMenu && this.openMenu}
                   className="slds-page-header__title slds-truncate"
                   title={title}
                 >
                   {title}
                 </h1>
-                <ControlledMenu
-                  button={<IconButton
-                    container
-                    icon="down"
-                    sprite="utility"
-                    onClick={this.toggleMenu}
-                  />}
-                  isOpen={this.state.menuIsOpen}
-                >
-                  {titleMenu}
-                </ControlledMenu>
+                {titleMenu && (
+                  <ControlledMenu
+                    button={<IconButton
+                      container
+                      icon="down"
+                      sprite="utility"
+                      onClick={this.toggleMenu}
+                    />}
+                    isOpen={this.state.menuIsOpen}
+                  >
+                    {titleMenu}
+                  </ControlledMenu>
+                )}
               </Grid>
             </Grid>
           </Column>
