@@ -38,7 +38,7 @@ describe('<MenuItem />', () => {
       rightIcon: icon,
     });
 
-    expect(mounted.find('li > a > span svg').length).toBe(1);
+    expect(mounted.find('li > a > span svg').exists()).toBeTruthy();
     expect(mounted.find('li > a svg').length).toBe(2);
   });
 

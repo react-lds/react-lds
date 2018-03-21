@@ -11,7 +11,7 @@ const propTypes = {
    */
   button: PropTypes.element.isRequired,
   /**
-   * make true if menuitems should be menuitemcheckboxes
+   * set to true if menuitems should be menuitemcheckboxes
    */
   checkbox: PropTypes.bool,
   /**
@@ -23,11 +23,11 @@ const propTypes = {
    */
   className: PropTypes.string,
   /**
-   * sets the number of items being displayed
+   * sets the number of items being displayed. 5, 7, or 10
    */
   height: PropTypes.oneOf([5, 7, 10]),
   /**
-   * use this instead of height if an leftIcon is on every item
+   * use this instead of height if an leftIcon is on every item. 5, 7, or 10
    */
   heightIcon: PropTypes.oneOf([5, 7, 10]),
   /**
@@ -43,7 +43,7 @@ const propTypes = {
    * displays the nubbin at the correct position if true, hidden per default
    */
   nubbin: PropTypes.bool,
-  /*
+  /**
    * use onSelect instead of onClick on the MenuItems if you want reduce the number of event listeners
    */
   onSelect: PropTypes.func,
@@ -56,7 +56,7 @@ const propTypes = {
    */
   renderClosedDropdown: PropTypes.bool,
   /**
-   * length of the menu box
+   * length of the menu box. 'small', 'medium', or 'large'
    */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
 };
@@ -78,27 +78,55 @@ class ControlledMenu extends Component {
     size: 'small',
   };
 
-  getClasses = () => {
-    const { isOpen, last } = this.props;
+  handleItemClick = (event) => {
+    const { onSelect } = this.props;
+    const { value } = event.target.dataset;
+    if (value) {
+      onSelect(value, event);
+      event.stopPropagation(); // stopPropagation so we can have nested menus
+    }
+  };
 
-    const classes = [
+  renderChildren = () => {
+    const { children, checkbox } = this.props;
+    return React.Children.map(children, (child, index) => {
+      const id = getUniqueHash('item', index);
+
+      if (child.type !== MenuItem) {
+        return React.cloneElement(child, {
+          key: id
+        });
+      }
+      return React.cloneElement(
+        child, {
+          selected: checkbox ? child.props.selected === true : null,
+          key: id,
+        }
+      );
+    });
+  };
+
+  render() {
+    const {
+      button,
+      className,
+      height,
+      heightIcon,
+      isOpen,
+      last,
+      nubbin,
+      onSelect,
+      position,
+      renderClosedDropdown,
+      size,
+    } = this.props;
+
+    const wrapperClasses = [
       'slds-dropdown-trigger',
       'slds-dropdown-trigger_click',
       { 'slds-button_last': last },
+      { 'slds-is-open': isOpen },
     ];
-    if (!isOpen) {
-      return classes;
-    }
-    return [...classes, 'slds-is-open'];
-  };
-
-  getDropdownClasses = () => {
-    const {
-      size,
-      position,
-      className,
-      nubbin
-    } = this.props;
 
     const dropdownClasses = [
       'slds-dropdown',
@@ -110,49 +138,6 @@ class ControlledMenu extends Component {
       className,
     ];
 
-    return dropdownClasses;
-  };
-
-  handleItemClick = (event) => {
-    const { onSelect } = this.props;
-    const dataValue = event.target.dataset.value;
-    if (dataValue) {
-      onSelect(dataValue, event);
-      event.stopPropagation(); // stopPropagation so we can have nested menus
-    }
-  };
-
-  renderChildren = () => {
-    const { children, checkbox } = this.props;
-    return React.Children.map(children, (child, index) => {
-      const id = getUniqueHash('item', index);
-
-      if (child.type !== MenuItem) {
-        return React.cloneElement(
-          child, { key: id }
-        );
-      }
-      return React.cloneElement(
-        child, {
-          // if checkbox is true then
-          // childs selected prop becomes false if it was null, stays true if it was true
-          selected: checkbox ? child.props.selected === true : null,
-          key: id,
-        }
-      );
-    });
-  };
-
-  render() {
-    const {
-      button,
-      height,
-      heightIcon,
-      isOpen,
-      renderClosedDropdown,
-      onSelect,
-    } = this.props;
-
     const listClasses = [
       { [`slds-dropdown_length-${height}`]: height },
       { [`slds-dropdown_length-with-icon-${heightIcon}`]: heightIcon },
@@ -162,9 +147,9 @@ class ControlledMenu extends Component {
     const rest = omit(this.props, Object.keys(propTypes));
 
     return (
-      <div className={cx(this.getClasses())} {...rest}>
+      <div className={cx(wrapperClasses)} {...rest}>
         {button}
-        {(isOpen || renderClosedDropdown) && <div className={cx(this.getDropdownClasses())}>
+        {(isOpen || renderClosedDropdown) && <div className={cx(dropdownClasses)}>
           <ul className={cx(listClasses)} role="menu" onClick={onSelect ? this.handleItemClick : null}>
             {this.renderChildren()}
           </ul>

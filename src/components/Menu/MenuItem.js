@@ -11,7 +11,6 @@ const MenuItem = (props) => {
     divider,
     id,
     leftIcon,
-    onClick,
     rightIcon,
     selected,
     ...rest
@@ -74,7 +73,6 @@ const MenuItem = (props) => {
     <li
       className={cx(sldsClasses)}
       role="presentation"
-      onClick={onClick}
       {...rest}
     >
       <a
@@ -122,10 +120,6 @@ MenuItem.propTypes = {
     alwaysDisplay: PropTypes.bool,
   }),
   /**
-   * optional onClick handler
-   */
-  onClick: PropTypes.func,
-  /**
    * right icon that is always shown
    */
   rightIcon: PropTypes.shape({
@@ -147,7 +141,6 @@ MenuItem.defaultProps = {
   dataValue: null,
   divider: false,
   leftIcon: null,
-  onClick: () => {},
   rightIcon: null,
   selected: null,
   id: null,
