@@ -83,7 +83,7 @@ export class ObjectHomeRaw extends Component {
             <Grid>
               <Grid className={cx(titleClasses)}>
                 <h1
-                  onClick={titleMenu && this.openMenu}
+                  onClick={titleMenu && this.toggleMenu}
                   className="slds-page-header__title slds-truncate"
                   title={title}
                 >
