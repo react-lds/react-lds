@@ -3,6 +3,45 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { IconSVG } from '../../';
 
+/* eslint-disable react/prop-types */
+const leftIconElem = ({ alwaysDisplay, sprite, icon }) => {
+  const iconClasses = [
+    { 'slds-icon_selected': !alwaysDisplay },
+    { 'slds-icon-text-default': !alwaysDisplay },
+    { 'slds-m-right_x-small': !alwaysDisplay },
+    { 'slds-m-right_small': alwaysDisplay },
+    { 'slds-icon': alwaysDisplay },
+  ];
+
+  return (
+    <IconSVG
+      className={cx(iconClasses)}
+      icon={icon}
+      size={alwaysDisplay ? 'small' : 'x-small'}
+      sprite={sprite}
+    />
+  );
+};
+
+const rightIconElem = ({ icon, sprite }) => {
+  const iconClasses = [
+    'slds-icon-selected',
+    'slds-icon-text-default',
+    'slds-m-left_small',
+    'slds-shrink-none',
+  ];
+
+  return (
+    <IconSVG
+      className={cx(iconClasses)}
+      icon={icon}
+      size="x-small"
+      sprite={sprite}
+    />
+  );
+};
+/* eslint-enable */
+
 const MenuItem = (props) => {
   const {
     children,
@@ -15,49 +54,6 @@ const MenuItem = (props) => {
     selected,
     ...rest
   } = props;
-
-  const leftIconElem = () => {
-    if (leftIcon) {
-      const iconClasses = [
-        { 'slds-icon_selected': !leftIcon.alwaysDisplay },
-        { 'slds-icon-text-default': !leftIcon.alwaysDisplay },
-        { 'slds-m-right_x-small': !leftIcon.alwaysDisplay },
-        { 'slds-m-right_small': leftIcon.alwaysDisplay },
-        { 'slds-icon': leftIcon.alwaysDisplay },
-      ];
-
-      return (
-        <IconSVG
-          className={cx(iconClasses)}
-          icon={leftIcon.icon}
-          size={leftIcon.alwaysDisplay ? 'small' : 'x-small'}
-          sprite={leftIcon.sprite}
-        />);
-    }
-
-    return null;
-  };
-
-  const rightIconElem = () => {
-    if (rightIcon) {
-      const iconClasses = [
-        'slds-icon-selected',
-        'slds-icon-text-default',
-        'slds-m-left_small',
-        'slds-shrink-none',
-      ];
-
-      return (
-        <IconSVG
-          className={cx(iconClasses)}
-          icon={rightIcon.icon}
-          size="x-small"
-          sprite={rightIcon.sprite}
-        />);
-    }
-
-    return null;
-  };
 
   const sldsClasses = [
     'slds-dropdown__item',
@@ -85,10 +81,10 @@ const MenuItem = (props) => {
           title={children}
           data-value={dataValue}
         >
-          {leftIconElem()}
+          {leftIcon && leftIconElem(leftIcon)}
           {children}
         </span>
-        {rightIconElem()}
+        {rightIcon && rightIconElem(rightIcon)}
       </a>
     </li>
   );
