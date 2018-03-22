@@ -42,6 +42,15 @@ describe('<MenuItem />', () => {
     expect(mounted.find('li > a svg').length).toBe(2);
   });
 
+  it('applies a title when set', () => {
+    const getTitle = () => mounted.find('a > span').prop('title');
+    expect(getTitle()).toEqual('foobar');
+    mounted.setProps({ children: <span>child</span> });
+    expect(getTitle()).toBeFalsy();
+    mounted.setProps({ title: 'foobaz' });
+    expect(getTitle()).toEqual('foobaz');
+  });
+
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-dropdown__item').hasClass('foo')).toBeTruthy();

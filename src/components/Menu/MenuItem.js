@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import isString from 'lodash/isString';
 import { IconSVG } from '../../';
 
 const nonCapturing = { pointerEvents: 'none' };
@@ -55,6 +56,7 @@ const MenuItem = (props) => {
     leftIcon,
     rightIcon,
     selected,
+    title,
     ...rest
   } = props;
 
@@ -65,14 +67,16 @@ const MenuItem = (props) => {
     className,
   ];
 
+  const assistiveTitle = title || (isString(children) && children);
+
   const role = (selected === null) ? 'menuitem' : 'menuitemcheckbox';
   // if selected true or false, it's a menuitemcheckbox, else it's a menuitem
 
   return (
     <li
+      {...rest}
       className={cx(sldsClasses)}
       role="presentation"
-      {...rest}
     >
       <a
         aria-checked={selected}
@@ -82,7 +86,7 @@ const MenuItem = (props) => {
         <span
           className="slds-truncate"
           style={nonCapturing}
-          title={children}
+          title={assistiveTitle}
         >
           {leftIcon && leftIconElem(leftIcon)}
           {children}
@@ -133,6 +137,10 @@ MenuItem.propTypes = {
    * id should be set by parent element
    */
   id: PropTypes.string,
+  /**
+   * Assistive title. Falls back to `children` if children is a string
+   */
+  title: PropTypes.string,
 };
 
 MenuItem.defaultProps = {
@@ -142,6 +150,7 @@ MenuItem.defaultProps = {
   leftIcon: null,
   rightIcon: null,
   selected: null,
+  title: null,
   id: null,
 };
 
