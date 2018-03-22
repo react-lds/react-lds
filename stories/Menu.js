@@ -71,21 +71,17 @@ stories
       <MenuSubHeader>
         SubHeading 1
       </MenuSubHeader>
-      <MenuItem
-        dataValue="item1"
-      >Item 1</MenuItem>
-      <MenuItem
-        dataValue="item2"
-      >Item 2</MenuItem>
+      <MenuItem data-value="item1">Item 1</MenuItem>
+      <MenuItem data-value="item2">Item 2</MenuItem>
       <MenuSubHeader>
         SubHeading 2
       </MenuSubHeader>
       <MenuItem
-        dataValue="item3"
+        data-value="item3"
         divider={boolean('Divider item 3', true)}
       >Important Item 3</MenuItem>
       <MenuItem
-        dataValue="item4"
+        data-value="item4"
       >Important last item</MenuItem>
     </ControlledMenu>
   ))
@@ -98,19 +94,13 @@ stories
       size={select('Size', ['', 'small', 'medium', 'large'], '') || undefined}
       defaultOpen={boolean('defaultOpen', true)}
     >
-      <MenuItem
-        onClick={action('clicked menu item 1')}
-      >Item 1</MenuItem>
-      <MenuItem
-        onClick={action('clicked menu item 2')}
-      >Item 2</MenuItem>
+      <MenuItem onClick={action('clicked menu item 1')}>Item 1</MenuItem>
+      <MenuItem onClick={action('clicked menu item 2')}>Item 2</MenuItem>
       <MenuItem
         onClick={action('clicked menu item 3')}
         divider={boolean('Divider item 3', true)}
       >Important Item 3</MenuItem>
-      <MenuItem
-        onClick={action('clicked menu item 4')}
-      >Important last item</MenuItem>
+      <MenuItem onClick={action('clicked menu item 4')}>Important last item</MenuItem>
     </Menu>
   ))
   .add('Uncontrolled with onSelect', () => (
@@ -123,18 +113,12 @@ stories
       defaultOpen={boolean('defaultOpen', true)}
       onSelect={action()}
     >
-      <MenuItem
-        dataValue="item1"
-      >Item 1</MenuItem>
-      <MenuItem
-        dataValue="item2"
-      >Item 2</MenuItem>
-      <MenuItem
-        dataValue="item3"
-      >Item 3</MenuItem>
+      <MenuItem data-value="item1">Item 1</MenuItem>
+      <MenuItem data-value="item2">Item 2</MenuItem>
+      <MenuItem data-value="item3">Item 3</MenuItem>
       <MenuItem
         divider={boolean('Divider item 4', true)}
-        dataValue="item4"
+        data-value="item4"
       >Important last item</MenuItem>
     </Menu>
   ));

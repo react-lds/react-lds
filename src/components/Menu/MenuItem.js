@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { IconSVG } from '../../';
 
+const nonCapturing = { pointerEvents: 'none' };
+
 /* eslint-disable react/prop-types */
 const leftIconElem = ({ alwaysDisplay, sprite, icon }) => {
   const iconClasses = [
@@ -37,6 +39,7 @@ const rightIconElem = ({ icon, sprite }) => {
       icon={icon}
       size="x-small"
       sprite={sprite}
+      style={nonCapturing}
     />
   );
 };
@@ -46,7 +49,7 @@ const MenuItem = (props) => {
   const {
     children,
     className,
-    dataValue,
+    'data-value': dataValue,
     divider,
     id,
     leftIcon,
@@ -73,13 +76,13 @@ const MenuItem = (props) => {
     >
       <a
         aria-checked={selected}
-        role={role}
         data-value={dataValue}
+        role={role}
       >
         <span
           className="slds-truncate"
+          style={nonCapturing}
           title={children}
-          data-value={dataValue}
         >
           {leftIcon && leftIconElem(leftIcon)}
           {children}
@@ -100,9 +103,9 @@ MenuItem.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * dataValue is required when using onSelect on parent
+   * data-value is required when using onSelect on parent
    */
-  dataValue: PropTypes.string,
+  'data-value': PropTypes.string,
   /**
    * set to true if a divider should appear above this list item
    */
@@ -134,7 +137,7 @@ MenuItem.propTypes = {
 
 MenuItem.defaultProps = {
   className: null,
-  dataValue: null,
+  'data-value': null,
   divider: false,
   leftIcon: null,
   rightIcon: null,
