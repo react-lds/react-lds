@@ -1,20 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import MenuDropdownListItem from '../MenuDropdownListItem';
+import MenuItem from '../MenuItem';
 
-describe('<MenuDropdownListItem />', () => {
+describe('<MenuItem />', () => {
   let mounted = null;
 
   beforeEach(() => {
-    mounted = mount(<MenuDropdownListItem>foobar</MenuDropdownListItem>);
-  });
-
-  it('handles onClick', () => {
-    const clickMock = jest.fn();
-    mounted.setProps({ onClick: clickMock });
-    mounted.find('li > a').simulate('click');
-    expect(clickMock).toBeCalled();
+    mounted = mount(<MenuItem id="123">foobar</MenuItem>);
   });
 
   it('renders children, string or node', () => {
@@ -45,8 +38,17 @@ describe('<MenuDropdownListItem />', () => {
       rightIcon: icon,
     });
 
-    expect(mounted.find('li > a > span svg').length).toBe(1);
+    expect(mounted.find('li > a > span svg').exists()).toBeTruthy();
     expect(mounted.find('li > a svg').length).toBe(2);
+  });
+
+  it('applies a title when set', () => {
+    const getTitle = () => mounted.find('a > span').prop('title');
+    expect(getTitle()).toEqual('foobar');
+    mounted.setProps({ children: <span>child</span> });
+    expect(getTitle()).toBeFalsy();
+    mounted.setProps({ title: 'foobaz' });
+    expect(getTitle()).toEqual('foobaz');
   });
 
   it('applies className and rest-properties', () => {
