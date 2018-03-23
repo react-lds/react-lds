@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
 
 import { IconButton } from '../Button';
 
