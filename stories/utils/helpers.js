@@ -89,7 +89,7 @@ export function getSizes() {
 export class Context extends Component {
   getChildContext() {
     return {
-      assetBasePath: '',
+      assetBasePath: '/assets',
     };
   }
 
