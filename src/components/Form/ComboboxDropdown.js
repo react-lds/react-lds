@@ -72,7 +72,7 @@ class PicklistDropdown extends Component {
             >
               <div className={cx(this.comboboxFormElementClasses)}>
                 {input}
-                {children}
+                {isOpen && children}
               </div>
             </div>
           </div>
