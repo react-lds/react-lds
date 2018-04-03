@@ -22,7 +22,7 @@ IconSVG.contextTypes = { assetBasePath: PropTypes.string };
 
 IconSVG.defaultProps = {
   className: null,
-  pathPrefix: '/icons/',
+  pathPrefix: 'icons/',
   size: null,
   isButton: false,
 };
