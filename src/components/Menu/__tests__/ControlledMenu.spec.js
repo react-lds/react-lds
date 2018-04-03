@@ -56,6 +56,12 @@ describe('<ControlledMenu />', () => {
     expect(mounted.find('.slds-dropdown').exists()).toBeTruthy();
   });
 
+  it('renders an arbitrary menu header', () => {
+    const mockEl = <p>Foo</p>;
+    const mounted = getComponent({ renderHeader: () => mockEl, isOpen: true });
+    expect(mounted.find('.slds-dropdown').contains(mockEl)).toBeTruthy();
+  });
+
   it('applies className and rest-properties', () => {
     const mounted = getComponent({ className: 'foo', 'data-test': 'bar', renderClosedDropdown: true });
     expect(mounted.find('.slds-dropdown').first().hasClass('foo')).toBeTruthy();

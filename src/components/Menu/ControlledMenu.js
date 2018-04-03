@@ -56,6 +56,10 @@ const propTypes = {
    */
   renderClosedDropdown: PropTypes.bool,
   /**
+   * Can be used to prepend an arbitrary menu header
+   */
+  renderHeader: PropTypes.func,
+  /**
    * length of the menu box. 'small', 'medium', or 'large'
    */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
@@ -74,6 +78,7 @@ class ControlledMenu extends Component {
     nubbin: false,
     onSelect: null,
     position: 'top-left',
+    renderHeader: null,
     renderClosedDropdown: false,
     size: 'small',
   };
@@ -97,6 +102,7 @@ class ControlledMenu extends Component {
           key: id
         });
       }
+
       return React.cloneElement(
         child, {
           selected: checkbox ? child.props.selected === true : null,
@@ -109,6 +115,7 @@ class ControlledMenu extends Component {
   render() {
     const {
       button,
+      children,
       className,
       height,
       heightIcon,
@@ -118,6 +125,7 @@ class ControlledMenu extends Component {
       onSelect,
       position,
       renderClosedDropdown,
+      renderHeader,
       size,
     } = this.props;
 
@@ -149,11 +157,20 @@ class ControlledMenu extends Component {
     return (
       <div className={cx(wrapperClasses)} {...rest}>
         {button}
-        {(isOpen || renderClosedDropdown) && <div className={cx(dropdownClasses)}>
-          <ul className={cx(listClasses)} role="menu" onClick={onSelect ? this.handleItemClick : null}>
-            {this.renderChildren()}
-          </ul>
-        </div>}
+        {(isOpen || renderClosedDropdown) && (
+          <div className={cx(dropdownClasses)}>
+            {renderHeader && renderHeader()}
+            {children && (
+              <ul
+                className={cx(listClasses)}
+                role="menu"
+                onClick={onSelect ? this.handleItemClick : null}
+              >
+                {this.renderChildren()}
+              </ul>
+            )}
+          </div>
+        )}
       </div>
     );
   }
