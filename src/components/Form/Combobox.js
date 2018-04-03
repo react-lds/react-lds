@@ -271,6 +271,8 @@ export class ComboboxRaw extends Component {
       'slds-input-has-icon_right',
     ];
 
+    const renderPills = !inlineListbox && this.getSelectedItems().length > 1;
+
     return (
       <FormElement required={required} error={error}>
         <FormElementLabel
@@ -294,7 +296,7 @@ export class ComboboxRaw extends Component {
               <ComboboxDropdownList height={height} id={id}>
                 {this.renderComboboxItems()}
               </ComboboxDropdownList>
-              {!inlineListbox && this.renderSelectedPills()}
+              {renderPills && this.renderSelectedPills()}
             </div>
           </div>
         </FormElementControl>
