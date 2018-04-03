@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const PicklistDropdownList = (props) => {
+const ComboboxDropdownList = (props) => {
   const {
     children,
     height,
@@ -26,7 +26,7 @@ const PicklistDropdownList = (props) => {
   );
 };
 
-PicklistDropdownList.propTypes = {
+ComboboxDropdownList.propTypes = {
   /**
    * list content
    */
@@ -41,10 +41,10 @@ PicklistDropdownList.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-PicklistDropdownList.defaultProps = {
+ComboboxDropdownList.defaultProps = {
   children: null,
   header: null,
   height: null,
 };
 
-export default PicklistDropdownList;
+export default ComboboxDropdownList;

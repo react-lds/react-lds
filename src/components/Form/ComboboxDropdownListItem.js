@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import { IconSVG, MediaObject } from '../../';
 
-const PicklistDropdownListItem = (props) => {
+const ComboboxDropdownListItem = (props) => {
   const {
     children,
     className,
@@ -92,7 +92,7 @@ const PicklistDropdownListItem = (props) => {
     : renderItem();
 };
 
-PicklistDropdownListItem.propTypes = {
+ComboboxDropdownListItem.propTypes = {
   /**
    * The content of a menu item
    */
@@ -123,7 +123,7 @@ PicklistDropdownListItem.propTypes = {
   selected: PropTypes.bool,
 };
 
-PicklistDropdownListItem.defaultProps = {
+ComboboxDropdownListItem.defaultProps = {
   className: null,
   icon: null,
   isHeader: false,
@@ -131,4 +131,4 @@ PicklistDropdownListItem.defaultProps = {
   selected: false,
 };
 
-export default PicklistDropdownListItem;
+export default ComboboxDropdownListItem;

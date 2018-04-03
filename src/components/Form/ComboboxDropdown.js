@@ -9,7 +9,7 @@ import {
   FormElementLabel,
 } from '../../';
 
-class PicklistDropdown extends Component {
+class ComboboxDropdown extends Component {
   constructor(props) {
     super(props);
     this.state = { open: this.props.isOpen };
@@ -83,9 +83,9 @@ class PicklistDropdown extends Component {
   }
 }
 
-PicklistDropdown.propTypes = {
+ComboboxDropdown.propTypes = {
   /**
-   * one PicklistDropdownList or many of them
+   * one ComboboxDropdownList or many of them
    */
   children: PropTypes.node.isRequired,
   /**
@@ -121,7 +121,7 @@ PicklistDropdown.propTypes = {
   isRequired: PropTypes.bool,
 };
 
-PicklistDropdown.defaultProps = {
+ComboboxDropdown.defaultProps = {
   disabled: false,
   error: null,
   isOpen: false,
@@ -130,4 +130,4 @@ PicklistDropdown.defaultProps = {
   isRequired: false,
 };
 
-export default PicklistDropdown;
+export default ComboboxDropdown;
