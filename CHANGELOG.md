@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.2.0
+
+* Enable usage of `Icon` with latest `<apex:slds />`
+* Automatically label responsive table rows
+* Fix lodash imports
+
 ## 5.1.0
 
 * New: `ScoreIcon` component
