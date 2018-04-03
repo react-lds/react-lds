@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
 import cx from 'classnames';
+import memoize from 'lodash/memoize';
 
 import ComboboxDropdownList from './ComboboxDropdownList';
 import ComboboxDropdownListItem from './ComboboxDropdownListItem';
@@ -105,6 +106,16 @@ export class ComboboxRaw extends Component {
 
   onToggle = () => this.setState(({ open }) => ({ open: !open }))
 
+  onSelect(key) {
+    const { onSelect } = this.props;
+
+    onSelect(key);
+
+    this.setState({ open: false });
+  }
+
+  getSelectHandler = itemKey => memoize(() => this.onSelect(itemKey));
+
   getSelectedItems() {
     const { items } = this.props;
 
@@ -172,29 +183,23 @@ export class ComboboxRaw extends Component {
   }
 
   renderComboboxItems() {
-    const { onSelect, items } = this.props;
+    const { items } = this.props;
 
-    return items.map((item) => {
-      const boundClick = () => onSelect(item.key);
-
-      return (
-        <ComboboxDropdownListItem
-          icon={item.icon}
-          id={`listbox-option-${item.key}`}
-          isHeader={item.isHeader}
-          key={item.key}
-          onClick={boundClick}
-          selected={item.selected}
-        >
-          {item.label}
-        </ComboboxDropdownListItem>
-      );
-    });
+    return items.map(item => (
+      <ComboboxDropdownListItem
+        icon={item.icon}
+        id={`listbox-option-${item.key}`}
+        isHeader={item.isHeader}
+        key={item.key}
+        onClick={this.getSelectHandler(item.key)}
+        selected={item.selected}
+      >
+        {item.label}
+      </ComboboxDropdownListItem>
+    ));
   }
 
   renderInlineListbox() {
-    const { onSelect } = this.props;
-
     const selectedItems = this.getSelectedItems();
 
     return (
@@ -205,7 +210,7 @@ export class ComboboxRaw extends Component {
             key={key}
             label={label}
             title={label}
-            onClose={() => onSelect(key)}
+            onClick={this.getSelectHandler(key)}
           />
         ))}
       </Listbox>
@@ -283,7 +288,7 @@ export class ComboboxRaw extends Component {
               className={cx(comboboxClasses)}
               role="combobox"
             >
-              <div className={cx(formElementClasses)}>
+              <div className={cx(formElementClasses)} role="none">
                 {this.renderInput()}
               </div>
               <ComboboxDropdownList height={height} id={id}>

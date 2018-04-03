@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { Icon } from '../../';
+import { IconSVG, MediaObject } from '../../';
 
 const PicklistDropdownListItem = (props) => {
   const {
@@ -18,13 +18,22 @@ const PicklistDropdownListItem = (props) => {
   const renderIcon = () => {
     if (icon) {
       return (
-        <div className="slds-media__figure">
-          <Icon
-            icon={icon.icon}
-            size="small"
-            sprite={icon.sprite}
-          />
-        </div>
+        <IconSVG
+          icon={icon.icon}
+          size="small"
+          sprite={icon.sprite}
+        />
+      );
+    }
+
+    if (selected) {
+      return (
+        <IconSVG
+          className="slds-listbox__icon-selected"
+          icon="check"
+          size="x-small"
+          sprite="utility"
+        />
       );
     }
 
@@ -37,39 +46,44 @@ const PicklistDropdownListItem = (props) => {
   ];
 
   const itemClasses = [
-    'slds-media',
     'slds-listbox__option',
     'slds-listbox__option_plain',
-    'slds-media_small',
-    'slds-media_center',
     { 'slds-is-selected': selected },
     className,
   ];
 
   const renderHeader = () => (
     <li className="slds-listbox__item" role="presentation">
-      <span
-        className="slds-media slds-listbox__option slds-listbox__option_plain"
+      <MediaObject
+        center
+        className={cx(itemClasses)}
+        figureLeft={renderIcon()}
         id={id}
+        onClick={onClick}
         role="presentation"
+        truncate
       >
         <h3 className="slds-text-title_caps" role="presentation">
           {children}
         </h3>
-      </span>
+      </MediaObject>
     </li>
   );
 
   const renderItem = () => (
     <li className={cx(sldsClasses)} role="presentation">
-      <span id={id} className={cx(itemClasses)} role="option" onClick={onClick}>
-        {renderIcon()}
-        <div className="slds-media__body">
-          <div className="slds-truncate" title={children}>
-            {children}
-          </div>
-        </div>
-      </span>
+      <MediaObject
+        center
+        className={cx(itemClasses)}
+        figureLeft={renderIcon()}
+        id={id}
+        onClick={onClick}
+        role="option"
+        size="small"
+        truncate
+      >
+        {children}
+      </MediaObject>
     </li>
   );
 
