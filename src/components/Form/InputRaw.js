@@ -4,8 +4,7 @@ import cx from 'classnames';
 
 import { getUniqueHash } from '../../utils';
 import {
-  Button,
-  ButtonIcon,
+  IconButton,
   IconSVG,
   Spinner,
 } from '../../';
@@ -70,13 +69,12 @@ const InputRaw = (props) => {
       ];
 
       return (
-        <Button
+        <IconButton
+          icon={iconRight}
+          sprite="utility"
           className={cx(iconClasses)}
-          flavor="icon"
           onClick={iconRightOnClick}
-        >
-          <ButtonIcon sprite="utility" icon={iconRight} />
-        </Button>
+        />
       );
     }
 

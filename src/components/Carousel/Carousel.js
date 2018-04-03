@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import isEqual from 'lodash/isEqual';
 
-import { Button, ButtonIcon } from '../../';
+import { IconButton } from '../Button';
 
 class Carousel extends Component {
   state = {
@@ -11,7 +12,6 @@ class Carousel extends Component {
   }
 
   autoPlayId = null // eslint-disable-line react/sort-comp
-  autoPlayFlavors = ['icon-border-filled', 'icon-x-small']
 
   componentWillMount() {
     const { autoPlayActive, children } = this.props;
@@ -33,7 +33,10 @@ class Carousel extends Component {
     const { children: prevChildren } = this.props;
     const { autoPlayActive: prevAutoPlayActive } = this.state;
 
-    if (nextChildren !== prevChildren) {
+    const childrenChanged = nextChildren.length !== prevChildren.length ||
+      !isEqual(nextChildren.map(({ props }) => props), prevChildren.map(({ props }) => props));
+
+    if (childrenChanged) {
       this.updatePanels(nextChildren);
     }
 
@@ -147,15 +150,14 @@ class Carousel extends Component {
 
     return (
       <span className="slds-carousel__autoplay">
-        <Button
-          flavor={this.autoPlayFlavors}
+        <IconButton
+          icon={icon}
+          border="filled"
+          sprite="utility"
           onClick={this.toggleAutoPlay}
           size="x-small"
           title={assistiveText}
-        >
-          <ButtonIcon sprite="utility" icon={icon} />
-          <span className="slds-assistive-text">{assistiveText}</span>
-        </Button>
+        />
       </span>
     );
   }

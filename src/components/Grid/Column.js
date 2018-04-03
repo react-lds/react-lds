@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import omit from 'lodash.omit';
+import omit from 'lodash/omit';
 import { applyDecorators, decoratorProp } from '../../utils';
 
 const validBreakpoints = [
@@ -13,8 +13,9 @@ const validBreakpoints = [
   'max-large',
 ];
 
-const breakPointProp = breakpoint => `${breakpoint}-sizeOf`;
+const breakPointProp = (breakpoint, suffix) => `${breakpoint}-${suffix}`;
 const sizeRegex = /^([1-9]|1[0-2])-([1-9]|1[0-2])$/;
+const orderRegex = /^((1[0,1,2])|[1-9])$/;
 
 const Column = (props) => {
   const {
@@ -35,19 +36,32 @@ const Column = (props) => {
   const breakpoints = Array.from(validBreakpoints);
   breakpoints.unshift('');
 
-  breakpoints.forEach((breakpoint) => {
-    const propName = breakpoint === '' ? 'sizeOf' : breakPointProp(breakpoint);
-    const sizeString = breakpoint === '' ? 'size' : `${breakpoint}-size`;
+  const generatedProps = [];
 
-    const size = props[propName];
-    if (sizeRegex.test(size)) {
+  breakpoints.forEach((breakpoint) => {
+    const emptyBreakPoint = breakpoint === '';
+
+    const sizePropName = emptyBreakPoint ? 'sizeOf' : breakPointProp(breakpoint, 'sizeOf');
+    const sizeString = emptyBreakPoint ? 'size' : `${breakpoint}-size`;
+    const size = props[sizePropName];
+    if (size && sizeRegex.test(size)) {
       const from = parseInt(size.split('-')[0], 10);
       const to = parseInt(size.split('-')[1], 10);
       sldsClasses.push(`slds-${sizeString}_${from}-of-${to}`);
     }
+
+    const orderPropName = emptyBreakPoint ? 'order' : breakPointProp(breakpoint, 'order');
+    const orderString = emptyBreakPoint ? 'order' : `${breakpoint}-order`;
+    const order = props[orderPropName];
+    if (order && orderRegex.test(order)) {
+      const position = parseInt(order.split('-')[0], 10);
+      sldsClasses.push(`slds-${orderString}_${position}`);
+    }
+
+    generatedProps.push(sizePropName, orderPropName);
   });
 
-  const restProps = omit(rest, validBreakpoints.map(breakPointProp), 'sizeOf');
+  const restProps = omit(rest, generatedProps);
 
   return (
     <div {...restProps} className={cx(sldsClasses)}>{children}</div>
@@ -72,6 +86,20 @@ const sizeOfPropType = (props, propName) => {
     if (from > to) {
       return new Error(`${propName} ${size} is impossible. \`${from}\` needs to be smaller than \`${to}\``);
     }
+  }
+
+  return null;
+};
+
+const orderPropType = (props, propName) => {
+  const position = props[propName];
+
+  if (position && !(typeof position === 'string' || typeof position === 'number')) {
+    return new Error(`${propName} must be a string or a number`);
+  }
+
+  if ((typeof position === 'string' || typeof position === 'number') && !orderRegex.test(position)) {
+    return new Error(`${propName} must be of format {1-12}`);
   }
 
   return null;
@@ -105,18 +133,28 @@ Column.propTypes = {
     'shrink',
     'shrink-none',
   ]),
-
   /**
    * omit 'slds-col'
    */
   omitCol: PropTypes.bool,
   /**
-   * non-responsive sizeOf
+   * sizeOf: specify size in fractions like 1-2, 4-12. Breakpoint possible e.g. small-sizeOf="1-2"
    */
   sizeOf: sizeOfPropType, // eslint-disable-line react/require-default-props
   ...validBreakpoints.reduce((_propTypes, breakpoint) => {
+    // this generates sizeOf props for each of the valid breakpoints
     const propTypes = _propTypes;
-    propTypes[breakPointProp(breakpoint)] = sizeOfPropType;
+    propTypes[breakPointProp(breakpoint, 'sizeOf')] = sizeOfPropType;
+    return propTypes;
+  }, {}),
+  /**
+   * order: reorder columns with number from 1 to 12. Breakpoint possible e.g. medium-order="3"
+   */
+  order: orderPropType, // eslint-disable-line react/require-default-props
+  ...validBreakpoints.reduce((_propTypes, breakpoint) => {
+    // this generates order props for each of the valid breakpoints
+    const propTypes = _propTypes;
+    propTypes[breakPointProp(breakpoint, 'order')] = orderPropType;
     return propTypes;
   }, {}),
 };

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import omit from 'lodash.omit';
+import omit from 'lodash/omit';
 import { THEMES, getThemeClass } from '../../utils';
 
-import { Button, ButtonIcon } from '../../';
+import { IconButton } from '../../';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {
@@ -145,20 +145,19 @@ class Popover extends Component {
     const { onClose, customHeaderTheme, theme } = this.props;
     const invertIcon = Popover.shouldInvertIcon(customHeaderTheme || theme);
     const closeButtonClasses = [
-      'slds-button_icon-small',
       'slds-float_right',
       'slds-popover__close',
-      { 'slds-button_icon-inverse': invertIcon },
     ];
 
     return (
-      <Button
-        flavor={['icon', invertIcon ? 'icon-inverse' : null]}
+      <IconButton
+        flavor={invertIcon ? 'inverse' : null}
         className={cx(closeButtonClasses)}
         onClick={onClose}
-      >
-        <ButtonIcon sprite="utility" icon="close" />
-      </Button>
+        size="small"
+        sprite="utility"
+        icon="close"
+      />
     );
   }
 

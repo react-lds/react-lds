@@ -53,11 +53,13 @@ describe('<MediaObject />', () => {
     expect(mounted.find('.slds-media').prop('data-test')).toEqual('bar');
   });
 
-  it('applies flavoring', () => {
-    mounted.setProps({ flavor: 'center' });
+  it('applies center prop', () => {
+    mounted.setProps({ center: true });
     expect(mounted.find('.slds-media').hasClass('slds-media_center')).toBeTruthy();
-    mounted.setProps({ flavor: ['center', 'responsive'] });
-    expect(mounted.find('.slds-media').hasClass('slds-media_center')).toBeTruthy();
+  });
+
+  it('applies responsive prop', () => {
+    mounted.setProps({ responsive: true });
     expect(mounted.find('.slds-media').hasClass('slds-media_responsive')).toBeTruthy();
   });
 

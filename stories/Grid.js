@@ -102,6 +102,54 @@ stories
       </Column>
     </Grid>
   ))
+  .add('Manual order', () => (
+    <Grid wrap>
+      <Column
+        className="slds-m-bottom--large slds-p-horizontal_small"
+        sizeOf="1-1"
+        small-sizeOf="1-2"
+        medium-sizeOf="1-4"
+        order="1"
+        small-order="2"
+        medium-order="3"
+      >
+        <Box>One. Try adjusting the window width!</Box>
+      </Column>
+      <Column
+        className="slds-m-bottom--large slds-p-horizontal_small"
+        sizeOf="1-1"
+        small-sizeOf="1-2"
+        medium-sizeOf="1-4"
+        order="2"
+        small-order="1"
+        medium-order="2"
+      >
+        <Box>Two. Responsive Reordering baby! Yeah!</Box>
+      </Column>
+      <Column
+        className="slds-m-bottom--large slds-p-horizontal_small"
+        sizeOf="1-1"
+        small-sizeOf="1-2"
+        medium-sizeOf="1-4"
+        order="3"
+        small-order="4"
+        medium-order="1"
+      >
+        <Box>Three. I think that&apos;s pretty neat!</Box>
+      </Column>
+      <Column
+        className="slds-m-bottom--large slds-p-horizontal_small"
+        sizeOf="1-1"
+        small-sizeOf="1-2"
+        medium-sizeOf="1-4"
+        order="4"
+        small-order="3"
+        medium-order="4"
+      >
+        <Box>Four. Don&apos;t you?</Box>
+      </Column>
+    </Grid>
+  ))
   .add('Containers', () => (
     <div>
       <Container

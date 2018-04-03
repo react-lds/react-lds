@@ -5,7 +5,7 @@ import Prompt from '../Prompt';
 
 describe('<Prompt />', () => {
   let mounted = null;
-  const props = { buttonText: 'foo', description: 'bar', label: 'baz', title: 'foobar' };
+  const props = { id: 'foo', label: { close: 'bar' }, onClose: jest.fn(), title: 'foobar' };
   const child = <p>Foobar</p>;
 
   beforeEach(() => {

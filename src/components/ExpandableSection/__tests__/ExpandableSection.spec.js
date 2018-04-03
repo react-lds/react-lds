@@ -25,7 +25,7 @@ describe('<ExpandableSection />', () => {
 
   it('renders a title', () => {
     const mounted = getExpandableSection();
-    expect(mounted.find(Button).find('span').prop('title')).toEqual('Title');
+    expect(mounted.find(Button).prop('title')).toEqual('Title');
     expect(mounted.find(Button).find('span').text()).toEqual('Title');
   });
   it('renders right slds-classes when open is set to true', () => {

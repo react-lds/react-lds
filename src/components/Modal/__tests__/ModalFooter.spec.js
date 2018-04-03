@@ -1,37 +1,40 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-
 import ModalFooter from '../ModalFooter';
+import { Button } from '../../../';
+
+const sampleChild = <p>Sample</p>;
+
+const getComponent = (props = {}) => shallow(
+  <ModalFooter closeButtonLabel="foo" {...props}>
+    {sampleChild}
+  </ModalFooter>
+);
 
 describe('<ModalFooter />', () => {
-  let mounted = null;
-  const child = (<div className="foo">bar</div>);
-
-  beforeEach(() => {
-    mounted = shallow(<ModalFooter>{child}</ModalFooter>);
+  it('renders additional children', () => {
+    const mounted = getComponent({ children: sampleChild });
+    expect(mounted.contains(sampleChild)).toBeTruthy();
   });
 
-  it('renders the correct markup', () => {
-    expect(mounted.find('.slds-modal__footer').length).toBe(1);
+  it('applies extra classNames and rest properties', () => {
+    const mounted = getComponent({ className: 'foo', 'aria-hidden': true });
+    const el = mounted.find('.slds-modal__footer');
+    expect(el.prop('aria-hidden')).toBeTruthy();
+    expect(el.hasClass('foo')).toBeTruthy();
   });
 
-  it('renders children', () => {
-    expect(mounted.contains(child)).toBeTruthy();
+  it('renders a button that binds onClose', () => {
+    const mockFn = jest.fn();
+    const mounted = getComponent({ onClose: mockFn });
+    const buttonEl = mounted.find(Button);
+    buttonEl.simulate('click');
+    expect(mockFn).toHaveBeenCalled();
+    expect(buttonEl.prop('children')).toEqual('foo');
   });
 
-  it('applies the default theme', () => {
-    mounted.setProps({ defaultTheme: true });
-    expect(mounted.find('.slds-theme_default')).toBeTruthy();
-  });
-
-  it('applies the directional flavor', () => {
-    mounted.setProps({ directional: true });
+  it('renders a directional variant', () => {
+    const mounted = getComponent({ directional: true });
     expect(mounted.find('.slds-modal__footer').hasClass('slds-modal__footer_directional')).toBeTruthy();
-  });
-
-  it('applies className and rest-properties', () => {
-    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
-    expect(mounted.find('.slds-modal__footer').hasClass('foo')).toBeTruthy();
-    expect(mounted.find('.slds-modal__footer').prop('data-test')).toEqual('bar');
   });
 });

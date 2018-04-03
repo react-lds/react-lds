@@ -104,6 +104,7 @@ class ExpandableSection extends Component {
               aria-expanded={isOpen || open}
               className="slds-section__title-action"
               onClick={this.toggleSection}
+              title={title}
             >
               <ButtonIcon
                 position="left"
@@ -111,7 +112,7 @@ class ExpandableSection extends Component {
                 sprite="utility"
                 aria-hidden="true"
               />
-              <span className="slds-truncate" title={title}>
+              <span className="slds-truncate">
                 {title}
               </span>
             </Button>

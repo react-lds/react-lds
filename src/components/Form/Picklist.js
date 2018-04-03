@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
+import memoize from 'lodash/memoize';
 
 import {
   PicklistDropdown,
@@ -15,6 +16,16 @@ export class PicklistRaw extends Component {
 
     this.state = { isOpen: false };
   }
+
+  onSelect(key) {
+    const { closeOnSelect, onSelect } = this.props;
+
+    onSelect(key);
+
+    if (closeOnSelect) this.setState({ isOpen: false });
+  }
+
+  getSelectHandler = itemKey => memoize(() => this.onSelect(itemKey));
 
   toggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
@@ -67,24 +78,20 @@ export class PicklistRaw extends Component {
   };
 
   renderPicklistItems() {
-    const { onSelect, items } = this.props;
+    const { items } = this.props;
 
-    return items.map((item) => {
-      const boundClick = () => onSelect(item.key);
-
-      return (
-        <PicklistDropdownListItem
-          icon={{ icon: 'check', sprite: 'utility' }}
-          id={`listbox-option-${item.key}`}
-          isHeader={item.isHeader}
-          key={item.key}
-          onClick={boundClick}
-          selected={item.selected}
-        >
-          {item.label}
-        </PicklistDropdownListItem>
-      );
-    });
+    return items.map(({ isHeader, key, label, selected }) => (
+      <PicklistDropdownListItem
+        icon={{ icon: 'check', sprite: 'utility' }}
+        id={`listbox-option-${key}`}
+        isHeader={isHeader}
+        key={key}
+        onClick={this.getSelectHandler(key)}
+        selected={selected}
+      >
+        {label}
+      </PicklistDropdownListItem>
+    ));
   }
 
   render() {
@@ -96,6 +103,7 @@ export class PicklistRaw extends Component {
       isLabelHidden,
       isRequired,
       labelInput,
+      size,
     } = this.props;
 
     return (
@@ -108,6 +116,7 @@ export class PicklistRaw extends Component {
         isOpen={this.state.isOpen}
         isRequired={isRequired}
         labelInput={labelInput}
+        size={size}
       >
         <PicklistDropdownList
           height={height}
@@ -125,6 +134,10 @@ PicklistRaw.propTypes = {
    * class name
    */
   className: PropTypes.string,
+  /**
+   * close the picklist when selecting an item
+   */
+  closeOnSelect: PropTypes.bool,
   /**
    * sets the number of items being displayed
    */
@@ -178,10 +191,15 @@ PicklistRaw.propTypes = {
    * you should indicate it
    */
   placeholder: PropTypes.string.isRequired,
+  /**
+   * Picklist sizes: small, medium, large
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
 };
 
 PicklistRaw.defaultProps = {
   className: null,
+  closeOnSelect: false,
   error: null,
   height: null,
   isDisabled: false,
@@ -190,6 +208,7 @@ PicklistRaw.defaultProps = {
   items: [],
   labelInput: '',
   labelMultiselect: '',
+  size: null,
 };
 
 export default enhanceWithClickOutside(PicklistRaw);

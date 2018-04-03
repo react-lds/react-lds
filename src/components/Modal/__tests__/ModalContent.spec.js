@@ -1,33 +1,30 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-
 import ModalContent from '../ModalContent';
 
+const sampleChild = <p>Sample</p>;
+
+const getComponent = (props = {}) => shallow(
+  <ModalContent {...props}>
+    {sampleChild}
+  </ModalContent>
+);
+
 describe('<ModalContent />', () => {
-  let mounted = null;
-  const child = (<div className="foo">bar</div>);
-
-  beforeEach(() => {
-    mounted = shallow(<ModalContent>{child}</ModalContent>);
-  });
-
-  it('renders the correct markup', () => {
-    expect(mounted.find('.slds-modal__content').hasClass('slds-p-vertical_large')).toBeTruthy();
-    expect(mounted.find('.slds-modal__content').hasClass('slds-p-horizontal_x-large')).toBeTruthy();
-  });
-
   it('renders children', () => {
-    expect(mounted.contains(child)).toBeTruthy();
+    const mounted = getComponent();
+    expect(mounted.contains(sampleChild)).toBeTruthy();
   });
 
-  it('renders as a menu', () => {
-    mounted.setProps({ menu: true });
-    expect(mounted.find('.slds-modal__menu').length).toBe(1);
+  it('applies extra classNames and rest properties', () => {
+    const mounted = getComponent({ className: 'foo', 'aria-hidden': true });
+    const el = mounted.find('.slds-modal__content');
+    expect(el.prop('aria-hidden')).toBeTruthy();
+    expect(el.hasClass('foo')).toBeTruthy();
   });
 
-  it('applies className and rest-properties', () => {
-    mounted.setProps({ className: 'foo', 'data-test': 'bar' });
-    expect(mounted.find('.slds-modal__content').hasClass('foo')).toBeTruthy();
-    expect(mounted.find('.slds-modal__content').prop('data-test')).toEqual('bar');
+  it('applies the id', () => {
+    const mounted = getComponent({ id: 'foo' });
+    expect(mounted.find('.slds-modal__content').prop('id')).toEqual('foo');
   });
 });

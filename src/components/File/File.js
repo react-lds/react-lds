@@ -53,7 +53,11 @@ const File = (props) => {
 
     return (
       <figcaption className={cx(captionClasses)}>
-        <MediaObject figureLeft={fileIcon} flavor="center" size="small">
+        <MediaObject
+          center
+          figureLeft={fileIcon}
+          size="small"
+        >
           <span className="slds-file__text slds-truncate" title={title}>{title}</span>
         </MediaObject>
       </figcaption>
