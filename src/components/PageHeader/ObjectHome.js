@@ -4,7 +4,7 @@ import cx from 'classnames';
 import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash/omit';
 
-import { Grid, Column, Menu } from '../../';
+import { Grid, Column, ControlledMenu, IconButton } from '../../';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {
@@ -30,7 +30,7 @@ const propTypes = {
   title: PropTypes.string.isRequired,
   /**
    * dropdown header menu that also get's triggered when a user clicks on the
-   * title headline. Must be one or more instances of MenuDropdownList
+   * title headline. Must be one or more instances of MenuItem/MenuSubHeader
    */
   titleMenu: PropTypes.node,
   /**
@@ -55,9 +55,7 @@ export class ObjectHomeRaw extends Component {
     this.state = { menuIsOpen: false };
   }
 
-  openMenu = () => {
-    this.setState({ menuIsOpen: true });
-  }
+  toggleMenu = () => this.setState(prevState => ({ menuIsOpen: !prevState.menuIsOpen }));
 
   handleClickOutside() {
     this.setState({ menuIsOpen: false });
@@ -85,19 +83,24 @@ export class ObjectHomeRaw extends Component {
             <Grid>
               <Grid className={cx(titleClasses)}>
                 <h1
-                  onClick={titleMenu && this.openMenu}
+                  onClick={titleMenu && this.toggleMenu}
                   className="slds-page-header__title slds-truncate"
                   title={title}
                 >
                   {title}
                 </h1>
                 {titleMenu && (
-                  <Menu
-                    button={{ sprite: 'utility', icon: 'down', noBorder: true }}
+                  <ControlledMenu
+                    button={<IconButton
+                      container
+                      icon="down"
+                      sprite="utility"
+                      onClick={this.toggleMenu}
+                    />}
                     isOpen={this.state.menuIsOpen}
                   >
                     {titleMenu}
-                  </Menu>
+                  </ControlledMenu>
                 )}
               </Grid>
             </Grid>
