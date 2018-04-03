@@ -7,7 +7,8 @@ import {
   ButtonGroup,
   IconButton,
   Menu,
-  MenuItem,
+  MenuDropdownList,
+  MenuDropdownListItem,
   StatefulIconButton
 } from '../src';
 
@@ -40,21 +41,23 @@ stories
         <Button title="Edit" />
         <Button title="Save" />
         <Menu
-          button={menuButton}
+          customButton={menuButton}
           isOpen={boolean('Open menu', false)}
           last
-          position="top-right"
+          position="right"
           size={null}
         >
-          <MenuItem onClick={action()}>Item 1</MenuItem>
-          <MenuItem onClick={action()}>Item 2</MenuItem>
-          <MenuItem onClick={action()}>Item 3</MenuItem>
+          <MenuDropdownList>
+            <MenuDropdownListItem onClick={action()}>Item 1</MenuDropdownListItem>
+            <MenuDropdownListItem onClick={action()}>Item 2</MenuDropdownListItem>
+            <MenuDropdownListItem onClick={action()}>Item 3</MenuDropdownListItem>
+          </MenuDropdownList>
         </Menu>
       </ButtonGroup>
     );
   })
   .add('Inverse', () => (
-    <div style={{ padding: '0.5rem', backgroundColor: 'rgb(22, 50, 92)' }}>
+    <div style={{ padding: '0.5rem', 'background-color': 'rgb(22, 50, 92)' }}>
       <ButtonGroup>
         <Button flavor="inverse" title="Refresh" />
         <Button flavor="inverse" title="Edit" disabled={boolean('Disable last button', false)} />
