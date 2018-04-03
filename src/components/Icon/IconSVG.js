@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const IconSVG = (props, { assetBasePath }) => {
-  const { className, icon, size, sprite, isButton, ...rest } = props;
+  const { className, icon, size, pathPrefix, sprite, isButton, ...rest } = props;
 
   const sldsClasses = [
     { 'slds-icon': !isButton },
@@ -13,7 +13,7 @@ const IconSVG = (props, { assetBasePath }) => {
 
   return (
     <svg {...rest} aria-hidden="true" className={cx(sldsClasses)}>
-      <use xlinkHref={`${assetBasePath}assets/icons/${sprite}-sprite/svg/symbols.svg#${icon}`} />
+      <use xlinkHref={`${assetBasePath}${pathPrefix}${sprite}-sprite/svg/symbols.svg#${icon}`} />
     </svg>
   );
 };
@@ -22,6 +22,7 @@ IconSVG.contextTypes = { assetBasePath: PropTypes.string };
 
 IconSVG.defaultProps = {
   className: null,
+  pathPrefix: '/icons/',
   size: null,
   isButton: false,
 };
@@ -35,6 +36,11 @@ IconSVG.propTypes = {
    * icon name
    */
   icon: PropTypes.string.isRequired,
+  /**
+   * Path between assetBasePath and the corresponding sprite.
+   * This changed for <apex:slds /> between some SF apiVersions and is set to support 42.0
+   */
+  pathPrefix: PropTypes.string,
   /**
    * icon size
    */
