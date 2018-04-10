@@ -1,3 +1,3 @@
-import Lookup, { LookupRaw } from './Lookup';
+import Lookup from './Lookup';
 
-export { Lookup, LookupRaw };
+export { Lookup };

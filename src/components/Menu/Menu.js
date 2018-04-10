@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash/omit';
 
-import { Button, IconButton } from '../../';
+import { Button, ClickOutside, IconButton } from '../../';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {
@@ -66,6 +65,10 @@ const propTypes = {
    * length of the menu box
    */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * indicates if the menu closes automatically on an outside click
+   */
+  closeOnClickOutside: PropTypes.bool,
 };
 
 export class MenuRaw extends Component {
@@ -81,11 +84,16 @@ export class MenuRaw extends Component {
     nubbin: false,
     position: 'top-left',
     size: 'small',
+    closeOnClickOutside: false,
   }
 
   constructor(props, { cssPrefix }) {
     super(props, { cssPrefix });
     this.state = { open: this.props.isOpen };
+  }
+
+  onClickOutside = () => {
+    this.setState({ open: false });
   }
 
   getClasses() {
@@ -98,10 +106,6 @@ export class MenuRaw extends Component {
 
   toggle = () => {
     this.setState(prevState => ({ open: !prevState.open }));
-  }
-
-  handleClickOutside() {
-    this.setState({ open: false });
   }
 
   button = () => {
@@ -144,7 +148,16 @@ export class MenuRaw extends Component {
   }
 
   render() {
-    const { children, className, last, position, nubbin, size } = this.props;
+    const {
+      children,
+      className,
+      last,
+      nubbin,
+      position,
+      size,
+      closeOnClickOutside,
+    } = this.props;
+    const { open } = this.state;
 
     this.classes = [
       'slds-dropdown-trigger',
@@ -164,15 +177,32 @@ export class MenuRaw extends Component {
 
     const rest = omit(this.props, Object.keys(propTypes));
 
+    const Menu = (
+      <div {...rest} className={cx(this.dropdownClasses)}>
+        {children}
+      </div>
+    );
+
+    if (closeOnClickOutside) {
+      return (
+        <div className={cx(this.getClasses())}>
+          {this.button()}
+          <ClickOutside onClickOutside={this.onClickOutside} condition={open} >
+            {Menu}
+          </ClickOutside>
+        </div>
+      );
+    }
+
     return (
       <div className={cx(this.getClasses())}>
         {this.button()}
-        <div {...rest} className={cx(this.dropdownClasses)}>
-          {children}
-        </div>
+        {Menu}
       </div>
     );
   }
 }
 
-export default enhanceWithClickOutside(MenuRaw);
+const Menu = props => <MenuRaw closeOnClickOutside {...props} />;
+
+export default Menu;

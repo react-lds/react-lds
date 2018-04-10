@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import enhanceWithClickOutside from 'react-click-outside';
 import debounce from 'lodash/debounce';
 import omit from 'lodash/omit';
 
 import {
+  Cell,
+  ClickOutside,
   FormElement,
   FormElementControl,
   FormElementError,
@@ -14,9 +15,8 @@ import {
   InputRaw,
   Pill,
   PillContainer,
-  Table,
   Row,
-  Cell,
+  Table,
 } from '../../';
 
 
@@ -133,7 +133,7 @@ const propTypes = {
   tableResultsHeading: PropTypes.string,
 };
 
-export class LookupRaw extends PureComponent {
+export default class Lookup extends PureComponent {
   static propTypes = propTypes;
 
   static defaultProps = {
@@ -218,9 +218,7 @@ export class LookupRaw extends PureComponent {
     }
   }
 
-  handleClickOutside = () => {
-    this.closeList(false);
-  }
+  onClickOutside = () => this.closeList(false);
 
   handleLoad = (searchTerm) => {
     const { searchTerm: prevSearchTerm } = this.state;
@@ -286,7 +284,6 @@ export class LookupRaw extends PureComponent {
     });
   };
 
-
   addSelection(item) {
     const { multi, onChange, selection } = this.props;
     const { selected } = this.state;
@@ -344,7 +341,7 @@ export class LookupRaw extends PureComponent {
       <Pill
         key={id}
         className={!multi ? 'slds-size_1-of-1' : null}
-        icon={objectType && (<Icon sprite={LookupRaw.getSprite(objectType)} icon={objectType} />)}
+        icon={objectType && (<Icon sprite={Lookup.getSprite(objectType)} icon={objectType} />)}
         id={id}
         title={label}
         label={label}
@@ -430,7 +427,7 @@ export class LookupRaw extends PureComponent {
     const { listLabel, table } = this.props;
     const { loaded, selected } = this.state;
 
-    const displayItems = LookupRaw.filterDisplayItems(loaded, selected);
+    const displayItems = Lookup.filterDisplayItems(loaded, selected);
 
     if (table || !open || displayItems.length < 1) { return null; }
 
@@ -455,7 +452,7 @@ export class LookupRaw extends PureComponent {
           >
             <Icon
               className="slds-media__figure"
-              sprite={LookupRaw.getSprite(objectType)}
+              sprite={Lookup.getSprite(objectType)}
               icon={objectType}
               size="small"
             />
@@ -488,7 +485,7 @@ export class LookupRaw extends PureComponent {
     const { table, tableFields, tableResultsHeading } = this.props;
     const { loaded, selected } = this.state;
 
-    const displayItems = LookupRaw.filterDisplayItems(loaded, selected);
+    const displayItems = Lookup.filterDisplayItems(loaded, selected);
 
     if (!table || displayItems.length < 1) { return null; }
 
@@ -500,7 +497,7 @@ export class LookupRaw extends PureComponent {
               <Icon
                 size="small"
                 className="slds-m-right_x-small"
-                sprite={LookupRaw.getSprite(objectType)}
+                sprite={Lookup.getSprite(objectType)}
                 icon={objectType}
               />
             )}
@@ -604,15 +601,15 @@ export class LookupRaw extends PureComponent {
               required={required}
             />
           )}
-          {this.renderInput()}
-          {this.renderSelections()}
-          {this.renderError()}
-          {this.renderLookupList()}
+          <ClickOutside onClickOutside={this.onClickOutside} condition={open}>
+            {this.renderInput()}
+            {this.renderSelections()}
+            {this.renderError()}
+            {this.renderLookupList()}
+          </ClickOutside>
         </FormElement>
         {this.renderLookupTable()}
       </div>
     );
   }
 }
-
-export default enhanceWithClickOutside(LookupRaw);

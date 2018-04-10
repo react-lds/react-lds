@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import enhanceWithClickOutside from 'react-click-outside';
 
 import moment from 'moment-timezone';
 import 'moment-range';
 
-import { Input, IconButton } from '../../';
+import { ClickOutside, Input, IconButton } from '../../';
 
 const defaultDateFormat = 'l';
 const placeholderDateFormat = 'L';
@@ -219,6 +218,14 @@ export class DatepickerRaw extends Component {
   }
 
   /**
+   * Callback when an outside click occurs
+   * @return {void} interacts with component state
+   */
+  onClickOutside = () => {
+    this.setState({ open: false });
+  }
+
+  /**
    * Get provided translations or fall back to default values
    * @param  {String} key translation key
    * @return {String}     translation string
@@ -259,14 +266,6 @@ export class DatepickerRaw extends Component {
       acc[acc.length - 1].push([moment(val), monthRange.contains(val)]);
       return acc;
     }, [[]]).filter(bin => bin.length > 0);
-  }
-
-  /**
-   * Callback when an outside click occurs
-   * @return {void} interacts with component state
-   */
-  handleClickOutside = () => {
-    this.setState({ open: false });
   }
 
   /**
@@ -382,7 +381,7 @@ export class DatepickerRaw extends Component {
   }
 
   render() {
-    const { className, disabled, required } = this.props;
+    const { className, disabled, closeOnClickOutside, required } = this.props;
     const { inputValue, isValid, open, viewedDate } = this.state;
     const viewedMonthName = moment(viewedDate).format('MMMM');
 
@@ -391,7 +390,7 @@ export class DatepickerRaw extends Component {
     const error = isValid ? undefined : inputFieldError;
     const placeholder = moment().localeData().longDateFormat(placeholderDateFormat);
 
-    return (
+    const datepicker = (
       <div className={className} style={{ position: 'relative' }}>
         <Input
           disabled={disabled}
@@ -446,6 +445,16 @@ export class DatepickerRaw extends Component {
         )}
       </div>
     );
+
+    if (closeOnClickOutside) {
+      return (
+        <ClickOutside onClickOutside={this.onClickOutside} condition={open}>
+          {datepicker}
+        </ClickOutside>
+      );
+    }
+
+    return datepicker;
   }
 }
 
@@ -455,6 +464,7 @@ DatepickerRaw.defaultProps = {
   disabled: false,
   initialDate: null,
   locale: 'en',
+  closeOnClickOutside: false,
   open: false,
   required: false,
   timezone: 'America/Los_Angeles',
@@ -489,6 +499,10 @@ DatepickerRaw.propTypes = {
    */
   onChange: PropTypes.func.isRequired,
   /**
+   * Whether the datepicker closes automatically on an outside click
+   */
+  closeOnClickOutside: PropTypes.bool,
+  /**
    * Whether the datepicker is open or closed
    */
   open: PropTypes.bool,
@@ -514,4 +528,6 @@ DatepickerRaw.propTypes = {
   yearSpan: PropTypes.number,
 };
 
-export default enhanceWithClickOutside(DatepickerRaw);
+const Datepicker = props => <DatepickerRaw closeOnClickOutside {...props} />;
+
+export default Datepicker;

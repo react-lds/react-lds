@@ -12,7 +12,7 @@ import {
 class PicklistDropdown extends Component {
   constructor(props) {
     super(props);
-    this.state = { open: this.props.isOpen };
+    this.state = { open: this.props.open };
   }
 
   toggle = () => {
@@ -30,7 +30,7 @@ class PicklistDropdown extends Component {
       hideLabel,
       id,
       input,
-      isOpen,
+      open,
       labelInput,
       isRequired,
       size,
@@ -46,7 +46,7 @@ class PicklistDropdown extends Component {
       'slds-dropdown-trigger',
       'slds-combobox-picklist',
       'slds-dropdown-trigger_click',
-      { 'slds-is-open': !!isOpen },
+      { 'slds-is-open': !!open },
     ];
 
     this.comboboxFormElementClasses = [
@@ -66,7 +66,7 @@ class PicklistDropdown extends Component {
         <FormElementControl>
           <div className={cx(this.comboboxContainerClasses)}>
             <div
-              aria-expanded={isOpen}
+              aria-expanded={open}
               aria-haspopup
               className={cx(this.comboboxClasses)}
               role="combobox"
@@ -108,7 +108,7 @@ PicklistDropdown.propTypes = {
   /**
    * forces open or closed state, is needed when using a custom button
    */
-  isOpen: PropTypes.bool,
+  open: PropTypes.bool,
   /**
    * label for the input
    */
@@ -129,10 +129,11 @@ PicklistDropdown.propTypes = {
 PicklistDropdown.defaultProps = {
   disabled: false,
   error: null,
-  isOpen: false,
   hideLabel: false,
-  labelInput: '',
   isRequired: false,
+  labelInput: '',
+  open: false,
+  size: 'medium',
 };
 
 export default PicklistDropdown;

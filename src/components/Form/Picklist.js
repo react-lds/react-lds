@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import enhanceWithClickOutside from 'react-click-outside';
 import memoize from 'lodash/memoize';
 
 import {
+  ClickOutside,
   PicklistDropdown,
   PicklistDropdownList,
   PicklistDropdownListItem,
@@ -14,7 +14,7 @@ export class PicklistRaw extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { isOpen: false };
+    this.state = { open: false };
   }
 
   onSelect(key) {
@@ -22,17 +22,17 @@ export class PicklistRaw extends Component {
 
     onSelect(key);
 
-    if (closeOnSelect) this.setState({ isOpen: false });
+    if (closeOnSelect) this.setState({ open: false });
+  }
+
+  onClickOutside = () => {
+    this.setState({ open: false });
   }
 
   getSelectHandler = itemKey => memoize(() => this.onSelect(itemKey));
 
   toggle = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-  }
-
-  handleClickOutside() {
-    this.setState({ isOpen: false });
+    this.setState({ open: !this.state.open });
   }
 
   renderInput = () => {
@@ -103,17 +103,19 @@ export class PicklistRaw extends Component {
       isLabelHidden,
       isRequired,
       labelInput,
+      closeOnClickOutside,
       size,
     } = this.props;
+    const { open } = this.state;
 
-    return (
+    const picklist = (
       <PicklistDropdown
         className={className}
         error={error}
         hideLabel={isLabelHidden}
         id={`combobox-${id}`}
         input={this.renderInput()}
-        isOpen={this.state.isOpen}
+        open={open}
         isRequired={isRequired}
         labelInput={labelInput}
         size={size}
@@ -126,6 +128,16 @@ export class PicklistRaw extends Component {
         </PicklistDropdownList>
       </PicklistDropdown>
     );
+
+    if (closeOnClickOutside) {
+      return (
+        <ClickOutside onClickOutside={this.onClickOutside} condition={open}>
+          {picklist}
+        </ClickOutside>
+      );
+    }
+
+    return picklist;
   }
 }
 
@@ -183,6 +195,10 @@ PicklistRaw.propTypes = {
    */
   labelMultiselect: PropTypes.string,
   /**
+   * Whether the picklist closes automatically on an outside click
+   */
+  closeOnClickOutside: PropTypes.bool,
+  /**
    * triggered whenever an item was clicked, has the item's key as parameter
    */
   onSelect: PropTypes.func.isRequired,
@@ -208,7 +224,10 @@ PicklistRaw.defaultProps = {
   items: [],
   labelInput: '',
   labelMultiselect: '',
+  closeOnClickOutside: false,
   size: null,
 };
 
-export default enhanceWithClickOutside(PicklistRaw);
+const Picklist = props => <PicklistRaw closeOnClickOutside {...props} />;
+
+export default Picklist;
