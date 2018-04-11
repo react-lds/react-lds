@@ -29,7 +29,7 @@ describe('<Datepicker />', () => {
   it('renders additional className', () => {
     expect(mounted.hasClass('foo')).toBe(false);
     mounted = shallow(<Datepicker className="foo" onChange={changed} />);
-    expect(mounted.hasClass('foo')).toBe(true);
+    expect(mounted.children().hasClass('foo')).toBe(true);
   });
 
   it('can render as disabled', () => {

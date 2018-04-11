@@ -177,27 +177,16 @@ export class MenuRaw extends Component {
 
     const rest = omit(this.props, Object.keys(propTypes));
 
-    const Menu = (
-      <div {...rest} className={cx(this.dropdownClasses)}>
-        {children}
-      </div>
-    );
-
-    if (closeOnClickOutside) {
-      return (
-        <div className={cx(this.getClasses())}>
-          {this.button()}
-          <ClickOutside onClickOutside={this.onClickOutside} condition={open} >
-            {Menu}
-          </ClickOutside>
-        </div>
-      );
-    }
+    const condition = closeOnClickOutside && open;
 
     return (
       <div className={cx(this.getClasses())}>
         {this.button()}
-        {Menu}
+        <ClickOutside onClickOutside={this.onClickOutside} condition={condition} >
+          <div {...rest} className={cx(this.dropdownClasses)}>
+            {children}
+          </div>
+        </ClickOutside>
       </div>
     );
   }

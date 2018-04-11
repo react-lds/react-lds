@@ -390,81 +390,75 @@ export class DatepickerRaw extends Component {
     const error = isValid ? undefined : inputFieldError;
     const placeholder = moment().localeData().longDateFormat(placeholderDateFormat);
 
-    const datepicker = (
-      <div className={className} style={{ position: 'relative' }}>
-        <Input
-          disabled={disabled}
-          id="date-input"
-          label={inputFieldLabel}
-          placeholder={placeholder}
-          iconRight="monthlyview"
-          error={error}
-          value={inputValue || ''}
-          onFocus={e => this.onInputFieldClick(e.target.value)}
-          onChange={e => this.onInputFieldChange(e.target.value)}
-          required={required}
-        />
-        {open && (
-          <div
-            aria-label={`Date picker: ${viewedMonthName}`}
-            className="slds-datepicker slds-dropdown slds-dropdown_left"
-            role="dialog"
-          >
-            <div className="slds-datepicker__filter slds-grid">
-              <div className="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
-                <div className="slds-align-middle">
-                  <IconButton
-                    onClick={() => this.onMonthChange(-1)}
-                    sprite="utility"
-                    icon="left"
-                    container
-                  />
-                </div>
-                <h2 id="month" className="slds-align-middle">
-                  {viewedDate.format('MMMM')}
-                </h2>
-                <div className="slds-align-middle">
-                  <IconButton
-                    onClick={() => this.onMonthChange(1)}
-                    sprite="utility"
-                    icon="right"
-                    container
-                  />
-                </div>
-              </div>
-              {this.renderYearPicker()}
-            </div>
-            <table
-              className="slds-datepicker__month"
-              role="grid"
+    const condition = closeOnClickOutside && open;
+
+    return (
+      <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
+        <div className={className} style={{ position: 'relative' }}>
+          <Input
+            disabled={disabled}
+            id="date-input"
+            label={inputFieldLabel}
+            placeholder={placeholder}
+            iconRight="monthlyview"
+            error={error}
+            value={inputValue || ''}
+            onFocus={e => this.onInputFieldClick(e.target.value)}
+            onChange={e => this.onInputFieldChange(e.target.value)}
+            required={required}
+          />
+          {open && (
+            <div
+              aria-label={`Date picker: ${viewedMonthName}`}
+              className="slds-datepicker slds-dropdown slds-dropdown_left"
+              role="dialog"
             >
-              {DatepickerRaw.renderWeekHeader()}
-              {this.renderMonth()}
-            </table>
-          </div>
-        )}
-      </div>
+              <div className="slds-datepicker__filter slds-grid">
+                <div className="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
+                  <div className="slds-align-middle">
+                    <IconButton
+                      onClick={() => this.onMonthChange(-1)}
+                      sprite="utility"
+                      icon="left"
+                      container
+                    />
+                  </div>
+                  <h2 id="month" className="slds-align-middle">
+                    {viewedDate.format('MMMM')}
+                  </h2>
+                  <div className="slds-align-middle">
+                    <IconButton
+                      onClick={() => this.onMonthChange(1)}
+                      sprite="utility"
+                      icon="right"
+                      container
+                    />
+                  </div>
+                </div>
+                {this.renderYearPicker()}
+              </div>
+              <table
+                className="slds-datepicker__month"
+                role="grid"
+              >
+                {DatepickerRaw.renderWeekHeader()}
+                {this.renderMonth()}
+              </table>
+            </div>
+          )}
+        </div>
+      </ClickOutside>
     );
-
-    if (closeOnClickOutside) {
-      return (
-        <ClickOutside onClickOutside={this.onClickOutside} condition={open}>
-          {datepicker}
-        </ClickOutside>
-      );
-    }
-
-    return datepicker;
   }
 }
 
 DatepickerRaw.defaultProps = {
   className: null,
+  closeOnClickOutside: false,
   date: undefined,
   disabled: false,
   initialDate: null,
   locale: 'en',
-  closeOnClickOutside: false,
   open: false,
   required: false,
   timezone: 'America/Los_Angeles',

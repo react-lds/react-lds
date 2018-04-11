@@ -108,36 +108,30 @@ export class PicklistRaw extends Component {
     } = this.props;
     const { open } = this.state;
 
-    const picklist = (
-      <PicklistDropdown
-        className={className}
-        error={error}
-        hideLabel={isLabelHidden}
-        id={`combobox-${id}`}
-        input={this.renderInput()}
-        open={open}
-        isRequired={isRequired}
-        labelInput={labelInput}
-        size={size}
-      >
-        <PicklistDropdownList
-          height={height}
-          id={id}
+    const condition = closeOnClickOutside && open;
+
+    return (
+      <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
+        <PicklistDropdown
+          className={className}
+          error={error}
+          hideLabel={isLabelHidden}
+          id={`combobox-${id}`}
+          input={this.renderInput()}
+          open={open}
+          isRequired={isRequired}
+          labelInput={labelInput}
+          size={size}
         >
-          {this.renderPicklistItems()}
-        </PicklistDropdownList>
-      </PicklistDropdown>
+          <PicklistDropdownList
+            height={height}
+            id={id}
+          >
+            {this.renderPicklistItems()}
+          </PicklistDropdownList>
+        </PicklistDropdown>
+      </ClickOutside>
     );
-
-    if (closeOnClickOutside) {
-      return (
-        <ClickOutside onClickOutside={this.onClickOutside} condition={open}>
-          {picklist}
-        </ClickOutside>
-      );
-    }
-
-    return picklist;
   }
 }
 

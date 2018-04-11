@@ -64,7 +64,7 @@ export class ObjectHomeRaw extends Component {
     this.state = { menuIsOpen: false };
   }
 
-  onClickOutside() {
+  onClickOutside = () => {
     this.setState({ menuIsOpen: false });
   }
 
@@ -97,26 +97,7 @@ export class ObjectHomeRaw extends Component {
       'slds-no-space'
     ];
 
-    const renderMenu = () => {
-      const menu = (
-        <Menu
-          button={{ sprite: 'utility', icon: 'down', noBorder: true }}
-          isOpen={this.state.menuIsOpen}
-        >
-          {titleMenu}
-        </Menu>
-      );
-
-      if (closeOnClickOutside) {
-        return (
-          <ClickOutside onClickOutside={this.onClickOutside} condition={menuIsOpen}>
-            {menu}
-          </ClickOutside>
-        );
-      }
-
-      return menu;
-    };
+    const condition = closeOnClickOutside && menuIsOpen;
 
     return (
       <div {...rest} className={cx(sldsClasses)} role="banner">
@@ -132,7 +113,16 @@ export class ObjectHomeRaw extends Component {
                 >
                   {title}
                 </h1>
-                {titleMenu && renderMenu()}
+                {titleMenu && (
+                  <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
+                    <Menu
+                      button={{ sprite: 'utility', icon: 'down', noBorder: true }}
+                      isOpen={this.state.menuIsOpen}
+                    >
+                      {titleMenu}
+                    </Menu>
+                  </ClickOutside>
+                )}
               </Grid>
             </Grid>
           </Column>

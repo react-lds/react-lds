@@ -94,6 +94,10 @@ const propTypes = {
    */
   objectType: PropTypes.string,
   /**
+   * if set, closes lookup on an outside click
+   */
+  closeOnClickOutside: PropTypes.bool,
+  /**
    * onChange handler for the lookup. has selected items as first argument
    */
   onChange: PropTypes.func.isRequired,
@@ -133,30 +137,31 @@ const propTypes = {
   tableResultsHeading: PropTypes.string,
 };
 
-export default class Lookup extends PureComponent {
+export class LookupRaw extends PureComponent {
   static propTypes = propTypes;
 
   static defaultProps = {
     allowCreate: false,
     className: null,
+    closeOnClickOutside: false,
     emailLayout: false,
     error: null,
     hideErrorMessage: false,
     hideLabel: false,
     initialSelection: null,
-    loadOnFocus: true,
     loadOnChange: true,
+    loadOnFocus: true,
     loadOnMount: false,
     multi: false,
     objectType: 'default',
     onFocus: null,
     placeholder: 'Search',
-    tableResultsHeading: 'Results',
     renderSelection: null,
     required: false,
     selection: null,
     table: false,
     tableFields: [],
+    tableResultsHeading: 'Results',
   };
 
   static getSprite(objectType = '') {
@@ -218,7 +223,9 @@ export default class Lookup extends PureComponent {
     }
   }
 
-  onClickOutside = () => this.closeList(false);
+  onClickOutside = () => {
+    this.closeList(false);
+  }
 
   handleLoad = (searchTerm) => {
     const { searchTerm: prevSearchTerm } = this.state;
@@ -284,6 +291,7 @@ export default class Lookup extends PureComponent {
     });
   };
 
+
   addSelection(item) {
     const { multi, onChange, selection } = this.props;
     const { selected } = this.state;
@@ -341,7 +349,7 @@ export default class Lookup extends PureComponent {
       <Pill
         key={id}
         className={!multi ? 'slds-size_1-of-1' : null}
-        icon={objectType && (<Icon sprite={Lookup.getSprite(objectType)} icon={objectType} />)}
+        icon={objectType && (<Icon sprite={LookupRaw.getSprite(objectType)} icon={objectType} />)}
         id={id}
         title={label}
         label={label}
@@ -427,7 +435,7 @@ export default class Lookup extends PureComponent {
     const { listLabel, table } = this.props;
     const { loaded, selected } = this.state;
 
-    const displayItems = Lookup.filterDisplayItems(loaded, selected);
+    const displayItems = LookupRaw.filterDisplayItems(loaded, selected);
 
     if (table || !open || displayItems.length < 1) { return null; }
 
@@ -452,7 +460,7 @@ export default class Lookup extends PureComponent {
           >
             <Icon
               className="slds-media__figure"
-              sprite={Lookup.getSprite(objectType)}
+              sprite={LookupRaw.getSprite(objectType)}
               icon={objectType}
               size="small"
             />
@@ -485,7 +493,7 @@ export default class Lookup extends PureComponent {
     const { table, tableFields, tableResultsHeading } = this.props;
     const { loaded, selected } = this.state;
 
-    const displayItems = Lookup.filterDisplayItems(loaded, selected);
+    const displayItems = LookupRaw.filterDisplayItems(loaded, selected);
 
     if (!table || displayItems.length < 1) { return null; }
 
@@ -497,7 +505,7 @@ export default class Lookup extends PureComponent {
               <Icon
                 size="small"
                 className="slds-m-right_x-small"
-                sprite={Lookup.getSprite(objectType)}
+                sprite={LookupRaw.getSprite(objectType)}
                 icon={objectType}
               />
             )}
@@ -553,6 +561,7 @@ export default class Lookup extends PureComponent {
   render() {
     const {
       className,
+      closeOnClickOutside,
       emailLayout,
       error,
       hideLabel,
@@ -579,6 +588,8 @@ export default class Lookup extends PureComponent {
 
     const scope = multi ? null : 'single';
 
+    const condition = closeOnClickOutside && open;
+
     return (
       <div className={emailLayout ? cx(wrapperClasses) : null}>
         {emailLayout && (
@@ -601,7 +612,7 @@ export default class Lookup extends PureComponent {
               required={required}
             />
           )}
-          <ClickOutside onClickOutside={this.onClickOutside} condition={open}>
+          <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
             {this.renderInput()}
             {this.renderSelections()}
             {this.renderError()}
@@ -613,3 +624,7 @@ export default class Lookup extends PureComponent {
     );
   }
 }
+
+const Lookup = props => <LookupRaw closeOnClickOutside {...props} />;
+
+export default Lookup;
