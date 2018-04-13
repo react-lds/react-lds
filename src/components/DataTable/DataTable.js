@@ -134,7 +134,7 @@ class DataTable extends Component {
     const { getCellData, getRowId, rowRenderer, selection } = this.props;
     const rowId = getRowId({ rowIndex, rowData });
 
-    const cells = columns.map(({ cellRenderer, dataKey }) =>
+    const cells = columns.map(({ cellRenderer, dataKey, title }) =>
       cellRenderer({
         cellData: getCellData({ rowData, dataKey }),
         dataKey,
@@ -145,6 +145,7 @@ class DataTable extends Component {
         onSelect: this.onSelect,
         tableId: id,
         defaultProps: {
+          'data-label': title,
           key: `${rowId}-${dataKey}`,
           role: 'gridcell',
         },
