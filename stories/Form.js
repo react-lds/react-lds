@@ -143,8 +143,11 @@ stories
       ])}
       labelInput={text('Label', 'Tis a input label')}
       labelMultiselect={text('MultiSelect', '*multiselect label*')}
+      onAdd={action('added')}
+      onChange={action('changed')}
       onSelect={action('selected')}
       placeholder={text('Placeholder', 'Tis a placeholder')}
+      value="Foo"
     />
   ))
   .add('Checkbox', () => (

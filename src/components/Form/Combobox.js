@@ -69,6 +69,14 @@ export class ComboboxRaw extends Component {
      */
     labelMultiselect: PropTypes.string,
     /**
+     * called when adding a custom item in case the combobox isnt in readOnly mode
+     */
+    onAdd: PropTypes.func,
+    /**
+     * callback for changes in the input field
+     */
+    onChange: PropTypes.func,
+    /**
      * triggered whenever an item was clicked, has the item's key as parameter
      */
     onSelect: PropTypes.func.isRequired,
@@ -85,6 +93,10 @@ export class ComboboxRaw extends Component {
      * whether the combobox is required
      */
     required: PropTypes.bool,
+    /**
+     * value of the input element
+     */
+    value: PropTypes.string,
   }
 
   static defaultProps = {
@@ -98,13 +110,25 @@ export class ComboboxRaw extends Component {
     labelInput: '',
     labelMultiselect: '',
     multiEntity: false,
+    onAdd: null,
+    onChange: null,
     readOnly: false,
     required: false,
+    value: '',
   }
 
-  state = { open: false };
+  state = { open: false, inputValue: '' };
 
   onToggle = () => this.setState(({ open }) => ({ open: !open }))
+
+  onInputKeyDown = ({ keyCode, target: { value } }) => {
+    const { onAdd } = this.props;
+
+    // enter pressed?
+    if (keyCode === 13 && value && onAdd) {
+      onAdd(value);
+    }
+  };
 
   onSelect(key) {
     const { onSelect } = this.props;
@@ -133,13 +157,19 @@ export class ComboboxRaw extends Component {
       isDisabled,
       required,
       labelMultiselect,
+      onChange,
       placeholder,
       readOnly,
+      value,
     } = this.props;
 
     const formatLabel = () => {
       if (inlineListbox) {
         return undefined;
+      }
+
+      if (!readOnly) {
+        return value;
       }
 
       const selectedItems = this.getSelectedItems();
@@ -151,7 +181,7 @@ export class ComboboxRaw extends Component {
         return selectedItems[0].label;
       }
 
-      return undefined;
+      return '';
     };
 
     const label = formatLabel();
@@ -172,9 +202,11 @@ export class ComboboxRaw extends Component {
         iconRight={iconRight}
         iconRightOnClick={this.onToggle}
         id={`combobox-${id}`}
+        onChange={onChange}
         onClick={this.onToggle}
+        onKeyDown={readOnly ? null : this.onInputKeyDown}
         placeholder={placeholder}
-        readOnly
+        readOnly={readOnly}
         required={required}
         role="textbox"
         value={label}
