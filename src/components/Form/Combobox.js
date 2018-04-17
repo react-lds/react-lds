@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import enhanceWithClickOutside from 'react-click-outside';
 import cx from 'classnames';
 import memoize from 'lodash/memoize';
 
+import ComboboxDropdown from './ComboboxDropdown';
 import ComboboxDropdownList from './ComboboxDropdownList';
 import ComboboxDropdownListItem from './ComboboxDropdownListItem';
 
 import {
-  FormElement,
-  FormElementError,
-  FormElementControl,
-  FormElementLabel,
+  ClickOutside,
   Icon,
   InputRaw,
   Listbox,
@@ -23,6 +20,14 @@ export const propTypes = {
    * class name
    */
   className: PropTypes.string,
+  /**
+   * Whether the picklist closes automatically on an outside click
+   */
+  closeOnClickOutside: PropTypes.bool,
+  /**
+   * close the combobox when selecting an item
+   */
+  closeOnSelect: PropTypes.bool,
   /**
    * sets the number of items being displayed
    */
@@ -93,6 +98,10 @@ export const propTypes = {
    */
   required: PropTypes.bool,
   /**
+   * Picklist sizes: small, medium, large
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
    * value of the input element
    */
   value: PropTypes.string,
@@ -103,6 +112,8 @@ export class ComboboxRaw extends Component {
 
   static defaultProps = {
     className: null,
+    closeOnClickOutside: false,
+    closeOnSelect: true,
     error: null,
     height: null,
     disabled: false,
@@ -116,6 +127,7 @@ export class ComboboxRaw extends Component {
     onChange: null,
     readOnly: false,
     required: false,
+    size: null,
     value: '',
   }
 
@@ -133,10 +145,14 @@ export class ComboboxRaw extends Component {
   };
 
   onSelect(key) {
-    const { onSelect } = this.props;
+    const { closeOnSelect, onSelect } = this.props;
 
     onSelect(key);
 
+    if (closeOnSelect) this.setState({ open: false });
+  }
+
+  onClickOutside = () => {
     this.setState({ open: false });
   }
 
@@ -149,7 +165,7 @@ export class ComboboxRaw extends Component {
   }
 
   handleClickOutside() {
-    this.setState({ open: false });
+    this.setState({ open: !this.state.open });
   }
 
   renderInput() {
@@ -269,6 +285,7 @@ export class ComboboxRaw extends Component {
   render() {
     const {
       className,
+      closeOnClickOutside,
       error,
       height,
       hideLabel,
@@ -277,29 +294,12 @@ export class ComboboxRaw extends Component {
       labelInput,
       readOnly,
       required,
+      size,
     } = this.props;
 
     const { open } = this.state;
 
-    const containerClasses = [
-      className,
-      'slds-combobox_container',
-      { 'slds-has-inline-listbox': !!inlineListbox },
-    ];
-
-    const comboboxClasses = [
-      'slds-combobox',
-      'slds-dropdown-trigger',
-      'slds-combobox-picklist',
-      'slds-dropdown-trigger_click',
-      { 'slds-is-open': !!open },
-    ];
-
-    const formElementClasses = [
-      'slds-combobox__form-element',
-      'slds-input-has-icon',
-      'slds-input-has-icon_right',
-    ];
+    const condition = closeOnClickOutside && open;
 
     const renderPills = !inlineListbox && (
       (readOnly && this.getSelectedItems().length > 1) ||
@@ -307,36 +307,27 @@ export class ComboboxRaw extends Component {
     );
 
     return (
-      <FormElement required={required} error={error}>
-        <FormElementLabel
+      <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
+        <ComboboxDropdown
+          className={className}
+          error={error}
           hideLabel={hideLabel}
-          id={id}
-          label={labelInput}
+          id={`combobox-${id}`}
+          inlineListbox={inlineListbox ? this.renderInlineListbox() : null}
+          input={this.renderInput()}
+          labelInput={labelInput}
+          open={open}
+          pills={renderPills ? this.renderSelectedPills() : null}
           required={required}
-        />
-        <FormElementControl>
-          <div className={cx(containerClasses)}>
-            {inlineListbox && this.renderInlineListbox()}
-            <div
-              aria-expanded={open}
-              aria-haspopup
-              className={cx(comboboxClasses)}
-              role="combobox"
-            >
-              <div className={cx(formElementClasses)} role="none">
-                {this.renderInput()}
-              </div>
-              <ComboboxDropdownList height={height} id={id}>
-                {this.renderComboboxItems()}
-              </ComboboxDropdownList>
-              {renderPills && this.renderSelectedPills()}
-            </div>
-          </div>
-        </FormElementControl>
-        <FormElementError error={error} id={`error-${id}`} />
-      </FormElement>
+          size={size}
+        >
+          <ComboboxDropdownList height={height} id={id}>
+            {this.renderComboboxItems()}
+          </ComboboxDropdownList>
+        </ComboboxDropdown>
+      </ClickOutside>
     );
   }
 }
 
-export default enhanceWithClickOutside(ComboboxRaw);
+export default props => <ComboboxRaw closeOnClickOutside {...props} />;

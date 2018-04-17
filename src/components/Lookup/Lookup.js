@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import enhanceWithClickOutside from 'react-click-outside';
 import debounce from 'lodash/debounce';
 import omit from 'lodash/omit';
 
 import {
+  Cell,
+  ClickOutside,
   FormElement,
   FormElementControl,
   FormElementError,
@@ -14,9 +15,8 @@ import {
   InputRaw,
   Pill,
   PillContainer,
-  Table,
   Row,
-  Cell,
+  Table,
 } from '../../';
 
 
@@ -94,6 +94,10 @@ const propTypes = {
    */
   objectType: PropTypes.string,
   /**
+   * if set, closes lookup on an outside click
+   */
+  closeOnClickOutside: PropTypes.bool,
+  /**
    * onChange handler for the lookup. has selected items as first argument
    */
   onChange: PropTypes.func.isRequired,
@@ -139,24 +143,25 @@ export class LookupRaw extends PureComponent {
   static defaultProps = {
     allowCreate: false,
     className: null,
+    closeOnClickOutside: false,
     emailLayout: false,
     error: null,
     hideErrorMessage: false,
     hideLabel: false,
     initialSelection: null,
-    loadOnFocus: true,
     loadOnChange: true,
+    loadOnFocus: true,
     loadOnMount: false,
     multi: false,
     objectType: 'default',
     onFocus: null,
     placeholder: 'Search',
-    tableResultsHeading: 'Results',
     renderSelection: null,
     required: false,
     selection: null,
     table: false,
     tableFields: [],
+    tableResultsHeading: 'Results',
   };
 
   static getSprite(objectType = '') {
@@ -218,7 +223,7 @@ export class LookupRaw extends PureComponent {
     }
   }
 
-  handleClickOutside = () => {
+  onClickOutside = () => {
     this.closeList(false);
   }
 
@@ -556,6 +561,7 @@ export class LookupRaw extends PureComponent {
   render() {
     const {
       className,
+      closeOnClickOutside,
       emailLayout,
       error,
       hideLabel,
@@ -582,6 +588,8 @@ export class LookupRaw extends PureComponent {
 
     const scope = multi ? null : 'single';
 
+    const condition = closeOnClickOutside && open;
+
     return (
       <div className={emailLayout ? cx(wrapperClasses) : null}>
         {emailLayout && (
@@ -604,10 +612,12 @@ export class LookupRaw extends PureComponent {
               required={required}
             />
           )}
-          {this.renderInput()}
-          {this.renderSelections()}
-          {this.renderError()}
-          {this.renderLookupList()}
+          <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
+            {this.renderInput()}
+            {this.renderSelections()}
+            {this.renderError()}
+            {this.renderLookupList()}
+          </ClickOutside>
         </FormElement>
         {this.renderLookupTable()}
       </div>
@@ -615,4 +625,6 @@ export class LookupRaw extends PureComponent {
   }
 }
 
-export default enhanceWithClickOutside(LookupRaw);
+const Lookup = props => <LookupRaw closeOnClickOutside {...props} />;
+
+export default Lookup;

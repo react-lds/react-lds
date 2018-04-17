@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -9,85 +9,82 @@ import {
   FormElementLabel,
 } from '../../';
 
-class ComboboxDropdown extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { open: this.props.isOpen };
-  }
+const ComboboxDropdown = (props) => {
+  const {
+    children,
+    className,
+    error,
+    hideLabel,
+    id,
+    inlineListbox,
+    input,
+    labelInput,
+    open,
+    pills,
+    required,
+    size,
+  } = props;
 
-  toggle = () => {
-    this.setState(prevState => ({ open: !prevState.open }));
-  }
+  const containerClasses = [
+    className,
+    'slds-combobox_container',
+    { 'slds-has-inline-listbox': !!inlineListbox },
+    { [`slds-size_${size}`]: !!size },
+  ];
 
-  handleClickOutside() {
-    this.setState({ open: false });
-  }
+  const comboboxClasses = [
+    'slds-combobox',
+    'slds-dropdown-trigger',
+    'slds-combobox-picklist',
+    'slds-dropdown-trigger_click',
+    { 'slds-is-open': !!open },
+  ];
 
-  render() {
-    const {
-      children,
-      error,
-      hideLabel,
-      id,
-      input,
-      isOpen,
-      labelInput,
-      isRequired,
-    } = this.props;
+  const formElementClasses = [
+    'slds-combobox__form-element',
+    'slds-input-has-icon',
+    'slds-input-has-icon_right',
+  ];
 
-    this.comboboxContainerClasses = [
-      'slds-combobox_container',
-      'slds-size_small',
-    ];
-
-    this.comboboxClasses = [
-      'slds-combobox',
-      'slds-dropdown-trigger',
-      'slds-combobox-picklist',
-      'slds-dropdown-trigger_click',
-      { 'slds-is-open': !!isOpen },
-    ];
-
-    this.comboboxFormElementClasses = [
-      'slds-combobox__form-element',
-      'slds-input-has-icon',
-      'slds-input-has-icon_right',
-    ];
-
-    return (
-      <FormElement required={isRequired} error={error}>
-        <FormElementLabel
-          hideLabel={hideLabel}
-          id={id}
-          label={labelInput}
-          required={isRequired}
-        />
-        <FormElementControl>
-          <div className={cx(this.comboboxContainerClasses)}>
-            <div
-              aria-expanded={isOpen}
-              aria-haspopup
-              className={cx(this.comboboxClasses)}
-              role="combobox"
-            >
-              <div className={cx(this.comboboxFormElementClasses)}>
-                {input}
-                {isOpen && children}
-              </div>
+  return (
+    <FormElement required={required} error={error}>
+      <FormElementLabel
+        hideLabel={hideLabel}
+        id={id}
+        label={labelInput}
+        required={required}
+      />
+      <FormElementControl>
+        <div className={cx(containerClasses)}>
+          {inlineListbox}
+          <div
+            aria-expanded={open}
+            aria-haspopup
+            className={cx(comboboxClasses)}
+            role="combobox"
+          >
+            <div className={cx(formElementClasses)} role="none">
+              {input}
             </div>
+            {children}
+            {pills}
           </div>
-        </FormElementControl>
-        <FormElementError error={error} id={`error-${id}`} />
-      </FormElement>
-    );
-  }
-}
+        </div>
+      </FormElementControl>
+      <FormElementError error={error} id={`error-${id}`} />
+    </FormElement>
+  );
+};
 
 ComboboxDropdown.propTypes = {
   /**
    * one ComboboxDropdownList or many of them
    */
   children: PropTypes.node.isRequired,
+  /**
+   * class name
+   */
+  className: PropTypes.string,
   /**
   * input error
   */
@@ -101,13 +98,13 @@ ComboboxDropdown.propTypes = {
   */
   id: PropTypes.string.isRequired,
   /**
+   * optional inline listbox node
+   */
+  inlineListbox: PropTypes.node,
+  /**
    * input field
    */
   input: PropTypes.element.isRequired,
-  /**
-   * forces open or closed state, is needed when using a custom button
-   */
-  isOpen: PropTypes.bool,
   /**
    * label for the input
    */
@@ -116,18 +113,33 @@ ComboboxDropdown.propTypes = {
     PropTypes.node,
   ]),
   /**
+   * forces open or closed state, is needed when using a custom button
+   */
+  open: PropTypes.bool,
+  /**
+   * optional pills node
+   */
+  pills: PropTypes.node,
+  /**
    * indicates if the input is required
    */
-  isRequired: PropTypes.bool,
+  required: PropTypes.bool,
+  /**
+   * Picklist sizes: small, medium, large
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
 };
 
 ComboboxDropdown.defaultProps = {
-  disabled: false,
+  className: null,
   error: null,
-  isOpen: false,
   hideLabel: false,
+  inlineListbox: null,
   labelInput: '',
-  isRequired: false,
+  open: false,
+  pills: null,
+  required: false,
+  size: 'medium',
 };
 
 export default ComboboxDropdown;

@@ -5,10 +5,11 @@ import omit from 'lodash/omit';
 import Combobox, { ComboboxRaw, propTypes } from './Combobox';
 
 const makePicklist = Component => (
-  ({ isDisabled, isLabelHidden, isRequired, ...rest }) => ( // eslint-disable-line react/prop-types
+  ({ closeOnSelect, isDisabled, isLabelHidden, isRequired, ...rest }) => ( // eslint-disable-line react/prop-types
     <Component
+      closeOnSelect={closeOnSelect}
       disabled={isDisabled}
-      labelHidden={isLabelHidden}
+      hideLabel={isLabelHidden}
       readOnly
       required={isRequired}
       {...rest}
@@ -21,7 +22,6 @@ PicklistRaw.displayName = 'PicklistRaw';
 
 PicklistRaw.propTypes = {
   ...omit(propTypes, ['isDisabled', 'isLabelHidden', 'isRequired']),
-
   /**
   /**
    * whether the input is disabled
@@ -35,6 +35,10 @@ PicklistRaw.propTypes = {
    * whether the picklist is required
    */
   isRequired: PropTypes.bool,
+};
+
+PicklistRaw.defaultProps = {
+  closeOnSelect: false,
 };
 
 const Picklist = makePicklist(Combobox);

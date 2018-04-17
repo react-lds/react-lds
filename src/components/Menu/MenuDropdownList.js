@@ -82,4 +82,5 @@ MenuDropdownList.defaultProps = {
   height: null,
   heightIcon: null,
 };
+
 export default MenuDropdownList;
