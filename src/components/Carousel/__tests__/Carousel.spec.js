@@ -88,11 +88,13 @@ describe('<Carousel />', () => {
       .toBe(true);
 
     jest.runOnlyPendingTimers();
+    mounted.update();
 
     expect(mounted.find('CarouselPanel').at(1).prop('active'))
       .toBe(true);
 
     jest.runOnlyPendingTimers();
+    mounted.update();
 
     expect(mounted.find('CarouselPanel').at(0).prop('active'))
       .toBe(true);
@@ -108,6 +110,7 @@ describe('<Carousel />', () => {
       .toBe(true);
 
     jest.runOnlyPendingTimers();
+    mounted.update();
 
     expect(mounted.find('CarouselPanel').at(1).prop('active'))
       .toBe(true);
@@ -115,6 +118,7 @@ describe('<Carousel />', () => {
     mounted.find('Button').simulate('click');
 
     jest.runOnlyPendingTimers();
+    mounted.update();
 
     expect(mounted.find('CarouselPanel').at(1).prop('active'))
       .toBe(true);

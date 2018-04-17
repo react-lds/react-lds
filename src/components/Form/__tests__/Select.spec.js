@@ -23,8 +23,8 @@ describe('<Select />', () => {
     );
   });
 
-  it('renders the id', () => {
-    expect(mounted.find(`#${props.id}`).length).toBe(1);
+  it('renders the component', () => {
+    expect(mounted.find(Select).length).toBe(1);
   });
 
   it('attaches an onChange handler', () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, render } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import Spinner from '../Spinner';
 import SpinnerContainer from '../SpinnerContainer';
@@ -40,19 +40,19 @@ describe('<Spinner />', () => {
   });
 
   it('renders in container', () => {
-    const mounted = render(<SpinnerContainer><Spinner /></SpinnerContainer>);
+    const mounted = shallow(<SpinnerContainer><Spinner /></SpinnerContainer>);
     expect(mounted.find('.slds-spinner_container').length).toBe(1);
     expect(mounted.find('.slds-spinner_container').children().length).toBe(1);
   });
 
   it('renders in fixed container', () => {
-    const mounted = render(<SpinnerContainer fixed><Spinner /></SpinnerContainer>);
+    const mounted = shallow(<SpinnerContainer fixed><Spinner /></SpinnerContainer>);
     expect(mounted.find('.slds-is-fixed.slds-spinner_container').length).toBe(1);
     expect(mounted.find('.slds-is-fixed.slds-spinner_container').children().length).toBe(1);
   });
 
   it('applies className and rest-properties to SpinnerContainer', () => {
-    const mounted = render(<SpinnerContainer className="foo" data-test="bar"><Spinner /></SpinnerContainer>);
+    const mounted = shallow(<SpinnerContainer className="foo" data-test="bar"><Spinner /></SpinnerContainer>);
     expect(mounted.find('.slds-spinner_container').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-spinner_container').prop('data-test')).toEqual('bar');
   });

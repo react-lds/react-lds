@@ -26,8 +26,8 @@ describe('<Slider />', () => {
     mounted = mount(<Slider {...props} />);
   });
 
-  it('renders the id', () => {
-    expect(mounted.find(`#${props.id}`).length).toBe(1);
+  it('renders the component', () => {
+    expect(mounted.find(Slider).length).toBe(1);
   });
 
   it('renders control', () => {

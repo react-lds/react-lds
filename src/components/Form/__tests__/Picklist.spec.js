@@ -71,7 +71,7 @@ describe('</Picklist />', () => {
     const picklist = mounted.find('div.slds-combobox').first();
     expect(picklist.hasClass('slds-is-open')).toBeFalsy();
     picklist.find('input').simulate('click');
-    expect(picklist.hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('div.slds-combobox').first().hasClass('slds-is-open')).toBeTruthy();
   });
 
   it('sets the label of the currently selected item as input label', () => {
