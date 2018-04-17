@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import enhanceWithClickOutside from 'react-click-outside';
 
 import moment from 'moment-timezone';
 import 'moment-range';
 
-import { Input, IconButton } from '../../';
+import { ClickOutside, Input, IconButton } from '../../';
 
 const defaultDateFormat = 'l';
 const placeholderDateFormat = 'L';
@@ -219,6 +218,14 @@ export class DatepickerRaw extends Component {
   }
 
   /**
+   * Callback when an outside click occurs
+   * @return {void} interacts with component state
+   */
+  onClickOutside = () => {
+    this.setState({ open: false });
+  }
+
+  /**
    * Get provided translations or fall back to default values
    * @param  {String} key translation key
    * @return {String}     translation string
@@ -259,14 +266,6 @@ export class DatepickerRaw extends Component {
       acc[acc.length - 1].push([moment(val), monthRange.contains(val)]);
       return acc;
     }, [[]]).filter(bin => bin.length > 0);
-  }
-
-  /**
-   * Callback when an outside click occurs
-   * @return {void} interacts with component state
-   */
-  handleClickOutside = () => {
-    this.setState({ open: false });
   }
 
   /**
@@ -382,7 +381,7 @@ export class DatepickerRaw extends Component {
   }
 
   render() {
-    const { className, disabled, required } = this.props;
+    const { className, disabled, closeOnClickOutside, required } = this.props;
     const { inputValue, isValid, open, viewedDate } = this.state;
     const viewedMonthName = moment(viewedDate).format('MMMM');
 
@@ -391,66 +390,71 @@ export class DatepickerRaw extends Component {
     const error = isValid ? undefined : inputFieldError;
     const placeholder = moment().localeData().longDateFormat(placeholderDateFormat);
 
+    const condition = closeOnClickOutside && open;
+
     return (
-      <div className={className} style={{ position: 'relative' }}>
-        <Input
-          disabled={disabled}
-          id="date-input"
-          label={inputFieldLabel}
-          placeholder={placeholder}
-          iconRight="monthlyview"
-          error={error}
-          value={inputValue || ''}
-          onFocus={e => this.onInputFieldClick(e.target.value)}
-          onChange={e => this.onInputFieldChange(e.target.value)}
-          required={required}
-        />
-        {open && (
-          <div
-            aria-label={`Date picker: ${viewedMonthName}`}
-            className="slds-datepicker slds-dropdown slds-dropdown_left"
-            role="dialog"
-          >
-            <div className="slds-datepicker__filter slds-grid">
-              <div className="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
-                <div className="slds-align-middle">
-                  <IconButton
-                    onClick={() => this.onMonthChange(-1)}
-                    sprite="utility"
-                    icon="left"
-                    container
-                  />
-                </div>
-                <h2 id="month" className="slds-align-middle">
-                  {viewedDate.format('MMMM')}
-                </h2>
-                <div className="slds-align-middle">
-                  <IconButton
-                    onClick={() => this.onMonthChange(1)}
-                    sprite="utility"
-                    icon="right"
-                    container
-                  />
-                </div>
-              </div>
-              {this.renderYearPicker()}
-            </div>
-            <table
-              className="slds-datepicker__month"
-              role="grid"
+      <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
+        <div className={className} style={{ position: 'relative' }}>
+          <Input
+            disabled={disabled}
+            id="date-input"
+            label={inputFieldLabel}
+            placeholder={placeholder}
+            iconRight="monthlyview"
+            error={error}
+            value={inputValue || ''}
+            onFocus={e => this.onInputFieldClick(e.target.value)}
+            onChange={e => this.onInputFieldChange(e.target.value)}
+            required={required}
+          />
+          {open && (
+            <div
+              aria-label={`Date picker: ${viewedMonthName}`}
+              className="slds-datepicker slds-dropdown slds-dropdown_left"
+              role="dialog"
             >
-              {DatepickerRaw.renderWeekHeader()}
-              {this.renderMonth()}
-            </table>
-          </div>
-        )}
-      </div>
+              <div className="slds-datepicker__filter slds-grid">
+                <div className="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
+                  <div className="slds-align-middle">
+                    <IconButton
+                      onClick={() => this.onMonthChange(-1)}
+                      sprite="utility"
+                      icon="left"
+                      container
+                    />
+                  </div>
+                  <h2 id="month" className="slds-align-middle">
+                    {viewedDate.format('MMMM')}
+                  </h2>
+                  <div className="slds-align-middle">
+                    <IconButton
+                      onClick={() => this.onMonthChange(1)}
+                      sprite="utility"
+                      icon="right"
+                      container
+                    />
+                  </div>
+                </div>
+                {this.renderYearPicker()}
+              </div>
+              <table
+                className="slds-datepicker__month"
+                role="grid"
+              >
+                {DatepickerRaw.renderWeekHeader()}
+                {this.renderMonth()}
+              </table>
+            </div>
+          )}
+        </div>
+      </ClickOutside>
     );
   }
 }
 
 DatepickerRaw.defaultProps = {
   className: null,
+  closeOnClickOutside: false,
   date: undefined,
   disabled: false,
   initialDate: null,
@@ -489,6 +493,10 @@ DatepickerRaw.propTypes = {
    */
   onChange: PropTypes.func.isRequired,
   /**
+   * Whether the datepicker closes automatically on an outside click
+   */
+  closeOnClickOutside: PropTypes.bool,
+  /**
    * Whether the datepicker is open or closed
    */
   open: PropTypes.bool,
@@ -514,4 +522,6 @@ DatepickerRaw.propTypes = {
   yearSpan: PropTypes.number,
 };
 
-export default enhanceWithClickOutside(DatepickerRaw);
+const Datepicker = props => <DatepickerRaw closeOnClickOutside {...props} />;
+
+export default Datepicker;

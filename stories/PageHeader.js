@@ -10,7 +10,7 @@ import {
   RecordHome,
   MenuDropdownList,
   MenuDropdownListItem,
-  ObjectHomeRaw as ObjectHome
+  ObjectHome,
 } from '../src';
 
 const stories = storiesOf('PageHeader', module);

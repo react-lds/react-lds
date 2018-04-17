@@ -21,6 +21,7 @@ export * from './components/MediaObject';
 export * from './components/Menu';
 export * from './components/Modal';
 export * from './components/Alert';
+export * from './components/ClickOutside';
 export * from './components/PageHeader';
 export * from './components/Path';
 export * from './components/Pill';
