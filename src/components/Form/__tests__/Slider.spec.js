@@ -26,8 +26,10 @@ describe('<Slider />', () => {
     mounted = mount(<Slider {...props} />);
   });
 
-  it('renders the component', () => {
-    expect(mounted.find(Slider).length).toBe(1);
+  it('renders the component and attaches the id', () => {
+    const slider = mounted.find(Slider);
+    expect(slider.length).toEqual(1);
+    expect(slider.prop('id')).toEqual(props.id);
   });
 
   it('renders control', () => {

@@ -18,8 +18,10 @@ describe('<Checkbox />', () => {
     mounted = mount(<Checkbox {...props} />);
   });
 
-  it('renders the component', () => {
-    expect(mounted.find(Checkbox).length).toEqual(1);
+  it('renders the component and attaches the id', () => {
+    const checkbox = mounted.find(Checkbox);
+    expect(checkbox.length).toEqual(1);
+    expect(checkbox.prop('id')).toEqual(props.id);
   });
 
   it('attaches an onChange handler', () => {
