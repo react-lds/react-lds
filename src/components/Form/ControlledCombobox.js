@@ -15,8 +15,6 @@ export default class ControlledCombobox extends Component {
     ...omit(propTypes, ['onAdd', 'onSelect'])
   };
 
-  static defaultProps = Combobox.defaultProps;
-
   state = {
     items: [],
     value: '',
