@@ -92,7 +92,7 @@ describe('</Picklist />', () => {
 
   it('calls the callback function if an item is clicked', () => {
     const item = mounted.find('ul.slds-listbox').children().at(1);
-    item.find('span').first().simulate('click');
+    item.find('MediaObject').first().simulate('click');
     expect(onSelect).toHaveBeenCalledWith('1');
   });
 });

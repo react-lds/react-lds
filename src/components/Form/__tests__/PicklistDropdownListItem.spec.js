@@ -19,17 +19,17 @@ describe('<PicklistDropdownListItem />', () => {
   it('handles onClick', () => {
     const clickMock = jest.fn();
     mounted.setProps({ onClick: clickMock });
-    mounted.find('li > span').simulate('click');
+    mounted.find('MediaObject').simulate('click');
     expect(clickMock).toBeCalled();
   });
 
   it('renders children', () => {
-    expect(mounted.find('li > span').text()).toEqual('Option 1');
+    expect(mounted.find('MediaObject').text()).toEqual('Option 1');
   });
 
   it('renders selected child', () => {
     mounted.setProps({ selected: true });
-    expect(mounted.find('li > span').hasClass('slds-is-selected')).toBeTruthy();
+    expect(mounted.find('MediaObject').hasClass('slds-is-selected')).toBeTruthy();
   });
 
   it('renders icon', () => {

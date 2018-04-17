@@ -15,7 +15,7 @@ describe('<PicklistDropdown />', () => {
     hideLabel: false,
     id: 'picklist-1',
     input,
-    isOpen: false,
+    isOpen: true,
     labelInput: 'Label',
     isRequired: false,
   };
