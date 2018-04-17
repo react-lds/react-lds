@@ -6,11 +6,11 @@ import {
   Input,
   Textarea,
   Select,
-  PicklistRaw as Picklist,
+  Picklist,
   Checkbox,
   CheckboxRaw,
   CheckboxGroup,
-  ComboboxRaw as Combobox,
+  Combobox,
   ControlledCombobox,
   RadioRaw,
   RadioGroup,
@@ -157,7 +157,7 @@ stories
       error={text('Error', '') || undefined}
       height={select('Height', [5, 7, 10]) || undefined}
       id="picklist-1"
-      isDisabled={boolean('Disabled', false) || undefined}
+      disabled={boolean('Disabled', false) || undefined}
       hideLabel={boolean('Label hidden', false) || undefined}
       required={boolean('Required', false) || undefined}
       items={object('Items', [

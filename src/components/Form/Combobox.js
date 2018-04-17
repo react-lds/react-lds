@@ -38,7 +38,7 @@ export const propTypes = {
   /**
    * whether the input is disabled
    */
-  isDisabled: PropTypes.bool,
+  disabled: PropTypes.bool,
   /**
    * whether the input lable is visible
    */
@@ -105,7 +105,7 @@ export class ComboboxRaw extends Component {
     className: null,
     error: null,
     height: null,
-    isDisabled: false,
+    disabled: false,
     hideLabel: false,
     inlineListbox: false,
     items: [],
@@ -155,8 +155,7 @@ export class ComboboxRaw extends Component {
   renderInput() {
     const {
       id,
-      inlineListbox,
-      isDisabled,
+      disabled,
       required,
       labelMultiselect,
       onChange,
@@ -166,21 +165,17 @@ export class ComboboxRaw extends Component {
     } = this.props;
 
     const formatLabel = () => {
-      if (!readOnly) {
+      if (readOnly) {
+        const selectedItems = this.getSelectedItems();
+        const count = selectedItems.length;
+
+        if (count > 1) {
+          return `${count} ${labelMultiselect}`;
+        } else if (count === 1) {
+          return selectedItems[0].label;
+        }
+      } else {
         return value;
-      }
-
-      if (inlineListbox) {
-        return '';
-      }
-
-      const selectedItems = this.getSelectedItems();
-      const count = selectedItems.length;
-
-      if (count > 1) {
-        return `${count} ${labelMultiselect}`;
-      } else if (count === 1) {
-        return selectedItems[0].label;
       }
 
       return '';
@@ -200,7 +195,7 @@ export class ComboboxRaw extends Component {
         aria-controls={`listbox-${id}`}
         autoComplete="off"
         className={classNames}
-        disabled={isDisabled}
+        disabled={disabled}
         iconRight={iconRight}
         iconRightOnClick={this.onToggle}
         id={`combobox-${id}`}
@@ -280,6 +275,7 @@ export class ComboboxRaw extends Component {
       id,
       inlineListbox,
       labelInput,
+      readOnly,
       required,
     } = this.props;
 
@@ -305,7 +301,10 @@ export class ComboboxRaw extends Component {
       'slds-input-has-icon_right',
     ];
 
-    const renderPills = !inlineListbox && this.getSelectedItems().length > 1;
+    const renderPills = !inlineListbox && (
+      (readOnly && this.getSelectedItems().length > 1) ||
+      (!readOnly && this.getSelectedItems().length > 0)
+    );
 
     return (
       <FormElement required={required} error={error}>
