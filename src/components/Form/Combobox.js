@@ -18,86 +18,88 @@ import {
   Pill,
 } from '../..';
 
+export const propTypes = {
+  /**
+   * class name
+   */
+  className: PropTypes.string,
+  /**
+   * sets the number of items being displayed
+   */
+  error: PropTypes.string,
+  /**
+   * sets the number of items being displayed
+   */
+  height: PropTypes.number,
+  /**
+   * unique id
+   */
+  id: PropTypes.string.isRequired,
+  /**
+   * whether the input is disabled
+   */
+  isDisabled: PropTypes.bool,
+  /**
+   * whether the input lable is visible
+   */
+  hideLabel: PropTypes.bool,
+  /**
+   * toggle inline listbox mode
+   */
+  inlineListbox: PropTypes.bool,
+  /**
+   * list of displayed items
+   * `{ key: 'id123', label: 'first option', selected: false }`
+   */
+  items: PropTypes.arrayOf(PropTypes.shape({
+    key: PropTypes.any,
+    label: PropTypes.string,
+    selected: PropTypes.bool,
+  })),
+  /**
+   * label for input label
+   */
+  labelInput: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]),
+  /**
+   * label for multiple selected items
+   */
+  labelMultiselect: PropTypes.string,
+  /**
+   * called when adding a custom item in case the combobox isnt in readOnly mode
+   */
+  onAdd: PropTypes.func,
+  /**
+   * callback for changes in the input field
+   */
+  onChange: PropTypes.func,
+  /**
+   * triggered whenever an item was clicked, has the item's key as parameter
+   */
+  onSelect: PropTypes.func.isRequired,
+  /**
+   * placeholder for the input. if a selection is present,
+   * you should indicate it
+   */
+  placeholder: PropTypes.string.isRequired,
+  /**
+   * toggle readonly mode
+   */
+  readOnly: PropTypes.bool,
+  /**
+   * whether the combobox is required
+   */
+  required: PropTypes.bool,
+  /**
+   * value of the input element
+   */
+  value: PropTypes.string,
+};
+
 export class ComboboxRaw extends Component {
-  static propTypes = {
-    /**
-     * class name
-     */
-    className: PropTypes.string,
-    /**
-     * sets the number of items being displayed
-     */
-    error: PropTypes.string,
-    /**
-     * sets the number of items being displayed
-     */
-    height: PropTypes.number,
-    /**
-     * unique id
-     */
-    id: PropTypes.string.isRequired,
-    /**
-     * whether the input is disabled
-     */
-    isDisabled: PropTypes.bool,
-    /**
-     * whether the input lable is visible
-     */
-    hideLabel: PropTypes.bool,
-    /**
-     * toggle inline listbox mode
-     */
-    inlineListbox: PropTypes.bool,
-    /**
-     * list of displayed items
-     * `{ key: 'id123', label: 'first option', selected: false }`
-     */
-    items: PropTypes.arrayOf(PropTypes.shape({
-      key: PropTypes.any,
-      label: PropTypes.string,
-      selected: PropTypes.bool,
-    })),
-    /**
-     * label for input label
-     */
-    labelInput: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.node,
-    ]),
-    /**
-     * label for multiple selected items
-     */
-    labelMultiselect: PropTypes.string,
-    /**
-     * called when adding a custom item in case the combobox isnt in readOnly mode
-     */
-    onAdd: PropTypes.func,
-    /**
-     * callback for changes in the input field
-     */
-    onChange: PropTypes.func,
-    /**
-     * triggered whenever an item was clicked, has the item's key as parameter
-     */
-    onSelect: PropTypes.func.isRequired,
-    /**
-     * placeholder for the input. if a selection is present,
-     * you should indicate it
-     */
-    placeholder: PropTypes.string.isRequired,
-    /**
-     * toggle readonly mode
-     */
-    readOnly: PropTypes.bool,
-    /**
-     * whether the combobox is required
-     */
-    required: PropTypes.bool,
-    /**
-     * value of the input element
-     */
-    value: PropTypes.string,
-  }
+  static propTypes = propTypes
 
   static defaultProps = {
     className: null,
@@ -164,12 +166,12 @@ export class ComboboxRaw extends Component {
     } = this.props;
 
     const formatLabel = () => {
-      if (inlineListbox) {
-        return undefined;
-      }
-
       if (!readOnly) {
         return value;
+      }
+
+      if (inlineListbox) {
+        return '';
       }
 
       const selectedItems = this.getSelectedItems();
@@ -242,7 +244,7 @@ export class ComboboxRaw extends Component {
             key={key}
             label={label}
             title={label}
-            onClick={this.getSelectHandler(key)}
+            onClose={this.getSelectHandler(key)}
           />
         ))}
       </Listbox>
