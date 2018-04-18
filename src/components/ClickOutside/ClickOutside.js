@@ -90,16 +90,17 @@ export default class ClickOutside extends Component {
     const { onClickOutside, handleEsc } = this.props;
     if (handleEsc && e.key === 'Escape') {
       onClickOutside(e);
+      e.stopPropagation();
     }
   };
 
   render() {
     const {
-      children, condition: _, onClickOutside, useCapture, handleEsc, ...rest
+      children, condition, onClickOutside, useCapture, handleEsc, ...rest
     } = this.props;
 
     return (
-      <div tabIndex="-1" onKeyUp={this.handleKeyUp} {...rest} ref={this.getContainer}>
+      <div tabIndex="-1" onKeyUp={condition ? this.handleKeyUp : null} {...rest} ref={this.getContainer}>
         {children}
       </div>
     );
