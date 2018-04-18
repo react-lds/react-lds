@@ -88,10 +88,8 @@ export default class ClickOutside extends Component {
 
   handleKeyUp = (e) => {
     const { onClickOutside, handleEsc } = this.props;
-
     if (handleEsc && e.key === 'Escape') {
       onClickOutside(e);
-      e.stopPropagation();
     }
   };
 
