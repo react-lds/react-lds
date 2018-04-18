@@ -27,7 +27,7 @@ describe('<Menu />', () => {
     expect(menu.hasClass('slds-is-open')).toBeFalsy();
     expect(menu.find('Button').exists()).toBeTruthy();
     menu.find('Button').simulate('click');
-    expect(menu.hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('.slds-dropdown-trigger').hasClass('slds-is-open')).toBeTruthy();
   });
 
   it('starts as closed by default and defaultOpens', () => {
