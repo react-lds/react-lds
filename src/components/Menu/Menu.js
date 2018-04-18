@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 import ControlledMenu from './ControlledMenu';
+import { ClickOutside } from '../../';
+
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {
@@ -9,6 +11,10 @@ const propTypes = {
    * The button that triggers the dropdown menu
    */
   button: PropTypes.element.isRequired,
+  /**
+  * indicates if the menu closes automatically on an outside click
+  */
+  closeOnClickOutside: PropTypes.bool,
   /**
    * menu should start open
    */
@@ -19,6 +25,7 @@ class Menu extends Component {
   static propTypes = propTypes
 
   static defaultProps = {
+    closeOnClickOutside: false,
     defaultOpen: false,
   }
 
@@ -41,14 +48,18 @@ class Menu extends Component {
   }
 
   render() {
+    const { closeOnClickOutside } = this.props;
     const { open } = this.state;
-    const rest = omit(this.props, ['button', 'defaultOpen']);
+    const rest = omit(this.props, ['button', 'defaultOpen', 'closeOnClickOutside']);
+    const condition = closeOnClickOutside && open;
     return (
-      <ControlledMenu
-        {...rest}
-        button={this.getButton()}
-        isOpen={open}
-      />
+      <ClickOutside onClickOutside={this.onClickOutside} condition={condition} >
+        <ControlledMenu
+          {...rest}
+          button={this.getButton()}
+          isOpen={open}
+        />
+      </ClickOutside>
     );
   }
 }
