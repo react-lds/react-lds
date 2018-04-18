@@ -21,7 +21,7 @@ const propTypes = {
   defaultOpen: PropTypes.bool,
 };
 
-class Menu extends Component {
+export class MenuRaw extends Component {
   static propTypes = propTypes
 
   static defaultProps = {
@@ -34,6 +34,10 @@ class Menu extends Component {
     this.state = { open: this.props.defaultOpen };
   }
 
+  onClickOutside = () => {
+    this.setState({ open: false });
+  }
+
   getButton = () => {
     const { button } = this.props;
     return React.cloneElement(button, { onClick: this.toggle });
@@ -41,10 +45,6 @@ class Menu extends Component {
 
   toggle = () => {
     this.setState(prevState => ({ open: !prevState.open }));
-  }
-
-  handleClickOutside() {
-    this.setState({ open: false });
   }
 
   render() {
@@ -63,5 +63,7 @@ class Menu extends Component {
     );
   }
 }
+
+const Menu = props => <MenuRaw closeOnClickOutside {...props} />;
 
 export default Menu;

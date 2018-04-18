@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import enhanceWithClickOutside from 'react-click-outside';
 import omit from 'lodash/omit';
 
-import { Grid, Column, ControlledMenu, IconButton } from '../../';
+import {
+  ClickOutside,
+  Column,
+  Grid,
+  ControlledMenu,
+  IconButton
+} from '../../';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {
@@ -20,6 +25,10 @@ const propTypes = {
    * info that is displayed below the title
    */
   info: PropTypes.string,
+  /**
+   * Whether the menu closes automatically on an outside click
+   */
+  closeOnClickOutside: PropTypes.bool,
   /**
    * record type header above the title
    */
@@ -39,12 +48,13 @@ const propTypes = {
   topButtons: PropTypes.node,
 };
 
-export class ObjectHomeRaw extends Component {
+export class ObjectHome extends Component {
   static propTypes = propTypes;
 
   static defaultProps = {
     bottomButtons: null,
     className: null,
+    closeOnClickOutside: false,
     info: null,
     titleMenu: null,
     topButtons: null,
@@ -55,14 +65,29 @@ export class ObjectHomeRaw extends Component {
     this.state = { menuIsOpen: false };
   }
 
-  toggleMenu = () => this.setState(prevState => ({ menuIsOpen: !prevState.menuIsOpen }));
-
-  handleClickOutside() {
+  onClickOutside = () => {
     this.setState({ menuIsOpen: false });
   }
 
+  toggleMenu = () => this.setState(prevState => ({ menuIsOpen: !prevState.menuIsOpen }));
+
+  openMenu = () => {
+    this.setState({ menuIsOpen: true });
+  }
+
   render() {
-    const { bottomButtons, className, info, recordType, title, titleMenu, topButtons } = this.props;
+    const {
+      bottomButtons,
+      className,
+      closeOnClickOutside,
+      info,
+      recordType,
+      title,
+      titleMenu,
+      topButtons,
+    } = this.props;
+    const { menuIsOpen } = this.state;
+
     const rest = omit(this.props, Object.keys(propTypes));
 
     const sldsClasses = [
@@ -74,6 +99,8 @@ export class ObjectHomeRaw extends Component {
       { 'slds-type-focus': !!titleMenu },
       'slds-no-space'
     ];
+
+    const condition = closeOnClickOutside && menuIsOpen;
 
     return (
       <div {...rest} className={cx(sldsClasses)} role="banner">
@@ -90,17 +117,19 @@ export class ObjectHomeRaw extends Component {
                   {title}
                 </h1>
                 {titleMenu && (
-                  <ControlledMenu
-                    button={<IconButton
-                      container
-                      icon="down"
-                      sprite="utility"
-                      onClick={this.toggleMenu}
-                    />}
-                    isOpen={this.state.menuIsOpen}
-                  >
-                    {titleMenu}
-                  </ControlledMenu>
+                  <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
+                    <ControlledMenu
+                      button={<IconButton
+                        container
+                        icon="down"
+                        sprite="utility"
+                        onClick={this.toggleMenu}
+                      />}
+                      isOpen={this.state.menuIsOpen}
+                    >
+                      {titleMenu}
+                    </ControlledMenu>
+                  </ClickOutside>
                 )}
               </Grid>
             </Grid>
@@ -120,4 +149,4 @@ export class ObjectHomeRaw extends Component {
   }
 }
 
-export default enhanceWithClickOutside(ObjectHomeRaw);
+export default ObjectHome;

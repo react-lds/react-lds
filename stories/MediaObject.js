@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { array, boolean, select, text } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import { Icon, MediaObject } from '../src';
 
 const stories = storiesOf('MediaObject', module);

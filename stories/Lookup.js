@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean, object, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { Button, LookupRaw as Lookup } from '../src';
+import { Button, Lookup } from '../src';
 
 const stories = storiesOf('Lookup', module);
 

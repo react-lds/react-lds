@@ -1,7 +1,13 @@
 # Changelog
 
 ## Unreleased
- * _Menu_: **Breaking** `Menu` and `ControlledMenu` take `MenuItem` and `MenuSubHeader` as children. `Button` *must* be passed as prop. 
+ * _Menu_: **Breaking** `Menu` and `ControlledMenu` take `MenuItem` and `MenuSubHeader` as children. `Button` *must* be passed as prop.
+
+## 5.2.0
+
+* Enable usage of `Icon` with latest `<apex:slds />`
+* Automatically label responsive table rows
+* Fix lodash imports
 
 ## 5.1.0
 
