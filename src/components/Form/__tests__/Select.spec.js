@@ -23,9 +23,12 @@ describe('<Select />', () => {
     );
   });
 
-  it('renders the id', () => {
-    expect(mounted.find(`#${props.id}`).length).toBe(1);
+  it('renders the component and attaches the id', () => {
+    const select = mounted.find(Select);
+    expect(select.length).toEqual(1);
+    expect(select.prop('id')).toEqual(props.id);
   });
+
 
   it('attaches an onChange handler', () => {
     const select = mounted.find('select');

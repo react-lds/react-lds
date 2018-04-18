@@ -25,7 +25,7 @@ describe('<Menu />', () => {
     const menu = mounted.find('div').first();
     expect(menu.hasClass('slds-is-open')).toBeFalsy();
     menu.find('button').simulate('click');
-    expect(menu.hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('div').first().hasClass('slds-is-open')).toBeTruthy();
   });
 
   it('renders buttons with border per default', () => {
