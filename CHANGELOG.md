@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.0.0
+
+* Upgrade to React 16
+* Add custom outside click wrapper
+
 ## 5.2.0
 
 * Enable usage of `Icon` with latest `<apex:slds />`
