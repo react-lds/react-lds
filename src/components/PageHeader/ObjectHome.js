@@ -48,7 +48,7 @@ const propTypes = {
   topButtons: PropTypes.node,
 };
 
-export class ObjectHome extends Component {
+class ObjectHome extends Component {
   static propTypes = propTypes;
 
   static defaultProps = {
