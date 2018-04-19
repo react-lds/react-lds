@@ -92,9 +92,7 @@ export class MenuRaw extends Component {
     this.state = { open: this.props.isOpen };
   }
 
-  onClickOutside = () => {
-    this.setState({ open: false });
-  }
+  onClickOutside = () => this.setState({ open: false });
 
   getClasses() {
     if (!this.props.isOpen && !this.state.open) {
@@ -181,8 +179,8 @@ export class MenuRaw extends Component {
 
     return (
       <div className={cx(this.getClasses())}>
-        {this.button()}
-        <ClickOutside onClickOutside={this.onClickOutside} condition={condition} >
+        <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
+          {this.button()}
           <div {...rest} className={cx(this.dropdownClasses)}>
             {children}
           </div>
