@@ -26,11 +26,17 @@ export default class ClickOutside extends Component {
      * @type {Bool}
      */
     useCapture: PropTypes.bool,
+    /**
+     * Handle ESC key press as click outside
+     * @type {Bool}
+     */
+    handleEsc: PropTypes.bool,
   }
 
   static defaultProps = {
     condition: true,
     useCapture: false,
+    handleEsc: true,
   }
 
   componentDidMount() {
@@ -80,11 +86,23 @@ export default class ClickOutside extends Component {
     if (!$el.contains(e.target)) { onClickOutside(e); }
   }
 
+  handleKeyUp = (e) => {
+    const { onClickOutside, handleEsc } = this.props;
+    if (handleEsc && e.key === 'Escape') {
+      onClickOutside(e);
+      e.stopPropagation();
+    }
+  };
+
   render() {
     const {
-      children, condition: _, onClickOutside, useCapture, ...rest
+      children, condition, onClickOutside, useCapture, handleEsc, ...rest
     } = this.props;
 
-    return <div {...rest} ref={this.getContainer}>{children}</div>;
+    return (
+      <div tabIndex="-1" onKeyUp={condition ? this.handleKeyUp : null} {...rest} ref={this.getContainer}>
+        {children}
+      </div>
+    );
   }
 }

@@ -25,7 +25,7 @@ describe('<ObjectHome />', () => {
     const dropdown = mounted.find('div.slds-dropdown-trigger').first();
     expect(dropdown.hasClass('slds-is-open')).toBeFalsy();
     headline.simulate('click');
-    expect(dropdown.hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('div.slds-dropdown-trigger').first().hasClass('slds-is-open')).toBeTruthy();
   });
 
   it('contains the title', () => {

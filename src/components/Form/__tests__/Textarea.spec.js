@@ -19,8 +19,10 @@ describe('<Textarea />', () => {
     mounted = mount(<Textarea {...props} />);
   });
 
-  it('renders the id', () => {
-    expect(mounted.find(`#${props.id}`).length).toEqual(1);
+  it('renders the component and attaches the id', () => {
+    const textarea = mounted.find(Textarea);
+    expect(textarea.length).toEqual(1);
+    expect(textarea.prop('id')).toEqual(props.id);
   });
 
   it('attaches an onChange handler', () => {

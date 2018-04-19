@@ -34,9 +34,7 @@ export class MenuRaw extends Component {
     this.state = { open: this.props.defaultOpen };
   }
 
-  onClickOutside = () => {
-    this.setState({ open: false });
-  }
+  onClickOutside = () => this.setState({ open: false });
 
   getButton = () => {
     const { button } = this.props;

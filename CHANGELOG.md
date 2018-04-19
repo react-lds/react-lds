@@ -3,6 +3,15 @@
 ## Unreleased
  * _Menu_: **Breaking** `Menu` and `ControlledMenu` take `MenuItem` and `MenuSubHeader` as children. `Button` *must* be passed as prop.
 
+## 6.0.1
+
+* Add ESC key support for outside click wrapper
+
+## 6.0.0
+
+* Upgrade to React 16
+* Add custom outside click wrapper
+
 ## 5.2.0
 
 * Enable usage of `Icon` with latest `<apex:slds />`

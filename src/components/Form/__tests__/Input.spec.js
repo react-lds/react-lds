@@ -24,8 +24,14 @@ describe('<Input />', () => {
     mounted = mount(<Input {...props} />);
   });
 
-  it('renders the id', () => {
-    expect(mounted.find(`#${props.id}`).length).toEqual(1);
+  it('renders the component and attaches the id', () => {
+    const input = mounted.find(Input);
+    expect(input.length).toEqual(1);
+    expect(input.prop('id')).toEqual(props.id);
+  });
+
+  it('renders the component', () => {
+    expect(mounted.find(Input).length).toEqual(1);
   });
 
   it('attaches an onChange handler', () => {
