@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.0.1
+
+* Add ESC key support for outside click wrapper
+
 ## 6.0.0
 
 * Upgrade to React 16
