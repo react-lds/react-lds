@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import ModalHeader from './ModalHeader';
-import ModalFooter from './ModalFooter';
-import ModalContent from './ModalContent';
 import { getContentId, getTitleId } from './utils';
 
 class Modal extends Component {
@@ -16,25 +14,21 @@ class Modal extends Component {
 
   onKeyUp = (evt) => {
     const { key } = evt;
-    if (key === 'Escape') { this.onClose(evt); }
+    if (key === 'Escape') {
+      evt.stopPropagation();
+      this.onClose(evt);
+    }
   }
 
   cloneWithProps = (child) => {
     const { id, onClose } = this.props;
-    const type = child.type;
-
-    if (type === ModalContent) {
-      const contentId = getContentId(id);
-      return React.cloneElement(child, { id: contentId });
-    }
-
-    if (type === ModalFooter) {
-      return React.cloneElement(child, {
-        onClose: onClose ? this.onClose : null
-      });
-    }
-
-    return child;
+    // Passing props to both children, need to ignore onClose in body and vice versa
+    // react-hot-loader wraps a ProxyFacade, checking child.type is not really feasible
+    // https://github.com/gaearon/react-hot-loader/issues/938
+    return React.cloneElement(child, {
+      id: getContentId(id),
+      onClose: onClose ? this.onClose : null
+    });
   }
 
   render() {
