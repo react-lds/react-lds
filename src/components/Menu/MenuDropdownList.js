@@ -9,7 +9,7 @@ const MenuDropdownList = (props) => {
   const renderHeader = () => {
     if (header) {
       return (
-        <div className="slds-dropdown__header">
+        <div className="slds-dropdown__header slds-truncate">
           <span className="slds-text-title_caps">{header}</span>
         </div>
       );
