@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.0.2
+
+* Fix menu header markup for long titles
+* Fix Modal child type check when using react-hot-loader
+
 ## 6.0.1
 
 * Add ESC key support for outside click wrapper
