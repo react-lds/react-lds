@@ -10,6 +10,7 @@ const ModalFooter = ({
   directional,
   hideCloseButton,
   onClose,
+  id: _, // eslint-disable-line react/prop-types
   ...rest
 }) => (
   <footer
