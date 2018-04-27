@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.0.3
+
+* Upgrade `moment`, fix `moment-range` errors
+
 ## 6.0.2
 
 * Fix menu header markup for long titles
