@@ -1,8 +1,13 @@
 import React from 'react';
-import moment from 'moment';
+import Moment from 'moment-timezone';
+// eslint-disable-next-line
+import { extendMoment } from 'moment-range';
 import { shallow } from 'enzyme';
+
 import { DatepickerRaw as Datepicker } from '../Datepicker';
 import { IconButton } from '../../../';
+
+const moment = extendMoment(Moment);
 
 describe('<Datepicker />', () => {
   let mounted = null;
