@@ -22,8 +22,6 @@ const ModalContent = ({
   </div>
 );
 
-ModalContent.displayName = 'ModalContent';
-
 ModalContent.defaultProps = {
   className: null,
   id: null,

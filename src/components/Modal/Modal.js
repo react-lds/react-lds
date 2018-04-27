@@ -6,6 +6,14 @@ import ModalHeader from './ModalHeader';
 import { getContentId, getTitleId } from './utils';
 
 class Modal extends Component {
+  constructor(props) {
+    super(props);
+    this.focusTrapOptions = {
+      escapeDeactivates: false,
+      fallbackFocus: null,
+    };
+  }
+
   onClose = (evt) => {
     evt.stopPropagation();
     const { onClose } = this.props;
@@ -18,6 +26,10 @@ class Modal extends Component {
       evt.stopPropagation();
       this.onClose(evt);
     }
+  }
+
+  setRef = (ref) => {
+    this.focusTrapOptions.fallbackFocus = ref;
   }
 
   cloneWithProps = (child) => {
@@ -58,18 +70,22 @@ class Modal extends Component {
     );
 
     return (
-      <div>
+      <FocusTrap
+        active={open}
+        focusTrapOptions={this.focusTrapOptions}
+        onKeyUp={onClose ? this.onKeyUp : null}
+      >
         <section
           {...rest}
           className={sldsClasses}
-          onKeyUp={onClose ? this.onKeyUp : null}
+          ref={this.setRef}
           role={prompt ? 'alertdialog' : 'dialog'}
           tabIndex={-1}
           aria-modal="true"
           aria-describedby={contentId}
           aria-labelledby={titleId}
         >
-          <FocusTrap className="slds-modal__container" active={open}>
+          <div className="slds-modal__container">
             <ModalHeader
               id={titleId}
               onClose={onClose ? this.onClose : null}
@@ -78,15 +94,15 @@ class Modal extends Component {
               title={title}
             />
             {React.Children.map(children, this.cloneWithProps)}
-          </FocusTrap>
+          </div>
         </section>
         <div
-          className={cx(
+          className={cx([
             'slds-backdrop',
             { 'slds-backdrop_open': open }
-          )}
+          ])}
         />
-      </div>
+      </FocusTrap>
     );
   }
 }
