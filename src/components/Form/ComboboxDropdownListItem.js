@@ -4,92 +4,72 @@ import cx from 'classnames';
 
 import { IconSVG, MediaObject } from '../../';
 
+const renderIcon = (icon, selected) => {
+  if (icon) {
+    return (
+      <IconSVG
+        icon={icon.icon}
+        size="small"
+        sprite={icon.sprite}
+      />
+    );
+  }
+
+  if (selected) {
+    return (
+      <IconSVG
+        className="slds-listbox__icon-selected"
+        icon="check"
+        size="x-small"
+        sprite="utility"
+      />
+    );
+  }
+
+  return null;
+};
+
 const ComboboxDropdownListItem = (props) => {
   const {
     children,
     className,
-    onClick,
-    selected,
+    icon,
     id,
     isHeader,
-    icon,
+    onClick,
+    selected,
   } = props;
-
-  const renderIcon = () => {
-    if (icon) {
-      return (
-        <IconSVG
-          icon={icon.icon}
-          size="small"
-          sprite={icon.sprite}
-        />
-      );
-    }
-
-    if (selected) {
-      return (
-        <IconSVG
-          className="slds-listbox__icon-selected"
-          icon="check"
-          size="x-small"
-          sprite="utility"
-        />
-      );
-    }
-
-    return null;
-  };
 
   const sldsClasses = [
     'slds-listbox__item',
-    className,
+    { [className]: !isHeader },
   ];
 
   const itemClasses = [
     'slds-listbox__option',
     'slds-listbox__option_plain',
     { 'slds-is-selected': selected },
-    className,
   ];
 
-  const renderHeader = () => (
-    <li className="slds-listbox__item" role="presentation">
-      <MediaObject
-        center
-        className={cx(itemClasses)}
-        figureLeft={renderIcon()}
-        id={id}
-        onClick={onClick}
-        role="presentation"
-        truncate
-      >
-        <h3 className="slds-text-title_caps" role="presentation">
-          {children}
-        </h3>
-      </MediaObject>
-    </li>
-  );
-
-  const renderItem = () => (
+  return (
     <li className={cx(sldsClasses)} role="presentation">
       <MediaObject
         center
         className={cx(itemClasses)}
-        figureLeft={renderIcon()}
+        figureLeft={renderIcon(icon, selected)}
         id={id}
-        onClick={onClick}
-        role="option"
-        size="small"
+        onClick={isHeader ? undefined : onClick}
+        role={isHeader ? 'presentation' : 'option'}
         truncate
       >
-        {children}
+        {isHeader ? (
+          <h3 className="slds-text-title_caps" role="presentation">
+            {children}
+          </h3>
+        ) : children}
       </MediaObject>
     </li>
   );
-
-  return isHeader
-    ? renderHeader()
-    : renderItem();
 };
 
 ComboboxDropdownListItem.propTypes = {
@@ -101,6 +81,10 @@ ComboboxDropdownListItem.propTypes = {
    * class name
    */
   className: PropTypes.string,
+  /**
+   * indicates whether this is a header row.
+   */
+  isHeader: PropTypes.bool,
   /**
    * unique id
    */

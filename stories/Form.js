@@ -153,7 +153,7 @@ stories
       inlineListbox={boolean('Inline listbox variant', false)}
       readOnly={boolean('Read-only variant', false)}
       error={text('Error', '') || undefined}
-      height={select('Height', [5, 7, 10]) || undefined}
+      height={select('Height', [undefined, 5, 7, 10]) || undefined}
       id="picklist-1"
       isDisabled={boolean('Disabled', false) || undefined}
       hideLabel={boolean('Label hidden', false) || undefined}
@@ -174,7 +174,6 @@ stories
       onChange={action('changed')}
       onSelect={action('selected')}
       placeholder={text('Placeholder', 'Tis a placeholder')}
-      value="Foo"
     />
   ))
   .add('Controlled Combobox', () => (
@@ -182,7 +181,7 @@ stories
       inlineListbox={boolean('Inline listbox variant', false)}
       readOnly={boolean('Read-only variant', false)}
       error={text('Error', '') || undefined}
-      height={select('Height', [5, 7, 10]) || undefined}
+      height={select('Height', [undefined, 5, 7, 10]) || undefined}
       id="picklist-1"
       disabled={boolean('Disabled', false) || undefined}
       hideLabel={boolean('Label hidden', false) || undefined}

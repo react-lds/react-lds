@@ -115,7 +115,7 @@ export class ComboboxRaw extends Component {
     closeOnClickOutside: false,
     closeOnSelect: true,
     error: null,
-    height: null,
+    height: 7,
     disabled: false,
     hideLabel: false,
     inlineListbox: false,
@@ -135,11 +135,10 @@ export class ComboboxRaw extends Component {
 
   onToggle = () => this.setState(({ open }) => ({ open: !open }))
 
-  onInputKeyDown = ({ keyCode, target: { value } }) => {
+  onInputKeyDown = ({ key, target: { value } }) => {
     const { onAdd } = this.props;
 
-    // enter pressed?
-    if (keyCode === 13 && value && onAdd) {
+    if (key === 'Enter' && value && onAdd) {
       onAdd(value);
     }
   };
@@ -164,25 +163,20 @@ export class ComboboxRaw extends Component {
     return items.filter(item => item.selected === true);
   }
 
-  handleClickOutside() {
-    this.setState({ open: !this.state.open });
-  }
-
-  renderInput() {
+  renderInput(selectedItems) {
     const {
-      id,
       disabled,
-      required,
+      id,
       labelMultiselect,
       onChange,
       placeholder,
       readOnly,
+      required,
       value,
     } = this.props;
 
     const formatLabel = () => {
       if (readOnly) {
-        const selectedItems = this.getSelectedItems();
         const count = selectedItems.length;
 
         if (count > 1) {
@@ -230,25 +224,29 @@ export class ComboboxRaw extends Component {
   renderComboboxItems() {
     const { items } = this.props;
 
-    return items.map(item => (
+    return items.map(({
+      icon,
+      isHeader,
+      key,
+      label,
+      selected,
+    }) => (
       <ComboboxDropdownListItem
-        icon={item.icon}
-        id={`listbox-option-${item.key}`}
-        isHeader={item.isHeader}
-        key={item.key}
-        onClick={this.getSelectHandler(item.key)}
-        selected={item.selected}
+        icon={icon}
+        id={`listbox-option-${key}`}
+        isHeader={isHeader}
+        key={key}
+        onClick={this.getSelectHandler(key)}
+        selected={selected}
       >
-        {item.label}
+        {label}
       </ComboboxDropdownListItem>
     ));
   }
 
-  renderInlineListbox() {
-    const selectedItems = this.getSelectedItems();
-
+  renderListbox(selectedItems, className) {
     return (
-      <Listbox className="slds-listbox_inline">
+      <Listbox className={cx('slds-listbox_inline', className)}>
         {selectedItems.map(({ icon, key, label }) => (
           <Pill
             icon={icon ? <Icon icon={icon.icon} size="small" sprite={icon.sprite} /> : null}
@@ -256,26 +254,6 @@ export class ComboboxRaw extends Component {
             label={label}
             title={label}
             onClose={this.getSelectHandler(key)}
-          />
-        ))}
-      </Listbox>
-    );
-  }
-
-  renderSelectedPills() {
-    const { onSelect } = this.props;
-
-    const selectedItems = this.getSelectedItems();
-
-    return (
-      <Listbox className="slds-listbox_inline slds-p-top_xxx-small">
-        {selectedItems.map(({ icon, key, label }) => (
-          <Pill
-            icon={icon ? <Icon icon={icon.icon} size="small" sprite={icon.sprite} /> : null}
-            key={key}
-            label={label}
-            title={label}
-            onClose={() => onSelect(key)}
           />
         ))}
       </Listbox>
@@ -301,9 +279,11 @@ export class ComboboxRaw extends Component {
 
     const condition = closeOnClickOutside && open;
 
+    const selectedItems = this.getSelectedItems();
+
     const renderPills = !inlineListbox && (
-      (readOnly && this.getSelectedItems().length > 1) ||
-      (!readOnly && this.getSelectedItems().length > 0)
+      (readOnly && selectedItems.length > 1) ||
+      (!readOnly && selectedItems.length > 0)
     );
 
     return (
@@ -313,11 +293,11 @@ export class ComboboxRaw extends Component {
           error={error}
           hideLabel={hideLabel}
           id={`combobox-${id}`}
-          inlineListbox={inlineListbox ? this.renderInlineListbox() : null}
-          input={this.renderInput()}
+          inlineListbox={inlineListbox ? this.renderListbox(selectedItems) : null}
+          input={this.renderInput(selectedItems)}
           labelInput={labelInput}
           open={open}
-          pills={renderPills ? this.renderSelectedPills() : null}
+          pills={renderPills ? this.renderListbox(selectedItems, 'slds-p-top_xxx-small') : null}
           required={required}
           size={size}
         >
@@ -330,4 +310,6 @@ export class ComboboxRaw extends Component {
   }
 }
 
-export default props => <ComboboxRaw closeOnClickOutside {...props} />;
+const Combobox = props => <ComboboxRaw closeOnClickOutside {...props} />;
+
+export default Combobox;

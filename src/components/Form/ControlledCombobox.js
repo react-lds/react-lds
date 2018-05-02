@@ -84,10 +84,10 @@ export default class ControlledCombobox extends Component {
     return (
       <Combobox
         {...rest}
+        items={items}
         onAdd={this.onAdd}
         onChange={this.onChange}
         onSelect={this.onSelect}
-        items={items}
         value={value}
       />
     );
