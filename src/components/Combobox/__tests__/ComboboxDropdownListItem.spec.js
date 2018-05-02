@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { MediaObject } from '../../..';
+import { MediaObject } from '../../MediaObject';
 
 import ComboboxDropdownListItem from '../ComboboxDropdownListItem';
 

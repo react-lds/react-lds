@@ -1,3 +1,3 @@
-import ComboboxDropdownListItem from './ComboboxDropdownListItem';
+import { ComboboxDropdownListItem } from '../..';
 
 export default ComboboxDropdownListItem;

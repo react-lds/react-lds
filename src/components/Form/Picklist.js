@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 
-import ControlledCombobox, { propTypes } from './ControlledCombobox';
+import ControlledCombobox, { propTypes } from '../Combobox/ControlledCombobox';
 
 const makePicklist = (Component, defaultProps) => (
   ({ isDisabled, isLabelHidden, isRequired, ...rest }) => ( // eslint-disable-line react/prop-types

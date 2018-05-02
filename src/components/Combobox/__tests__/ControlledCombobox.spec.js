@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { ComboboxRaw as Combobox } from '../Combobox';
+import Combobox from '../ControlledCombobox';
 
 describe('</Combobox />', () => {
   let mounted = null;

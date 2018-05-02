@@ -5,8 +5,6 @@ import FormElementLabel from './FormElementLabel';
 import Checkbox from './Checkbox';
 import CheckboxRaw from './CheckboxRaw';
 import CheckboxGroup from './CheckboxGroup';
-import Combobox, { ComboboxRaw } from './Combobox';
-import ControlledCombobox from './ControlledCombobox';
 import Input from './Input';
 import InputRaw from './InputRaw';
 import Picklist, { PicklistRaw } from './Picklist';
@@ -28,9 +26,6 @@ export {
   Checkbox,
   CheckboxRaw,
   CheckboxGroup,
-  Combobox,
-  ComboboxRaw,
-  ControlledCombobox,
   Input,
   InputRaw,
   Picklist,
