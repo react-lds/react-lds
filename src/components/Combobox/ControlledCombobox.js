@@ -287,25 +287,25 @@ export default class ControlledCombobox extends Component {
     );
 
     return (
-      <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
-        <ComboboxDropdown
-          className={className}
-          error={error}
-          hideLabel={hideLabel}
-          id={`combobox-${id}`}
-          inlineListbox={inlineListbox ? this.renderListbox(selectedItems) : null}
-          input={this.renderInput(selectedItems)}
-          labelInput={labelInput}
-          open={open}
-          pills={renderPills ? this.renderListbox(selectedItems, 'slds-p-top_xxx-small') : null}
-          required={required}
-          size={size}
-        >
+      <ComboboxDropdown
+        className={className}
+        error={error}
+        hideLabel={hideLabel}
+        id={`combobox-${id}`}
+        inlineListbox={inlineListbox ? this.renderListbox(selectedItems) : null}
+        input={this.renderInput(selectedItems)}
+        labelInput={labelInput}
+        open={open}
+        pills={renderPills ? this.renderListbox(selectedItems, 'slds-p-top_xxx-small') : null}
+        required={required}
+        size={size}
+      >
+        <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
           <ComboboxDropdownList height={height} id={id}>
             {this.renderComboboxItems()}
           </ComboboxDropdownList>
-        </ComboboxDropdown>
-      </ClickOutside>
+        </ClickOutside>
+      </ComboboxDropdown>
     );
   }
 }
