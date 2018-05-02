@@ -4,7 +4,7 @@ import { text, boolean, select, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { Combobox, ControlledCombobox } from '../src';
 
-const stories = storiesOf('Form', module);
+const stories = storiesOf('Combobox', module);
 
 stories
   .add('Default', () => (
