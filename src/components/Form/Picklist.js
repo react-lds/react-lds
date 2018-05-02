@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 
-import Combobox, { ComboboxRaw, propTypes } from './Combobox';
+import ControlledCombobox, { propTypes } from './ControlledCombobox';
 
-const makePicklist = Component => (
-  ({ closeOnSelect, isDisabled, isLabelHidden, isRequired, ...rest }) => ( // eslint-disable-line react/prop-types
+const makePicklist = (Component, defaultProps) => (
+  ({ isDisabled, isLabelHidden, isRequired, ...rest }) => ( // eslint-disable-line react/prop-types
     <Component
-      closeOnSelect={closeOnSelect}
+      {...defaultProps}
       disabled={isDisabled}
       hideLabel={isLabelHidden}
       readOnly
@@ -17,11 +17,11 @@ const makePicklist = Component => (
   )
 );
 
-export const PicklistRaw = makePicklist(ComboboxRaw);
+export const PicklistRaw = makePicklist(ControlledCombobox, { closeOnClickOutside: false });
 PicklistRaw.displayName = 'PicklistRaw';
 
 PicklistRaw.propTypes = {
-  ...omit(propTypes, ['isDisabled', 'isLabelHidden', 'isRequired']),
+  ...omit(propTypes, ['disabled', 'hideLabel', 'required']),
   /**
   /**
    * whether the input is disabled
@@ -41,7 +41,7 @@ PicklistRaw.defaultProps = {
   closeOnSelect: false,
 };
 
-const Picklist = makePicklist(Combobox);
+const Picklist = makePicklist(ControlledCombobox);
 Picklist.displayName = 'Picklist';
 
 export default Picklist;

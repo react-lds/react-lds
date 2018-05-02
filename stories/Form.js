@@ -155,7 +155,7 @@ stories
       error={text('Error', '') || undefined}
       height={select('Height', [undefined, 5, 7, 10]) || undefined}
       id="picklist-1"
-      isDisabled={boolean('Disabled', false) || undefined}
+      disabled={boolean('Disabled', false) || undefined}
       hideLabel={boolean('Label hidden', false) || undefined}
       required={boolean('Required', false) || undefined}
       items={object('Items', [
@@ -183,7 +183,7 @@ stories
       error={text('Error', '') || undefined}
       height={select('Height', [undefined, 5, 7, 10]) || undefined}
       id="picklist-1"
-      disabled={boolean('Disabled', false) || undefined}
+      isDisabled={boolean('Disabled', false) || undefined}
       hideLabel={boolean('Label hidden', false) || undefined}
       required={boolean('Required', false) || undefined}
       items={object('Items', [
@@ -198,7 +198,9 @@ stories
       ])}
       labelInput={text('Label', 'Tis a input label')}
       labelMultiselect={text('MultiSelect', '*multiselect label*')}
+      onAdd={action('added')}
       onChange={action('changed')}
+      onSelect={action('selected')}
       placeholder={text('Placeholder', 'Tis a placeholder')}
     />
   ))
