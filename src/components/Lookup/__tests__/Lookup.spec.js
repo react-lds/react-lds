@@ -144,10 +144,9 @@ describe('<Lookup />', () => {
 
   it('renders selections correctly', () => {
     mounted.setState({ selected: [sampleData[0]] });
-
     const firstData = sampleData[0];
     const result = mounted.find('.slds-pill');
-    expect(result.find('.slds-pill__remove').length).toBe(1);
+    expect(result.find('button.slds-pill__remove').length).toBe(1);
     expect(result.find('.slds-pill__label').text()).toEqual(firstData.label);
     expect(result.find('IconSVG').first().prop('icon')).toEqual(firstData.objectType);
   });
@@ -261,7 +260,7 @@ describe('<Lookup />', () => {
   it('shows the input if the selection is cleared', () => {
     mounted.setState({ selected: [sampleData[0]] });
     expect(mounted.find('input').length).toBe(0);
-    mounted.find('.slds-pill__remove').simulate('click');
+    mounted.find('button.slds-pill__remove').simulate('click');
     expect(mounted.find('input').length).toBe(1);
   });
 
@@ -282,8 +281,8 @@ describe('<Lookup />', () => {
 
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
-    expect(mounted.find('.slds-lookup').hasClass('foo')).toBeTruthy();
-    expect(mounted.find('.slds-lookup').prop('data-test')).toEqual('bar');
+    expect(mounted.find('div.slds-lookup').hasClass('foo')).toBeTruthy();
+    expect(mounted.find('div.slds-lookup').prop('data-test')).toEqual('bar');
   });
 
   it('resets selection & loading state when the objectType of the lookup changes', () => {

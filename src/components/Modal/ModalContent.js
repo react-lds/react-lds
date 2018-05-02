@@ -6,6 +6,7 @@ const ModalContent = ({
   children,
   className,
   id,
+  onClose: _, // eslint-disable-line react/prop-types
   ...rest
 }) => (
   <div
@@ -20,8 +21,6 @@ const ModalContent = ({
     {children}
   </div>
 );
-
-ModalContent.displayName = 'ModalContent';
 
 ModalContent.defaultProps = {
   className: null,

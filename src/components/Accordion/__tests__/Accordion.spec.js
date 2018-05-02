@@ -68,7 +68,7 @@ describe('<Accordion />', () => {
   });
 
   it('defaults to default classes', () => {
-    const mounted = render(
+    const mounted = mount(
       <Accordion>
         <AccordionSection
           summary="summary for 1st section"
@@ -111,7 +111,7 @@ describe('<Accordion />', () => {
   });
 
   it('applies className and rest-properties to Accordion', () => {
-    const mounted = render(
+    const mounted = mount(
       <Accordion className="foo" data-test="bar">
         <AccordionSection
           summary="summary for 1st section"
@@ -142,7 +142,7 @@ describe('<Accordion />', () => {
   });
 
   it('applies className and rest-properties to AccordionSection', () => {
-    const mounted = render(
+    const mounted = mount(
       <Accordion>
         <AccordionSection
           summary="summary for 1st section"
@@ -175,7 +175,7 @@ describe('<Accordion />', () => {
   });
 
   it('takes styled prop and wraps Accordion in slds-card', () => {
-    const mounted = render(
+    const mounted = mount(
       <Accordion styled>
         <AccordionSection
           summary="summary for 1st section"
@@ -219,8 +219,8 @@ describe('<Accordion />', () => {
       </Accordion>
     );
 
-    expect(mounted.find('#section-2').first().hasClass('slds-is-open')).toBeTruthy();
-    expect(mounted.find('#section-1').first().hasClass('slds-is-open')).toBeFalsy();
+    expect(mounted.find('section #section-2').first().hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('section #section-1').first().hasClass('slds-is-open')).toBeFalsy();
   });
 
   it('takes array as defaultOpen and renders those sections open', () => {
@@ -250,8 +250,8 @@ describe('<Accordion />', () => {
       </Accordion>
     );
 
-    expect(mounted.find('#section-1').first().hasClass('slds-is-open')).toBeTruthy();
-    expect(mounted.find('#section-2').first().hasClass('slds-is-open')).toBeTruthy();
-    expect(mounted.find('#section-3').first().hasClass('slds-is-open')).toBeFalsy();
+    expect(mounted.find('section #section-1').first().hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('section #section-2').first().hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('section #section-3').first().hasClass('slds-is-open')).toBeFalsy();
   });
 });

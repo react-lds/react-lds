@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import moment from 'moment-timezone';
-import 'moment-range';
-
+import Moment from 'moment-timezone';
+// eslint-disable-next-line
+import { extendMoment } from 'moment-range';
 import { ClickOutside, Input, IconButton } from '../../';
+
+const moment = extendMoment(Moment);
 
 const defaultDateFormat = 'l';
 const placeholderDateFormat = 'L';
@@ -261,11 +263,11 @@ export class DatepickerRaw extends Component {
     const fullWeekRange = moment.range(firstDayFirstWeek, lastDayLastWeek);
 
     // Return filled week bins
-    return fullWeekRange.toArray('days').reduce((acc, val) => {
+    return Array.from(fullWeekRange.by('days')).reduce((acc, val) => {
       if (moment(val).day() % 7 === 0) { acc.push([]); }
       acc[acc.length - 1].push([moment(val), monthRange.contains(val)]);
       return acc;
-    }, [[]]).filter(bin => bin.length > 0);
+    }, [[]]).filter(bin => bin.length > 1);
   }
 
   /**
@@ -278,7 +280,8 @@ export class DatepickerRaw extends Component {
 
     const prevYears = moment(viewedDate).subtract(yearSpan, 'years');
     const nextYears = moment(viewedDate).add(yearSpan, 'years');
-    return moment.range(prevYears, nextYears).toArray('years').map((momentYear) => {
+    const yearsRange = moment.range(prevYears, nextYears);
+    return Array.from(yearsRange.by('years')).map((momentYear) => {
       const year = moment(momentYear).year();
       return <option key={year} value={year}>{year}</option>;
     });

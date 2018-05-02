@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import FocusTrap from 'focus-trap-react';
 import Modal from '../Modal';
 import ModalContent from '../ModalContent';
 import ModalFooter from '../ModalFooter';
@@ -28,14 +29,14 @@ describe('<Modal />', () => {
     const mounted = getComponent();
     expect(mounted.find('.slds-modal').hasClass('slds-fade-in-open')).toBeFalsy();
     expect(mounted.find('.slds-backdrop').hasClass('slds-backdrop_open')).toBeFalsy();
-    expect(mounted.find('FocusTrap').prop('active')).toBeFalsy();
+    expect(mounted.find(FocusTrap).prop('active')).toBeFalsy();
   });
 
   it('renders as open', () => {
     const mounted = getComponent({ open: true });
     expect(mounted.find('.slds-modal').hasClass('slds-fade-in-open')).toBeTruthy();
     expect(mounted.find('.slds-backdrop').hasClass('slds-backdrop_open')).toBeTruthy();
-    expect(mounted.find('FocusTrap').prop('active')).toBeTruthy();
+    expect(mounted.find(FocusTrap).prop('active')).toBeTruthy();
   });
 
   it('renders with a different transitionStyle', () => {
@@ -64,7 +65,7 @@ describe('<Modal />', () => {
   it('closes the modal when esc is pressed', () => {
     const mockFn = jest.fn();
     const mounted = getComponent({ onClose: mockFn });
-    mounted.find('section').simulate('keyUp', { key: 'Escape', stopPropagation: jest.fn() });
+    mounted.find(FocusTrap).simulate('keyUp', { key: 'Escape', stopPropagation: jest.fn() });
     expect(mockFn).toHaveBeenCalled();
   });
 });

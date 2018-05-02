@@ -22,7 +22,7 @@ describe('<Alert />', () => {
     const notification = container.find('.slds-notify');
     expect(notification.find('button').length).toBe(1);
     expect(notification.find('button > .slds-assistive-text').length).toBe(1);
-    expect(notification.find('> .slds-assistive-text').length).toBe(1);
+    expect(notification.find('button > .slds-assistive-text').length).toBe(1);
     expect(notification.contains(child)).toBeTruthy();
   });
 
