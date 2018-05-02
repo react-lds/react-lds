@@ -97,6 +97,8 @@ class ControlledMenu extends Component {
     return React.Children.map(children, (child, index) => {
       const id = getUniqueHash('item', index);
 
+      if (!child) return null;
+
       if (child.type !== MenuItem) {
         return React.cloneElement(child, {
           key: id
