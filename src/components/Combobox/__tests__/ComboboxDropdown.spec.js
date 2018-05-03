@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import PicklistDropdown from '../PicklistDropdown';
+import ComboboxDropdown from '../ComboboxDropdown';
 
-describe('<PicklistDropdown />', () => {
+describe('<ComboboxDropdown />', () => {
   let mounted = null;
   let props = {};
   const children = [<li key="1">one</li>, <li key="2">two</li>];
@@ -22,7 +22,7 @@ describe('<PicklistDropdown />', () => {
 
   beforeEach(() => {
     mounted = shallow(
-      <PicklistDropdown {...props} />
+      <ComboboxDropdown {...props} />
     );
   });
 

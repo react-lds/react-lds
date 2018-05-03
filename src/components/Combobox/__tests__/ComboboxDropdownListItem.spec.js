@@ -3,9 +3,9 @@ import { mount } from 'enzyme';
 
 import { MediaObject } from '../../MediaObject';
 
-import PicklistDropdownListItem from '../PicklistDropdownListItem';
+import ComboboxDropdownListItem from '../ComboboxDropdownListItem';
 
-describe('<PicklistDropdownListItem />', () => {
+describe('<ComboboxDropdownListItem />', () => {
   let mounted = null;
   let props = {};
 
@@ -15,7 +15,7 @@ describe('<PicklistDropdownListItem />', () => {
   };
 
   beforeEach(() => {
-    mounted = mount(<PicklistDropdownListItem {...props} />);
+    mounted = mount(<ComboboxDropdownListItem {...props} />);
   });
 
   it('handles onClick', () => {
