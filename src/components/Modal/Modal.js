@@ -3,11 +3,17 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import ModalHeader from './ModalHeader';
-import ModalFooter from './ModalFooter';
-import ModalContent from './ModalContent';
 import { getContentId, getTitleId } from './utils';
 
 class Modal extends Component {
+  constructor(props) {
+    super(props);
+    this.focusTrapOptions = {
+      escapeDeactivates: false,
+      fallbackFocus: null,
+    };
+  }
+
   onClose = (evt) => {
     evt.stopPropagation();
     const { onClose } = this.props;
@@ -16,25 +22,25 @@ class Modal extends Component {
 
   onKeyUp = (evt) => {
     const { key } = evt;
-    if (key === 'Escape') { this.onClose(evt); }
+    if (key === 'Escape') {
+      evt.stopPropagation();
+      this.onClose(evt);
+    }
+  }
+
+  setRef = (ref) => {
+    this.focusTrapOptions.fallbackFocus = ref;
   }
 
   cloneWithProps = (child) => {
     const { id, onClose } = this.props;
-    const type = child.type;
-
-    if (type === ModalContent) {
-      const contentId = getContentId(id);
-      return React.cloneElement(child, { id: contentId });
-    }
-
-    if (type === ModalFooter) {
-      return React.cloneElement(child, {
-        onClose: onClose ? this.onClose : null
-      });
-    }
-
-    return child;
+    // Passing props to both children, need to ignore onClose in body and vice versa
+    // react-hot-loader wraps a ProxyFacade, checking child.type is not really feasible
+    // https://github.com/gaearon/react-hot-loader/issues/938
+    return React.cloneElement(child, {
+      id: getContentId(id),
+      onClose: onClose ? this.onClose : null
+    });
   }
 
   render() {
@@ -64,18 +70,22 @@ class Modal extends Component {
     );
 
     return (
-      <div>
+      <FocusTrap
+        active={open}
+        focusTrapOptions={this.focusTrapOptions}
+        onKeyUp={onClose ? this.onKeyUp : null}
+      >
         <section
           {...rest}
           className={sldsClasses}
-          onKeyUp={onClose ? this.onKeyUp : null}
+          ref={this.setRef}
           role={prompt ? 'alertdialog' : 'dialog'}
           tabIndex={-1}
           aria-modal="true"
           aria-describedby={contentId}
           aria-labelledby={titleId}
         >
-          <FocusTrap className="slds-modal__container" active={open}>
+          <div className="slds-modal__container">
             <ModalHeader
               id={titleId}
               onClose={onClose ? this.onClose : null}
@@ -84,15 +94,15 @@ class Modal extends Component {
               title={title}
             />
             {React.Children.map(children, this.cloneWithProps)}
-          </FocusTrap>
+          </div>
         </section>
         <div
-          className={cx(
+          className={cx([
             'slds-backdrop',
             { 'slds-backdrop_open': open }
-          )}
+          ])}
         />
-      </div>
+      </FocusTrap>
     );
   }
 }
