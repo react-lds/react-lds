@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { PicklistRaw as Picklist } from '../Picklist';
+import Combobox from '../ControlledCombobox';
 
-describe('</Picklist />', () => {
+describe('</ControlledCombobox />', () => {
   let mounted = null;
   let props = {};
   let onSelect = jest.fn();
@@ -26,12 +26,13 @@ describe('</Picklist />', () => {
         selected: false,
       }],
       onSelect,
-      labelInput: 'Picklist label',
+      labelInput: 'Combobox label',
       labelMultiselect: 'Options selected',
-      placeholder: 'Picklist placeholder',
+      placeholder: 'Combobox placeholder',
+      readOnly: true,
     };
 
-    mounted = mount(<Picklist {...props} />);
+    mounted = mount(<Combobox {...props} />);
   });
 
   it('renders the picklist label', () => {
@@ -51,12 +52,12 @@ describe('</Picklist />', () => {
   });
 
   it('disables the picklist', () => {
-    mounted.setProps({ isDisabled: true });
+    mounted.setProps({ disabled: true });
     expect(mounted.find('input').prop('disabled')).toEqual(true);
   });
 
   it('makes the picklist required', () => {
-    mounted.setProps({ isRequired: true });
+    mounted.setProps({ required: true });
     expect(mounted.find('div.slds-form-element').hasClass('slds-is-required')).toBeTruthy();
     expect(mounted.find('label > abbr').hasClass('slds-required')).toBeTruthy();
     expect(mounted.find('input').prop('required')).toEqual(true);
@@ -68,10 +69,10 @@ describe('</Picklist />', () => {
   });
 
   it('is closed by default and opens when the input was clicked', () => {
-    const picklist = mounted.find('div.slds-combobox').first();
+    const picklist = mounted.find('div.slds-combobox');
     expect(picklist.hasClass('slds-is-open')).toBeFalsy();
     picklist.find('input').simulate('click');
-    expect(mounted.find('div.slds-combobox').first().hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('div.slds-combobox').hasClass('slds-is-open')).toBeTruthy();
   });
 
   it('sets the label of the currently selected item as input label', () => {
@@ -91,8 +92,9 @@ describe('</Picklist />', () => {
   });
 
   it('calls the callback function if an item is clicked', () => {
-    const item = mounted.find('ul.slds-listbox').children().at(1);
-    item.find('MediaObject').first().simulate('click');
+    mounted.find('button').simulate('click');
+    const options = mounted.find('ul.slds-listbox div[role="option"]');
+    options.first().simulate('click');
     expect(onSelect).toHaveBeenCalledWith('1');
   });
 });

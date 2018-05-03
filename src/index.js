@@ -7,6 +7,7 @@ export * from './components/Button';
 export * from './components/Card';
 export * from './components/Carousel';
 export * from './components/CheckboxToggle';
+export * from './components/Combobox';
 export * from './components/Table';
 export * from './components/DataTable';
 export * from './components/Datepicker';
