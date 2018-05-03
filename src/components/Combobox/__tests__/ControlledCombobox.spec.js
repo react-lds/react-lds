@@ -68,18 +68,11 @@ describe('</ControlledCombobox />', () => {
     expect(mounted.find('ul.slds-listbox').hasClass('slds-dropdown_length-with-icon-5')).toBeTruthy();
   });
 
-  it('is closed by default and opens when the input was clicked', (done) => {
-    const picklist = mounted.find('div.slds-combobox').first();
+  it('is closed by default and opens when the input was clicked', () => {
+    const picklist = mounted.find('div.slds-combobox');
     expect(picklist.hasClass('slds-is-open')).toBeFalsy();
     picklist.find('input').simulate('click');
-
-    setTimeout(() => {
-      try {
-        expect(picklist.hasClass('slds-is-open')).toBeTruthy();
-      } finally {
-        done();
-      }
-    }, 0);
+    expect(mounted.find('div.slds-combobox').hasClass('slds-is-open')).toBeTruthy();
   });
 
   it('sets the label of the currently selected item as input label', () => {
