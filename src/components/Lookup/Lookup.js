@@ -110,6 +110,10 @@ const propTypes = {
    */
   placeholder: PropTypes.string,
   /**
+   * Callback for rendering additional meta information for a list item.
+   */
+  renderMeta: PropTypes.func,
+  /**
    * Callback for rendering a single selection pill.
    */
   renderSelection: PropTypes.func,
@@ -156,6 +160,7 @@ export class LookupRaw extends PureComponent {
     objectType: 'default',
     onFocus: null,
     placeholder: 'Search',
+    renderMeta: null,
     renderSelection: null,
     required: false,
     selection: null,
@@ -433,7 +438,7 @@ export class LookupRaw extends PureComponent {
   }
 
   renderLookupList() {
-    const { listLabel, table } = this.props;
+    const { listLabel, renderMeta, table } = this.props;
     const { loaded, selected } = this.state;
 
     const displayItems = LookupRaw.filterDisplayItems(loaded, selected);
@@ -460,14 +465,15 @@ export class LookupRaw extends PureComponent {
             role="option"
           >
             <Icon
-              className="slds-media__figure"
+              className="slds-m-right_x-small"
               sprite={LookupRaw.getSprite(objectType)}
               icon={objectType}
               size="small"
             />
             <div className="slds-media__body">
               <div className="slds-lookup__result-text">{label}</div>
-              {meta && (
+              {renderMeta && renderMeta()}
+              {!renderMeta && meta && (
                 <span className="slds-lookup__result-meta slds-text-body_small">
                   {meta}
                 </span>
