@@ -55,6 +55,7 @@ const exampleData = [
 stories
   .add('Uncontrolled', () => (
     <Lookup
+      allowCreate={boolean('AllowCreate', false)}
       error={text('Error', '') || undefined}
       hideErrorMessage={boolean('HideErrorMessage', false)}
       hideLabel={boolean('HideLabel', false)}
@@ -71,6 +72,29 @@ stories
       loadOnChange={boolean('Call load() onInputChange', true) || undefined}
       loadOnFocus={boolean('Call load() onInputFocus', false) || undefined}
       loadOnMount={boolean('Call load() onComponentDidMount', false) || undefined}
+      multi={boolean('Multi selection mode', false)}
+      objectType={text('ObjectType', '') || undefined}
+      onChange={action('changed')}
+      onFocus={action('focussed')}
+      placeholder={text('Placeholder', 'Search Accounts')}
+      required={boolean('Required', false)}
+    />
+  ))
+  .add('Uncontrolled with custom value', () => (
+    <Lookup
+      allowCreate={boolean('AllowCreate', true)}
+      error={text('Error', '') || undefined}
+      hideErrorMessage={boolean('HideErrorMessage', false)}
+      hideLabel={boolean('HideLabel', false)}
+      id="lookup"
+      selection={object('InitialSelection', [{
+        id: '1',
+        label: 'Custom value',
+        objectType: '',
+      }])}
+      inputLabel={text('InputLabel', 'Accounts')}
+      listLabel={text('ListLabel', 'Recent Accounts')}
+      load={() => []}
       multi={boolean('Multi selection mode', false)}
       objectType={text('ObjectType', '') || undefined}
       onChange={action('changed')}

@@ -263,13 +263,14 @@ export class LookupRaw extends PureComponent {
   handleCreateElement = (event) => {
     const { charCode, target: { value } } = event;
     const { allowCreate, emailLayout, multi } = this.props;
-    const { loaded } = this.state;
+    const { loaded, selected } = this.state;
 
     const isEnterPress = (charCode === 13 || typeof charCode === 'undefined');
-    const isAllowed = allowCreate && multi && loaded.length === 0;
+    const isAllowed = allowCreate && loaded.length === 0;
+    const isMultiOrEmpty = multi || selected.length === 0;
     const isValid = emailLayout ? /^.+@.+\..+$/.test(value) : value !== '';
 
-    if (isEnterPress && isValid && isAllowed) {
+    if (isEnterPress && isValid && isAllowed && isMultiOrEmpty) {
       this.createElement(value);
     }
   }
