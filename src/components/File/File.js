@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Icon, MediaObject } from '../..';
+import FileActions from './FileActions';
+import FileCaption from './FileCaption';
+import FileExternalIcon from './FileExternalIcon';
+import FileMedia from './FileMedia';
 
 const RATIOS = [
   '1-by-1',
@@ -23,89 +26,6 @@ const File = (props) => {
     ...rest
   } = props;
 
-  const renderActions = () => {
-    if (hideTitle) {
-      return (
-        <div className="slds-file__title slds-file__title_scrim">
-          <div className="slds-file__actions-menu">{actions}</div>
-        </div>
-      );
-    }
-
-    return <div className="slds-file__actions-menu">{actions}</div>;
-  };
-
-  const renderCaption = () => {
-    const fileIcon = (
-      <Icon
-        sprite="doctype"
-        icon={fileType}
-        title={fileType}
-        size="x-small"
-      />
-    );
-
-    const captionClasses = [
-      'slds-file__title',
-      'slds-file__title_card',
-      { 'slds-file-has-actions': actions && !hideTitle },
-    ];
-
-    return (
-      <figcaption className={cx(captionClasses)}>
-        <MediaObject
-          center
-          figureLeft={fileIcon}
-          size="small"
-        >
-          <span className="slds-file__text slds-truncate" title={title}>{title}</span>
-        </MediaObject>
-      </figcaption>
-    );
-  };
-
-  const renderExternalIcon = () => {
-    const { icon, sprite, title: iconTitle } = externalIcon;
-
-    return (
-      <div className="slds-file__external-icon">
-        <Icon
-          className="slds-file__icon"
-          svgClassName="slds-icon-text-default"
-          icon={icon}
-          sprite={sprite}
-          title={iconTitle}
-        />
-      </div>
-    );
-  };
-
-  const renderMedia = () => {
-    if (isLoading) {
-      return (
-        <Icon
-          className="slds-file__icon"
-          sprite="utility"
-          icon="image"
-          size="large"
-          svgClassName="slds-file__loading-icon"
-          title={title}
-        />
-      );
-    }
-
-    if (image && image.src) { return <img src={image.src} alt={image.alt || title} />; }
-
-    return (
-      <Icon
-        className="slds-file__icon"
-        sprite="doctype"
-        icon={fileType}
-        title={fileType}
-      />
-    );
-  };
-
   const sldsClasses = [
     'slds-file',
     'slds-file_card',
@@ -122,11 +42,22 @@ const File = (props) => {
     <div className={cx(sldsClasses)}>
       <figure>
         <a {...rest} className={cx(mediaClasses)}>
-          {renderMedia()}
+          <FileMedia
+            fileType={fileType}
+            image={image}
+            isLoading={isLoading}
+            title={title}
+          />
         </a>
-        {!hideTitle && renderCaption()}
-        {actions && renderActions()}
-        {externalIcon && renderExternalIcon()}
+        {!hideTitle && (
+          <FileCaption
+            fileType={fileType}
+            hasActions={!!actions}
+            title={title}
+          />
+        )}
+        {actions && <FileActions hideTitle={hideTitle}>{actions}</FileActions>}
+        {externalIcon && <FileExternalIcon externalIcon={externalIcon} />}
       </figure>
     </div>
   );
@@ -173,8 +104,8 @@ File.propTypes = {
    * Image with src & alt
    */
   image: PropTypes.shape({
-    src: PropTypes.string,
     alt: PropTypes.string,
+    src: PropTypes.string,
   }),
   /**
    * Indicate a loading image
