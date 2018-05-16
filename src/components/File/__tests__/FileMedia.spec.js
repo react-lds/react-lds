@@ -21,7 +21,7 @@ describe('<FileMedia />', () => {
     expect($icon.exists()).toBeTruthy();
     expect($icon.props()).toMatchObject({
       icon: 'foo',
-      title: 'foo',
+      title: 'bar : foo',
     });
   });
 

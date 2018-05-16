@@ -28,7 +28,7 @@ const FileMedia = ({
       className="slds-file__icon"
       sprite="doctype"
       icon={fileType}
-      title={fileType}
+      title={`${title} : ${fileType}`}
     />
   );
 };
