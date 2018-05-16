@@ -1,6 +1,6 @@
 {
   "name": "react-lds",
-  "version": "6.0.3",
+  "version": "6.1.0",
   "description": "Salesforce Lightning Design System React Components",
   "keywords": [
     "react",
@@ -53,7 +53,7 @@
     "react-dom": "^16.3.2"
   },
   "devDependencies": {
-    "@salesforce-ux/design-system": "2.5.0",
+    "@salesforce-ux/design-system": "2.5.2",
     "@storybook/addon-actions": "~3.2.16",
     "@storybook/addon-info": "~3.2.16",
     "@storybook/addon-knobs": "~3.2.16",

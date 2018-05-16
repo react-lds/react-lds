@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.1.0
+
+* New: `Combobox` component
+* Changed: `Picklist` now uses `Combobox` internally
+* Changed: `File` now shows `title` prop when hovering icon
+* Fixed: `Modals` now handle mouse events correctly
+* Fixed: `Modals` now handle case when no focussable element is present
+
 ## 6.0.3
 
 * Upgrade `moment`, fix `moment-range` errors
