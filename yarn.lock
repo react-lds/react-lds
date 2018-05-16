@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@salesforce-ux/design-system@2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@salesforce-ux/design-system/-/design-system-2.5.0.tgz#ffff54fdb2dbe365a657938ddfeee6a57fe1fe3b"
+"@salesforce-ux/design-system@2.5.4":
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/@salesforce-ux/design-system/-/design-system-2.5.2.tgz#454f2c0b0214a980b10fe817061c4b8c15c35276"
 
 "@storybook/addon-actions@^3.2.19":
   version "3.3.10"
