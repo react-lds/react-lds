@@ -1,7 +1,16 @@
 # Changelog
 
-## Unreleased
- * _Menu_: **Breaking** `Menu` and `ControlledMenu` take `MenuItem` and `MenuSubHeader` as children. `Button` *must* be passed as prop.
+## 7.0.0
+
+* _Menu_: **Breaking** `Menu` has beend reworked completely to comply with HTML5 standards and LDS specifications
+* _Menu_: **Breaking** `MenuDropdownList` has been removed. Use `MenuSubHeader` to add titles to the menu
+* _Menu_: **Breaking** `MenuDropdownListItem` has been renamed to `MenuItem`
+* _Menu_: **Breaking** `Menu` now takes a `height` prop
+* _Menu_: **Breaking** Menu has been split into `ControlledMenu` and `Menu`. Use `ControlledMenu` to specify exactly when Menu should be open
+* _Menu_: **Breaking** Menu always has to be supplied with a `button` element. `onClick` has to be defined for `ControlledMenu`s
+* _Menu_: `onSelect` prop has been added to `Menu` and allows to use a single event listener for all menu item click events
+* _Menu_: `renderClosedDropdown` prop has been added to allow not rendering Menu children when closed
+ * Fix: `Modals` do not crash anymore when `null` is passed as child
 
 ## 6.1.0
 
