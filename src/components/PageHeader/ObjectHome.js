@@ -7,7 +7,8 @@ import {
   ClickOutside,
   Column,
   Grid,
-  Menu,
+  ControlledMenu,
+  IconButton
 } from '../../';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
@@ -38,7 +39,7 @@ const propTypes = {
   title: PropTypes.string.isRequired,
   /**
    * dropdown header menu that also get's triggered when a user clicks on the
-   * title headline. Must be one or more instances of MenuDropdownList
+   * title headline. Must be one or more instances of MenuItem/MenuSubHeader
    */
   titleMenu: PropTypes.node,
   /**
@@ -47,7 +48,7 @@ const propTypes = {
   topButtons: PropTypes.node,
 };
 
-export class ObjectHomeRaw extends Component {
+class ObjectHome extends Component {
   static propTypes = propTypes;
 
   static defaultProps = {
@@ -67,6 +68,8 @@ export class ObjectHomeRaw extends Component {
   onClickOutside = () => {
     this.setState({ menuIsOpen: false });
   }
+
+  toggleMenu = () => this.setState(prevState => ({ menuIsOpen: !prevState.menuIsOpen }));
 
   openMenu = () => {
     this.setState({ menuIsOpen: true });
@@ -107,7 +110,7 @@ export class ObjectHomeRaw extends Component {
             <Grid>
               <Grid className={cx(titleClasses)}>
                 <h1
-                  onClick={titleMenu && this.openMenu}
+                  onClick={titleMenu && this.toggleMenu}
                   className="slds-page-header__title slds-truncate"
                   title={title}
                 >
@@ -115,12 +118,17 @@ export class ObjectHomeRaw extends Component {
                 </h1>
                 {titleMenu && (
                   <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
-                    <Menu
-                      button={{ sprite: 'utility', icon: 'down', noBorder: true }}
+                    <ControlledMenu
+                      button={<IconButton
+                        container
+                        icon="down"
+                        sprite="utility"
+                        onClick={this.toggleMenu}
+                      />}
                       isOpen={this.state.menuIsOpen}
                     >
                       {titleMenu}
-                    </Menu>
+                    </ControlledMenu>
                   </ClickOutside>
                 )}
               </Grid>
@@ -140,7 +148,5 @@ export class ObjectHomeRaw extends Component {
     );
   }
 }
-
-const ObjectHome = props => <ObjectHomeRaw closeOnClickOutside {...props} />;
 
 export default ObjectHome;

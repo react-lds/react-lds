@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+ * _Menu_: **Breaking** `Menu` and `ControlledMenu` take `MenuItem` and `MenuSubHeader` as children. `Button` *must* be passed as prop.
+
 ## 6.1.0
 
 * New: `Combobox` component
@@ -38,6 +41,7 @@
 * New: `Picklist` can now auto-close when selecting an item
 * Changed: `Picklist` default size is now full-width, was `small`
 * Fixed: `ObjectHome` doesn't show the menu style if no menu is provided
+
 
 ## 5.0.0
 
