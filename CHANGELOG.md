@@ -1,5 +1,25 @@
 # Changelog
 
+## 7.0.0
+
+* _Menu_: **Breaking** `Menu` has beend reworked completely to comply with HTML5 standards and LDS specifications
+* _Menu_: **Breaking** `MenuDropdownList` has been removed. Use `MenuSubHeader` to add titles to the menu
+* _Menu_: **Breaking** `MenuDropdownListItem` has been renamed to `MenuItem`
+* _Menu_: **Breaking** `Menu` now takes a `height` prop
+* _Menu_: **Breaking** Menu has been split into `ControlledMenu` and `Menu`. Use `ControlledMenu` to specify exactly when Menu should be open
+* _Menu_: **Breaking** Menu always has to be supplied with a `button` element. `onClick` has to be defined for `ControlledMenu`s
+* _Menu_: `onSelect` prop has been added to `Menu` and allows to use a single event listener for all menu item click events
+* _Menu_: `renderClosedDropdown` prop has been added to allow not rendering Menu children when closed
+ * Fix: `Modals` do not crash anymore when `null` is passed as child
+
+## 6.1.0
+
+* New: `Combobox` component
+* Changed: `Picklist` now uses `Combobox` internally
+* Changed: `File` now shows `title` prop when hovering icon
+* Fixed: `Modals` now handle mouse events correctly
+* Fixed: `Modals` now handle case when no focussable element is present
+
 ## 6.0.3
 
 * Upgrade `moment`, fix `moment-range` errors
@@ -30,6 +50,7 @@
 * New: `Picklist` can now auto-close when selecting an item
 * Changed: `Picklist` default size is now full-width, was `small`
 * Fixed: `ObjectHome` doesn't show the menu style if no menu is provided
+
 
 ## 5.0.0
 

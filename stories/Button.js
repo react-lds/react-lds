@@ -143,7 +143,7 @@ iconButtonStories
     />
   ))
   .add('Inverse', () => (
-    <div style={{ padding: '0.5rem', 'background-color': 'rgb(22, 50, 92)' }}>
+    <div style={{ padding: '0.5rem', backgroundColor: 'rgb(22, 50, 92)' }}>
       <IconButton
         sprite="utility"
         icon="search"
@@ -153,7 +153,7 @@ iconButtonStories
     </div>
   ))
   .add('Bordered Inverse', () => (
-    <div style={{ padding: '0.5rem', 'background-color': 'rgb(22, 50, 92)' }}>
+    <div style={{ padding: '0.5rem', backgroundColor: 'rgb(22, 50, 92)' }}>
       <IconButton
         sprite="utility"
         icon="search"

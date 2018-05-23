@@ -34,6 +34,7 @@ class Modal extends Component {
 
   cloneWithProps = (child) => {
     const { id, onClose } = this.props;
+    if (!child) return child;
     // Passing props to both children, need to ignore onClose in body and vice versa
     // react-hot-loader wraps a ProxyFacade, checking child.type is not really feasible
     // https://github.com/gaearon/react-hot-loader/issues/938
