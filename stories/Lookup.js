@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean, object, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { Button, Lookup } from '../src';
+import { Button, Lookup, Spinner } from '../src';
 
 const stories = storiesOf('Lookup', module);
 
@@ -55,6 +55,7 @@ const exampleData = [
 stories
   .add('Uncontrolled', () => (
     <Lookup
+      allowCreate={boolean('AllowCreate', false)}
       error={text('Error', '') || undefined}
       hideErrorMessage={boolean('HideErrorMessage', false)}
       hideLabel={boolean('HideLabel', false)}
@@ -71,6 +72,29 @@ stories
       loadOnChange={boolean('Call load() onInputChange', true) || undefined}
       loadOnFocus={boolean('Call load() onInputFocus', false) || undefined}
       loadOnMount={boolean('Call load() onComponentDidMount', false) || undefined}
+      multi={boolean('Multi selection mode', false)}
+      objectType={text('ObjectType', '') || undefined}
+      onChange={action('changed')}
+      onFocus={action('focussed')}
+      placeholder={text('Placeholder', 'Search Accounts')}
+      required={boolean('Required', false)}
+    />
+  ))
+  .add('Uncontrolled with custom value', () => (
+    <Lookup
+      allowCreate={boolean('AllowCreate', true)}
+      error={text('Error', '') || undefined}
+      hideErrorMessage={boolean('HideErrorMessage', false)}
+      hideLabel={boolean('HideLabel', false)}
+      id="lookup"
+      selection={object('InitialSelection', [{
+        id: '1',
+        label: 'Custom value',
+        objectType: '',
+      }])}
+      inputLabel={text('InputLabel', 'Accounts')}
+      listLabel={text('ListLabel', 'Recent Accounts')}
+      load={() => []}
       multi={boolean('Multi selection mode', false)}
       objectType={text('ObjectType', '') || undefined}
       onChange={action('changed')}
@@ -110,7 +134,7 @@ stories
       required={boolean('Required', false)}
     />
   ))
-  .add('With custom ', () => (
+  .add('With custom selection and meta info', () => (
     <Lookup
       error={text('Error', '') || undefined}
       hideErrorMessage={boolean('HideErrorMessage', false)}
@@ -120,24 +144,28 @@ stories
         {
           id: '4',
           email: 'muchuseful@example.com',
+          meta: 'soo meta',
           label: 'Much useful',
           objectType: 'contact',
         },
         {
           id: '5',
           email: 'ofanytype@example.com',
+          meta: 'soo meta',
           label: 'Of any type',
           objectType: 'contact',
         },
         {
           id: '6',
           email: 'ofsometype@example.com',
+          meta: 'soo meta',
           label: 'Of some type',
           objectType: 'account',
         },
         {
           id: '7',
           email: 'ofsomerecordtype@example.com',
+          meta: 'soo meta',
           label: 'Of some record type',
           objectType: 'record',
         }
@@ -154,6 +182,21 @@ stories
       onFocus={action('focussed')}
       placeholder={text('Placeholder', 'Search Accounts')}
       required={boolean('Required', false)}
+      renderMeta={() => (
+        <div>
+          <Spinner
+            style={{
+              top: '9px',
+              left: '6px',
+              position: 'relative',
+            }}
+            size="xx-small"
+          />
+          <span className="slds-lookup__result-meta slds-text-body_small slds-m-left_medium">
+            Loading meta info...
+          </span>
+        </div>
+      )}
       renderSelection={(item, { onClose }) => {
         let f;
         switch (item.objectType) {
