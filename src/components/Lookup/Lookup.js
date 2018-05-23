@@ -472,7 +472,7 @@ export class LookupRaw extends PureComponent {
             />
             <div className="slds-media__body">
               <div className="slds-lookup__result-text">{label}</div>
-              {renderMeta && renderMeta()}
+              {renderMeta && renderMeta(item)}
               {!renderMeta && meta && (
                 <span className="slds-lookup__result-meta slds-text-body_small">
                   {meta}
