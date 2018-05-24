@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.0.1
+
+* Small `Lookup` enhancements
+
 ## 7.0.0
 
 * _Menu_: **Breaking** `Menu` has beend reworked completely to comply with HTML5 standards and LDS specifications
@@ -10,7 +14,7 @@
 * _Menu_: **Breaking** Menu always has to be supplied with a `button` element. `onClick` has to be defined for `ControlledMenu`s
 * _Menu_: `onSelect` prop has been added to `Menu` and allows to use a single event listener for all menu item click events
 * _Menu_: `renderClosedDropdown` prop has been added to allow not rendering Menu children when closed
- * Fix: `Modals` do not crash anymore when `null` is passed as child
+* Fix: `Modals` do not crash anymore when `null` is passed as child
 
 ## 6.1.0
 
