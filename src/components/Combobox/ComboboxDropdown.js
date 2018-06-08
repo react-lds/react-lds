@@ -14,6 +14,7 @@ const ComboboxDropdown = (props) => {
     children,
     className,
     error,
+    hideErrorMessage,
     hideLabel,
     id,
     inlineListbox,
@@ -71,7 +72,7 @@ const ComboboxDropdown = (props) => {
           </div>
         </div>
       </FormElementControl>
-      <FormElementError error={error} id={`error-${id}`} />
+      {!hideErrorMessage && <FormElementError error={error} id={`error-${id}`} />}
     </FormElement>
   );
 };
@@ -89,6 +90,10 @@ ComboboxDropdown.propTypes = {
   * input error
   */
   error: PropTypes.string,
+  /**
+  * indicates if the error message is hidden
+  */
+  hideErrorMessage: PropTypes.bool,
   /**
   * indicates if the label for the input is hidden
   */
@@ -133,6 +138,7 @@ ComboboxDropdown.propTypes = {
 ComboboxDropdown.defaultProps = {
   className: null,
   error: null,
+  hideErrorMessage: false,
   hideLabel: false,
   inlineListbox: null,
   labelInput: '',
