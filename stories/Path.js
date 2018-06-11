@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import cx from 'classnames';
-import { Button, ButtonIcon, Path, PathStage } from '../src';
+import { Button, ButtonIcon, Icon, Path, PathStage } from '../src';
 
 const stories = storiesOf('Path', module);
 
@@ -66,14 +66,43 @@ class ContactPath extends Component {
     this.setState({ current: selected });
   }
 
+  renderLabel = (label, isSelected) => {
+    const svgClassName = cx([
+      { 'slds-text-color_inverse': !!isSelected },
+      { 'slds-icon-text-default': !isSelected },
+    ]);
+
+    return (
+      <span>
+        {label}
+        <Icon
+          className="slds-m-left_small"
+          background={false}
+          icon="food_and_drink"
+          size="x-small"
+          sprite="utility"
+          svgClassName={svgClassName}
+        />
+      </span>
+    );
+  };
+
   renderPathStage = (picklistValue, i) => {
     const { leadStatusPicklist, selected, current } = this.state;
+
+    let label = picklistValue.label;
+    if (i === 1) {
+      const currentValue = leadStatusPicklist[1].value;
+      const isSelected = currentValue === selected || currentValue === current;
+      label = this.renderLabel(label, isSelected);
+    }
+
     return (
       <PathStage
         complete={i < leadStatusPicklist.findIndex(o => o.value === current)}
         current={picklistValue.value === current}
         key={leadStatusPicklist[i].value}
-        label={picklistValue.label}
+        label={label}
         onStageClick={() => this.onStageClickControl(picklistValue.value)}
         selected={picklistValue.value === selected}
         value={picklistValue.value}
