@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.1.1
+
+* Add support for hidden error message for picklists
+* Enable custom labels for path stage
+
 ## 7.1.0
 
 * Enable single selection for `allowCreate` mode for `Lookup`
