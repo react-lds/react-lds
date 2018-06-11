@@ -45,7 +45,11 @@ export const propTypes = {
    */
   disabled: PropTypes.bool,
   /**
-   * whether the input lable is visible
+   * whether the error message is visible
+   */
+  hideErrorMessage: PropTypes.bool,
+  /**
+   * whether the input label is visible
    */
   hideLabel: PropTypes.bool,
   /**
@@ -108,15 +112,16 @@ export const propTypes = {
 };
 
 export default class ControlledCombobox extends Component {
-  static propTypes = propTypes
+  static propTypes = propTypes;
 
   static defaultProps = {
     className: null,
     closeOnClickOutside: true,
     closeOnSelect: true,
+    disabled: false,
     error: null,
     height: 7,
-    disabled: false,
+    hideErrorMessage: false,
     hideLabel: false,
     inlineListbox: false,
     items: [],
@@ -266,6 +271,7 @@ export default class ControlledCombobox extends Component {
       closeOnClickOutside,
       error,
       height,
+      hideErrorMessage,
       hideLabel,
       id,
       inlineListbox,
@@ -290,6 +296,7 @@ export default class ControlledCombobox extends Component {
       <ComboboxDropdown
         className={className}
         error={error}
+        hideErrorMessage={hideErrorMessage}
         hideLabel={hideLabel}
         id={`combobox-${id}`}
         inlineListbox={inlineListbox ? this.renderListbox(selectedItems) : null}
