@@ -30,11 +30,11 @@ stories
     <div style={{ width: '480px', maxWidth: '100%' }}>
       <ControlledCarousel
         activeIndex={number('active Panel index', 1)}
-        onPanelChange={action()}
         autoPlay={boolean('Show Autoplay controls', true)}
         autoPlayActive={boolean('Autoplay is active')}
         autoPlayStartText={text('AutoPlay start assistive text', 'Play')}
         autoPlayStopText={text('AutoPlay stop assistive text', 'Pause')}
+        onPanelChange={action()}
         onToggleAutoPlay={action()}
       >
         <CarouselPanel id="panel-1" imageUrl="assets/images/carousel/carousel-01.jpg" title="Visit App Exchange">
