@@ -56,7 +56,7 @@ describe('<Carousel />', () => {
 
     mounted.find('CarouselPanel').at(0).find('a').simulate('keydown', { keyCode: 39 });
 
-    // expect mockfunction to have been called
+    expect(onPanelChange).toHaveBeenCalledWith(1);
   });
 
   it('returns the right index on arrow keydown and also wraps around', () => {
@@ -64,33 +64,35 @@ describe('<Carousel />', () => {
       { title: 'Title 1', children: 'Content 1' },
     ]);
 
-    mounted.find('CarouselPanel').at(0).find('a').simulate('keydown', { keyCode: 39 });
-    // expect mockfunction to have been called with [0]
+    mounted.find('CarouselPanel').at(0).find('a').simulate('keydown', { keyCode: 37 });
+    expect(onPanelChange).toHaveBeenCalledWith(0);
   });
 
   it('does not render the autplay controls by default', () => {
     const mounted = getComponent({
-      autoPlay: true,
       onPanelChange,
     }, [
       { title: 'Title 1', children: 'Content 1' },
       { title: 'Title 2', children: 'Content 2' },
-
-      // expect thingy to be false
     ]);
+
+    expect(mounted.find('.slds-carousel__autoplay')).toHaveLength(0);
   });
 
   it('shows the autoplay controls correctly', () => {
     let mounted = getComponent({
       autoPlay: true,
       autoPlayActive: true,
+      autoPlayStartText: 'play',
+      autoPlayStopText: 'pause',
       onPanelChange,
     }, [
       { title: 'Title 1', children: 'Content 1' },
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    // check for pause button
+    expect(mounted.find('.slds-carousel__autoplay')).toHaveLength(1);
+    expect(mounted.find('.slds-carousel__autoplay span').at(1).text()).toEqual('pause');
 
     mounted = getComponent({
       autoPlay: true,
@@ -101,18 +103,23 @@ describe('<Carousel />', () => {
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    // check for play button
+    expect(mounted.find('.slds-carousel__autoplay')).toHaveLength(1);
   });
 
   it('calls the autoplay handler', () => {
+    const onToggleAutoPlay = jest.fn();
+
     const mounted = getComponent({
       autoPlay: true,
       onPanelChange,
+      onToggleAutoPlay,
     }, [
       { title: 'Title 1', children: 'Content 1' },
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    // check for mockfunction call
+    expect(mounted.find('.slds-carousel__autoplay')).toHaveLength(1);
+    mounted.find('Button').simulate('click');
+    expect(onToggleAutoPlay).toHaveBeenCalled();
   });
 });
