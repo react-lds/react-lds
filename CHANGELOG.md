@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* Add `ControlledCarousel`
+
 ## 7.1.1
 
 * Add support for hidden error message for picklists
