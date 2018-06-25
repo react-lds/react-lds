@@ -10,6 +10,7 @@
     "react-lds"
   ],
   "main": "./dist/index.js",
+  "sideEffects": false,
   "scripts": {
     "build-storybook": "yarn run prestorybook && rm -rf react-lds && BABEL_ENV=docs build-storybook -s ./public -o ./react-lds",
     "build:babel": "NODE_ENV=production babel ./src --ignore spec.js --out-dir ./dist",

@@ -4,11 +4,10 @@
       "browsers": [
         "last 2 versions",
         "not ie <= 11",
-        "not android <= 56"
+        "not android < 56"
       ]
     },
-    "loose": true,
-    "modules": "commonjs",
+    "modules": false,
     "useBuiltIns": false
   }]],
   "plugins": [
