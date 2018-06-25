@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import uniqueId from 'lodash/uniqueId';
+import uniqueId from 'lodash-es/uniqueId';
 
 import ControlledCombobox, { propTypes } from './ControlledCombobox';
 

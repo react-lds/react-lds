@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import omit from 'lodash/omit';
+import omit from 'lodash-es/omit';
 
 import ControlledCombobox, { propTypes } from '../Combobox/ControlledCombobox';
 

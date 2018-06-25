@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import memoize from 'lodash/memoize';
+import memoize from 'lodash-es/memoize';
 
 import ComboboxDropdown from './ComboboxDropdown';
 import ComboboxDropdownList from './ComboboxDropdownList';

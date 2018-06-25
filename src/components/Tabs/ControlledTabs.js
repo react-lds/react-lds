@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import isEqual from 'lodash/isEqual';
+import isEqual from 'lodash-es/isEqual';
 import { getAriaLabel, getTabsClass } from './utils';
 import TabLink from './TabLink';
 

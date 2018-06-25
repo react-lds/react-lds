@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import omit from 'lodash/omit';
+import omit from 'lodash-es/omit';
 import ControlledMenu from './ControlledMenu';
 import { ClickOutside } from '../../';
 
