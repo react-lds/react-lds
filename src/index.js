@@ -30,5 +30,7 @@ export * from './components/Popover';
 export * from './components/Progress';
 export * from './components/Spinner';
 export * from './components/Tabs';
+export * from './components/Tooltip';
 export * from './components/VerticalNavigation';
 export * from './utils';
+

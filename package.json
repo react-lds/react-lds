@@ -50,7 +50,8 @@
     "moment-timezone": "^0.5.16",
     "prop-types": "^15.5.6",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-dom": "^16.3.2",
+    "react-popper": "^1.0.0"
   },
   "devDependencies": {
     "@salesforce-ux/design-system": "2.5.2",

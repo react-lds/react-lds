@@ -39,3 +39,9 @@ export const VerticalNavigationDecorator = storyFn => (
     { storyFn() }
   </div>
 );
+
+export const TooltipsDecorator = storyFn => (
+  <div className="demo-tooltips">
+    { storyFn() }
+  </div>
+);
