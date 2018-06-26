@@ -56,20 +56,14 @@ Page.childContextTypes = {
 };
 ```
 
-### Interactivity
-
-Some components need a certain level of interactivity to be usable as React components. In order to achieve this, these components keep a minimal internal state and provide ways to hook into fired events:
-
- - `<Datepicker />`
- - `<Lookup />`
- - `<DropDownMenu />`
- - `<Modal />`
- - `<PickList />`
- - `<Tab />`
-
 ## Development
 
 `yarn install` and `yarn start`. Add or modify stories in `./stories` Happy hacking!
+
+## Scaffold components
+
+New components can be scaffolded with [hygen](https://hygen.io) templates. To add a component, run `npx hygen component new --name Foo`.
+
 
 ## Developing while embedded into a react project
 
