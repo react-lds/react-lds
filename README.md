@@ -26,6 +26,19 @@ const HelloWorld = props => (
 
 Head over to the [Storybook Docs](https://propertybase.github.io/react-lds) to see a list of available components and their usage as well as interactive sample implementations of each component.
 
+### ES Modules
+
+By default, react-lds transpiles to commonJS modules. You can import ES modules directly by importing components from `react-lds/es`. This enables tree-shaking when using Webpack or similiar bundlers.
+
+``` js
+// CommonJS import (Supported browsers: IE11+, last 2 versions)
+import { Badge } from 'react-lds';
+// ES import (Supported browsers: last 2 versions)
+import { Badge } from 'react-lds/es';
+```
+
+⚠ Do not mix imports from `react-lds` and `react-lds/es` in your codebase. This will duplicate code.
+
 ### Context
 
 In order to use ReactLDS, you will have to provide `assetBasePath` via the [React Context](https://facebook.github.io/react/docs/context.html).
@@ -60,12 +73,11 @@ Page.childContextTypes = {
 
 `yarn install` and `yarn start`. Add or modify stories in `./stories` Happy hacking!
 
-## Scaffold components
+### Scaffold components
 
 New components can be scaffolded with [hygen](https://hygen.io) templates. To add a component, run `npx hygen component new --name Foo`.
 
-
-## Developing while embedded into a react project
+### Developing while embedded into a react project
 
 `npm link` in this folder. After you changed stuff, run `npm build` to update
 the files inside the `./dist` folder, because that's the entry point for
@@ -73,7 +85,7 @@ external react applications.
 
 In your react app: `npm link react-lds`.
 
-## Publish
+### Publish
 
 - Open a new pull request from `/release/{version}`
 - Adjust version in `package.json`

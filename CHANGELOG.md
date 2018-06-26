@@ -3,6 +3,7 @@
 ## Unreleased
 
 * Add `Tooltip` and `ControlledTooltip` component
+* Export ES modules under `react-lds/es`
 
 ## 7.1.1
 

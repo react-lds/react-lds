@@ -27,10 +27,29 @@
         }]
       ],
       "plugins": [
+        "transform-object-rest-spread",
         "transform-class-properties"
       ]
     },
-    "production": {
+    "commonjs": {
+      "presets": [
+        ["env", {
+          "targets": {
+            "browsers": ["last 2 versions"]
+          },
+          "modules": "commonjs",
+          "useBuiltIns": false
+        }]
+      ],
+      "plugins": [
+        "transform-object-rest-spread",
+        "transform-class-properties",
+        ["transform-react-remove-prop-types", {
+          "mode": "wrap",
+          "ignoreFilenames": ["node_modules"]
+        }]]
+    },
+    "es": {
       "plugins": [
         ["transform-react-remove-prop-types", {
           "mode": "wrap",
