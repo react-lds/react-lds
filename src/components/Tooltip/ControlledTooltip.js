@@ -102,27 +102,25 @@ const ControlledTooltip = (props) => {
           </div>
         )}
       </Reference>
-      {isOpen && (
-        <Popper {...getPopperProps(position)}>
-          {({ ref, style }) => {
-            if (!isOpen) return null;
+      <Popper {...getPopperProps(position)}>
+        {({ ref, style }) => {
+          if (!isOpen) return null;
 
-            return (
-              <div
-                className={popoverClasses}
-                id={id}
-                ref={ref}
-                role="tooltip"
-                style={style}
-              >
-                <div className="slds-popover__body">
-                  {renderTitle ? renderTitle(title) : title}
-                </div>
+          return (
+            <div
+              className={popoverClasses}
+              id={id}
+              ref={ref}
+              role="tooltip"
+              style={style}
+            >
+              <div className="slds-popover__body">
+                {renderTitle ? renderTitle(title) : title}
               </div>
-            );
-          }}
-        </Popper>
-      )}
+            </div>
+          );
+        }}
+      </Popper>
     </Manager>
   );
 };
