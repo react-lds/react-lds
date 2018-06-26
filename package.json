@@ -23,7 +23,7 @@
     "start": "yarn storybook",
     "storybook": "yarn run prestorybook; start-storybook -p 6006 -s ./public",
     "test-watch": "jest --watchAll",
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "contributors": [
     "Konstantin Krauss <konstantin@propertybase.com> (http://www.propertybase.com)",
