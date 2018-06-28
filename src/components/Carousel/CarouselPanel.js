@@ -10,7 +10,6 @@ const CarouselPanel = (props) => {
     className,
     id,
     imageUrl,
-    onKeyboardInteraction,
     title,
     ...rest
   } = props;
@@ -50,7 +49,6 @@ const CarouselPanel = (props) => {
     >
       <a
         className="slds-carousel__panel-action slds-text-link_reset"
-        onKeyDown={onKeyboardInteraction}
         tabIndex={tabIndex}
       >
         {renderedImage}
@@ -68,7 +66,6 @@ CarouselPanel.defaultProps = {
   backgroundStyle: null,
   children: [],
   className: null,
-  onKeyboardInteraction: null,
 };
 
 CarouselPanel.propTypes = {
@@ -101,11 +98,6 @@ CarouselPanel.propTypes = {
    * url for the panel image
    */
   imageUrl: PropTypes.string.isRequired,
-
-  /**
-   * Callback for keyboard interaction on an active panel.
-   */
-  onKeyboardInteraction: PropTypes.func,
 
   /**
    * title text

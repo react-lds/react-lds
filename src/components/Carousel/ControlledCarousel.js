@@ -25,10 +25,7 @@ class ControlledCarousel extends Component {
     const { activeIndex, children } = this.props;
 
     return React.Children.map(children, (panel, index) => (
-      React.cloneElement(panel, {
-        active: activeIndex === index,
-        onKeyboardInteraction: this.onKeyboardInteraction,
-      })
+      React.cloneElement(panel, { active: activeIndex === index })
     ));
   }
 
@@ -119,7 +116,11 @@ class ControlledCarousel extends Component {
       <div className={cx(sldsClasses)}>
         <div className="slds-carousel__stage">
           {autoPlay && this.renderAutoPlay()}
-          <div className="slds-carousel__panels" style={{ transform: translateX }}>
+          <div
+            className="slds-carousel__panels"
+            onKeyDown={this.onKeyboardInteraction}
+            style={{ transform: translateX }}
+          >
             {panels}
           </div>
           <ul className="slds-carousel__indicators" role="tablist">
