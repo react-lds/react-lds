@@ -45,6 +45,21 @@ class Carousel extends Component {
     }
   }
 
+  activateNextPanel = () => {
+    const { children } = this.props;
+    const { activeIndex } = this.state;
+
+    const nextActiveIndex = activeIndex + 1;
+
+    if (nextActiveIndex >= children.length) {
+      this.setState({ activeIndex: 0 });
+    } else {
+      this.setState({ activeIndex: nextActiveIndex });
+    }
+  }
+
+  panelChange = index => this.setState({ activeIndex: index });
+
   setActivePanel(nextActiveIndex) {
     const { activeIndex, panels } = this.state;
 
@@ -71,19 +86,6 @@ class Carousel extends Component {
       this.stopAutoPlay();
     } else {
       this.startAutoPlay();
-    }
-  }
-
-  activateNextPanel = () => {
-    const { children } = this.props;
-    const { activeIndex } = this.state;
-
-    const nextActiveIndex = activeIndex + 1;
-
-    if (nextActiveIndex >= children.length) {
-      this.setState({ activeIndex: 0 });
-    } else {
-      this.setState({ activeIndex: nextActiveIndex });
     }
   }
 
@@ -121,8 +123,8 @@ class Carousel extends Component {
         autoPlayStartText={autoPlayStartText}
         autoPlayStopText={autoPlayStopText}
         className={className}
-        onToggleAutoPlay={() => this.toggleAutoPlay()}
-        onPanelChange={index => this.setState({ activeIndex: index })}
+        onToggleAutoPlay={this.toggleAutoPlay}
+        onPanelChange={this.panelChange}
       >
         {children}
       </ControlledCarousel>

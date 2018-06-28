@@ -23,7 +23,7 @@ describe('<Carousel />', () => {
     </Carousel>, options);
 
   it('renders without crashing', () => {
-    expect(getComponent({ onPanelChange }).find('.slds-carousel').length).toEqual(1);
+    expect(getComponent({ onPanelChange }).find(Carousel).length).toEqual(1);
   });
 
   it('renders every panel', () => {
@@ -32,7 +32,7 @@ describe('<Carousel />', () => {
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    expect(mounted.find('.slds-carousel__panel'))
+    expect(mounted.find(CarouselPanel))
       .toHaveLength(2);
   });
 
@@ -42,9 +42,9 @@ describe('<Carousel />', () => {
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    expect(mounted.find('CarouselPanel').at(0).prop('active'))
+    expect(mounted.find(CarouselPanel).at(0).prop('active'))
       .toBe(true);
-    expect(mounted.find('CarouselPanel').at(1).prop('active'))
+    expect(mounted.find(CarouselPanel).at(1).prop('active'))
       .toBe(false);
   });
 
@@ -54,7 +54,7 @@ describe('<Carousel />', () => {
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    mounted.find('CarouselPanel').at(0).find('a').simulate('keydown', { keyCode: 39 });
+    mounted.find(CarouselPanel).at(0).find('a').simulate('keydown', { key: 'ArrowRight' });
 
     expect(onPanelChange).toHaveBeenCalledWith(1);
   });
@@ -64,7 +64,7 @@ describe('<Carousel />', () => {
       { title: 'Title 1', children: 'Content 1' },
     ]);
 
-    mounted.find('CarouselPanel').at(0).find('a').simulate('keydown', { keyCode: 37 });
+    mounted.find(CarouselPanel).at(0).find('a').simulate('keydown', { key: 'ArrowRight' });
     expect(onPanelChange).toHaveBeenCalledWith(0);
   });
 

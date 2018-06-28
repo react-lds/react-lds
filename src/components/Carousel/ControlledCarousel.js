@@ -10,20 +10,19 @@ class ControlledCarousel extends Component {
 
     e.stopPropagation();
     e.target.blur();
-    onPanelChange(Number(e.target.dataset.index));
+    onPanelChange(parseInt(e.target.dataset.index, 10));
   }
 
   onKeyboardInteraction = (e) => {
-    if (e.keyCode === 37) {
+    if (e.key === 'ArrowLeft') {
       this.activatePreviousPanel();
-    } else if (e.keyCode === 39) {
+    } else if (e.key === 'ArrowRight') {
       this.activateNextPanel();
     }
   }
 
   getPanels = () => {
     const { activeIndex, children } = this.props;
-
 
     return React.Children.map(children, (panel, index) => (
       React.cloneElement(panel, {
@@ -58,8 +57,6 @@ class ControlledCarousel extends Component {
   }
 
   renderIndicator = ({ props: { active, id, title } }, index) => {
-    const tabIndex = active ? 0 : -1;
-
     const actionClasses = cx(
       'slds-carousel__indicator-action',
       { 'slds-is-active': active },
@@ -70,7 +67,7 @@ class ControlledCarousel extends Component {
         <a
           className={actionClasses}
           role="tab"
-          tabIndex={tabIndex}
+          tabIndex={active ? 0 : -1}
           aria-selected={active}
           aria-controls={id}
           onClick={this.onClickIndicator}
@@ -91,20 +88,15 @@ class ControlledCarousel extends Component {
       onToggleAutoPlay,
     } = this.props;
 
-    const icon = autoPlayActive ? 'pause' : 'right';
-    const assistiveText = autoPlayActive
-      ? autoPlayStopText
-      : autoPlayStartText;
-
     return (
       <span className="slds-carousel__autoplay">
         <IconButton
-          icon={icon}
+          icon={autoPlayActive ? 'pause' : 'right'}
           border="filled"
           sprite="utility"
           onClick={onToggleAutoPlay}
           size="x-small"
-          title={assistiveText}
+          title={autoPlayActive ? autoPlayStopText : autoPlayStartText}
         />
       </span>
     );
@@ -119,10 +111,7 @@ class ControlledCarousel extends Component {
 
     const panels = this.getPanels();
 
-    const sldsClasses = [
-      'slds-carousel',
-      className
-    ];
+    const sldsClasses = ['slds-carousel', className];
 
     const translateX = `translateX(-${activeIndex * 100}%)`;
 
