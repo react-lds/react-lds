@@ -2,7 +2,8 @@
 
 ## Unreleased
 
-* Add `ControlledCarousel`
+* Add `ControlledCarousel` component
+* Add `Tooltip` and `ControlledTooltip` component
 
 ## 7.1.1
 

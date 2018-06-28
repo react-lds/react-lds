@@ -16,3 +16,10 @@
 .demo-notifications .slds-notify_container {
   position: absolute !important;
 }
+
+.demo-tooltips {
+  display: flex;
+  height: 20rem;
+  align-items: center;
+  justify-content: center;
+}
