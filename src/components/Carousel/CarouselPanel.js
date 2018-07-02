@@ -10,6 +10,8 @@ const CarouselPanel = (props) => {
     className,
     id,
     imageUrl,
+    onError,
+    onLoad,
     title,
     ...rest
   } = props;
@@ -34,7 +36,12 @@ const CarouselPanel = (props) => {
     )
     : (
       <div className="slds-carousel__image">
-        <img src={imageUrl} alt={title} />
+        <img
+          alt={title}
+          src={imageUrl}
+          onError={onError}
+          onLoad={onLoad}
+        />
       </div>
     );
 
@@ -66,6 +73,8 @@ CarouselPanel.defaultProps = {
   backgroundStyle: null,
   children: [],
   className: null,
+  onError: null,
+  onLoad: null,
 };
 
 CarouselPanel.propTypes = {
@@ -103,6 +112,16 @@ CarouselPanel.propTypes = {
    * title text
    */
   title: PropTypes.string.isRequired,
+
+  /**
+   * onError function for img tag, renders only when not supplying backgroundStyle
+   */
+  onError: PropTypes.func,
+
+  /**
+   * onLoad function for img tag, renders only when not supplying backgroundStyle
+   */
+  onLoad: PropTypes.func,
 };
 
 export default CarouselPanel;
