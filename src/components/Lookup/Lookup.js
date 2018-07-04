@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import debounce from 'lodash/debounce';
-import omit from 'lodash/omit';
+import debounce from 'lodash-es/debounce';
+import omit from 'lodash-es/omit';
 
 import {
   Cell,

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import omit from 'lodash/omit';
+import omit from 'lodash-es/omit';
 import { applyDecorators, decoratorProp } from '../../utils';
 
 const validBreakpoints = [
