@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 7.2.0
 
 * Add `Tooltip` and `ControlledTooltip` component
 * Export ES modules under `react-lds/es`
