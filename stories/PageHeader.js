@@ -9,7 +9,7 @@ import {
   PageHeaderBase,
   RecordHome,
   MenuItem,
-  ObjectHomeRaw as ObjectHome
+  ObjectHome
 } from '../src';
 
 const stories = storiesOf('PageHeader', module);
