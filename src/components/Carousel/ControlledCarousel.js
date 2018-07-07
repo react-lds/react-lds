@@ -120,6 +120,7 @@ class ControlledCarousel extends Component {
             className="slds-carousel__panels"
             onKeyDown={this.onKeyboardInteraction}
             style={{ transform: translateX }}
+            tabIndex="0"
           >
             {panels}
           </div>

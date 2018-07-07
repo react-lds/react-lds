@@ -21,8 +21,6 @@ const CarouselPanel = (props) => {
     className,
   ];
 
-  const tabIndex = active ? 0 : -1;
-
   const renderedImage = backgroundStyle
     ? (
       <div
@@ -56,7 +54,6 @@ const CarouselPanel = (props) => {
     >
       <a
         className="slds-carousel__panel-action slds-text-link_reset"
-        tabIndex={tabIndex}
       >
         {renderedImage}
         <div className="slds-carousel__content">
