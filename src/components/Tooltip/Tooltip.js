@@ -5,6 +5,7 @@ import ControlledTooltip, { POSITIONS } from './ControlledTooltip';
 class Tooltip extends Component {
   static defaultProps = {
     className: null,
+    portalSelector: null,
     position: 'top-start',
     renderTitle: null,
   }
@@ -22,6 +23,10 @@ class Tooltip extends Component {
      * Id linking the popover to the reference
      */
     id: PropTypes.string.isRequired,
+    /**
+     * If set, use element with this selector as Portal for Popper
+     */
+    portalSelector: PropTypes.string,
     /**
      * Position of the popover. The popover will move if it hits a window boundary
      */
