@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { omit } from 'lodash-es';
@@ -114,7 +114,7 @@ const InputRaw = (props) => {
   ];
 
   return (
-    <span>
+    <Fragment>
       {renderIconLeft()}
       <input
         {...omit(rest, ['label'])}
@@ -136,7 +136,7 @@ const InputRaw = (props) => {
         {renderSpinner()}
         {renderIconRight()}
       </span>
-    </span>
+    </Fragment>
   );
 };
 
