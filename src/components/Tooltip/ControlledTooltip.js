@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Manager, Reference, Popper } from 'react-popper';
+
+const ELEMENT_STYLE = { display: 'inline-block' };
 
 export const POSITIONS = [
   'top',
@@ -65,45 +68,26 @@ const getPopperProps = (position) => {
   };
 };
 
-const ControlledTooltip = (props) => {
-  const {
-    children,
-    className,
-    id,
-    isOpen,
-    onOpen,
-    onClose,
-    position,
-    renderTitle,
-    title,
-  } = props;
+class ControlledTooltip extends PureComponent {
+  renderPopper = () => {
+    const {
+      className,
+      id,
+      isOpen,
+      position,
+      renderTitle,
+      title,
+    } = this.props;
+    const popoverClasses = cx([
+      'slds-popover',
+      'slds-popover_tooltip',
+      `slds-nubbin_${getNubbin(position)}`,
+      className,
+    ]);
 
-  const popoverClasses = cx([
-    'slds-popover',
-    'slds-popover_tooltip',
-    `slds-nubbin_${getNubbin(position)}`,
-    className,
-  ]);
-
-  return (
-    <Manager>
-      <Reference>
-        {({ ref }) => (
-          <div
-            aria-describedby={id}
-            onMouseEnter={onOpen}
-            onFocus={onOpen}
-            onMouseLeave={onClose}
-            onBlur={onClose}
-            ref={ref}
-            style={{ display: 'inline-block' }}
-          >
-            {children}
-          </div>
-        )}
-      </Reference>
+    return (
       <Popper {...getPopperProps(position)}>
-        {({ ref, style }) => {
+        {({ placement, ref, style }) => {
           if (!isOpen) return null;
 
           return (
@@ -113,6 +97,7 @@ const ControlledTooltip = (props) => {
               ref={ref}
               role="tooltip"
               style={style}
+              data-placement={placement}
             >
               <div className="slds-popover__body">
                 {renderTitle ? renderTitle(title) : title}
@@ -121,15 +106,51 @@ const ControlledTooltip = (props) => {
           );
         }}
       </Popper>
-    </Manager>
-  );
-};
+    );
+  }
+
+  render = () => {
+    const {
+      children,
+      id,
+      onOpen,
+      onClose,
+      portalSelector,
+    } = this.props;
+
+    const popper = portalSelector
+      ? ReactDOM.createPortal(this.renderPopper(), document.querySelector(portalSelector))
+      : this.renderPopper();
+
+    return (
+      <Manager>
+        <Reference>
+          {({ ref }) => (
+            <div
+              aria-describedby={id}
+              onMouseEnter={onOpen}
+              onFocus={onOpen}
+              onMouseLeave={onClose}
+              onBlur={onClose}
+              ref={ref}
+              style={ELEMENT_STYLE}
+            >
+              {children}
+            </div>
+          )}
+        </Reference>
+        {popper}
+      </Manager>
+    );
+  };
+}
 
 ControlledTooltip.defaultProps = {
   className: null,
   isOpen: true,
   onOpen: null,
   onClose: null,
+  portalSelector: null,
   position: 'top-start',
   renderTitle: null,
   title: null,
@@ -160,6 +181,10 @@ ControlledTooltip.propTypes = {
    * Function toggled when blurring the reference (when open)
    */
   onClose: PropTypes.func,
+  /**
+   * If set, use element with this selector as Portal for Popper
+   */
+  portalSelector: PropTypes.string,
   /**
    * Position of the popover. The popover will move if it hits a window boundary
    */
