@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -68,7 +68,7 @@ const getPopperProps = (position) => {
   };
 };
 
-class ControlledTooltip extends React.PureComponent {
+class ControlledTooltip extends PureComponent {
   renderPopper = () => {
     const {
       className,
