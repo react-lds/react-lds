@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.2.1
+
+* Changed: `Tooltip`: Added support for `overflow: hidden;` containers
+* Fixed: `Input` now does not pass wrong `label` prop to underlying <input> tag
+* Fixed: Removed orphan `ObjectHomeRaw` export
+
 ## 7.2.0
 
 * Add `Tooltip` and `ControlledTooltip` component
