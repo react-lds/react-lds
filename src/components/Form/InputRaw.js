@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { omit } from 'lodash-es';
 
 import { getUniqueHash } from '../../utils';
 import {
@@ -116,7 +117,7 @@ const InputRaw = (props) => {
     <span>
       {renderIconLeft()}
       <input
-        {...rest}
+        {...omit(rest, ['label'])}
         aria-describedby={error && !hideErrorMessage ? getUniqueHash(error, id) : null}
         className={cx(sldsClasses)}
         disabled={disabled}
