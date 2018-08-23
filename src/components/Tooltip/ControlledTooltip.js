@@ -33,17 +33,21 @@ const getNubbin = (position) => {
     .join('-');
 };
 
-const getPopperProps = (position) => {
+const getPopperProps = (position, customOffset) => {
   let offset;
 
-  if (position === 'left' || position === 'right') {
-    offset = '0, 16';
-  } else if (position.endsWith('start')) {
-    offset = '-16, 16';
-  } else if (position.endsWith('end')) {
-    offset = '16, 16';
+  if (!customOffset) {
+    if (position === 'left' || position === 'right') {
+      offset = '0, 16';
+    } else if (position.endsWith('start')) {
+      offset = '-16, 16';
+    } else if (position.endsWith('end')) {
+      offset = '16, 16';
+    } else {
+      offset = '0, 16';
+    }
   } else {
-    offset = '0, 16';
+    offset = customOffset;
   }
 
   return {
@@ -74,6 +78,7 @@ class ControlledTooltip extends PureComponent {
       className,
       id,
       isOpen,
+      offset,
       position,
       renderTitle,
       title,
@@ -86,7 +91,7 @@ class ControlledTooltip extends PureComponent {
     ]);
 
     return (
-      <Popper {...getPopperProps(position)}>
+      <Popper {...getPopperProps(position, offset)}>
         {({ placement, ref, style }) => {
           if (!isOpen) return null;
 
@@ -148,6 +153,7 @@ class ControlledTooltip extends PureComponent {
 ControlledTooltip.defaultProps = {
   className: null,
   isOpen: true,
+  offset: null,
   onOpen: null,
   onClose: null,
   portalSelector: null,
@@ -173,6 +179,11 @@ ControlledTooltip.propTypes = {
    * Controls whether the popover is visible
    */
   isOpen: PropTypes.bool,
+  /**
+   * Allows you to set popper offsets manually
+   * Usage: https://popper.js.org/popper-documentation.html#modifiers..offset
+   */
+  offset: PropTypes.string,
   /**
    * Function toggled when hovering or focussing the reference
    */
