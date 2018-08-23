@@ -181,6 +181,7 @@ ControlledTooltip.propTypes = {
   isOpen: PropTypes.bool,
   /**
    * Allows you to set popper offsets manually
+   * Usage: https://popper.js.org/popper-documentation.html#modifiers..offset
    */
   offset: PropTypes.string,
   /**
