@@ -50,8 +50,9 @@ export class MenuRaw extends Component {
     const { open } = this.state;
     const rest = omit(this.props, ['button', 'defaultOpen', 'closeOnClickOutside']);
     const condition = closeOnClickOutside && open;
+
     return (
-      <ClickOutside onClickOutside={this.onClickOutside} condition={condition} >
+      <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
         <ControlledMenu
           {...rest}
           button={this.getButton()}
