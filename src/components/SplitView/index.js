@@ -40,78 +40,76 @@ export class SplitView extends Component {
 
   getMasterViewId = () => `master_view_${this.props.id}`;
 
-	setIsOpen = (isOpen) => {
-	  this.setState({ isOpen });
-	}
+  setIsOpen = (isOpen) => {
+    this.setState({ isOpen });
+  }
 
-	toggle = () => {
-	  const { isOpen } = this.state;
-	  const { onOpen, onClose } = this.props;
+  toggle = () => {
+    const { isOpen } = this.state;
+    const { onOpen, onClose } = this.props;
 
-	  this.setIsOpen(!isOpen);
+    this.setIsOpen(!isOpen);
 
-	  if (isOpen) {
-	    onClose();
-	  } else {
-	    onOpen();
-	  }
-	}
+    if (isOpen) {
+      onClose();
+    } else {
+      onOpen();
+    }
+  }
 
-	renderMasterView() {
-    return this.state.isOpen
-      ? (
-        <article
-          id={this.getMasterViewId()}
-          className="slds-split-view slds-grid slds-grid_vertical slds-grow slds-scrollable_none"
-        >
-          {this.props.master}
-        </article>
-      )
+  renderMasterView() {
+    return this.state.isOpen && (
+      <article
+        id={this.getMasterViewId()}
+        className="slds-split-view slds-grid slds-grid_vertical slds-grow slds-scrollable_none"
+      >
+        {this.props.master}
+      </article>
+    );
+  }
+
+  render() {
+    const {
+      assistiveTextOpen,
+      assistiveTextClose,
+      className,
+      detail,
+      id,
+      masterMaxWidth,
+      masterMinWidth,
+    } = this.props;
+    const { isOpen } = this.state;
+    const masterStyle = isOpen
+      ? { maxWidth: masterMaxWidth, minWidth: masterMinWidth }
       : null;
-	}
 
-	render() {
-	  const {
-	    assistiveTextOpen,
-	    assistiveTextClose,
-	    className,
-	    detail,
-	    id,
-	    masterMaxWidth,
-	    masterMinWidth,
-	  } = this.props;
-	  const { isOpen } = this.state;
-	  const masterStyle = isOpen
-	    ? { maxWidth: masterMaxWidth, minWidth: masterMinWidth }
-	    : null;
-
-	  return (
-  <div
-    id={id}
-    className={cx('slds-grid', className)}
-    style={FULL_HEIGHT}
-  >
-    <div
-      style={masterStyle}
-      className={cx(
-						'slds-split-view_container',
-						{ 'slds-is-open': isOpen },
-						{ 'slds-is-closed': !isOpen },
-					)}
-    >
-      <ToggleButton
-        ariaControls={this.getMasterViewId()}
-        assistiveTextOpen={assistiveTextOpen}
-        assistiveTextClose={assistiveTextClose}
-        isOpen={isOpen}
-        onClick={this.toggle}
-      />
-      {this.renderMasterView()}
-    </div>
-    <div style={DETAIL_VIEW_STYLE} className="slds-grow slds-scrollable_y">
-      {detail}
-    </div>
-  </div>
-	  );
-	}
+    return (
+      <div
+        id={id}
+        className={cx('slds-grid', className)}
+        style={FULL_HEIGHT}
+      >
+        <div
+          style={masterStyle}
+          className={cx(
+            'slds-split-view_container',
+            { 'slds-is-open': isOpen },
+            { 'slds-is-closed': !isOpen },
+          )}
+        >
+          <ToggleButton
+            ariaControls={this.getMasterViewId()}
+            assistiveTextOpen={assistiveTextOpen}
+            assistiveTextClose={assistiveTextClose}
+            isOpen={isOpen}
+            onClick={this.toggle}
+          />
+          {this.renderMasterView()}
+        </div>
+        <div style={DETAIL_VIEW_STYLE} className="slds-grow slds-scrollable_y">
+          {detail}
+        </div>
+      </div>
+    );
+  }
 }
