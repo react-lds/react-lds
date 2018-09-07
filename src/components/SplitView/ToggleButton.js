@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { IconSVG } from 'react-lds/es';
+import { IconSVG } from '../Icon';
 
 export const TOGGLE_BUTTON_WIDTH = '0.75rem';
 

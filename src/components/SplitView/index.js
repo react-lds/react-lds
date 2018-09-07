@@ -58,14 +58,16 @@ export class SplitView extends Component {
 	}
 
 	renderMasterView() {
-	  return this.state.isOpen ? (
-  <article
-    id={this.getMasterViewId()}
-    className="slds-split-view slds-grid slds-grid_vertical slds-grow slds-scrollable_none"
-  >
-    {this.props.master}
-  </article>
-	  ) : null;
+    return this.state.isOpen
+      ? (
+        <article
+          id={this.getMasterViewId()}
+          className="slds-split-view slds-grid slds-grid_vertical slds-grow slds-scrollable_none"
+        >
+          {this.props.master}
+        </article>
+      )
+      : null;
 	}
 
 	render() {
