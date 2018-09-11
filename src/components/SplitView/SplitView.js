@@ -5,10 +5,12 @@ import { ControlledSplitView } from './ControlledSplitView';
 
 export class SplitView extends Component {
   static propTypes = {
+    initialIsOpen: PropTypes.bool,
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
   };
   static defaultProps = {
+    initialIsOpen: false,
     onOpen: Function.prototype,
     onClose: Function.prototype,
   };
@@ -17,10 +19,6 @@ export class SplitView extends Component {
     super(props);
 
     this.state = { isOpen: props.initialIsOpen };
-  }
-
-  setIsOpen = (isOpen) => {
-    this.setState({ isOpen });
   }
 
   onOpen = () => {
@@ -33,12 +31,16 @@ export class SplitView extends Component {
     this.props.onClose();
   }
 
+  setIsOpen = (isOpen) => {
+    this.setState({ isOpen });
+  }
+
   render() {
     const { isOpen } = this.state;
 
     return (
       <ControlledSplitView
-        { ...this.props }
+        {...this.props}
         isOpen={isOpen}
         onClose={this.onClose}
         onOpen={this.onOpen}
