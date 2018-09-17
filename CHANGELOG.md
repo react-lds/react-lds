@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.2.2
+
+* New: `SplitView` & `ControlledSplitView` components
+* Changed: `Tooltip`: Added support for custom offsets
+
 ## 7.2.1
 
 * Changed: `Tooltip`: Added support for `overflow: hidden;` containers
