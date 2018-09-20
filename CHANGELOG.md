@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.2.3
+
+* Fixed: SplitView: Proper icon for toggle button
+* Fixed: SplitView: Removed incorrect shadow of toggle button
+
 ## 7.2.2
 
 * New: `SplitView` & `ControlledSplitView` components
