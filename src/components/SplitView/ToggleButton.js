@@ -33,6 +33,9 @@ export const ToggleButton = ({
     >
       <IconSVG
         className="slds-button__icon slds-button__icon_x-small"
+        /* SLDS applies rotate tranform to this icon,
+           so we don't need to change icon itself
+         */
         icon="left"
         isButton
         sprite="utility"
