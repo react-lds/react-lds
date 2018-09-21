@@ -30,7 +30,7 @@ ComboboxDropdownList.propTypes = {
   /**
    * list content
    */
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.node,
   /**
    * sets the number of items being displayed
    */
