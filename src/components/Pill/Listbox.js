@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const Listbox = (props) => {
+const Listbox = React.forwardRef((props, ref) => {
   const { children, className, label, ...rest } = props;
 
   const sldsClasses = [
@@ -27,12 +27,13 @@ const Listbox = (props) => {
       aria-label={label}
       aria-orientation="horizontal"
       className={cx(sldsClasses)}
+      ref={ref}
       role="listbox"
     >
       {React.Children.map(children, renderChild)}
     </ul>
   );
-};
+});
 
 Listbox.defaultProps = {
   className: null,
