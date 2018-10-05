@@ -12,6 +12,7 @@ const Listbox = React.forwardRef((props, ref) => {
   ];
 
   const renderChild = ((child, i) => {
+    if (!child) return null;
     const clonedChild = React.cloneElement(child, {
       'aria-selected': true,
       tabIndex: i === 0 ? 0 : null,
