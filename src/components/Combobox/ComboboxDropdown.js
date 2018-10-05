@@ -13,7 +13,7 @@ const ComboboxDropdown = (props) => {
   const {
     children,
     className,
-    email,
+    isEmailComposer,
     error,
     hideErrorMessage,
     hideLabel,
@@ -50,7 +50,7 @@ const ComboboxDropdown = (props) => {
 
   return (
     <FormElement
-      className={email ? 'slds-email-composer__combobox' : null}
+      className={isEmailComposer ? 'slds-email-composer__combobox' : null}
       error={error}
       required={required}
     >
@@ -94,7 +94,7 @@ ComboboxDropdown.propTypes = {
   /**
    * add class for email composer mode
    */
-  email: PropTypes.bool,
+  isEmailComposer: PropTypes.bool,
   /**
    * input error
    */
@@ -146,7 +146,7 @@ ComboboxDropdown.propTypes = {
 
 ComboboxDropdown.defaultProps = {
   className: null,
-  email: false,
+  isEmailComposer: false,
   error: null,
   hideErrorMessage: false,
   hideLabel: false,
