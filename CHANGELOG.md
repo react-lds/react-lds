@@ -1,4 +1,9 @@
 # Changelog
+## 7.2.4
+
+* Add support for `ComboboxDropdown` email modifier
+* Fixed: Removed blue border on the PDF template selector field
+* Fixed: Loading state now works when two icons are shown or a margin is set on `Input`
 
 ## 7.2.3
 
