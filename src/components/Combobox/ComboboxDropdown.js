@@ -88,7 +88,7 @@ ComboboxDropdown.propTypes = {
   /**
    * one ComboboxDropdownList or many of them
    */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   /**
    * class name
    */
@@ -151,6 +151,7 @@ ComboboxDropdown.propTypes = {
 };
 
 ComboboxDropdown.defaultProps = {
+  children: null,
   className: null,
   isEmailComposer: false,
   error: null,
