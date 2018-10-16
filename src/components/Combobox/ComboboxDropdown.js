@@ -20,6 +20,7 @@ const ComboboxDropdown = (props) => {
     inlineListbox,
     input,
     labelInput,
+    onInputLabelClick,
     open,
     pills,
     required,
@@ -53,6 +54,7 @@ const ComboboxDropdown = (props) => {
         hideLabel={hideLabel}
         id={id}
         label={labelInput}
+        onClick={onInputLabelClick}
         required={required}
       />
       <FormElementControl>
@@ -117,6 +119,7 @@ ComboboxDropdown.propTypes = {
     PropTypes.string,
     PropTypes.node,
   ]),
+  onInputLabelClick: PropTypes.func,
   /**
    * forces open or closed state, is needed when using a custom button
    */
@@ -142,6 +145,7 @@ ComboboxDropdown.defaultProps = {
   hideLabel: false,
   inlineListbox: null,
   labelInput: '',
+  onInputLabelClick: null,
   open: false,
   pills: null,
   required: false,
