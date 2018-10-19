@@ -76,7 +76,7 @@ ComboboxDropdownListItem.propTypes = {
   /**
    * The content of a menu item
    */
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   /**
    * class name
    */
