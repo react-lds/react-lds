@@ -225,7 +225,7 @@ class DataTable extends Component {
 
     if (fixedHeader) {
       return (
-        <div className="slds-table--header-fixed_container">
+        <div className="slds-table--header-fixed_container slds-grid slds-grid_vertical">
           <div className="slds-scrollable_y" style={FULL_HEIGHT_STYLE}>
             {table}
           </div>
