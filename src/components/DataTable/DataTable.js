@@ -7,6 +7,8 @@ import { propTypes as tablePropTypes } from '../Table/Table';
 
 import defaultRowRenderer from './defaultRowRenderer';
 
+const FULL_HEIGHT_STYLE = { height: '100%' };
+
 class DataTable extends Component {
   state = {
     id: uniqueId('data-table-advanced-'),
@@ -162,14 +164,16 @@ class DataTable extends Component {
   }
 
   renderHead() {
+    const { fixedHeader } = this.props;
     const { columns, id, sortBy, sortDirection } = this.state;
 
     return (
       <thead>
-        <tr>
+        <tr className={fixedHeader ? 'slds-text-title_caps' : null}>
           {columns.map(({ headRenderer, ...restProps }) =>
             headRenderer({
               allSelected: this.areAllRowsSelected(),
+              fixed: fixedHeader,
               onSelectAll: this.onSelectAll,
               onSort: this.onSort,
               sortBy,
@@ -198,6 +202,7 @@ class DataTable extends Component {
   }
 
   render() {
+    const { fixedHeader } = this.props;
     const rest = omit(this.props, [
       'children',
       'data',
@@ -211,13 +216,24 @@ class DataTable extends Component {
       'sortBy',
       'sortDirection',
     ]);
-
-    return (
+    const table = (
       <Table {...rest}>
         {this.renderHead()}
         {this.renderBody()}
       </Table>
     );
+
+    if (fixedHeader) {
+      return (
+        <div className="slds-table--header-fixed_container">
+          <div className="slds-scrollable_y" style={FULL_HEIGHT_STYLE}>
+            {table}
+          </div>
+        </div>
+      );
+    }
+
+    return table;
   }
 }
 
