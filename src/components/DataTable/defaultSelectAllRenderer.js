@@ -5,13 +5,14 @@ import { CheckboxRaw } from '../../';
 
 const FIXED_STYLE = { marginLeft: '-0.25rem' };
 
+/* eslint-disable react/prop-types */
 export default ({
   allSelected,
   dataKey,
   fixed,
   onSelectAll,
   tableId,
-}) => { // eslint-disable-line react/prop-types
+}) => {
   const checkboxId = `${tableId}-${dataKey}`;
   const wrapperClassName = cx([
     { 'slds-cell-fixed': fixed },
@@ -38,3 +39,4 @@ export default ({
     </th>
   );
 };
+/* eslint-enable react/prop-types */
