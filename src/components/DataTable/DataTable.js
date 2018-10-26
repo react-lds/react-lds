@@ -7,8 +7,6 @@ import { propTypes as tablePropTypes } from '../Table/Table';
 
 import defaultRowRenderer from './defaultRowRenderer';
 
-const FULL_HEIGHT_STYLE = { height: '100%' };
-
 class DataTable extends Component {
   state = {
     id: uniqueId('data-table-advanced-'),
@@ -169,7 +167,7 @@ class DataTable extends Component {
 
     return (
       <thead>
-        <tr className={fixedHeader ? 'slds-text-title_caps' : null}>
+        <tr>
           {columns.map(({ headRenderer, ...restProps }) =>
             headRenderer({
               allSelected: this.areAllRowsSelected(),
@@ -226,7 +224,7 @@ class DataTable extends Component {
     if (fixedHeader) {
       return (
         <div className="slds-table--header-fixed_container slds-grid slds-grid_vertical">
-          <div className="slds-scrollable_y" style={FULL_HEIGHT_STYLE}>
+          <div className="slds-scrollable_y">
             {table}
           </div>
         </div>

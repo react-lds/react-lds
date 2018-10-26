@@ -10,7 +10,7 @@ const Table = (props) => {
     fixedHeader,
     flavor,
     variation,
-    ...rest,
+    ...rest
   } = props;
 
   const sldsClasses = [
