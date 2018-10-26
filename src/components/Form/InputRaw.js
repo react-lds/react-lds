@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { omit } from 'lodash-es';
@@ -44,10 +44,10 @@ const InputRaw = (props) => {
 
     if (iconName) {
       const iconClasses = [
-        'slds-icon-text-default',
         'slds-icon',
         'slds-input__icon',
-        { 'slds-input__icon_left': iconLeft && iconRight },
+        'slds-input__icon_left',
+        'slds-icon-text-default',
       ];
 
       return (
@@ -66,7 +66,7 @@ const InputRaw = (props) => {
     if (iconRight && iconRightOnClick) {
       const iconClasses = [
         'slds-input__icon',
-        { 'slds-input__icon_right': iconLeft && iconRight },
+        'slds-input__icon_right',
       ];
 
       return (
@@ -84,7 +84,7 @@ const InputRaw = (props) => {
         'slds-icon-text-default',
         'slds-icon',
         'slds-input__icon',
-        { 'slds-input__icon_right': iconLeft && iconRight },
+        'slds-input__icon_right',
       ];
 
       return (
@@ -99,14 +99,6 @@ const InputRaw = (props) => {
     return null;
   };
 
-  const renderSpinner = () => showSpinner && (
-    <Spinner
-      flavor="brand"
-      className="slds-input__spinner slds-m-right_xx-small"
-      size="x-small"
-    />
-  );
-
   const sldsClasses = [
     { 'slds-has-input-focus': isFocused },
     bare ? 'slds-input_bare' : 'slds-input',
@@ -114,7 +106,7 @@ const InputRaw = (props) => {
   ];
 
   return (
-    <span>
+    <Fragment>
       {renderIconLeft()}
       <input
         {...omit(rest, ['label'])}
@@ -132,11 +124,17 @@ const InputRaw = (props) => {
         type={type}
         value={value}
       />
-      <span className="slds-input__icon-group slds-input__icon-group_right">
-        {renderSpinner()}
-        {renderIconRight()}
-      </span>
-    </span>
+      {showSpinner ? (
+        <div className="slds-input__icon-group slds-input__icon-group_right">
+          <Spinner
+            flavor="brand"
+            className="slds-input__spinner slds-m-right_xx-small"
+            size="x-small"
+          />
+          {renderIconRight()}
+        </div>
+      ) : renderIconRight()}
+    </Fragment>
   );
 };
 
@@ -149,12 +147,12 @@ InputRaw.defaultProps = {
   hideErrorMessage: false,
   iconLeft: null,
   iconRight: null,
-  iconRightOnClick: () => {},
   isFocused: false,
+  iconRightOnClick: null,
   label: null,
-  onChange: () => {},
-  onFocus: () => {},
-  onKeyPress: () => {},
+  onChange: null,
+  onFocus: null,
+  onKeyPress: null,
   placeholder: null,
   role: null,
   required: false,

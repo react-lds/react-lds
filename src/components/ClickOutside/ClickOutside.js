@@ -70,13 +70,11 @@ export default class ClickOutside extends Component {
 
   registerEventListener() {
     const { useCapture } = this.props;
-
     document.addEventListener('click', this.handle, useCapture);
   }
 
   unregisterEventListener() {
     const { useCapture } = this.props;
-
     document.removeEventListener('click', this.handle, useCapture);
   }
 
@@ -100,7 +98,7 @@ export default class ClickOutside extends Component {
     } = this.props;
 
     return (
-      <div tabIndex="-1" onKeyUp={condition ? this.handleKeyUp : null} {...rest} ref={this.getContainer}>
+      <div onKeyUp={condition ? this.handleKeyUp : null} {...rest} ref={this.getContainer}>
         {children}
       </div>
     );

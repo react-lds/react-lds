@@ -1,4 +1,14 @@
 # Changelog
+## 7.2.4
+
+* Add support for `ComboboxDropdown` email modifier
+* Fixed: Opening Menus now does not trigger an incorrect `::focus` state on parent
+* Fixed: Loading state now works when two icons are shown or a margin is set on `Input`
+
+## 7.2.3
+
+* Fixed: SplitView: Proper icon for toggle button
+* Fixed: SplitView: Removed incorrect shadow of toggle button
 
 ## 7.2.2
 
