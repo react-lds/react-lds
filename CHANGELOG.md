@@ -1,4 +1,9 @@
 # Changelog
+
+## 7.2.5
+
+* Changed: `DataTable`: Added support for fixed header row
+
 ## 7.2.4
 
 * Add support for `ComboboxDropdown` email modifier
