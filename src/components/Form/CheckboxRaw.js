@@ -124,6 +124,9 @@ CheckboxRaw.propTypes = {
    * adds required attribute to the checkbox
    */
   required: PropTypes.bool,
+  /**
+   * sets class name for wrapper <span/> element
+   */
   wrapperClassName: PropTypes.string,
 };
 
