@@ -9,6 +9,7 @@ const Cell = (props) => {
   const {
     children,
     className,
+    fixed,
     resizable,
     resizableAssistiveText,
     scope,
@@ -121,7 +122,10 @@ const Cell = (props) => {
   ];
 
   const wrappedChildren = wrapChildren(childArray);
-  const wrapperClassName = truncate ? 'slds-truncate' : null;
+  const wrapperClassName = cx([
+    { 'slds-truncate': truncate },
+    { 'slds-cell-fixed': fixed },
+  ]);
 
   return (
     <CellElement
@@ -139,6 +143,7 @@ const Cell = (props) => {
 Cell.defaultProps = {
   children: null,
   className: null,
+  fixed: false,
   resizable: false,
   resizableAssistiveText: 'Resize Cell',
   scope: null,
@@ -155,6 +160,10 @@ Cell.propTypes = {
    * cell content
    */
   children: PropTypes.node,
+  /**
+   * cell for fixed header
+   */
+  fixed: PropTypes.bool,
   /**
    * class name
    */

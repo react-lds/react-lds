@@ -17,7 +17,7 @@ describe('<Carousel />', () => {
         <CarouselPanel
           id={`panel-${i}`}
           imageUrl={`/assets/images/carousel/carousel-0${i}.jpg`}
-          key={`p${i}`}
+          key={`p${i}`} // eslint-disable-line react/no-array-index-key
           {...panelProps}
         />
       ))}
