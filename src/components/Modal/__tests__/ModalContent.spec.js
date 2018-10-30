@@ -16,6 +16,18 @@ describe('<ModalContent />', () => {
     expect(mounted.contains(sampleChild)).toBeTruthy();
   });
 
+  it('allows to collapse padding', () => {
+    const testPadding = (cmp, truthy) => {
+      const test = expect(cmp.find('.slds-modal__content').hasClass('slds-p-around_medium'));
+      return truthy ? test.toBeTruthy() : test.toBeFalsy();
+    };
+
+    const mounted = getComponent({ collapsePadding: false });
+    testPadding(mounted, true);
+    mounted.setProps({ collapsePadding: true });
+    testPadding(mounted, false);
+  });
+
   it('applies extra classNames and rest properties', () => {
     const mounted = getComponent({ className: 'foo', 'aria-hidden': true });
     const el = mounted.find('.slds-modal__content');
