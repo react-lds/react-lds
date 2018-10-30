@@ -9,7 +9,7 @@ import {
   InputRaw,
 } from '../../';
 
-const Input = (props) => {
+const Input = React.forwardRef((props, ref) => {
   const {
     error,
     errorIcon,
@@ -30,24 +30,6 @@ const Input = (props) => {
   const hasIconLeft = !!iconLeft || (error && errorIcon);
   const hasIconRight = !!iconRight || !!showSpinner;
 
-  const inputRaw = (
-    <InputRaw
-      error={error}
-      errorIcon={errorIcon}
-      hideErrorMessage={hideErrorMessage}
-      iconLeft={iconLeft}
-      iconRight={iconRight}
-      id={id}
-      label={label}
-      placeholder={placeholder}
-      readOnly={readOnly}
-      required={required}
-      showSpinner={showSpinner}
-      value={value}
-      {...rest}
-    />
-  );
-
   return (
     <FormElement required={required} error={error}>
       <FormElementLabel
@@ -60,12 +42,27 @@ const Input = (props) => {
         hasIconLeft={hasIconLeft}
         hasIconRight={hasIconRight}
       >
-        {inputRaw}
+        <InputRaw
+          error={error}
+          errorIcon={errorIcon}
+          hideErrorMessage={hideErrorMessage}
+          iconLeft={iconLeft}
+          iconRight={iconRight}
+          id={id}
+          label={label}
+          placeholder={placeholder}
+          readOnly={readOnly}
+          ref={ref}
+          required={required}
+          showSpinner={showSpinner}
+          value={value}
+          {...rest}
+        />
       </FormElementControl>
       {!hideErrorMessage && <FormElementError error={error} id={id} />}
     </FormElement>
   );
-};
+});
 
 Input.defaultProps = {
   bare: false,
@@ -78,7 +75,6 @@ Input.defaultProps = {
   iconLeft: null,
   iconRight: null,
   iconRightOnClick: () => {},
-  isFocused: false,
   label: null,
   onChange: () => {},
   onFocus: () => {},
@@ -138,10 +134,6 @@ Input.propTypes = {
    * id of the input field
    */
   id: PropTypes.string.isRequired,
-  /**
-   * focuses the input field
-   */
-  isFocused: PropTypes.bool,
   /**
    * label for the input
    */
