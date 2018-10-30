@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ButtonIcon from './ButtonIcon';
 
-const Button = (props) => {
+const Button = React.forwardRef((props, ref) => {
   const {
     children,
     className,
@@ -36,6 +36,7 @@ const Button = (props) => {
       {...rest}
       className={sldsClasses}
       href={href}
+      ref={ref}
       title={title}
     >
       {isRightShortcut ? content : null}
@@ -49,7 +50,7 @@ const Button = (props) => {
       {!isRightShortcut ? content : null}
     </ButtonEl>
   );
-};
+});
 
 Button.defaultProps = {
   children: null,

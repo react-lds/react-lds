@@ -10,7 +10,7 @@ import {
   Spinner,
 } from '../../';
 
-const InputRaw = (props) => {
+const InputRaw = React.forwardRef((props, ref) => {
   const {
     bare,
     className,
@@ -31,16 +31,11 @@ const InputRaw = (props) => {
     showSpinner,
     type,
     value,
-    isFocused,
     ...rest
   } = props;
 
   const renderIconLeft = () => {
-    let iconName = iconLeft;
-
-    if (error && errorIcon) {
-      iconName = 'warning';
-    }
+    const iconName = (error && errorIcon) ? 'warning' : iconLeft;
 
     if (iconName) {
       const iconClasses = [
@@ -100,7 +95,6 @@ const InputRaw = (props) => {
   };
 
   const sldsClasses = [
-    { 'slds-has-input-focus': isFocused },
     bare ? 'slds-input_bare' : 'slds-input',
     className
   ];
@@ -118,7 +112,7 @@ const InputRaw = (props) => {
         onFocus={onFocus}
         onKeyPress={onKeyPress}
         placeholder={placeholder}
-        ref={(input) => { if (input && isFocused) { input.focus(); } }}
+        ref={ref}
         required={required}
         role={role}
         type={type}
@@ -136,7 +130,7 @@ const InputRaw = (props) => {
       ) : renderIconRight()}
     </Fragment>
   );
-};
+});
 
 InputRaw.defaultProps = {
   bare: false,
@@ -147,7 +141,6 @@ InputRaw.defaultProps = {
   hideErrorMessage: false,
   iconLeft: null,
   iconRight: null,
-  isFocused: false,
   iconRightOnClick: null,
   label: null,
   onChange: null,
@@ -202,10 +195,6 @@ InputRaw.propTypes = {
    * id of the input field
    */
   id: PropTypes.string.isRequired,
-  /**
-   * focuses the input field
-   */
-  isFocused: PropTypes.bool,
   /**
    * label for the input
    */

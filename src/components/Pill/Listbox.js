@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const Listbox = (props) => {
+const Listbox = React.forwardRef((props, ref) => {
   const { children, className, label, ...rest } = props;
 
   const sldsClasses = [
@@ -12,6 +12,7 @@ const Listbox = (props) => {
   ];
 
   const renderChild = ((child, i) => {
+    if (!child) return null;
     const clonedChild = React.cloneElement(child, {
       'aria-selected': true,
       tabIndex: i === 0 ? 0 : null,
@@ -27,12 +28,13 @@ const Listbox = (props) => {
       aria-label={label}
       aria-orientation="horizontal"
       className={cx(sldsClasses)}
+      ref={ref}
       role="listbox"
     >
       {React.Children.map(children, renderChild)}
     </ul>
   );
-};
+});
 
 Listbox.defaultProps = {
   className: null,

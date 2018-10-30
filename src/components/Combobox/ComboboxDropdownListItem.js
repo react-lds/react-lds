@@ -5,17 +5,9 @@ import cx from 'classnames';
 import { IconSVG, MediaObject } from '../../';
 
 const renderIcon = (icon, selected) => {
-  if (icon) {
-    return (
-      <IconSVG
-        icon={icon.icon}
-        size="small"
-        sprite={icon.sprite}
-      />
-    );
-  }
+  if (!icon && !selected) return null;
 
-  if (selected) {
+  if (selected && (!icon || !icon.alwaysDisplay)) {
     return (
       <IconSVG
         className="slds-listbox__icon-selected"
@@ -26,7 +18,8 @@ const renderIcon = (icon, selected) => {
     );
   }
 
-  return null;
+  const { alwaysDisplay, ...iconProps } = icon;
+  return <IconSVG {...iconProps} size="x-small" />;
 };
 
 const ComboboxDropdownListItem = (props) => {
@@ -76,7 +69,7 @@ ComboboxDropdownListItem.propTypes = {
   /**
    * The content of a menu item
    */
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   /**
    * class name
    */

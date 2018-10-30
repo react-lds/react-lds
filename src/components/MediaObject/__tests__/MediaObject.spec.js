@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import cx from 'classnames';
 
 import MediaObject from '../MediaObject';
 
@@ -35,6 +36,27 @@ describe('<MediaObject />', () => {
     mounted.setProps({ figureLeft: figure, figureRight: figure });
     expect(mounted.find('.slds-media__figure').length).toBe(2);
     expect(mounted.find('.slds-media__figure_reverse').length).toBe(1);
+  });
+
+  it('allows rendering figures via a render function', () => {
+    const renderer = (elem, classes) => (
+      <span className={cx(classes, 'custom')}>{elem}</span>
+    );
+
+    mounted.setProps({
+      figureLeft: figure,
+      figureRight: figure,
+      renderFigureLeft: renderer,
+      renderFigureRight: renderer,
+    });
+
+    const figureLeft = mounted.find('.slds-media__figure.custom').at(0);
+    const figureRight = mounted.find('.slds-media__figure_reverse.custom');
+
+    expect(figureLeft.exists()).toBeTruthy();
+    expect(figureRight.exists()).toBeTruthy();
+    expect(figureLeft.contains(figure)).toBeTruthy();
+    expect(figureRight.contains(figure)).toBeTruthy();
   });
 
   it('allows a custom tag to be used', () => {
