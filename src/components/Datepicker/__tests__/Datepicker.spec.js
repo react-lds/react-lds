@@ -5,7 +5,7 @@ import { extendMoment } from 'moment-range';
 import { shallow } from 'enzyme';
 
 import { DatepickerRaw as Datepicker } from '../Datepicker';
-import { IconButton } from '../../../';
+import { IconButton, Input } from '../../../';
 
 const moment = extendMoment(Moment);
 
@@ -19,7 +19,7 @@ describe('<Datepicker />', () => {
   });
 
   it('renders input field', () => {
-    expect(mounted.find('Input').first().length).toBe(1);
+    expect(mounted.find(Input).first().length).toBe(1);
   });
 
   it('hides datepicker', () => {
@@ -39,7 +39,7 @@ describe('<Datepicker />', () => {
 
   it('can render as disabled', () => {
     mounted = shallow(<Datepicker className="foo" onChange={changed} disabled />);
-    expect(mounted.find('Input').first().prop('disabled')).toBe(true);
+    expect(mounted.find(Input).first().prop('disabled')).toBe(true);
   });
 
   it('highlights the current day', () => {
@@ -64,29 +64,29 @@ describe('<Datepicker />', () => {
     sampleDate.simulate('click');
     expect(changed).toBeCalled();
     expect(changed).toHaveBeenCalledWith('2016-05-11', true);
-    expect(mounted.find('Input').first().props().error).toBeFalsy();
+    expect(mounted.find(Input).first().props().error).toBeFalsy();
   });
 
   it('calls the callback function if a date is input', () => {
-    const input = mounted.find('Input').first();
+    const input = mounted.find(Input).first();
     const sampleDate = '1/10/2017';
     input.simulate('change', { target: { value: sampleDate } });
     expect(changed).toBeCalled();
     expect(changed).toHaveBeenCalledWith('2017-01-10', true);
-    expect(mounted.find('Input').first().props().error).toBeFalsy();
+    expect(mounted.find(Input).first().props().error).toBeFalsy();
   });
 
   it('displays an error message if the input date is invalid', () => {
-    const input = mounted.find('Input').first();
+    const input = mounted.find(Input).first();
     const falseSampleDate = '13/10/2017';
     input.simulate('change', { target: { value: falseSampleDate } });
     expect(changed).toBeCalled();
     expect(changed).toHaveBeenCalledWith('13/10/2017', false);
-    expect(mounted.find('Input').first().props().error).toBeDefined();
+    expect(mounted.find(Input).first().props().error).toBeDefined();
   });
 
   it('datepicker mirrors the date of the input', () => {
-    const input = mounted.find('Input').first();
+    const input = mounted.find(Input).first();
     const sampleDate = '1/10/2017';
     input.simulate('change', { target: { value: sampleDate } });
     expect(changed).toBeCalled();
@@ -97,7 +97,7 @@ describe('<Datepicker />', () => {
     mounted.setState({ viewedDate: moment('2016-05-11') });
     const sampleDate = mounted.find('.slds-day').at(10);
     sampleDate.simulate('click');
-    const input = mounted.find('Input').first();
+    const input = mounted.find(Input).first();
     expect(mounted.state('viewedDate').toString()).toEqual(moment(input.props().value, 'MM/DD/YYYY').toString());
   });
 
@@ -138,7 +138,7 @@ describe('<Datepicker />', () => {
 
   it('makes the input field required', () => {
     mounted = shallow(<Datepicker open onChange={changed} required />);
-    const input = mounted.find('Input').first();
+    const input = mounted.find(Input).first();
     expect(input.props().required).toEqual(true);
   });
 
