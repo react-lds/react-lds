@@ -35,6 +35,6 @@ describe('<Container />', () => {
 
   it('renders as arbitrary DOM node', () => {
     mounted.setProps({ as: 'footer', flavor: 'left' });
-  expect(mounted.find('footer.slds-container_left').exists()).toBeTruthy();
+    expect(mounted.find('footer.slds-container_left').exists()).toBeTruthy();
   });
 });
