@@ -20,6 +20,12 @@ describe('<MenuSubHeader />', () => {
     expect(mounted.find('li').hasClass('slds-has-divider_top-space')).toBeTruthy();
   });
 
+  it('allows a react element as child', () => {
+    const sampleChild = <span>Sample</span>;
+    mounted.setProps({ children: sampleChild });
+    expect(mounted.contains(sampleChild)).toBeTruthy();
+  });
+
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-dropdown__header').hasClass('foo')).toBeTruthy();

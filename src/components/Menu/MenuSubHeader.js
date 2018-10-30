@@ -24,9 +24,9 @@ const MenuSubHeader = (props) => {
 
 MenuSubHeader.propTypes = {
   /**
-   * The content of a menu item sub header, should be string
+   * The content of a menu item sub header, should be string or an element
    */
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   /**
    * class name
    */
