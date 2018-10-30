@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 
 import Menu from '../Menu';
 import MenuItem from '../MenuItem';
-import { IconButton } from '../../Button';
+import { Button, IconButton } from '../../Button';
 
 const customButton = (
   <IconButton
@@ -24,8 +24,8 @@ describe('<Menu />', () => {
   it('is closed by default and opens when the button was clicked', () => {
     const mounted = getComponent();
     expect(mounted.find('.slds-dropdown-trigger').hasClass('slds-is-open')).toBeFalsy();
-    expect(mounted.find('Button').exists()).toBeTruthy();
-    mounted.find('Button').simulate('click');
+    expect(mounted.find(Button).exists()).toBeTruthy();
+    mounted.find(Button).simulate('click');
     expect(mounted.find('.slds-dropdown-trigger').hasClass('slds-is-open')).toBeTruthy();
   });
 

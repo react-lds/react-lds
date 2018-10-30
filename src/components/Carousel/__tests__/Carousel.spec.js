@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { Carousel, CarouselPanel } from '..';
+import { Button } from '../../../';
 
 jest.useFakeTimers();
 
@@ -43,9 +44,9 @@ describe('<Carousel />', () => {
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    expect(mounted.find('CarouselPanel').at(0).prop('active'))
+    expect(mounted.find(CarouselPanel).at(0).prop('active'))
       .toBe(true);
-    expect(mounted.find('CarouselPanel').at(1).prop('active'))
+    expect(mounted.find(CarouselPanel).at(1).prop('active'))
       .toBe(false);
   });
 
@@ -55,11 +56,11 @@ describe('<Carousel />', () => {
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    mounted.find('CarouselPanel').at(0).find('a').simulate('keydown', { keyCode: 39 });
+    mounted.find(CarouselPanel).at(0).find('a').simulate('keydown', { keyCode: 39 });
 
-    expect(mounted.find('CarouselPanel').at(0).prop('active'))
+    expect(mounted.find(CarouselPanel).at(0).prop('active'))
       .toBe(false);
-    expect(mounted.find('CarouselPanel').at(1).prop('active'))
+    expect(mounted.find(CarouselPanel).at(1).prop('active'))
       .toBe(true);
   });
 
@@ -69,12 +70,12 @@ describe('<Carousel />', () => {
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    mounted.find('CarouselPanel').at(0).find('a').simulate('keydown', { keyCode: 39 });
-    mounted.find('CarouselPanel').at(1).find('a').simulate('keydown', { keyCode: 39 });
+    mounted.find(CarouselPanel).at(0).find('a').simulate('keydown', { keyCode: 39 });
+    mounted.find(CarouselPanel).at(1).find('a').simulate('keydown', { keyCode: 39 });
 
-    expect(mounted.find('CarouselPanel').at(0).prop('active'))
+    expect(mounted.find(CarouselPanel).at(0).prop('active'))
       .toBe(true);
-    expect(mounted.find('CarouselPanel').at(1).prop('active'))
+    expect(mounted.find(CarouselPanel).at(1).prop('active'))
       .toBe(false);
   });
 
@@ -84,19 +85,19 @@ describe('<Carousel />', () => {
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    expect(mounted.find('CarouselPanel').at(0).prop('active'))
+    expect(mounted.find(CarouselPanel).at(0).prop('active'))
       .toBe(true);
 
     jest.runOnlyPendingTimers();
     mounted.update();
 
-    expect(mounted.find('CarouselPanel').at(1).prop('active'))
+    expect(mounted.find(CarouselPanel).at(1).prop('active'))
       .toBe(true);
 
     jest.runOnlyPendingTimers();
     mounted.update();
 
-    expect(mounted.find('CarouselPanel').at(0).prop('active'))
+    expect(mounted.find(CarouselPanel).at(0).prop('active'))
       .toBe(true);
   });
 
@@ -106,21 +107,21 @@ describe('<Carousel />', () => {
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    expect(mounted.find('CarouselPanel').at(0).prop('active'))
+    expect(mounted.find(CarouselPanel).at(0).prop('active'))
       .toBe(true);
 
     jest.runOnlyPendingTimers();
     mounted.update();
 
-    expect(mounted.find('CarouselPanel').at(1).prop('active'))
+    expect(mounted.find(CarouselPanel).at(1).prop('active'))
       .toBe(true);
 
-    mounted.find('Button').simulate('click');
+    mounted.find(Button).simulate('click');
 
     jest.runOnlyPendingTimers();
     mounted.update();
 
-    expect(mounted.find('CarouselPanel').at(1).prop('active'))
+    expect(mounted.find(CarouselPanel).at(1).prop('active'))
       .toBe(true);
   });
 });
