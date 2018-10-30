@@ -32,4 +32,9 @@ describe('<Container />', () => {
     mounted.setProps({ size: 'small' });
     expect(mounted.find('div').hasClass('slds-container_small')).toBeTruthy();
   });
+
+  it('renders as arbitrary DOM node', () => {
+    mounted.setProps({ as: 'footer', flavor: 'left' });
+    expect(mounted.find('footer.slds-container_left').exists()).toBeTruthy();
+  });
 });

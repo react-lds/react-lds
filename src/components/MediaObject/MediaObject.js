@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const renderFigure = (figure, ...classes) => (
-  <div className={cx('slds-media__figure', ...classes)}>{figure}</div>
+const renderFigure = (figure, classes) => (
+  <div className={cx(...classes)}>{figure}</div>
 );
 
 const MediaObject = (props) => {
@@ -14,13 +14,19 @@ const MediaObject = (props) => {
     customTag,
     figureLeft,
     figureRight,
+    renderFigureLeft,
+    renderFigureRight,
     responsive,
     size,
     title,
     truncate,
-    ...rest } = props;
+    ...rest
+  } = props;
 
   const Tag = customTag || 'div';
+
+  const figureLeftRenderer = renderFigureLeft || renderFigure;
+  const figureRightRenderer = renderFigureRight || renderFigure;
 
   return (
     <Tag
@@ -33,14 +39,14 @@ const MediaObject = (props) => {
         className
       )}
     >
-      {figureLeft && renderFigure(figureLeft)}
+      {figureLeft && figureLeftRenderer(figureLeft, ['slds-media__figure'])}
       <div
         className={cx('slds-media__body', { 'slds-truncate': truncate })}
         title={title}
       >
         {children}
       </div>
-      {figureRight && renderFigure(figureRight, 'slds-media__figure_reverse')}
+      {figureRight && figureRightRenderer(figureRight, ['slds-media__figure', 'slds-media__figure_reverse'])}
     </Tag>
   );
 };
@@ -52,6 +58,8 @@ MediaObject.defaultProps = {
   customTag: null,
   figureLeft: null,
   figureRight: null,
+  renderFigureLeft: null,
+  renderFigureRight: null,
   responsive: false,
   size: null,
   truncate: false,
@@ -76,13 +84,21 @@ MediaObject.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * renders a figure on the left side of the media object
+   * sets a figure on the left side of the media object
    */
   figureLeft: PropTypes.node,
   /**
-   * renders a figure on the right side of the media object
+   * sets a figure on the right side of the media object
    */
   figureRight: PropTypes.node,
+  /**
+   * Function to render figureLeft. Receives (elem, classes) as arguments
+   */
+  renderFigureLeft: PropTypes.func,
+  /**
+   * Function to render figureRight. Receives (elem, classes) as arguments
+   */
+  renderFigureRight: PropTypes.func,
   /**
    * renders a responsive variant of the MediaObject
    */

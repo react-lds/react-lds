@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import ComboboxDropdown from '../ComboboxDropdown';
+import { FormElementLabel } from '../../Form';
 
 describe('<ComboboxDropdown />', () => {
   let mounted = null;
@@ -28,6 +29,13 @@ describe('<ComboboxDropdown />', () => {
 
   it('renders input', () => {
     expect(mounted.find('input').contains(input)).toBeTruthy();
+  });
+
+  it('allows registering a click handler on input label', () => {
+    const mockFn = jest.fn();
+    mounted.setProps({ onInputLabelClick: mockFn });
+    mounted.find(FormElementLabel).simulate('click');
+    expect(mockFn).toBeCalled();
   });
 
   it('renders children', () => {
