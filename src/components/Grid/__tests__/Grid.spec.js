@@ -34,4 +34,9 @@ describe('<Grid />', () => {
     mounted.setProps({ wrap: true });
     expect(mounted.find('.slds-grid').hasClass('slds-wrap')).toBeTruthy();
   });
+
+  it('renders as arbitrary DOM node', () => {
+    mounted.setProps({ as: 'footer' });
+    expect(mounted.find('footer.slds-grid').exists()).toBeTruthy();
+  });
 });
