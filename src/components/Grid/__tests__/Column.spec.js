@@ -51,4 +51,9 @@ describe('<Column />', () => {
     mounted.setProps({ 'small-order': '3' });
     expect(mounted.find('.slds-col').hasClass('slds-small-order_3')).toBeTruthy();
   });
+
+  it('renders as arbitrary DOM node', () => {
+    mounted.setProps({ as: 'footer' });
+    expect(mounted.find('footer.slds-col').exists()).toBeTruthy();
+  });
 });

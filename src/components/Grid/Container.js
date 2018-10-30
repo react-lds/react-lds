@@ -4,16 +4,25 @@ import cx from 'classnames';
 import { applyDecorators, decoratorProp } from '../../utils';
 
 const Container = (props) => {
-  const { children, className, flavor, size, ...rest } = props;
+  const {
+    as: El,
+    children,
+    className,
+    flavor,
+    size,
+    ...rest
+  } = props;
+
   const sldsClasses = [
     className,
     applyDecorators(flavor, 'container'),
     { [`slds-container_${size}`]: !!size }
   ];
-  return (<div {...rest} className={cx(sldsClasses)}>{children}</div>);
+  return (<El {...rest} className={cx(sldsClasses)}>{children}</El>);
 };
 
 Container.defaultProps = {
+  as: 'div',
   children: null,
   className: null,
   flavor: [],
@@ -21,6 +30,10 @@ Container.defaultProps = {
 };
 
 Container.propTypes = {
+  /**
+   * Allows using an arbitrary DOM element as container
+   */
+  as: PropTypes.string,
   /**
    * container content
    */

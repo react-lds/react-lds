@@ -17,6 +17,7 @@ export const gutterSizes = [
 const Grid = (props) => {
   const {
     align,
+    as: El,
     children,
     className,
     flavor,
@@ -47,11 +48,12 @@ const Grid = (props) => {
     sldsClasses.push(`slds-gutters_${gutters}`);
   }
 
-  return <div {...rest} className={cx(sldsClasses)}>{children}</div>;
+  return <El {...rest} className={cx(sldsClasses)}>{children}</El>;
 };
 
 Grid.defaultProps = {
   align: null,
+  as: 'div',
   children: null,
   className: null,
   gutters: null,
@@ -62,6 +64,10 @@ Grid.defaultProps = {
 };
 
 Grid.propTypes = {
+  /**
+   * Allows using an arbitrary DOM element as container
+   */
+  as: PropTypes.string,
   /**
    * grid content
    */
