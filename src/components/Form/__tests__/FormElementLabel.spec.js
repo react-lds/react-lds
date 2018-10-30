@@ -21,7 +21,7 @@ describe('<FormElementLabel />', () => {
   });
 
   it('renders the label', () => {
-    expect(mounted.find('.slds-form-element__label label').text()).toEqual(props.label);
+    expect(mounted.find('label.slds-form-element__label').text()).toEqual(props.label);
   });
 
   it('renders required', () => {
@@ -31,8 +31,8 @@ describe('<FormElementLabel />', () => {
 
   it('renders as a span', () => {
     mounted.setProps({ readOnly: true });
-    expect(mounted.find('.slds-form-element__label label').length).toBe(0);
-    expect(mounted.find('.slds-form-element__label span').length).toBe(1);
+    expect(mounted.find('label.slds-form-element__label').length).toBe(0);
+    expect(mounted.find('span.slds-form-element__label').length).toBe(1);
   });
 
   it('renders as a legend', () => {

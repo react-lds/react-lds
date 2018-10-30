@@ -8,10 +8,10 @@ const getComponent = (props = {}) => shallow(
   <VerticalNavigationItem {...props}>Sample</VerticalNavigationItem>
 );
 
-describe('<VerticalNavigationSection />', () => {
+describe('<VerticalNavigationItem />', () => {
   it('applies rest props to action', () => {
     const mounted = getComponent({ 'aria-test': 'foo' });
-    expect(mounted.find('.slds-nav-vertical__action a').prop('aria-test')).toEqual('foo');
+    expect(mounted.find('a.slds-nav-vertical__action').prop('aria-test')).toEqual('foo');
   });
 
   it('renders a notification badge', () => {

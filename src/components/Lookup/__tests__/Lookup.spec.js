@@ -191,14 +191,14 @@ describe('<Lookup />', () => {
 
   it('renders error with message', () => {
     mounted.setProps({ error: 'Error' });
-    expect(mounted.find('.slds-form-element .slds-has-error').length).toBe(1);
-    expect(mounted.find('.slds-form-element__help').length).toBe(1);
+    expect(mounted.find('.slds-form-element').hasClass('slds-has-error')).toBeTruthy();
+    expect(mounted.find('.slds-form-element__help').exists()).toBeTruthy();
   });
 
   it('renders error without error message', () => {
     mounted.setProps({ error: 'Error', hideErrorMessage: true });
-    expect(mounted.find('.slds-form-element .slds-has-error').length).toBe(1);
-    expect(mounted.find('.slds-form-element__help').length).toBe(0);
+    expect(mounted.find('.slds-form-element').hasClass('slds-has-error')).toBeTruthy();
+    expect(mounted.find('.slds-form-element__help').exists()).toBeFalsy();
   });
 
   it('calls the load function onChange', () => {
