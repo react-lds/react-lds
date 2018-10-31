@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { ControlledCarousel as Carousel, CarouselPanel } from '..';
+import { Button } from '../../Button';
 
 describe('<Carousel />', () => {
   const context = { assetBasePath: '/' };
@@ -92,7 +93,7 @@ describe('<Carousel />', () => {
     ]);
 
     expect(mounted.find('.slds-carousel__autoplay')).toHaveLength(1);
-    expect(mounted.find('.slds-carousel__autoplay span').at(1).text()).toEqual('pause');
+    expect(mounted.find('.slds-carousel__autoplay .slds-button .slds-assistive-text').at(0).text()).toEqual('pause');
 
     mounted = getComponent({
       autoPlay: true,
@@ -119,7 +120,7 @@ describe('<Carousel />', () => {
     ]);
 
     expect(mounted.find('.slds-carousel__autoplay')).toHaveLength(1);
-    mounted.find('Button').simulate('click');
+    mounted.find(Button).simulate('click');
     expect(onToggleAutoPlay).toHaveBeenCalled();
   });
 });
