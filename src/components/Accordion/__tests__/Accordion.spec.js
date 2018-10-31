@@ -219,8 +219,8 @@ describe('<Accordion />', () => {
       </Accordion>
     );
 
-    expect(mounted.find('section #section-2').first().hasClass('slds-is-open')).toBeTruthy();
-    expect(mounted.find('section #section-1').first().hasClass('slds-is-open')).toBeFalsy();
+    expect(mounted.find('section#section-2').first().hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('section#section-1').first().hasClass('slds-is-open')).toBeFalsy();
   });
 
   it('takes array as defaultOpen and renders those sections open', () => {
@@ -250,8 +250,8 @@ describe('<Accordion />', () => {
       </Accordion>
     );
 
-    expect(mounted.find('section #section-1').first().hasClass('slds-is-open')).toBeTruthy();
-    expect(mounted.find('section #section-2').first().hasClass('slds-is-open')).toBeTruthy();
-    expect(mounted.find('section #section-3').first().hasClass('slds-is-open')).toBeFalsy();
+    expect(mounted.find('section#section-1').first().hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('section#section-2').first().hasClass('slds-is-open')).toBeTruthy();
+    expect(mounted.find('section#section-3').first().hasClass('slds-is-open')).toBeFalsy();
   });
 });

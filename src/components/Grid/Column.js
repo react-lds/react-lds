@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import omit from 'lodash/omit';
+import omit from 'lodash-es/omit';
 import { applyDecorators, decoratorProp } from '../../utils';
 
 const validBreakpoints = [
@@ -19,6 +19,7 @@ const orderRegex = /^((1[0,1,2])|[1-9])$/;
 
 const Column = (props) => {
   const {
+    as: El,
     children,
     className,
     flavor,
@@ -64,7 +65,7 @@ const Column = (props) => {
   const restProps = omit(rest, generatedProps);
 
   return (
-    <div {...restProps} className={cx(sldsClasses)}>{children}</div>
+    <El {...restProps} className={cx(sldsClasses)}>{children}</El>
   );
 };
 
@@ -106,12 +107,17 @@ const orderPropType = (props, propName) => {
 };
 
 Column.defaultProps = {
+  as: 'div',
   className: null,
   variation: [],
   omitCol: false,
 };
 
 Column.propTypes = {
+  /**
+   * Allows using an arbitrary DOM element as container
+   */
+  as: PropTypes.string,
   /**
    * Column content
    */

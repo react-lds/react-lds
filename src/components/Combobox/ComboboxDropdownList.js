@@ -9,6 +9,8 @@ const ComboboxDropdownList = (props) => {
     id
   } = props;
 
+  if (!children) return null;
+
   const listClasses = [
     { [`slds-dropdown_length-with-icon-${height}`]: height },
     'slds-dropdown',
@@ -30,7 +32,7 @@ ComboboxDropdownList.propTypes = {
   /**
    * list content
    */
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.node,
   /**
    * sets the number of items being displayed
    */

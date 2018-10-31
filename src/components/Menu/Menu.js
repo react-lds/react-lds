@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import omit from 'lodash/omit';
+import omit from 'lodash-es/omit';
 import ControlledMenu from './ControlledMenu';
 import { ClickOutside } from '../../';
 
@@ -50,8 +50,9 @@ export class MenuRaw extends Component {
     const { open } = this.state;
     const rest = omit(this.props, ['button', 'defaultOpen', 'closeOnClickOutside']);
     const condition = closeOnClickOutside && open;
+
     return (
-      <ClickOutside onClickOutside={this.onClickOutside} condition={condition} >
+      <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
         <ControlledMenu
           {...rest}
           button={this.getButton()}

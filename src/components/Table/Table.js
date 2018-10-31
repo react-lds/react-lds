@@ -4,11 +4,19 @@ import cx from 'classnames';
 import { applyDecorators, decoratorProp } from '../../utils';
 
 const Table = (props) => {
-  const { children, className, flavor, variation, ...rest } = props;
+  const {
+    children,
+    className,
+    fixedHeader,
+    flavor,
+    variation,
+    ...rest
+  } = props;
 
   const sldsClasses = [
     'slds-table',
     'slds-table_cell-buffer',
+    { 'slds-table--header-fixed': fixedHeader },
     className,
     applyDecorators(flavor, 'table'),
     applyDecorators(variation),
@@ -27,6 +35,10 @@ export const propTypes = {
    * class name
    */
   className: PropTypes.string,
+  /**
+   * Make table header fixed on top
+   */
+  fixedHeader: PropTypes.bool,
   /**
    * variation: array of variations, you can also provide a single variation string.
    * Variations: no-row-hover, max-medium-table_stacked,
@@ -52,6 +64,7 @@ export const propTypes = {
 Table.defaultProps = {
   children: null,
   className: null,
+  fixedHeader: false,
   variation: [],
   flavor: [],
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import omit from 'lodash/omit';
+import omit from 'lodash-es/omit';
 
 import { Table, uniqueId } from '../../';
 import { propTypes as tablePropTypes } from '../Table/Table';
@@ -162,6 +162,7 @@ class DataTable extends Component {
   }
 
   renderHead() {
+    const { fixedHeader } = this.props;
     const { columns, id, sortBy, sortDirection } = this.state;
 
     return (
@@ -170,6 +171,7 @@ class DataTable extends Component {
           {columns.map(({ headRenderer, ...restProps }) =>
             headRenderer({
               allSelected: this.areAllRowsSelected(),
+              fixed: fixedHeader,
               onSelectAll: this.onSelectAll,
               onSort: this.onSort,
               sortBy,
@@ -198,6 +200,7 @@ class DataTable extends Component {
   }
 
   render() {
+    const { fixedHeader } = this.props;
     const rest = omit(this.props, [
       'children',
       'data',
@@ -211,13 +214,24 @@ class DataTable extends Component {
       'sortBy',
       'sortDirection',
     ]);
-
-    return (
+    const table = (
       <Table {...rest}>
         {this.renderHead()}
         {this.renderBody()}
       </Table>
     );
+
+    if (fixedHeader) {
+      return (
+        <div className="slds-table--header-fixed_container slds-grid slds-grid_vertical">
+          <div className="slds-scrollable_y">
+            {table}
+          </div>
+        </div>
+      );
+    }
+
+    return table;
   }
 }
 

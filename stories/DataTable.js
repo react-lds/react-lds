@@ -68,6 +68,36 @@ stories
       />
     </DataTable>
   ))
+  .add('With fixed header', () => (
+    <div style={{ height: '300px', width: '100%', display: 'flex', flexDirection: 'column' }}>
+      <DataTable
+        flavor={array('Flavor', ['bordered', 'striped'])}
+        fixedHeader
+        variation={array('Variation', [])}
+        data={object('Data', sampleData)}
+        onSelect={action()}
+        onSort={action()}
+      >
+        <DataTableColumn
+          dataKey="name"
+          title="Name"
+        />
+        <DataTableColumn
+          dataKey="city"
+          title="City"
+        />
+        <DataTableColumn
+          dataKey="dob"
+          title="Date of birth (local date format)"
+          cellRenderer={({ cellData, defaultProps }) => (
+            <td {...defaultProps}>
+              <span>{new Date(cellData).toLocaleString()}</span>
+            </td>
+          )}
+        />
+      </DataTable>
+    </div>
+  ))
   .add('Sortable table', withInfo(`
     Marking a column **sortable** will make the table header clickable. On click, the
     data array is sorted by that column. If an **onSort** callback is provided, sorting the

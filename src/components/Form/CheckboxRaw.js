@@ -16,6 +16,7 @@ const CheckboxRaw = (props) => {
     label,
     onChange,
     required,
+    wrapperClassName,
     ...rest
   } = props;
 
@@ -53,8 +54,13 @@ const CheckboxRaw = (props) => {
     return (<abbr className="slds-required" title="required">*</abbr>);
   };
 
+  const spanClass = cx([
+    'slds-checkbox',
+    wrapperClassName,
+  ]);
+
   return (
-    <span className="slds-checkbox">
+    <span className={spanClass}>
       {renderRequired()}
       {renderCheckbox()}
       {renderLabel()}
@@ -71,6 +77,7 @@ CheckboxRaw.defaultProps = {
   hideLabel: false,
   onChange: () => {},
   required: false,
+  wrapperClassName: null,
 };
 
 CheckboxRaw.propTypes = {
@@ -117,6 +124,10 @@ CheckboxRaw.propTypes = {
    * adds required attribute to the checkbox
    */
   required: PropTypes.bool,
+  /**
+   * sets class name for wrapper <span/> element
+   */
+  wrapperClassName: PropTypes.string,
 };
 
 export default CheckboxRaw;

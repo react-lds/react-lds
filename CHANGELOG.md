@@ -1,9 +1,36 @@
 # Changelog
 
-## Unreleased
+## 7.2.5
+
+* Changed: `DataTable`: Added support for fixed header row
+
+## 7.2.4
+
+* Add support for `ComboboxDropdown` email modifier
+* Fixed: Opening Menus now does not trigger an incorrect `::focus` state on parent
+* Fixed: Loading state now works when two icons are shown or a margin is set on `Input`
+
+## 7.2.3
+
+* Fixed: SplitView: Proper icon for toggle button
+* Fixed: SplitView: Removed incorrect shadow of toggle button
+
+## 7.2.2
+
+* New: `SplitView` & `ControlledSplitView` components
+* Changed: `Tooltip`: Added support for custom offsets
+
+## 7.2.1
+
+* Changed: `Tooltip`: Added support for `overflow: hidden;` containers
+* Fixed: `Input` now does not pass wrong `label` prop to underlying <input> tag
+* Fixed: Removed orphan `ObjectHomeRaw` export
+
+## 7.2.0
 
 * Add `ControlledCarousel` component
 * Add `Tooltip` and `ControlledTooltip` component
+* Export ES modules under `react-lds/es`
 
 ## 7.1.1
 

@@ -1,6 +1,6 @@
 {
   "name": "react-lds",
-  "version": "7.1.1",
+  "version": "7.2.5",
   "description": "Salesforce Lightning Design System React Components",
   "keywords": [
     "react",
@@ -9,19 +9,21 @@
     "slds",
     "react-lds"
   ],
-  "main": "./dist/index.js",
+  "main": "./common/index.js",
+  "sideEffects": false,
   "scripts": {
     "build-storybook": "yarn run prestorybook && rm -rf react-lds && BABEL_ENV=docs build-storybook -s ./public -o ./react-lds",
-    "build:babel": "NODE_ENV=production babel ./src --ignore spec.js --out-dir ./dist",
-    "build:clean": "rm -rf dist",
-    "build": "yarn build:clean && yarn build:babel",
+    "build:commonjs": "NODE_ENV=commonjs babel ./src --ignore spec.js --out-dir ./common",
+    "build:es": "NODE_ENV=es babel ./src --ignore spec.js --out-dir ./es",
+    "build:clean": "rm -rf common && rm -rf es",
+    "build": "yarn build:clean && yarn build:commonjs && yarn build:es",
     "lint": "eslint src",
-    "prepublishOnly": "yarn build && cp ./README.md ./dist/ && cp ./LICENSE ./dist/ && cp ./CHANGELOG.md ./dist/",
+    "prepublishOnly": "yarn build",
     "prestorybook": "rm -rf public && mkdir public && cp -R node_modules/@salesforce-ux/design-system/assets ./public/",
     "start": "yarn storybook",
     "storybook": "yarn run prestorybook; start-storybook -p 6006 -s ./public",
     "test-watch": "jest --watchAll",
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "contributors": [
     "Konstantin Krauss <konstantin@propertybase.com> (http://www.propertybase.com)",
@@ -44,10 +46,10 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "focus-trap-react": "^3.1.2",
-    "lodash": "^4.17.5",
-    "moment": "^2.22.1",
-    "moment-range": "^4.0.0",
-    "moment-timezone": "^0.5.16",
+    "lodash-es": "^4.17.10",
+    "moment": "^2.22.2",
+    "moment-range": "^4.0.1",
+    "moment-timezone": "^0.5.23",
     "prop-types": "^15.5.6",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -71,16 +73,22 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.10",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^4.7.2",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.4.0",
-    "jest-cli": "^21.2.1"
+    "jest-cli": "^23.6.0"
   },
   "jest": {
+    "transform": {
+      "^.+\\.js?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!lodash-es)"
+    ],
     "setupFiles": [
       "./internals/shim.js",
       "./internals/setupEnzyme.js"

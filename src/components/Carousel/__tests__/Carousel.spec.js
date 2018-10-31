@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { Carousel, CarouselPanel } from '..';
+import { Button } from '../../../';
 
 jest.useFakeTimers();
 
@@ -115,7 +116,7 @@ describe('<Carousel />', () => {
     expect(mounted.find(CarouselPanel).at(1).prop('active'))
       .toBe(true);
 
-    mounted.find('Button').simulate('click');
+    mounted.find(Button).simulate('click');
 
     jest.runOnlyPendingTimers();
     mounted.update();

@@ -6,6 +6,7 @@ import { Cell } from '../../';
 /* eslint-disable react/prop-types */
 export default ({
   dataKey,
+  fixed,
   onSort,
   sortable,
   sortBy,
@@ -18,6 +19,7 @@ export default ({
   return (
     <Cell
       className={classNames}
+      fixed={fixed}
       key={dataKey}
       scope="col"
       sortable={sortable}

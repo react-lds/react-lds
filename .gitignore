@@ -1,10 +1,8 @@
 node_modules
 npm-debug.log
-react-lds
-dist
+common
+es
 public
-lib
-coverage
 yarn-error.log
 
 # OS files

@@ -13,6 +13,7 @@ const ComboboxDropdown = (props) => {
   const {
     children,
     className,
+    isEmailComposer,
     error,
     hideErrorMessage,
     hideLabel,
@@ -20,6 +21,7 @@ const ComboboxDropdown = (props) => {
     inlineListbox,
     input,
     labelInput,
+    onInputLabelClick,
     open,
     pills,
     required,
@@ -48,11 +50,16 @@ const ComboboxDropdown = (props) => {
   ];
 
   return (
-    <FormElement required={required} error={error}>
+    <FormElement
+      className={isEmailComposer ? 'slds-email-composer__combobox' : null}
+      error={error}
+      required={required}
+    >
       <FormElementLabel
         hideLabel={hideLabel}
         id={id}
         label={labelInput}
+        onClick={onInputLabelClick}
         required={required}
       />
       <FormElementControl>
@@ -81,14 +88,18 @@ ComboboxDropdown.propTypes = {
   /**
    * one ComboboxDropdownList or many of them
    */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   /**
    * class name
    */
   className: PropTypes.string,
   /**
-  * input error
-  */
+   * add class for email composer mode
+   */
+  isEmailComposer: PropTypes.bool,
+  /**
+   * input error
+   */
   error: PropTypes.string,
   /**
   * indicates if the error message is hidden
@@ -118,6 +129,10 @@ ComboboxDropdown.propTypes = {
     PropTypes.node,
   ]),
   /**
+   * Registers a callback when the input label is clicked
+   */
+  onInputLabelClick: PropTypes.func,
+  /**
    * forces open or closed state, is needed when using a custom button
    */
   open: PropTypes.bool,
@@ -136,12 +151,15 @@ ComboboxDropdown.propTypes = {
 };
 
 ComboboxDropdown.defaultProps = {
+  children: null,
   className: null,
+  isEmailComposer: false,
   error: null,
   hideErrorMessage: false,
   hideLabel: false,
   inlineListbox: null,
   labelInput: '',
+  onInputLabelClick: null,
   open: false,
   pills: null,
   required: false,

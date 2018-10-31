@@ -5,6 +5,7 @@ import cx from 'classnames';
 const ModalContent = ({
   children,
   className,
+  collapsePadding,
   id,
   onClose: _, // eslint-disable-line react/prop-types
   ...rest
@@ -13,7 +14,7 @@ const ModalContent = ({
     {...rest}
     className={cx(
       'slds-modal__content',
-      'slds-p-around_medium',
+      { 'slds-p-around_medium': !collapsePadding },
       className
     )}
     id={id}
@@ -24,6 +25,7 @@ const ModalContent = ({
 
 ModalContent.defaultProps = {
   className: null,
+  collapsePadding: false,
   id: null,
 };
 
@@ -36,6 +38,10 @@ ModalContent.propTypes = {
    * className that will be merged
    */
   className: PropTypes.string,
+  /**
+   * Whether the standard padding should be collapsed
+   */
+  collapsePadding: PropTypes.bool,
   /**
    * (PRIVATE) passed down from Modal
    */
