@@ -223,8 +223,8 @@ class DataTable extends Component {
 
     if (fixedHeader) {
       return (
-        <div className="slds-table--header-fixed_container slds-grid slds-grid_vertical">
-          <div className="slds-scrollable_y">
+        <div className="slds-table--header-fixed_container slds-grid slds-grid_vertical slds-scrollable">
+          <div>
             {table}
           </div>
         </div>
