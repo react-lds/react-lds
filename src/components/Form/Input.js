@@ -64,6 +64,8 @@ const Input = React.forwardRef((props, ref) => {
   );
 });
 
+Input.displayName = 'Input';
+
 Input.defaultProps = {
   bare: false,
   className: null,

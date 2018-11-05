@@ -36,6 +36,8 @@ const Listbox = React.forwardRef((props, ref) => {
   );
 });
 
+Listbox.displayName = 'Listbox';
+
 Listbox.defaultProps = {
   className: null,
   label: null,

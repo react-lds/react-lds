@@ -132,6 +132,8 @@ const InputRaw = React.forwardRef((props, ref) => {
   );
 });
 
+InputRaw.displayName = 'InputRaw';
+
 InputRaw.defaultProps = {
   bare: false,
   className: null,
