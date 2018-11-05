@@ -31,7 +31,6 @@ stories
       iconLeft={getUtilityIcons('Icon left') || undefined}
       iconRight={getUtilityIcons('Icon right') || undefined}
       iconRightOnClick={action('clicked right icon')}
-      isFocused={boolean('IsFocused', false) || undefined}
       label={text('Label', 'default input')}
       onChange={action('changed input')}
       onFocus={action('focussed')}

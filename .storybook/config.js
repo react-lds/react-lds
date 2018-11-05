@@ -3,8 +3,13 @@ import { setDefaults, withInfo } from '@storybook/addon-info';
 import { withKnobs } from '@storybook/addon-knobs';
 import { withContext, withSpacing } from '../stories/utils/helpers';
 
-// addon-info
-setDefaults({
+const req = require.context('../stories', true, /.js$/);
+
+function loadStories() {
+  req.keys().forEach((filename) => req(filename));
+}
+
+addDecorator(withInfo({
   header: false,
   inline: true,
   source: true,
@@ -14,15 +19,7 @@ setDefaults({
   maxPropObjectKeys: 20,
   maxPropArrayLength: 20,
   maxPropStringLength: 100,
-});
-
-const req = require.context('../stories', true, /.js$/);
-
-function loadStories() {
-  req.keys().forEach((filename) => req(filename));
-}
-
-addDecorator((story, context) => withInfo('Usage')(story)(context));
+}));
 addDecorator(withContext);
 addDecorator(withSpacing);
 addDecorator(withKnobs);

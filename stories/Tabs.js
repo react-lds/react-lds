@@ -25,12 +25,7 @@ stories
       <Tab id="tab-3" title="Tab 3">Tab Three</Tab>
     </Tabs>
   ))
-  .add('Controlled', withInfo(`
-    **ControlledTabs** are the underlying implementation of **Tabs**.
-    They receive the active tab id via the prop _activeTab_ and hand off changes via _onChangeTab_.
-    Note that this demo does not implement any event handling
-    and focus styles will appear off because of this.
-  `)(() => (
+  .add('Controlled', () => (
     <ControlledTabs
       onChangeTab={action('change-tab')}
       activeTab={select('Tab Open', ['tab-1', 'tab-2', 'tab-3'], 'tab-2')}
@@ -43,4 +38,11 @@ stories
       </Tab>
       <Tab id="tab-3" title="Tab 3">Tab Three</Tab>
     </ControlledTabs>
-  )));
+  ), {
+    info: {
+      text: `**ControlledTabs** are the underlying implementation of **Tabs**.
+      They receive the active tab id via the prop _activeTab_ and hand off changes via _onChangeTab_.
+      Note that this demo does not implement any event handling
+      and focus styles will appear off because of this.`
+    }
+  });

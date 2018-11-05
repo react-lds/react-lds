@@ -56,23 +56,23 @@
     "react-popper": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
     "@salesforce-ux/design-system": "2.5.2",
-    "@storybook/addon-actions": "~3.2.16",
-    "@storybook/addon-info": "~3.2.16",
-    "@storybook/addon-knobs": "~3.2.16",
-    "@storybook/addon-links": "~3.2.16",
-    "@storybook/react": "~3.2.16",
+    "@storybook/addon-actions": "^4.0.2",
+    "@storybook/addon-info": "^4.0.2",
+    "@storybook/addon-knobs": "^4.0.2",
+    "@storybook/addon-links": "^4.0.2",
+    "@storybook/react": "^4.0.2",
     "@storybook/storybook-deployer": "^2.0.0",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.1",
-    "babel-jest": "^21.2.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.10",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
+    "babel-core": "^7.0.0-bridge",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^4.7.2",
@@ -93,5 +93,10 @@
       "./internals/shim.js",
       "./internals/setupEnzyme.js"
     ]
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not ie <= 11",
+    "not android <= 56"
+  ]
 }
