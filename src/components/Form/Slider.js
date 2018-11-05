@@ -7,7 +7,7 @@ import {
   FormElementControl,
   FormElementLabel,
   FormElementError,
-} from '../../';
+} from '../..';
 
 const renderLabel = (label, min, max) => (
   <span className="slds-slider-label">

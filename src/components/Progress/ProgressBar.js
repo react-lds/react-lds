@@ -79,7 +79,7 @@ ProgressBar.propTypes = {
   /**
    * Progress value (between min-max)
    */
-  progress: PropTypes.number.isRequired,
+  progress: PropTypes.number,
   /**
    * Progress min
    */

@@ -14,7 +14,9 @@ describe('<PathStage />', () => {
   });
 
   it('applies className and rest-properties', () => {
-    const mounted = getComponent({ className: 'foo', 'data-test': 'bar', label: 'foo', onStageClick: () => {} });
+    const mounted = getComponent({
+      className: 'foo', 'data-test': 'bar', label: 'foo', onStageClick: () => {}
+    });
     expect(mounted.find('li.slds-tabs_path__item').hasClass('foo')).toBeTruthy();
     expect(mounted.find('li.slds-tabs_path__item').prop('data-test')).toEqual('bar');
   });

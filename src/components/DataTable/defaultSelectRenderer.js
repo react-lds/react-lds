@@ -1,8 +1,11 @@
 import React from 'react';
 
-import { CheckboxRaw } from '../../';
+import { CheckboxRaw } from '../..';
 
-export default ({ dataKey, rowId, selected, onSelect, tableId }) => { // eslint-disable-line react/prop-types
+/* eslint-disable react/prop-types */
+export default ({
+  dataKey, rowId, selected, onSelect, tableId
+}) => {
   const checkboxId = `${tableId}-${dataKey}-${rowId}`;
 
   return (

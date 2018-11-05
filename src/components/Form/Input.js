@@ -7,7 +7,7 @@ import {
   FormElementLabel,
   FormElementError,
   InputRaw,
-} from '../../';
+} from '../..';
 
 const Input = React.forwardRef((props, ref) => {
   const {

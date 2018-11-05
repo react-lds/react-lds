@@ -9,7 +9,7 @@ import {
   Grid,
   ControlledMenu,
   IconButton
-} from '../../';
+} from '../..';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {
@@ -119,13 +119,15 @@ class ObjectHome extends Component {
                 {titleMenu && (
                   <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
                     <ControlledMenu
-                      button={<IconButton
-                        container
-                        icon="down"
-                        sprite="utility"
-                        onClick={this.toggleMenu}
-                      />}
-                      isOpen={this.state.menuIsOpen}
+                      button={(
+                        <IconButton
+                          container
+                          icon="down"
+                          sprite="utility"
+                          onClick={this.toggleMenu}
+                        />
+)}
+                      isOpen={menuIsOpen}
                     >
                       {titleMenu}
                     </ControlledMenu>

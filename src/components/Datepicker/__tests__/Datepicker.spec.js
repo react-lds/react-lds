@@ -5,7 +5,7 @@ import { extendMoment } from 'moment-range';
 import { shallow } from 'enzyme';
 
 import { DatepickerRaw as Datepicker } from '../Datepicker';
-import { IconButton, Input } from '../../../';
+import { IconButton, Input } from '../../..';
 
 const moment = extendMoment(Moment);
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { Carousel, CarouselPanel } from '..';
-import { Button } from '../../../';
+import { Button } from '../../..';
 
 jest.useFakeTimers();
 
@@ -22,7 +22,8 @@ describe('<Carousel />', () => {
           {...panelProps}
         />
       ))}
-    </Carousel>, options);
+    </Carousel>, options
+  );
 
   it('renders without crashing', () => {
     expect(getComponent().find('.slds-carousel').length).toEqual(1);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ProgressRing, Icon } from '../../../';
+import { ProgressRing, Icon } from '../../..';
 
 const getCmp = (props = {}) => shallow(<ProgressRing progress={88} {...props} />);
 

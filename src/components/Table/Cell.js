@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { uniqueId } from '../../utils';
-import { IconSVG } from '../../';
+import { IconSVG } from '../..';
 
 const Cell = (props) => {
   const {
@@ -99,6 +99,7 @@ const Cell = (props) => {
 
   const wrapChildren = (content) => {
     if (!!sortable && isHeader) {
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
       return <a className="slds-th__action slds-text-link_reset">{content}</a>;
     }
 

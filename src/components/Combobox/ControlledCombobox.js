@@ -127,7 +127,6 @@ export default class ControlledCombobox extends Component {
     items: [],
     labelInput: '',
     labelMultiselect: '',
-    multiEntity: false,
     onAdd: null,
     onChange: null,
     readOnly: false,
@@ -136,7 +135,7 @@ export default class ControlledCombobox extends Component {
     value: '',
   }
 
-  state = { open: false, inputValue: '' };
+  state = { open: false };
 
   onToggle = () => this.setState(({ open }) => ({ open: !open }))
 
@@ -186,7 +185,7 @@ export default class ControlledCombobox extends Component {
 
         if (count > 1) {
           return `${count} ${labelMultiselect}`;
-        } else if (count === 1) {
+        } if (count === 1) {
           return selectedItems[0].label;
         }
       } else {
@@ -288,8 +287,8 @@ export default class ControlledCombobox extends Component {
     const selectedItems = this.getSelectedItems();
 
     const renderPills = !inlineListbox && (
-      (readOnly && selectedItems.length > 1) ||
-      (!readOnly && selectedItems.length > 0)
+      (readOnly && selectedItems.length > 1)
+      || (!readOnly && selectedItems.length > 0)
     );
 
     return (

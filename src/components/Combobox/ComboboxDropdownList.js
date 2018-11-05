@@ -45,7 +45,6 @@ ComboboxDropdownList.propTypes = {
 
 ComboboxDropdownList.defaultProps = {
   children: null,
-  header: null,
   height: null,
 };
 

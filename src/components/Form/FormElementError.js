@@ -5,7 +5,9 @@ import cx from 'classnames';
 import { getUniqueHash } from '../../utils';
 
 const FormElementError = (props) => {
-  const { className, error, id, ...rest } = props;
+  const {
+    className, error, id, ...rest
+  } = props;
 
   const renderError = () => {
     if (error) {

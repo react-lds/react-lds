@@ -70,7 +70,7 @@ const Column = (props) => {
 };
 
 const sizeOfPropType = (props, propName) => {
-  const size = props[propName];
+  const size = props[propName]; // eslint-disable-line react/destructuring-assignment
 
   if (size && typeof size !== 'string') {
     return new Error(`${propName} must be a string`);
@@ -93,7 +93,7 @@ const sizeOfPropType = (props, propName) => {
 };
 
 const orderPropType = (props, propName) => {
-  const position = props[propName];
+  const position = props[propName]; // eslint-disable-line react/destructuring-assignment
 
   if (position && !(typeof position === 'string' || typeof position === 'number')) {
     return new Error(`${propName} must be a string or a number`);

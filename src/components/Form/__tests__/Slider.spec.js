@@ -7,7 +7,7 @@ import {
   FormElementControl,
   FormElementLabel,
   FormElementError,
-} from '../../../';
+} from '../../..';
 
 describe('<Slider />', () => {
   let props = {};

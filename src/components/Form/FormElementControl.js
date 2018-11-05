@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const FormElementControl = (props) => {
-  const { children, className, hasIconLeft, hasIconRight, ...rest } = props;
+  const {
+    children, className, hasIconLeft, hasIconRight, ...rest
+  } = props;
 
   const sldsClasses = [
     'slds-form-element__control',

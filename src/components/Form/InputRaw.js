@@ -8,7 +8,7 @@ import {
   IconButton,
   IconSVG,
   Spinner,
-} from '../../';
+} from '../..';
 
 const InputRaw = React.forwardRef((props, ref) => {
   const {

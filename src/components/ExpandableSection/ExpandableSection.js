@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { Button, ButtonIcon } from '../../';
+import { Button, ButtonIcon } from '../..';
 
 class ExpandableSection extends Component {
   static defaultProps = {
@@ -78,7 +78,7 @@ class ExpandableSection extends Component {
       uncollapsable,
       ...rest
     } = this.props;
-    const isOpen = open === null ? this.state.isOpen : null;
+    const isOpen = open === null ? this.state.isOpen : null; // eslint-disable-line react/destructuring-assignment
 
     const sldsClasses = [
       'slds-section',
@@ -94,28 +94,31 @@ class ExpandableSection extends Component {
     return (
       <div className={cx(sldsClasses)} {...rest}>
         <h3 className={cx(headerClasses)}>
-          {uncollapsable ?
-            <span className="slds-truncate slds-p-horizontal_small" title={title}>
-              {title}
-            </span>
-            :
-            <Button
-              aria-controls={id}
-              aria-expanded={isOpen || open}
-              className="slds-section__title-action"
-              onClick={this.toggleSection}
-              title={title}
-            >
-              <ButtonIcon
-                position="left"
-                icon={isOpen || open ? 'chevrondown' : 'chevronright'}
-                sprite="utility"
-                aria-hidden="true"
-              />
-              <span className="slds-truncate">
+          {uncollapsable
+            ? (
+              <span className="slds-truncate slds-p-horizontal_small" title={title}>
                 {title}
               </span>
-            </Button>
+            )
+            : (
+              <Button
+                aria-controls={id}
+                aria-expanded={isOpen || open}
+                className="slds-section__title-action"
+                onClick={this.toggleSection}
+                title={title}
+              >
+                <ButtonIcon
+                  position="left"
+                  icon={isOpen || open ? 'chevrondown' : 'chevronright'}
+                  sprite="utility"
+                  aria-hidden="true"
+                />
+                <span className="slds-truncate">
+                  {title}
+                </span>
+              </Button>
+            )
           }
         </h3>
         <div

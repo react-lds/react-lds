@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const IconSVG = (props, { assetBasePath }) => {
-  const { className, icon, size, pathPrefix, sprite, isButton, ...rest } = props;
+  const {
+    className, icon, size, pathPrefix, sprite, isButton, ...rest
+  } = props;
 
   const sldsClasses = [
     { 'slds-icon': !isButton },

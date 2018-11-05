@@ -64,13 +64,15 @@ class ControlledTabs extends PureComponent {
   }
 
   componentWillReceiveProps({ children: nextChildren }) {
+    const { positions } = this.state;
+
     const nextChildrenArr = React.Children.toArray(nextChildren);
     const prevChildrenArr = React.Children.toArray(this.children);
 
     const isEqualLength = nextChildrenArr.length !== prevChildrenArr.length;
     const nextState = ControlledTabs.getPanelState(nextChildrenArr);
 
-    if (!isEqualLength || !isEqual(nextState.positions, this.state.positions)) {
+    if (!isEqualLength || !isEqual(nextState.positions, positions)) {
       this.setState(nextState);
     }
   }
@@ -93,7 +95,7 @@ class ControlledTabs extends PureComponent {
   }
 
   onLinkKeyUp = (evt) => {
-    const linkNodes = this.linkNodes;
+    const { linkNodes } = this;
 
     const { key } = evt;
     const isLeftKey = key === 'ArrowLeft';
@@ -164,7 +166,9 @@ class ControlledTabs extends PureComponent {
         scoped={scoped}
         title={title}
       >
-        {renderTitle ? renderTitle({ id, isActive, isFocused, title }) : title}
+        {renderTitle ? renderTitle({
+          id, isActive, isFocused, title
+        }) : title}
       </TabLink>
     );
   }

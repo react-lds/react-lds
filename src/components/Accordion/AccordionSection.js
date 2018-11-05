@@ -4,7 +4,9 @@ import cx from 'classnames';
 import { Button, IconButton } from '../Button';
 
 const AccordionSection = (props) => {
-  const { children, className, id, isOpen, summary, summaryOnClick, ...rest } = props;
+  const {
+    children, className, id, isOpen, summary, summaryOnClick, ...rest
+  } = props;
 
   const liClasses = [
     'slds-accordion__list-item',

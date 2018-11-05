@@ -40,7 +40,8 @@ const FormElementLabel = (props) => {
 
   return (
     <Tag {...rest} className={cx(sldsClasses)} htmlFor={readOnly || legend ? null : id}>
-      {renderRequired()}{label}
+      {renderRequired()}
+      {label}
     </Tag>
   );
 };

@@ -6,7 +6,7 @@ import {
   FormElement,
   FormElementControl,
   FormElementError,
-} from '../../';
+} from '../..';
 
 const Radio = (props) => {
   const {

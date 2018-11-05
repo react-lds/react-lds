@@ -4,7 +4,9 @@ import cx from 'classnames';
 import { THEMES, getThemeClass } from '../../utils';
 
 const Box = (props) => {
-  const { children, className, size, theme, ...rest } = props;
+  const {
+    children, className, size, theme, ...rest
+  } = props;
 
   const sldsClasses = [
     'slds-box',

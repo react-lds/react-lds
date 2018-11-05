@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { IconSVG, MediaObject } from '../../';
+import { IconSVG, MediaObject } from '../..';
 
 const renderIcon = (icon, selected) => {
   if (!icon && !selected) return null;

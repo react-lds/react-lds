@@ -4,7 +4,7 @@ import cx from 'classnames';
 import omit from 'lodash-es/omit';
 import { THEMES, getThemeClass } from '../../utils';
 
-import { IconButton } from '../../';
+import { IconButton } from '../..';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {
@@ -83,10 +83,10 @@ class Popover extends Component {
 
   static shouldInvertIcon(themeStr) {
     if (typeof themeStr === 'string') {
-      return themeStr.includes('error') ||
-        themeStr.includes('success') ||
-        themeStr.includes('info') ||
-        themeStr.includes('offline');
+      return themeStr.includes('error')
+        || themeStr.includes('success')
+        || themeStr.includes('info')
+        || themeStr.includes('offline');
     }
     return false;
   }
@@ -162,7 +162,9 @@ class Popover extends Component {
   }
 
   render() {
-    const { className, closeable, open, customHeaderTheme, nubbin, panels, header, body, footer, theme } = this.props;
+    const {
+      className, closeable, open, customHeaderTheme, nubbin, panels, header, body, footer, theme
+    } = this.props;
     const rest = omit(this.props, Object.keys(propTypes));
 
     const sldsClasses = [

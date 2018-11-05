@@ -7,7 +7,7 @@ import {
   FormElementError,
   FormElementControl,
   FormElementLabel,
-} from '../../';
+} from '../..';
 
 const ComboboxDropdown = (props) => {
   const {

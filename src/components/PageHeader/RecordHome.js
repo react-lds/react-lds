@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { Grid, Column, MediaObject, Icon } from '../../';
+import {
+  Grid, Column, MediaObject, Icon
+} from '../..';
 
 const RecordHome = (props) => {
-  const { className, detailItems = [], headerButtons, icon, recordType, title, ...rest } = props;
+  const {
+    className, detailItems = [], headerButtons, icon, recordType, title, ...rest
+  } = props;
 
   const iconRendered = <Icon sprite={icon.sprite} icon={icon.icon} />;
   let detailRow;
@@ -22,8 +26,7 @@ const RecordHome = (props) => {
       <li className="slds-page-header__detail-block" key={`${item.title}-${index}`}>
         <p className={cx(titleClasses)}>{item.title}</p>
         <p className="slds-text-body_regular slds-truncate">{item.content}</p>
-      </li>
-    );
+      </li>);
     detailRow = (
       <ul className="slds-grid slds-page-header__detail-row">{detailItemsRendered}</ul>
     );

@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { Icon, MediaObject } from '../../';
+import { Icon, MediaObject } from '../..';
 
 const PageHeaderBase = (props) => {
-  const { className, icon, info, title, ...rest } = props;
+  const {
+    className, icon, info, title, ...rest
+  } = props;
 
   const iconRendered = <Icon sprite={icon.sprite} icon={icon.icon} />;
 

@@ -6,7 +6,7 @@ import {
   FormElementControl,
   FormElementError,
   FormElementLabel,
-} from '../../';
+} from '../..';
 
 import { getUniqueHash } from '../../utils';
 
@@ -28,9 +28,9 @@ const RadioGroup = (props) => {
       return children;
     }
 
-    return React.Children.map(children, child =>
+    return React.Children.map(children, child => (
       React.cloneElement(child, { 'aria-describedby': getUniqueHash(error, id) })
-    );
+    ));
   };
 
   return (

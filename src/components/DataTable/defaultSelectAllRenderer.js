@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 
-import { CheckboxRaw } from '../../';
+import { CheckboxRaw } from '../..';
 
 const FIXED_STYLE = { marginLeft: '-0.25rem' };
 

@@ -86,14 +86,13 @@ class Accordion extends Component {
 
   renderSections() {
     const { children, open } = this.props;
-    let activeSections = open || this.state.activeSections;
+    let activeSections = open || this.state.activeSections; // eslint-disable-line react/destructuring-assignment
     if (typeof activeSections === 'string') { activeSections = [activeSections]; }
-    const sections = children.map(child =>
-      React.cloneElement(child, {
-        key: child.props.id,
-        isOpen: activeSections.includes(child.props.id),
-        onClick: () => this.handleClick(child.props.id),
-      }));
+    const sections = children.map(child => React.cloneElement(child, {
+      key: child.props.id,
+      isOpen: activeSections.includes(child.props.id),
+      onClick: () => this.handleClick(child.props.id),
+    }));
     return sections;
   }
 

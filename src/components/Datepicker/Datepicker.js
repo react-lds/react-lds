@@ -5,7 +5,7 @@ import cx from 'classnames';
 import Moment from 'moment-timezone';
 // eslint-disable-next-line
 import { extendMoment } from 'moment-range';
-import { ClickOutside, Input, IconButton } from '../../';
+import { ClickOutside, Input, IconButton } from '../..';
 
 const moment = extendMoment(Moment);
 
@@ -53,7 +53,9 @@ export class DatepickerRaw extends Component {
 
   constructor(props, context) {
     super(props, context);
-    const { date, initialDate, locale, open, timezone, translations } = this.props;
+    const {
+      date, initialDate, locale, open, timezone, translations
+    } = this.props;
 
     moment.locale(locale.toLowerCase());
     moment.tz.setDefault(timezone);
@@ -122,9 +124,9 @@ export class DatepickerRaw extends Component {
   onDatepickerChange = (day) => {
     const { date, onChange } = this.props;
     const isControlled = DatepickerRaw.isControlled(date);
-    const inputValue = day ?
-      moment(day).format(defaultDateFormat).toString() :
-      moment().format(defaultDateFormat).toString();
+    const inputValue = day
+      ? moment(day).format(defaultDateFormat).toString()
+      : moment().format(defaultDateFormat).toString();
     const viewedDate = day ? moment(day) : moment();
 
     if (!isControlled) {
@@ -250,12 +252,12 @@ export class DatepickerRaw extends Component {
 
     // Get the first Sunday of the first week and the last Saturday of the last week
     // touched by the current month
-    const firstDayFirstWeek = moment(firstDay).isoWeekday() === 7 ?
-      moment(firstDay) :
-      moment(firstDay).startOf('isoweek').subtract(1, 'days');
-    const lastDayLastWeek = moment(lastDay).isoWeekday() === 7 ?
-      moment(lastDay).add(6, 'days') :
-      moment(lastDay).endOf('isoweek').subtract(1, 'days');
+    const firstDayFirstWeek = moment(firstDay).isoWeekday() === 7
+      ? moment(firstDay)
+      : moment(firstDay).startOf('isoweek').subtract(1, 'days');
+    const lastDayLastWeek = moment(lastDay).isoWeekday() === 7
+      ? moment(lastDay).add(6, 'days')
+      : moment(lastDay).endOf('isoweek').subtract(1, 'days');
 
     // Create two ranges, one spanning all weeks touched by the current month,
     // and one spanning only the month
@@ -384,8 +386,12 @@ export class DatepickerRaw extends Component {
   }
 
   render() {
-    const { className, disabled, closeOnClickOutside, required } = this.props;
-    const { inputValue, isValid, open, viewedDate } = this.state;
+    const {
+      className, disabled, closeOnClickOutside, required
+    } = this.props;
+    const {
+      inputValue, isValid, open, viewedDate
+    } = this.state;
     const viewedMonthName = moment(viewedDate).format('MMMM');
 
     const inputFieldLabel = this.getTranslations('inputFieldLabel');

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const Avatar = (props) => {
-  const { alt, circle, className, src, size, title, ...rest } = props;
+  const {
+    alt, circle, className, src, size, title, ...rest
+  } = props;
 
   const sldsClasses = [
     'slds-avatar',

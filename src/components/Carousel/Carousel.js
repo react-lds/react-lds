@@ -23,18 +23,12 @@ class Carousel extends Component {
     }
   }
 
-  componentWillUnmount() {
-    if (this.autoPlayId) {
-      clearInterval(this.autoPlayId);
-    }
-  }
-
   componentWillReceiveProps({ autoPlayActive: nextAutoPlayActive, children: nextChildren }) {
     const { children: prevChildren } = this.props;
     const { autoPlayActive: prevAutoPlayActive } = this.state;
 
-    const childrenChanged = nextChildren.length !== prevChildren.length ||
-      !isEqual(nextChildren.map(({ props }) => props), prevChildren.map(({ props }) => props));
+    const childrenChanged = nextChildren.length !== prevChildren.length
+      || !isEqual(nextChildren.map(({ props }) => props), prevChildren.map(({ props }) => props));
 
     if (childrenChanged) {
       this.updatePanels(nextChildren);
@@ -43,6 +37,12 @@ class Carousel extends Component {
     if (!!nextAutoPlayActive !== prevAutoPlayActive) {
       if (nextAutoPlayActive) this.startAutoPlay();
       else this.stopAutoPlay();
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.autoPlayId) {
+      clearInterval(this.autoPlayId);
     }
   }
 
@@ -81,38 +81,12 @@ class Carousel extends Component {
     });
   }
 
-  updatePanels(panels) {
-    const { activeIndex } = this.state;
-
-    this.setState({
-      activeIndex: Math.min(panels.length, activeIndex),
-      panels: React.Children.map(panels, (panel, index) => (
-        React.cloneElement(panel, {
-          active: activeIndex === index,
-          onKeyboardInteraction: this.onKeyboardInteraction,
-        })
-      )),
-    });
-  }
-
   toggleAutoPlay = () => {
     if (this.autoPlayId) {
       this.stopAutoPlay();
     } else {
       this.startAutoPlay();
     }
-  }
-
-  startAutoPlay() {
-    const { autoPlayInterval } = this.props;
-    this.autoPlayId = setInterval(this.activateNextPanel, autoPlayInterval);
-    this.setState({ autoPlayActive: true });
-  }
-
-  stopAutoPlay() {
-    clearInterval(this.autoPlayId);
-    this.autoPlayId = null;
-    this.setState({ autoPlayActive: false });
   }
 
   activateNextPanel = () => {
@@ -137,6 +111,32 @@ class Carousel extends Component {
     } else {
       this.setActivePanel(nextActiveIndex);
     }
+  }
+
+  startAutoPlay() {
+    const { autoPlayInterval } = this.props;
+    this.autoPlayId = setInterval(this.activateNextPanel, autoPlayInterval);
+    this.setState({ autoPlayActive: true });
+  }
+
+  stopAutoPlay() {
+    clearInterval(this.autoPlayId);
+    this.autoPlayId = null;
+    this.setState({ autoPlayActive: false });
+  }
+
+  updatePanels(panels) {
+    const { activeIndex } = this.state;
+
+    this.setState({
+      activeIndex: Math.min(panels.length, activeIndex),
+      panels: React.Children.map(panels, (panel, index) => (
+        React.cloneElement(panel, {
+          active: activeIndex === index,
+          onKeyboardInteraction: this.onKeyboardInteraction,
+        })
+      )),
+    });
   }
 
   renderAutoPlay() {

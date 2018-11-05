@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const Path = (props) => {
-  const { button, children, className, ...rest } = props;
+  const {
+    button, children, className, ...rest
+  } = props;
 
   const sldsClasses = [
     'slds-path-coach',

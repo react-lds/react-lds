@@ -9,6 +9,7 @@ export class SplitView extends Component {
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
   };
+
   static defaultProps = {
     initialIsOpen: false,
     onOpen: Function.prototype,
@@ -22,13 +23,15 @@ export class SplitView extends Component {
   }
 
   onOpen = () => {
+    const { onOpen } = this.props;
     this.setIsOpen(true);
-    this.props.onOpen();
+    onOpen();
   }
 
   onClose = () => {
+    const { onClose } = this.props;
     this.setIsOpen(false);
-    this.props.onClose();
+    onClose();
   }
 
   setIsOpen = (isOpen) => {

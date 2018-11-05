@@ -62,7 +62,8 @@ class Tabs extends Component {
   }
 
   componentWillReceiveProps({ children: nextChildren }) {
-    if (nextChildren.length !== this.props.children.length) {
+    const { children } = this.props;
+    if (nextChildren.length !== children.length) {
       this.setState({
         activeTab: Tabs.getFirstChildId(nextChildren),
       });
