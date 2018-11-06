@@ -15,7 +15,10 @@ const stories = storiesOf('ButtonGroup', module);
 
 stories
   .add('Default', () => (
-    <ButtonGroup list={boolean('Render as list', false)}>
+    <ButtonGroup
+      list={boolean('Render as list', false)}
+      row={boolean('Render as row', false)}
+    >
       <Button title="Refresh" />
       <Button title="Edit" />
       <Button title="Save" disabled={boolean('Disable last button', false)} />
