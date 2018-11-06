@@ -27,7 +27,7 @@ const AccordionSection = (props) => {
         id={id}
       >
         <div className="slds-accordion__summary">
-          <h3 className="slds-text-heading_small slds-accordion__summary-heading">
+          <h3 className="slds-accordion__summary-heading">
             <Button
               sprite="utility"
               icon={isOpen ? 'chevrondown' : 'chevronright'}
