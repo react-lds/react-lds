@@ -99,7 +99,11 @@ const Cell = (props) => {
 
   const wrapChildren = (content) => {
     if (isHeader) {
-      return <a className="slds-th__action slds-text-link_reset">{content}</a>;
+      if (!!sortable) {
+        return <a className="slds-th__action slds-text-link_reset">{content}</a>;
+      }
+
+      return <span>{content}</span>;
     }
 
     return content;
