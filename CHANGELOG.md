@@ -3,6 +3,17 @@
 ## 7.2.6
 
 * Fixed: `DataTable`: Added horizontal scrolling for table with fixed header
+* Changed: `ModalContent`: Added option to collapse padding
+* Changed: `MenuSubHeader`: Allow passing elements as children
+* Changed: Allow grid components to have arbitrary DOM elements as containers
+* Changed: `MediaObject`: Allow passing figureRenderers
+* Changed: `ComboboxDropdown`: Added `onInputLabelClick` handler
+* Changed: `ComboboxDropdown`: Allow to be empty
+* Changed: `ComboboxDropdownItems`: Added back `alwaysDisplay` option to icons
+* Changed: `ComboboxDropdownItems`: Allow React elements as children
+* Changed: Return early if `ComboboxDropdownList` does not have children
+* Changed: Added forwarding refs to Input, Button and Listbox children
+* Changed: Upgraded enzyme, jest & moment
 
 ## 7.2.5
 
