@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.2.6
+
+* Fixed: `DataTable`: Added horizontal scrolling for table with fixed header
+
 ## 7.2.5
 
 * Changed: `DataTable`: Added support for fixed header row
