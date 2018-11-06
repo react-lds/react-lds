@@ -1,9 +1,6 @@
 import React from 'react';
-import cx from 'classnames';
 
-import { CheckboxRaw } from '../../';
-
-const FIXED_STYLE = { marginLeft: '-0.25rem' };
+import { CheckboxRaw, Cell } from '../../';
 
 /* eslint-disable react/prop-types */
 export default ({
@@ -14,18 +11,15 @@ export default ({
   tableId,
 }) => {
   const checkboxId = `${tableId}-${dataKey}`;
-  const wrapperClassName = cx([
-    { 'slds-cell-fixed': fixed },
-  ]);
 
   return (
     <th
       className="slds-text-align--right"
       key={dataKey}
       scope="col"
-      style={{ width: '3.25rem' }}
+      style={fixed ? Cell.FIXED_STYLE : null}
     >
-      <div className={wrapperClassName} style={fixed ? FIXED_STYLE : null}>
+      <div>
         <CheckboxRaw
           checked={allSelected}
           hideLabel
@@ -33,7 +27,6 @@ export default ({
           label="Select All"
           name="options"
           onChange={onSelectAll}
-          wrapperClassName={fixed ? 'slds-th__action' : null}
         />
       </div>
     </th>

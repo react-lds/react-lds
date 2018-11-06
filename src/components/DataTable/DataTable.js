@@ -8,6 +8,8 @@ import { propTypes as tablePropTypes } from '../Table/Table';
 import defaultRowRenderer from './defaultRowRenderer';
 
 class DataTable extends Component {
+  static FIXED_STYLE = { tableLayout: 'fixed', width: 'auto' };
+
   state = {
     id: uniqueId('data-table-advanced-'),
     columns: [],
@@ -215,7 +217,7 @@ class DataTable extends Component {
       'sortDirection',
     ]);
     const table = (
-      <Table {...rest}>
+      <Table {...rest} style={fixedHeader ? DataTable.FIXED_STYLE : null}>
         {this.renderHead()}
         {this.renderBody()}
       </Table>
@@ -223,7 +225,7 @@ class DataTable extends Component {
 
     if (fixedHeader) {
       return (
-        <div className="slds-table--header-fixed_container slds-grid slds-grid_vertical slds-scrollable">
+        <div className="slds-grid slds-grid_vertical slds-scrollable">
           <div>
             {table}
           </div>
