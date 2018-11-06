@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+* Upgrade to latest LDS release
+* Added: `ButtonGroup`: Support new `row` option
+
 ## 7.2.6
 
 * Fixed: `DataTable`: Added horizontal scrolling for table with fixed header
