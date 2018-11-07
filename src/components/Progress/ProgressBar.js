@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { clamp, fraction } from './utils';
 
-const getBarValueStyle = num => ({
-  width: `${num}%`,
+const getBarValueStyle = (num, vertical) => ({
+  [vertical ? 'height' : 'width']: `${num}%`,
 });
 
 const ProgressBar = (props) => {
@@ -17,6 +17,7 @@ const ProgressBar = (props) => {
     progress,
     size,
     success,
+    vertical,
     ...rest
   } = props;
 
@@ -26,6 +27,7 @@ const ProgressBar = (props) => {
     baseClass,
     { [`${baseClass}_${size}`]: !!size },
     { [`${baseClass}_circular`]: circular },
+    { [`${baseClass}_vertical`]: vertical },
     className
   ];
 
@@ -45,7 +47,7 @@ const ProgressBar = (props) => {
       aria-valuenow={clampedProgress}
       role="progressbar"
     >
-      <span className={cx(valueClasses)} style={getBarValueStyle(clampedProgress)}>
+      <span className={cx(valueClasses)} style={getBarValueStyle(clampedProgress, vertical)}>
         <span className="slds-assistive-text">{`${assistiveLabel}: ${clampedProgress}%`}</span>
       </span>
     </div>
@@ -61,6 +63,7 @@ ProgressBar.defaultProps = {
   max: 100,
   size: null,
   success: false,
+  vertical: false,
 };
 
 ProgressBar.propTypes = {
@@ -96,6 +99,10 @@ ProgressBar.propTypes = {
    * Render a green progress bar
    */
   success: PropTypes.bool,
+  /**
+   * Renders as a vertical progress bar
+   */
+  vertical: PropTypes.bool,
 };
 
 export default ProgressBar;
