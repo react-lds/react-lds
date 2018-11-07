@@ -14,11 +14,14 @@ import {
 
 const buttonFlavors = [
   'none',
-  'neutral',
   'brand',
-  'success',
   'destructive',
-  'text-destructive'
+  'inverse',
+  'neutral',
+  'none',
+  'outline-brand',
+  'success',
+  'text-destructive',
 ];
 
 const buttonStories = storiesOf('Button', module);
