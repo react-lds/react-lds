@@ -13,6 +13,14 @@ describe('<ProgressBar />', () => {
     });
   });
 
+  it('renders as vertical layout', () => {
+    const mounted = getProgressBar({ progress: 50, vertical: true });
+    expect(mounted.find('.slds-progress-bar__value').prop('style')).toEqual({
+      height: '50%',
+    });
+  });
+
+
   it('clamps the maximum value to 100', () => {
     const mounted = getProgressBar({ progress: 500 });
     expect(mounted.find('.slds-progress-bar').prop('aria-valuenow')).toEqual(100);
