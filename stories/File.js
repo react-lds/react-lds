@@ -47,9 +47,9 @@ stories
     <File
       href="#"
       externalIcon={object('ExternalIcon', {
-        icon: 'generic_loading',
-        sprite: 'standard',
-        title: 'custom icon',
+        icon: 'salesforce1',
+        sprite: 'utility',
+        title: 'External Icon',
       })}
       fileType={getFileTypes() || undefined}
       title={text('Title', 'Proposal.pdf')}

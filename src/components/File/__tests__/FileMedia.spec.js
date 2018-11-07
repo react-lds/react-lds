@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Icon } from '../../../';
 import FileMedia from '../FileMedia';
+import { Spinner } from '../../Spinner';
 
 const getComponent = (props = {}) => shallow(
   <FileMedia
@@ -27,14 +28,8 @@ describe('<FileMedia />', () => {
 
   it('renders a loading indicator if isLoading is set', () => {
     const mounted = getComponent({ isLoading: true });
-    const $icon = mounted.find(Icon);
-
-    expect($icon.exists()).toBeTruthy();
-    expect($icon.props()).toMatchObject({
-      icon: 'image',
-      svgClassName: 'slds-file__loading-icon',
-      title: 'bar',
-    });
+    const spinner = mounted.find(Spinner);
+    expect(spinner.exists()).toBeTruthy();
   });
 
   it('renders an image if passed', () => {
