@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { clamp, fraction } from './utils';
+import { getClampedProgress } from './utils';
 
 const getBarValueStyle = (num, vertical) => ({
   [vertical ? 'height' : 'width']: `${num}%`,
@@ -11,6 +11,7 @@ const ProgressBar = (props) => {
   const {
     assistiveLabel,
     circular,
+    completeLabel,
     className,
     min,
     max,
@@ -36,7 +37,7 @@ const ProgressBar = (props) => {
     { [`${baseClass}__value_success`]: success },
   ];
 
-  const clampedProgress = fraction(clamp(progress, min, max), min, max) * 100;
+  const clampedProgress = getClampedProgress(progress, min, max);
 
   return (
     <div
@@ -48,14 +49,20 @@ const ProgressBar = (props) => {
       role="progressbar"
     >
       <span className={cx(valueClasses)} style={getBarValueStyle(clampedProgress, vertical)}>
-        <span className="slds-assistive-text">{`${assistiveLabel}: ${clampedProgress}%`}</span>
+        <span className="slds-assistive-text">
+          {assistiveLabel
+            ? `${assistiveLabel}: ${clampedProgress}%`
+            : `${clampedProgress}% ${completeLabel}`
+          }
+        </span>
       </span>
     </div>
   );
 };
 
 ProgressBar.defaultProps = {
-  assistiveLabel: 'Progress',
+  assistiveLabel: null,
+  completeLabel: 'Complete',
   circular: false,
   className: null,
   progress: 0,
@@ -68,9 +75,13 @@ ProgressBar.defaultProps = {
 
 ProgressBar.propTypes = {
   /**
-   * Assistive label. Interpolates to `${label}: x%`
+   * (DEPRECATED) Assistive label. Interpolates to `${label}: x%`
    */
   assistiveLabel: PropTypes.string,
+  /**
+   * Assistive label. Interpolates to `x% ${label}`
+   */
+  completeLabel: PropTypes.string,
   /**
    * Render progress bar with round edges instead
    */
