@@ -5,9 +5,9 @@ import ButtonIcon from './ButtonIcon';
 
 const renderStatefulButtonIcon = (icon, sprite) => (
   <ButtonIcon
-    className="slds-button__icon_stateful"
     position="left"
     icon={icon}
+    size="small"
     sprite={sprite}
   />
 );
