@@ -20,6 +20,11 @@ const getTabLink = (mounted, pos = 0) => mounted.find(TabLink).at(pos);
 const getTab = (mounted, pos = 0) => mounted.find(Tab).at(pos);
 
 describe('<ControlledTabs />', () => {
+  it('renders size modifiers', () => {
+    const mounted = getComponent({ size: 'large' });
+    expect(mounted.find('.slds-tabs_default').hasClass('slds-tabs_large')).toBeTruthy();
+  })
+
   it('renders a link for every tab passed', () => {
     const mounted = getComponent();
     expect(mounted.find(TabLink).length).toEqual(3);
