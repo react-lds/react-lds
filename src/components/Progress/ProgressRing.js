@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { clamp, fraction } from './utils';
+import { getClampedProgress } from './utils';
 import { Icon } from '../../';
 
 const getIconForStatus = (status, labels) => {
@@ -41,9 +41,9 @@ const ProgressRing = (props) => {
 
   const baseClass = 'slds-progress-ring';
 
-  const percComplete = fraction(clamp(progress, min, max), min, max);
+  const percComplete = getClampedProgress(progress, min, max);
 
-  const isForceComplete = complete === true || (complete === 'auto' && percComplete === 1);
+  const isForceComplete = complete === true || (complete === 'auto' && percComplete === 100);
   const currentStatus = isForceComplete ? 'complete' : status;
 
   const iconEl = !currentStatus && customIcon
@@ -66,9 +66,9 @@ const ProgressRing = (props) => {
         role="progressbar"
         aria-valuemin={min}
         aria-valuemax={max}
-        aria-valuenow={percComplete * 100}
+        aria-valuenow={percComplete}
       >
-        <svg viewBox="-1 -1 2 2">{getPath(percComplete, isForceComplete)}</svg>
+        <svg viewBox="-1 -1 2 2">{getPath(percComplete / 100, isForceComplete)}</svg>
       </div>
       <div className="slds-progress-ring__content">{iconEl}</div>
     </div>
@@ -84,6 +84,7 @@ ProgressRing.defaultProps = {
   complete: 'auto',
   className: null,
   customIcon: null,
+  progress: 0,
   min: 0,
   max: 100,
   status: null,
@@ -114,7 +115,7 @@ ProgressRing.propTypes = {
   /**
    * Progress value (between min-max)
    */
-  progress: PropTypes.number.isRequired,
+  progress: PropTypes.number,
   /**
    * Progress min
    */
