@@ -34,7 +34,7 @@ describe('<Carousel />', () => {
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    expect(mounted.find('.slds-carousel__panel'))
+    expect(mounted.find(CarouselPanel))
       .toHaveLength(2);
   });
 
@@ -56,7 +56,7 @@ describe('<Carousel />', () => {
       { title: 'Title 2', children: 'Content 2' },
     ]);
 
-    mounted.find(CarouselPanel).at(0).find('a').simulate('keydown', { keyCode: 39 });
+    mounted.find(CarouselPanel).at(0).find('a').simulate('keydown', { key: 'ArrowRight' });
 
     expect(mounted.find(CarouselPanel).at(0).prop('active'))
       .toBe(false);

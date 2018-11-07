@@ -32,6 +32,7 @@
 
 ## 7.2.0
 
+* Add `ControlledCarousel` component
 * Add `Tooltip` and `ControlledTooltip` component
 * Export ES modules under `react-lds/es`
 

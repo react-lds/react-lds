@@ -10,7 +10,8 @@ const CarouselPanel = (props) => {
     className,
     id,
     imageUrl,
-    onKeyboardInteraction,
+    onError,
+    onLoad,
     title,
     ...rest
   } = props;
@@ -19,8 +20,6 @@ const CarouselPanel = (props) => {
     'slds-carousel__panel',
     className,
   ];
-
-  const tabIndex = active ? 0 : -1;
 
   const renderedImage = backgroundStyle
     ? (
@@ -35,7 +34,12 @@ const CarouselPanel = (props) => {
     )
     : (
       <div className="slds-carousel__image">
-        <img src={imageUrl} alt={title} />
+        <img
+          alt={title}
+          src={imageUrl}
+          onError={onError}
+          onLoad={onLoad}
+        />
       </div>
     );
 
@@ -50,8 +54,6 @@ const CarouselPanel = (props) => {
     >
       <a
         className="slds-carousel__panel-action slds-text-link_reset"
-        onKeyDown={onKeyboardInteraction}
-        tabIndex={tabIndex}
       >
         {renderedImage}
         <div className="slds-carousel__content">
@@ -68,7 +70,8 @@ CarouselPanel.defaultProps = {
   backgroundStyle: null,
   children: [],
   className: null,
-  onKeyboardInteraction: null,
+  onError: null,
+  onLoad: null,
 };
 
 CarouselPanel.propTypes = {
@@ -103,14 +106,19 @@ CarouselPanel.propTypes = {
   imageUrl: PropTypes.string.isRequired,
 
   /**
-   * Callback for keyboard interaction on an active panel.
-   */
-  onKeyboardInteraction: PropTypes.func,
-
-  /**
    * title text
    */
   title: PropTypes.string.isRequired,
+
+  /**
+   * onError function for img tag, renders only when not supplying backgroundStyle
+   */
+  onError: PropTypes.func,
+
+  /**
+   * onLoad function for img tag, renders only when not supplying backgroundStyle
+   */
+  onLoad: PropTypes.func,
 };
 
 export default CarouselPanel;
