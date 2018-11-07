@@ -89,7 +89,7 @@ Button.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Can be either `neutral`, `brand`, `destructive`, `success` or `inverse`
+   * Can be either `neutral`, `brand`, `destructive`, `success`, `inverse` or `text-destructive`
    * Default to `neutral`, set to "none" or `null` explicitely to render a plain button
    */
   flavor: PropTypes.oneOf([
@@ -98,7 +98,8 @@ Button.propTypes = {
     'brand',
     'destructive',
     'success',
-    'inverse'
+    'inverse',
+    'text-destructive'
   ]),
   /**
    * Optional href, renders as `a` when set
