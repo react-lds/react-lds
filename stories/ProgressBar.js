@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { number, select, boolean } from '@storybook/addon-knobs';
-import { ProgressBar } from '../src';
+import { number, select, boolean, text } from '@storybook/addon-knobs';
+import { ProgressBar, DescriptiveProgressBar } from '../src';
 
 const stories = storiesOf('Progress Bar', module);
 
@@ -24,4 +24,11 @@ stories
         vertical
       />
     </div>
+  ))
+  .add('Descriptive Progressbar', () => (
+    <DescriptiveProgressBar
+      completeLabel={text('Complete Label', 'Completed')}
+      label={text('Label', 'Setup Assistant')}
+      progress={number('Progress', 33, { range: true, min: 0, max: 100, step: 1, })}
+    />
   ));
