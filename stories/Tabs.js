@@ -15,6 +15,7 @@ stories
       scoped={boolean('Scoped?', false)}
       onChangeTab={action('change-tab')}
       renderInactiveTabs={boolean('Render Inactive Tabs (Inspect to see change)', false)}
+      size={select('Size', ['', 'medium', 'large'], '')}
     >
       <Tab id="tab-1" title="Tab 1">Tab One</Tab>
       <Tab id="tab-2" title="Tab 2">
