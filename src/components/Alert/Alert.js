@@ -19,52 +19,61 @@ const Alert = (props) => {
 
   const sldsClasses = [
     'slds-notify',
-    { 'slds-notify_toast': !!toast },
-    { 'slds-notify_alert': !toast },
-    { 'slds-theme_alert-texture': !toast },
+    { 'slds-notify_toast': toast },
+    { 'slds-notify_alert slds-theme_alert-texture': !toast },
     getThemeClass(theme),
     className,
   ];
 
-  let iconEl = null;
+  let iconEl;
+  let iconContainerClasses;
 
   if (React.isValidElement(icon)) {
     iconEl = React.cloneElement(icon, { size: toast ? 'small' : 'x-small' });
+
+    iconContainerClasses = [
+      'slds-icon_container',
+      { 'slds-m-right_small slds-no-flex slds-align-top': toast },
+      { 'slds-m-right_x-small': !toast },
+    ];
   }
 
-  return (
-    <div className="slds-notify_container">
-      <div {...rest} className={cx(sldsClasses)} role="alert">
-        {iconEl && (
-          <span className="slds-icon_container slds-m-right_small slds-no-flex slds-align-top">
-            {iconEl}
-            <span className="slds-assistive-text">{title}</span>
-          </span>
-        )}
-        <IconButton
-          flavor="inverse"
-          className="slds-notify__close"
-          onClick={onClickClose}
-          title="Close"
-        >
-          <ButtonIcon
-            sprite="utility"
-            icon="close"
-            size={toast ? 'large' : undefined}
-          />
-        </IconButton>
-        <span className="slds-assistive-text">{title}</span>
-        {toast ? <div className="slds-notify__content">{children}</div> : children }
-      </div>
+  const alert = (
+    <div {...rest} className={cx(sldsClasses)} role={toast ? 'status' : 'alert'}>
+      <span className="slds-assistive-text">{title}</span>
+      {iconEl && <span className={cx(iconContainerClasses)}>{iconEl}</span>}
+      {toast
+        ? <div className="slds-notify__content">{children}</div>
+        : children
+      }
+      {onClickClose && (
+        <div className="slds-notify__close">
+          <IconButton
+            flavor="inverse"
+            onClick={onClickClose}
+            title="Close"
+          >
+            <ButtonIcon
+              sprite="utility"
+              icon="close"
+              size={toast ? 'large' : null}
+            />
+          </IconButton>
+        </div>
+      )}
     </div>
   );
+
+  return toast
+    ? <div className="slds-notify_container slds-is-relative">{alert}</div>
+    : alert;
 };
 
 Alert.defaultProps = {
   className: null,
   icon: null,
   toast: false,
-  onClickClose: () => {},
+  onClickClose: null,
   theme: 'info',
 };
 
@@ -78,9 +87,9 @@ Alert.propTypes = {
    */
   className: PropTypes.string,
   /**
-  * IconSVG
+  * IconSVG element
   */
-  icon: PropTypes.node,
+  icon: PropTypes.element,
   /**
    * notification title (will be rendered as assistiveText)
    */
