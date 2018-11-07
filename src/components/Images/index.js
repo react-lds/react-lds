@@ -1,3 +1,2 @@
-import Avatar from './Avatar';
+export { EntityAvatar, UserAvatar, Avatar } from './Avatar';
 
-export { Avatar };
