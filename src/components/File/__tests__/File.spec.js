@@ -10,14 +10,26 @@ const getComponent = (props = {}) => shallow(<File title="foo" {...props} />);
 describe('<File />', () => {
   it('renders a placeholder when loading', () => {
     const mounted = getComponent({ hideTitle: true, isLoading: true });
-    expect(mounted.find('.slds-file').hasClass('slds-file_center-icon')).toBeTruthy();
+    expect(mounted.find('.slds-file').hasClass('slds-file_loading')).toBeTruthy();
   });
 
   it('renders no caption if hideTitle is true', () => {
+    const expectTitle = (cmp, isVisible) => {
+      const expectations = [
+        expect(cmp.find('.slds-file').hasClass('slds-has-title')),
+        expect(cmp.find(FileCaption).exists())
+      ];
+
+      expectations.forEach((expectation) => {
+        if (isVisible) expectation.toBeTruthy();
+        else expectation.toBeFalsy();
+      });
+    };
+
     const mounted = getComponent();
-    expect(mounted.find(FileCaption).exists()).toBeTruthy();
+    expectTitle(mounted, true);
     mounted.setProps({ hideTitle: true });
-    expect(mounted.find(FileCaption).exists()).toBeFalsy();
+    expectTitle(mounted, false);
   });
 
   it('renders an external icon', () => {
