@@ -45,7 +45,7 @@ const CarouselPanel = (props) => {
       className={cx(sldsClasses)}
       id={id}
       role="tabpanel"
-      aria-hidden={active}
+      aria-hidden={!active}
       aria-labelledby={`${id}-indicator`}
     >
       <a
