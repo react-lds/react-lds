@@ -9,6 +9,7 @@ class ControlledTabs extends PureComponent {
   static defaultProps = {
     renderInactiveTabs: false,
     scoped: false,
+    size: null,
     styled: false,
   }
 
@@ -33,6 +34,10 @@ class ControlledTabs extends PureComponent {
      * Renders scoped variant
      */
     scoped: PropTypes.bool,
+    /**
+     * Size modifier
+     */
+    size: PropTypes.oneOf(['medium', 'large']),
     /**
      * Renders Card-like variant
      */
@@ -183,15 +188,21 @@ class ControlledTabs extends PureComponent {
   }
 
   render() {
-    const { scoped, styled, children } = this.props;
+    const {
+      children,
+      scoped,
+      size,
+      styled,
+    } = this.props;
+
+    const sldsClasses = [
+      getTabsClass('', scoped),
+      { 'slds-tabs_card': styled },
+      { [`slds-tabs_${size}`]: size }
+    ];
 
     return (
-      <div
-        className={cx(
-          getTabsClass('', scoped),
-          { 'slds-tabs_card': styled }
-        )}
-      >
+      <div className={cx(sldsClasses)}>
         <ul
           className={getTabsClass('__nav', scoped)}
           onBlur={this.onBlur}
