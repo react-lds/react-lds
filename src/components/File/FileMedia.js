@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from '../..';
+import { Icon } from '../Icon';
+import { Spinner } from '../Spinner';
 
 const FileMedia = ({
   fileType,
@@ -8,18 +9,7 @@ const FileMedia = ({
   isLoading,
   title,
 }) => {
-  if (isLoading) {
-    return (
-      <Icon
-        className="slds-file__icon"
-        sprite="utility"
-        icon="image"
-        size="large"
-        svgClassName="slds-file__loading-icon"
-        title={title}
-      />
-    );
-  }
+  if (isLoading) return <Spinner size="medium" />;
 
   if (image && image.src) return <img src={image.src} alt={image.alt || title} />;
 
