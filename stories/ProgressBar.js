@@ -13,4 +13,15 @@ stories
       progress={number('Progress', 33, { range: true, min: 0, max: 100, step: 1, })}
       success={boolean('Success Style', false)}
     />
+  ))
+  .add('Vertical', () => (
+    <div style={{ height: '200px' }}>
+      <ProgressBar
+        circular={boolean('Circular', false)}
+        size={select('Size', ['', 'x-small', 'small', 'medium', 'large']) || undefined}
+        progress={number('Progress', 33, { range: true, min: 0, max: 100, step: 1, })}
+        success={boolean('Success Style', false)}
+        vertical
+      />
+    </div>
   ));
