@@ -4,6 +4,8 @@
 
 * Changed: `Spinner`: Added `container` convenience prop
 * Changed: `Spinner`: Added `inline` prop
+* Changed: `ProgressRing`: Added `active-step` status
+* Changed: `ProgressRing`: Added `fill` and `drain` variants
 * Upgrade to latest LDS release
 * Added: `ButtonGroup`: Support new `row` option
 
