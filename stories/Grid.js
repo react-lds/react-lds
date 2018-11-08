@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { array, select, text } from '@storybook/addon-knobs';
+import { array, select, text, boolean } from '@storybook/addon-knobs';
 import { Box, Column, Grid, Container } from '../src';
 import { getThemes } from './utils/helpers';
 
@@ -34,6 +34,7 @@ stories
       className="slds-m-bottom--large"
       flavor={array('Grid Flavor', [])}
       gutters={select('Gutters', sizeOptions, 'small')}
+      guttersDirect={boolean('Direct Gutters', false)}
       align={select('Horizontal Alignment', alignOptions) || undefined}
       verticalAlign={select('Vertical Alignment', vAlignOptions, 'start')}
     >
