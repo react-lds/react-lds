@@ -31,6 +31,11 @@ describe('<FormElement />', () => {
     expect(mounted.find('fieldset.slds-form-element').length).toBe(1);
   });
 
+  it('renders a static version', () => {
+    mounted.setProps({ isStatic: true });
+    expect(mounted.find('.slds-form-element').hasClass('slds-form-element_readonly')).toBeTruthy();
+  });
+
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-form-element').hasClass('foo')).toBeTruthy();
