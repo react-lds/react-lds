@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+* Changed: `Spinner`: Added `container` convenience prop
+* Changed: `Spinner`: Added `inline` prop
 * Upgrade to latest LDS release
 * Added: `ButtonGroup`: Support new `row` option
 
