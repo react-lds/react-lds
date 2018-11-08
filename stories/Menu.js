@@ -19,11 +19,15 @@ const customButton = (
 const positions = [
   '',
   'top-left',
+  'top-left-corner',
   'top',
   'top-right',
+  'top-right-corner',
   'bottom-left',
+  'bottom-left-corner',
   'bottom',
-  'bottom-right'
+  'bottom-right',
+  'bottom-right-corner',
 ];
 
 stories
