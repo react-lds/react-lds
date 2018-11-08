@@ -164,11 +164,13 @@ class DataTable extends Component {
   }
 
   renderHead() {
-    const { fixedHeader } = this.props;
+    const { fixedHeader, variation } = this.props;
     const { columns, id, sortBy, sortDirection } = this.state;
 
+    const hasHiddenHeader = !fixedHeader && variation.includes('header-hidden');
+
     return (
-      <thead>
+      <thead className={hasHiddenHeader ? 'slds-assistive-text' : null}>
         <tr>
           {columns.map(({ headRenderer, ...restProps }) =>
             headRenderer({

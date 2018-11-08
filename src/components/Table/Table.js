@@ -58,6 +58,7 @@ export const propTypes = {
     'col-bordered',
     'striped',
     'fixed-layout',
+    'header-hidden',
   ]),
 };
 
