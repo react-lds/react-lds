@@ -110,12 +110,14 @@ stories
       titleMenu={titleMenu}
       topButtons={topButtons}
       info={text('Info', '10 items • sorted by name')}
+      icon={object('Icon', { icon: 'user', sprite: 'standard' })}
       bottomButtons={bottomButtons}
     />
   ))
   .add('ObjectHome without menu', () => (
     <ObjectHome
       title={text('Title', 'My Leads')}
+      icon={object('Icon', { icon: 'user', sprite: 'standard' })}
       recordType={text('RecordType', 'Leads')}
       topButtons={topButtons}
       info={text('Info', '10 items • sorted by name')}

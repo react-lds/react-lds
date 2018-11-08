@@ -21,7 +21,7 @@ describe('<ObjectHome />', () => {
   });
 
   it('opens the menu on headline click', () => {
-    const headline = mounted.find('h1').first();
+    const headline = mounted.find('.slds-page-header__title');
     const dropdown = mounted.find('div.slds-dropdown-trigger').first();
     expect(dropdown.hasClass('slds-is-open')).toBeFalsy();
     headline.simulate('click');
@@ -29,39 +29,33 @@ describe('<ObjectHome />', () => {
   });
 
   it('contains the title', () => {
-    expect(mounted.find('h1').first().text()).toEqual('foo');
+    expect(mounted.find('.slds-page-header__title').text()).toEqual('foo');
+  });
+
+  it('contains the recordType', () => {
+    expect(mounted.find('h1 span').first().text()).toEqual('unicornz');
   });
 
   it('contains the titleMenu', () => {
-    const headline = mounted.find('h1').first();
+    const headline = mounted.find('.slds-page-header__title');
     headline.simulate('click');
     expect(mounted.find('.slds-dropdown').exists()).toBeTruthy();
   });
 
-  it('contains the recordType', () => {
-    expect(mounted.find('p.slds-text-title_caps').first().text()).toEqual('unicornz');
-  });
-
   it('contains topButtons', () => {
     expect(mounted
-      .find('div.slds-grid')
-      .first()
-      .children()
-      .at(1)
+      .find('.slds-page-header__col-actions')
       .text())
       .toEqual('button098');
   });
 
   it('contains info', () => {
-    expect(mounted.find('p.slds-text-body_small').text()).toEqual('yeah');
+    expect(mounted.find('.slds-page-header__meta-text').text()).toEqual('yeah');
   });
 
   it('contains bottomButtons', () => {
     expect(mounted
-      .find('div.slds-grid')
-      .at(4)
-      .children()
-      .at(1)
+      .find('.slds-page-header__col-controls')
       .text())
       .toEqual('button1234');
   });

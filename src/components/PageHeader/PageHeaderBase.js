@@ -5,29 +5,40 @@ import cx from 'classnames';
 import { Icon, MediaObject } from '../../';
 
 const PageHeaderBase = (props) => {
-  const { className, icon, info, title, ...rest } = props;
+  const {
+    className,
+    icon: { icon, sprite },
+    info,
+    title,
+    ...rest
+  } = props;
 
-  const iconRendered = <Icon sprite={icon.sprite} icon={icon.icon} />;
-
-  const sldsClasses = [
-    'slds-page-header',
-    className
-  ];
-
-  const titleClasses = [
-    'slds-page-header__title',
-    'slds-truncate',
-    'slds-align-middle'
-  ];
+  const sldsClasses = ['slds-page-header', className];
 
   return (
-    <div {...rest} className={cx(sldsClasses)} role="banner">
-      <MediaObject figureLeft={iconRendered} center>
-        <p className={cx(titleClasses)} title={title}>
-          {title}
-        </p>
-        <p className="slds-text-body_small slds-page-header__info">{info}</p>
-      </MediaObject>
+    <div {...rest} className={cx(sldsClasses)}>
+      <div className="slds-page-header__row">
+        <div className="slds-page-header__col-title">
+          <MediaObject
+            figureLeft={(
+              <Icon
+                sprite={sprite}
+                icon={icon}
+                svgClassName="slds-page-header__icon"
+              />
+            )}
+          >
+            <div className="slds-page-header__name">
+              <div className="slds-page-header__name-title">
+                <h1>
+                  <span className="slds-page-header__title slds-truncate" title={title}>{title}</span>
+                </h1>
+              </div>
+            </div>
+            <p className="slds-page-header__name-meta">{info}</p>
+          </MediaObject>
+        </div>
+      </div>
     </div>
   );
 };

@@ -11,11 +11,11 @@ describe('<PageHeaderBase />', () => {
   });
 
   it('contains the title', () => {
-    expect(mounted.find('p.slds-page-header__title').text()).toEqual('test');
+    expect(mounted.find('h1 .slds-page-header__title').text()).toEqual('test');
   });
 
   it('contains info', () => {
-    expect(mounted.find('p.slds-text-body_small').text()).toEqual('foo');
+    expect(mounted.find('.slds-page-header__name-meta').text()).toEqual('foo');
   });
 
   it('renders the icon', () => {
