@@ -22,6 +22,7 @@ const Grid = (props) => {
     className,
     flavor,
     gutters,
+    guttersDirect,
     pullPadding,
     verticalAlign,
     wrap,
@@ -40,12 +41,12 @@ const Grid = (props) => {
     className,
   ];
 
-  if (gutters === true) {
-    sldsClasses.push('slds-gutters');
-  }
+  const guttersBaseClass = guttersDirect ? 'slds-gutters_direct' : 'slds-gutters';
 
-  if (gutters && gutters !== true) {
-    sldsClasses.push(`slds-gutters_${gutters}`);
+  if (gutters === true || (guttersDirect === true && gutters === false)) {
+    sldsClasses.push(guttersBaseClass);
+  } else if (gutters && gutters !== true) {
+    sldsClasses.push(`${guttersBaseClass}${guttersDirect ? '-' : '_'}${gutters}`);
   }
 
   return <El {...rest} className={cx(sldsClasses)}>{children}</El>;
@@ -57,6 +58,7 @@ Grid.defaultProps = {
   children: null,
   className: null,
   gutters: null,
+  guttersDirect: false,
   flavor: [],
   pullPadding: null,
   verticalAlign: null,
@@ -97,6 +99,10 @@ Grid.propTypes = {
    * Can either be true or any valid slds size string (xxx-small to xx-large)
    */
   gutters: PropTypes.oneOf([true, false, ...gutterSizes]),
+  /**
+   * When true, gutters will only be applied to direct children. Use in combination with `gutters`
+   */
+  guttersDirect: PropTypes.bool,
   /**
    * Controls how columns are aligned vertically.
    * Can either either: center, end, space
