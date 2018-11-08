@@ -50,7 +50,18 @@ const propTypes = {
   /**
    * position relative to the menu button
    */
-  position: PropTypes.oneOf(['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right']),
+  position: PropTypes.oneOf([
+    'top-left',
+    'top-left-corner',
+    'top',
+    'top-right',
+    'top-right-corner',
+    'bottom-left',
+    'bottom-left-corner',
+    'bottom',
+    'bottom-right',
+    'bottom-right-corner',
+  ]),
   /**
    * render the dropdown even when it is closed
    */
@@ -141,8 +152,8 @@ class ControlledMenu extends Component {
     const dropdownClasses = [
       'slds-dropdown',
       { [`slds-dropdown_${size}`]: size },
-      { 'slds-dropdown_left': position.endsWith('left') },
-      { 'slds-dropdown_right': position.endsWith('right') },
+      { 'slds-dropdown_left': position.includes('left') },
+      { 'slds-dropdown_right': position.includes('right') },
       { 'slds-dropdown_bottom': position.startsWith('bottom') },
       { [`slds-nubbin_${position}`]: nubbin },
       className,
