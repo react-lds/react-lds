@@ -842,10 +842,10 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@salesforce-ux/design-system@2.5.2":
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/@salesforce-ux/design-system/-/design-system-2.5.2.tgz#454f2c0b0214a980b10fe817061c4b8c15c35276"
-  integrity sha512-VPjwUPj0er0bwH/7U4FGJUiVTRJtyVjvDdFFWRBalFubKgx8hAj7WiIMrdWmofyADmsFDI9aomsDHZvjf7CKeQ==
+"@salesforce-ux/design-system@~2.7.4":
+  version "2.7.4"
+  resolved "https://registry.yarnpkg.com/@salesforce-ux/design-system/-/design-system-2.7.4.tgz#dabf45767128389ded9fb7bd34c19fcf4614ec17"
+  integrity sha512-3dbl05b/132UvSq1lEslLC+gTghyc13Q11zYrZx0MSoO6zOgMSCfL9qHi3AieU4JvCMV93V3mAugObXWfrpWjA==
 
 "@storybook/addon-actions@^4.0.2":
   version "4.0.2"

@@ -1,76 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import { ObjectHome } from '.';
 
-import {
-  Grid, Column, MediaObject, Icon
-} from '../..';
-
-const RecordHome = (props) => {
-  const {
-    className, detailItems = [], headerButtons, icon, recordType, title, ...rest
-  } = props;
-
-  const iconRendered = <Icon sprite={icon.sprite} icon={icon.icon} />;
-  let detailRow;
-
-  if ((detailItems !== null) && (detailItems.length > 0)) {
-    const titleClasses = [
-      'slds-text-title',
-      'slds-truncate',
-      'slds-m-bottom_xx-small'
-    ];
-
-    const detailItemsRendered = detailItems.map((item, index) =>
-      // eslint-disable-next-line
-      <li className="slds-page-header__detail-block" key={`${item.title}-${index}`}>
-        <p className={cx(titleClasses)}>{item.title}</p>
-        <p className="slds-text-body_regular slds-truncate">{item.content}</p>
-      </li>);
-    detailRow = (
-      <ul className="slds-grid slds-page-header__detail-row">{detailItemsRendered}</ul>
-    );
-  } else {
-    detailRow = '';
-  }
-
-  const sldsClasses = [
-    'slds-page-header',
-    className
-  ];
-
-  const pageHeaderTitleClasses = [
-    'slds-page-header__title',
-    'slds-m-right_small',
-    'slds-truncate',
-    'slds-align-middle',
-  ];
-
-  return (
-    <div {...rest} className={cx(sldsClasses)} role="banner">
-      <Grid>
-        <Column className="slds-has-flexi-truncate">
-          <MediaObject
-            center
-            figureLeft={iconRendered}
-            className="slds-grow slds-no-space"
-          >
-            <p className="slds-text-title_caps">{recordType}</p>
-            <h1 className={cx(pageHeaderTitleClasses)} title={title}>
-              {title}
-            </h1>
-          </MediaObject>
-        </Column>
-        <Column className="slds-no-flex slds-grid slds-align-bottom">{headerButtons}</Column>
-      </Grid>
-      {detailRow}
+const RecordHome = ({
+  detailItems,
+  headerButtons,
+  icon,
+  recordType,
+  title,
+  ...rest
+}) => (
+  <ObjectHome
+    {...rest}
+    icon={icon}
+    recordType={recordType}
+    title={title}
+    topButtons={headerButtons}
+    bottomButtons={null}
+    titleMenu={null}
+  >
+    <div className="slds-page-header__row slds-page-header__row_gutters">
+      <div className="slds-page-header__col-details">
+        {detailItems.length > 0 && (
+          <ul className="slds-grid slds-page-header__detail-row">
+            {detailItems.map(({ title: itemTitle, content: itemContent }, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <li className="slds-page-header__detail-block" key={`${itemTitle}-${index}`}>
+                <div className="slds-text-title slds-truncate" title={itemTitle}>{itemTitle}</div>
+                <div className="slds-truncate" title={itemContent}>{itemContent}</div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
-  );
-};
+  </ObjectHome>
+);
+
 
 RecordHome.defaultProps = {
   className: null,
-  detailItems: null,
+  detailItems: [],
   headerButtons: null
 };
 

@@ -33,6 +33,9 @@ const ComboboxDropdownListItem = (props) => {
     selected,
   } = props;
 
+  const iconEl = renderIcon(icon, selected);
+  const isIconOption = iconEl || (icon && !selected);
+
   const sldsClasses = [
     'slds-listbox__item',
     { [className]: !isHeader },
@@ -40,7 +43,8 @@ const ComboboxDropdownListItem = (props) => {
 
   const itemClasses = [
     'slds-listbox__option',
-    'slds-listbox__option_plain',
+    { 'slds-listbox__option_plain': !isIconOption },
+    { 'slds-listbox__option_icon': isIconOption },
     { 'slds-is-selected': selected },
   ];
 
@@ -49,7 +53,7 @@ const ComboboxDropdownListItem = (props) => {
       <MediaObject
         center
         className={cx(itemClasses)}
-        figureLeft={renderIcon(icon, selected)}
+        figureLeft={iconEl}
         id={id}
         onClick={isHeader ? undefined : onClick}
         role={isHeader ? 'presentation' : 'option'}

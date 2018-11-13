@@ -22,29 +22,30 @@ const stories = storiesOf('Form', module);
 stories
   .add('Input', () => (
     <Input
-      id="input-1"
-      bare={boolean('Bare', false)}
-      disabled={boolean('Disabled', false) || undefined}
-      error={text('Error', '') || undefined}
-      errorIcon={boolean('ErrorIcon', false) || undefined}
-      hideLabel={boolean('Hide Label', false) || undefined}
-      iconLeft={getUtilityIcons('Icon left') || undefined}
-      iconRight={getUtilityIcons('Icon right') || undefined}
-      iconRightOnClick={action('clicked right icon')}
       label={text('Label', 'default input')}
-      onChange={action('changed input')}
-      onFocus={action('focussed')}
-      onKeyPress={action('key pressed')}
       placeholder={text('Placeholder', 'Placeholder')}
-      readOnly={boolean('Read Only', false) || undefined}
-      role={text('Role', 'input role')}
-      required={boolean('Required', false) || undefined}
-      showSpinner={boolean('Show Spinner', false) || undefined}
+      value={text('Value', '') || undefined}
       type={select('Type', [
         'text', 'password', 'datetime', 'datetime-local', 'date', 'month',
         'time', 'week', 'number', 'email', 'url', 'search', 'tel', 'color'
       ], 'text')}
-      value={text('Value', '') || undefined}
+      bare={boolean('Bare', false)}
+      disabled={boolean('Disabled', false) || undefined}
+      hideLabel={boolean('Hide Label', false) || undefined}
+      isStatic={boolean('Static', false) || undefined}
+      readOnly={boolean('Read Only', false) || undefined}
+      required={boolean('Required', false) || undefined}
+      showSpinner={boolean('Show Spinner', false) || undefined}
+      error={text('Error', '') || undefined}
+      errorIcon={boolean('ErrorIcon', false) || undefined}
+      iconLeft={getUtilityIcons('Icon left') || undefined}
+      iconRight={getUtilityIcons('Icon right') || undefined}
+      iconRightOnClick={action('clicked right icon')}
+      role={text('Role', 'input role')}
+      onChange={action('changed input')}
+      onFocus={action('focussed')}
+      onKeyPress={action('key pressed')}
+      id="input-1"
     />
   ))
   .add('Textarea', () => (

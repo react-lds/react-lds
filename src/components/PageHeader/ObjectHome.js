@@ -1,60 +1,69 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import omit from 'lodash-es/omit';
 
 import {
   ClickOutside,
-  Column,
-  Grid,
   ControlledMenu,
   IconButton
 } from '../..';
-
-// https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
-const propTypes = {
-  /**
-   * bottom Buttons or ButtonGroup(s)
-   */
-  bottomButtons: PropTypes.node,
-  /**
-   * class name
-   */
-  className: PropTypes.string,
-  /**
-   * info that is displayed below the title
-   */
-  info: PropTypes.string,
-  /**
-   * Whether the menu closes automatically on an outside click
-   */
-  closeOnClickOutside: PropTypes.bool,
-  /**
-   * record type header above the title
-   */
-  recordType: PropTypes.string.isRequired,
-  /**
-   * title
-   */
-  title: PropTypes.string.isRequired,
-  /**
-   * dropdown header menu that also get's triggered when a user clicks on the
-   * title headline. Must be one or more instances of MenuItem/MenuSubHeader
-   */
-  titleMenu: PropTypes.node,
-  /**
-   * top Buttons or ButtonGroup(s)
-   */
-  topButtons: PropTypes.node,
-};
+import { MediaObject } from '../MediaObject';
+import { Icon } from '../Icon';
 
 class ObjectHome extends Component {
-  static propTypes = propTypes;
+  static propTypes = {
+    /**
+     * bottom Buttons or ButtonGroup(s)
+     */
+    bottomButtons: PropTypes.node,
+    /**
+     * Additional PageHeader rows
+     */
+    children: PropTypes.node,
+    /**
+     * class name
+     */
+    className: PropTypes.string,
+    /**
+     * Whether the menu closes automatically on an outside click
+     */
+    closeOnClickOutside: PropTypes.bool,
+    /**
+     * icon and sprite
+     */
+    icon: PropTypes.shape({
+      sprite: PropTypes.string.isRequired,
+      icon: PropTypes.string.isRequired,
+    }),
+    /**
+     * info that is displayed below the title
+     */
+    info: PropTypes.string,
+    /**
+     * record type header above the title
+     */
+    recordType: PropTypes.string.isRequired,
+    /**
+     * title
+     */
+    title: PropTypes.string.isRequired,
+    /**
+     * dropdown header menu that also get's triggered when a user clicks on the
+     * title headline. Must be one or more instances of MenuItem/MenuSubHeader
+     */
+    titleMenu: PropTypes.node,
+    /**
+     * top Buttons or ButtonGroup(s)
+     */
+    topButtons: PropTypes.node,
+  };
 
   static defaultProps = {
     bottomButtons: null,
+    children: null,
     className: null,
     closeOnClickOutside: false,
+    icon: null,
     info: null,
     titleMenu: null,
     topButtons: null,
@@ -78,74 +87,103 @@ class ObjectHome extends Component {
   render() {
     const {
       bottomButtons,
+      children,
       className,
       closeOnClickOutside,
+      icon,
       info,
       recordType,
       title,
       titleMenu,
       topButtons,
+      ...rest
     } = this.props;
     const { menuIsOpen } = this.state;
 
-    const rest = omit(this.props, Object.keys(propTypes));
-
-    const sldsClasses = [
-      'slds-page-header',
-      className,
-    ];
+    const sldsClasses = ['slds-page-header', className];
 
     const titleClasses = [
-      { 'slds-type-focus': !!titleMenu },
-      'slds-no-space'
+      'slds-page-header__title',
+      'slds-truncate',
+      { 'slds-text-link_faux': titleMenu },
     ];
 
-    const condition = closeOnClickOutside && menuIsOpen;
-
     return (
-      <div {...rest} className={cx(sldsClasses)} role="banner">
-        <Grid>
-          <Column className="slds-has-flexi-truncate">
-            <p className="slds-text-title_caps">{recordType}</p>
-            <Grid>
-              <Grid className={cx(titleClasses)}>
-                <h1
-                  onClick={titleMenu && this.toggleMenu}
-                  className="slds-page-header__title slds-truncate"
-                  title={title}
-                >
-                  {title}
-                </h1>
+      <div {...rest} className={cx(sldsClasses)}>
+        <div className="slds-page-header__row">
+          <div className="slds-page-header__col-title">
+            <MediaObject
+              figureLeft={icon ? (
+                <Icon
+                  sprite={icon.sprite}
+                  icon={icon.icon}
+                  svgClassName="slds-page-header__icon"
+                />
+              ) : null}
+            >
+              <div className="slds-page-header__name">
+                <div className="slds-page-header__name-title">
+                  <h1>
+                    <span>{recordType}</span>
+                    <span
+                      className={cx(titleClasses)}
+                      onClick={titleMenu && this.toggleMenu}
+                      title={title}
+                    >
+                      {title}
+                    </span>
+                  </h1>
+                </div>
                 {titleMenu && (
-                  <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
+                  <ClickOutside
+                    className="slds-page-header__name-switcher"
+                    onClickOutside={this.onClickOutside}
+                    condition={closeOnClickOutside && menuIsOpen}
+                  >
                     <ControlledMenu
                       button={(
                         <IconButton
                           container
                           icon="down"
+                          size="small"
                           sprite="utility"
                           onClick={this.toggleMenu}
                         />
-)}
-                      isOpen={menuIsOpen}
+                      )}
+                      isOpen={this.state.menuIsOpen}
                     >
                       {titleMenu}
                     </ControlledMenu>
                   </ClickOutside>
                 )}
-              </Grid>
-            </Grid>
-          </Column>
-          <Column className="slds-no-flex slds-grid slds-align-top">
-            {topButtons}
-          </Column>
-        </Grid>
-        <Grid>
-          <Column className="slds-align-bottom">
-            <p className="slds-page-header__info slds-text-body_small">{info}</p>
-          </Column>
-          <Column className="slds-align-bottom slds-no-flex slds-grid">{bottomButtons}</Column>
-        </Grid>
+              </div>
+            </MediaObject>
+          </div>
+          {topButtons && (
+            <div className="slds-page-header__col-actions">
+              <div className="slds-page-header__controls">
+                <div className="slds-page-header__control">
+                  {topButtons}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        {(info || bottomButtons) && (
+          <div className="slds-page-header__row">
+            <div className="slds-page-header__col-meta">
+              {info && (
+                <p className="slds-page-header__meta-text">{info}</p>
+              )}
+            </div>
+            <div className="slds-page-header__col-controls">
+              {bottomButtons && (
+                <div className="slds-page-header__controls">{bottomButtons}</div>
+              )}
+            </div>
+          </div>
+        )}
+        {children}
       </div>
     );
   }

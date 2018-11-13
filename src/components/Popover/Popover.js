@@ -47,13 +47,21 @@ const propTypes = {
   nubbin: PropTypes.oneOf([
     'left',
     'left-top',
+    'left-top-corner',
     'left-bottom',
+    'left-bottom-corner',
     'top-left',
+    'top-left-corner',
     'top-right',
+    'top-right-corner',
     'right-top',
+    'right-top-corner',
     'right-bottom',
+    'right-bottom-corner',
     'bottom-left',
+    'bottom-left-corner',
     'bottom-right',
+    'bottom-right-corner',
   ]),
   /**
    * Optional custom Header theme. Themes: warning, error, success, info

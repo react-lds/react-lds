@@ -107,7 +107,7 @@ describe('<Accordion />', () => {
       .first()
       .find('h3')
       .first()
-      .hasClass('slds-text-heading_small slds-accordion__summary-heading')).toBeTruthy();
+      .hasClass('slds-accordion__summary-heading')).toBeTruthy();
   });
 
   it('applies className and rest-properties to Accordion', () => {

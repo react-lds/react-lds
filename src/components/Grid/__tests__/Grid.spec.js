@@ -35,6 +35,26 @@ describe('<Grid />', () => {
     expect(mounted.find('.slds-grid').hasClass('slds-wrap')).toBeTruthy();
   });
 
+  it('applies gutters when set to true', () => {
+    mounted.setProps({ gutters: true });
+    expect(mounted.find('.slds-grid').hasClass('slds-gutters')).toBeTruthy();
+  });
+
+  it('applies gutters when set to size', () => {
+    mounted.setProps({ gutters: 'small' });
+    expect(mounted.find('.slds-grid').hasClass('slds-gutters_small')).toBeTruthy();
+  });
+
+  it('applies direct gutters when set to true', () => {
+    mounted.setProps({ gutters: true, guttersDirect: true });
+    expect(mounted.find('.slds-grid').hasClass('slds-gutters_direct')).toBeTruthy();
+  });
+
+  it('applies direct gutters when set to string', () => {
+    mounted.setProps({ gutters: 'small', guttersDirect: true });
+    expect(mounted.find('.slds-grid').hasClass('slds-gutters_direct-small')).toBeTruthy();
+  });
+
   it('renders as arbitrary DOM node', () => {
     mounted.setProps({ as: 'footer' });
     expect(mounted.find('footer.slds-grid').exists()).toBeTruthy();

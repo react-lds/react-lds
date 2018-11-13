@@ -8,6 +8,7 @@ class Tabs extends Component {
     onChangeTab: null,
     renderInactiveTabs: false,
     scoped: false,
+    size: null,
     styled: false,
   }
 
@@ -33,6 +34,10 @@ class Tabs extends Component {
      * Renders scoped variant
      */
     scoped: PropTypes.bool,
+    /**
+     * Size modifier
+     */
+    size: PropTypes.oneOf(['medium', 'large']),
     /**
      * Renders Card-like variant
      */

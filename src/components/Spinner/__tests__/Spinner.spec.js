@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import Spinner from '../Spinner';
 import SpinnerContainer from '../SpinnerContainer';
@@ -55,5 +55,11 @@ describe('<Spinner />', () => {
     const mounted = shallow(<SpinnerContainer className="foo" data-test="bar"><Spinner /></SpinnerContainer>);
     expect(mounted.find('.slds-spinner_container').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-spinner_container').prop('data-test')).toEqual('bar');
+  });
+
+  it('renders in SpinnerContainer when \'container\' prop is used on Spinner', () => {
+    const mounted = mount(<Spinner container />);
+    expect(mounted.find('.slds-spinner_container').length).toBe(1);
+    expect(mounted.find('.slds-spinner_container').children().length).toBe(1);
   });
 });

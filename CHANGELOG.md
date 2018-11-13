@@ -1,5 +1,40 @@
 # Changelog
 
+## 8.0.0
+
+* Added: `Button` now supports new flavors `text-destructive` & `outline-brand`
+* Added: `ButtonGroup` now supports rendering as a `row`
+* Added: `DescriptiveProgressBar` allows adding more information to a `ProgressBar`
+* Added: `File` now supports rendering a loading `Spinner`
+* Added: `Grid` now allows to only apply `gutters` to direct children when `guttersDirect` is set
+* Added: `Input` now supports a `static` variant
+* Added: `ProgressBar` now supports rendering a `vertical` variant
+* Added: `ProgressRing` now supports the new `active-step` status which renders a blue ring
+* Added: `ProgressRing` now supports rendering a version that fills rather than drains
+* Added: `Spinner` now supports rendering `inline`
+* Added: `Spinner` can now wrap a `SpinnerContainer` when `container` is set to `true`
+* Added: `Tabs` now supports setting `size`
+* Added: `UserAvatar` and `EntityAvatar` supersede `Avatar` (which is now deprecated)
+* Added: `DataTable` now allows hiding the table header
+* Changed: Updated various components to accomodate changed LDS specs
+* Changed: `ProgressRing` renders as `fill` variant per default. Previous default was `drain`
+* Changed: `PageHeaders` have significantly changed in their internal structure
+
+## 7.2.6
+
+* Fixed: `DataTable`: Added horizontal scrolling for table with fixed header
+* Changed: `ModalContent`: Added option to collapse padding
+* Changed: `MenuSubHeader`: Allow passing elements as children
+* Changed: Allow grid components to have arbitrary DOM elements as containers
+* Changed: `MediaObject`: Allow passing figureRenderers
+* Changed: `ComboboxDropdown`: Added `onInputLabelClick` handler
+* Changed: `ComboboxDropdown`: Allow to be empty
+* Changed: `ComboboxDropdownItems`: Added back `alwaysDisplay` option to icons
+* Changed: `ComboboxDropdownItems`: Allow React elements as children
+* Changed: Return early if `ComboboxDropdownList` does not have children
+* Changed: Added forwarding refs to Input, Button and Listbox children
+* Changed: Upgraded enzyme, jest & moment
+
 ## 7.2.5
 
 * Changed: `DataTable`: Added support for fixed header row

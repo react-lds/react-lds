@@ -280,9 +280,12 @@ export class DatepickerRaw extends Component {
     const { yearSpan } = this.props;
     const { viewedDate } = this.state;
 
-    const prevYears = moment(viewedDate).subtract(yearSpan, 'years');
-    const nextYears = moment(viewedDate).add(yearSpan, 'years');
+    const yearDuration = moment.duration({ years: yearSpan });
+
+    const prevYears = moment(viewedDate).subtract(yearDuration);
+    const nextYears = moment(viewedDate).add(yearDuration);
     const yearsRange = moment.range(prevYears, nextYears);
+
     return Array.from(yearsRange.by('years')).map((momentYear) => {
       const year = moment(momentYear).year();
       return <option key={year} value={year}>{year}</option>;

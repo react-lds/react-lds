@@ -12,7 +12,7 @@ stories
       icon={<Icon sprite="standard" icon="contact" />}
       title={text('Title', 'Base Card')}
       headerRight={<Button title="New" onClick={action('click')}>New</Button>}
-      footer="Footer"
+      footer={(<a className="slds-card__footer-action">View All</a>)}
     >
       Body would be here
     </Card>

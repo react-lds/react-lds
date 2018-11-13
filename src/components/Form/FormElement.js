@@ -4,13 +4,20 @@ import cx from 'classnames';
 
 const FormElement = (props) => {
   const {
-    children, className, error, required, fieldset, ...rest
+    children,
+    className,
+    error,
+    fieldset,
+    isStatic,
+    required,
+    ...rest
   } = props;
 
   const sldsClasses = [
     'slds-form-element',
     { 'slds-has-error': !!error },
     { 'slds-is-required': required },
+    { 'slds-form-element_readonly': isStatic },
     className
   ];
 
@@ -23,6 +30,7 @@ FormElement.defaultProps = {
   className: null,
   error: null,
   fieldset: false,
+  isStatic: false,
   required: false,
 };
 
@@ -43,6 +51,10 @@ FormElement.propTypes = {
    * renders as a fieldset instead
    */
   fieldset: PropTypes.bool,
+  /**
+   * Renders in a static, "view" mode
+   */
+  isStatic: PropTypes.bool,
   /**
    * adds required-attribute to the form element
    */

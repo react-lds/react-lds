@@ -1,6 +1,6 @@
 {
   "name": "react-lds",
-  "version": "7.2.5",
+  "version": "7.2.6",
   "description": "Salesforce Lightning Design System React Components",
   "keywords": [
     "react",
@@ -64,7 +64,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
-    "@salesforce-ux/design-system": "2.5.2",
+    "@salesforce-ux/design-system": "~2.7.4",
     "@storybook/addon-actions": "^4.0.2",
     "@storybook/addon-info": "^4.0.2",
     "@storybook/addon-knobs": "^4.0.2",

@@ -16,7 +16,7 @@ const Table = (props) => {
   const sldsClasses = [
     'slds-table',
     'slds-table_cell-buffer',
-    { 'slds-table--header-fixed': fixedHeader },
+    { 'header-fixed': fixedHeader },
     className,
     applyDecorators(flavor, 'table'),
     applyDecorators(variation),
@@ -58,6 +58,7 @@ export const propTypes = {
     'col-bordered',
     'striped',
     'fixed-layout',
+    'header-hidden',
   ]),
 };
 

@@ -88,7 +88,7 @@ Card.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * footer in the bottom right corner
+   * footer, rendered on the bottom of the card
    */
   footer: PropTypes.node,
   /**

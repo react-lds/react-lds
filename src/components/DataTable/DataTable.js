@@ -8,6 +8,8 @@ import { propTypes as tablePropTypes } from '../Table/Table';
 import defaultRowRenderer from './defaultRowRenderer';
 
 class DataTable extends Component {
+  static FIXED_STYLE = { tableLayout: 'fixed', width: 'auto' };
+
   constructor(props) {
     super(props);
 
@@ -170,13 +172,15 @@ class DataTable extends Component {
   }
 
   renderHead() {
-    const { fixedHeader } = this.props;
+    const { fixedHeader, variation } = this.props;
     const {
       columns, id, sortBy, sortDirection
     } = this.state;
 
+    const hasHiddenHeader = !fixedHeader && variation.includes('header-hidden');
+
     return (
-      <thead>
+      <thead className={hasHiddenHeader ? 'slds-assistive-text' : null}>
         <tr>
           {columns.map(({ headRenderer, ...restProps }) => headRenderer({
             allSelected: this.areAllRowsSelected(),
@@ -224,7 +228,7 @@ class DataTable extends Component {
       'sortDirection',
     ]);
     const table = (
-      <Table {...rest}>
+      <Table {...rest} style={fixedHeader ? DataTable.FIXED_STYLE : null}>
         {this.renderHead()}
         {this.renderBody()}
       </Table>
@@ -232,8 +236,8 @@ class DataTable extends Component {
 
     if (fixedHeader) {
       return (
-        <div className="slds-table--header-fixed_container slds-grid slds-grid_vertical">
-          <div className="slds-scrollable_y">
+        <div className="slds-grid slds-grid_vertical slds-scrollable">
+          <div>
             {table}
           </div>
         </div>

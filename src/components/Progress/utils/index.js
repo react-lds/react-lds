@@ -1,8 +1,12 @@
 
-export function clamp(num, min = 0, max = 100) {
+function clamp(num, min = 0, max = 100) {
   return Math.min(Math.max(num, min), max);
 }
 
-export function fraction(num, min = 0, max = 100) {
+function fraction(num, min = 0, max = 100) {
   return ((num - min) / (max - min));
+}
+
+export function getClampedProgress(progress, min, max) {
+  return fraction(clamp(progress, min, max), min, max) * 100;
 }

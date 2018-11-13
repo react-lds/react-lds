@@ -29,7 +29,8 @@ const File = (props) => {
   const sldsClasses = [
     'slds-file',
     'slds-file_card',
-    { 'slds-file_center-icon': isLoading && hideTitle },
+    { 'slds-has-title': !hideTitle },
+    { 'slds-file_loading': isLoading },
   ];
 
   const mediaClasses = [

@@ -18,6 +18,7 @@ const Input = React.forwardRef((props, ref) => {
     iconLeft,
     iconRight,
     id,
+    isStatic,
     label,
     placeholder,
     readOnly,
@@ -31,33 +32,38 @@ const Input = React.forwardRef((props, ref) => {
   const hasIconRight = !!iconRight || !!showSpinner;
 
   return (
-    <FormElement required={required} error={error}>
+    <FormElement isStatic={isStatic} required={required} error={error}>
       <FormElementLabel
         hideLabel={hideLabel}
         id={id}
         label={label}
+        readOnly={isStatic}
         required={required}
       />
       <FormElementControl
         hasIconLeft={hasIconLeft}
         hasIconRight={hasIconRight}
       >
-        <InputRaw
-          error={error}
-          errorIcon={errorIcon}
-          hideErrorMessage={hideErrorMessage}
-          iconLeft={iconLeft}
-          iconRight={iconRight}
-          id={id}
-          label={label}
-          placeholder={placeholder}
-          readOnly={readOnly}
-          ref={ref}
-          required={required}
-          showSpinner={showSpinner}
-          value={value}
-          {...rest}
-        />
+        {!isStatic ? (
+          <InputRaw
+            error={error}
+            errorIcon={errorIcon}
+            hideErrorMessage={hideErrorMessage}
+            iconLeft={iconLeft}
+            iconRight={iconRight}
+            id={id}
+            label={label}
+            placeholder={placeholder}
+            readOnly={readOnly}
+            ref={ref}
+            required={required}
+            showSpinner={showSpinner}
+            value={value}
+            {...rest}
+          />
+        ) : (
+          <div className="slds-form-element__static">{value}</div>
+        )}
       </FormElementControl>
       {!hideErrorMessage && <FormElementError error={error} id={id} />}
     </FormElement>
@@ -137,6 +143,10 @@ Input.propTypes = {
    */
   id: PropTypes.string.isRequired,
   /**
+   * Renders in a static, "view" mode
+   */
+  isStatic: PropTypes.bool,
+  /**
    * label for the input
    */
   label: PropTypes.oneOfType([
@@ -160,7 +170,7 @@ Input.propTypes = {
    */
   placeholder: PropTypes.string,
   /**
-   * makes Input readOnly
+   * Renders a read-only input element
    */
   readOnly: PropTypes.bool,
   /**

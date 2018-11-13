@@ -20,6 +20,11 @@ describe('<ProgressRing />', () => {
     expect(cmp.find(Icon).prop('icon')).toEqual('error');
   });
 
+  it('renders necessary class in active-step status', () => {
+    const cmp = getCmp({ status: 'active-step' });
+    expect(cmp.find('.slds-progress-ring').hasClass('slds-progress-ring_active-step'));
+  });
+
   it('autocompletes by default', () => {
     const cmp = getCmp({ progress: 100 });
     expect(cmp.find('.slds-progress-ring').hasClass('slds-progress-ring_complete')).toBeTruthy();
@@ -59,5 +64,10 @@ describe('<ProgressRing />', () => {
   it('supports setting min & max', () => {
     const cmp = getCmp({ progress: 100, min: -200, max: 200 });
     expect(cmp.find('.slds-progress-ring__progress').prop('aria-valuenow')).toEqual(75);
+  });
+
+  it('renders in large size', () => {
+    const cmp = getCmp({ size: 'large' });
+    expect(cmp.find('.slds-progress-ring').hasClass('slds-progress-ring_large'));
   });
 });

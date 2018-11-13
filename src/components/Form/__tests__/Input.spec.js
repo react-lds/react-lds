@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 
 import { getUniqueHash } from '../../../utils';
 import Input from '../Input';
+import { FormElementLabel } from '..';
 
 describe('<Input />', () => {
   let props = {};
@@ -115,6 +116,18 @@ describe('<Input />', () => {
   it('renders disabled', () => {
     mounted.setProps({ disabled: true });
     expect(mounted.find('input').props().disabled).toBeTruthy();
+  });
+
+  it('renders required', () => {
+    mounted.setProps({ required: true });
+    expect(mounted.find('input').props().required).toBeTruthy();
+  });
+
+  it('renders as static output', () => {
+    mounted.setProps({ isStatic: true });
+    expect(mounted.find('input').exists()).toBeFalsy();
+    expect(mounted.find('.slds-form-element__static').exists()).toBeTruthy();
+    expect(mounted.find(FormElementLabel).prop('readOnly')).toBeTruthy();
   });
 
   it('renders errorIcon if set', () => {

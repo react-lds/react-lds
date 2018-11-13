@@ -10,7 +10,7 @@ const Row = (props) => {
   const variationClasses = Array.isArray(variation) ? variation.map(f => `slds-${f}`) : `slds-${variation}`;
 
   const sldsClasses = [
-    { 'slds-text-title_caps': !!head },
+    { 'slds-text-title_caps': head },
     variationClasses,
     className
   ];

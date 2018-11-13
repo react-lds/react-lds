@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { SpinnerContainer } from '.';
 
 const Spinner = (props) => {
   const {
     assistiveLabel,
     className,
+    container,
     delayed,
     flavor,
+    inline,
     size,
     ...rest
   } = props;
@@ -19,24 +22,30 @@ const Spinner = (props) => {
     { [`${baseClass}_${size}`]: !!size },
     { [`${baseClass}_${flavor}`]: !!flavor },
     { [`${baseClass}_delayed`]: !!delayed },
-    className
+    { [`${baseClass}_inline`]: !!inline },
+    className,
   ];
 
-  return (
+  const spinner = (
     <div {...rest} role="status" className={cx(sldsClasses)}>
       <span className="slds-assistive-text">{assistiveLabel}</span>
       <div className="slds-spinner__dot-a" />
       <div className="slds-spinner__dot-b" />
     </div>
   );
+
+  if (container) return <SpinnerContainer>{spinner}</SpinnerContainer>;
+  return spinner;
 };
 
 Spinner.defaultProps = {
   assistiveLabel: 'Loading',
   className: null,
+  container: false,
   delayed: false,
   flavor: null,
-  size: 'medium'
+  inline: false,
+  size: 'medium',
 };
 
 Spinner.propTypes = {
@@ -49,6 +58,10 @@ Spinner.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * convenience prop to wrap Spinner in SpinnerContainer
+   */
+  container: PropTypes.bool,
+  /**
    * Adds a 300ms start delay
    */
   delayed: PropTypes.bool,
@@ -56,6 +69,10 @@ Spinner.propTypes = {
    * Flavor. Can be either 'brand' or 'inverse'
    */
   flavor: PropTypes.oneOf(['brand', 'inverse']),
+  /**
+   * inline variation
+   */
+  inline: PropTypes.bool,
   /**
    * spinner sizes: xx-small, x-small, small, medium, large
    */

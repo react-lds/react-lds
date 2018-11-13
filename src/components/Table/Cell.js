@@ -98,9 +98,10 @@ const Cell = (props) => {
   };
 
   const wrapChildren = (content) => {
-    if (!!sortable && isHeader) {
-      // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      return <a className="slds-th__action slds-text-link_reset">{content}</a>;
+    if (isHeader) {
+      return sortable
+        ? <a className="slds-th__action slds-text-link_reset">{content}</a>
+        : <span>{content}</span>;
     }
 
     return content;
@@ -123,22 +124,28 @@ const Cell = (props) => {
   ];
 
   const wrappedChildren = wrapChildren(childArray);
-  const wrapperClassName = cx([
-    { 'slds-truncate': truncate },
-    { 'slds-cell-fixed': fixed },
-  ]);
+  const wrapperClassName = cx({ 'slds-truncate': truncate });
+  const isFixedHeader = isHeader && fixed;
 
   return (
     <CellElement
       {...rest}
       className={cx(sldsClasses)}
       scope={cellScope}
+      style={isFixedHeader ? Cell.FIXED_STYLE : null}
     >
       <div className={wrapperClassName} title={cellTitle}>
         {wrappedChildren}
       </div>
     </CellElement>
   );
+};
+
+Cell.FIXED_STYLE = {
+  position: 'sticky',
+  top: 0,
+  zIndex: 1,
+  borderBottom: '1px solid rgb(221, 219, 218)',
 };
 
 Cell.defaultProps = {
