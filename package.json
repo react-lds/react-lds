@@ -13,8 +13,8 @@
   "sideEffects": false,
   "scripts": {
     "build-storybook": "yarn run prestorybook && rm -rf react-lds && BABEL_ENV=docs build-storybook -s ./public -o ./react-lds",
-    "build:commonjs": "NODE_ENV=commonjs babel ./src --ignore spec.js --out-dir ./common",
-    "build:es": "NODE_ENV=es babel ./src --ignore spec.js --out-dir ./es",
+    "build:commonjs": "NODE_ENV=commonjs babel ./src --ignore './src/**/__tests__/**' --out-dir ./common",
+    "build:es": "NODE_ENV=es babel ./src --ignore './src/**/__tests__/**' --out-dir ./es",
     "build:clean": "rm -rf common && rm -rf es",
     "build": "yarn build:clean && yarn build:commonjs && yarn build:es",
     "lint": "eslint src",
@@ -83,7 +83,8 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
-    "jest-cli": "^23.6.0"
+    "jest-cli": "^23.6.0",
+    "webpack": "^4.25.1"
   },
   "jest": {
     "transform": {
