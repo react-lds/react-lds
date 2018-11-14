@@ -12,7 +12,7 @@ stories
       inlineListbox={boolean('Inline listbox variant', false)}
       readOnly={boolean('Read-only variant', false)}
       error={text('Error', '') || undefined}
-      hideDropdown={boolean('Hide dropdown list', false)}
+      noSearch={boolean('Hide dropdown list', false)}
       height={select('Height', [undefined, 5, 7, 10]) || undefined}
       id="picklist-1"
       disabled={boolean('Disabled', false) || undefined}
@@ -41,7 +41,7 @@ stories
       inlineListbox={boolean('Inline listbox variant', false)}
       readOnly={boolean('Read-only variant', false)}
       error={text('Error', '') || undefined}
-      hideDropdown={boolean('Hide dropdown list', false)}
+      noSearch={boolean('Hide dropdown list', false)}
       height={select('Height', [undefined, 5, 7, 10]) || undefined}
       id="picklist-1"
       isDisabled={boolean('Disabled', false) || undefined}

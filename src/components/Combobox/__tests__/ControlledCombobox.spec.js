@@ -99,7 +99,7 @@ describe('</ControlledCombobox />', () => {
   });
 
   it('hides the dropdown list and icon button', () => {
-    mounted.setProps({ hideDropdown: true });
+    mounted.setProps({ noSearch: true });
     const picklist = mounted.find('div.slds-combobox');
     picklist.find('input').simulate('click');
     expect(mounted.find('ul.slds-dropdown')).toHaveLength(0);

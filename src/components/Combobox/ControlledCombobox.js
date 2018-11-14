@@ -45,10 +45,6 @@ export const propTypes = {
    */
   disabled: PropTypes.bool,
   /**
-   * whether the dropdown list and icon are visible
-   */
-  hideDropdown: PropTypes.bool,
-  /**
    * whether the error message is visible
    */
   hideErrorMessage: PropTypes.bool,
@@ -80,6 +76,10 @@ export const propTypes = {
    * label for multiple selected items
    */
   labelMultiselect: PropTypes.string,
+  /**
+   * whether the dropdown list and icon are visible
+   */
+  noSearch: PropTypes.bool,
   /**
    * called when adding a custom item in case the combobox isnt in readOnly mode
    */
@@ -125,7 +125,6 @@ export default class ControlledCombobox extends Component {
     disabled: false,
     error: null,
     height: 7,
-    hideDropdown: false,
     hideErrorMessage: false,
     hideLabel: false,
     inlineListbox: false,
@@ -133,6 +132,7 @@ export default class ControlledCombobox extends Component {
     labelInput: '',
     labelMultiselect: '',
     multiEntity: false,
+    noSearch: false,
     onAdd: null,
     onChange: null,
     readOnly: false,
@@ -176,9 +176,9 @@ export default class ControlledCombobox extends Component {
   renderInput(selectedItems) {
     const {
       disabled,
-      hideDropdown,
       id,
       labelMultiselect,
+      noSearch,
       onChange,
       placeholder,
       readOnly,
@@ -212,7 +212,7 @@ export default class ControlledCombobox extends Component {
     let iconRight = null;
     let iconRightOnClick;
 
-    if (!hideDropdown) {
+    if (!noSearch) {
       iconRight = readOnly ? 'down' : 'search';
       iconRightOnClick = this.onToggle;
     }
@@ -283,12 +283,12 @@ export default class ControlledCombobox extends Component {
       closeOnClickOutside,
       error,
       height,
-      hideDropdown,
       hideErrorMessage,
       hideLabel,
       id,
       inlineListbox,
       labelInput,
+      noSearch,
       readOnly,
       required,
       size,
@@ -320,7 +320,7 @@ export default class ControlledCombobox extends Component {
         required={required}
         size={size}
       >
-        {!hideDropdown &&
+        {!noSearch &&
           <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
             <ComboboxDropdownList height={height} id={id}>
               {this.renderComboboxItems()}
