@@ -45,6 +45,10 @@ export const propTypes = {
    */
   disabled: PropTypes.bool,
   /**
+   * whether the dropdown list and icon are visible
+   */
+  hideDropdown: PropTypes.bool,
+  /**
    * whether the error message is visible
    */
   hideErrorMessage: PropTypes.bool,
@@ -121,6 +125,7 @@ export default class ControlledCombobox extends Component {
     disabled: false,
     error: null,
     height: 7,
+    hideDropdown: false,
     hideErrorMessage: false,
     hideLabel: false,
     inlineListbox: false,
@@ -171,6 +176,7 @@ export default class ControlledCombobox extends Component {
   renderInput(selectedItems) {
     const {
       disabled,
+      hideDropdown,
       id,
       labelMultiselect,
       onChange,
@@ -203,7 +209,13 @@ export default class ControlledCombobox extends Component {
       { 'slds-combobox__input-value': !!label },
     );
 
-    const iconRight = readOnly ? 'down' : 'search';
+    let iconRight = null;
+    let iconRightOnClick;
+
+    if (!hideDropdown) {
+      iconRight = readOnly ? 'down' : 'search';
+      iconRightOnClick = this.onToggle;
+    }
 
     return (
       <InputRaw
@@ -212,7 +224,7 @@ export default class ControlledCombobox extends Component {
         className={classNames}
         disabled={disabled}
         iconRight={iconRight}
-        iconRightOnClick={this.onToggle}
+        iconRightOnClick={iconRightOnClick}
         id={`combobox-${id}`}
         onChange={onChange}
         onClick={this.onToggle}
@@ -271,6 +283,7 @@ export default class ControlledCombobox extends Component {
       closeOnClickOutside,
       error,
       height,
+      hideDropdown,
       hideErrorMessage,
       hideLabel,
       id,
@@ -307,11 +320,13 @@ export default class ControlledCombobox extends Component {
         required={required}
         size={size}
       >
-        <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
-          <ComboboxDropdownList height={height} id={id}>
-            {this.renderComboboxItems()}
-          </ComboboxDropdownList>
-        </ClickOutside>
+        {!hideDropdown &&
+          <ClickOutside onClickOutside={this.onClickOutside} condition={condition}>
+            <ComboboxDropdownList height={height} id={id}>
+              {this.renderComboboxItems()}
+            </ComboboxDropdownList>
+          </ClickOutside>
+        }
       </ComboboxDropdown>
     );
   }

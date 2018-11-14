@@ -97,4 +97,12 @@ describe('</ControlledCombobox />', () => {
     options.first().simulate('click');
     expect(onSelect).toHaveBeenCalledWith('1');
   });
+
+  it('hides the dropdown list and icon button', () => {
+    mounted.setProps({ hideDropdown: true });
+    const picklist = mounted.find('div.slds-combobox');
+    picklist.find('input').simulate('click');
+    expect(mounted.find('ul.slds-dropdown')).toHaveLength(0);
+    expect(mounted.find('button')).toHaveLength(0);
+  });
 });
