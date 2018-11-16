@@ -1,7 +1,10 @@
 import React from 'react';
-import { Row } from '../../';
+import { Row } from '../..';
 
-export default ({ cells, isSelected, rowId, tableId }) => { // eslint-disable-line react/prop-types
+/* eslint-disable react/prop-types */
+export default ({
+  cells, isSelected, rowId, tableId
+}) => {
   const variation = isSelected ? 'is-selected' : undefined;
 
   return (

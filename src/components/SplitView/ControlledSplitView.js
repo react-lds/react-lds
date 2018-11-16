@@ -21,6 +21,7 @@ export class ControlledSplitView extends Component {
     onClose: PropTypes.func.isRequired,
     isOpen: PropTypes.bool.isRequired,
   };
+
   static defaultProps = {
     assistiveTextOpen: '',
     assistiveTextClose: '',
@@ -29,7 +30,10 @@ export class ControlledSplitView extends Component {
     masterMinWidth: '20rem',
   };
 
-  getMasterViewId = () => `master_view_${this.props.id}`;
+  getMasterViewId = () => {
+    const { id } = this.props;
+    return `master_view_${id}`;
+  }
 
   toggle = () => {
     const { isOpen, onOpen, onClose } = this.props;

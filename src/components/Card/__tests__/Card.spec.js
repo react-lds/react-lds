@@ -24,7 +24,8 @@ describe('<Card />', () => {
     };
 
     mounted = mount(
-      <Card {...props} />, options);
+      <Card {...props} />, options
+    );
   });
 
   it('renders the icon', () => {

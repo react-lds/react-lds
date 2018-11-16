@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { SplitView } from '../';
+import { SplitView } from '..';
 
 const renderSplitView = (initialIsOpen = false) => (
   <SplitView

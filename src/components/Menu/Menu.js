@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash-es/omit';
 import ControlledMenu from './ControlledMenu';
-import { ClickOutside } from '../../';
+import { ClickOutside } from '../..';
 
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
@@ -31,7 +31,8 @@ export class MenuRaw extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { open: this.props.defaultOpen };
+    const { defaultOpen } = this.props;
+    this.state = { open: defaultOpen };
   }
 
   onClickOutside = () => this.setState({ open: false });

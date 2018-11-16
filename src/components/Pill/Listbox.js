@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const Listbox = React.forwardRef((props, ref) => {
-  const { children, className, label, ...rest } = props;
+  const {
+    children, className, label, ...rest
+  } = props;
 
   const sldsClasses = [
     'slds-listbox',
@@ -35,6 +37,8 @@ const Listbox = React.forwardRef((props, ref) => {
     </ul>
   );
 });
+
+Listbox.displayName = 'Listbox';
 
 Listbox.defaultProps = {
   className: null,

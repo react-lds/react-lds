@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const SpinnerContainer = (props) => {
-  const { className, fixed, children, ...rest } = props;
+  const {
+    className, fixed, children, ...rest
+  } = props;
 
   const sldsClasses = [
     'slds-spinner_container',

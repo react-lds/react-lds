@@ -159,7 +159,6 @@ ControlledTooltip.defaultProps = {
   portalSelector: null,
   position: 'top-start',
   renderTitle: null,
-  title: null,
 };
 
 ControlledTooltip.propTypes = {

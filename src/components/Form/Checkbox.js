@@ -6,7 +6,7 @@ import {
   FormElement,
   FormElementControl,
   FormElementError,
-} from '../../';
+} from '../..';
 
 const Checkbox = (props) => {
   const {

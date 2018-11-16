@@ -6,8 +6,8 @@ import defaultHeadRenderer from './defaultHeadRenderer';
 
 /* eslint-disable react/no-unused-prop-types */
 export const propTypes = {
-  cellRenderer: PropTypes.func.isRequired,
-  headRenderer: PropTypes.func.isRequired,
+  cellRenderer: PropTypes.func,
+  headRenderer: PropTypes.func,
   dataKey: PropTypes.string.isRequired,
   isResizable: PropTypes.bool,
   sortable: PropTypes.bool,
@@ -15,6 +15,7 @@ export const propTypes = {
 };
 // eslint-enable
 
+/* eslint-disable react/prefer-stateless-function */
 class DataTableColumn extends Component {
   static propTypes = propTypes
 

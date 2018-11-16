@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { IconButton } from '../../';
+import { IconButton } from '../..';
 
 const Pill = (props) => {
   const {

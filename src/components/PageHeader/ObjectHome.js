@@ -6,7 +6,7 @@ import {
   ClickOutside,
   ControlledMenu,
   IconButton
-} from '../../';
+} from '../..';
 import { MediaObject } from '../MediaObject';
 import { Icon } from '../Icon';
 

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const MenuSubHeader = (props) => {
-  const { children, className, divider, ...rest } = props;
+  const {
+    children, className, divider, ...rest
+  } = props;
   const sldsClasses = [
     'slds-dropdown__header',
     'slds-truncate',

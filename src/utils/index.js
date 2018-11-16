@@ -4,4 +4,6 @@ import { decoratorProp, applyDecorators } from './decoratorProp';
 
 export * from './theme';
 
-export { applyDecorators, decoratorProp, uniqueId, getUniqueHash };
+export {
+  applyDecorators, decoratorProp, uniqueId, getUniqueHash
+};

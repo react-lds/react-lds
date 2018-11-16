@@ -73,7 +73,6 @@ File.defaultProps = {
   isLoading: false,
   ratio: null,
   hideTitle: false,
-  title: null,
 };
 
 File.propTypes = {

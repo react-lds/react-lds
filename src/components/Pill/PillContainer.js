@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const PillContainer = (props) => {
-  const { bare, children, className, ...rest } = props;
+  const {
+    bare, children, className, ...rest
+  } = props;
 
   const sldsClasses = [
     'slds-pill_container',

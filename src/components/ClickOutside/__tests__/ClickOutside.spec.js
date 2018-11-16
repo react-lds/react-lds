@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import { ClickOutside } from '../';
+import { ClickOutside } from '..';
 
 const $mockApp = document.createElement('div');
 $mockApp.id = 'container';

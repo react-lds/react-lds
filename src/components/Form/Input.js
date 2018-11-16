@@ -7,7 +7,7 @@ import {
   FormElementLabel,
   FormElementError,
   InputRaw,
-} from '../../';
+} from '../..';
 
 const Input = React.forwardRef((props, ref) => {
   const {
@@ -69,6 +69,8 @@ const Input = React.forwardRef((props, ref) => {
     </FormElement>
   );
 });
+
+Input.displayName = 'Input';
 
 Input.defaultProps = {
   bare: false,

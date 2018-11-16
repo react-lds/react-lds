@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { IconSVG, MediaObject } from '../../';
+import { IconSVG, MediaObject } from '../..';
 
 const renderIcon = (icon, selected) => {
   if (!icon && !selected) return null;
@@ -33,9 +33,6 @@ const ComboboxDropdownListItem = (props) => {
     selected,
   } = props;
 
-  const iconEl = renderIcon(icon, selected);
-  const isIconOption = iconEl || (icon && !selected);
-
   const sldsClasses = [
     'slds-listbox__item',
     { [className]: !isHeader },
@@ -43,8 +40,7 @@ const ComboboxDropdownListItem = (props) => {
 
   const itemClasses = [
     'slds-listbox__option',
-    { 'slds-listbox__option_plain': !isIconOption },
-    { 'slds-listbox__option_icon': isIconOption },
+    'slds-listbox__option_plain',
     { 'slds-is-selected': selected },
   ];
 
@@ -53,7 +49,7 @@ const ComboboxDropdownListItem = (props) => {
       <MediaObject
         center
         className={cx(itemClasses)}
-        figureLeft={iconEl}
+        figureLeft={renderIcon(icon, selected)}
         id={id}
         onClick={isHeader ? undefined : onClick}
         role={isHeader ? 'presentation' : 'option'}

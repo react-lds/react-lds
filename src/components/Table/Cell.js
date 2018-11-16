@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { uniqueId } from '../../utils';
-import { IconSVG } from '../../';
+import { IconSVG } from '../..';
 
 const Cell = (props) => {
   const {

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Pill from '../Pill';
-import { Icon, Avatar } from '../../../';
+import { Icon, Avatar } from '../../..';
 
 describe('<Pill />', () => {
   let props = {};

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { THEMES } from '../../utils';
 
-import { Modal, ModalContent, ModalFooter } from '../../';
+import { Modal, ModalContent, ModalFooter } from '../..';
 
 const Prompt = (props) => {
   const {

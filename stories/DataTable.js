@@ -133,12 +133,7 @@ stories
       />
     </DataTable>
   )))
-  .add('Selectable table', withInfo(`
-    Adding a **DataTableSelectColumn** to the columns will add a column of checkboxes
-    to the table.
-    Ticking one of the checkboxes will result in the **onSelect** callback being called
-    with a list of currently selected rows (identified by **rowId**).
-  `)(() => (
+  .add('Selectable table', () => (
     <StatefulWrapper data={object('Data', sampleData.slice(0, 5))}>
       <DataTable
         flavor="fixed-layout"
@@ -159,7 +154,16 @@ stories
         />
       </DataTable>
     </StatefulWrapper>
-  )))
+  ), {
+    info: {
+      text: `
+      Adding a **DataTableSelectColumn** to the columns will add a column of checkboxes
+      to the table.
+      Ticking one of the checkboxes will result in the **onSelect** callback being called
+      with a list of currently selected rows (identified by **rowId**).
+      `
+    }
+  })
   .add('Actionable table', () => (
     <DataTable
       data={object('Data', sampleData)}

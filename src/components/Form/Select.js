@@ -8,7 +8,7 @@ import {
   FormElementControl,
   FormElementLabel,
   FormElementError,
-} from '../../';
+} from '../..';
 
 const Select = (props) => {
   const {

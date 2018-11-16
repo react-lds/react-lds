@@ -84,4 +84,3 @@ describe('<Alert />', () => {
     expect(notification.prop('aria-hidden')).toBeTruthy();
   });
 });
-

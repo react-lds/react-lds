@@ -5,7 +5,9 @@ import { IconButton, ButtonIcon } from '../Button';
 import { THEMES, getThemeClass } from '../../utils';
 
 const ModalHeader = (props) => {
-  const { id, onClose, theme, title, tagline } = props;
+  const {
+    id, onClose, theme, title, tagline
+  } = props;
   const isEmpty = !tagline && !title;
 
   return (

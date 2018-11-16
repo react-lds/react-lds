@@ -17,7 +17,9 @@ const DescriptiveProgressBar = ({
     <Grid className="slds-p-bottom_x-small" align="spread" id={id}>
       <span>{label}</span>
       <span aria-hidden="true">
-        <strong>{getClampedProgress(progress, min, max)}% {completeLabel}</strong>
+        <strong>
+          {`${getClampedProgress(progress, min, max)}% ${completeLabel}`}
+        </strong>
       </span>
     </Grid>
     <ProgressBar

@@ -68,16 +68,6 @@ export default class ClickOutside extends Component {
     this.container = ref;
   }
 
-  registerEventListener() {
-    const { useCapture } = this.props;
-    document.addEventListener('click', this.handle, useCapture);
-  }
-
-  unregisterEventListener() {
-    const { useCapture } = this.props;
-    document.removeEventListener('click', this.handle, useCapture);
-  }
-
   handle = (e) => {
     const { onClickOutside } = this.props;
     const $el = this.container;
@@ -91,6 +81,16 @@ export default class ClickOutside extends Component {
       e.stopPropagation();
     }
   };
+
+  registerEventListener() {
+    const { useCapture } = this.props;
+    document.addEventListener('click', this.handle, useCapture);
+  }
+
+  unregisterEventListener() {
+    const { useCapture } = this.props;
+    document.removeEventListener('click', this.handle, useCapture);
+  }
 
   render() {
     const {

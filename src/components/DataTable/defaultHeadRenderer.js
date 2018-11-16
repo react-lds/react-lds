@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 
-import { Cell } from '../../';
+import { Cell } from '../..';
 
 /* eslint-disable react/prop-types */
 export default ({

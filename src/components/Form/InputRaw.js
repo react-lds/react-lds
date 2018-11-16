@@ -8,7 +8,7 @@ import {
   IconButton,
   IconSVG,
   Spinner,
-} from '../../';
+} from '../..';
 
 const InputRaw = React.forwardRef((props, ref) => {
   const {
@@ -131,6 +131,8 @@ const InputRaw = React.forwardRef((props, ref) => {
     </Fragment>
   );
 });
+
+InputRaw.displayName = 'InputRaw';
 
 InputRaw.defaultProps = {
   bare: false,

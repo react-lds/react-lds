@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { Grid, Icon, MediaObject } from '../../';
+import { Grid, Icon, MediaObject } from '../..';
 
 const Card = (props) => {
   const {

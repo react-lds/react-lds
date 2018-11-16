@@ -17,7 +17,7 @@ import {
   PillContainer,
   Row,
   Table,
-} from '../../';
+} from '../..';
 
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
@@ -212,11 +212,13 @@ export class LookupRaw extends PureComponent {
   }
 
   componentDidMount() {
-    if (this.props.loadOnMount) { this.handleLoad(); }
+    const { loadOnMount } = this.props;
+    if (loadOnMount) { this.handleLoad(); }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.objectType !== nextProps.objectType) {
+    const { objectType } = this.props;
+    if (objectType !== nextProps.objectType) {
       this.setState({
         loaded: [],
         selected: [],
@@ -297,6 +299,45 @@ export class LookupRaw extends PureComponent {
     });
   };
 
+  defaultRenderSelection = (item, { onClose }) => {
+    const { id, label, objectType } = item;
+    const { multi } = this.props;
+
+    return (
+      <Pill
+        key={id}
+        className={!multi ? 'slds-size_1-of-1' : null}
+        icon={objectType && (<Icon sprite={LookupRaw.getSprite(objectType)} icon={objectType} />)}
+        id={id}
+        title={label}
+        label={label}
+        onClose={onClose}
+      />
+    );
+  };
+
+  createElement = (value) => {
+    const { onChange, selection } = this.props;
+    const { selected } = this.state;
+
+    const newItem = {
+      id: Date.now(),
+      label: value,
+    };
+
+    const nextSelection = [...selected, newItem];
+
+    if (!selection) {
+      this.setState({ selected: nextSelection });
+    }
+
+    onChange(nextSelection);
+    this.closeList();
+  }
+
+  highlightSelection = (id) => {
+    this.setState({ highlighted: id });
+  }
 
   addSelection(item) {
     const { multi, onChange, selection } = this.props;
@@ -316,7 +357,9 @@ export class LookupRaw extends PureComponent {
 
   removeSelection(item) {
     const { onChange, selection } = this.props;
-    const nextSelection = this.state.selected.filter(select => select.id !== item.id);
+    const { selected } = this.state;
+
+    const nextSelection = selected.filter(select => select.id !== item.id);
 
     if (!selection) {
       this.setState({ selected: nextSelection });
@@ -324,45 +367,6 @@ export class LookupRaw extends PureComponent {
 
     onChange(nextSelection);
   }
-
-  createElement = (value) => {
-    const { onChange, selection } = this.props;
-
-    const newItem = {
-      id: Date.now(),
-      label: value,
-    };
-
-    const nextSelection = [...this.state.selected, newItem];
-
-    if (!selection) {
-      this.setState({ selected: nextSelection });
-    }
-
-    onChange(nextSelection);
-    this.closeList();
-  }
-
-  highlightSelection = (id) => {
-    this.setState({ highlighted: id });
-  }
-
-  defaultRenderSelection = (item, { onClose }) => {
-    const { id, label, objectType } = item;
-    const { multi } = this.props;
-
-    return (
-      <Pill
-        key={id}
-        className={!multi ? 'slds-size_1-of-1' : null}
-        icon={objectType && (<Icon sprite={LookupRaw.getSprite(objectType)} icon={objectType} />)}
-        id={id}
-        title={label}
-        label={label}
-        onClose={onClose}
-      />
-    );
-  };
 
   renderInput() {
     const {
@@ -439,7 +443,7 @@ export class LookupRaw extends PureComponent {
 
   renderLookupList() {
     const { listLabel, renderMeta, table } = this.props;
-    const { loaded, selected } = this.state;
+    const { loaded, open, selected } = this.state;
 
     const displayItems = LookupRaw.filterDisplayItems(loaded, selected);
 
@@ -447,7 +451,9 @@ export class LookupRaw extends PureComponent {
 
     const renderLookupItem = (item, i) => {
       const { id } = this.props;
-      const { objectType, label, id: itemId, meta } = item;
+      const {
+        objectType, label, id: itemId, meta
+      } = item;
 
       const lookupItemClasses = [
         'slds-lookup__item-action',
@@ -601,7 +607,8 @@ export class LookupRaw extends PureComponent {
       <div className={emailLayout ? cx(wrapperClasses) : null}>
         {emailLayout && (
           <label className="slds-email-composer__label slds-align-middle" htmlFor={id}>
-            {required && <abbr className="slds-required" title="required">*</abbr>}{inputLabel}
+            {required && <abbr className="slds-required" title="required">*</abbr>}
+            {inputLabel}
           </label>
         )}
         <FormElement

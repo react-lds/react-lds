@@ -5,7 +5,9 @@ import omit from 'lodash-es/omit';
 import ControlledCombobox, { propTypes } from '../Combobox/ControlledCombobox';
 
 const makePicklist = (Component, defaultProps) => (
-  ({ isDisabled, isLabelHidden, isRequired, ...rest }) => ( // eslint-disable-line react/prop-types
+  ({
+    isDisabled, isLabelHidden, isRequired, ...rest
+  }) => ( // eslint-disable-line react/prop-types
     <Component
       {...defaultProps}
       disabled={isDisabled}

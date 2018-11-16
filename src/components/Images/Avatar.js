@@ -75,7 +75,6 @@ export const EntityAvatar = ({
 EntityAvatar.defaultProps = {
   className: null,
   displayType: 'icon',
-  round: false,
   size: null,
   title: null,
 };

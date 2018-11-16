@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const Row = (props) => {
-  const { children, className, head, variation, ...rest } = props;
+  const {
+    children, className, head, variation, ...rest
+  } = props;
 
   const variationClasses = Array.isArray(variation) ? variation.map(f => `slds-${f}`) : `slds-${variation}`;
 

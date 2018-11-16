@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { IconSVG } from '../../.';
+import { IconSVG } from '../..';
 
 const PathStage = (props) => {
-  const { assistiveText, className, complete, current, label, onStageClick, selected, ...rest } = props;
+  const {
+    assistiveText, className, complete, current, label, onStageClick, selected, ...rest
+  } = props;
 
   const sldsClasses = [
     'slds-tabs_path__item',

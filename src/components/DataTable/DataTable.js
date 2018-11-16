@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash-es/omit';
 
-import { Table, uniqueId } from '../../';
+import { Table, uniqueId } from '../..';
 import { propTypes as tablePropTypes } from '../Table/Table';
 
 import defaultRowRenderer from './defaultRowRenderer';
@@ -10,12 +10,18 @@ import defaultRowRenderer from './defaultRowRenderer';
 class DataTable extends Component {
   static FIXED_STYLE = { tableLayout: 'fixed', width: 'auto' };
 
-  state = {
-    id: uniqueId('data-table-advanced-'),
-    columns: [],
-    data: this.props.data,
-    sortBy: this.props.sortBy,
-    sortDirection: this.props.sortDirection,
+  constructor(props) {
+    super(props);
+
+    const { data, sortBy, sortDirection } = this.props;
+
+    this.state = {
+      id: uniqueId('data-table-advanced-'),
+      columns: [],
+      data,
+      sortBy,
+      sortDirection,
+    };
   }
 
   componentWillMount() {
@@ -23,7 +29,9 @@ class DataTable extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { children, data, sortBy, sortDirection } = this.props;
+    const {
+      children, data, sortBy, sortDirection
+    } = this.props;
 
     if (nextProps.children !== children) {
       this.updateColumns();
@@ -133,26 +141,26 @@ class DataTable extends Component {
 
   renderRow(rowData, rowIndex) {
     const { columns, id } = this.state;
-    const { getCellData, getRowId, rowRenderer, selection } = this.props;
+    const {
+      getCellData, getRowId, rowRenderer, selection
+    } = this.props;
     const rowId = getRowId({ rowIndex, rowData });
 
-    const cells = columns.map(({ cellRenderer, dataKey, title }) =>
-      cellRenderer({
-        cellData: getCellData({ rowData, dataKey }),
-        dataKey,
-        rowData,
-        rowId,
-        rowIndex,
-        selected: selection.includes(rowId),
-        onSelect: this.onSelect,
-        tableId: id,
-        defaultProps: {
-          'data-label': title,
-          key: `${rowId}-${dataKey}`,
-          role: 'gridcell',
-        },
-      })
-    );
+    const cells = columns.map(({ cellRenderer, dataKey, title }) => cellRenderer({
+      cellData: getCellData({ rowData, dataKey }),
+      dataKey,
+      rowData,
+      rowId,
+      rowIndex,
+      selected: selection.includes(rowId),
+      onSelect: this.onSelect,
+      tableId: id,
+      defaultProps: {
+        'data-label': title,
+        key: `${rowId}-${dataKey}`,
+        role: 'gridcell',
+      },
+    }));
 
     return rowRenderer({
       cells,
@@ -165,35 +173,36 @@ class DataTable extends Component {
 
   renderHead() {
     const { fixedHeader, variation } = this.props;
-    const { columns, id, sortBy, sortDirection } = this.state;
+    const {
+      columns, id, sortBy, sortDirection
+    } = this.state;
 
     const hasHiddenHeader = !fixedHeader && variation.includes('header-hidden');
 
     return (
       <thead className={hasHiddenHeader ? 'slds-assistive-text' : null}>
         <tr>
-          {columns.map(({ headRenderer, ...restProps }) =>
-            headRenderer({
-              allSelected: this.areAllRowsSelected(),
-              fixed: fixedHeader,
-              onSelectAll: this.onSelectAll,
-              onSort: this.onSort,
-              sortBy,
-              sortDirection,
-              tableId: id,
-              ...restProps
-            })
-          )}
+          {columns.map(({ headRenderer, ...restProps }) => headRenderer({
+            allSelected: this.areAllRowsSelected(),
+            fixed: fixedHeader,
+            onSelectAll: this.onSelectAll,
+            onSort: this.onSort,
+            sortBy,
+            sortDirection,
+            tableId: id,
+            ...restProps
+          }))}
         </tr>
       </thead>
     );
   }
 
   renderBody() {
+    const { noRowsRenderer } = this.props;
     const { columns, data, id } = this.state;
 
     if (!Array.isArray(data) || data.length === 0) {
-      return this.props.noRowsRenderer({ columns, tableId: id });
+      return noRowsRenderer({ columns, tableId: id });
     }
 
     return (
