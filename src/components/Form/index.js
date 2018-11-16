@@ -7,10 +7,6 @@ import CheckboxRaw from './CheckboxRaw';
 import CheckboxGroup from './CheckboxGroup';
 import Input from './Input';
 import InputRaw from './InputRaw';
-import Picklist, { PicklistRaw } from './Picklist';
-import PicklistDropdown from './PicklistDropdown';
-import PicklistDropdownList from './PicklistDropdownList';
-import PicklistDropdownListItem from './PicklistDropdownListItem';
 import Radio from './Radio';
 import RadioRaw from './RadioRaw';
 import RadioGroup from './RadioGroup';
@@ -28,11 +24,6 @@ export {
   CheckboxGroup,
   Input,
   InputRaw,
-  Picklist,
-  PicklistRaw,
-  PicklistDropdown,
-  PicklistDropdownList,
-  PicklistDropdownListItem,
   Radio,
   RadioRaw,
   RadioGroup,
