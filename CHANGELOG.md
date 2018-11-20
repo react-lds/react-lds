@@ -1,7 +1,8 @@
 # Changelog
 
-## 8.0.0
+## 7.3.0
 
+* Upgrade Storybook to 4.0
 * Added: `Button` now supports new flavors `text-destructive` & `outline-brand`
 * Added: `ButtonGroup` now supports rendering as a `row`
 * Added: `DescriptiveProgressBar` allows adding more information to a `ProgressBar`
