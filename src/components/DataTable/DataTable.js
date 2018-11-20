@@ -8,17 +8,20 @@ import { propTypes as tablePropTypes } from '../Table/Table';
 import defaultRowRenderer from './defaultRowRenderer';
 
 class DataTable extends Component {
-  static FIXED_STYLE = { tableLayout: 'fixed', width: 'auto' };
-
   constructor(props) {
     super(props);
 
-    const { data, sortBy, sortDirection } = this.props;
+    const {
+      data,
+      sortBy,
+      sortDirection,
+    } = this.props;
 
     this.state = {
       id: uniqueId('data-table-advanced-'),
       columns: [],
       data,
+      isScrolled: false,
       sortBy,
       sortDirection,
     };
@@ -48,6 +51,10 @@ class DataTable extends Component {
       });
     }
   }
+
+  handleStickyHeader = (e) => {
+    this.setState({ isScrolled: e.nativeEvent.target.scrollTop > 0 });
+  };
 
   onSelect = (rowId) => {
     const { onSelect, selection } = this.props;
@@ -172,19 +179,20 @@ class DataTable extends Component {
   }
 
   renderHead() {
-    const { fixedHeader, variation } = this.props;
+    const { stickyHeader, variation } = this.props;
     const {
-      columns, id, sortBy, sortDirection
+      columns, id, isScrolled, sortBy, sortDirection
     } = this.state;
 
-    const hasHiddenHeader = !fixedHeader && variation.includes('header-hidden');
+    const hasHiddenHeader = !stickyHeader && variation.includes('header-hidden');
 
     return (
       <thead className={hasHiddenHeader ? 'slds-assistive-text' : null}>
         <tr>
           {columns.map(({ headRenderer, ...restProps }) => headRenderer({
             allSelected: this.areAllRowsSelected(),
-            fixed: fixedHeader,
+            isSticky: stickyHeader,
+            isScrolled,
             onSelectAll: this.onSelectAll,
             onSort: this.onSort,
             sortBy,
@@ -213,7 +221,7 @@ class DataTable extends Component {
   }
 
   render() {
-    const { fixedHeader } = this.props;
+    const { stickyHeader } = this.props;
     const rest = omit(this.props, [
       'children',
       'data',
@@ -228,15 +236,15 @@ class DataTable extends Component {
       'sortDirection',
     ]);
     const table = (
-      <Table {...rest} style={fixedHeader ? DataTable.FIXED_STYLE : null}>
+      <Table {...rest}>
         {this.renderHead()}
         {this.renderBody()}
       </Table>
     );
 
-    if (fixedHeader) {
+    if (stickyHeader) {
       return (
-        <div className="slds-grid slds-grid_vertical slds-scrollable">
+        <div className="slds-grid slds-grid_vertical slds-scrollable" onScroll={this.handleStickyHeader}>
           <div>
             {table}
           </div>

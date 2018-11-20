@@ -9,7 +9,8 @@ const Cell = (props) => {
   const {
     children,
     className,
-    fixed,
+    isScrolled,
+    isSticky,
     resizable,
     resizableAssistiveText,
     scope,
@@ -125,14 +126,18 @@ const Cell = (props) => {
 
   const wrappedChildren = wrapChildren(childArray);
   const wrapperClassName = cx({ 'slds-truncate': truncate });
-  const isFixedHeader = isHeader && fixed;
+  const isHeaderSticky = isHeader && isSticky;
+  let style = null;
+  if (isHeaderSticky) {
+    style = isScrolled ? Cell.STICKY_SCROLLED_STYLE : Cell.STICKY_TOP_STYLE;
+  }
 
   return (
     <CellElement
       {...rest}
       className={cx(sldsClasses)}
       scope={cellScope}
-      style={isFixedHeader ? Cell.FIXED_STYLE : null}
+      style={style}
     >
       <div className={wrapperClassName} title={cellTitle}>
         {wrappedChildren}
@@ -141,17 +146,22 @@ const Cell = (props) => {
   );
 };
 
-Cell.FIXED_STYLE = {
+Cell.STICKY_TOP_STYLE = {
   position: 'sticky',
   top: 0,
   zIndex: 1,
+};
+
+Cell.STICKY_SCROLLED_STYLE = {
+  ...Cell.STICKY_TOP_STYLE,
   borderBottom: '1px solid rgb(221, 219, 218)',
 };
 
 Cell.defaultProps = {
   children: null,
   className: null,
-  fixed: false,
+  isScrolled: false,
+  isSticky: false,
   resizable: false,
   resizableAssistiveText: 'Resize Cell',
   scope: null,
@@ -169,13 +179,17 @@ Cell.propTypes = {
    */
   children: PropTypes.node,
   /**
-   * cell for fixed header
-   */
-  fixed: PropTypes.bool,
-  /**
    * class name
    */
   className: PropTypes.string,
+  /**
+   * whether the cell is scrolled
+   */
+  isScrolled: PropTypes.bool,
+  /**
+   * whether the cell is a sticky header cell
+   */
+  isSticky: PropTypes.bool,
   /**
    * makes the cell resizable
    */
