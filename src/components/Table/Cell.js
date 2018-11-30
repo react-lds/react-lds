@@ -183,11 +183,11 @@ Cell.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * whether the cell is scrolled
+   * Whether the table has been scrolled
    */
   isScrolled: PropTypes.bool,
   /**
-   * whether the cell is a sticky header cell
+   * Whether the cell is a sticky header cell
    */
   isSticky: PropTypes.bool,
   /**

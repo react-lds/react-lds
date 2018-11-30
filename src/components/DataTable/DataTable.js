@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash-es/omit';
+import debounce from 'lodash-es/debounce';
 
 import { Table, uniqueId } from '../..';
 import { propTypes as tablePropTypes } from '../Table/Table';
@@ -25,6 +26,9 @@ class DataTable extends Component {
       sortBy,
       sortDirection,
     };
+
+    this.scrollContainer = React.createRef();
+    this.onScroll = debounce(this.onScroll, 50);
   }
 
   componentWillMount() {
@@ -52,8 +56,9 @@ class DataTable extends Component {
     }
   }
 
-  handleStickyHeader = (e) => {
-    this.setState({ isScrolled: e.nativeEvent.target.scrollTop > 0 });
+  onScroll = () => {
+    const scrollTop = this.scrollContainer.current.scrollTop; // eslint-disable-line
+    this.setState({ isScrolled: scrollTop > 0 });
   };
 
   onSelect = (rowId) => {
@@ -244,7 +249,11 @@ class DataTable extends Component {
 
     if (stickyHeader) {
       return (
-        <div className="slds-grid slds-grid_vertical slds-scrollable" onScroll={this.handleStickyHeader}>
+        <div
+          className="slds-grid slds-grid_vertical slds-scrollable"
+          onScroll={this.onScroll}
+          ref={this.scrollContainer}
+        >
           <div>
             {table}
           </div>
