@@ -98,6 +98,10 @@ export const propTypes = {
    */
   readOnly: PropTypes.bool,
   /**
+   * Function to render listbox
+   */
+  renderListbox: PropTypes.func,
+  /**
    * whether the combobox is required
    */
   required: PropTypes.bool,
@@ -130,6 +134,7 @@ export default class ControlledCombobox extends Component {
     onAdd: null,
     onChange: null,
     readOnly: false,
+    renderListbox: null,
     required: false,
     size: null,
     value: '',
@@ -249,6 +254,12 @@ export default class ControlledCombobox extends Component {
   }
 
   renderListbox(selectedItems, className) {
+    const { renderListbox } = this.props;
+
+    if (renderListbox) {
+      return renderListbox(selectedItems, className, this.getSelectHandler);
+    }
+
     return (
       <Listbox className={cx('slds-listbox_inline', className)}>
         {selectedItems.map(({ icon, key, label }) => (
