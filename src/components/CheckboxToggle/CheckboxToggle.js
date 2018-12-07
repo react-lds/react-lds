@@ -73,7 +73,10 @@ CheckboxToggle.propTypes = {
   /**
    * Checkbox label
    */
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]).isRequired,
   /**
    * :checked state. Pass `null` for an uncontrolled checkbox
    */
