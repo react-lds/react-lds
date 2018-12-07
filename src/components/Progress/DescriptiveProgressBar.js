@@ -46,10 +46,7 @@ DescriptiveProgressBar.propTypes = {
   /** Ties label to ProgressBar for assistive technology */
   id: PropTypes.string.isRequired,
   /** Main label */
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-  ]).isRequired,
+  label: PropTypes.node.isRequired,
   /** See ProgressBar */
   max: PropTypes.number,
   /** See ProgressBar */

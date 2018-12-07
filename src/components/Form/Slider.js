@@ -120,10 +120,7 @@ Slider.propTypes = {
   /**
    * label for the select
    */
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-  ]),
+  label: PropTypes.node,
   /**
    * onChange handler for the slider
    */
