@@ -5,18 +5,24 @@ import { CheckboxRaw, Cell } from '../..';
 export default ({
   allSelected,
   dataKey,
-  fixed,
+  isScrolled,
+  isSticky,
   onSelectAll,
   tableId,
 }) => {
   const checkboxId = `${tableId}-${dataKey}`;
+
+  let style = null;
+  if (isSticky) {
+    style = isScrolled ? Cell.STICKY_SCROLLED_STYLE : Cell.STICKY_TOP_STYLE;
+  }
 
   return (
     <th
       className="slds-text-align--right"
       key={dataKey}
       scope="col"
-      style={fixed ? Cell.FIXED_STYLE : null}
+      style={style}
     >
       <div>
         <CheckboxRaw

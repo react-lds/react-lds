@@ -6,7 +6,8 @@ import { Cell } from '../..';
 /* eslint-disable react/prop-types */
 export default ({
   dataKey,
-  fixed,
+  isScrolled,
+  isSticky,
   onSort,
   sortable,
   sortBy,
@@ -19,12 +20,13 @@ export default ({
   return (
     <Cell
       className={classNames}
-      fixed={fixed}
+      isScrolled={isScrolled}
+      isSticky={isSticky}
       key={dataKey}
+      onClick={onClick}
       scope="col"
       sortable={sortable}
       sortDirection={sortDirection}
-      onClick={onClick}
     >
       {title}
     </Cell>

@@ -7,8 +7,8 @@ const Table = (props) => {
   const {
     children,
     className,
-    fixedHeader,
     flavor,
+    stickyHeader,
     variation,
     ...rest
   } = props;
@@ -16,7 +16,6 @@ const Table = (props) => {
   const sldsClasses = [
     'slds-table',
     'slds-table_cell-buffer',
-    { 'header-fixed': fixedHeader },
     className,
     applyDecorators(flavor, 'table'),
     applyDecorators(variation),
@@ -36,20 +35,6 @@ export const propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Make table header fixed on top
-   */
-  fixedHeader: PropTypes.bool,
-  /**
-   * variation: array of variations, you can also provide a single variation string.
-   * Variations: no-row-hover, max-medium-table_stacked,
-   max-medium-table_stacked-horizontal
-   */
-  variation: decoratorProp([
-    'no-row-hover',
-    'max-medium-table_stacked',
-    'max-medium-table_stacked-horizontal',
-  ]),
-  /**
    * flavor: array of flavors, you can also provide a single flavor string.
    * Flavors: bordered, col-bordered, striped, fixed-layout
    */
@@ -60,14 +45,28 @@ export const propTypes = {
     'fixed-layout',
     'header-hidden',
   ]),
+  /**
+   * Make table header stick to the top
+   */
+  stickyHeader: PropTypes.bool,
+  /**
+   * variation: array of variations, you can also provide a single variation string.
+   * Variations: no-row-hover, max-medium-table_stacked,
+   max-medium-table_stacked-horizontal
+   */
+  variation: decoratorProp([
+    'no-row-hover',
+    'max-medium-table_stacked',
+    'max-medium-table_stacked-horizontal',
+  ]),
 };
 
 Table.defaultProps = {
   children: null,
   className: null,
-  fixedHeader: false,
-  variation: [],
   flavor: [],
+  stickyHeader: false,
+  variation: [],
 };
 
 Table.propTypes = propTypes;

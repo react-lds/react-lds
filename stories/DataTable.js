@@ -68,11 +68,17 @@ stories
       />
     </DataTable>
   ))
-  .add('With fixed header', () => (
-    <div style={{ height: '300px', width: '100%', display: 'flex', flexDirection: 'column' }}>
+  .add('With sticky header', () => (
+    <div style={{
+      height: '300px',
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column'
+    }}
+    >
       <DataTable
         flavor={array('Flavor', ['bordered', 'striped'])}
-        fixedHeader
+        stickyHeader
         variation={array('Variation', [])}
         data={object('Data', sampleData)}
         onSelect={action()}
@@ -187,7 +193,9 @@ stories
             <Button
               flavor={null}
               onClick={action(`click ${dataKey}@${rowIndex}`)}
-            >Send Message</Button>
+            >
+              Send Message
+            </Button>
           </td>
         )}
       />
