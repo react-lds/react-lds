@@ -277,6 +277,7 @@ DataTable.defaultProps = {
   selection: [],
   sortBy: '',
   sortDirection: 'asc',
+  stickyHeader: false,
 };
 
 DataTable.propTypes = {
@@ -338,6 +339,11 @@ DataTable.propTypes = {
    * Initial sort direction (`asc` or `desc`).
    */
   sortDirection: PropTypes.string,
+
+  /**
+   * Make table header stick to the top
+   */
+  stickyHeader: PropTypes.bool,
 };
 
 export default DataTable;

@@ -64,10 +64,7 @@ PathStage.propTypes = {
   /*
    * string or node as label of the stage
    */
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-  ]).isRequired,
+  label: PropTypes.node.isRequired,
   /*
    * function to be called on stage click
    */

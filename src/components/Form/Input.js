@@ -149,10 +149,7 @@ Input.propTypes = {
   /**
    * label for the input
    */
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-  ]),
+  label: PropTypes.node,
   /**
    * onChange handler for input
    */

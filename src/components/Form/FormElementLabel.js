@@ -70,10 +70,7 @@ FormElementLabel.propTypes = {
   /**
    * label content
    */
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-  ]).isRequired,
+  label: PropTypes.node.isRequired,
   /**
    * Renders as a html5 legend
    */

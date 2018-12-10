@@ -104,10 +104,7 @@ Textarea.propTypes = {
   /**
    * label for the textarea
    */
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-  ]).isRequired,
+  label: PropTypes.node.isRequired,
   /**
    * onChange handler for the textarea
    */
