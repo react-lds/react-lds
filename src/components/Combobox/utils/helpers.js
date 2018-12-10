@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const scrollDropdown = (parentNode, childNode) => {
   const viewPortTop = parentNode.scrollTop;
   const viewPortBottom = viewPortTop + parentNode.offsetHeight;
@@ -24,6 +26,45 @@ export const handleIndexChange = (items, prevIndex, direction = 'desc') => {
     : nextIndex;
 };
 
-/** TODO: This should probably be memoized */
-export const getSelectedItems = (items, selectedIds) => selectedIds
-  .map(str => items.find(({ id }) => id === str));
+export const preventDefault = evt => evt.preventDefault();
+
+const makeHighlighter = highlighter => (str = '', search = '') => {
+  let result = str;
+  const searchLen = search.length;
+  if (searchLen === 0) return str;
+
+  const splitLabel = str.toLowerCase().split(search.toLowerCase());
+  const splitLen = splitLabel.length;
+
+  if (splitLen < 2) return str;
+
+  let startIndex = 0;
+
+  result = splitLabel.map((strPortion, i) => {
+    const len = strPortion.length;
+    const origIndex = startIndex + len;
+    const origStr = str.slice(startIndex, origIndex);
+    startIndex = origIndex;
+
+    let highlightEl = null;
+    let highlightStr = '';
+
+    if (i !== splitLen - 1) {
+      const searchIndex = startIndex + searchLen;
+      highlightStr = str.slice(startIndex, searchIndex);
+      highlightEl = highlighter(highlightStr);
+      startIndex = searchIndex;
+    }
+
+    return (
+      <React.Fragment key={`${origStr}${highlightStr}`}>
+        {origStr}
+        {highlightEl}
+      </React.Fragment>
+    );
+  });
+
+  return result;
+};
+
+export const defaultHighlighter = makeHighlighter(str => <mark>{str}</mark>);

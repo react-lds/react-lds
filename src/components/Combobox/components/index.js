@@ -1,16 +1,13 @@
 import ComboboxCore from './ComboboxCore';
 import ComboboxDropdown from './ComboboxDropdown';
+import ComboboxDropdownLists from './ComboboxDropdownLists';
+import ComboboxListbox from './ComboboxListbox';
 
-import {
-  BaseComboboxDropdownItem,
-  HeaderComboboxDropdownItem,
-  LoadingComboboxDropdownItem,
-} from './ComboboxDropdownListItem';
+export * from './DropdownItems';
 
 export {
   ComboboxCore,
   ComboboxDropdown,
-  BaseComboboxDropdownItem,
-  HeaderComboboxDropdownItem,
-  LoadingComboboxDropdownItem,
+  ComboboxDropdownLists,
+  ComboboxListbox,
 };

@@ -86,6 +86,10 @@ export function getSizes() {
   return select('Size', SIZES, 'medium');
 }
 
+export function getDropdownHeights() {
+  return [5, 7, 10];
+}
+
 export class Context extends Component {
   getChildContext() {
     return {

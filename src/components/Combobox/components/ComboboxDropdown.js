@@ -11,69 +11,65 @@ import {
 const ComboboxDropdown = React.forwardRef((props, ref) => {
   const {
     children,
-    className,
     comboboxClassName,
     height,
     id,
+    isSingleInlineSelection,
     label,
     listboxId,
-    open,
+    isOpen,
     renderInput,
-    renderResultListbox,
+    ...rest
   } = props;
 
-  const comboboxContainerClasses = ['slds-combobox_container'];
+  const comboboxContainerClasses = [
+    'slds-combobox_container',
+    { 'slds-has-selection': isSingleInlineSelection },
+  ];
 
   const comboboxClasses = [
     'slds-combobox',
     'slds-dropdown-trigger',
     'slds-dropdown-trigger_click',
-    { 'slds-is-open': open },
+    { 'slds-is-open': isOpen },
     comboboxClassName
   ];
 
   const comboboxFormElementClasses = [
     'slds-combobox__form-element',
     'slds-input-has-icon',
-    'slds-input-has-icon_right'
+    { 'slds-input-has-icon_left-right': isSingleInlineSelection },
+    { 'slds-input-has-icon_right': !isSingleInlineSelection }
   ];
 
   const dropdownClasses = [
-    { [`slds-dropdown_length-with-icon-${height}`]: height },
     'slds-dropdown',
     'slds-dropdown_fluid',
-    'slds-listbox',
-    'slds-listbox_vertical',
+    { [`slds-dropdown_length-with-icon-${height}`]: height },
   ];
 
   return (
-    <FormElement className={className}>
+    <FormElement {...rest}>
       <FormElementLabel id={id} label={label} />
       <FormElementControl>
         <div className={cx(comboboxContainerClasses)}>
           <div
             className={cx(comboboxClasses)}
-            aria-expanded={open}
+            aria-expanded={isOpen}
             aria-haspopup="listbox"
             role="combobox"
           >
             <div className={cx(comboboxFormElementClasses)} role="none">
-              {renderInput({
-                'aria-controls': listboxId,
-                autoComplete: 'off',
-                id,
-                role: 'textbox'
-              })}
+              {renderInput()}
             </div>
             <div
               className={cx(dropdownClasses)}
-              id={`listbox-${id}`}
+              id={listboxId}
               ref={ref}
               role="listbox"
             >
               {children}
             </div>
-            {renderResultListbox && renderResultListbox()}
           </div>
         </div>
       </FormElementControl>
@@ -85,19 +81,19 @@ ComboboxDropdown.displayName = 'ComboboxDropdown';
 
 ComboboxDropdown.propTypes = {
   children: PropTypes.node,
-  className: PropTypes.string,
   comboboxClassName: PropTypes.string,
   id: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  isSingleInlineSelection: PropTypes.bool,
   label: PropTypes.string.isRequired,
   listboxId: PropTypes.string.isRequired,
-  open: PropTypes.bool.isRequired,
   renderInput: PropTypes.func.isRequired,
 };
 
 ComboboxDropdown.defaultProps = {
   children: null,
-  className: null,
   comboboxClassName: null,
+  isSingleInlineSelection: false,
 };
 
 export default ComboboxDropdown;
