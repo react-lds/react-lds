@@ -69,7 +69,7 @@ Pill.propTypes = {
   /**
    * content of the pill label
    */
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
   /**
    * onClose handler for the pill, if left out, Pill doesn't have close button
    */
