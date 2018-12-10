@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.3.1
+
+* Changed: `DataTables`: Revise sticky header
+* Added: `Pills`: Support custom rendering
+* Added: Consistently allow proptype `node` as label
+
 ## 7.3.0
 
 * Upgrade Storybook to 4.0
