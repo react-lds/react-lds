@@ -33,4 +33,5 @@ export * from './components/SplitView';
 export * from './components/Tabs';
 export * from './components/Tooltip';
 export * from './components/VerticalNavigation';
+export * from './components/Expression';
 export * from './utils';
