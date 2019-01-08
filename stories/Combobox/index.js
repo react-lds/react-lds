@@ -28,7 +28,7 @@ stories
   .add('Docs: Base Combobox', () => (
     <BaseCombobox
       isMultiSelect
-      isOpen={boolean('Open', true)}
+      isOpen={boolean('Open', false)}
       items={BASE_ITEMS}
       selectedItems={select('Selected Items', selectedOptions, [])}
       label={text('Label', 'Relate To')}

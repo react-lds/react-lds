@@ -16,6 +16,7 @@ class ComboboxCore extends Component {
      * When set to true, selecting an item will close the dropdown
      */
     closeOnSelect: PropTypes.bool,
+    comboboxClassName: PropTypes.string,
     /**
      * Number of results displayed in the result dropdown
      */
@@ -113,6 +114,7 @@ class ComboboxCore extends Component {
 
   static defaultProps = {
     closeOnSelect: true,
+    comboboxClassName: null,
     height: 5,
     items: [],
     selectedItems: [],
@@ -168,9 +170,11 @@ class ComboboxCore extends Component {
       && selectedItems.length > 0;
 
     onSelect(id, { isRemove, isReplace });
-    this.setState({ keyboardSelection: null });
 
-    if (closeOnSelect) onToggle(false);
+    if (closeOnSelect) {
+      this.setState({ keyboardSelection: null });
+      onToggle(false);
+    }
   }
 
   onInputMouseDown = () => {
@@ -196,7 +200,6 @@ class ComboboxCore extends Component {
       selectedItems,
     } = this.props;
     const { keyboardSelection } = this.state;
-
     const filteredItems = items.filter(item => !item.isHeader);
     const len = filteredItems.length;
 
@@ -224,7 +227,9 @@ class ComboboxCore extends Component {
       if (keyboardSelection != null) {
         evt.preventDefault();
         const inputVal = evt.target.value;
-        onSearch(inputVal.substring(0, inputVal.length - 1), false);
+        if (onSearch) {
+          onSearch(inputVal.substring(0, inputVal.length - 1), false);
+        }
         this.setState({ keyboardSelection: null });
       }
 
@@ -273,6 +278,12 @@ class ComboboxCore extends Component {
     if (isUserEvent) onToggle(!isOpen);
   }
 
+  onInputBlur = (evt) => {
+    if (evt.isTrusted) {
+      this.onClose();
+    }
+  }
+
   getOpts() {
     const { isMultiSelect, items, selectedItems } = this.props;
     const { keyboardSelection } = this.state;
@@ -301,8 +312,8 @@ class ComboboxCore extends Component {
       'aria-controls': listboxId,
       autoComplete: 'off',
       id,
-      onBlur: this.onClose,
       onChange: onSearch,
+      onBlur: this.onInputBlur,
       onFocus: this.onInputFocus,
       onKeyDown: this.onInputKeyDown,
       onMouseDown: this.onInputMouseDown,
@@ -338,14 +349,32 @@ class ComboboxCore extends Component {
     );
   }
 
+  renderListbox = () => {
+    const {
+      isOpen,
+      labelListbox,
+      renderListbox,
+      selectedItems,
+    } = this.props;
+    if (isOpen || selectedItems.length === 0) return null;
+
+    const opts = this.getOpts();
+
+    return renderListbox({
+      label: labelListbox,
+      makeSelectHandler: this.makeSelectHandler,
+      selectedItems,
+    }, opts);
+  }
+
   render() {
     const {
+      comboboxClassName,
       height,
       id,
       items,
       isMultiSelect,
       label,
-      labelListbox,
       isInlineListboxSelection,
       isLoading,
       isOpen,
@@ -356,7 +385,6 @@ class ComboboxCore extends Component {
     } = this.props;
     const { keyboardSelection } = this.state;
 
-    const opts = this.getOpts();
     const listboxId = `listbox-${id}`;
 
     return (
@@ -366,6 +394,7 @@ class ComboboxCore extends Component {
         condition={isOpen}
       >
         <ComboboxDropdown
+          comboboxClassName={comboboxClassName}
           height={height}
           id={`combobox-${id}`}
           isSingleInlineSelection={isInlineListboxSelection && !isMultiSelect && selectedItems.length === 1}
@@ -374,6 +403,10 @@ class ComboboxCore extends Component {
           isOpen={isOpen}
           ref={this.dropdownRef}
           renderInput={this.renderInput}
+          renderListbox={renderListbox && isMultiSelect
+            ? this.renderListbox
+            : null
+          }
         >
           <ComboboxDropdownLists
             items={items}
@@ -387,11 +420,7 @@ class ComboboxCore extends Component {
             selectedItems={selectedItems}
           />
         </ComboboxDropdown>
-        {!isOpen && isMultiSelect && renderListbox && renderListbox({
-          label: labelListbox,
-          makeSelectHandler: this.makeSelectHandler,
-          selectedItems,
-        }, opts)}
+
       </ClickOutside>
     );
   }

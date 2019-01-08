@@ -8,7 +8,9 @@ const ComboboxListbox = ({
   makeSelectHandler,
   selectedItems,
 }) => (
-  <div className="slds-listbox_selection-group">
+  // This should have class 'slds-listbox_selection-group' once overflow behavior
+  // has been implemented
+  <div className="slds-listbox_selection">
     <Listbox label={label}>
       {selectedItems.map(({ icon, id, label: itemLabel }) => (
         <Pill

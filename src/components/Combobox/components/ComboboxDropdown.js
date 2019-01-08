@@ -19,6 +19,7 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
     listboxId,
     isOpen,
     renderInput,
+    renderListbox,
     ...rest
   } = props;
 
@@ -32,7 +33,6 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
     'slds-dropdown-trigger',
     'slds-dropdown-trigger_click',
     { 'slds-is-open': isOpen },
-    comboboxClassName
   ];
 
   const comboboxFormElementClasses = [
@@ -49,7 +49,7 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
   ];
 
   return (
-    <FormElement {...rest}>
+    <FormElement className={comboboxClassName} {...rest}>
       <FormElementLabel id={id} label={label} />
       <FormElementControl>
         <div className={cx(comboboxContainerClasses)}>
@@ -73,6 +73,7 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
           </div>
         </div>
       </FormElementControl>
+      {renderListbox && renderListbox()}
     </FormElement>
   );
 });
@@ -88,12 +89,14 @@ ComboboxDropdown.propTypes = {
   label: PropTypes.string.isRequired,
   listboxId: PropTypes.string.isRequired,
   renderInput: PropTypes.func.isRequired,
+  renderListbox: PropTypes.func,
 };
 
 ComboboxDropdown.defaultProps = {
   children: null,
   comboboxClassName: null,
   isSingleInlineSelection: false,
+  renderListbox: null,
 };
 
 export default ComboboxDropdown;

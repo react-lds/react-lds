@@ -45,7 +45,7 @@ export const DropdownItemBase = (props) => {
         {isMultiSelect && isSelected && (
           <span className="slds-assistive-text">{isSelectedAssistiveLabel}</span>
         )}
-        {defaultHighlighter(label, highlight)}
+        {highlight.length > 0 ? defaultHighlighter(label, highlight) : label}
       </span>
       {meta && (
       <span className="slds-listbox__option-meta">
