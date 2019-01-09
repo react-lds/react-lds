@@ -13,9 +13,12 @@ const byItemId = value => ({ id }) => id === value;
 class ComboboxCore extends Component {
   static propTypes = {
     /**
-     * When set to true, selecting an item will close the dropdown
+     * Will close the selection dropdown upon selection when true
      */
     closeOnSelect: PropTypes.bool,
+    /**
+     * Classname that will be applied to the <FormElement> wrapping input and listbox
+     */
     comboboxClassName: PropTypes.string,
     /**
      * Number of results displayed in the result dropdown
@@ -56,7 +59,7 @@ class ComboboxCore extends Component {
       meta: PropTypes.node,
     })),
     /**
-     * Label of the Combobox
+     * Labels the Combobox
      */
     label: PropTypes.string.isRequired,
     /**
@@ -106,9 +109,14 @@ class ComboboxCore extends Component {
      * Array of `id`s that are currently selected
      */
     selectedItems: PropTypes.arrayOf(PropTypes.shape({
+      icon: PropTypes.shape({
+        icon: PropTypes.string.isRequired,
+        sprite: PropTypes.string.isRequired,
+      }),
       id: PropTypes.string.isRequired,
       isHeader: PropTypes.bool,
       label: PropTypes.string.isRequired,
+      meta: PropTypes.node,
     })),
   }
 

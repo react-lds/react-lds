@@ -8,13 +8,35 @@ import { ComboboxCore } from './components';
 
 class EntityCombobox extends Component {
   static propTypes = {
+    items: PropTypes.arrayOf(PropTypes.shape({
+      icon: PropTypes.shape({
+        icon: PropTypes.string.isRequired,
+        sprite: PropTypes.string.isRequired,
+      }).isRequired,
+      id: PropTypes.string.isRequired,
+      isHeader: PropTypes.bool,
+      label: PropTypes.string.isRequired,
+      meta: PropTypes.node,
+    })),
     onSearch: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
     search: PropTypes.string,
+    selectedItems: PropTypes.arrayOf(PropTypes.shape({
+      icon: PropTypes.shape({
+        icon: PropTypes.string.isRequired,
+        sprite: PropTypes.string.isRequired,
+      }).isRequired,
+      id: PropTypes.string.isRequired,
+      isHeader: PropTypes.bool,
+      label: PropTypes.string.isRequired,
+      meta: PropTypes.node,
+    })),
   }
 
   static defaultProps = {
     search: '',
+    items: [],
+    selectedItems: [],
   }
 
   makeOnInputKeyDown = (originalHandler, keyboardSelection) => {
@@ -60,35 +82,15 @@ class EntityCombobox extends Component {
       onSearch,
       onSelect,
     } = this.props;
-    onSelect(id, opts);
 
-    if (closeOnSelect) {
-      onSearch('', { isClear: true });
-    }
+    onSelect(id, opts);
+    if (closeOnSelect) onSearch('', { isClear: true });
   }
 
   renderSearchIndicator = () => {
     const { search } = this.props;
     if (search.trim().length < 2) return null;
     return <DropdownItemSearch search={search} />;
-  }
-
-  renderItem = ({ id, ...resultProps }, opts) => {
-    const { renderItem, search } = this.props;
-    if (renderItem) return renderItem(resultProps, opts);
-
-    const { makeSelectHandler, selectedItems } = opts;
-
-    return (
-      <DropdownItemEntity
-        {...resultProps}
-        highlight={search}
-        isMultiSelect={!isEmpty(selectedItems)}
-        key={id}
-        id={id}
-        onSelect={makeSelectHandler(id)}
-      />
-    );
   }
 
   renderInput = (inputProps, opts) => {
@@ -136,19 +138,20 @@ class EntityCombobox extends Component {
 
   renderItem = ({ id, ...resultProps }, opts) => {
     const { renderItem, search } = this.props;
+    if (renderItem) return renderItem(resultProps, opts);
+
     const { makeSelectHandler, selectedItems } = opts;
 
-    const entityResultProps = {
-      ...resultProps,
-      isMultiSelect: !isEmpty(selectedItems),
-      key: id,
-      id,
-      onSelect: makeSelectHandler(id),
-      highlight: search,
-    };
-
-    if (renderItem) return renderItem(entityResultProps, opts);
-    return <DropdownItemEntity {...entityResultProps} />;
+    return (
+      <DropdownItemEntity
+        {...resultProps}
+        highlight={search}
+        isMultiSelect={!isEmpty(selectedItems)}
+        key={id}
+        id={id}
+        onSelect={makeSelectHandler(id)}
+      />
+    );
   }
 
   render() {

@@ -6,14 +6,12 @@ import { InputRaw } from '../Form';
 
 class AutoCompleteCombobox extends Component {
   static propTypes = {
-    closeOnSelect: PropTypes.bool,
     onSelect: PropTypes.func.isRequired,
     onSearch: PropTypes.func.isRequired,
     search: PropTypes.string,
   }
 
   static defaultProps = {
-    closeOnSelect: true,
     search: '',
   }
 
@@ -110,12 +108,15 @@ class AutoCompleteCombobox extends Component {
     );
   }
 
-  renderItem = ({ id, ...resultProps }, opts) => {
+  renderItem = (_itemProps, opts) => {
     const { renderItem, search } = this.props;
     const { makeSelectHandler, selectedItems } = opts;
+    if (renderItem) return renderItem(_itemProps, opts);
+
+    const { id, ...itemProps } = _itemProps;
 
     const autocompleteResultProps = {
-      ...resultProps,
+      ...itemProps,
       isMultiSelect: !isEmpty(selectedItems),
       key: id,
       id,
@@ -123,17 +124,16 @@ class AutoCompleteCombobox extends Component {
       highlight: search,
     };
 
-    if (renderItem) return renderItem(autocompleteResultProps, opts);
     return <DropdownItemBase {...autocompleteResultProps} />;
   }
 
   render() {
-    const { closeOnSelect, search, ...rest } = this.props;
+    const { search, ...rest } = this.props;
 
     return (
       <ComboboxCore
         {...rest}
-        closeOnSelect={closeOnSelect}
+        closeOnSelect
         renderInput={this.renderInput}
         renderItem={this.renderItem}
         onSearch={this.onSearch}
