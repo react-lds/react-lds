@@ -19,7 +19,7 @@ const MenuSubHeader = (props) => {
       role="separator"
       {...rest}
     >
-      <span className="slds-text-title_caps">{children}</span>
+      <span>{children}</span>
     </li>
   );
 };
