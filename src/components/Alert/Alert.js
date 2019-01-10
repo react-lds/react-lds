@@ -56,7 +56,7 @@ const Alert = (props) => {
             <ButtonIcon
               sprite="utility"
               icon="close"
-              size={toast ? 'large' : null}
+              size={toast ? 'large' : 'small'}
             />
           </IconButton>
         </div>
