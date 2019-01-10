@@ -208,8 +208,8 @@ class ComboboxCore extends Component {
       selectedItems,
     } = this.props;
     const { keyboardSelection } = this.state;
-    const filteredItems = items.filter(item => !item.isHeader);
-    const len = filteredItems.length;
+    const optionItems = items.filter(item => !item.isHeader);
+    const len = optionItems.length;
 
     const isDelete = key === 'Backspace' || key === 'Delete';
     const isEscape = key === 'Escape';
@@ -263,14 +263,14 @@ class ComboboxCore extends Component {
     if (isKeyboardCycle) {
       evt.preventDefault();
       this.setState(({ keyboardSelection: prevSelection }) => {
-        const prevIndex = filteredItems.findIndex(byItemId(prevSelection));
-        const nextIndex = getNextIndex(filteredItems, prevIndex, isDownArrow ? 'desc' : 'asc');
+        const prevIndex = optionItems.findIndex(byItemId(prevSelection));
+        const nextIndex = getNextIndex(optionItems, prevIndex, isDownArrow ? 'desc' : 'asc');
         const dropdown = this.dropdownRef.current;
-        // This works since this mirrors `filteredItems`
+        // This works since this mirrors `optionItems`
         // It may be faster to keep a refMap of items and augment the DOM access that way
         const childNodes = dropdown.querySelectorAll('.slds-listbox__option[role="option"]');
         scrollDropdown(dropdown, childNodes[nextIndex]);
-        const { id } = filteredItems[nextIndex];
+        const { id } = optionItems[nextIndex];
         return { keyboardSelection: id };
       });
 
