@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash-es/isEmpty';
+import isObject from 'lodash-es/isObject';
 import { ComboboxCore, BaseDropdownItem, ComboboxListbox } from './components';
 import { InputRaw } from '../Form';
 import { makeInputAddHandler } from './utils/helpers';
@@ -107,9 +108,9 @@ class AutoCompleteCombobox extends Component {
     selectedItems: [],
   }
 
-  onSearch = (input, isEvent = true) => {
+  onSearch = (input) => {
     const { onSearch } = this.props;
-    const val = isEvent ? input.target.value : input;
+    const val = isObject(input) ? input.target.value : input;
     onSearch(val, { isClear: false });
   }
 

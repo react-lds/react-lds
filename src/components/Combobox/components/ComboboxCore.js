@@ -153,14 +153,13 @@ class ComboboxCore extends Component {
       selectedItems,
     } = this.props;
 
-    // TODO
     const isRemove = selectedItems.findIndex(byItemId(id)) > -1;
 
     const isReplace = !isMultiSelect
       && !isRemove
       && selectedItems.length > 0;
 
-    onSelect(id, { isRemove, isReplace });
+    onSelect(id, { isAdd: false, isRemove, isReplace });
 
     if (closeOnSelect) {
       this.setState({ keyboardSelection: null });
@@ -218,13 +217,13 @@ class ComboboxCore extends Component {
         evt.preventDefault();
         const inputVal = evt.target.value;
         if (onSearch) {
-          onSearch(inputVal.substring(0, inputVal.length - 1), false);
+          onSearch(inputVal.substring(0, inputVal.length - 1));
         }
         this.setState({ keyboardSelection: null });
       }
 
       const isKeyboardRemove = !isMultiSelect && selectedItems.length === 1;
-      // TODO
+
       if (isKeyboardRemove) this.onSelect(selectedItems[0].id, evt);
       return true;
     }
@@ -264,9 +263,8 @@ class ComboboxCore extends Component {
   }
 
   onInputFocus = (evt) => {
-    const isUserEvent = evt.nativeEvent.which != null;
     const { onToggle, isOpen } = this.props;
-    if (isUserEvent) onToggle(!isOpen);
+    if (evt.isTrusted) onToggle(!isOpen);
   }
 
   onInputBlur = (evt) => {

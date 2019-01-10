@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash-es/isEmpty';
+import isObject from 'lodash-es/isObject';
 import { EntityDropdownItem, SearchIndicatorDropdownItem } from './components/DropdownItems';
 import { InputRaw } from '../Form';
 import { Icon } from '../Icon';
@@ -104,9 +105,9 @@ class EntityCombobox extends Component {
     selectedItems: [],
   }
 
-  onSearch = (input, isEvent = true) => {
+  onSearch = (input) => {
     const { onSearch } = this.props;
-    const val = isEvent ? input.target.value : input;
+    const val = isObject(input) ? input.target.value : input;
     onSearch(val, { isClear: false });
   }
 
