@@ -69,3 +69,5 @@ const makeHighlighter = highlighter => (str = '', search = '') => {
 };
 
 export const defaultHighlighter = makeHighlighter(str => <mark>{str}</mark>);
+
+export const byItemId = value => ({ id }) => id === value;

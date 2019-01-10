@@ -5,11 +5,9 @@ import { ClickOutside } from '../../ClickOutside';
 import ComboboxDropdown from './ComboboxDropdown';
 import ComboboxDropdownLists from './ComboboxDropdownLists';
 import { LoadingIndicatorDropdownItem } from './DropdownItems';
-import { getNextIndex, scrollDropdown } from '../utils/helpers';
+import { byItemId, getNextIndex, scrollDropdown } from '../utils/helpers';
 import { itemType } from '../utils/constants';
 import ComboboxListbox from './ComboboxListbox';
-
-const byItemId = value => ({ id }) => id === value;
 
 class ComboboxCore extends Component {
   static propTypes = {
