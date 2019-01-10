@@ -245,7 +245,7 @@ class ComboboxCore extends Component {
     if (isKeyboardCycle) {
       evt.preventDefault();
       this.setState(({ keyboardSelection: prevSelection }) => {
-        const prevIndex = optionItems.findIndex(byItemId(prevSelection));
+        const prevIndex = prevSelection ? optionItems.findIndex(byItemId(prevSelection)) : null;
         const nextIndex = getNextIndex(optionItems, prevIndex, isDownArrow ? 'desc' : 'asc');
         const dropdown = this.dropdownRef.current;
         // This works since this mirrors `optionItems`

@@ -22,7 +22,9 @@ const onSelectMock = jest.fn();
 const onToggleMock = jest.fn();
 
 /* eslint-disable react/prop-types */
-const MockItem = ({ id, onMouseDown }) => <li onMouseDown={onMouseDown} key={id} />;
+const MockItem = ({ id, isHeader, onMouseDown }) => (
+  <li className="slds-listbox__option" role={isHeader ? 'header' : 'option'} onMouseDown={onMouseDown} key={id} />
+);
 const MockInput = React.forwardRef((inputProps, ref) => <InputRaw {...inputProps} ref={ref} />);
 const mockListbox = <div />;
 
@@ -251,6 +253,27 @@ describe('<ComboboxCore />', () => {
     expect(call[1]).toMatchObject({ isAdd: false, isRemove: false, isReplace: false });
   });
 
-  // it('cycles keyboard selection when encountering arrow keys', () => {});
-  // it('does not allow selecting headers when using arrow keys', () => {});
+  it('cycles keyboard selection when encountering arrow keys while ignoring headers', () => {
+    const items = [
+      ITEMS[0],
+      { id: 'h1', label: 'h1l', isHeader: true },
+      ITEMS[1],
+      ITEMS[2],
+      { id: 'h2', label: 'h2l', isHeader: true },
+    ];
+    const mounted = getCmp({ isOpen: true, items });
+    const up = () => { mounted.find(InputRaw).simulate('keydown', { key: 'ArrowUp' }); };
+    const down = () => { mounted.find(InputRaw).simulate('keydown', { key: 'ArrowDown' }); };
+    const testState = (val) => { expect(mounted.state('keyboardSelection')).toEqual(val); };
+
+    up();
+    testState('3');
+    down();
+    testState('1');
+    down();
+    down();
+    testState('3');
+    down();
+    testState('1');
+  });
 });

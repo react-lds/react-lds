@@ -16,7 +16,7 @@ export const scrollDropdown = (parentNode, childNode) => {
 };
 
 export const getNextIndex = (items, prevIndex, direction = 'desc') => {
-  if (prevIndex == null) return getNextIndex(items, -1, direction);
+  if (prevIndex == null) return getNextIndex(items, direction === 'desc' ? -1 : 0, direction);
   const len = items.length;
   const getIndexInBounds = nextIndex => ((nextIndex % len) + len) % len;
   const nextIndex = getIndexInBounds(direction === 'desc' ? prevIndex + 1 : prevIndex - 1);
