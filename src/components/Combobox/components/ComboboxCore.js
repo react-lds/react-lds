@@ -398,7 +398,7 @@ class ComboboxCore extends Component {
         condition={isOpen}
       >
         <ComboboxDropdown
-          comboboxClassName={comboboxClassName}
+          className={comboboxClassName}
           height={height}
           id={`combobox-${id}`}
           isSingleInlineSelection={isInlineListboxSelection && !isMultiSelect && selectedItems.length === 1}

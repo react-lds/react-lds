@@ -111,6 +111,76 @@ describe('<BaseDropdownItem />', () => {
     expect(icon.exists()).toBeTruthy();
     expect(icon.prop('icon')).toEqual('check');
   });
+
+  it('renders a highlight when supplied', () => {
+    const mounted = getCmp({ label: 'A really long label', highlight: 'Long' });
+    expect(mounted.find('mark').text()).toEqual('long');
+  });
+});
+
+describe('<EntityDropdownItem />', () => {
+  const getCmp = ({ props = {}, isShallow = true } = {}) => {
+    const renderer = isShallow ? shallow : mount;
+
+    return renderer(
+      <EntityDropdownItem
+        icon={{ icon: 'account', sprite: 'standard' }}
+        label="foo"
+        {...props}
+      />
+    );
+  };
+
+  it('renders a DropdownItem', () => {
+    const mounted = getCmp();
+    expect(mounted.find(DropdownItem).exists()).toBeTruthy();
+  });
+
+  it('renders an icon and passes it to DropdownItem', () => {
+    const mounted = getCmp({ isShallow: false });
+    const icon = mounted.find(Icon);
+    expect(icon.exists()).toBeTruthy();
+    expect(icon.props()).toMatchObject({
+      icon: 'account',
+      sprite: 'standard'
+    });
+    expect(icon.prop('className')).toBeNull();
+  });
+
+  it('renders utility icons different from other icons', () => {
+    const mounted = getCmp({
+      props: {
+        icon: { icon: 'foo', sprite: 'utility' },
+        isSelected: false,
+      },
+      isShallow: false,
+    });
+    const icon = mounted.find(Icon);
+    expect(icon.hasClass('slds-current-color')).toBeTruthy();
+    expect(icon.prop('size')).toEqual('x-small');
+  });
+
+  it('renders an assistive label when selected in a multi-select combobox', () => {
+    const mounted = getCmp({
+      props: {
+        isSelected: true,
+        isMultiSelect: true,
+        isSelectedAssistiveLabel: 'baz',
+      }
+    });
+    expect(mounted.find('.slds-listbox__option-text > .slds-assistive-text').text()).toEqual('baz');
+  });
+
+  it('renders the content wrapped in an entity-specific class', () => {
+    const mounted = getCmp();
+    expect(mounted.find('.slds-listbox__option-text_entity').text()).toEqual('foo');
+  });
+
+  it('renders the meta wrapped in an entity-specific class', () => {
+    const sampleEl = <span className="sample" />;
+    const mounted = getCmp({ props: { meta: sampleEl } });
+    expect(mounted.find('.slds-listbox__option-meta_entity').contains(sampleEl)).toBeTruthy();
+  });
 });
 
 describe('<HeaderDropdownItem />', () => {
@@ -141,46 +211,6 @@ describe('<LoadingIndicatorDropdownItem />', () => {
     const mounted = shallow(<LoadingIndicatorDropdownItem />);
     expect(mounted.find('.slds-listbox__item').prop('role')).toEqual('presentation');
     expect(mounted.find(Spinner).prop('inline')).toBeTruthy();
-  });
-});
-
-describe('<EntityDropdownItem />', () => {
-  const getCmp = ({ props = {}, isShallow = true } = {}) => {
-    const renderer = isShallow ? shallow : mount;
-
-    return renderer(
-      <EntityDropdownItem
-        {...props}
-        icon={{ icon: 'account', sprite: 'standard' }}
-        label="foo"
-      />
-    );
-  };
-
-  it('renders a DropdownItem', () => {
-    const mounted = getCmp();
-    expect(mounted.find(DropdownItem).exists()).toBeTruthy();
-  });
-
-  it('renders an icon and passes it to DropdownItem', () => {
-    const mounted = getCmp({ isShallow: false });
-    const icon = mounted.find(Icon);
-    expect(icon.exists()).toBeTruthy();
-    expect(icon.props()).toMatchObject({
-      icon: 'account',
-      sprite: 'standard'
-    });
-  });
-
-  it('renders the content wrapped in an entity-specific class', () => {
-    const mounted = getCmp();
-    expect(mounted.find('.slds-listbox__option-text_entity').text()).toEqual('foo');
-  });
-
-  it('renders the meta wrapped in an entity-specific class', () => {
-    const sampleEl = <span className="sample" />;
-    const mounted = getCmp({ props: { meta: sampleEl } });
-    expect(mounted.find('.slds-listbox__option-meta_entity').contains(sampleEl)).toBeTruthy();
   });
 });
 

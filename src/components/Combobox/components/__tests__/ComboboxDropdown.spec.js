@@ -7,6 +7,7 @@ const mockFn = jest.fn();
 
 const getCmp = (props = {}) => shallow(
   <ComboboxDropdown
+    height={7}
     id="foo"
     isOpen={false}
     label="bar"
@@ -28,7 +29,7 @@ describe('<ComboboxDropdown />', () => {
   });
 
   it('Renders with a set height', () => {
-    const mounted = getCmp({ height: 7 });
+    const mounted = getCmp();
     expect(mounted.find('.slds-dropdown').hasClass('slds-dropdown_length-with-icon-7')).toBeTruthy();
   });
 
@@ -50,9 +51,12 @@ describe('<ComboboxDropdown />', () => {
     expect(mockFn).toHaveBeenCalled();
   });
 
-  it('Applies comboboxClassName', () => {
-    const mounted = getCmp({ comboboxClassName: 'foo' });
-    expect(mounted.find('.slds-combobox').hasClass('foo')).toBeTruthy();
+  it('renders a listbox of results by calling a renderer', () => {
+    const mockRenderer = jest.fn();
+    const mounted = getCmp();
+    expect(mockRenderer).not.toHaveBeenCalled();
+    mounted.setProps({ renderListbox: mockRenderer });
+    expect(mockRenderer).toHaveBeenCalled();
   });
 
   it('Applies rest props', () => {

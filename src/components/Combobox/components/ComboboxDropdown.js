@@ -49,7 +49,7 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
   ];
 
   return (
-    <FormElement className={comboboxClassName} {...rest}>
+    <FormElement {...rest}>
       <FormElementLabel id={id} label={label} />
       <FormElementControl>
         <div className={cx(comboboxContainerClasses)}>

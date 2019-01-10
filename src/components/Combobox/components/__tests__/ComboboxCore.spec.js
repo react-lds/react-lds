@@ -17,14 +17,19 @@ const onToggleMock = jest.fn();
 
 const mockInput = <input type="text" />;
 const mockItem = <li />;
+const mockListbox = <div />;
 
 const renderInputMock = jest.fn(() => mockInput);
 const renderItemMock = jest.fn(() => mockItem);
+const renderListboxMock = jest.fn(() => mockListbox);
 
 const getCmp = (props = {}) => shallow(
   <ComboboxCore
-    {...props}
+    closeOnSelect
     id="foo"
+    isLoading={false}
+    isMultiSelect={false}
+    isOpen={false}
     items={ITEMS}
     label="bar"
     placeholder="baz"
@@ -32,6 +37,9 @@ const getCmp = (props = {}) => shallow(
     onToggle={onToggleMock}
     renderInput={renderInputMock}
     renderItem={renderItemMock}
+    renderListbox={renderListboxMock}
+    selectedItems={[]}
+    {...props}
   />
 );
 
@@ -43,10 +51,12 @@ describe('<ComboboxCore />', () => {
     onToggleMock.mockClear();
     renderInputMock.mockClear();
     renderItemMock.mockClear();
+    renderListboxMock.mockClear();
   });
 
   it('renders a combobox dropdown', () => {
     const mounted = getCmp({
+      comboboxClassName: 'foo',
       height: 7,
       isOpen: true,
     });
@@ -55,6 +65,7 @@ describe('<ComboboxCore />', () => {
     expect(dropdown.exists()).toBeTruthy();
     expect(dropdown.props()).toMatchObject({
       height: 7,
+      className: 'foo',
       id: 'combobox-foo',
       listboxId: 'listbox-foo',
       isOpen: true,
@@ -72,48 +83,19 @@ describe('<ComboboxCore />', () => {
 
     const dropdownLists = mounted.find(ComboboxDropdownLists);
     expect(dropdownLists.exists()).toBeTruthy();
+
+
     expect(dropdownLists.props()).toMatchObject({
       items: ITEMS,
       renderItemsPrepended: mockFn,
       selectedItems: selection,
     });
-  });
 
-  it('renders a Listbox when a multiselect combobox is closed', () => {
-    const mockFn = jest.fn(() => <span />);
-    const selection = [ITEMS[1]];
-
-    const mounted = getCmp({
-      isOpen: false,
-      labelListbox: 'foobaz',
-      renderListbox: mockFn,
-      selectedItems: selection,
-    });
-
-    expect(mockFn).toHaveBeenCalledTimes(0);
-    mounted.setProps({ isMultiSelect: true });
-    expect(mockFn).toHaveBeenCalledTimes(1);
-
-    const call = mockFn.mock.calls[0];
-    const [props, opts] = call;
-
-    expect(props).toHaveProperty('label', 'foobaz');
-    expect(props).toHaveProperty('selectedItems', selection);
-    expect(props).toHaveProperty('makeSelectHandler');
-
-    expect(opts).toHaveProperty('items', ITEMS);
-    expect(opts).toHaveProperty('selectedItems', selection);
-    expect(opts).toHaveProperty('makeSelectHandler');
-    expect(opts).toHaveProperty('keyboardSelection');
-  });
-
-  it('closes when a click outside is registered', () => {
-    const mounted = getCmp({ isOpen: true });
-    mounted.find(ClickOutside).simulate('clickOutside');
-    expect(onToggleMock).toHaveBeenCalledWith(false);
+    expect(dropdownLists.prop('renderItemsAppended')).toBeInstanceOf(Function);
   });
 
   // TODO: When enzyme allows it
+  // it('renders a Listbox when a multiselect combobox is closed', () => {});
   // it('renders dropdown items with the supplied render function', () => {});
   // it('renders an input with the supplied render function', () => {});
   // it('opens if input is not focussed and clicked', () => {});
