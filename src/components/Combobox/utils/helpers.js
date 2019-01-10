@@ -18,8 +18,8 @@ export const scrollDropdown = (parentNode, childNode) => {
 export const getNextIndex = (items, prevIndex, direction = 'desc') => {
   if (prevIndex == null) return getNextIndex(items, -1, direction);
   const len = items.length;
-  const getWrappedIndex = nextIndex => ((nextIndex % len) + len) % len;
-  const nextIndex = getWrappedIndex(direction === 'desc' ? prevIndex + 1 : prevIndex - 1);
+  const getIndexInBounds = nextIndex => ((nextIndex % len) + len) % len;
+  const nextIndex = getIndexInBounds(direction === 'desc' ? prevIndex + 1 : prevIndex - 1);
   const nextItem = items[nextIndex];
   return nextItem.isHeader
     ? getNextIndex(items, nextIndex, direction)
