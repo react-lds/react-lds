@@ -56,7 +56,7 @@ const ComboboxDropdownListItem = (props) => {
         truncate
       >
         {isHeader ? (
-          <h3 className="slds-text-title_caps" role="presentation">
+          <h3 className="slds-listbox__option-header" role="presentation">
             {children}
           </h3>
         ) : children}
