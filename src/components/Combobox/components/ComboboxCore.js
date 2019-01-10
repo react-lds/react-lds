@@ -6,6 +6,7 @@ import ComboboxDropdown from './ComboboxDropdown';
 import ComboboxDropdownLists from './ComboboxDropdownLists';
 import { DropdownItemLoading } from './DropdownItems';
 import { getNextIndex, scrollDropdown } from '../utils/helpers';
+import { itemType } from '../utils/constants';
 import ComboboxListbox from './ComboboxListbox';
 
 const byItemId = value => ({ id }) => id === value;
@@ -48,16 +49,7 @@ class ComboboxCore extends Component {
      * Array of items that will be displayed in the selection dropdown
      * `isHeader` items break the dropdown into sublists
      */
-    items: PropTypes.arrayOf(PropTypes.shape({
-      icon: PropTypes.shape({
-        icon: PropTypes.string.isRequired,
-        sprite: PropTypes.string.isRequired,
-      }),
-      id: PropTypes.string.isRequired,
-      isHeader: PropTypes.bool,
-      label: PropTypes.string.isRequired,
-      meta: PropTypes.node,
-    })),
+    items: PropTypes.arrayOf(itemType),
     /**
      * Labels the Combobox
      */
@@ -108,16 +100,7 @@ class ComboboxCore extends Component {
     /**
      * Array of `id`s that are currently selected
      */
-    selectedItems: PropTypes.arrayOf(PropTypes.shape({
-      icon: PropTypes.shape({
-        icon: PropTypes.string.isRequired,
-        sprite: PropTypes.string.isRequired,
-      }),
-      id: PropTypes.string.isRequired,
-      isHeader: PropTypes.bool,
-      label: PropTypes.string.isRequired,
-      meta: PropTypes.node,
-    })),
+    selectedItems: PropTypes.arrayOf(itemType),
   }
 
   static defaultProps = {

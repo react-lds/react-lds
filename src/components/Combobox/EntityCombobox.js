@@ -5,32 +5,15 @@ import { DropdownItemEntity, DropdownItemSearch } from './components/DropdownIte
 import { InputRaw } from '../Form';
 import { Icon } from '../Icon';
 import { ComboboxCore } from './components';
+import { itemTypeEntity } from './utils/constants';
 
 class EntityCombobox extends Component {
   static propTypes = {
-    items: PropTypes.arrayOf(PropTypes.shape({
-      icon: PropTypes.shape({
-        icon: PropTypes.string.isRequired,
-        sprite: PropTypes.string.isRequired,
-      }).isRequired,
-      id: PropTypes.string.isRequired,
-      isHeader: PropTypes.bool,
-      label: PropTypes.string.isRequired,
-      meta: PropTypes.node,
-    })),
+    items: PropTypes.arrayOf(itemTypeEntity),
     onSearch: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
     search: PropTypes.string,
-    selectedItems: PropTypes.arrayOf(PropTypes.shape({
-      icon: PropTypes.shape({
-        icon: PropTypes.string.isRequired,
-        sprite: PropTypes.string.isRequired,
-      }).isRequired,
-      id: PropTypes.string.isRequired,
-      isHeader: PropTypes.bool,
-      label: PropTypes.string.isRequired,
-      meta: PropTypes.node,
-    })),
+    selectedItems: PropTypes.arrayOf(itemTypeEntity),
   }
 
   static defaultProps = {
