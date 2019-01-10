@@ -60,6 +60,10 @@ class ComboboxCore extends Component {
      * Placeholder shown in the Dropdown input when no items are selected yet
      */
     placeholder: PropTypes.string.isRequired,
+    /**
+     * Callback to update input state
+     * Called with (value, { isClear })
+     */
     onSearch: PropTypes.func,
     /**
      * Callback to update selection state
@@ -96,7 +100,7 @@ class ComboboxCore extends Component {
      */
     renderListbox: PropTypes.func,
     /**
-     * Array of `id`s that are currently selected
+     * Array of `item`-like shapes that are currently selected
      */
     selectedItems: PropTypes.arrayOf(itemType),
   }
