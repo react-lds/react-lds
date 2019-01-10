@@ -5,7 +5,7 @@ import { ClickOutside } from '../../ClickOutside';
 import ComboboxDropdown from './ComboboxDropdown';
 import ComboboxDropdownLists from './ComboboxDropdownLists';
 import { DropdownItemLoading } from './DropdownItems';
-import { handleIndexChange, scrollDropdown } from '../utils/helpers';
+import { getNextIndex, scrollDropdown } from '../utils/helpers';
 import ComboboxListbox from './ComboboxListbox';
 
 const byItemId = value => ({ id }) => id === value;
@@ -264,7 +264,7 @@ class ComboboxCore extends Component {
       evt.preventDefault();
       this.setState(({ keyboardSelection: prevSelection }) => {
         const prevIndex = filteredItems.findIndex(byItemId(prevSelection));
-        const nextIndex = handleIndexChange(filteredItems, prevIndex, isDownArrow ? 'desc' : 'asc');
+        const nextIndex = getNextIndex(filteredItems, prevIndex, isDownArrow ? 'desc' : 'asc');
         const dropdown = this.dropdownRef.current;
         // This works since this mirrors `filteredItems`
         // It may be faster to keep a refMap of items and augment the DOM access that way

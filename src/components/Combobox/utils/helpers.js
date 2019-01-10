@@ -15,14 +15,14 @@ export const scrollDropdown = (parentNode, childNode) => {
   /* eslint-enable no-param-reassign */
 };
 
-export const handleIndexChange = (items, prevIndex, direction = 'desc') => {
-  if (prevIndex == null) return handleIndexChange(items, -1, direction);
+export const getNextIndex = (items, prevIndex, direction = 'desc') => {
+  if (prevIndex == null) return getNextIndex(items, -1, direction);
   const len = items.length;
   const getWrappedIndex = nextIndex => ((nextIndex % len) + len) % len;
   const nextIndex = getWrappedIndex(direction === 'desc' ? prevIndex + 1 : prevIndex - 1);
   const nextItem = items[nextIndex];
   return nextItem.isHeader
-    ? handleIndexChange(items, nextIndex, direction)
+    ? getNextIndex(items, nextIndex, direction)
     : nextIndex;
 };
 
