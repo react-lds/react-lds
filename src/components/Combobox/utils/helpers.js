@@ -29,7 +29,6 @@ export const handleIndexChange = (items, prevIndex, direction = 'desc') => {
 export const preventDefault = evt => evt.preventDefault();
 
 const makeHighlighter = highlighter => (str = '', search = '') => {
-  let result = str;
   const searchLen = search.length;
   if (searchLen === 0) return str;
 
@@ -39,11 +38,13 @@ const makeHighlighter = highlighter => (str = '', search = '') => {
   if (splitLen < 2) return str;
 
   let startIndex = 0;
+  const result = [];
 
-  result = splitLabel.map((strPortion, i) => {
-    const len = strPortion.length;
+  splitLabel.forEach((strPos, i) => {
+    const len = strPos.length;
     const origIndex = startIndex + len;
     const origStr = str.slice(startIndex, origIndex);
+
     startIndex = origIndex;
 
     let highlightEl = null;
@@ -56,12 +57,12 @@ const makeHighlighter = highlighter => (str = '', search = '') => {
       startIndex = searchIndex;
     }
 
-    return (
+    result.push((
       <React.Fragment key={`${origStr}${highlightStr}`}>
         {origStr}
         {highlightEl}
       </React.Fragment>
-    );
+    ));
   });
 
   return result;
