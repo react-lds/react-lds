@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { debounce, without } from 'lodash-es';
 import { BASE_ITEMS } from './constants';
-import { AutoCompleteCombobox } from '../../src';
+import { EntityCombobox } from '../../src';
+
+const mockSearchResults = BASE_ITEMS.map(i => ({
+  ...i,
+  icon: { sprite: 'standard', icon: 'groups' },
+}));
 
 export class AsyncComboboxDemo extends Component {
   constructor(props) {
@@ -10,7 +15,7 @@ export class AsyncComboboxDemo extends Component {
     this.state = {
       isLoading: false,
       isOpen: false,
-      items: BASE_ITEMS,
+      items: mockSearchResults,
       search: '',
       selection: [],
     };
@@ -22,7 +27,7 @@ export class AsyncComboboxDemo extends Component {
     this.setState({ isLoading: true, items: [] });
 
     setTimeout(() => {
-      this.setState({ isLoading: false, items: BASE_ITEMS });
+      this.setState({ isLoading: false, items: mockSearchResults });
     }, 1000);
   }
 
@@ -31,7 +36,7 @@ export class AsyncComboboxDemo extends Component {
     if (val !== '') this.performSearch(val);
   }
 
-  onSelect = (id, { isReplace, isRemove }) => {
+  onSelect = (id, { isAdd, isReplace, isRemove }) => {
     if (isReplace) {
       this.setState({
         selection: [].concat(id),
@@ -40,7 +45,7 @@ export class AsyncComboboxDemo extends Component {
       this.setState(({ selection: prevSelection }) => ({
         selection: without(prevSelection, id),
       }));
-    } else {
+    } else if (!isAdd) {
       this.setState(({ selection: prevSelection }) => ({
         selection: [...prevSelection, id],
       }));
@@ -60,13 +65,10 @@ export class AsyncComboboxDemo extends Component {
       selection
     } = this.state;
 
-    const selectedItems = selection.map((id) => {
-      const existingItem = items.find(item => item.id === id);
-      return existingItem || { label: id, id };
-    });
+    const selectedItems = selection.map(id => items.find(item => item.id === id));
 
     return (
-      <AutoCompleteCombobox
+      <EntityCombobox
         {...this.props}
         isLoading={isLoading}
         isOpen={isOpen}
