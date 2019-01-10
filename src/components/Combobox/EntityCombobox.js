@@ -6,51 +6,74 @@ import { InputRaw } from '../Form';
 import { Icon } from '../Icon';
 import { ComboboxCore } from './components';
 import { itemTypeEntity } from './utils/constants';
+import { makeInputAddHandler } from './utils/helpers';
 
 class EntityCombobox extends Component {
   static propTypes = {
     items: PropTypes.arrayOf(itemTypeEntity),
     onSearch: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
-    search: PropTypes.string,
+    renderInput: PropTypes.func,
+    renderItem: PropTypes.func,
     selectedItems: PropTypes.arrayOf(itemTypeEntity),
   }
 
   static defaultProps = {
-    search: '',
     items: [],
-    selectedItems: [],
-  }
+    renderInput: (inputProps, opts) => {
+      const { isMultiSelect, makeSelectHandler, selectedItems } = opts;
+      const { onKeyDown, value, ...rest } = inputProps;
 
-  makeOnInputKeyDown = (originalHandler, keyboardSelection) => {
-    const {
-      isOpen,
-      onToggle,
-      search,
-      selectedItems,
-    } = this.props;
+      const len = selectedItems.length;
+      const hasSingleSelection = !isMultiSelect && len === 1;
 
-    return (evt) => {
-      const { key } = evt;
+      let inputValue = value;
+      let activeId = null;
+      let selectedItem;
 
-      const isKeyboardAdd = isOpen
-        && search !== ''
-        && !keyboardSelection
-        && key === 'Enter';
-
-      if (isKeyboardAdd) {
-        this.onSelect(search, {
-          isAdd: true,
-          isReplace: selectedItems.length > 1,
-          isRemove: false,
-        });
-
-        onToggle(false);
-        return true;
+      if (hasSingleSelection) {
+        [selectedItem] = selectedItems;
+        const { id, label } = selectedItem;
+        inputValue = label;
+        activeId = id;
       }
 
-      return originalHandler(evt);
-    };
+      return (
+        <InputRaw
+          {...rest}
+          aria-activedescendant={!hasSingleSelection && activeId ? activeId : null}
+          aria-autocomplete="list"
+          className="slds-input slds-combobox__input slds-combobox__input-value"
+          iconLeft={selectedItem && (
+            <Icon
+              className="slds-combobox__input-entity-icon"
+              icon={selectedItem.icon.icon}
+              sprite={selectedItem.icon.sprite}
+            />
+          )}
+          iconRight={hasSingleSelection ? 'clear' : 'search'}
+          iconRightOnClick={hasSingleSelection ? makeSelectHandler(activeId) : null}
+          onKeyDown={makeInputAddHandler(onKeyDown, opts)}
+          readOnly={hasSingleSelection}
+          value={inputValue}
+        />
+      );
+    },
+    renderItem: ({ id, ...resultProps }, opts) => {
+      const { makeSelectHandler, search, selectedItems } = opts;
+
+      return (
+        <EntityDropdownItem
+          {...resultProps}
+          highlight={search}
+          isMultiSelect={!isEmpty(selectedItems)}
+          key={id}
+          id={id}
+          onSelect={makeSelectHandler(id)}
+        />
+      );
+    },
+    selectedItems: [],
   }
 
   onSearch = (input, isEvent = true) => {
@@ -76,78 +99,13 @@ class EntityCombobox extends Component {
     return <SearchIndicatorDropdownItem search={search} />;
   }
 
-  renderInput = (inputProps, opts) => {
-    const { isMultiSelect, search } = this.props;
-    const { keyboardSelection, makeSelectHandler, selectedItems } = opts;
-
-    const len = selectedItems.length;
-    const hasSingleSelection = !isMultiSelect && len === 1;
-
-    let inputValue = search;
-    let activeId = null;
-    let selectedItem;
-
-    if (hasSingleSelection) {
-      [selectedItem] = selectedItems;
-      const { id, label } = selectedItem;
-      inputValue = label;
-      activeId = id;
-    }
-
-    return (
-      <InputRaw
-        {...inputProps}
-        aria-activedescendant={!hasSingleSelection && activeId
-          ? activeId
-          : null
-        }
-        aria-autocomplete="list"
-        className="slds-input slds-combobox__input slds-combobox__input-value"
-        iconLeft={selectedItem && (
-          <Icon
-            className="slds-combobox__input-entity-icon"
-            icon={selectedItem.icon.icon}
-            sprite={selectedItem.icon.sprite}
-          />
-        )}
-        iconRight={hasSingleSelection ? 'clear' : 'search'}
-        iconRightOnClick={hasSingleSelection ? makeSelectHandler(activeId) : null}
-        onKeyDown={this.makeOnInputKeyDown(inputProps.onKeyDown, keyboardSelection)}
-        readOnly={hasSingleSelection}
-        value={inputValue}
-      />
-    );
-  }
-
-  renderItem = ({ id, ...resultProps }, opts) => {
-    const { renderItem, search } = this.props;
-    if (renderItem) return renderItem(resultProps, opts);
-
-    const { makeSelectHandler, selectedItems } = opts;
-
-    return (
-      <EntityDropdownItem
-        {...resultProps}
-        highlight={search}
-        isMultiSelect={!isEmpty(selectedItems)}
-        key={id}
-        id={id}
-        onSelect={makeSelectHandler(id)}
-      />
-    );
-  }
-
   render() {
-    const { search, ...rest } = this.props;
-
     return (
       <ComboboxCore
-        {...rest}
+        {...this.props}
         isInlineListboxSelection
         onSelect={this.onSelect}
         onSearch={this.onSearch}
-        renderInput={this.renderInput}
-        renderItem={this.renderItem}
         renderItemsPrepended={this.renderSearchIndicator}
       />
     );

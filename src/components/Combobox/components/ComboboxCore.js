@@ -100,6 +100,10 @@ class ComboboxCore extends Component {
      */
     renderListbox: PropTypes.func,
     /**
+     * Search, will be passed to `opts` for Combobox variants that support input
+     */
+    search: PropTypes.string,
+    /**
      * Array of `item`-like shapes that are currently selected
      */
     selectedItems: PropTypes.arrayOf(itemType),
@@ -120,6 +124,7 @@ class ComboboxCore extends Component {
     renderItemsAppended: null,
     renderItemsPrepended: null,
     renderListbox: listboxProps => <ComboboxListbox {...listboxProps} />,
+    search: '',
   }
 
   constructor(props) {
@@ -202,7 +207,6 @@ class ComboboxCore extends Component {
     const isDownArrow = key === 'ArrowDown' || key === 'Down';
     const isUpArrow = key === 'ArrowUp' || key === 'Up';
 
-
     // (1) Open the dropdown when a key is pressed and it's closed
     const isKeyboardOpen = !isOpen
       && !isUpArrow
@@ -272,19 +276,30 @@ class ComboboxCore extends Component {
   }
 
   onInputBlur = (evt) => {
-    if (evt.isTrusted) {
-      this.onClose();
-    }
+    if (evt.isTrusted) this.onClose();
   }
 
   getOpts() {
-    const { isMultiSelect, items, selectedItems } = this.props;
+    const {
+      isMultiSelect,
+      isOpen,
+      items,
+      onSearch,
+      onSelect,
+      onToggle,
+      search,
+      selectedItems,
+    } = this.props;
     const { keyboardSelection } = this.state;
 
     return {
       isMultiSelect,
+      isOpen,
       items,
       keyboardSelection,
+      onToggle,
+      rawOnSelect: onSelect,
+      search: onSearch ? search : undefined,
       selectedItems,
       makeSelectHandler: this.makeSelectHandler
     };
@@ -295,6 +310,7 @@ class ComboboxCore extends Component {
       id,
       placeholder,
       onSearch,
+      search,
       renderInput,
     } = this.props;
 
@@ -313,6 +329,7 @@ class ComboboxCore extends Component {
       placeholder,
       ref: this.inputRef,
       role: 'textbox',
+      value: onSearch ? search : undefined,
     }, opts);
   }
 

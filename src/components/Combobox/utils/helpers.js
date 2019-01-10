@@ -71,3 +71,36 @@ const makeHighlighter = highlighter => (str = '', search = '') => {
 export const defaultHighlighter = makeHighlighter(str => <mark>{str}</mark>);
 
 export const byItemId = value => ({ id }) => id === value;
+
+export const makeInputAddHandler = (originalHandler, opts) => {
+  const {
+    isOpen,
+    keyboardSelection,
+    onToggle,
+    rawOnSelect: onSelect,
+    search,
+    selectedItems
+  } = opts;
+
+  return (evt) => {
+    const { key } = evt;
+
+    const isKeyboardAdd = isOpen
+      && search !== ''
+      && !keyboardSelection
+      && key === 'Enter';
+
+    if (isKeyboardAdd) {
+      onSelect(search, {
+        isAdd: true,
+        isReplace: selectedItems.length > 1,
+        isRemove: false,
+      });
+
+      onToggle(false);
+      return true;
+    }
+
+    return originalHandler(evt);
+  };
+};
