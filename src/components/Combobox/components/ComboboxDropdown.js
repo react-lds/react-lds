@@ -83,6 +83,7 @@ ComboboxDropdown.displayName = 'ComboboxDropdown';
 ComboboxDropdown.propTypes = {
   children: PropTypes.node,
   comboboxClassName: PropTypes.string,
+  height: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   isSingleInlineSelection: PropTypes.bool,

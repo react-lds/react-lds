@@ -4,22 +4,46 @@ import isEmpty from 'lodash-es/isEmpty';
 import { EntityDropdownItem, SearchIndicatorDropdownItem } from './components/DropdownItems';
 import { InputRaw } from '../Form';
 import { Icon } from '../Icon';
-import { ComboboxCore } from './components';
+import { ComboboxCore, ComboboxListbox } from './components';
 import { itemTypeEntity } from './utils/constants';
 import { makeInputAddHandler } from './utils/helpers';
 
 class EntityCombobox extends Component {
   static propTypes = {
+    /**
+     * See `ComboboxCore` or the Storybook stories for more information
+     */
+    closeOnSelect: PropTypes.bool,
+    comboboxClassName: PropTypes.string,
+    height: PropTypes.oneOf([5, 7, 10]),
+    id: PropTypes.string.isRequired,
+    isLoading: PropTypes.bool,
+    isMultiSelect: PropTypes.bool,
+    isOpen: PropTypes.bool.isRequired,
+    label: PropTypes.string.isRequired,
+    labelListbox: PropTypes.string,
+    placeholder: PropTypes.string.isRequired,
+    onToggle: PropTypes.func.isRequired,
+    renderInput: PropTypes.func,
+    renderItem: PropTypes.func,
+    renderItemsAppended: PropTypes.func,
+    renderItemsPrepended: PropTypes.func,
+    renderListbox: PropTypes.func,
+    search: PropTypes.string,
     items: PropTypes.arrayOf(itemTypeEntity),
     onSearch: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
-    renderInput: PropTypes.func,
-    renderItem: PropTypes.func,
     selectedItems: PropTypes.arrayOf(itemTypeEntity),
   }
 
   static defaultProps = {
+    closeOnSelect: true,
+    comboboxClassName: null,
+    height: 5,
+    isLoading: false,
+    isMultiSelect: false,
     items: [],
+    labelListbox: undefined,
     renderInput: (inputProps, opts) => {
       const { isMultiSelect, makeSelectHandler, selectedItems } = opts;
       const { onKeyDown, value, ...rest } = inputProps;
@@ -73,6 +97,10 @@ class EntityCombobox extends Component {
         />
       );
     },
+    renderItemsAppended: null,
+    renderItemsPrepended: null,
+    renderListbox: listboxProps => <ComboboxListbox {...listboxProps} />,
+    search: '',
     selectedItems: [],
   }
 
@@ -94,9 +122,14 @@ class EntityCombobox extends Component {
   }
 
   renderSearchIndicator = () => {
-    const { search } = this.props;
+    const { renderItemsPrepended, search } = this.props;
     if (search.trim().length < 2) return null;
-    return <SearchIndicatorDropdownItem search={search} />;
+    return (
+      <React.Fragment>
+        {renderItemsPrepended && renderItemsPrepended()}
+        <SearchIndicatorDropdownItem search={search} />
+      </React.Fragment>
+    );
   }
 
   render() {

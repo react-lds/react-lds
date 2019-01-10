@@ -7,14 +7,13 @@ import ComboboxDropdownLists from './ComboboxDropdownLists';
 import { LoadingIndicatorDropdownItem } from './DropdownItems';
 import { byItemId, getNextIndex, scrollDropdown } from '../utils/helpers';
 import { itemType } from '../utils/constants';
-import ComboboxListbox from './ComboboxListbox';
 
 class ComboboxCore extends Component {
   static propTypes = {
     /**
      * Will close the selection dropdown upon selection when true
      */
-    closeOnSelect: PropTypes.bool,
+    closeOnSelect: PropTypes.bool.isRequired,
     /**
      * Classname that will be applied to the <FormElement> wrapping input and listbox
      */
@@ -34,20 +33,20 @@ class ComboboxCore extends Component {
     /**
      * Appends a `loading` spinner to the result items to
      */
-    isLoading: PropTypes.bool,
+    isLoading: PropTypes.bool.isRequired,
     /**
      * Defines whether the Combobox allows more than one selection
      */
-    isMultiSelect: PropTypes.bool,
+    isMultiSelect: PropTypes.bool.isRequired,
     /**
      * Determines whether the result dropdown is rendered
      */
-    isOpen: PropTypes.bool,
+    isOpen: PropTypes.bool.isRequired,
     /**
      * Array of items that will be displayed in the selection dropdown
      * `isHeader` items break the dropdown into sublists
      */
-    items: PropTypes.arrayOf(itemType),
+    items: PropTypes.arrayOf(itemType).isRequired,
     /**
      * Labels the Combobox
      */
@@ -98,7 +97,7 @@ class ComboboxCore extends Component {
     /**
      * Renders beneath Combobox. Used to display a Listbox of Pills in multi-select Comboboxes
      */
-    renderListbox: PropTypes.func,
+    renderListbox: PropTypes.func.isRequired,
     /**
      * Search, will be passed to `opts` for Combobox variants that support input
      */
@@ -106,24 +105,17 @@ class ComboboxCore extends Component {
     /**
      * Array of `item`-like shapes that are currently selected
      */
-    selectedItems: PropTypes.arrayOf(itemType),
+    selectedItems: PropTypes.arrayOf(itemType).isRequired,
   }
 
   static defaultProps = {
-    closeOnSelect: true,
     comboboxClassName: null,
     height: 5,
-    items: [],
-    selectedItems: [],
     isInlineListboxSelection: false,
-    isMultiSelect: false,
-    isLoading: false,
-    isOpen: false,
     labelListbox: 'Selected Items',
     onSearch: null,
     renderItemsAppended: null,
     renderItemsPrepended: null,
-    renderListbox: listboxProps => <ComboboxListbox {...listboxProps} />,
     search: '',
   }
 
@@ -161,6 +153,7 @@ class ComboboxCore extends Component {
       selectedItems,
     } = this.props;
 
+    // TODO
     const isRemove = selectedItems.findIndex(byItemId(id)) > -1;
 
     const isReplace = !isMultiSelect
@@ -231,6 +224,7 @@ class ComboboxCore extends Component {
       }
 
       const isKeyboardRemove = !isMultiSelect && selectedItems.length === 1;
+      // TODO
       if (isKeyboardRemove) this.onSelect(selectedItems[0].id, evt);
       return true;
     }

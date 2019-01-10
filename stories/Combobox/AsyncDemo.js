@@ -6,6 +6,7 @@ import { EntityCombobox } from '../../src';
 const mockSearchResults = BASE_ITEMS.map(i => ({
   ...i,
   icon: { sprite: 'standard', icon: 'groups' },
+  meta: <span>Objects • Standard</span>
 }));
 
 export class AsyncComboboxDemo extends Component {

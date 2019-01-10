@@ -1,21 +1,47 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash-es/isEmpty';
-import { ComboboxCore, BaseDropdownItem } from './components';
+import { ComboboxCore, BaseDropdownItem, ComboboxListbox } from './components';
 import { InputRaw } from '../Form';
 import { makeInputAddHandler } from './utils/helpers';
+import { itemType } from './utils/constants';
 
 class AutoCompleteCombobox extends Component {
   static propTypes = {
-    onSelect: PropTypes.func.isRequired,
+    /**
+     * See `ComboboxCore` or the Storybook stories for more information
+     */
+    closeOnSelect: PropTypes.bool,
+    comboboxClassName: PropTypes.string,
+    height: PropTypes.oneOf([5, 7, 10]),
+    id: PropTypes.string.isRequired,
+    isLoading: PropTypes.bool,
+    isMultiSelect: PropTypes.bool,
+    isOpen: PropTypes.bool.isRequired,
+    items: PropTypes.arrayOf(itemType),
+    label: PropTypes.string.isRequired,
+    labelListbox: PropTypes.string,
+    placeholder: PropTypes.string.isRequired,
     onSearch: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired,
+    onToggle: PropTypes.func.isRequired,
     renderInput: PropTypes.func,
     renderItem: PropTypes.func,
+    renderItemsAppended: PropTypes.func,
+    renderItemsPrepended: PropTypes.func,
+    renderListbox: PropTypes.func,
     search: PropTypes.string,
+    selectedItems: PropTypes.arrayOf(itemType),
   }
 
   static defaultProps = {
-    search: '',
+    closeOnSelect: true,
+    comboboxClassName: null,
+    height: 5,
+    isLoading: false,
+    isMultiSelect: false,
+    items: [],
+    labelListbox: null,
     renderInput: (inputProps, opts) => {
       const { onKeyDown, value, ...rest } = inputProps;
       const {
@@ -73,7 +99,12 @@ class AutoCompleteCombobox extends Component {
       };
 
       return <BaseDropdownItem {...autocompleteResultProps} />;
-    }
+    },
+    renderItemsAppended: null,
+    renderItemsPrepended: null,
+    renderListbox: listboxProps => <ComboboxListbox {...listboxProps} />,
+    search: '',
+    selectedItems: [],
   }
 
   onSearch = (input, isEvent = true) => {
@@ -92,7 +123,6 @@ class AutoCompleteCombobox extends Component {
     return (
       <ComboboxCore
         {...this.props}
-        closeOnSelect
         onSearch={this.onSearch}
         onSelect={this.onSelect}
       />
