@@ -15,7 +15,7 @@ export default ({
   title,
 }) => {
   const onClick = sortable ? () => onSort(dataKey) : null;
-  const classNames = cx('slds-text-title--caps', { 'slds-is-sorted': sortBy === dataKey });
+  const classNames = cx({ 'slds-is-sorted': sortBy === dataKey });
 
   return (
     <Cell
