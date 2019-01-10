@@ -1,13 +1,13 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import {
-  DropdownItem,
-  DropdownItemBase,
-  DropdownItemHeader,
-  DropdownItemLoading,
-  DropdownItemEntity,
-  DropdownItemSearch,
+  BaseDropdownItem,
+  HeaderDropdownItem,
+  LoadingIndicatorDropdownItem,
+  EntityDropdownItem,
+  SearchIndicatorDropdownItem,
 } from '../DropdownItems';
+import { DropdownItem } from '../DropdownItems/DropdownItem';
 import { Icon } from '../../../Icon';
 import { Spinner } from '../../../Spinner';
 
@@ -57,9 +57,9 @@ describe('<DropdownItem />', () => {
   });
 });
 
-describe('<DropdownItemBase />', () => {
+describe('<BaseDropdownItem />', () => {
   const getCmp = (props = {}) => mount(
-    <DropdownItemBase
+    <BaseDropdownItem
       id="foo"
       label="bar"
       {...props}
@@ -113,9 +113,9 @@ describe('<DropdownItemBase />', () => {
   });
 });
 
-describe('<DropdownItemHeader />', () => {
+describe('<HeaderDropdownItem />', () => {
   const getCmp = () => shallow(
-    <DropdownItemHeader
+    <HeaderDropdownItem
       id="foo"
       label="bar"
     />
@@ -136,20 +136,20 @@ describe('<DropdownItemHeader />', () => {
   });
 });
 
-describe('<DropdownItemLoading />', () => {
+describe('<LoadingIndicatorDropdownItem />', () => {
   it('renders an inline spinner', () => {
-    const mounted = shallow(<DropdownItemLoading />);
+    const mounted = shallow(<LoadingIndicatorDropdownItem />);
     expect(mounted.find('.slds-listbox__item').prop('role')).toEqual('presentation');
     expect(mounted.find(Spinner).prop('inline')).toBeTruthy();
   });
 });
 
-describe('<DropdownItemEntity />', () => {
+describe('<EntityDropdownItem />', () => {
   const getCmp = ({ props = {}, isShallow = true } = {}) => {
     const renderer = isShallow ? shallow : mount;
 
     return renderer(
-      <DropdownItemEntity
+      <EntityDropdownItem
         {...props}
         icon={{ icon: 'account', sprite: 'standard' }}
         label="foo"
@@ -184,9 +184,9 @@ describe('<DropdownItemEntity />', () => {
   });
 });
 
-describe('DropdownItemSearch />', () => {
-  it('renders a DropdownItemEntity', () => {
-    const mounted = shallow(<DropdownItemSearch search="foo" />);
-    expect(mounted.find(DropdownItemEntity).exists()).toBeTruthy();
+describe('SearchIndicatorDropdownItem />', () => {
+  it('renders a EntityDropdownItem', () => {
+    const mounted = shallow(<SearchIndicatorDropdownItem search="foo" />);
+    expect(mounted.find(EntityDropdownItem).exists()).toBeTruthy();
   });
 });

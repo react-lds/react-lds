@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash-es/isEmpty';
-import { ComboboxCore, DropdownItemBase } from './components';
+import { ComboboxCore, BaseDropdownItem } from './components';
 import { InputRaw } from '../Form';
 
 class AutoCompleteCombobox extends Component {
@@ -124,7 +124,7 @@ class AutoCompleteCombobox extends Component {
       highlight: search,
     };
 
-    return <DropdownItemBase {...autocompleteResultProps} />;
+    return <BaseDropdownItem {...autocompleteResultProps} />;
   }
 
   render() {

@@ -5,7 +5,7 @@ import { DropdownItem } from './DropdownItem';
 import { Icon } from '../../../Icon';
 import { defaultHighlighter } from '../../utils/helpers';
 
-export const DropdownItemEntity = ({
+export const EntityDropdownItem = ({
   className,
   highlight,
   icon,
@@ -58,7 +58,7 @@ export const DropdownItemEntity = ({
   );
 };
 
-DropdownItemEntity.propTypes = {
+EntityDropdownItem.propTypes = {
   className: PropTypes.string,
   highlight: PropTypes.string,
   icon: PropTypes.shape({
@@ -72,7 +72,7 @@ DropdownItemEntity.propTypes = {
   meta: PropTypes.node,
 };
 
-DropdownItemEntity.defaultProps = {
+EntityDropdownItem.defaultProps = {
   className: null,
   highlight: '',
   isMultiSelect: false,

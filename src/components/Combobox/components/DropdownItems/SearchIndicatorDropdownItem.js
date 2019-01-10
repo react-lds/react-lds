@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DropdownItemEntity } from './DropdownItemEntity';
+import { EntityDropdownItem } from './EntityDropdownItem';
 
 const searchIcon = { icon: 'search', sprite: 'utility' };
 
-export const DropdownItemSearch = ({ search }) => (
-  <DropdownItemEntity
+export const SearchIndicatorDropdownItem = ({ search }) => (
+  <EntityDropdownItem
     className="slds-listbox__option_term"
     isPresentation
     icon={searchIcon}
@@ -13,6 +13,6 @@ export const DropdownItemSearch = ({ search }) => (
   />
 );
 
-DropdownItemSearch.propTypes = {
+SearchIndicatorDropdownItem.propTypes = {
   search: PropTypes.string.isRequired,
 };

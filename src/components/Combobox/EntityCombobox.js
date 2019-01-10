@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash-es/isEmpty';
-import { DropdownItemEntity, DropdownItemSearch } from './components/DropdownItems';
+import { EntityDropdownItem, SearchIndicatorDropdownItem } from './components/DropdownItems';
 import { InputRaw } from '../Form';
 import { Icon } from '../Icon';
 import { ComboboxCore } from './components';
@@ -73,7 +73,7 @@ class EntityCombobox extends Component {
   renderSearchIndicator = () => {
     const { search } = this.props;
     if (search.trim().length < 2) return null;
-    return <DropdownItemSearch search={search} />;
+    return <SearchIndicatorDropdownItem search={search} />;
   }
 
   renderInput = (inputProps, opts) => {
@@ -126,7 +126,7 @@ class EntityCombobox extends Component {
     const { makeSelectHandler, selectedItems } = opts;
 
     return (
-      <DropdownItemEntity
+      <EntityDropdownItem
         {...resultProps}
         highlight={search}
         isMultiSelect={!isEmpty(selectedItems)}

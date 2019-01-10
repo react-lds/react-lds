@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { RawComboboxDropdownLists } from '../ComboboxDropdownLists';
-import { DropdownItemHeader } from '../DropdownItems';
+import { HeaderDropdownItem } from '../DropdownItems';
 
 const mockRenderer = jest.fn(({ id }) => <li key={id} />);
 
@@ -48,7 +48,7 @@ describe('<ComboboxDropdownLists />', () => {
   it('Renders a header item for identified groups', () => {
     const mounted = getCmp({ items: MULTI_GROUP_ITEMS });
     const identifiedList = mounted.find('.slds-listbox').at(1);
-    const header = identifiedList.find(DropdownItemHeader);
+    const header = identifiedList.find(HeaderDropdownItem);
     expect(header.exists()).toBeTruthy();
     expect(header.prop('id')).toEqual('3');
     expect(header.prop('label')).toEqual('l3');
@@ -57,7 +57,7 @@ describe('<ComboboxDropdownLists />', () => {
   it('Renders no header for an unidentified group', () => {
     const mounted = getCmp({ items: MULTI_GROUP_ITEMS });
     const unidentifiedList = mounted.find('.slds-listbox').at(0);
-    const header = unidentifiedList.find(DropdownItemHeader);
+    const header = unidentifiedList.find(HeaderDropdownItem);
     expect(header.exists()).toBeFalsy();
   });
 

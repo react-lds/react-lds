@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DropdownItemHeader } from './DropdownItems';
+import { HeaderDropdownItem } from './DropdownItems';
 
 export const RawComboboxDropdownLists = ({
   items,
@@ -45,7 +45,7 @@ export const RawComboboxDropdownLists = ({
       key={id}
       role="group"
     >
-      {id && label && <DropdownItemHeader id={id} label={label} />}
+      {id && label && <HeaderDropdownItem id={id} label={label} />}
       {index === 0 && renderItemsPrepended && renderItemsPrepended()}
       {groupItems.map(renderItem)}
       {index === groups.length - 1 && renderItemsAppended && renderItemsAppended()}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DropdownItem } from './DropdownItem';
 import { preventDefault } from '../../utils/helpers';
 
-export const DropdownItemHeader = ({ id, label }) => (
+export const HeaderDropdownItem = ({ id, label }) => (
   <DropdownItem
     className="slds-listbox__option_plain"
     id={id}
@@ -14,7 +14,7 @@ export const DropdownItemHeader = ({ id, label }) => (
   </DropdownItem>
 );
 
-DropdownItemHeader.propTypes = {
+HeaderDropdownItem.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
 };

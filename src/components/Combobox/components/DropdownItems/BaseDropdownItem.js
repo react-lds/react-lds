@@ -4,7 +4,7 @@ import { Icon } from '../../../Icon';
 import { DropdownItem } from './DropdownItem';
 import { defaultHighlighter } from '../../utils/helpers';
 
-export const DropdownItemBase = (props) => {
+export const BaseDropdownItem = (props) => {
   const {
     highlight,
     icon,
@@ -56,7 +56,7 @@ export const DropdownItemBase = (props) => {
   );
 };
 
-DropdownItemBase.propTypes = {
+BaseDropdownItem.propTypes = {
   highlight: PropTypes.string,
   icon: PropTypes.shape({
     icon: PropTypes.string.isRequired,
@@ -69,7 +69,7 @@ DropdownItemBase.propTypes = {
   meta: PropTypes.node,
 };
 
-DropdownItemBase.defaultProps = {
+BaseDropdownItem.defaultProps = {
   highlight: '',
   icon: null,
   isMultiSelect: false,

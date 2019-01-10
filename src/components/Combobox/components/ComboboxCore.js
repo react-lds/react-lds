@@ -4,7 +4,7 @@ import memoize from 'lodash-es/memoize';
 import { ClickOutside } from '../../ClickOutside';
 import ComboboxDropdown from './ComboboxDropdown';
 import ComboboxDropdownLists from './ComboboxDropdownLists';
-import { DropdownItemLoading } from './DropdownItems';
+import { LoadingIndicatorDropdownItem } from './DropdownItems';
 import { getNextIndex, scrollDropdown } from '../utils/helpers';
 import { itemType } from '../utils/constants';
 import ComboboxListbox from './ComboboxListbox';
@@ -335,7 +335,7 @@ class ComboboxCore extends Component {
     return (
       <React.Fragment>
         {renderItemsAppended && renderItemsAppended()}
-        {isLoading && <DropdownItemLoading />}
+        {isLoading && <LoadingIndicatorDropdownItem />}
       </React.Fragment>
     );
   }

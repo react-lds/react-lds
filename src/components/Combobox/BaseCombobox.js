@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ComboboxCore, DropdownItemBase } from './components';
+import { ComboboxCore, BaseDropdownItem } from './components';
 import { InputRaw } from '../Form';
 
 class BaseCombobox extends Component {
@@ -50,7 +50,7 @@ class BaseCombobox extends Component {
         onSelect: makeSelectHandler(id),
       };
 
-      return <DropdownItemBase {...baseResultsProps} />;
+      return <BaseDropdownItem {...baseResultsProps} />;
     },
   }
 
