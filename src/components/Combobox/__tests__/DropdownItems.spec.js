@@ -11,7 +11,7 @@ import { DropdownItemCore } from '../components/DropdownItems/DropdownItemCore';
 import { Icon } from '../../Icon';
 import { Spinner } from '../../Spinner';
 
-describe('<DropdownItem />', () => {
+describe('<DropdownItemCore />', () => {
   const sampleChild = <span />;
 
   const getCmp = (props = {}) => shallow(

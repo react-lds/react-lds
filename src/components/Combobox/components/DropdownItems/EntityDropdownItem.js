@@ -39,9 +39,9 @@ export const EntityDropdownItem = ({
   return (
     <DropdownItemCore
       {...rest}
-      icon={iconEl}
-      isSelected={isSelected}
       className={cx(itemClasses)}
+      isSelected={isSelected}
+      icon={iconEl}
     >
       <span className="slds-listbox__option-text slds-listbox__option-text_entity">
         {isMultiSelect && isSelected && (

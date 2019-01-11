@@ -34,12 +34,12 @@ export const BaseDropdownItem = (props) => {
     <DropdownItemCore
       {...rest}
       className="slds-listbox__option_plain"
+      isSelected={isSelected}
       icon={(
         <span className="slds-media__figure slds-listbox__option-icon">
           {iconEl}
         </span>
       )}
-      isSelected={isSelected}
     >
       <span className="slds-truncate" title={label}>
         {isMultiSelect && isSelected && (
