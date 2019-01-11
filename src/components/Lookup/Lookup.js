@@ -19,7 +19,6 @@ import {
   Table,
 } from '../..';
 
-
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {
   /**
@@ -180,6 +179,13 @@ export class LookupRaw extends PureComponent {
 
   constructor(props, context) {
     super(props, context);
+
+    // eslint-disable-next-line
+    console.info(
+      '[react-lds] Lookup:',
+      'This component is deprecated and will be removed in a future version',
+      'Please migrate to `EntityCombobox`'
+    );
 
     const { initialSelection, selection } = props;
 

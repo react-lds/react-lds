@@ -1,13 +1,12 @@
-import Combobox from './Combobox';
-import ControlledCombobox from './ControlledCombobox';
-import ComboboxDropdown from './ComboboxDropdown';
-import ComboboxDropdownList from './ComboboxDropdownList';
-import ComboboxDropdownListItem from './ComboboxDropdownListItem';
+import AutoCompleteCombobox from './AutoCompleteCombobox';
+import BaseCombobox from './BaseCombobox';
+import EntityCombobox from './EntityCombobox';
+
+export * from './components';
 
 export {
-  Combobox,
-  ControlledCombobox,
-  ComboboxDropdown,
-  ComboboxDropdownList,
-  ComboboxDropdownListItem,
+  AutoCompleteCombobox,
+  BaseCombobox,
+  BaseCombobox as Picklist,
+  EntityCombobox,
 };
