@@ -35,6 +35,8 @@ const InputRaw = React.forwardRef((props, ref) => {
   } = props;
 
   const renderIconLeft = () => {
+    if (React.isValidElement(iconLeft)) return iconLeft;
+
     const iconName = (error && errorIcon) ? 'warning' : iconLeft;
 
     if (iconName) {
@@ -184,7 +186,10 @@ InputRaw.propTypes = {
   /**
    * icon rendered on the left side of the input (from utility sprite)
    */
-  iconLeft: PropTypes.string,
+  iconLeft: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
   /**
    * icon rendered on the right side of the input (from utility sprite)
    */
