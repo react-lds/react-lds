@@ -1,9 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import ComboboxCore from '../ComboboxCore';
-import { ComboboxDropdown } from '..';
-import ComboboxDropdownLists from '../ComboboxDropdownLists';
-import { InputRaw } from '../../../Form';
+import ComboboxCore from '../components/ComboboxCore';
+import { ComboboxDropdown, ComboboxDropdownLists } from '../components';
+import { InputRaw } from '../../Form';
 
 // TODO: Remove once enzyme supports React.memo
 jest.mock('react', () => {

@@ -6,10 +6,10 @@ import {
   LoadingIndicatorDropdownItem,
   EntityDropdownItem,
   SearchIndicatorDropdownItem,
-} from '../DropdownItems';
-import { DropdownItem } from '../DropdownItems/DropdownItem';
-import { Icon } from '../../../Icon';
-import { Spinner } from '../../../Spinner';
+} from '../components/DropdownItems';
+import { DropdownItem } from '../components/DropdownItems/DropdownItem';
+import { Icon } from '../../Icon';
+import { Spinner } from '../../Spinner';
 
 describe('<DropdownItem />', () => {
   const sampleChild = <span />;

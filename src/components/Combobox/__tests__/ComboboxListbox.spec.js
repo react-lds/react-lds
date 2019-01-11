@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ComboboxListbox } from '..';
-import { Listbox, Pill } from '../../../Pill';
+import ComboboxListbox from '../components/ComboboxListbox';
+import { Listbox, Pill } from '../../Pill';
 
 const mockFn = jest.fn(id => () => id);
 

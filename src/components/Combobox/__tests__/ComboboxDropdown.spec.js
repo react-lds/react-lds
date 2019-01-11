@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ComboboxDropdown } from '..';
-import { FormElementLabel, FormElement } from '../../../Form';
+import ComboboxDropdown from '../components/ComboboxDropdown';
+import { FormElementLabel, FormElement } from '../../Form';
 
 const mockFn = jest.fn();
 
