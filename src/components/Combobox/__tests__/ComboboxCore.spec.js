@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import ComboboxCore from '../components/ComboboxCore';
-import { ComboboxDropdown, ComboboxDropdownLists } from '../components';
+import { ComboboxDropdown, ComboboxDropdownLists, LoadingIndicatorDropdownItem } from '../components';
 import { InputRaw } from '../../Form';
 
 // TODO: Remove once enzyme supports React.memo
@@ -28,8 +28,13 @@ const MockInput = React.forwardRef((inputProps, ref) => <InputRaw {...inputProps
 const mockListbox = <div />;
 
 const renderInputMock = jest.fn(props => <MockInput {...props} />);
-const renderItemMock = jest.fn(({ id }, { makeSelectHandler }) => (
-  <MockItem onMouseDown={makeSelectHandler(id)} key={id} />
+const renderItemMock = jest.fn(({ id, isSelected, isFocus }, { makeSelectHandler }) => (
+  <MockItem
+    onMouseDown={makeSelectHandler(id)}
+    key={id}
+    isSelected={isSelected}
+    isFocus={isFocus}
+  />
 ));
 const renderListboxMock = jest.fn(() => mockListbox);
 /* eslint-enable */
@@ -127,14 +132,22 @@ describe('<ComboboxCore />', () => {
   });
 
   it('renders dropdown items with the supplied render function', () => {
-    getCmp();
+    const mounted = getCmp({ selectedItems: [ITEMS[0]] });
     expect(renderItemMock).toHaveBeenCalledTimes(ITEMS.length);
+    mounted.setState({ keyboardSelection: '3' });
+    expect(mounted.find(MockItem).at(0).prop('isSelected')).toBeTruthy();
+    expect(mounted.find(MockItem).at(2).prop('isFocus')).toBeTruthy();
   });
 
   it('renders an input with the supplied render function', () => {
     const mounted = getCmp();
     expect(renderInputMock).toHaveBeenCalled();
     expect(mounted.find(InputRaw).exists()).toBeTruthy();
+  });
+
+  it('renders a loading indicator when isLoading is true', () => {
+    const mounted = getCmp({ isLoading: true });
+    expect(mounted.find(LoadingIndicatorDropdownItem).exists()).toBeTruthy();
   });
 
   it('opens if input is clicked', () => {

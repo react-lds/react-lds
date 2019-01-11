@@ -1,4 +1,4 @@
-import AutoCompleteCombobox from './AutocompleteCombobox';
+import AutoCompleteCombobox from './AutoCompleteCombobox';
 import BaseCombobox from './BaseCombobox';
 import EntityCombobox from './EntityCombobox';
 

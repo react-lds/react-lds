@@ -112,14 +112,9 @@ class EntityCombobox extends Component {
   }
 
   onSelect = (id, opts) => {
-    const {
-      closeOnSelect,
-      onSearch,
-      onSelect,
-    } = this.props;
-
+    const { onSearch, onSelect } = this.props;
     onSelect(id, opts);
-    if (closeOnSelect) onSearch('', { isClear: true });
+    onSearch('', { isClear: true });
   }
 
   renderSearchIndicator = () => {

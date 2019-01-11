@@ -64,7 +64,7 @@ class AutoCompleteCombobox extends Component {
         const { id, label } = selectedItem;
         inputValue = label;
         activeId = id;
-      } else if (!isMultiSelect && len === 0 && keyboardSelection) {
+      } else if (!isMultiSelect && len === 0 && !!keyboardSelection) {
         const activeItem = items.find(item => item.id === keyboardSelection);
         if (activeItem) {
           const { id, label } = activeItem;
