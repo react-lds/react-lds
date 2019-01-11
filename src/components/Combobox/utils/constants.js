@@ -19,5 +19,5 @@ export const itemTypeEntity = PropTypes.shape({
   id: PropTypes.string.isRequired,
   isHeader: PropTypes.bool,
   label: PropTypes.string.isRequired,
-  meta: PropTypes.node,
+  meta: PropTypes.node.isRequired,
 });
