@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { RawComboboxDropdownLists } from '../ComboboxDropdownLists';
-import { HeaderDropdownItem } from '../DropdownItems';
+import { RawComboboxDropdownLists } from '../components/ComboboxDropdownLists';
+import { HeaderDropdownItem } from '../components';
 
 const mockRenderer = jest.fn(({ id }) => <li key={id} />);
 
