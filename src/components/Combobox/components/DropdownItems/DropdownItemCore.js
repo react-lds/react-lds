@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export const DropdownItem = (props) => {
+export const DropdownItemCore = (props) => {
   const {
     children,
     className,
@@ -43,7 +43,7 @@ export const DropdownItem = (props) => {
   );
 };
 
-DropdownItem.propTypes = {
+DropdownItemCore.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   icon: PropTypes.node,
@@ -55,7 +55,7 @@ DropdownItem.propTypes = {
   onSelect: PropTypes.func,
 };
 
-DropdownItem.defaultProps = {
+DropdownItemCore.defaultProps = {
   className: null,
   icon: null,
   id: null,

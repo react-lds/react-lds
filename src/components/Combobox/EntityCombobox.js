@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash-es/isEmpty';
 import isObject from 'lodash-es/isObject';
-import { EntityDropdownItem, SearchIndicatorDropdownItem } from './components/DropdownItems';
 import { InputRaw } from '../Form';
 import { Icon } from '../Icon';
-import { ComboboxCore, ComboboxListbox } from './components';
+import ComboboxCore from './components/ComboboxCore';
+import ComboboxListbox from './components/ComboboxListbox';
+import { EntityDropdownItem, SearchIndicatorDropdownItem } from './components/DropdownItems';
 import { itemTypeEntity } from './utils/constants';
 import { makeInputAddHandler } from './utils/helpers';
 

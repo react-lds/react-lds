@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { DropdownItem } from './DropdownItem';
+import { DropdownItemCore } from './DropdownItemCore';
 import { Icon } from '../../../Icon';
 import { defaultHighlighter } from '../../utils/helpers';
 
@@ -37,7 +37,7 @@ export const EntityDropdownItem = ({
   ];
 
   return (
-    <DropdownItem
+    <DropdownItemCore
       {...rest}
       icon={iconEl}
       isSelected={isSelected}
@@ -54,7 +54,7 @@ export const EntityDropdownItem = ({
           {meta}
         </span>
       )}
-    </DropdownItem>
+    </DropdownItemCore>
   );
 };
 

@@ -7,7 +7,7 @@ import {
   EntityDropdownItem,
   SearchIndicatorDropdownItem,
 } from '../components/DropdownItems';
-import { DropdownItem } from '../components/DropdownItems/DropdownItem';
+import { DropdownItemCore } from '../components/DropdownItems/DropdownItemCore';
 import { Icon } from '../../Icon';
 import { Spinner } from '../../Spinner';
 
@@ -15,9 +15,9 @@ describe('<DropdownItem />', () => {
   const sampleChild = <span />;
 
   const getCmp = (props = {}) => shallow(
-    <DropdownItem {...props}>
+    <DropdownItemCore {...props}>
       {sampleChild}
-    </DropdownItem>
+    </DropdownItemCore>
   );
 
   it('renders children', () => {
@@ -74,7 +74,7 @@ describe('<BaseDropdownItem />', () => {
   it('renders meta information', () => {
     const meta = <span className="meta" />;
     const mounted = getCmp({ meta });
-    expect(mounted.find(DropdownItem).contains(meta)).toBeTruthy();
+    expect(mounted.find(DropdownItemCore).contains(meta)).toBeTruthy();
   });
 
   it('renders an assistive label when selected in a multi-select combobox', () => {
@@ -133,7 +133,7 @@ describe('<EntityDropdownItem />', () => {
 
   it('renders a DropdownItem', () => {
     const mounted = getCmp();
-    expect(mounted.find(DropdownItem).exists()).toBeTruthy();
+    expect(mounted.find(DropdownItemCore).exists()).toBeTruthy();
   });
 
   it('renders an icon and passes it to DropdownItem', () => {
@@ -198,7 +198,7 @@ describe('<HeaderDropdownItem />', () => {
 
   it('renders as ComboboxDropdownListItem', () => {
     const mounted = getCmp();
-    const item = mounted.find(DropdownItem);
+    const item = mounted.find(DropdownItemCore);
     expect(item.prop('className')).toEqual('slds-listbox__option_plain');
     expect(item.prop('id')).toEqual('foo');
     expect(item.prop('isHeader')).toBeTruthy();

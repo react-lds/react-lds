@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '../../../Icon';
-import { DropdownItem } from './DropdownItem';
+import { DropdownItemCore } from './DropdownItemCore';
 import { defaultHighlighter } from '../../utils/helpers';
 
 export const BaseDropdownItem = (props) => {
@@ -31,7 +31,7 @@ export const BaseDropdownItem = (props) => {
   }
 
   return (
-    <DropdownItem
+    <DropdownItemCore
       {...rest}
       className="slds-listbox__option_plain"
       icon={(
@@ -52,7 +52,7 @@ export const BaseDropdownItem = (props) => {
         {meta}
       </span>
       )}
-    </DropdownItem>
+    </DropdownItemCore>
   );
 };
 

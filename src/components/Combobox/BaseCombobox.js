@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ComboboxCore, BaseDropdownItem, ComboboxListbox } from './components';
 import { InputRaw } from '../Form';
+import ComboboxCore from './components/ComboboxCore';
+import ComboboxListbox from './components/ComboboxListbox';
+import { BaseDropdownItem } from './components/DropdownItems';
 import { itemType } from './utils/constants';
 
 class BaseCombobox extends Component {

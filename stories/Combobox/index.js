@@ -5,7 +5,7 @@ import { text, boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { getDropdownHeights } from '../utils/helpers';
 import { AutoCompleteCombobox, BaseCombobox, EntityCombobox } from '../../src';
-import { ComboboxCore } from '../../src/components/Combobox/components';
+import ComboboxCore from '../../src/components/Combobox/components/ComboboxCore';
 
 import { BaseComboboxDemo } from './BaseComboboxDemo';
 import { AutoCompleteComboboxDemo } from './AutoCompleteComboboxDemo';

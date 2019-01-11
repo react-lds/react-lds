@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import BaseCombobox from '../BaseCombobox';
-import { BaseDropdownItem } from '../components';
+import { BaseDropdownItem } from '../components/DropdownItems';
 import { InputRaw } from '../../Form';
 
 // TODO: Remove once enzyme supports React.memo
