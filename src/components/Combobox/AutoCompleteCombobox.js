@@ -9,7 +9,67 @@ import { InputRaw } from '../Form';
 import { makeInputAddHandler } from './utils/helpers';
 import { itemType } from './utils/constants';
 
-class AutoCompleteCombobox extends Component {
+export const defaultAutoCompleteComboboxInputRenderer = (inputProps, opts) => {
+  const { onKeyDown, value, ...rest } = inputProps;
+  const {
+    keyboardSelection,
+    items,
+    isMultiSelect,
+    makeSelectHandler,
+    selectedItems,
+  } = opts;
+
+  const len = selectedItems.length;
+  const hasSingleSelection = !isMultiSelect && len === 1;
+
+  let inputValue = value;
+  let activeId = null;
+
+  if (hasSingleSelection) {
+    const selectedItem = selectedItems[0];
+    const { id, label } = selectedItem;
+    inputValue = label;
+    activeId = id;
+  } else if (!isMultiSelect && len === 0 && !!keyboardSelection) {
+    const activeItem = items.find(item => item.id === keyboardSelection);
+    if (activeItem) {
+      const { id, label } = activeItem;
+      inputValue = label;
+      activeId = id;
+    }
+  }
+
+  return (
+    <InputRaw
+      {...rest}
+      aria-activedescendant={!hasSingleSelection && activeId ? activeId : null}
+      aria-autocomplete="list"
+      iconRight={hasSingleSelection ? 'clear' : 'search'}
+      iconRightOnClick={hasSingleSelection ? makeSelectHandler(activeId) : null}
+      onKeyDown={makeInputAddHandler(onKeyDown, opts)}
+      readOnly={hasSingleSelection}
+      value={inputValue}
+    />
+  );
+};
+
+export const defaultAutoCompleteComboboxItemRenderer = (_itemProps, opts) => {
+  const { makeSelectHandler, search, selectedItems } = opts;
+  const { id, ...itemProps } = _itemProps;
+
+  const autocompleteResultProps = {
+    ...itemProps,
+    isMultiSelect: !isEmpty(selectedItems),
+    key: id,
+    id,
+    onSelect: makeSelectHandler(id),
+    highlight: search,
+  };
+
+  return <BaseDropdownItem {...autocompleteResultProps} />;
+};
+
+export class AutoCompleteCombobox extends Component {
   static propTypes = {
     /**
      * See `ComboboxCore` or the Storybook stories for more information
@@ -45,64 +105,8 @@ class AutoCompleteCombobox extends Component {
     isMultiSelect: false,
     items: [],
     labelListbox: null,
-    renderInput: (inputProps, opts) => {
-      const { onKeyDown, value, ...rest } = inputProps;
-      const {
-        keyboardSelection,
-        items,
-        isMultiSelect,
-        makeSelectHandler,
-        selectedItems,
-      } = opts;
-
-      const len = selectedItems.length;
-      const hasSingleSelection = !isMultiSelect && len === 1;
-
-      let inputValue = value;
-      let activeId = null;
-
-      if (hasSingleSelection) {
-        const selectedItem = selectedItems[0];
-        const { id, label } = selectedItem;
-        inputValue = label;
-        activeId = id;
-      } else if (!isMultiSelect && len === 0 && !!keyboardSelection) {
-        const activeItem = items.find(item => item.id === keyboardSelection);
-        if (activeItem) {
-          const { id, label } = activeItem;
-          inputValue = label;
-          activeId = id;
-        }
-      }
-
-      return (
-        <InputRaw
-          {...rest}
-          aria-activedescendant={!hasSingleSelection && activeId ? activeId : null}
-          aria-autocomplete="list"
-          iconRight={hasSingleSelection ? 'clear' : 'search'}
-          iconRightOnClick={hasSingleSelection ? makeSelectHandler(activeId) : null}
-          onKeyDown={makeInputAddHandler(onKeyDown, opts)}
-          readOnly={hasSingleSelection}
-          value={inputValue}
-        />
-      );
-    },
-    renderItem: (_itemProps, opts) => {
-      const { makeSelectHandler, search, selectedItems } = opts;
-      const { id, ...itemProps } = _itemProps;
-
-      const autocompleteResultProps = {
-        ...itemProps,
-        isMultiSelect: !isEmpty(selectedItems),
-        key: id,
-        id,
-        onSelect: makeSelectHandler(id),
-        highlight: search,
-      };
-
-      return <BaseDropdownItem {...autocompleteResultProps} />;
-    },
+    renderInput: defaultAutoCompleteComboboxInputRenderer,
+    renderItem: defaultAutoCompleteComboboxItemRenderer,
     renderItemsAppended: null,
     renderItemsPrepended: null,
     renderListbox: listboxProps => <ComboboxListbox {...listboxProps} />,

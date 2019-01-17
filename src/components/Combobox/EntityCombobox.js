@@ -10,7 +10,62 @@ import { EntityDropdownItem, SearchIndicatorDropdownItem } from './components/Dr
 import { itemTypeEntity } from './utils/constants';
 import { makeInputAddHandler } from './utils/helpers';
 
-class EntityCombobox extends Component {
+export const defaultEntityComboboxInputRenderer = (inputProps, opts) => {
+  const { isMultiSelect, makeSelectHandler, selectedItems } = opts;
+  const { onKeyDown, value, ...rest } = inputProps;
+
+  const len = selectedItems.length;
+  const hasSingleSelection = !isMultiSelect && len === 1;
+
+  let inputValue = value;
+  let activeId = null;
+  let selectedItem;
+
+  if (hasSingleSelection) {
+    [selectedItem] = selectedItems;
+    const { id, label } = selectedItem;
+    inputValue = label;
+    activeId = id;
+  }
+
+  return (
+    <InputRaw
+      {...rest}
+      aria-activedescendant={!hasSingleSelection && activeId ? activeId : null}
+      aria-autocomplete="list"
+      className="slds-input slds-combobox__input slds-combobox__input-value"
+      iconLeft={selectedItem && (
+        <Icon
+          className="slds-combobox__input-entity-icon"
+          icon={selectedItem.icon.icon}
+          sprite={selectedItem.icon.sprite}
+        />
+      )}
+      iconRight={hasSingleSelection ? 'clear' : 'search'}
+      iconRightOnClick={hasSingleSelection ? makeSelectHandler(activeId) : null}
+      onKeyDown={makeInputAddHandler(onKeyDown, opts)}
+      readOnly={hasSingleSelection}
+      value={inputValue}
+    />
+  );
+};
+
+export const defaultEntityComboboxItemRenderer = ({ id, ...resultProps }, opts) => {
+  const { makeSelectHandler, search, selectedItems } = opts;
+
+  return (
+    <EntityDropdownItem
+      {...resultProps}
+      highlight={search}
+      isMultiSelect={!isEmpty(selectedItems)}
+      key={id}
+      id={id}
+      onSelect={makeSelectHandler(id)}
+    />
+  );
+};
+
+export class EntityCombobox extends Component {
   static propTypes = {
     /**
      * See `ComboboxCore` or the Storybook stories for more information
@@ -46,59 +101,8 @@ class EntityCombobox extends Component {
     isMultiSelect: false,
     items: [],
     labelListbox: undefined,
-    renderInput: (inputProps, opts) => {
-      const { isMultiSelect, makeSelectHandler, selectedItems } = opts;
-      const { onKeyDown, value, ...rest } = inputProps;
-
-      const len = selectedItems.length;
-      const hasSingleSelection = !isMultiSelect && len === 1;
-
-      let inputValue = value;
-      let activeId = null;
-      let selectedItem;
-
-      if (hasSingleSelection) {
-        [selectedItem] = selectedItems;
-        const { id, label } = selectedItem;
-        inputValue = label;
-        activeId = id;
-      }
-
-      return (
-        <InputRaw
-          {...rest}
-          aria-activedescendant={!hasSingleSelection && activeId ? activeId : null}
-          aria-autocomplete="list"
-          className="slds-input slds-combobox__input slds-combobox__input-value"
-          iconLeft={selectedItem && (
-            <Icon
-              className="slds-combobox__input-entity-icon"
-              icon={selectedItem.icon.icon}
-              sprite={selectedItem.icon.sprite}
-            />
-          )}
-          iconRight={hasSingleSelection ? 'clear' : 'search'}
-          iconRightOnClick={hasSingleSelection ? makeSelectHandler(activeId) : null}
-          onKeyDown={makeInputAddHandler(onKeyDown, opts)}
-          readOnly={hasSingleSelection}
-          value={inputValue}
-        />
-      );
-    },
-    renderItem: ({ id, ...resultProps }, opts) => {
-      const { makeSelectHandler, search, selectedItems } = opts;
-
-      return (
-        <EntityDropdownItem
-          {...resultProps}
-          highlight={search}
-          isMultiSelect={!isEmpty(selectedItems)}
-          key={id}
-          id={id}
-          onSelect={makeSelectHandler(id)}
-        />
-      );
-    },
+    renderInput: defaultEntityComboboxInputRenderer,
+    renderItem: defaultEntityComboboxItemRenderer,
     renderItemsAppended: null,
     renderItemsPrepended: null,
     renderListbox: listboxProps => <ComboboxListbox {...listboxProps} />,
@@ -141,5 +145,3 @@ class EntityCombobox extends Component {
     );
   }
 }
-
-export default EntityCombobox;
