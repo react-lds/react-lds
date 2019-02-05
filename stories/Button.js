@@ -22,6 +22,7 @@ const buttonFlavors = [
   'outline-brand',
   'success',
   'text-destructive',
+  'stretch',
 ];
 
 const buttonStories = storiesOf('Button', module);
@@ -73,6 +74,7 @@ buttonStories
   ))
   .add('Stateful Button', () => (
     <StatefulButton
+      disabled={boolean('Disabled?', false)}
       onClick={action()}
       selected={boolean('Selected?', false)}
       flavor={select('Flavor', buttonFlavors, 'neutral') || undefined}
@@ -169,6 +171,7 @@ iconButtonStories
   ))
   .add('Stateful', () => (
     <StatefulIconButton
+      disabled={boolean('Disabled?', false)}
       selected={boolean('Selected?', false)}
       sprite="utility"
       icon="download"

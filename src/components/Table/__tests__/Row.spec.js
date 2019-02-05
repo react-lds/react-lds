@@ -20,11 +20,6 @@ describe('<Row />', () => {
     expect(mounted.find('tr').contains(child)).toBeTruthy();
   });
 
-  it('adds a class for header rows', () => {
-    mounted.setProps({ head: true });
-    expect(mounted.find('tr').hasClass('slds-text-title_caps')).toBeTruthy();
-  });
-
   it('applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('tr').hasClass('foo')).toBeTruthy();

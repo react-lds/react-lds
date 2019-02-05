@@ -36,7 +36,7 @@ describe('<Alert />', () => {
     expectButtonPresent(mounted, true);
     const closeButton = mounted.find('.slds-notify__close').find(IconButton);
     closeButton.simulate('click');
-    expect(closeButton.prop('size')).toBeNull();
+    expect(closeButton.find(ButtonIcon).prop('size')).toEqual('small');
     expect(mockFn).toBeCalled();
   });
 
