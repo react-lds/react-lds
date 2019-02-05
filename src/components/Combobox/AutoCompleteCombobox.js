@@ -136,5 +136,3 @@ export class AutoCompleteCombobox extends Component {
     );
   }
 }
-
-export default AutoCompleteCombobox;
