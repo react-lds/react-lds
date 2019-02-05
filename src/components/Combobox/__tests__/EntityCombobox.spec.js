@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import EntityCombobox from '../EntityCombobox';
+import { EntityCombobox } from '../EntityCombobox';
 import { EntityDropdownItem, SearchIndicatorDropdownItem } from '../components';
 import { InputRaw } from '../../Form';
 

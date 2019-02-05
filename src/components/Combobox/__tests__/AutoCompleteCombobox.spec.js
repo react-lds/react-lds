@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import AutoCompleteCombobox from '../AutoCompleteCombobox';
+import { AutoCompleteCombobox } from '../AutoCompleteCombobox';
 import { BaseDropdownItem } from '../components/DropdownItems';
 import { InputRaw } from '../../Form';
 

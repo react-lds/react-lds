@@ -67,6 +67,7 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
               id={listboxId}
               ref={ref}
               role="listbox"
+              tabIndex="-1"
             >
               {children}
             </div>

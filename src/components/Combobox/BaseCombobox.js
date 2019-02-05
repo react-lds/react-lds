@@ -6,7 +6,45 @@ import ComboboxListbox from './components/ComboboxListbox';
 import { BaseDropdownItem } from './components/DropdownItems';
 import { itemType } from './utils/constants';
 
-class BaseCombobox extends Component {
+export const defaultBaseComboboxInputRenderer = (inputProps, opts) => {
+  const { isMultiSelect, labelMultiSelect, selectedItems } = opts;
+  const len = selectedItems.length;
+
+  let inputValue = '';
+
+  if (len === 1 && !isMultiSelect) {
+    const selection = selectedItems[0];
+    if (selection && selection.label) inputValue = selection.label;
+  } else if (len > 0) {
+    inputValue = labelMultiSelect.replace(/%n/gm, `${len}`);
+  }
+
+  return (
+    <InputRaw
+      {...inputProps}
+      iconRight="down"
+      readOnly
+      type="text"
+      value={inputValue}
+    />
+  );
+};
+
+export const defaultBaseComboboxItemRenderer = (resultProps, opts) => {
+  const { id } = resultProps;
+  const { makeSelectHandler, selectedItems } = opts;
+
+  const baseResultsProps = {
+    ...resultProps,
+    isMultiSelect: selectedItems.length > 1,
+    key: id,
+    onSelect: makeSelectHandler(id),
+  };
+
+  return <BaseDropdownItem {...baseResultsProps} />;
+};
+
+export class BaseCombobox extends Component {
   static propTypes = {
     /**
      * See `ComboboxCore` or the Storybook stories for more information
@@ -46,42 +84,8 @@ class BaseCombobox extends Component {
     items: [],
     labelListbox: null,
     labelMultiSelect: '%n Option(s) Selected',
-    renderInput: (inputProps, opts) => {
-      const { isMultiSelect, labelMultiSelect, selectedItems } = opts;
-      const len = selectedItems.length;
-
-      let inputValue = '';
-
-      if (len === 1 && !isMultiSelect) {
-        const selection = selectedItems[0];
-        if (selection && selection.label) inputValue = selection.label;
-      } else if (len > 0) {
-        inputValue = labelMultiSelect.replace(/%n/gm, `${len}`);
-      }
-
-      return (
-        <InputRaw
-          {...inputProps}
-          iconRight="down"
-          readOnly
-          type="text"
-          value={inputValue}
-        />
-      );
-    },
-    renderItem: (resultProps, opts) => {
-      const { id } = resultProps;
-      const { makeSelectHandler, selectedItems } = opts;
-
-      const baseResultsProps = {
-        ...resultProps,
-        isMultiSelect: selectedItems.length > 1,
-        key: id,
-        onSelect: makeSelectHandler(id),
-      };
-
-      return <BaseDropdownItem {...baseResultsProps} />;
-    },
+    renderInput: defaultBaseComboboxInputRenderer,
+    renderItem: defaultBaseComboboxItemRenderer,
     renderItemsAppended: null,
     renderItemsPrepended: null,
     renderListbox: listboxProps => <ComboboxListbox {...listboxProps} />,
@@ -99,4 +103,4 @@ class BaseCombobox extends Component {
   }
 }
 
-export default BaseCombobox;
+export const Picklist = BaseCombobox;

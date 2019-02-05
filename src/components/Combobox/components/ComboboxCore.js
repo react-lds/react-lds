@@ -122,7 +122,6 @@ class ComboboxCore extends Component {
   constructor(props) {
     super(props);
     this.state = { keyboardSelection: null };
-    this.inputRef = React.createRef();
     this.dropdownRef = React.createRef();
     this.makeSelectHandler = memoize(key => evt => this.onSelect(key, evt));
   }
@@ -167,14 +166,14 @@ class ComboboxCore extends Component {
     }
   }
 
-  onInputMouseDown = () => {
-    const inputRef = this.inputRef.current;
-    const isFocused = document.activeElement === inputRef;
+  onInputMouseDown = (evt) => {
+    const input = evt.target;
+    const isFocused = document.activeElement === input;
 
     if (isFocused) {
       this.onToggle();
     } else {
-      inputRef.focus();
+      input.focus();
       this.onOpen();
     }
   }
@@ -319,7 +318,6 @@ class ComboboxCore extends Component {
       onKeyDown: this.onInputKeyDown,
       onMouseDown: this.onInputMouseDown,
       placeholder,
-      ref: this.inputRef,
       role: 'textbox',
       value: onSearch ? search : undefined,
     }, opts);

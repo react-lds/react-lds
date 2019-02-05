@@ -25,10 +25,10 @@ export class AsyncComboboxDemo extends Component {
   }
 
   performSearch = () => {
-    this.setState({ isLoading: true, items: [] });
-
+    this.setState({ isLoading: true });
+    console.log('Loading new items...'); // eslint-disable-line
     setTimeout(() => {
-      this.setState({ isLoading: false, items: mockSearchResults });
+      this.setState({ isLoading: false });
     }, 1000);
   }
 
@@ -73,7 +73,7 @@ export class AsyncComboboxDemo extends Component {
         {...this.props}
         isLoading={isLoading}
         isOpen={isOpen}
-        items={items}
+        items={isLoading ? [] : items}
         onSearch={this.onSearch}
         onSelect={this.onSelect}
         onToggle={this.onToggle}
