@@ -90,7 +90,7 @@ ComboboxDropdown.propTypes = {
   id: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   isSingleInlineSelection: PropTypes.bool,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
   listboxId: PropTypes.string.isRequired,
   renderInput: PropTypes.func.isRequired,
   renderListbox: PropTypes.func,

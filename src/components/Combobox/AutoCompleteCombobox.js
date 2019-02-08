@@ -83,7 +83,7 @@ export class AutoCompleteCombobox extends Component {
     isMultiSelect: PropTypes.bool,
     isOpen: PropTypes.bool.isRequired,
     items: PropTypes.arrayOf(itemType),
-    label: PropTypes.string.isRequired,
+    label: PropTypes.node.isRequired,
     labelListbox: PropTypes.string,
     placeholder: PropTypes.string.isRequired,
     onSearch: PropTypes.func.isRequired,

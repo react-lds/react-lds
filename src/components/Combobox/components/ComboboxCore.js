@@ -54,7 +54,7 @@ class ComboboxCore extends Component {
     /**
      * Labels the Combobox
      */
-    label: PropTypes.string.isRequired,
+    label: PropTypes.node.isRequired,
     /**
      * Assistive label for the Listbox of selected items
      */

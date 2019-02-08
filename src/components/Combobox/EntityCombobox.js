@@ -78,7 +78,7 @@ export class EntityCombobox extends Component {
     isLoading: PropTypes.bool,
     isMultiSelect: PropTypes.bool,
     isOpen: PropTypes.bool.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.node.isRequired,
     labelListbox: PropTypes.string,
     placeholder: PropTypes.string.isRequired,
     onToggle: PropTypes.func.isRequired,
