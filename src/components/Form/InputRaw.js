@@ -105,7 +105,7 @@ const InputRaw = React.forwardRef((props, ref) => {
     <Fragment>
       {renderIconLeft()}
       <input
-        {...omit(rest, ['label'])}
+        {...omit(rest, ['isFocused', 'label'])}
         aria-describedby={error && !hideErrorMessage ? getUniqueHash(error, id) : null}
         className={cx(sldsClasses)}
         disabled={disabled}
