@@ -13,6 +13,7 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
     children,
     comboboxClassName,
     height,
+    hideLabel,
     id,
     isSingleInlineSelection,
     label,
@@ -50,7 +51,7 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
 
   return (
     <FormElement {...rest}>
-      <FormElementLabel id={id} label={label} />
+      {!hideLabel && <FormElementLabel id={id} label={label} />}
       <FormElementControl>
         <div className={cx(comboboxContainerClasses)}>
           <div
@@ -85,6 +86,7 @@ ComboboxDropdown.propTypes = {
   children: PropTypes.node,
   comboboxClassName: PropTypes.string,
   height: PropTypes.number.isRequired,
+  hideLabel: PropTypes.bool,
   id: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   isSingleInlineSelection: PropTypes.bool,
@@ -97,6 +99,7 @@ ComboboxDropdown.propTypes = {
 ComboboxDropdown.defaultProps = {
   children: null,
   comboboxClassName: null,
+  hideLabel: false,
   isSingleInlineSelection: false,
   renderListbox: null,
 };

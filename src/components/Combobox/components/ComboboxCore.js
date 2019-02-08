@@ -23,6 +23,10 @@ class ComboboxCore extends Component {
      */
     height: PropTypes.oneOf([5, 7, 10]),
     /**
+     * Determines whether the label is rendered
+     */
+    hideLabel: PropTypes.bool,
+    /**
      * Unique identifier
      */
     id: PropTypes.string.isRequired,
@@ -111,6 +115,7 @@ class ComboboxCore extends Component {
   static defaultProps = {
     comboboxClassName: null,
     height: 5,
+    hideLabel: false,
     isInlineListboxSelection: false,
     labelListbox: 'Selected Items',
     onSearch: null,
@@ -371,6 +376,7 @@ class ComboboxCore extends Component {
     const {
       comboboxClassName,
       height,
+      hideLabel,
       id,
       items,
       isMultiSelect,
@@ -396,6 +402,7 @@ class ComboboxCore extends Component {
         <ComboboxDropdown
           className={comboboxClassName}
           height={height}
+          hideLabel={hideLabel}
           id={`combobox-${id}`}
           isSingleInlineSelection={isInlineListboxSelection && !isMultiSelect && selectedItems.length === 1}
           label={label}
