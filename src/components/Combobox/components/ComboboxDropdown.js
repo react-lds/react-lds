@@ -53,7 +53,7 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
   ];
 
   return (
-    <FormElement required={isRequired} {...rest}>
+    <FormElement error={error} required={isRequired} {...rest}>
       <FormElementLabel id={id} label={label} required={isRequired} />
       <FormElementControl>
         <div className={cx(comboboxContainerClasses)}>
