@@ -151,12 +151,15 @@ stories
     <BaseCombobox
       isMultiSelect
       isOpen={boolean('Open', false)}
+      error={text('Error', '')}
       items={BASE_ITEMS}
       selectedItems={select('Selected Items', selectedOptions, [])}
       label={text('Label', 'Relate To')}
       placeholder={text('Placeholder', 'Pick a type...')}
       height={select('Height', getDropdownHeights(), 5)}
+      isErrorHidden={boolean('Hide error text?', false)}
       isLoading={boolean('Loading?', false)}
+      isRequired={boolean('Required?', false)}
       id="base-combobox-demo"
       onToggle={action('toggle')}
       onSelect={action('select')}
@@ -165,22 +168,28 @@ stories
   .add('Demo: Base Combobox', () => (
     <BaseComboboxDemo
       isMultiSelect={boolean('Allow multiple selections', false)}
+      error={text('Error', '')}
       closeOnSelect={boolean('Close on Select', true)}
       label={text('Label', 'Relate To')}
       placeholder={text('Placeholder', 'Pick a type...')}
       height={select('Height', getDropdownHeights(), 5)}
+      isErrorHidden={boolean('Hide error text?', false)}
       isLoading={boolean('Loading?', false)}
+      isRequired={boolean('Required?', false)}
       id="base-combobox-demo"
     />
   ))
   .add('Docs: Autocomplete Combobox', () => (
     <AutoCompleteCombobox
       isOpen={boolean('Open', false)}
+      error={text('Error', '')}
       items={BASE_ITEMS}
       selectedItems={select('Selected Items', selectedOptions, [])}
       search={text('Search', '')}
       placeholder="Search"
       id="base-combobox-demo"
+      isErrorHidden={boolean('Hide error text?', false)}
+      isRequired={boolean('Required?', false)}
       label="Relate To"
       onSearch={action('search:change')}
       onSelect={action('select')}
@@ -189,7 +198,10 @@ stories
   ), { info: baseInfo })
   .add('Demo: Autocomplete Combobox Integration', () => (
     <AutoCompleteComboboxDemo
+      isErrorHidden={boolean('Hide error text?', false)}
       isMultiSelect={boolean('Allow multiple selections', false)}
+      isRequired={boolean('Required?', false)}
+      error={text('Error', '')}
       closeOnSelect={boolean('Close on Select', true)}
       label={text('Label', 'Relate To')}
       placeholder={text('Placeholder', 'Pick a type...')}
@@ -216,7 +228,10 @@ stories
 
     return (
       <EntityCombobox
+        isErrorHidden={boolean('Hide error text?', false)}
         isOpen={boolean('Open', false)}
+        isRequired={boolean('Required?', false)}
+        error={text('Error', '')}
         items={items}
         selectedItems={select('Selected Items', entitySelections, [])}
         search={text('Search', '')}
@@ -232,6 +247,9 @@ stories
   .add('Demo: Async Search', () => (
     <AsyncComboboxDemo
       id="async-combobox-demo"
+      isErrorHidden={boolean('Hide error text?', false)}
+      isRequired={boolean('Required?', false)}
+      error={text('Error', '')}
       label={text('Label', 'Relate To')}
       placeholder={text('Placeholder', 'Pick a type...')}
       height={select('Height', getDropdownHeights(), 5)}

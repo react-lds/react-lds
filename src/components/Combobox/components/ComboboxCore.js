@@ -20,6 +20,7 @@ class ComboboxCore extends Component {
     comboboxClassName: PropTypes.string,
     /**
      * Error to display under the control
+     * Notice: This is a custom addition to LDS Combobox spec!
      */
     error: PropTypes.string,
     /**
@@ -32,6 +33,7 @@ class ComboboxCore extends Component {
     id: PropTypes.string.isRequired,
     /**
      * Prevent error from being shown
+     * Notice: This is a custom addition to LDS Combobox spec!
      */
     isErrorHidden: PropTypes.bool,
     /**
@@ -52,6 +54,7 @@ class ComboboxCore extends Component {
     isOpen: PropTypes.bool.isRequired,
     /**
      * Mark field as required
+     * Notice: This is a custom addition to LDS Combobox spec!
      */
     isRequired: PropTypes.bool,
     /**

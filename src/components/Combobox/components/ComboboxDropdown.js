@@ -55,6 +55,7 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
   return (
     <FormElement error={error} required={isRequired} {...rest}>
       <FormElementLabel id={id} label={label} required={isRequired} />
+      {!isErrorHidden && <FormElementError error={error} id={`error-${id}`} />}
       <FormElementControl>
         <div className={cx(comboboxContainerClasses)}>
           <div
@@ -79,7 +80,6 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
         </div>
       </FormElementControl>
       {renderListbox && renderListbox()}
-      {!isErrorHidden && <FormElementError error={error} id={`error-${id}`} />}
     </FormElement>
   );
 });
