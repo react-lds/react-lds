@@ -12,7 +12,6 @@ import {
 const ComboboxDropdown = React.forwardRef((props, ref) => {
   const {
     children,
-    className,
     dropdownClassName,
     error,
     height,
