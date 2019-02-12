@@ -53,6 +53,7 @@ export class BaseCombobox extends Component {
     comboboxClassName: PropTypes.string,
     error: PropTypes.string,
     height: PropTypes.oneOf([5, 7, 10]),
+    hideLabel: PropTypes.bool,
     id: PropTypes.string.isRequired,
     isErrorHidden: PropTypes.bool,
     isLoading: PropTypes.bool,
@@ -60,7 +61,7 @@ export class BaseCombobox extends Component {
     isOpen: PropTypes.bool.isRequired,
     isRequired: PropTypes.bool,
     items: PropTypes.arrayOf(itemType),
-    label: PropTypes.string.isRequired,
+    label: PropTypes.node.isRequired,
     labelListbox: PropTypes.string,
     /**
      * Text shown in Dropdown input when more than one item is selected.
@@ -83,6 +84,7 @@ export class BaseCombobox extends Component {
     comboboxClassName: null,
     error: null,
     height: 5,
+    hideLabel: false,
     isErrorHidden: false,
     isLoading: false,
     isMultiSelect: false,

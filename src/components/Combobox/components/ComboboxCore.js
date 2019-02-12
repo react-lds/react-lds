@@ -28,6 +28,10 @@ class ComboboxCore extends Component {
      */
     height: PropTypes.oneOf([5, 7, 10]),
     /**
+     * Determines whether the label is rendered
+     */
+    hideLabel: PropTypes.bool,
+    /**
      * Unique identifier
      */
     id: PropTypes.string.isRequired,
@@ -65,7 +69,7 @@ class ComboboxCore extends Component {
     /**
      * Labels the Combobox
      */
-    label: PropTypes.string.isRequired,
+    label: PropTypes.node.isRequired,
     /**
      * Assistive label for the Listbox of selected items
      */
@@ -127,6 +131,7 @@ class ComboboxCore extends Component {
     comboboxClassName: null,
     error: null,
     height: 5,
+    hideLabel: false,
     isErrorHidden: false,
     isInlineListboxSelection: false,
     isRequired: false,
@@ -390,6 +395,7 @@ class ComboboxCore extends Component {
       comboboxClassName,
       error,
       height,
+      hideLabel,
       id,
       items,
       isErrorHidden,
@@ -418,6 +424,7 @@ class ComboboxCore extends Component {
           className={comboboxClassName}
           error={error}
           height={height}
+          hideLabel={hideLabel}
           id={`combobox-${id}`}
           isErrorHidden={isErrorHidden}
           isRequired={isRequired}

@@ -399,7 +399,6 @@ export class LookupRaw extends PureComponent {
           className={emailLayout ? 'slds-input_height' : null}
           iconRight={emailLayout ? null : 'search'}
           id={id}
-          isFocused={open}
           onBlur={this.handleCreateElement}
           onChange={this.handleInputChange}
           onFocus={this.handleInputFocus}
