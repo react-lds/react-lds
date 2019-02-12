@@ -19,6 +19,11 @@ class ComboboxCore extends Component {
      */
     comboboxClassName: PropTypes.string,
     /**
+     * Error to display under the control
+     * Notice: This is a custom addition to LDS Combobox spec!
+     */
+    error: PropTypes.string,
+    /**
      * Number of results displayed in the result dropdown
      */
     height: PropTypes.oneOf([5, 7, 10]),
@@ -30,6 +35,11 @@ class ComboboxCore extends Component {
      * Unique identifier
      */
     id: PropTypes.string.isRequired,
+    /**
+     * Prevent error from being shown
+     * Notice: This is a custom addition to LDS Combobox spec!
+     */
+    isErrorHidden: PropTypes.bool,
     /**
      * Switch to render single selection as `inline` listboxs. Set by `EntityCombobox`
      */
@@ -46,6 +56,11 @@ class ComboboxCore extends Component {
      * Determines whether the result dropdown is rendered
      */
     isOpen: PropTypes.bool.isRequired,
+    /**
+     * Mark field as required
+     * Notice: This is a custom addition to LDS Combobox spec!
+     */
+    isRequired: PropTypes.bool,
     /**
      * Array of items that will be displayed in the selection dropdown
      * `isHeader` items break the dropdown into sublists
@@ -114,9 +129,12 @@ class ComboboxCore extends Component {
 
   static defaultProps = {
     comboboxClassName: null,
+    error: null,
     height: 5,
     hideLabel: false,
+    isErrorHidden: false,
     isInlineListboxSelection: false,
+    isRequired: false,
     labelListbox: 'Selected Items',
     onSearch: null,
     renderItemsAppended: null,
@@ -375,11 +393,14 @@ class ComboboxCore extends Component {
   render() {
     const {
       comboboxClassName,
+      error,
       height,
       hideLabel,
       id,
       items,
+      isErrorHidden,
       isMultiSelect,
+      isRequired,
       label,
       isInlineListboxSelection,
       isLoading,
@@ -401,9 +422,12 @@ class ComboboxCore extends Component {
       >
         <ComboboxDropdown
           className={comboboxClassName}
+          error={error}
           height={height}
           hideLabel={hideLabel}
           id={`combobox-${id}`}
+          isErrorHidden={isErrorHidden}
+          isRequired={isRequired}
           isSingleInlineSelection={isInlineListboxSelection && !isMultiSelect && selectedItems.length === 1}
           label={label}
           listboxId={listboxId}
