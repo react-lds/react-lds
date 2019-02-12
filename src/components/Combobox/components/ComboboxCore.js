@@ -19,7 +19,7 @@ class ComboboxCore extends Component {
      */
     comboboxClassName: PropTypes.string,
     /**
-     * Classname that will be applied to the '.slds-dropdown' wrapping input and listbox
+     * Classname that will be applied to the '.slds-dropdown'
      */
     dropdownClassName: PropTypes.string,
     /**
@@ -263,7 +263,6 @@ class ComboboxCore extends Component {
     if (isKeyboardSelect) {
       evt.preventDefault();
       this.onSelect(keyboardSelection);
-      evt.target.setSelectionRange(0, 0);
       return true;
     }
 
