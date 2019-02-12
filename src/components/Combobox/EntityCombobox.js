@@ -72,6 +72,7 @@ export class EntityCombobox extends Component {
      */
     closeOnSelect: PropTypes.bool,
     comboboxClassName: PropTypes.string,
+    dropdownClassName: PropTypes.string,
     error: PropTypes.string,
     height: PropTypes.oneOf([5, 7, 10]),
     hideLabel: PropTypes.bool,
@@ -100,6 +101,7 @@ export class EntityCombobox extends Component {
   static defaultProps = {
     closeOnSelect: true,
     comboboxClassName: null,
+    dropdownClassName: null,
     error: null,
     height: 5,
     hideLabel: false,
