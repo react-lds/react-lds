@@ -157,7 +157,7 @@ stories
       label={text('Label', 'Relate To')}
       placeholder={text('Placeholder', 'Pick a type...')}
       height={select('Height', getDropdownHeights(), 5)}
-      isErrorHidden={boolean('Hide error text?', false)}
+      hideErrorMessage={boolean('Hide error text?', false)}
       isLoading={boolean('Loading?', false)}
       isRequired={boolean('Required?', false)}
       id="base-combobox-demo"
@@ -173,7 +173,7 @@ stories
       label={text('Label', 'Relate To')}
       placeholder={text('Placeholder', 'Pick a type...')}
       height={select('Height', getDropdownHeights(), 5)}
-      isErrorHidden={boolean('Hide error text?', false)}
+      hideErrorMessage={boolean('Hide error text?', false)}
       isLoading={boolean('Loading?', false)}
       isRequired={boolean('Required?', false)}
       id="base-combobox-demo"
@@ -188,7 +188,7 @@ stories
       search={text('Search', '')}
       placeholder="Search"
       id="base-combobox-demo"
-      isErrorHidden={boolean('Hide error text?', false)}
+      hideErrorMessage={boolean('Hide error text?', false)}
       isRequired={boolean('Required?', false)}
       label="Relate To"
       onSearch={action('search:change')}
@@ -198,7 +198,7 @@ stories
   ), { info: baseInfo })
   .add('Demo: Autocomplete Combobox Integration', () => (
     <AutoCompleteComboboxDemo
-      isErrorHidden={boolean('Hide error text?', false)}
+      hideErrorMessage={boolean('Hide error text?', false)}
       isMultiSelect={boolean('Allow multiple selections', false)}
       isRequired={boolean('Required?', false)}
       error={text('Error', '')}
@@ -228,7 +228,7 @@ stories
 
     return (
       <EntityCombobox
-        isErrorHidden={boolean('Hide error text?', false)}
+        hideErrorMessage={boolean('Hide error text?', false)}
         isOpen={boolean('Open', false)}
         isRequired={boolean('Required?', false)}
         error={text('Error', '')}
@@ -247,7 +247,7 @@ stories
   .add('Demo: Async Search', () => (
     <AsyncComboboxDemo
       id="async-combobox-demo"
-      isErrorHidden={boolean('Hide error text?', false)}
+      hideErrorMessage={boolean('Hide error text?', false)}
       isRequired={boolean('Required?', false)}
       error={text('Error', '')}
       label={text('Label', 'Relate To')}

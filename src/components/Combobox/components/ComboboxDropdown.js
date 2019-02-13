@@ -15,14 +15,14 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
     comboboxClassName,
     error,
     height,
+    hideErrorMessage,
     hideLabel,
     id,
-    isErrorHidden,
+    isOpen,
     isRequired,
     isSingleInlineSelection,
     label,
     listboxId,
-    isOpen,
     renderInput,
     renderListbox,
     ...rest
@@ -56,7 +56,7 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
   return (
     <FormElement error={error} required={isRequired} {...rest}>
       {!hideLabel && <FormElementLabel id={id} label={label} required={isRequired} />}
-      {!isErrorHidden && <FormElementError error={error} id={`error-${id}`} />}
+      {!hideErrorMessage && <FormElementError error={error} id={`error-${id}`} />}
       <FormElementControl>
         <div className={cx(comboboxContainerClasses)}>
           <div
@@ -92,11 +92,11 @@ ComboboxDropdown.propTypes = {
   comboboxClassName: PropTypes.string,
   error: PropTypes.string,
   height: PropTypes.number.isRequired,
+  hideErrorMessage: PropTypes.bool,
   hideLabel: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  isErrorHidden: PropTypes.bool,
-  isRequired: PropTypes.bool,
   isOpen: PropTypes.bool.isRequired,
+  isRequired: PropTypes.bool,
   isSingleInlineSelection: PropTypes.bool,
   label: PropTypes.node.isRequired,
   listboxId: PropTypes.string.isRequired,
@@ -107,9 +107,9 @@ ComboboxDropdown.propTypes = {
 ComboboxDropdown.defaultProps = {
   children: null,
   comboboxClassName: null,
-  hideLabel: false,
   error: null,
-  isErrorHidden: false,
+  hideErrorMessage: false,
+  hideLabel: false,
   isRequired: false,
   isSingleInlineSelection: false,
   renderListbox: null,

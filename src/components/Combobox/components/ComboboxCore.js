@@ -28,6 +28,11 @@ class ComboboxCore extends Component {
      */
     height: PropTypes.oneOf([5, 7, 10]),
     /**
+     * Prevent error from being shown
+     * Notice: This is a custom addition to LDS Combobox spec!
+     */
+    hideErrorMessage: PropTypes.bool,
+    /**
      * Determines whether the label is rendered
      */
     hideLabel: PropTypes.bool,
@@ -35,11 +40,6 @@ class ComboboxCore extends Component {
      * Unique identifier
      */
     id: PropTypes.string.isRequired,
-    /**
-     * Prevent error from being shown
-     * Notice: This is a custom addition to LDS Combobox spec!
-     */
-    isErrorHidden: PropTypes.bool,
     /**
      * Switch to render single selection as `inline` listboxs. Set by `EntityCombobox`
      */
@@ -131,8 +131,8 @@ class ComboboxCore extends Component {
     comboboxClassName: null,
     error: null,
     height: 5,
+    hideErrorMessage: false,
     hideLabel: false,
-    isErrorHidden: false,
     isInlineListboxSelection: false,
     isRequired: false,
     labelListbox: 'Selected Items',
@@ -395,16 +395,16 @@ class ComboboxCore extends Component {
       comboboxClassName,
       error,
       height,
+      hideErrorMessage,
       hideLabel,
       id,
-      items,
-      isErrorHidden,
-      isMultiSelect,
-      isRequired,
-      label,
       isInlineListboxSelection,
       isLoading,
+      isMultiSelect,
       isOpen,
+      isRequired,
+      items,
+      label,
       renderItemsAppended,
       renderItemsPrepended,
       renderListbox,
@@ -424,14 +424,14 @@ class ComboboxCore extends Component {
           className={comboboxClassName}
           error={error}
           height={height}
+          hideErrorMessage={hideErrorMessage}
           hideLabel={hideLabel}
           id={`combobox-${id}`}
-          isErrorHidden={isErrorHidden}
+          isOpen={isOpen}
           isRequired={isRequired}
           isSingleInlineSelection={isInlineListboxSelection && !isMultiSelect && selectedItems.length === 1}
           label={label}
           listboxId={listboxId}
-          isOpen={isOpen}
           ref={this.dropdownRef}
           renderInput={this.renderInput}
           renderListbox={renderListbox && isMultiSelect
