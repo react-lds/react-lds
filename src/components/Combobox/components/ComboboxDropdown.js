@@ -12,7 +12,7 @@ import {
 const ComboboxDropdown = React.forwardRef((props, ref) => {
   const {
     children,
-    comboboxClassName,
+    dropdownClassName,
     error,
     height,
     hideLabel,
@@ -51,6 +51,7 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
     'slds-dropdown',
     'slds-dropdown_fluid',
     { [`slds-dropdown_length-with-icon-${height}`]: height },
+    dropdownClassName,
   ];
 
   return (
@@ -89,7 +90,8 @@ ComboboxDropdown.displayName = 'ComboboxDropdown';
 
 ComboboxDropdown.propTypes = {
   children: PropTypes.node,
-  comboboxClassName: PropTypes.string,
+  className: PropTypes.string,
+  dropdownClassName: PropTypes.string,
   error: PropTypes.string,
   height: PropTypes.number.isRequired,
   hideLabel: PropTypes.bool,
@@ -106,7 +108,8 @@ ComboboxDropdown.propTypes = {
 
 ComboboxDropdown.defaultProps = {
   children: null,
-  comboboxClassName: null,
+  className: null,
+  dropdownClassName: null,
   hideLabel: false,
   error: null,
   isErrorHidden: false,

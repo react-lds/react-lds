@@ -19,6 +19,10 @@ class ComboboxCore extends Component {
      */
     comboboxClassName: PropTypes.string,
     /**
+     * Classname that will be applied to the '.slds-dropdown'
+     */
+    dropdownClassName: PropTypes.string,
+    /**
      * Error to display under the control
      * Notice: This is a custom addition to LDS Combobox spec!
      */
@@ -129,6 +133,7 @@ class ComboboxCore extends Component {
 
   static defaultProps = {
     comboboxClassName: null,
+    dropdownClassName: null,
     error: null,
     height: 5,
     hideLabel: false,
@@ -393,6 +398,7 @@ class ComboboxCore extends Component {
   render() {
     const {
       comboboxClassName,
+      dropdownClassName,
       error,
       height,
       hideLabel,
@@ -422,6 +428,7 @@ class ComboboxCore extends Component {
       >
         <ComboboxDropdown
           className={comboboxClassName}
+          dropdownClassName={dropdownClassName}
           error={error}
           height={height}
           hideLabel={hideLabel}
