@@ -11,7 +11,6 @@ describe('<MenuSubHeader />', () => {
   });
 
   it('renders correct classes', () => {
-    expect(mounted.find('li > span').hasClass('slds-text-title_caps')).toBeTruthy();
     expect(mounted.find('li.slds-dropdown__header').hasClass('slds-truncate')).toBeTruthy();
   });
 

@@ -50,21 +50,26 @@ import PropTypes from 'prop-types';
 class AssetPathProvider extends Component {
   getChildContext() {
     return {
-      assetBasePath: '',
+      assetBasePath: 'assets/',
     };
   }
 
   render() {
     const { children } = this.props;
-    return Children.only(children);
+
+    return (
+      <div>
+        {children}
+      </div>
+    );
   }
 }
 
-Page.propTypes = {
+AssetPathProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Page.childContextTypes = {
+AssetPathProvider.childContextTypes = {
   assetBasePath: PropTypes.string,
 };
 ```
