@@ -17,12 +17,7 @@ const Breadcrumb = (props) => {
     className
   ];
 
-  const liClasses = [
-    'slds-breadcrumb__item',
-    'slds-text-title_caps'
-  ];
-
-  const wrapItems = filtered.map(child => <li className={cx(liClasses)} key={child.key}>{child}</li>);
+  const wrapItems = filtered.map(child => <li className="slds-breadcrumb__item" key={child.key}>{child}</li>);
 
   return (
     <nav {...rest} className={className} aria-label="Breadcrumbs">

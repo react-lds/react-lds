@@ -17,7 +17,7 @@ const VerticalNavigationSection = (props) => {
 
   return (
     <div {...rest} className={cx(sldsClasses)}>
-      <h2 className="slds-nav-vertical__title slds-text-title_caps" id={id}>{title}</h2>
+      <h2 className="slds-nav-vertical__title" id={id}>{title}</h2>
       <ul>{React.Children.map(children, renderChild)}</ul>
     </div>
   );
