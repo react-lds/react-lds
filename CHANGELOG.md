@@ -1,5 +1,12 @@
 # Changelog
 
+## 8.0.0
+
+
+* Added: **Breaking Change** Comboboxes have been reworked completely into `BaseCombobox/Picklist`, `AutoCompleteCombobox` and `EntityCombobox`. `Combobox` and `ControlledCombobox` have been removed. See the Storybook documentation for details
+* Changed: `Lookup` is now deprecated and will be removed with the next major version
+* Changed: `react` and `react-dom` and `moment-*` are now peerDependencies
+
 ## 7.3.2
 
 * Fixed: Clarify Context in README
