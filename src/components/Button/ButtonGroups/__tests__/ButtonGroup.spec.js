@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { shallow } from 'enzyme';
 import ButtonGroup from '../ButtonGroup';
 
 const sampleChild = <span>Foo</span>;
 
-const getComponent = (props = {}) => shallow(<ButtonGroup {...props}>{sampleChild}</ButtonGroup>);
+const getComponent = (props = {}) => shallow(<ButtonGroup {...props}>{props.children || sampleChild}</ButtonGroup>);
 
 describe('<ButtonGroup />', () => {
   it('applies rest props and additional classes', () => {
@@ -38,5 +38,18 @@ describe('<ButtonGroup />', () => {
     expect(wrapper.prop('role')).toBeNull();
     expect(wrapper.find('li').hasClass('slds-button-group-item')).toBeTruthy();
     expect(wrapper.find('li').contains(sampleChild)).toBeTruthy();
+  });
+
+  it('resolves fragments in children', () => {
+    const children = [
+      <span key="foo">Foo</span>,
+      <Fragment key="barbaz">
+        <span>Bar</span>
+        <span>Baz</span>
+      </Fragment>
+    ];
+
+    const mounted = getComponent({ children, row: true });
+    expect(mounted.find('li')).toHaveLength(3);
   });
 });
