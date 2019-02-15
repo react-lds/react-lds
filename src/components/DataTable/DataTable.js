@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
+import isEmpty from 'lodash-es/isEmpty';
 import omit from 'lodash-es/omit';
-import debounce from 'lodash-es/debounce';
 
-import { Table, uniqueId } from '../..';
+import { Row, Table, uniqueId } from '../..';
 import { propTypes as tablePropTypes } from '../Table/Table';
 
 import defaultRowRenderer from './defaultRowRenderer';
@@ -22,13 +23,9 @@ class DataTable extends Component {
       id: uniqueId('data-table-advanced-'),
       columns: [],
       data,
-      isScrolled: false,
       sortBy,
       sortDirection,
     };
-
-    this.scrollContainer = React.createRef();
-    this.onScroll = debounce(this.onScroll, 50);
   }
 
   componentWillMount() {
@@ -55,11 +52,6 @@ class DataTable extends Component {
       });
     }
   }
-
-  onScroll = () => {
-    const scrollTop = this.scrollContainer.current.scrollTop; // eslint-disable-line
-    this.setState({ isScrolled: scrollTop > 0 });
-  };
 
   onSelect = (rowId) => {
     const { onSelect, selection } = this.props;
@@ -154,18 +146,24 @@ class DataTable extends Component {
   renderRow(rowData, rowIndex) {
     const { columns, id } = this.state;
     const {
-      getCellData, getRowId, rowRenderer, selection
+      getCellData,
+      getRowId,
+      rowRenderer,
+      selection,
+      stickyHeader,
     } = this.props;
+
     const rowId = getRowId({ rowIndex, rowData });
 
     const cells = columns.map(({ cellRenderer, dataKey, title }) => cellRenderer({
       cellData: getCellData({ rowData, dataKey }),
       dataKey,
+      onSelect: this.onSelect,
       rowData,
       rowId,
       rowIndex,
       selected: selection.includes(rowId),
-      onSelect: this.onSelect,
+      stickyHeader,
       tableId: id,
       defaultProps: {
         'data-label': title,
@@ -183,50 +181,21 @@ class DataTable extends Component {
     });
   }
 
-  renderHead() {
-    const { stickyHeader, variation } = this.props;
+  render() {
     const {
-      columns, id, isScrolled, sortBy, sortDirection
+      className,
+      noRowsRenderer,
+      stickyHeader,
+      variation,
+    } = this.props;
+    const {
+      columns,
+      data,
+      id,
+      sortBy,
+      sortDirection,
     } = this.state;
 
-    const hasHiddenHeader = !stickyHeader && variation.includes('header-hidden');
-
-    return (
-      <thead className={hasHiddenHeader ? 'slds-assistive-text' : null}>
-        <tr>
-          {columns.map(({ headRenderer, ...restProps }) => headRenderer({
-            allSelected: this.areAllRowsSelected(),
-            isSticky: stickyHeader,
-            isScrolled,
-            onSelectAll: this.onSelectAll,
-            onSort: this.onSort,
-            sortBy,
-            sortDirection,
-            tableId: id,
-            ...restProps
-          }))}
-        </tr>
-      </thead>
-    );
-  }
-
-  renderBody() {
-    const { noRowsRenderer } = this.props;
-    const { columns, data, id } = this.state;
-
-    if (!Array.isArray(data) || data.length === 0) {
-      return noRowsRenderer({ columns, tableId: id });
-    }
-
-    return (
-      <tbody>
-        {data.map((row, i) => this.renderRow(row, i))}
-      </tbody>
-    );
-  }
-
-  render() {
-    const { stickyHeader } = this.props;
     const rest = omit(this.props, [
       'children',
       'data',
@@ -240,34 +209,43 @@ class DataTable extends Component {
       'sortBy',
       'sortDirection',
     ]);
-    const table = (
-      <Table {...rest}>
-        {this.renderHead()}
-        {this.renderBody()}
+
+    const hasHiddenHeader = !stickyHeader && variation.includes('header-hidden');
+
+    const sldsClasses = [
+      { 'reactlds-table_stickyheader': stickyHeader },
+      className,
+    ];
+
+    return (
+      <Table {...rest} className={cx(sldsClasses)}>
+        <thead className={hasHiddenHeader ? 'slds-assistive-text' : null}>
+          <Row sticky={stickyHeader}>
+            {columns.map(({ headRenderer, ...restProps }) => headRenderer({
+              allSelected: this.areAllRowsSelected(),
+              onSelectAll: this.onSelectAll,
+              onSort: this.onSort,
+              sortBy,
+              sortDirection,
+              tableId: id,
+              ...restProps
+            }))}
+          </Row>
+        </thead>
+        {isEmpty(data)
+          ? noRowsRenderer({ columns, tableId: id })
+          : (
+            <tbody>
+              {data.map((row, i) => this.renderRow(row, i))}
+            </tbody>
+          )}
       </Table>
     );
-
-    if (stickyHeader) {
-      return (
-        <div
-          className="slds-grid slds-grid_vertical slds-scrollable"
-          onScroll={this.onScroll}
-          ref={this.scrollContainer}
-        >
-          <div>
-            {table}
-          </div>
-        </div>
-      );
-    }
-
-    return table;
   }
 }
 
 DataTable.defaultProps = {
   ...Table.defaultProps,
-
   getCellData: ({ rowData, dataKey }) => rowData[dataKey],
   getRowId: ({ rowIndex }) => rowIndex,
   onSort: null,
@@ -282,7 +260,6 @@ DataTable.defaultProps = {
 
 DataTable.propTypes = {
   ...tablePropTypes,
-
   /**
    * Table content, an array of objects
    */

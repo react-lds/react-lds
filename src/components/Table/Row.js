@@ -4,23 +4,40 @@ import cx from 'classnames';
 
 const Row = (props) => {
   const {
-    children, className, head, variation, ...rest
+    children,
+    className,
+    sticky,
+    variation,
+    ...rest
   } = props;
 
-  const variationClasses = Array.isArray(variation) ? variation.map(f => `slds-${f}`) : `slds-${variation}`;
+  const rowStyle = sticky ? Row.STICKY_SCROLLED_STYLE : null;
 
-  const sldsClasses = [
-    variationClasses,
-    className
-  ];
+  const variationClasses = Array.isArray(variation)
+    ? variation.map(f => `slds-${f}`)
+    : `slds-${variation}`;
 
-  return (<tr {...rest} className={cx(sldsClasses)}>{children}</tr>);
+  return (
+    <tr
+      {...rest}
+      className={cx([variationClasses, className])}
+      style={rowStyle}
+    >
+      {children}
+    </tr>
+  );
+};
+
+Row.STICKY_SCROLLED_STYLE = {
+  position: 'sticky',
+  top: 0,
+  zIndex: 1,
 };
 
 Row.defaultProps = {
   children: null,
   className: null,
-  head: false,
+  sticky: false,
   variation: [],
 };
 
@@ -34,9 +51,9 @@ Row.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * marks a header row
+   * Should only be set for rows nested in thead. Sets `position:sticky` to attach to top of the scrolling ctx
    */
-  head: PropTypes.bool,
+  sticky: PropTypes.bool,
   /**
    * variation: string or array of strings. Variations: is-selected, hint-parent
    */

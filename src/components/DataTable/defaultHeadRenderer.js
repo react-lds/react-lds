@@ -6,8 +6,6 @@ import { Cell } from '../..';
 /* eslint-disable react/prop-types */
 export default ({
   dataKey,
-  isScrolled,
-  isSticky,
   onSort,
   sortable,
   sortBy,
@@ -20,8 +18,6 @@ export default ({
   return (
     <Cell
       className={classNames}
-      isScrolled={isScrolled}
-      isSticky={isSticky}
       key={dataKey}
       onClick={onClick}
       scope="col"

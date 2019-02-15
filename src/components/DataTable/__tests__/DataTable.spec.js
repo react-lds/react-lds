@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import { DataTable, DataTableColumn, DataTableSelectColumn } from '..';
-import { Cell } from '../../Table';
+import { Row } from '../../Table';
 
 describe('<DataTable />', () => {
   const getComponent = (props, selectable, nameProps, ageProps) => {
@@ -166,10 +166,6 @@ describe('<DataTable />', () => {
   it('displays a sticky header and adds an additional scroll container', () => {
     const mounted = getComponent({ stickyHeader: true }, false);
 
-    expect(mounted.find('.slds-scrollable')).toHaveLength(1);
-
-    expect(mounted.find('th').at(0).prop('style')).toEqual(Cell.STICKY_TOP_STYLE);
-    mounted.setState({ isScrolled: true });
-    expect(mounted.find('th').at(0).prop('style')).toEqual(Cell.STICKY_SCROLLED_STYLE);
+    expect(mounted.find('thead').find(Row).prop('style')).toEqual(Row.STICKY_TOP_STYLE);
   });
 });
