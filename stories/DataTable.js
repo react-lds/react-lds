@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
-import { array, object, select, text } from '@storybook/addon-knobs';
+import {
+  array,
+  object,
+  select,
+  text,
+} from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import {
   Button,
@@ -73,7 +78,8 @@ stories
       height: '300px',
       width: '100%',
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      overflowY: 'scroll'
     }}
     >
       <DataTable
@@ -103,7 +109,22 @@ stories
         />
       </DataTable>
     </div>
-  ))
+  ), {
+    info: `
+      This variant requires you to have a DOM ancestor that sets \`overflow-y: auto|scroll \`. \n
+      To optionally fix the double border for the first item, add the following to your CSS:
+      \`\`\` css
+      // CSS
+      .reactlds-table_stickyheader th {
+        border-bottom: 1px solid rgb(221, 219, 218); // $color-border-separator-alt
+      }
+
+      .reactlds-table_stickyheader tbody > tr:first-child > td {
+        border-top: none;
+      }
+      \`\`\`
+    `
+  })
   .add('Sortable table', withInfo(`
     Marking a column **sortable** will make the table header clickable. On click, the
     data array is sorted by that column. If an **onSort** callback is provided, sorting the
