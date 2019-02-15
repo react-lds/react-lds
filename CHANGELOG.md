@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.4.0
+
+* Fixed: Handle `Fragment` as `children` in `ButtonGroup`
+* Fixed: Replace scroll wrapper in `DataTable` `stickyHeader` implementation with a CSS based approach
+
 ## 7.3.2
 
 * Fixed: Clarify Context in README
