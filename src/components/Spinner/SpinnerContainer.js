@@ -22,6 +22,7 @@ const SpinnerContainer = (props) => {
 
 SpinnerContainer.defaultProps = {
   className: null,
+  children: null,
   fixed: false,
 };
 
@@ -38,7 +39,7 @@ SpinnerContainer.propTypes = {
   /**
    * children should be one instance of Spinner
    */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default SpinnerContainer;
