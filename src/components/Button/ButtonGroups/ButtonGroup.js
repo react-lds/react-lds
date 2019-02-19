@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as ReactIs from 'react-is';
 import cx from 'classnames';
 
 const ButtonGroup = (props) => {
@@ -11,9 +12,19 @@ const ButtonGroup = (props) => {
     ...rest
   } = props;
 
-  const wrapLi = (el, i) => (
-    <li className={row ? 'slds-button-group-item' : null} key={i}>{el}</li>
-  );
+  const wrapLi = (parentEl, i) => {
+    const isFragment = ReactIs.typeOf(parentEl) === ReactIs.Fragment;
+
+    const toLi = (childEl, index) => (
+      <li className={row ? 'slds-button-group-item' : null} key={index}>
+        {childEl}
+      </li>
+    );
+
+    return isFragment
+      ? React.Children.map(parentEl.props.children, (child, j) => toLi(child, `${i}-${j}`))
+      : toLi(parentEl, i);
+  };
 
   const isDivGroup = !list && !row;
 
@@ -25,7 +36,10 @@ const ButtonGroup = (props) => {
   );
 
   const ButtonGroupEl = isDivGroup ? 'div' : 'ul';
-  const childEls = !isDivGroup ? React.Children.map(children, wrapLi) : children;
+
+  const childEls = !isDivGroup
+    ? React.Children.map(children, wrapLi)
+    : children;
 
   return (
     <ButtonGroupEl

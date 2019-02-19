@@ -1,28 +1,20 @@
 import React from 'react';
-import { CheckboxRaw, Cell } from '../..';
+import { CheckboxRaw } from '../..';
 
 /* eslint-disable react/prop-types */
 export default ({
   allSelected,
   dataKey,
-  isScrolled,
-  isSticky,
   onSelectAll,
   tableId,
 }) => {
   const checkboxId = `${tableId}-${dataKey}`;
-
-  let style = null;
-  if (isSticky) {
-    style = isScrolled ? Cell.STICKY_SCROLLED_STYLE : Cell.STICKY_TOP_STYLE;
-  }
 
   return (
     <th
       className="slds-text-align--right"
       key={dataKey}
       scope="col"
-      style={style}
     >
       <div>
         <CheckboxRaw

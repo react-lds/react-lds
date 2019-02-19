@@ -7,6 +7,12 @@
 * Added: **Breaking Change** `Picklist` API has changed and is not compatible with the previous version
 * Changed: `Lookup` is now deprecated and will be removed with the next major version
 * Changed: `react` and `react-dom` and `moment-*` are now peerDependencies
+* Changed: `children` prop in `SpinnerContainer` is nows optional
+
+## 7.4.0
+
+* Fixed: Handle `Fragment` as `children` in `ButtonGroup`
+* Fixed: Replace scroll wrapper in `DataTable` `stickyHeader` implementation with a CSS based approach
 
 ## 7.3.2
 
