@@ -7,7 +7,7 @@
 * Added: **Breaking Change** `Picklist` API has changed and is not compatible with the previous version
 * Changed: `Lookup` is now deprecated and will be removed with the next major version
 * Changed: `react` and `react-dom` and `moment-*` are now peerDependencies
-* Changed: `children` prop in `SpinnerContainer` is nows optional
+* Changed: `children` prop in `SpinnerContainer` is now optional
 
 ## 7.4.0
 
