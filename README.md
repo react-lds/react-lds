@@ -7,6 +7,10 @@
 To install the stable version with [npm](http://npmjs.com/), run:
 
 ``` bash
+npm install --save react react-dom moment moment-timezone moment-range
+```
+
+``` bash
 npm install react-lds --save
 ```
 

@@ -1,6 +1,6 @@
 {
   "name": "react-lds",
-  "version": "7.4.0",
+  "version": "8.0.0",
   "description": "Salesforce Lightning Design System React Components",
   "keywords": [
     "react",
@@ -23,7 +23,8 @@
     "start": "yarn storybook",
     "storybook": "yarn run prestorybook; start-storybook -p 6006 -s ./public",
     "test-watch": "jest --watchAll",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "watch:build": "NODE_ENV=es babel -w ./src --ignore './src/**/__tests__/**' --out-dir ./es"
   },
   "contributors": [
     "Konstantin Krauss <konstantin@propertybase.com> (http://www.propertybase.com)",
@@ -43,17 +44,19 @@
   },
   "homepage": "https://github.com/propertybase/react-lds#readme",
   "license": "MIT",
+  "peerDependencies": {
+    "moment": "^2.24.0",
+    "moment-range": "^4.0.1",
+    "moment-timezone": "^0.5.23",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
+  },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "classnames": "^2.2.5",
     "focus-trap-react": "^3.1.2",
     "lodash-es": "^4.17.10",
-    "moment": "^2.22.2",
-    "moment-range": "^4.0.1",
-    "moment-timezone": "^0.5.23",
     "prop-types": "^15.5.6",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
     "react-is": "^16.8.2",
     "react-popper": "^1.3.2"
   },
@@ -85,6 +88,11 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
     "jest-cli": "^23.6.0",
+    "moment": "^2.24.0",
+    "moment-range": "^4.0.1",
+    "moment-timezone": "^0.5.23",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
     "webpack": "^4.25.1"
   },
   "jest": {

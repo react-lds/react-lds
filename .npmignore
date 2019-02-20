@@ -1,10 +1,14 @@
 _templates
 .storybook
 src
+coverage
+internals
+public
 stories
-.babelrc
+babel.config.js
 .editorconfig
 .eslintignore
 .eslintrc
 .travis.yml
+yarn.lock
 deploy_docs.sh
