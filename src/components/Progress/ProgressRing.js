@@ -108,6 +108,9 @@ ProgressRing.propTypes = {
     warning: PropTypes.string.isRequired,
     complete: PropTypes.string.isRequired,
   }),
+  /**
+   * If provided, children has precedence over the customIcon and status prop
+   */
   children: PropTypes.node,
   /**
    * Controls when the complete state is rendered. Can either be a boolean value or 'auto'

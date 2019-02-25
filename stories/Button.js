@@ -23,6 +23,7 @@ const buttonFlavors = [
   'success',
   'text-destructive',
   'stretch',
+  'reset',
 ];
 
 const buttonStories = storiesOf('Button', module);

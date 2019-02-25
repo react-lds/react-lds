@@ -8,6 +8,7 @@ const renderFigure = (figure, classes) => (
 
 const MediaObject = (props) => {
   const {
+    bodyClassName,
     center,
     children,
     className,
@@ -41,7 +42,7 @@ const MediaObject = (props) => {
     >
       {figureLeft && figureLeftRenderer(figureLeft, ['slds-media__figure'])}
       <div
-        className={cx('slds-media__body', { 'slds-truncate': truncate })}
+        className={cx('slds-media__body', { 'slds-truncate': truncate }, bodyClassName)}
         title={title}
       >
         {children}
@@ -52,6 +53,7 @@ const MediaObject = (props) => {
 };
 
 MediaObject.defaultProps = {
+  bodyClassName: null,
   center: true,
   children: null,
   className: null,
@@ -67,6 +69,10 @@ MediaObject.defaultProps = {
 };
 
 MediaObject.propTypes = {
+  /**
+   * Optional class name which is appended to the body div
+   */
+  bodyClassName: PropTypes.string,
   /**
    * horizontally centers figures with content
    */

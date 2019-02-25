@@ -11,6 +11,7 @@ const IconButton = (props) => {
     border,
     children,
     className,
+    iconClassName,
     container,
     flavor,
     icon,
@@ -53,6 +54,7 @@ const IconButton = (props) => {
         <ButtonIcon
           icon={icon}
           sprite={sprite}
+          className={iconClassName}
         />
       )}
       {more && (
@@ -60,6 +62,7 @@ const IconButton = (props) => {
           icon="down"
           size="x-small"
           sprite="utility"
+          className={iconClassName}
         />
       )}
       {title && <span className="slds-assistive-text">{title}</span>}
@@ -71,6 +74,7 @@ IconButton.defaultProps = {
   border: null,
   children: null,
   className: null,
+  iconClassName: null,
   container: false,
   icon: null,
   sprite: null,
@@ -105,6 +109,10 @@ IconButton.propTypes = {
    * Optional additional classNames
    */
   className: PropTypes.string,
+  /**
+   * Optional additional classNames for the icon svg
+   */
+  iconClassName: PropTypes.string,
   /**
    * Renders a small down chevron besides the main icon. Used for example in IconButton groups
    */
