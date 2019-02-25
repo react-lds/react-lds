@@ -90,10 +90,6 @@ Button.propTypes = {
    * Optional additional className
    */
   className: PropTypes.string,
-  /**
-   * Can be either `neutral`, `brand`, `outline-brand`, `destructive`, `text-destructive`, `success` or `inverse`
-   * Default to `neutral`, set to "none" or `null` explicitely to render a plain button
-   */
   flavor: PropTypes.oneOf([
     'brand',
     'destructive',
@@ -101,9 +97,10 @@ Button.propTypes = {
     'neutral',
     'none',
     'outline-brand',
+    'reset',
     'success',
+    'stretch',
     'text-destructive',
-    'stretch'
   ]),
   /**
    * Optional href, renders as `a` when set
