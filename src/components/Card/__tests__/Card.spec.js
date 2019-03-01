@@ -33,7 +33,7 @@ describe('<Card />', () => {
   });
 
   it('renders the header', () => {
-    expect(mounted.find('h2 span.slds-text-heading_small').first().text()).toEqual(props.title);
+    expect(mounted.find('h2').first().text()).toEqual(props.title);
   });
 
   it('renders headerRight', () => {
