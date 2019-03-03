@@ -6,14 +6,16 @@ import { ButtonIcon, IconButton } from '../Button';
 const SummaryDetail = ({
   children,
   isOpen,
+  iconButtonClassName,
   onOpen,
-  renderOpenContent,
+  title,
+  renderTitle,
 }) => (
   <div className={cx('slds-summary-detail', { 'slds-is-open': isOpen })}>
     {onOpen && (
       <IconButton
         onClick={onOpen}
-        className="slds-m-right_x-small slds-m-top_x-small"
+        className={cx('slds-m-right_x-small', iconButtonClassName)}
       >
         <ButtonIcon
           className="slds-summary-detail__action-icon"
@@ -24,11 +26,15 @@ const SummaryDetail = ({
     )}
     <div>
       <div className="slds-summary-detail__title">
-        {children}
+        {renderTitle ? renderTitle() : title && (
+          <h3 className="slds-text-heading_small slds-truncate">
+            {title}
+          </h3>
+        )}
       </div>
-      {isOpen && renderOpenContent && (
+      {isOpen && children && (
         <div aria-hidden={!isOpen} className="slds-summary-detail__content">
-          {renderOpenContent()}
+          {children()}
         </div>
       )}
     </div>
@@ -39,7 +45,9 @@ SummaryDetail.defaultProps = {
   children: null,
   isOpen: false,
   onOpen: null,
-  renderOpenContent: null,
+  title: null,
+  renderTitle: null,
+  iconButtonClassName: null,
 };
 
 SummaryDetail.propTypes = {
@@ -52,13 +60,21 @@ SummaryDetail.propTypes = {
    */
   isOpen: PropTypes.bool,
   /**
-   * The title content
+   * The expanded content
    */
-  children: PropTypes.node,
+  children: PropTypes.func,
   /**
    * Renders the content when isOpen=true
    */
-  renderOpenContent: PropTypes.func
+  title: PropTypes.string,
+  /**
+   * Renders custom title markup if provided
+   */
+  renderTitle: PropTypes.func,
+  /**
+   * Additional className for the expand icon
+   */
+  iconButtonClassName: PropTypes.string,
 };
 
 export default SummaryDetail;

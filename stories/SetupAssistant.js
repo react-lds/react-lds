@@ -5,35 +5,70 @@ import { Button, SetupAssistant, SetupAssistantItem } from '../src';
 import './utils/global.css';
 
 const stories = storiesOf('Setup Assistant', module);
+const makeLorem = () => (
+  <span>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+    commodo consequat.
+  </span>
+);
+
+const buildAssistant = ({ isOpen, onOpen } = {}) => (
+  <SetupAssistant>
+    <SetupAssistantItem
+      title="Add Users to Your Org"
+      stepProgress={100}
+      onOpen={onOpen}
+      isOpen={isOpen}
+    >
+      {makeLorem()}
+    </SetupAssistantItem>
+    <SetupAssistantItem
+      title="Create Profiles for Your Users"
+      stepProgress={25}
+      step={2}
+      onOpen={onOpen}
+      isOpen={isOpen}
+      renderAddon={() => <div>4 min</div>}
+      renderOpenContent={() => (
+        <div>
+          Hello
+        </div>
+      )}
+    >
+      {makeLorem()}
+    </SetupAssistantItem>
+    <SetupAssistantItem
+      title="Turn on Tracking for Profiles"
+      step={3}
+      onOpen={onOpen}
+      isOpen={isOpen}
+    >
+      {makeLorem()}
+    </SetupAssistantItem>
+  </SetupAssistant>
+);
 
 stories
   .add('Base', () => (
     <SetupAssistant>
-      <SetupAssistantItem
-        title="Add Users to Your Org"
-        renderAddon={() => (
-          <div>
-            <Button>Add Users</Button>
-          </div>
-        )}
-      >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+      <SetupAssistantItem title="Add Users to Your Org">
+        {makeLorem()}
       </SetupAssistantItem>
       <SetupAssistantItem
         title="Create Profiles for Your Users"
-        renderAddon={() => (
+        renderAddon={() => <div>4 min</div>}
+        renderOpenContent={() => (
           <div>
-            <Button>Go to Profiles</Button>
+            Hello
           </div>
         )}
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        {makeLorem()}
+      </SetupAssistantItem>
+      <SetupAssistantItem title="Turn on Tracking for Profiles">
+        {makeLorem()}
       </SetupAssistantItem>
     </SetupAssistant>
   ))
@@ -44,10 +79,7 @@ stories
         stepProgress={100}
         onOpen={action()}
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        {makeLorem()}
       </SetupAssistantItem>
       <SetupAssistantItem
         title="Create Profiles for Your Users"
@@ -62,20 +94,13 @@ stories
           </div>
         )}
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        {makeLorem()}
       </SetupAssistantItem>
       <SetupAssistantItem
         title="Turn on Tracking for Profiles"
         step={3}
-        onOpen={action()}
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        {makeLorem()}
       </SetupAssistantItem>
     </SetupAssistant>
   ));

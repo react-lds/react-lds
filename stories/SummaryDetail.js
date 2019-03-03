@@ -7,20 +7,18 @@ import './utils/global.css';
 const stories = storiesOf('Summary Detail', module);
 
 stories
-  .add('Base', () => (
-    <div>
-      <SummaryDetail
-        renderOpenContent={() => <div>Summary Content</div>}
-        onOpen={action()}
-      >
-        <h3 className="slds-text-heading_small slds-m-top_x-small">Summary Title (closed)</h3>
-      </SummaryDetail>
-      <SummaryDetail
-        renderOpenContent={() => <div>Summary Content</div>}
-        onOpen={action()}
-        isOpen
-      >
-        <h3 className="slds-text-heading_small slds-m-top_x-small">Summary Title (open)</h3>
-      </SummaryDetail>
-    </div>
+  .add('Closed', () => (
+    <SummaryDetail onOpen={action()} title="Summary Title">
+      {() => <div>Summary Content</div>}
+    </SummaryDetail>
+  ))
+  .add('Open', () => (
+    <SummaryDetail isOpen onOpen={action()} title="Summary Title">
+      {() => <div>Summary Content</div>}
+    </SummaryDetail>
+  ))
+  .add('With Custom Title', () => (
+    <SummaryDetail onOpen={action()} isOpen renderTitle={() => <h5>Custom Title </h5>}>
+      {() => <div>Summary Content</div>}
+    </SummaryDetail>
   ));

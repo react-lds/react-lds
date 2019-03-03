@@ -12,39 +12,54 @@ const SetupAssistantItem = ({
   stepProgress,
   step,
   renderProgress,
-  renderOpenContent,
   renderAddon,
+  renderOpenContent,
   onOpen,
-}) => (
-  <li className="slds-setup-assistant__item">
-    <article className="slds-setup-assistant__step">
-      <SummaryDetail isOpen={isOpen} onOpen={onOpen} renderOpenContent={renderOpenContent}>
-        <div className="slds-setup-assistant__step-summary">
-          <MediaObject
-            figureLeft={stepProgress && renderProgress({ stepProgress, step })}
-            bodyClassName="slds-m-top_x-small"
-            center={false}
-          >
-            <MediaObject
-              figureRight={renderAddon()}
-              bodyClassName="slds-setup-assistant__step-summary-content"
-              center={false}
-            >
-              <h3 className="slds-setup-assistant__step-summary-title slds-text-heading_small">
-                {onOpen ? (
-                  <Button flavor={null} className="slds-button_reset" onClick={onOpen}>
-                    {title}
-                  </Button>
-                ) : title}
-              </h3>
-              <p>{children}</p>
-            </MediaObject>
-          </MediaObject>
-        </div>
-      </SummaryDetail>
-    </article>
-  </li>
-);
+}) => {
+  const renderTitle = () => (
+    <div className="slds-setup-assistant__step-summary">
+      <MediaObject
+        figureLeft={renderProgress({ stepProgress, step })}
+        bodyClassName="slds-m-top_x-small"
+        center={false}
+      >
+        <MediaObject
+          figureRight={renderAddon()}
+          bodyClassName="slds-setup-assistant__step-summary-content"
+          center={false}
+        >
+          <h3 className="slds-setup-assistant__step-summary-title slds-text-heading_small">
+            {onOpen ? (
+              <Button flavor={null} className="slds-button_reset" onClick={onOpen}>
+                {title}
+              </Button>
+            ) : title}
+          </h3>
+          <p>{children}</p>
+        </MediaObject>
+      </MediaObject>
+    </div>
+  );
+
+  return (
+    <li className="slds-setup-assistant__item">
+      <article className="slds-setup-assistant__step">
+        <SummaryDetail
+          isOpen={isOpen}
+          onOpen={onOpen}
+          renderTitle={renderTitle}
+          iconButtonClassName="slds-m-top_x-small"
+        >
+          {renderOpenContent && (() => (
+            <div className="slds-setup-assistant__step-detail">
+              {renderOpenContent()}
+            </div>
+          ))}
+        </SummaryDetail>
+      </article>
+    </li>
+  );
+};
 
 SetupAssistantItem.defaultProps = {
   children: null,
@@ -55,7 +70,7 @@ SetupAssistantItem.defaultProps = {
   renderAddon: () => null,
   renderOpenContent: () => null,
   // eslint-disable-next-line react/prop-types
-  renderProgress: ({ stepProgress, step }) => (
+  renderProgress: ({ stepProgress, step }) => (step || stepProgress) && (
     <ProgressRing
       progress={stepProgress}
       status="active-step"
