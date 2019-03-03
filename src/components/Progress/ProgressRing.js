@@ -31,6 +31,7 @@ const getPath = (progress, isComplete, variant) => {
 const ProgressRing = (props) => {
   const {
     assistiveLabels,
+    children,
     className,
     complete,
     customIcon,
@@ -50,9 +51,9 @@ const ProgressRing = (props) => {
   const isForceComplete = complete === true || (complete === 'auto' && percComplete === 100);
   const currentStatus = isForceComplete ? 'complete' : status;
 
-  const iconEl = !currentStatus && customIcon
+  const content = children || (!currentStatus && customIcon
     ? customIcon
-    : getIconForStatus(currentStatus, assistiveLabels);
+    : getIconForStatus(currentStatus, assistiveLabels));
 
   const sldsClasses = [
     baseClass,
@@ -75,7 +76,7 @@ const ProgressRing = (props) => {
       >
         <svg viewBox="-1 -1 2 2">{getPath(percComplete / 100, isForceComplete, variant)}</svg>
       </div>
-      <div className="slds-progress-ring__content">{iconEl}</div>
+      <div className="slds-progress-ring__content">{content}</div>
     </div>
   );
 };
@@ -95,6 +96,7 @@ ProgressRing.defaultProps = {
   size: null,
   status: null,
   variant: 'fill',
+  children: null,
 };
 
 ProgressRing.propTypes = {
@@ -106,6 +108,10 @@ ProgressRing.propTypes = {
     warning: PropTypes.string.isRequired,
     complete: PropTypes.string.isRequired,
   }),
+  /**
+   * If provided, children has precedence over the customIcon and status prop
+   */
+  children: PropTypes.node,
   /**
    * Controls when the complete state is rendered. Can either be a boolean value or 'auto'
    * 'auto': Sets complete once progress >= max
@@ -136,7 +142,7 @@ ProgressRing.propTypes = {
    */
   size: PropTypes.oneOf(['large']),
   /**
-   * Progress status. Can be: 'expired' or 'warning'
+   * Progress status
    */
   status: PropTypes.oneOf(['expired', 'warning', 'active-step']),
   /**
