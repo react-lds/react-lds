@@ -103,7 +103,7 @@ Button.propTypes = {
     'outline-brand',
     'success',
     'text-destructive',
-    'stretch'
+    'stretch',
   ]),
   /**
    * Optional href, renders as `a` when set
