@@ -7,33 +7,40 @@ const getSummaryDetail = (props = {}) => shallow(<SummaryDetail {...props} />);
 
 describe('<SummaryDetail />', () => {
   it('renders the title', () => {
-    const mounted = getSummaryDetail({ children: <div className="title">Title</div> });
+    const mounted = getSummaryDetail({ title: 'Moo' });
 
     expect(mounted.find(
-      'div.slds-summary-detail > div > .slds-summary-detail__title > .title'
+      'div.slds-summary-detail > div > .slds-summary-detail__title > h3.slds-text-heading_small.slds-truncate'
+    ).text()).toEqual('Moo');
+  });
+
+  it('renders the title when provided as function', () => {
+    const mounted = getSummaryDetail({ renderTitle: () => 'Woo' });
+
+    expect(mounted.find(
+      'div.slds-summary-detail > div > .slds-summary-detail__title'
+    ).text()).toEqual('Woo');
+  });
+
+  it('renders the children when isOpen is true', () => {
+    const mounted = getSummaryDetail({
+      isOpen: true,
+      children: () => <div className="children">Title</div>,
+    });
+
+    expect(mounted.find(
+      'div.slds-summary-detail > div > .slds-summary-detail__content > .children'
     ).exists()).toBeTruthy();
   });
 
-  it('renders the content when open', () => {
-    const renderOpenContent = () => <div className="open">open</div>;
-    const mounted = getSummaryDetail({ isOpen: true, renderOpenContent });
+  it('does not render the children when open is false', () => {
+    const mounted = getSummaryDetail({
+      children: () => <div className="children">Title</div>,
+    });
 
     expect(mounted.find(
-      'div.slds-summary-detail > div > .slds-summary-detail__content > .open'
-    ).exists()).toBeTruthy();
-  });
-
-  it('does not render the content when open is false', () => {
-    const renderOpenContent = () => <div className="open">open</div>;
-    const mounted = getSummaryDetail({ isOpen: false, renderOpenContent });
-
-    expect(mounted.find('.open').exists()).toBeFalsy();
-  });
-
-  it('does not render the content when renderOpenContent is not provided', () => {
-    const mounted = getSummaryDetail({ isOpen: true, renderOpenContent: null });
-
-    expect(mounted.find('.slds-summary-detail__content').exists()).toBeFalsy();
+      'div.slds-summary-detail > div > .slds-summary-detail__content > .children'
+    ).exists()).toBeFalsy();
   });
 
   it('renders the expand icon when onOpen is provided', () => {
