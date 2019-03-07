@@ -6,7 +6,7 @@ import { Button, IconButton, ButtonIcon } from '../Button';
 // TODO: What's still missing is the step popover for horizontal progress
 // indicators.
 
-const HorizontalProgressIndicatorItem = ({
+const ProgressIndicatorItem = ({
   assistiveText,
   className,
   isActive,
@@ -43,7 +43,7 @@ const HorizontalProgressIndicatorItem = ({
   );
 };
 
-HorizontalProgressIndicatorItem.defaultProps = {
+ProgressIndicatorItem.defaultProps = {
   assistiveText: null,
   className: null,
   isActive: false,
@@ -52,7 +52,7 @@ HorizontalProgressIndicatorItem.defaultProps = {
   isSuccess: false,
 };
 
-HorizontalProgressIndicatorItem.propTypes = {
+ProgressIndicatorItem.propTypes = {
   /**
    * Assisitive text for this step
    */
@@ -79,4 +79,4 @@ HorizontalProgressIndicatorItem.propTypes = {
   isError: PropTypes.bool,
 };
 
-export default HorizontalProgressIndicatorItem;
+export default ProgressIndicatorItem;

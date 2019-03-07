@@ -2,6 +2,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+export const propTypes = {
+  /**
+   * Assistive text for the progress bar
+   */
+  assistiveText: PropTypes.string,
+  /**
+   * Progress steps. Need to be ProgressItem components
+   */
+  children: PropTypes.node,
+  /**
+   * Additional className
+   */
+  className: PropTypes.string,
+  /**
+   * Whether the progress indicator should be rendered vertically. This will allow arbitrary
+   * item content
+   */
+  isVertical: PropTypes.bool,
+  /**
+   * Progress (in no. of completed steps). This affects the progress bar
+   */
+  progress: PropTypes.number,
+  /**
+   * Shown as assistive text
+   */
+  progressLabel: PropTypes.string,
+  /**
+   * Optional flavor
+   */
+  flavor: PropTypes.oneOf(['shade']),
+};
+
 const calculateProgressPercent = (progress, childrenCount) => {
   if (progress === 0 || childrenCount === 0) return 0;
 
@@ -72,36 +104,6 @@ ProgressIndicator.defaultProps = {
   progressLabel: 'Progress',
 };
 
-ProgressIndicator.propTypes = {
-  /**
-   * Assistive text for the progress bar
-   */
-  assistiveText: PropTypes.string,
-  /**
-   * Progress steps. Need to be ProgressItem components
-   */
-  children: PropTypes.node,
-  /**
-   * Additional className
-   */
-  className: PropTypes.string,
-  /**
-   * Whether the progress indicator should be rendered vertically. This will allow arbitrary
-   * item content
-   */
-  isVertical: PropTypes.bool,
-  /**
-   * Progress (in no. of completed steps). This affects the progress bar
-   */
-  progress: PropTypes.number,
-  /**
-   * Shown as assistive text
-   */
-  progressLabel: PropTypes.string,
-  /**
-   * Optional flavor
-   */
-  flavor: PropTypes.oneOf(['shade']),
-};
+ProgressIndicator.propTypes = propTypes;
 
 export default ProgressIndicator;

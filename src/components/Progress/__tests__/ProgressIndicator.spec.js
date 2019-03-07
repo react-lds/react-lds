@@ -2,13 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import ProgressIndicator from '../ProgressIndicator';
-import HorizontalProgressIndicatorItem from '../HorizontalProgressIndicatorItem';
+import ProgressIndicatorItem from '../ProgressIndicatorItem';
 
 const getProgress = (props = {}) => shallow(
   <ProgressIndicator {...props}>
-    <HorizontalProgressIndicatorItem title="A" />
-    <HorizontalProgressIndicatorItem title="B" />
-    <HorizontalProgressIndicatorItem title="C" />
+    <ProgressIndicatorItem title="A" />
+    <ProgressIndicatorItem title="B" />
+    <ProgressIndicatorItem title="C" />
   </ProgressIndicator>
 );
 

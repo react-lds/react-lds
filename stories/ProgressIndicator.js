@@ -1,77 +1,82 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { ProgressIndicator, HorizontalProgressIndicatorItem, VerticalProgressIndicatorItem } from '../src';
+import {
+  ProgressIndicator,
+  ProgressIndicatorItem,
+  VerticalProgressIndicator,
+  VerticalProgressIndicatorItem,
+} from '../src';
 
 const stories = storiesOf('Progress Indicator', module);
 
 stories
   .add('Default', () => (
     <ProgressIndicator>
-      <HorizontalProgressIndicatorItem assistiveText="Step 1 - Active" isActive />
-      <HorizontalProgressIndicatorItem assistiveText="Step 2" />
-      <HorizontalProgressIndicatorItem assistiveText="Step 3" />
-      <HorizontalProgressIndicatorItem assistiveText="Step 4" />
-      <HorizontalProgressIndicatorItem assistiveText="Step 5" />
+      <ProgressIndicatorItem assistiveText="Step 1 - Active" isActive />
+      <ProgressIndicatorItem assistiveText="Step 2" />
+      <ProgressIndicatorItem assistiveText="Step 3" />
+      <ProgressIndicatorItem assistiveText="Step 4" />
+      <ProgressIndicatorItem assistiveText="Step 5" />
     </ProgressIndicator>
   ))
   .add('Completed Step', () => (
     <ProgressIndicator progress={2}>
-      <HorizontalProgressIndicatorItem assistiveText="Step 1 - Completed" isCompleted />
-      <HorizontalProgressIndicatorItem assistiveText="Step 2 - Completed" isCompleted isSuccess />
-      <HorizontalProgressIndicatorItem assistiveText="Step 3 - Active" isActive />
-      <HorizontalProgressIndicatorItem assistiveText="Step 4" />
-      <HorizontalProgressIndicatorItem assistiveText="Step 5" />
+      <ProgressIndicatorItem assistiveText="Step 1 - Completed" isCompleted />
+      <ProgressIndicatorItem assistiveText="Step 2 - Completed" isCompleted isSuccess />
+      <ProgressIndicatorItem assistiveText="Step 3 - Active" isActive />
+      <ProgressIndicatorItem assistiveText="Step 4" />
+      <ProgressIndicatorItem assistiveText="Step 5" />
     </ProgressIndicator>
   ))
   .add('Error in a Step', () => (
     <ProgressIndicator progress={2}>
-      <HorizontalProgressIndicatorItem assistiveText="Step 1 - Completed" isCompleted />
-      <HorizontalProgressIndicatorItem assistiveText="Step 2 - Completed" isCompleted />
-      <HorizontalProgressIndicatorItem assistiveText="Step 3 - Error" isError />
-      <HorizontalProgressIndicatorItem assistiveText="Step 4" />
-      <HorizontalProgressIndicatorItem assistiveText="Step 5" />
+      <ProgressIndicatorItem assistiveText="Step 1 - Completed" isCompleted />
+      <ProgressIndicatorItem assistiveText="Step 2 - Completed" isCompleted />
+      <ProgressIndicatorItem assistiveText="Step 3 - Error" isError />
+      <ProgressIndicatorItem assistiveText="Step 4" />
+      <ProgressIndicatorItem assistiveText="Step 5" />
     </ProgressIndicator>
   ))
   .add('On a Gray Background', () => (
     <div style={{ background: 'rgb(243, 242, 242)', padding: '1rem' }}>
       <ProgressIndicator progress={2} flavor="shade">
-        <HorizontalProgressIndicatorItem assistiveText="Step 1 - Completed" isCompleted />
-        <HorizontalProgressIndicatorItem assistiveText="Step 2 - Active" isActive />
-        <HorizontalProgressIndicatorItem assistiveText="Step 3" />
-        <HorizontalProgressIndicatorItem assistiveText="Step 4" />
-        <HorizontalProgressIndicatorItem assistiveText="Step 5" />
+        <ProgressIndicatorItem assistiveText="Step 1 - Completed" isCompleted />
+        <ProgressIndicatorItem assistiveText="Step 2 - Active" isActive />
+        <ProgressIndicatorItem assistiveText="Step 3" />
+        <ProgressIndicatorItem assistiveText="Step 4" />
+        <ProgressIndicatorItem assistiveText="Step 5" />
       </ProgressIndicator>
     </div>
   ))
   .add('Vertical', () => (
-    <ProgressIndicator progress={2} isVertical>
+    <VerticalProgressIndicator progress={2}>
       <VerticalProgressIndicatorItem assistiveText="Step 1 - Completed" isCompleted />
       <VerticalProgressIndicatorItem assistiveText="Step 2 - Active" isActive />
       <VerticalProgressIndicatorItem assistiveText="Step 3" />
       <VerticalProgressIndicatorItem assistiveText="Step 4" />
       <VerticalProgressIndicatorItem assistiveText="Step 5" />
-    </ProgressIndicator>
+    </VerticalProgressIndicator>
   ))
   .add('Vertical: Green Success', () => (
-    <ProgressIndicator progress={2} isVertical>
+    <VerticalProgressIndicator progress={2}>
       <VerticalProgressIndicatorItem assistiveText="Step 1 - Success" isSuccess />
       <VerticalProgressIndicatorItem assistiveText="Step 2 - Active" isActive />
       <VerticalProgressIndicatorItem assistiveText="Step 3" />
       <VerticalProgressIndicatorItem assistiveText="Step 4" />
       <VerticalProgressIndicatorItem assistiveText="Step 5" />
-    </ProgressIndicator>
+    </VerticalProgressIndicator>
   ))
   .add('Vertical: Error in a Step', () => (
-    <ProgressIndicator progress={2} isVertical>
+    <VerticalProgressIndicator progress={2}>
       <VerticalProgressIndicatorItem assistiveText="Step 1 - Success" isCompleted />
       <VerticalProgressIndicatorItem assistiveText="Step 2 - Error" isError />
       <VerticalProgressIndicatorItem assistiveText="Step 3" />
       <VerticalProgressIndicatorItem assistiveText="Step 4" />
       <VerticalProgressIndicatorItem assistiveText="Step 5" />
-    </ProgressIndicator>
+    </VerticalProgressIndicator>
   ))
   .add('Vertical: With arbitrary step content', () => (
-    <ProgressIndicator progress={2} isVertical>
+    <VerticalProgressIndicator progress={2}>
       <VerticalProgressIndicatorItem assistiveText="Step 1 - Success" isCompleted />
       <VerticalProgressIndicatorItem assistiveText="Step 2 - Error" isError />
       <VerticalProgressIndicatorItem assistiveText="Step 3">
@@ -87,5 +92,5 @@ stories
       </VerticalProgressIndicatorItem>
       <VerticalProgressIndicatorItem assistiveText="Step 4" />
       <VerticalProgressIndicatorItem assistiveText="Step 5" />
-    </ProgressIndicator>
+    </VerticalProgressIndicator>
   ));

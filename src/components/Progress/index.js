@@ -2,7 +2,8 @@ import DescriptiveProgressBar from './DescriptiveProgressBar';
 import ProgressBar from './ProgressBar';
 import ProgressRing from './ProgressRing';
 import ProgressIndicator from './ProgressIndicator';
-import HorizontalProgressIndicatorItem from './HorizontalProgressIndicatorItem';
+import ProgressIndicatorItem from './ProgressIndicatorItem';
+import VerticalProgressIndicator from './VerticalProgressIndicator';
 import VerticalProgressIndicatorItem from './VerticalProgressIndicatorItem';
 
 export {
@@ -10,6 +11,7 @@ export {
   ProgressBar,
   ProgressRing,
   ProgressIndicator,
-  HorizontalProgressIndicatorItem,
+  ProgressIndicatorItem,
+  VerticalProgressIndicator,
   VerticalProgressIndicatorItem
 };
