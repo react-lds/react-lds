@@ -67,7 +67,7 @@ const MenuItem = (props) => {
     className,
   ];
 
-  const assistiveTitle = title || (isString(children) && children);
+  const assistiveTitle = title || (isString(children) && children) || null;
 
   const role = (selected === null) ? 'menuitem' : 'menuitemcheckbox';
   // if selected true or false, it's a menuitemcheckbox, else it's a menuitem
