@@ -19,7 +19,7 @@ const SetupAssistantItem = ({
   onOpen,
   ...rest
 }) => {
-  const renderTitle = () => (
+  const renderTitle = _title => (
     <div className="slds-setup-assistant__step-summary">
       <MediaObject
         figureLeft={renderProgress({ stepProgress, step })}
@@ -34,9 +34,9 @@ const SetupAssistantItem = ({
           <h3 className="slds-setup-assistant__step-summary-title slds-text-heading_small">
             {onOpen ? (
               <Button flavor={null} className="slds-button_reset" onClick={onOpen}>
-                {title}
+                {_title}
               </Button>
-            ) : title}
+            ) : _title}
           </h3>
           <p>{children}</p>
         </MediaObject>
@@ -50,12 +50,13 @@ const SetupAssistantItem = ({
         <SummaryDetail
           isOpen={isOpen}
           onOpen={onOpen}
+          title={title}
           renderTitle={renderTitle}
           iconButtonClassName="slds-m-top_x-small"
         >
           {renderOpenContent && (() => (
             <div className="slds-setup-assistant__step-detail">
-              {renderOpenContent()}
+              {renderOpenContent({ isOpen })}
             </div>
           ))}
         </SummaryDetail>

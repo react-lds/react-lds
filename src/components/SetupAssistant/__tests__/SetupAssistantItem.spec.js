@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import SetupAssistantItem from '../SetupAssistantItem';
 import { SummaryDetail } from '../../SummaryDetail';
 
-const getSetupAssistantItem = (props = {}) => shallow(<SetupAssistantItem title="Item" {...props} />);
+const getSetupAssistantItem = (props = {}) => mount(<SetupAssistantItem title="Item" {...props} />);
 
 describe('<SetupAssistantItem />', () => {
   it('accepts a children prop and renders it in an ol', () => {
@@ -14,5 +14,13 @@ describe('<SetupAssistantItem />', () => {
         .find(SummaryDetail)
         .exists()
     ).toBeTruthy();
+  });
+
+  it('passes the correct args to renderOpenContent', () => {
+    const renderOpenContent = jest.fn();
+
+    getSetupAssistantItem({ isOpen: true, renderOpenContent });
+
+    expect(renderOpenContent).toHaveBeenCalledWith({ isOpen: true });
   });
 });
