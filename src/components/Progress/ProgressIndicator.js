@@ -2,38 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export const propTypes = {
-  /**
-   * Assistive text for the progress bar
-   */
-  assistiveText: PropTypes.string,
-  /**
-   * Progress steps. Need to be ProgressItem components
-   */
-  children: PropTypes.node,
-  /**
-   * Additional className
-   */
-  className: PropTypes.string,
-  /**
-   * Whether the progress indicator should be rendered vertically. This will allow arbitrary
-   * item content
-   */
-  isVertical: PropTypes.bool,
-  /**
-   * Progress (in no. of completed steps). This affects the progress bar
-   */
-  progress: PropTypes.number,
-  /**
-   * Shown as assistive text
-   */
-  progressLabel: PropTypes.string,
-  /**
-   * Optional flavor
-   */
-  flavor: PropTypes.oneOf(['shade']),
-};
-
 const calculateProgressPercent = (progress, childrenCount) => {
   if (progress === 0 || childrenCount === 0) return 0;
 
@@ -58,15 +26,13 @@ const ProgressIndicator = ({
     progress,
     React.Children.count(children)
   );
+  const classNames = cx('slds-progress', {
+    [`slds-progress_${flavor}`]: flavor,
+    'slds-progress_vertical': isVertical,
+  }, className);
 
   return (
-    <div
-      {...rest}
-      className={cx('slds-progress', {
-        [`slds-progress_${flavor}`]: flavor,
-        'slds-progress_vertical': isVertical,
-      }, className)}
-    >
+    <div {...rest} className={classNames}>
       <ol className="slds-progress__list">
         {children}
       </ol>
@@ -74,8 +40,8 @@ const ProgressIndicator = ({
         aria-valuemin="0"
         aria-valuemax="100"
         aria-valuenow={progressPercent}
-        role="progressbar"
         className={cx({ 'slds-progress-bar slds-progress-bar_x-small': !isVertical })}
+        role="progressbar"
       >
         {isVertical ? (
           <span className="slds-assistive-text">
@@ -84,9 +50,7 @@ const ProgressIndicator = ({
           </span>
         ) : (
           <span className="slds-progress-bar__value" style={{ width: `${progressPercent}%` }}>
-            {assistiveText && (
-              <span className="slds-assistive-text">{assistiveText}</span>
-            )}
+            {assistiveText && <span className="slds-assistive-text">{assistiveText}</span>}
           </span>
         )}
       </div>
@@ -104,6 +68,39 @@ ProgressIndicator.defaultProps = {
   progressLabel: 'Progress',
 };
 
+const propTypes = {
+  /**
+   * Assistive text for the progress bar
+   */
+  assistiveText: PropTypes.string,
+  /**
+   * Progress steps. Need to be ProgressIndicatorItem components
+   */
+  children: PropTypes.node,
+  /**
+   * Additional className
+   */
+  className: PropTypes.string,
+  /**
+   * Whether the progress indicator should be rendered vertically. This will allow arbitrary
+   * item content. Consider using VerticalProgressIndicator instead
+   */
+  isVertical: PropTypes.bool,
+  /**
+   * Progress (in no. of completed steps). This affects the progress bar
+   */
+  progress: PropTypes.number,
+  /**
+   * Shown as assistive text
+   */
+  progressLabel: PropTypes.string,
+  /**
+   * Optional flavor
+   */
+  flavor: PropTypes.oneOf(['shade']),
+};
+
 ProgressIndicator.propTypes = propTypes;
 
+export { propTypes };
 export default ProgressIndicator;

@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, IconButton, ButtonIcon } from '../Button';
 
-// TODO: What's still missing is the step popover for horizontal progress
-// indicators.
-
+// TODO: Support for step tooltip is still missing.
 const ProgressIndicatorItem = ({
   assistiveText,
   className,
@@ -27,15 +25,10 @@ const ProgressIndicatorItem = ({
     <li {...rest} className={classNames}>
       {!isCompleted && !isError && !isSuccess ? (
         <Button className="slds-progress__marker" title={assistiveText} flavor={null}>
-          {assistiveText && (
-            <span className="slds-assistive-text">{assistiveText}</span>
-          )}
+          {assistiveText && <span className="slds-assistive-text">{assistiveText}</span>}
         </Button>
       ) : (
-        <IconButton
-          className="slds-progress__marker slds-progress__marker_icon"
-          title={assistiveText}
-        >
+        <IconButton className="slds-progress__marker slds-progress__marker_icon" title={assistiveText}>
           <ButtonIcon sprite="utility" icon={icon} />
         </IconButton>
       )}
