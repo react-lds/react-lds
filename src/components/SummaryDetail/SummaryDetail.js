@@ -26,15 +26,11 @@ const SummaryDetail = ({
     )}
     <div>
       <div className="slds-summary-detail__title">
-        {renderTitle ? renderTitle() : title && (
-          <h3 className="slds-text-heading_small slds-truncate">
-            {title}
-          </h3>
-        )}
+        {renderTitle(title)}
       </div>
-      {isOpen && children && (
+      {children && (
         <div aria-hidden={!isOpen} className="slds-summary-detail__content">
-          {children()}
+          {children({ isOpen })}
         </div>
       )}
     </div>
@@ -45,8 +41,11 @@ SummaryDetail.defaultProps = {
   children: null,
   isOpen: false,
   onOpen: null,
-  title: null,
-  renderTitle: null,
+  renderTitle: title => (
+    <h3 className="slds-text-heading_small slds-truncate">
+      {title}
+    </h3>
+  ),
   iconButtonClassName: null,
 };
 
@@ -60,15 +59,15 @@ SummaryDetail.propTypes = {
    */
   isOpen: PropTypes.bool,
   /**
-   * The expanded content
+   * Function that renders the content. Takes { isOpen } as arguments
    */
   children: PropTypes.func,
   /**
-   * Renders the content when isOpen=true
+   * Title to be used by the renderTitle function
    */
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   /**
-   * Renders custom title markup if provided
+   * Renders custom title markup if provided. Receives title as an argument
    */
   renderTitle: PropTypes.func,
   /**

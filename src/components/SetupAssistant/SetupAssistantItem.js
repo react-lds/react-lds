@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { Button } from '../Button';
 import { ProgressRing } from '../Progress';
 import { MediaObject } from '../MediaObject';
@@ -7,6 +8,7 @@ import { SummaryDetail } from '../SummaryDetail';
 
 const SetupAssistantItem = ({
   children,
+  className,
   isOpen,
   title,
   stepProgress,
@@ -15,6 +17,7 @@ const SetupAssistantItem = ({
   renderAddon,
   renderOpenContent,
   onOpen,
+  ...rest
 }) => {
   const renderTitle = () => (
     <div className="slds-setup-assistant__step-summary">
@@ -42,7 +45,7 @@ const SetupAssistantItem = ({
   );
 
   return (
-    <li className="slds-setup-assistant__item">
+    <li className={cx('slds-setup-assistant__item', className)} {...rest}>
       <article className="slds-setup-assistant__step">
         <SummaryDetail
           isOpen={isOpen}
@@ -63,6 +66,7 @@ const SetupAssistantItem = ({
 
 SetupAssistantItem.defaultProps = {
   children: null,
+  className: null,
   stepProgress: null,
   step: null,
   isOpen: false,
@@ -87,6 +91,10 @@ SetupAssistantItem.propTypes = {
    */
   children: PropTypes.node,
   /**
+   * Additional className
+   */
+  className: PropTypes.string,
+  /**
    * Defines the expanded state
    */
   isOpen: PropTypes.bool,
@@ -95,7 +103,7 @@ SetupAssistantItem.propTypes = {
    */
   onOpen: PropTypes.func,
   /**
-   * Renders the addon
+   * Function that renders the expanded content. Called when isOpen is true
    */
   renderAddon: PropTypes.func,
   /**
@@ -109,7 +117,7 @@ SetupAssistantItem.propTypes = {
   /**
    * Passed to renderProgress
    */
-  step: PropTypes.number,
+  step: PropTypes.element,
   /**
    * Passed to renderProgress
    */
