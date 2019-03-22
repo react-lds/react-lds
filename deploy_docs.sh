@@ -14,7 +14,7 @@ git config --global user.email "propertybase-ci@propertybase.com"
 git config --global user.name "Propertybase CI"
 
 # Build docs
-yarn build-storybook
+yarn build:storybook
 
 # Initialize an empty repository, fetch upstream and reset it
 rev=$(git rev-parse --short HEAD)
@@ -24,5 +24,5 @@ git init
 # Add all changes in push them to gh-pages
 touch .
 git add -A .
-git commit -m "rebuild pages at ${rev}"
+git commit --quiet --message "rebuild pages at ${rev}"
 git push --force --quiet "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git" master:gh-pages > /dev/null 2>&1
