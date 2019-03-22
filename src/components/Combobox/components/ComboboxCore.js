@@ -5,7 +5,12 @@ import { ClickOutside } from '../../ClickOutside';
 import ComboboxDropdown from './ComboboxDropdown';
 import ComboboxDropdownLists from './ComboboxDropdownLists';
 import { LoadingIndicatorDropdownItem } from './DropdownItems';
-import { byItemId, getNextIndex, scrollDropdown } from '../utils/helpers';
+import {
+  byItemId,
+  getNextIndex,
+  isSelectionReplace,
+  scrollDropdown,
+} from '../utils/helpers';
 import { itemType } from '../utils/constants';
 
 class ComboboxCore extends Component {
@@ -184,11 +189,14 @@ class ComboboxCore extends Component {
 
     const isRemove = selectedItems.findIndex(byItemId(id)) > -1;
 
-    const isReplace = !isMultiSelect
-      && !isRemove
-      && selectedItems.length > 0;
-
-    onSelect(id, { isAdd: false, isRemove, isReplace });
+    onSelect(id, {
+      isAdd: false,
+      isRemove,
+      isReplace: !isRemove && isSelectionReplace({
+        isMultiSelect,
+        selectedItems,
+      }),
+    });
 
     if (closeOnSelect) {
       this.setState({ keyboardSelection: null });
