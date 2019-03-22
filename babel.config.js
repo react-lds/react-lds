@@ -1,7 +1,8 @@
 module.exports = {
   presets: ['@babel/react', ['@babel/env', {
     modules: false,
-    useBuiltIns: 'usage'
+    useBuiltIns: 'usage',
+    corejs: '2'
   }]],
   plugins: [
     '@babel/plugin-proposal-object-rest-spread',
