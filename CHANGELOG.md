@@ -1,7 +1,13 @@
 # Changelog
 
-## 8.0.0
+## 8.1.0
 
+* Upgrade Storybook to 5.0
+* Added: Add `SetupAssistant` & `SummaryDetail`
+* Added: Add `ProgressIndicator`
+* Fixed: Allow callback on `Combobox` labels
+
+## 8.0.0
 
 * Added: **Breaking Change** Comboboxes have been reworked completely into `BaseCombobox/Picklist`, `AutoCompleteCombobox` and `EntityCombobox`. `Combobox` and `ControlledCombobox` have been removed. See the Storybook documentation for details
 * Added: **Breaking Change** `Picklist` API has changed and is not compatible with the previous version
