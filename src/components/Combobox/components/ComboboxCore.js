@@ -82,6 +82,7 @@ class ComboboxCore extends Component {
      * Placeholder shown in the Dropdown input when no items are selected yet
      */
     placeholder: PropTypes.string.isRequired,
+    onLabelClick: PropTypes.func,
     /**
      * Callback to update input state
      * Called with (value, { isClear })
@@ -141,6 +142,7 @@ class ComboboxCore extends Component {
     isInlineListboxSelection: false,
     isRequired: false,
     labelListbox: 'Selected Items',
+    onLabelClick: null,
     onSearch: null,
     renderItemsAppended: null,
     renderItemsPrepended: null,
@@ -411,6 +413,7 @@ class ComboboxCore extends Component {
       isRequired,
       items,
       label,
+      onLabelClick,
       renderItemsAppended,
       renderItemsPrepended,
       renderListbox,
@@ -439,6 +442,7 @@ class ComboboxCore extends Component {
           isSingleInlineSelection={isInlineListboxSelection && !isMultiSelect && selectedItems.length === 1}
           label={label}
           listboxId={listboxId}
+          onLabelClick={onLabelClick}
           ref={this.dropdownRef}
           renderInput={this.renderInput}
           renderListbox={renderListbox && isMultiSelect
