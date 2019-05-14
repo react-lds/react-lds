@@ -13,6 +13,7 @@ export const DropdownItemCore = (props) => {
     isPresentation,
     isSelected,
     onSelect,
+    ...rest
   } = props;
 
   const optionClasses = [
@@ -25,7 +26,11 @@ export const DropdownItemCore = (props) => {
   ];
 
   return (
-    <li className="slds-listbox__item" role="presentation">
+    <li
+      {...rest}
+      className="slds-listbox__item"
+      role="presentation"
+    >
       <div
         id={id}
         className={cx(optionClasses)}
