@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.2.0
+
+* Allow passing rest props to `DropdownItem` in `Combobox` (useful in custom renderers)
+
 ## 8.1.0
 
 * Upgrade Storybook to 5.0
