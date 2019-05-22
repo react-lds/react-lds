@@ -467,6 +467,7 @@ class ComboboxCore extends Component {
           }
         >
           <ComboboxDropdownLists
+            isOpen={isOpen}
             items={items}
             renderItem={this.renderItem}
             renderItemsAppended={this.renderItemsAppended}
