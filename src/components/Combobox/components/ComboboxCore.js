@@ -108,6 +108,10 @@ class ComboboxCore extends Component {
      */
     onToggle: PropTypes.func.isRequired,
     /**
+     * When false, receiving keyboard focus will not open the selection menu
+     */
+    openOnKeyboardFocus: PropTypes.bool,
+    /**
      * Renders the input element
      */
     renderInput: PropTypes.func.isRequired,
@@ -149,6 +153,7 @@ class ComboboxCore extends Component {
     labelListbox: 'Selected Items',
     onLabelClick: null,
     onSearch: null,
+    openOnKeyboardFocus: true,
     renderItemsAppended: null,
     renderItemsPrepended: null,
     search: '',
@@ -300,8 +305,12 @@ class ComboboxCore extends Component {
   }
 
   onInputFocus = (evt) => {
-    const { onToggle, isOpen } = this.props;
-    if (evt.isTrusted) onToggle(!isOpen);
+    const {
+      onToggle,
+      openOnKeyboardFocus,
+      isOpen,
+    } = this.props;
+    if (openOnKeyboardFocus && evt.isTrusted) onToggle(!isOpen);
   }
 
   onInputBlur = (evt) => {
