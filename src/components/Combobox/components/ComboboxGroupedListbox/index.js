@@ -1,109 +1,10 @@
-/* eslint-disable react/no-multi-comp */
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Icon } from '../../Icon';
-import { Button } from '../../Button';
-import { Listbox, Pill } from '../../Pill';
-import { withThrottle } from '../utils/withThrottle';
-
-class RawResizeListener extends Component {
-  static propTypes = {
-    callback: PropTypes.func.isRequired,
-    throttleFn: PropTypes.func.isRequired,
-  }
-
-  constructor(props) {
-    super(props);
-    const { callback, throttleFn } = this.props;
-    this.cb = throttleFn(callback);
-  }
-
-  componentDidMount() {
-    window.addEventListener('resize', this.cb);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.cb);
-  }
-
-  render() {
-    return null;
-  }
-}
-
-const ResizeListener = withThrottle(RawResizeListener);
-
-class OverflowContainer extends Component {
-  static propTypes = {
-    children: PropTypes.func.isRequired,
-    containerRef: PropTypes.object,
-    forcedUpdateTimestamp: PropTypes.number,
-    skipCalculation: PropTypes.bool,
-  }
-
-  static defaultProps = {
-    containerRef: {},
-    forcedUpdateTimestamp: Date.now(),
-    skipCalculation: false,
-  }
-
-  state = {
-    overflowCount: 0
-  }
-
-  componentDidMount() {
-    this.calculateOverflow();
-  }
-
-  componentDidUpdate(prevProps) {
-    const { forcedUpdateTimestamp, skipCalculation } = this.props;
-
-    if (
-      (prevProps.skipCalculation && !skipCalculation)
-      || (forcedUpdateTimestamp && forcedUpdateTimestamp > prevProps.forcedUpdateTimestamp)
-    ) {
-      this.calculateOverflow();
-    }
-  }
-
-  calculateOverflow = () => {
-    const { containerRef, skipCalculation } = this.props;
-
-    if (skipCalculation || !containerRef || !containerRef.current) return;
-
-    const { overflowCount: currentOverflowCount } = this.state;
-    const { children } = containerRef.current;
-
-    if (children.length === 0) return;
-
-    // Optimization: All pills have a static height due to truncation
-    const pillHeight = children[0].clientHeight;
-
-    let overflowCount = 0;
-
-    for (let i = 0; i < children.length; i += 1) {
-      const child = children[i];
-      if (child.offsetTop >= pillHeight) overflowCount += 1;
-    }
-
-    if (currentOverflowCount !== overflowCount) {
-      this.setState({ overflowCount });
-    }
-  }
-
-  render() {
-    const { children } = this.props;
-    const { overflowCount } = this.state;
-
-    return (
-      <Fragment>
-        <ResizeListener callback={this.calculateOverflow} />
-        {children({ overflowCount })}
-      </Fragment>
-    );
-  }
-}
+import { Icon } from '../../../Icon';
+import { Button } from '../../../Button';
+import { Listbox, Pill } from '../../../Pill';
+import { OverflowContainer } from './OverflowContainer';
 
 const isPropChanged = prop => (a, b) => a[prop] !== b[prop];
 const isLengthChanged = isPropChanged('length');
@@ -117,6 +18,10 @@ class ComboboxGroupedListbox extends Component {
     label: PropTypes.string.isRequired,
     makeSelectHandler: PropTypes.func.isRequired,
     onExpand: PropTypes.func.isRequired,
+    overflowLabel: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.string,
+    ]),
     selectedItems: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
@@ -126,6 +31,7 @@ class ComboboxGroupedListbox extends Component {
 
   static defaultProps = {
     isExpanded: false,
+    overflowLabel: cnt => `+${cnt} more`,
     showItemsWhenOpen: false,
   }
 
@@ -161,18 +67,21 @@ class ComboboxGroupedListbox extends Component {
       label,
       makeSelectHandler,
       onExpand,
+      overflowLabel,
       renderPill,
       selectedItems,
       showItemsWhenOpen,
     } = this.props;
 
     const { forcedUpdateTimestamp } = this.state;
-
     const sldsClasses = [
       'slds-listbox_selection-group',
       { 'slds-is-expanded': isExpanded },
       { 'slds-hide': (hideWhenEmpty && selectedItems.length === 0) || (isOpen && !showItemsWhenOpen) },
     ];
+    const makeExpandButtonTitle = typeof overflowLabel === 'function'
+      ? overflowLabel
+      : () => overflowLabel;
 
     return (
       <OverflowContainer
@@ -188,7 +97,7 @@ class ComboboxGroupedListbox extends Component {
                   tabIndex="-1"
                   flavor="none"
                   onClick={onExpand}
-                  title={`+${overflowCount} more`}
+                  title={makeExpandButtonTitle(overflowCount)}
                 />
               </span>
             )}
