@@ -57,6 +57,7 @@ export const RawComboboxDropdownLists = ({
 };
 
 RawComboboxDropdownLists.propTypes = {
+  isOpen: PropTypes.bool,
   items: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
@@ -67,6 +68,7 @@ RawComboboxDropdownLists.propTypes = {
 };
 
 RawComboboxDropdownLists.defaultProps = {
+  isOpen: false,
   renderItemsAppended: null,
   renderItemsPrepended: null,
 };

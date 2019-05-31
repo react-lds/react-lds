@@ -22,6 +22,7 @@ const MULTI_GROUP_ITEMS = [
 
 const getCmp = (props = {}) => shallow(
   <RawComboboxDropdownLists
+    isOpen
     renderItem={mockRenderer}
     {...props}
   />
