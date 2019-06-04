@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const Row = (props) => {
+const Row = React.forwardRef((props, ref) => {
   const {
     children,
     className,
     sticky,
     variation,
+    style,
     ...rest
   } = props;
 
-  const rowStyle = sticky ? Row.STICKY_SCROLLED_STYLE : null;
+  const rowStyle = sticky ? { ...Row.STICKY_SCROLLED_STYLE, ...style } : style;
 
   const variationClasses = Array.isArray(variation)
     ? variation.map(f => `slds-${f}`)
@@ -21,12 +22,13 @@ const Row = (props) => {
     <tr
       {...rest}
       className={cx([variationClasses, className])}
+      ref={ref}
       style={rowStyle}
     >
       {children}
     </tr>
   );
-};
+});
 
 Row.STICKY_SCROLLED_STYLE = {
   position: 'sticky',
