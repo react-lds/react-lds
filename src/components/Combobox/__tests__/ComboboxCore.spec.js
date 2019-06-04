@@ -47,7 +47,7 @@ const getCmp = (props = {}) => mount(
     id="foo"
     isLoading={false}
     isMultiSelect={false}
-    isOpen={false}
+    isOpen
     items={ITEMS}
     label="bar"
     placeholder="baz"

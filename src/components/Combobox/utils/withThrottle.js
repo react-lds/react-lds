@@ -1,6 +1,6 @@
 import React from 'react';
 
-const rafThrottle = (cb) => {
+function rafThrottle(cb) {
   let currentExecution;
 
   const later = (context, args) => () => {
@@ -8,13 +8,13 @@ const rafThrottle = (cb) => {
     cb.apply(context, args);
   };
 
-  const throttled = (...args) => {
+  function throttled(...args) {
     if (currentExecution == null) {
       currentExecution = requestAnimationFrame(later(this, args));
     }
-  };
+  }
 
   return throttled;
-};
+}
 
 export const withThrottle = Cmp => props => <Cmp {...props} throttleFn={rafThrottle} />;
