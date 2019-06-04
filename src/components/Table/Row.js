@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const Row = (props) => {
+const Row = React.forwardRef((props, ref) => {
   const {
     children,
     className,
@@ -21,12 +21,13 @@ const Row = (props) => {
     <tr
       {...rest}
       className={cx([variationClasses, className])}
+      ref={ref}
       style={rowStyle}
     >
       {children}
     </tr>
   );
-};
+});
 
 Row.STICKY_SCROLLED_STYLE = {
   position: 'sticky',
