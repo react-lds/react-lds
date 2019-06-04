@@ -1,5 +1,12 @@
 # Changelog
 
+## 8.3.0
+
+* Added: Add `ComboboxGroupedListbox` to support expanding combobox result boxes
+* Added: Add `openOnKeyboardFocus` prop to all Comboboxes to control whether receiving keyboard focus should open the selection dropdown
+* Added: Add `preventCloseFocus` prop to `Pill` to prevent the close button from receiving keyboard focus
+* Fixed: `isReplace` is handled correctly when adding selections via keyboard
+
 ## 8.2.0
 
 * Allow passing rest props to `DropdownItem` in `Combobox` (useful in custom renderers)
