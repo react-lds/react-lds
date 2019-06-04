@@ -20,7 +20,7 @@ const getCmp = (props = {}) => mount((
   <BaseCombobox
     items={ITEMS}
     id="autocomplete"
-    isOpen={false}
+    isOpen
     label="autocomplete-label"
     placeholder="foo"
     onSelect={Function.prototype}

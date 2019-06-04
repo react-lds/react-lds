@@ -12,6 +12,7 @@ const Pill = (props) => {
     label,
     onClose,
     portrait,
+    preventCloseFocus,
     title,
     url,
     ...rest
@@ -32,6 +33,7 @@ const Pill = (props) => {
       className="slds-pill__remove"
       sprite="utility"
       icon="close"
+      tabIndex={preventCloseFocus ? '-1' : null}
       title="Remove"
     />
   );
@@ -53,6 +55,7 @@ Pill.defaultProps = {
   icon: null,
   onClose: null,
   portrait: null,
+  preventCloseFocus: false,
   url: null,
   bare: false,
 };
@@ -78,6 +81,10 @@ Pill.propTypes = {
    * optional image that receives '.pill__icon' class
    */
   portrait: PropTypes.node,
+  /**
+   * If set to true, the close icon will not be focusable with the keyboard
+   */
+  preventCloseFocus: PropTypes.bool,
   /**
    * title of the pill label
    */

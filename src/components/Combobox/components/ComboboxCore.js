@@ -5,7 +5,12 @@ import { ClickOutside } from '../../ClickOutside';
 import ComboboxDropdown from './ComboboxDropdown';
 import ComboboxDropdownLists from './ComboboxDropdownLists';
 import { LoadingIndicatorDropdownItem } from './DropdownItems';
-import { byItemId, getNextIndex, scrollDropdown } from '../utils/helpers';
+import {
+  byItemId,
+  getNextIndex,
+  isSelectionReplace,
+  scrollDropdown,
+} from '../utils/helpers';
 import { itemType } from '../utils/constants';
 
 class ComboboxCore extends Component {
@@ -103,6 +108,10 @@ class ComboboxCore extends Component {
      */
     onToggle: PropTypes.func.isRequired,
     /**
+     * When false, receiving keyboard focus will not open the selection menu
+     */
+    openOnKeyboardFocus: PropTypes.bool,
+    /**
      * Renders the input element
      */
     renderInput: PropTypes.func.isRequired,
@@ -144,6 +153,7 @@ class ComboboxCore extends Component {
     labelListbox: 'Selected Items',
     onLabelClick: null,
     onSearch: null,
+    openOnKeyboardFocus: true,
     renderItemsAppended: null,
     renderItemsPrepended: null,
     search: '',
@@ -184,11 +194,14 @@ class ComboboxCore extends Component {
 
     const isRemove = selectedItems.findIndex(byItemId(id)) > -1;
 
-    const isReplace = !isMultiSelect
-      && !isRemove
-      && selectedItems.length > 0;
-
-    onSelect(id, { isAdd: false, isRemove, isReplace });
+    onSelect(id, {
+      isAdd: false,
+      isRemove,
+      isReplace: !isRemove && isSelectionReplace({
+        isMultiSelect,
+        selectedItems,
+      }),
+    });
 
     if (closeOnSelect) {
       this.setState({ keyboardSelection: null });
@@ -292,8 +305,12 @@ class ComboboxCore extends Component {
   }
 
   onInputFocus = (evt) => {
-    const { onToggle, isOpen } = this.props;
-    if (evt.isTrusted) onToggle(!isOpen);
+    const {
+      onToggle,
+      openOnKeyboardFocus,
+      isOpen,
+    } = this.props;
+    if (openOnKeyboardFocus && evt.isTrusted) onToggle(!isOpen);
   }
 
   onInputBlur = (evt) => {
@@ -386,11 +403,10 @@ class ComboboxCore extends Component {
       renderListbox,
       selectedItems,
     } = this.props;
-    if (isOpen || selectedItems.length === 0) return null;
-
     const opts = this.getOpts();
 
     return renderListbox({
+      isOpen,
       label: labelListbox,
       makeSelectHandler: this.makeSelectHandler,
       selectedItems,
@@ -451,6 +467,7 @@ class ComboboxCore extends Component {
           }
         >
           <ComboboxDropdownLists
+            isOpen={isOpen}
             items={items}
             renderItem={this.renderItem}
             renderItemsAppended={this.renderItemsAppended}

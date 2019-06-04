@@ -11,6 +11,7 @@ import { BaseComboboxDemo } from './BaseComboboxDemo';
 import { AutoCompleteComboboxDemo } from './AutoCompleteComboboxDemo';
 import { BASE_ITEMS } from './constants';
 import { AsyncComboboxDemo } from './AsyncDemo';
+import { ExpandableListboxDemo } from './ExandableListboxDemo';
 
 const stories = storiesOf('Combobox', module);
 
@@ -199,10 +200,10 @@ stories
   .add('Demo: Autocomplete Combobox Integration', () => (
     <AutoCompleteComboboxDemo
       hideErrorMessage={boolean('Hide error text?', false)}
-      isMultiSelect={boolean('Allow multiple selections', false)}
+      isMultiSelect={boolean('Allow multiple selections', true)}
       isRequired={boolean('Required?', false)}
       error={text('Error', '')}
-      closeOnSelect={boolean('Close on Select', true)}
+      closeOnSelect={boolean('Close on Select', false)}
       label={text('Label', 'Relate To')}
       placeholder={text('Placeholder', 'Pick a type...')}
       height={select('Height', getDropdownHeights(), 5)}
@@ -254,4 +255,5 @@ stories
       placeholder={text('Placeholder', 'Pick a type...')}
       height={select('Height', getDropdownHeights(), 5)}
     />
-  ));
+  ))
+  .add('Demo: Expandable Listbox', () => (<ExpandableListboxDemo />))

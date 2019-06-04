@@ -72,6 +72,11 @@ export const defaultHighlighter = makeHighlighter(str => <mark>{str}</mark>);
 
 export const byItemId = value => ({ id }) => id === value;
 
+export const isSelectionReplace = (opts) => {
+  const { isMultiSelect, selectedItems } = opts;
+  return !isMultiSelect && selectedItems.length > 0;
+};
+
 export const makeInputAddHandler = (originalHandler, opts) => {
   const {
     isOpen,
@@ -79,7 +84,6 @@ export const makeInputAddHandler = (originalHandler, opts) => {
     onToggle,
     rawOnSelect: onSelect,
     search,
-    selectedItems
   } = opts;
 
   return (evt) => {
@@ -93,7 +97,7 @@ export const makeInputAddHandler = (originalHandler, opts) => {
     if (isKeyboardAdd) {
       onSelect(search, {
         isAdd: true,
-        isReplace: selectedItems.length > 1,
+        isReplace: isSelectionReplace(opts),
         isRemove: false,
       });
 

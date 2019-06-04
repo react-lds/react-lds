@@ -4,11 +4,14 @@ import { HeaderDropdownItem } from './DropdownItems';
 
 export const RawComboboxDropdownLists = ({
   items,
+  isOpen,
   renderItem,
   renderItemsAppended,
   renderItemsPrepended,
 }) => {
   const listClasses = 'slds-listbox slds-listbox_vertical';
+
+  if (!isOpen) return null;
 
   if (!items.some(({ isHeader }) => isHeader)) {
     return (
@@ -54,6 +57,7 @@ export const RawComboboxDropdownLists = ({
 };
 
 RawComboboxDropdownLists.propTypes = {
+  isOpen: PropTypes.bool,
   items: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
@@ -64,6 +68,7 @@ RawComboboxDropdownLists.propTypes = {
 };
 
 RawComboboxDropdownLists.defaultProps = {
+  isOpen: false,
   renderItemsAppended: null,
   renderItemsPrepended: null,
 };

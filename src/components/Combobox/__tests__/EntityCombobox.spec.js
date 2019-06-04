@@ -37,7 +37,7 @@ const getCmp = (props = {}) => mount((
   <EntityCombobox
     items={ITEMS}
     id="autocomplete"
-    isOpen={false}
+    isOpen
     label="autocomplete-label"
     placeholder="foo"
     onSearch={Function.prototype}

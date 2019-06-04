@@ -88,8 +88,8 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
             </div>
           </div>
         </div>
+        {renderListbox && renderListbox()}
       </FormElementControl>
-      {renderListbox && renderListbox()}
     </FormElement>
   );
 });
