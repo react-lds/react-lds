@@ -218,6 +218,8 @@ class ComboboxCore extends Component {
   }
 
   onInputMouseDown = (evt) => {
+    const { openOnKeyboardFocus } = this.props;
+
     const input = evt.target;
     const isFocused = document.activeElement === input;
 
@@ -225,7 +227,7 @@ class ComboboxCore extends Component {
       this.onToggle();
     } else {
       input.focus();
-      this.onOpen();
+      if (!openOnKeyboardFocus) this.onOpen();
     }
   }
 
