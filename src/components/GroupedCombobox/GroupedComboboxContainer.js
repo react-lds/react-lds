@@ -6,12 +6,12 @@ import { Picklist } from '../Combobox';
 class GroupedComboboxContainer extends Component {
   static propTypes = {
     children: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
     isOpen: PropTypes.bool.isRequired,
-    items: PropTypes.arrayOf(PropTypes.shape(itemType)).isRequired,
-    label: PropTypes.string.isRequired,
+    items: PropTypes.arrayOf(itemType).isRequired,
     onSelect: PropTypes.func.isRequired,
     onToggle: PropTypes.func.isRequired,
-    selectedItems: PropTypes.arrayOf(PropTypes.shape(itemType)).isRequired,
+    selectedItems: PropTypes.arrayOf(itemType).isRequired,
   }
 
   onSelect = (id) => {
@@ -21,6 +21,7 @@ class GroupedComboboxContainer extends Component {
 
   renderSwitcher = () => {
     const {
+      id,
       isOpen,
       items,
       onToggle,
@@ -31,6 +32,7 @@ class GroupedComboboxContainer extends Component {
       <Picklist
         closeOnSelect
         hideLabel
+        id={id}
         isMultiSelect={false}
         isOpen={isOpen}
         items={items}
@@ -47,7 +49,6 @@ class GroupedComboboxContainer extends Component {
     const {
       children,
       items,
-      label,
       selectedItems,
     } = this.props;
     if (!selectedItems.length) return null;
@@ -58,7 +59,6 @@ class GroupedComboboxContainer extends Component {
       activeId,
       items,
       comboboxProps: {
-        label,
         isMultiSelect: true,
         renderObjectSwitcher: this.renderSwitcher,
       }
