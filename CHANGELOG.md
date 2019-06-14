@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.4.0
+
+* Changed: Enable custom styles and add refs to `Row` component
+
 ## 8.3.0
 
 * Added: Add `ComboboxGroupedListbox` to support expanding combobox result boxes
