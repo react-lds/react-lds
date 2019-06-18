@@ -356,6 +356,7 @@ class ComboboxCore extends Component {
   renderInput = () => {
     const {
       id,
+      isLoading,
       placeholder,
       onSearch,
       search,
@@ -370,6 +371,7 @@ class ComboboxCore extends Component {
       autoComplete: 'off',
       className: 'slds-combobox__input slds-combobox__input-value',
       id,
+      showSpinner: isLoading,
       onChange: onSearch,
       onBlur: this.onInputBlur,
       onFocus: this.onInputFocus,

@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { EntityCombobox, ComboboxGroupedListbox } from '../Combobox';
+import { EntityCombobox, ComboboxGroupedListbox, defaultEntityComboboxItemRenderer } from '../Combobox';
 
 class GroupedCombobox extends Component {
   static propTypes = {
     isExpanded: PropTypes.bool.isRequired,
     onExpand: PropTypes.func.isRequired,
+    renderItem: PropTypes.func,
     renderListbox: PropTypes.func,
   }
 
   static defaultProps = {
     renderListbox: null,
+    renderItem: defaultEntityComboboxItemRenderer,
   }
 
   renderListbox = (listboxProps, opts) => {
