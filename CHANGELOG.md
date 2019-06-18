@@ -1,5 +1,10 @@
 # Changelog
 
+## 8.4.1
+
+* Fixed: Fixed infinite loop in `GroupedComboboxListbox` when more than 100 items are present
+* Added: Added `onToggle` callback to `Menu`
+
 ## 8.4.0
 
 * Changed: Enable custom styles and add refs to `Row` component
