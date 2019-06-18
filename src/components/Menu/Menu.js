@@ -19,6 +19,10 @@ const propTypes = {
    * menu should start open
    */
   defaultOpen: PropTypes.bool,
+  /**
+   * Called when menu is opened/closed
+   */
+  onToggle: PropTypes.func,
 };
 
 export class MenuRaw extends Component {
@@ -27,6 +31,7 @@ export class MenuRaw extends Component {
   static defaultProps = {
     closeOnClickOutside: false,
     defaultOpen: false,
+    onToggle: Function.prototype,
   }
 
   constructor(props) {
@@ -43,6 +48,9 @@ export class MenuRaw extends Component {
   }
 
   toggle = () => {
+    const { onToggle } = this.props;
+
+    onToggle(!this.state.open);
     this.setState(prevState => ({ open: !prevState.open }));
   }
 
