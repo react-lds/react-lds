@@ -45,18 +45,23 @@ class ComboboxGroupedListbox extends Component {
     const { selectedItems, isExpanded } = this.props;
     const { selectedItems: prevSelectedItems } = prevProps;
 
-    // Opimization: DOM access is expensive here. Avoid for small collections if possible
     if (isExpanded) return;
 
-    const isChanged = isOpenChanged(this.props, prevProps)
-      || isLengthChanged(selectedItems, prevSelectedItems)
-      || selectedItems.length > 100
-      || selectedItems.some((x, i) => isIdChanged(x, prevSelectedItems[i]));
-
-    if (isChanged) {
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ forcedUpdateTimestamp: Date.now() });
+    if (isOpenChanged(this.props, prevProps) || isLengthChanged(selectedItems, prevSelectedItems)) {
+      this.forceRecalculation();
+      return;
     }
+
+    // Optimization: Lists longer than 30 items will have an overflow present
+    // We can skip a detailed check and assume that only a length change should trigger a recalculation
+    if (selectedItems.length < 30 && selectedItems.some((item, i) => isIdChanged(item, prevSelectedItems[i]))) {
+      this.forceRecalculation();
+    }
+  }
+
+  forceRecalculation() {
+    // eslint-disable-next-line react/no-did-update-set-state
+    this.setState({ forcedUpdateTimestamp: Date.now() });
   }
 
   render() {
