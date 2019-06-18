@@ -47,9 +47,7 @@ class ComboboxGroupedListbox extends Component {
 
     if (isExpanded) return;
 
-    const changed = isOpenChanged(this.props, prevProps) || isLengthChanged(selectedItems, prevSelectedItems);
-
-    if (changed) {
+    if (isOpenChanged(this.props, prevProps) || isLengthChanged(selectedItems, prevSelectedItems)) {
       this.forceRecalculation();
       return;
     }
