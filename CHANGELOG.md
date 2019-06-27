@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.5.0
+
+* Added: Added `GroupedCombobox` and `GroupedComboboxContainer` components
+
 ## 8.4.1
 
 * Fixed: Fixed infinite loop in `GroupedComboboxListbox` when more than 100 items are present
