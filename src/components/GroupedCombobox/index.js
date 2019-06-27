@@ -1,4 +1,5 @@
 import GroupedCombobox from './GroupedCombobox';
 import GroupedComboboxContainer from './GroupedComboboxContainer';
+import ComboboxGroupedListbox from './ComboboxGroupedListbox';
 
-export { GroupedCombobox, GroupedComboboxContainer };
+export { ComboboxGroupedListbox, GroupedCombobox, GroupedComboboxContainer };

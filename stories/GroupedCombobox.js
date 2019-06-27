@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
-import { GroupedCombobox, GroupedComboboxContainer, EntityCombobox, ComboboxGroupedListbox } from '../src';
+import {
+  GroupedCombobox,
+  GroupedComboboxContainer,
+} from '../src';
 
 const stories = storiesOf('GroupedCombobox', module);
 

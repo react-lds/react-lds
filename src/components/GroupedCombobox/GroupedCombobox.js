@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { EntityCombobox, ComboboxGroupedListbox, defaultEntityComboboxItemRenderer } from '../Combobox';
+import {
+  EntityCombobox,
+  defaultEntityComboboxItemRenderer,
+} from '../Combobox';
+import ComboboxGroupedListbox from './ComboboxGroupedListbox';
 
 class GroupedCombobox extends Component {
   static propTypes = {

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { without } from 'lodash-es';
 import { BASE_ITEMS } from './constants';
-import { AutoCompleteCombobox } from '../../src';
-import ComboboxGroupedListbox from '../../src/components/Combobox/components/ComboboxGroupedListbox';
+import { AutoCompleteCombobox, ComboboxGroupedListbox } from '../../src';
 
 export class ExpandableListboxDemo extends Component {
   state = {
