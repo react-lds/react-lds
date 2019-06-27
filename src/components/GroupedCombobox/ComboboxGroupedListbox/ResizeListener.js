@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withThrottle } from '../../utils/withThrottle';
+import { withThrottle } from '../utils/withThrottle';
 
 class RawResizeListener extends Component {
   static propTypes = {

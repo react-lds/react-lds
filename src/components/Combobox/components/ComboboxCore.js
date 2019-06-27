@@ -87,6 +87,9 @@ class ComboboxCore extends Component {
      * Placeholder shown in the Dropdown input when no items are selected yet
      */
     placeholder: PropTypes.string.isRequired,
+    /**
+     * Attaches a click handler to the combobox label
+     */
     onLabelClick: PropTypes.func,
     /**
      * Callback to update input state
@@ -132,6 +135,10 @@ class ComboboxCore extends Component {
      */
     renderListbox: PropTypes.func.isRequired,
     /**
+     * Render hook to render an additional object switcher combobox
+     */
+    renderObjectSwitcher: PropTypes.func,
+    /**
      * Search, will be passed to `opts` for Combobox variants that support input
      */
     search: PropTypes.string,
@@ -156,6 +163,7 @@ class ComboboxCore extends Component {
     openOnKeyboardFocus: true,
     renderItemsAppended: null,
     renderItemsPrepended: null,
+    renderObjectSwitcher: null,
     search: '',
   }
 
@@ -210,6 +218,8 @@ class ComboboxCore extends Component {
   }
 
   onInputMouseDown = (evt) => {
+    const { openOnKeyboardFocus } = this.props;
+
     const input = evt.target;
     const isFocused = document.activeElement === input;
 
@@ -217,7 +227,7 @@ class ComboboxCore extends Component {
       this.onToggle();
     } else {
       input.focus();
-      this.onOpen();
+      if (!openOnKeyboardFocus) this.onOpen();
     }
   }
 
@@ -346,6 +356,7 @@ class ComboboxCore extends Component {
   renderInput = () => {
     const {
       id,
+      isLoading,
       placeholder,
       onSearch,
       search,
@@ -358,7 +369,9 @@ class ComboboxCore extends Component {
     return renderInput({
       'aria-controls': listboxId,
       autoComplete: 'off',
+      className: 'slds-combobox__input slds-combobox__input-value',
       id,
+      showSpinner: isLoading,
       onChange: onSearch,
       onBlur: this.onInputBlur,
       onFocus: this.onInputFocus,
@@ -433,11 +446,10 @@ class ComboboxCore extends Component {
       renderItemsAppended,
       renderItemsPrepended,
       renderListbox,
+      renderObjectSwitcher,
       selectedItems,
     } = this.props;
     const { keyboardSelection } = this.state;
-
-    const listboxId = `listbox-${id}`;
 
     return (
       <ClickOutside
@@ -457,14 +469,16 @@ class ComboboxCore extends Component {
           isRequired={isRequired}
           isSingleInlineSelection={isInlineListboxSelection && !isMultiSelect && selectedItems.length === 1}
           label={label}
-          listboxId={listboxId}
+          listboxId={`listbox-${id}`}
           onLabelClick={onLabelClick}
           ref={this.dropdownRef}
+          renderObjectSwitcher={renderObjectSwitcher}
           renderInput={this.renderInput}
           renderListbox={renderListbox && isMultiSelect
             ? this.renderListbox
             : null
           }
+          selectionLength={selectedItems.length}
         >
           <ComboboxDropdownLists
             isOpen={isOpen}

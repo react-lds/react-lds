@@ -154,7 +154,7 @@ describe('<ComboboxCore />', () => {
 
   it('opens if input is clicked', () => {
     const mockFn = jest.fn();
-    const mounted = getCmp({ isOpen: false, onToggle: mockFn });
+    const mounted = getCmp({ isOpen: false, onToggle: mockFn, openOnKeyboardFocus: false });
     mounted.find(InputRaw).simulate('mouseDown');
     expect(mockFn).toHaveBeenCalledWith(true);
   });

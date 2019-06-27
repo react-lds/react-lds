@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -26,12 +26,15 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
     onLabelClick,
     renderInput,
     renderListbox,
+    renderObjectSwitcher,
+    selectionLength,
     ...rest
   } = props;
 
   const comboboxContainerClasses = [
     'slds-combobox_container',
     { 'slds-has-selection': isSingleInlineSelection },
+    { 'slds-combobox-addon_end': renderObjectSwitcher },
   ];
 
   const comboboxClasses = [
@@ -55,6 +58,30 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
     dropdownClassName,
   ];
 
+  const comboboxEl = (
+    <div className={cx(comboboxContainerClasses)}>
+      <div
+        className={cx(comboboxClasses)}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        role="combobox"
+      >
+        <div className={cx(comboboxFormElementClasses)} role="none">
+          {renderInput()}
+        </div>
+        <div
+          className={cx(dropdownClasses)}
+          id={listboxId}
+          ref={ref}
+          role="listbox"
+          tabIndex="-1"
+        >
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <FormElement error={error} required={isRequired} {...rest}>
       {!hideLabel && (
@@ -65,30 +92,38 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
           required={isRequired}
         />
       )}
-      {!hideErrorMessage && <FormElementError error={error} id={`error-${id}`} />}
+      {!hideErrorMessage && (
+        <FormElementError error={error} id={`error-${id}`} />
+      )}
       <FormElementControl>
-        <div className={cx(comboboxContainerClasses)}>
-          <div
-            className={cx(comboboxClasses)}
-            aria-expanded={isOpen}
-            aria-haspopup="listbox"
-            role="combobox"
-          >
-            <div className={cx(comboboxFormElementClasses)} role="none">
-              {renderInput()}
-            </div>
-            <div
-              className={cx(dropdownClasses)}
-              id={listboxId}
-              ref={ref}
-              role="listbox"
-              tabIndex="-1"
-            >
-              {children}
-            </div>
-          </div>
-        </div>
-        {renderListbox && renderListbox()}
+        {renderObjectSwitcher
+          ? (
+            <Fragment>
+              <div
+                className={cx([
+                  'slds-combobox-group',
+                  { 'slds-has-selection': selectionLength > 0 }
+                ])}
+              >
+                <div className="slds-combobox_object-switcher slds-combobox-addon_start">
+                  <div className="slds-form-element">
+                    <div className="slds-form-element__control">
+                      {renderObjectSwitcher()}
+                    </div>
+                  </div>
+                </div>
+                {comboboxEl}
+              </div>
+              {renderListbox && renderListbox()}
+            </Fragment>
+          )
+          : (
+            <Fragment>
+              {comboboxEl}
+              {renderListbox && renderListbox()}
+            </Fragment>
+          )
+        }
       </FormElementControl>
     </FormElement>
   );
