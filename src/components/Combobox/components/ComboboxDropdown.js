@@ -59,29 +59,27 @@ const ComboboxDropdown = React.forwardRef((props, ref) => {
   ];
 
   const comboboxEl = (
-    <Fragment>
-      <div className={cx(comboboxContainerClasses)}>
+    <div className={cx(comboboxContainerClasses)}>
+      <div
+        className={cx(comboboxClasses)}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        role="combobox"
+      >
+        <div className={cx(comboboxFormElementClasses)} role="none">
+          {renderInput()}
+        </div>
         <div
-          className={cx(comboboxClasses)}
-          aria-expanded={isOpen}
-          aria-haspopup="listbox"
-          role="combobox"
+          className={cx(dropdownClasses)}
+          id={listboxId}
+          ref={ref}
+          role="listbox"
+          tabIndex="-1"
         >
-          <div className={cx(comboboxFormElementClasses)} role="none">
-            {renderInput()}
-          </div>
-          <div
-            className={cx(dropdownClasses)}
-            id={listboxId}
-            ref={ref}
-            role="listbox"
-            tabIndex="-1"
-          >
-            {children}
-          </div>
+          {children}
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 
   return (

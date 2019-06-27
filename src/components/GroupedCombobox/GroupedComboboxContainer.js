@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { itemType } from '../Combobox/utils/constants';
-import { Picklist } from '../Combobox';
+import { BaseCombobox } from '../Combobox';
 
 class GroupedComboboxContainer extends Component {
   static propTypes = {
@@ -29,7 +29,7 @@ class GroupedComboboxContainer extends Component {
     } = this.props;
 
     return (
-      <Picklist
+      <BaseCombobox
         closeOnSelect
         hideLabel
         id={id}
