@@ -11,10 +11,6 @@ const propTypes = {
    */
   button: PropTypes.element.isRequired,
   /**
-   * set to true if menuitems should be menuitemcheckboxes
-   */
-  checkbox: PropTypes.bool,
-  /**
    * should be MenuItems or MenuSubHeaders
    */
   children: PropTypes.node.isRequired,
@@ -81,7 +77,6 @@ class ControlledMenu extends Component {
 
   static defaultProps = {
     className: null,
-    checkbox: false,
     height: null,
     heightIcon: null,
     isOpen: false,
@@ -104,24 +99,13 @@ class ControlledMenu extends Component {
   };
 
   renderChildren = () => {
-    const { children, checkbox } = this.props;
+    const { children } = this.props;
     return React.Children.map(children, (child, index) => {
       const id = getUniqueHash('item', index);
 
       if (!child) return null;
 
-      if (child.type !== MenuItem) {
-        return React.cloneElement(child, {
-          key: id
-        });
-      }
-
-      return React.cloneElement(
-        child, {
-          selected: checkbox ? child.props.selected === true : null,
-          key: id,
-        }
-      );
+      return React.cloneElement(child, { key: id });
     });
   };
 
