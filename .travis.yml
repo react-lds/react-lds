@@ -4,12 +4,6 @@ cache:
   yarn: true
   directories:
   - node_modules
-node_js:
-  # There's an open bug in Jest which causes all specs to fail.
-  # See: https://github.com/facebook/jest/issues/8069
-  #
-  # Pinning node to this version solves the problem for now.
-  - "11.10.1"
 script:
   - yarn lint
   - yarn test
