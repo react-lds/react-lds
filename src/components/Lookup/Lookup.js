@@ -5,19 +5,20 @@ import debounce from 'lodash-es/debounce';
 import omit from 'lodash-es/omit';
 
 import {
-  Cell,
-  ClickOutside,
   FormElement,
   FormElementControl,
   FormElementError,
   FormElementLabel,
-  Icon,
   InputRaw,
-  Pill,
-  PillContainer,
+} from '../Form';
+import {
+  Cell,
   Row,
   Table,
-} from '../..';
+} from '../Table';
+import { Pill, PillContainer } from '../Pill';
+import { Icon } from '../Icon';
+import { ClickOutside } from '../ClickOutside';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {

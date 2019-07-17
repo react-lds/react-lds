@@ -64,6 +64,7 @@ BaseDropdownItem.propTypes = {
   }),
   id: PropTypes.string.isRequired,
   isMultiSelect: PropTypes.bool,
+  isSelected: PropTypes.bool,
   isSelectedAssistiveLabel: PropTypes.string,
   label: PropTypes.string.isRequired,
   meta: PropTypes.node,
@@ -73,6 +74,7 @@ BaseDropdownItem.defaultProps = {
   highlight: '',
   icon: null,
   isMultiSelect: false,
+  isSelected: false,
   isSelectedAssistiveLabel: 'Current Selection: ',
   meta: null,
 };

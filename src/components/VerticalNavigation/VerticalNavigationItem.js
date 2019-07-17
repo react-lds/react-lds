@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Badge, IconSVG } from '../..';
+
+import { Badge } from '../Badge';
+import { IconSVG } from '../Icon';
 
 const VerticalNavigationItem = (props) => {
   const {

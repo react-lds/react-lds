@@ -15,6 +15,7 @@ class ComboboxGroupedListbox extends Component {
   static propTypes = {
     isExpanded: PropTypes.bool,
     isOpen: PropTypes.bool.isRequired,
+    hideWhenEmpty: PropTypes.bool,
     label: PropTypes.string.isRequired,
     makeSelectHandler: PropTypes.func.isRequired,
     onExpand: PropTypes.func.isRequired,
@@ -22,6 +23,7 @@ class ComboboxGroupedListbox extends Component {
       PropTypes.func,
       PropTypes.string,
     ]),
+    renderPill: PropTypes.func,
     selectedItems: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
@@ -30,8 +32,10 @@ class ComboboxGroupedListbox extends Component {
   }
 
   static defaultProps = {
+    hideWhenEmpty: false,
     isExpanded: false,
     overflowLabel: cnt => `+${cnt} more`,
+    renderPill: null,
     showItemsWhenOpen: false,
   }
 

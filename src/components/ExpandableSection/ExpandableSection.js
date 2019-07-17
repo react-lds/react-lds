@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { Button, ButtonIcon } from '../..';
+import { Button, ButtonIcon } from '../Button';
 
 class ExpandableSection extends Component {
   static defaultProps = {

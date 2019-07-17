@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getUniqueHash } from '../../utils';
-import {
-  FormElement,
-  FormElementControl,
-  FormElementLabel,
-  FormElementError,
-} from '../..';
+
+import FormElement from './FormElement';
+import FormElementControl from './FormElement';
+import FormElementError from './FormElementError';
+import FormElementLabel from './FormElementLabel';
 
 const Textarea = (props) => {
   const {

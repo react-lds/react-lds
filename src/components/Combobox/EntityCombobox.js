@@ -50,6 +50,7 @@ export const defaultEntityComboboxInputRenderer = (inputProps, opts) => {
   );
 };
 
+// eslint-disable-next-line react/prop-types
 export const defaultEntityComboboxItemRenderer = ({ id, ...resultProps }, opts) => {
   const { makeSelectHandler, search, selectedItems } = opts;
 

@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import isString from 'lodash-es/isString';
-import { IconSVG } from '../..';
+
+import { IconSVG } from '../Icon';
 
 const nonCapturing = { pointerEvents: 'none' };
 

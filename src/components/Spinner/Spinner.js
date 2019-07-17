@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { SpinnerContainer } from '.';
+import SpinnerContainer from './SpinnerContainer';
 
 const Spinner = (props) => {
   const {

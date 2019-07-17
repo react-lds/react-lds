@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getClampedProgress } from './utils';
-import { Icon } from '../..';
+
+import { Icon } from '../Icon';
 
 const getIconForStatus = (status, labels) => {
   if (!status) return null;

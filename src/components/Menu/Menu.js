@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash-es/omit';
-import ControlledMenu from './ControlledMenu';
-import { ClickOutside } from '../..';
 
+import ControlledMenu from './ControlledMenu';
+import { ClickOutside } from '../ClickOutside';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {

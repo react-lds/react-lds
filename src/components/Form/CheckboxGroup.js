@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  FormElement,
-  FormElementControl,
-  FormElementError,
-  FormElementLabel,
-} from '../..';
+import FormElement from './FormElement';
+import FormElementControl from './FormElement';
+import FormElementError from './FormElementError';
+import FormElementLabel from './FormElementLabel';
 
 import { getUniqueHash } from '../../utils';
 

@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import {
-  FormElement,
-  FormElementControl,
-  FormElementLabel,
-  FormElementError,
-} from '../..';
+import FormElement from './FormElement';
+import FormElementControl from './FormElement';
+import FormElementError from './FormElementError';
+import FormElementLabel from './FormElementLabel';
 
 const renderLabel = (label, min, max) => (
   <span className="slds-slider-label">
@@ -143,7 +141,6 @@ Slider.defaultProps = {
   error: null,
   hideErrorMessage: false,
   hideLabel: false,
-  multiple: false,
   onChange: Function.prototype,
 };
 

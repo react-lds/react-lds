@@ -5,7 +5,10 @@ import cx from 'classnames';
 import Moment from 'moment-timezone';
 // eslint-disable-next-line
 import { extendMoment } from 'moment-range';
-import { ClickOutside, Input, IconButton } from '../..';
+
+import { ClickOutside } from '../ClickOutside';
+import { Input } from '../Form';
+import { IconButton } from '../Button';
 
 const moment = extendMoment(Moment);
 

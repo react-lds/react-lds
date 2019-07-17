@@ -87,7 +87,9 @@ describe('<DataTable />', () => {
 
   it('can render a custom message if the data array is empty', () => {
     const mounted = getComponent({
-      noRowsRenderer: ({ columns }) => ( // eslint-disable-line react/prop-types
+      // eslint-disable-next-line react/prop-types
+      noRowsRenderer: ({ columns }) => (
+        // eslint-disable-next-line react/prop-types
         <tbody><tr><td colSpan={columns.length}>No data</td></tr></tbody>
       )
     });

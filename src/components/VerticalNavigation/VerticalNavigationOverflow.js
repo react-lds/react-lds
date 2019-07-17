@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button } from '../..';
+import { Button } from '../Button';
 
 const getToggleHandler = (state, fn) => evt => fn(!state, evt);
 

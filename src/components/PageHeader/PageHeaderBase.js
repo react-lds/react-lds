@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { Icon, MediaObject } from '../..';
+import { Icon } from '../Icon';
+import { MediaObject } from '../MediaObject';
 
 const PageHeaderBase = (props) => {
   const {

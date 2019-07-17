@@ -4,7 +4,9 @@ import cx from 'classnames';
 import isEmpty from 'lodash-es/isEmpty';
 import omit from 'lodash-es/omit';
 
-import { Row, Table, uniqueId } from '../..';
+import { Row, Table } from '../Table';
+import { uniqueId } from '../../utils';
+
 import { propTypes as tablePropTypes } from '../Table/Table';
 
 import defaultRowRenderer from './defaultRowRenderer';
@@ -81,6 +83,7 @@ class DataTable extends Component {
       onSelect(nextSelection);
     }
 
+    // eslint-disable-next-line react/no-unused-state
     this.setState({ allSelected: !allSelected });
   }
 

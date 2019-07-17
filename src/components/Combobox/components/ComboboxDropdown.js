@@ -148,6 +148,8 @@ ComboboxDropdown.propTypes = {
   onLabelClick: PropTypes.func,
   renderInput: PropTypes.func.isRequired,
   renderListbox: PropTypes.func,
+  renderObjectSwitcher: PropTypes.func,
+  selectionLength: PropTypes.number,
 };
 
 ComboboxDropdown.defaultProps = {
@@ -161,6 +163,8 @@ ComboboxDropdown.defaultProps = {
   isSingleInlineSelection: false,
   onLabelClick: null,
   renderListbox: null,
+  renderObjectSwitcher: null,
+  selectionLength: 0,
 };
 
 export default ComboboxDropdown;
