@@ -48,12 +48,30 @@ CardHeader.defaultProps = {
 };
 
 CardHeader.propTypes = {
+  /**
+   * Renders in the right column
+   */
   children: PropTypes.node,
+  /**
+   * Applied to top-level element `slds-card__header`
+   */
   className: PropTypes.string,
+  /**
+   * Optional icon, should be `<Icon />`
+   */
   icon: PropTypes.element,
+  /**
+   * Applied to `slds-card__header-link`
+   */
   titleClassName: PropTypes.string,
+  /**
+   * Props passed to `slds-card__header-link`. If `href` is set, title will render as `a`, else `span`
+   */
   titleProps: PropTypes.object,
-  title: PropTypes.string,
+  /**
+   * Title text
+   */
+  title: PropTypes.element,
 };
 
 export default CardHeader;

@@ -28,8 +28,17 @@ CardFooter.defaultProps = {
 
 CardFooter.propTypes = {
   assistiveText: PropTypes.string,
+  /**
+   * Applied to top-level element `slds-card__footer`
+   */
   className: PropTypes.string,
+  /**
+   * Props passed to the link `a` tag
+   */
   linkProps: PropTypes.object,
+  /**
+   * Link text
+   */
   linkText: PropTypes.string,
 };
 
