@@ -48,19 +48,54 @@ const Card = ({
 );
 
 Card.defaultProps = {
+  /**
+   * Determines the HTML element type that the Card renders as
+   */
   as: 'article',
+  /**
+   * Content
+   */
   children: null,
   className: null,
+  /**
+   * Should be set to true for the outermost `Card`
+   */
   isBoundary: false,
+  /**
+   * By default, the content receives `medium` padding. Set to `false` to remove this
+   */
   isPadded: true,
+  /**
+   * Render function for the Card footer. Can use `<CardFooter />`
+   */
   renderFooter: null,
+  /**
+   * Render function for the Card footer. Can use `<CardHeader />`
+   */
   renderHeader: null,
-  // TODO: DEPRECATE THESE PROPS
+  /**
+   * DEPRECATED: Use `children` instead
+   */
   body: null,
+  /**
+   * DEPRECATED: Use `isHeader`  instead
+   */
   boundary: false,
+  /**
+   * DEPRECATED: Use `renderFooter()` instead
+   */
   footer: null,
+  /**
+   * DEPRECATED: Use `renderHeader()` instead (see example)
+   */
   headerRight: null,
+  /**
+   * DEPRECATED: Set this in `renderHeader()` => `<CardHeader />` instead
+   */
   icon: null,
+  /**
+   * DEPRECATED: Set this in `renderHeader()` => `<CardHeader />` instead
+   */
   title: null,
 };
 

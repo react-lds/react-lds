@@ -2,20 +2,50 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { text } from '@storybook/addon-knobs';
-import { Card, Icon, Button } from '../src';
+import {
+  Button,
+  Card,
+  CardHeader,
+  Icon,
+} from '../src';
 
 const stories = storiesOf('Card', module);
 
 stories
-  .add('Default', () => (
+  .add('Only Header', () => (
     <Card
-      icon={<Icon sprite="standard" icon="contact" />}
-      title={text('Title', 'Base Card')}
-      headerRight={<Button title="New" onClick={action('click')}>New</Button>}
-      footer={(<a className="slds-card__footer-action">View All</a>)}
-    >
-      Body would be here
-    </Card>
+      renderHeader={() => (
+        <CardHeader
+          title="Accounts"
+          titleProps={{ href: '#' }}
+          icon={(
+            <Icon
+              sprite="standard"
+              icon="account"
+              size="small"
+            />
+          )}
+        />
+      )}
+    />
+  ))
+  .add('Header with action', () => (
+    <Card
+      renderHeader={() => (
+        <CardHeader
+          title="Accounts"
+          icon={(
+            <Icon
+              sprite="standard"
+              icon="account"
+              size="small"
+            />
+          )}
+        >
+          <Button title="New" />
+        </CardHeader>
+      )}
+    />
   ))
   .add('Without Icon', () => (
     <Card
@@ -25,4 +55,13 @@ stories
     >
       Body would be here
     </Card>
+  ))
+  .add('Legacy: Deprecated usage', () => (
+    <Card
+      body="Body would be here"
+      icon={<Icon sprite="standard" icon="contact" />}
+      title={text('Title', 'Base Card')}
+      headerRight={<Button title="New" onClick={action('click')}>New</Button>}
+      footer={(<a className="slds-card__footer-action">View All</a>)}
+    />
   ));
