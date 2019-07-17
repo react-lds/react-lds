@@ -5,7 +5,7 @@ import cx from 'classnames';
 import { getUniqueHash } from '../../utils';
 
 import FormElement from './FormElement';
-import FormElementControl from './FormElement';
+import FormElementControl from './FormElementControl';
 import FormElementError from './FormElementError';
 import FormElementLabel from './FormElementLabel';
 

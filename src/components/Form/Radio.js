@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import FormElement from './FormElement';
-import FormElementControl from './FormElement';
+import FormElementControl from './FormElementControl';
 import FormElementError from './FormElementError';
 import RadioRaw from './RadioRaw';
 

@@ -168,6 +168,6 @@ describe('<DataTable />', () => {
   it('displays a sticky header and adds an additional scroll container', () => {
     const mounted = getComponent({ stickyHeader: true }, false);
 
-    expect(mounted.find('thead').find(Row).prop('style')).toEqual(Row.STICKY_TOP_STYLE);
+    expect(mounted.find('thead').find(Row).find('tr').prop('style')).toEqual(Row.STICKY_SCROLLED_STYLE);
   });
 });

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import FormElement from './FormElement';
-import FormElementControl from './FormElement';
+import FormElementControl from './FormElementControl';
 import FormElementError from './FormElementError';
 import FormElementLabel from './FormElementLabel';
 
