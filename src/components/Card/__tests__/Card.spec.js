@@ -28,32 +28,32 @@ describe('<Card />', () => {
     );
   });
 
-  it('renders the icon', () => {
+  it('DEPRECATED: renders the icon', () => {
     expect(mounted.find(Icon).exists()).toBeTruthy();
   });
 
-  it('renders the header', () => {
-    expect(mounted.find('h2 span.slds-text-heading_small').first().text()).toEqual(props.title);
+  it('DEPRECATED: renders the header', () => {
+    expect(mounted.find('h2').first().text()).toEqual(props.title);
   });
 
-  it('renders headerRight', () => {
+  it('DEPRECATED: renders headerRight', () => {
     expect(mounted.find('div.slds-no-flex').first().text()).toEqual(props.headerRight);
   });
 
-  it('renders body', () => {
+  it('DEPRECATED: renders body', () => {
     expect(mounted.find('div.slds-card__body').first().text()).toEqual(props.children);
   });
 
-  it('renders footer', () => {
+  it('DEPRECATED: renders footer', () => {
     expect(mounted.find('footer.slds-card__footer').first().text()).toEqual(props.footer);
   });
 
-  it('allows passing boundary flag', () => {
+  it('DEPRECATED: allows passing boundary flag', () => {
     expect(mounted.find('.slds-card').hasClass('slds-card_boundary')).toBeTruthy();
   });
 
 
-  it('applies className and rest-properties', () => {
+  it('DEPRECATED: applies className and rest-properties', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-card').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-card').prop('data-test')).toEqual('bar');
