@@ -35,5 +35,6 @@ export * from './components/SummaryDetail';
 export * from './components/Tabs';
 export * from './components/Tooltip';
 export * from './components/VerticalNavigation';
+export * from './components/Expression';
 export * from './utils';
 export * from './components/GroupedCombobox';
