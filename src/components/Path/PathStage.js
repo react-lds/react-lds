@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { IconSVG } from '../..';
+import { IconSVG } from '../Icon';
 
 const PathStage = (props) => {
   const {

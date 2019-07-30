@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  FormElement,
-  FormElementControl,
-  FormElementLabel,
-  FormElementError,
-  InputRaw,
-} from '../..';
+import FormElement from './FormElement';
+import FormElementControl from './FormElementControl';
+import FormElementError from './FormElementError';
+import FormElementLabel from './FormElementLabel';
+import InputRaw from './InputRaw';
 
 const Input = React.forwardRef((props, ref) => {
   const {

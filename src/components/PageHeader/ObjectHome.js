@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import {
-  ClickOutside,
-  ControlledMenu,
-  IconButton
-} from '../..';
+import { ClickOutside } from '../ClickOutside';
+import { ControlledMenu } from '../Menu';
+import { IconButton } from '../Button';
 import { MediaObject } from '../MediaObject';
 import { Icon } from '../Icon';
 

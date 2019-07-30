@@ -4,7 +4,7 @@ import cx from 'classnames';
 import omit from 'lodash-es/omit';
 import { THEMES, getThemeClass } from '../../utils';
 
-import { IconButton } from '../..';
+import { IconButton } from '../Button';
 
 // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types#is-it-safe
 const propTypes = {

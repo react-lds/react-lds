@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  RadioRaw,
-  FormElement,
-  FormElementControl,
-  FormElementError,
-} from '../..';
+import FormElement from './FormElement';
+import FormElementControl from './FormElementControl';
+import FormElementError from './FormElementError';
+import RadioRaw from './RadioRaw';
 
 const Radio = (props) => {
   const {

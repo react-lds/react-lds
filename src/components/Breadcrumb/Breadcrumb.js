@@ -24,7 +24,8 @@ const Breadcrumb = (props) => {
       <ol className={cx(sldsClasses)}>
         {wrapItems}
       </ol>
-    </nav>);
+    </nav>
+  );
 };
 
 Breadcrumb.defaultProps = {

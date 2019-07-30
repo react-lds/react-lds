@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  CheckboxRaw,
-  FormElement,
-  FormElementControl,
-  FormElementError,
-} from '../..';
+import CheckboxRaw from './CheckboxRaw';
+import FormElement from './FormElement';
+import FormElementControl from './FormElementControl';
+import FormElementError from './FormElementError';
 
 const Checkbox = (props) => {
   const {

@@ -40,6 +40,7 @@ Row.defaultProps = {
   children: null,
   className: null,
   sticky: false,
+  style: {},
   variation: [],
 };
 
@@ -56,6 +57,7 @@ Row.propTypes = {
    * Should only be set for rows nested in thead. Sets `position:sticky` to attach to top of the scrolling ctx
    */
   sticky: PropTypes.bool,
+  style: PropTypes.object,
   /**
    * variation: string or array of strings. Variations: is-selected, hint-parent
    */

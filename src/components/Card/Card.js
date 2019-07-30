@@ -2,112 +2,121 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { Grid, Icon, MediaObject } from '../..';
+import CardHeader from './CardHeader';
 
-const Card = (props) => {
-  const {
-    body,
-    boundary,
-    children,
-    className,
-    footer,
-    headerRight,
-    icon,
-    sprite,
-    title,
-    ...rest
-  } = props;
-
-  const sldsClasses = [
-    'slds-card',
-    { 'slds-card_boundary': boundary },
-    className,
-  ];
-
-  let iconEl = null;
-
-  if (typeof icon === 'string' && sprite) {
-    iconEl = <Icon sprite={sprite} icon={icon} size="small" />;
-  }
-
-  if (React.isValidElement(icon)) {
-    iconEl = React.cloneElement(icon, { size: 'small' });
-  }
-
-  return (
-    <div {...rest} className={cx(sldsClasses)}>
-      <Grid className="slds-card__header">
-        <MediaObject
-          center
-          className="slds-has-flexi-truncate"
-          customTag="header"
-          figureLeft={iconEl}
-          truncate
-        >
-          <h2>
-            <a className="slds-text-link_reset">
-              <span className="slds-text-heading_small">{title}</span>
-            </a>
-          </h2>
-        </MediaObject>
-        <div className="slds-no-flex">{headerRight}</div>
-      </Grid>
-      <div className="slds-card__body slds-text-align_center">{children || body}</div>
-      <footer className="slds-card__footer">{footer}</footer>
+const Card = ({
+  as: Tag,
+  boundary,
+  children,
+  className,
+  isBoundary,
+  isPadded,
+  renderFooter,
+  renderHeader,
+  body,
+  footer,
+  headerRight,
+  title,
+  icon,
+  ...rest
+}) => (
+  <Tag
+    {...rest}
+    className={cx([
+      'slds-card',
+      { 'slds-card_boundary': isBoundary || boundary },
+      className
+    ])}
+  >
+    {renderHeader ? renderHeader() : title && (
+      <CardHeader icon={icon} title={title}>
+        {headerRight}
+      </CardHeader>
+    )}
+    <div
+      className={cx([
+        'slds-card__body',
+        { 'slds-card__body_inner': isPadded },
+      ])}
+    >
+      {children || body}
     </div>
-  );
-};
+    {renderFooter ? renderFooter() : footer && (
+      <footer className="slds-card__footer">{footer}</footer>
+    )}
+  </Tag>
+);
 
 Card.defaultProps = {
-  body: null,
-  boundary: false,
+  as: 'article',
+
   children: null,
   className: null,
+  isBoundary: false,
+  isPadded: true,
+  renderFooter: null,
+  renderHeader: null,
+  body: null,
+  boundary: false,
   footer: null,
   headerRight: null,
   icon: null,
-  sprite: null,
+  title: null,
 };
 
 Card.propTypes = {
   /**
-   * DEPRECATED: card body, could be a table for example
+   * Determines the HTML element type that the Card renders as
    */
-  body: PropTypes.node,
+  as: PropTypes.string,
   /**
-   * When the Card is used inside Tabs, .Modal, or another Card, it no longer has the drop-shadow card look.
-   * This restored said look
-   */
-  boundary: PropTypes.bool,
-  /**
-   * Card body, could be a table for example
+   * Content
    */
   children: PropTypes.node,
   /**
-   * class name
+   * Optional classname, applied to top-level tag
    */
   className: PropTypes.string,
   /**
-   * footer, rendered on the bottom of the card
+   * Should be set to true for the outermost `Card`
+   */
+  isBoundary: PropTypes.bool,
+  /**
+   * By default, the content receives `medium` padding. Set to `false` to remove this
+   */
+  isPadded: PropTypes.bool,
+  /**
+   * Render function for the Card footer. Can use `<CardFooter />`
+   */
+  renderFooter: PropTypes.func,
+  /**
+   * Render function for the Card header. Can use `<CardHeader />`
+   */
+  renderHeader: PropTypes.func,
+  /**
+   * DEPRECATED: Use `children` instead
+   */
+  body: PropTypes.node,
+  /**
+   * DEPRECATED: Use `isHeader`  instead
+   */
+  boundary: PropTypes.bool,
+  /**
+   * DEPRECATED: Use `renderFooter()` instead
    */
   footer: PropTypes.node,
   /**
-   * card header
+   * DEPRECATED: Set this in `renderHeader()` => `<CardHeader />` instead
    */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   /**
-   * top right corner of the card, can be used for a Button for example
+   * DEPRECATED: Use `renderHeader()` instead (see example)
    */
   headerRight: PropTypes.node,
   /**
-   * Favored: Pass an <Icon /> (element)
-   * DEPRECATED: icon name (string) in combination with sprite prop
+   * DEPRECATED: Set this in `renderHeader()` => `<CardHeader />` instead
    */
-  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  /**
-   * DEPRECATED: icon sprite name
-   */
-  sprite: PropTypes.string,
+  icon: PropTypes.element,
 };
 
 export default Card;

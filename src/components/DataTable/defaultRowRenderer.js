@@ -1,5 +1,6 @@
 import React from 'react';
-import { Row } from '../..';
+
+import { Row } from '../Table';
 
 /* eslint-disable react/prop-types */
 export default ({

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from '../..';
+import { Icon } from '../Icon';
 
 const FileExternalIcon = ({ externalIcon }) => {
   const { icon, sprite, title } = externalIcon;

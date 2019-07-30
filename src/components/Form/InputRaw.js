@@ -4,11 +4,10 @@ import cx from 'classnames';
 import { omit } from 'lodash-es';
 
 import { getUniqueHash } from '../../utils';
-import {
-  IconButton,
-  IconSVG,
-  Spinner,
-} from '../..';
+
+import { IconButton } from '../Button';
+import { IconSVG } from '../Icon';
+import { Spinner } from '../Spinner';
 
 const InputRaw = React.forwardRef((props, ref) => {
   const {

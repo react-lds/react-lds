@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckboxRaw } from '../..';
+import { CheckboxRaw } from '../Form';
 
 /* eslint-disable react/prop-types */
 export default ({

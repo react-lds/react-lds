@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ObjectHome } from '.';
+
+import ObjectHome from './ObjectHome';
 
 const RecordHome = ({
   detailItems,
