@@ -90,7 +90,7 @@ Card.propTypes = {
    */
   renderFooter: PropTypes.func,
   /**
-   * Render function for the Card footer. Can use `<CardHeader />`
+   * Render function for the Card header. Can use `<CardHeader />`
    */
   renderHeader: PropTypes.func,
   /**
