@@ -51,7 +51,7 @@ VisualPicker.defaultProps = {
 
 VisualPicker.propTypes = {
   /**
-   * Caption element rendered underneath the tile. Should be `VisualPickerCaption`
+   * Caption element rendered underneath the tile. Should be `VisualPickerTileCaption`
    */
   caption: PropTypes.element,
   /**

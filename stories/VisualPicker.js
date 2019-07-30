@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import {
   VisualPicker,
-  VisualPickerCaption,
+  VisualPickerTileCaption,
   VisualPickerTileIcon,
   VisualPickerTileText,
   VisualPickerContainer,
@@ -17,7 +17,7 @@ stories
   .add('With icons', () => (
     <VisualPickerContainer label="Select an app">
       <VisualPicker
-        caption={<VisualPickerCaption>Connected App</VisualPickerCaption>}
+        caption={<VisualPickerTileCaption>Connected App</VisualPickerTileCaption>}
         disabled={boolean('Disabled?', false)}
         id="visual-picker-1"
         inputProps={{ onChange: action('change') }}
@@ -27,7 +27,7 @@ stories
         <VisualPickerTileIcon icon="connected_apps" sprite="utility" />
       </VisualPicker>
       <VisualPicker
-        caption={<VisualPickerCaption>Custom App</VisualPickerCaption>}
+        caption={<VisualPickerTileCaption>Custom App</VisualPickerTileCaption>}
         id="visual-picker-2"
         inputProps={{ onChange: action('change') }}
         size={select('Size', ['medium', 'large'], 'medium')}
@@ -41,9 +41,9 @@ stories
     <VisualPickerContainer label="Select a plan">
       <VisualPicker
         caption={(
-          <VisualPickerCaption title="Lightning Professional">
+          <VisualPickerTileCaption title="Lightning Professional">
             Complete service CRM for teams of any size
-          </VisualPickerCaption>
+          </VisualPickerTileCaption>
         )}
         disabled={boolean('Disabled?', false)}
         id="visual-picker-1"
@@ -57,9 +57,9 @@ stories
       </VisualPicker>
       <VisualPicker
         caption={(
-          <VisualPickerCaption title="Lightning Enterprise">
+          <VisualPickerTileCaption title="Lightning Enterprise">
             Everything you need to take support to the next level
-          </VisualPickerCaption>
+          </VisualPickerTileCaption>
         )}
         id="visual-picker-2"
         inputProps={{ onChange: action('change') }}
@@ -72,9 +72,9 @@ stories
       </VisualPicker>
       <VisualPicker
         caption={(
-          <VisualPickerCaption title="Lightning Unlimited">
+          <VisualPickerTileCaption title="Lightning Unlimited">
             Complete support with enterprise-grade customization
-          </VisualPickerCaption>
+          </VisualPickerTileCaption>
         )}
         id="visual-picker-3"
         inputProps={{ onChange: action('change') }}
@@ -115,7 +115,7 @@ stories
       label="Select an app"
     >
       <VisualPicker
-        caption={<VisualPickerCaption>Account</VisualPickerCaption>}
+        caption={<VisualPickerTileCaption>Account</VisualPickerTileCaption>}
         id="visual-picker-1"
         inputProps={{ checked: boolean('First selected', false) }}
         type="checkbox"
@@ -123,7 +123,7 @@ stories
         <VisualPickerTileIcon icon="account" sprite="standard" />
       </VisualPicker>
       <VisualPicker
-        caption={<VisualPickerCaption>Lead</VisualPickerCaption>}
+        caption={<VisualPickerTileCaption>Lead</VisualPickerTileCaption>}
         id="visual-picker-2"
         inputProps={{ checked: boolean('Second selected', false) }}
         type="checkbox"
@@ -131,7 +131,7 @@ stories
         <VisualPickerTileIcon icon="lead" sprite="standard" />
       </VisualPicker>
       <VisualPicker
-        caption={<VisualPickerCaption>Orders</VisualPickerCaption>}
+        caption={<VisualPickerTileCaption>Orders</VisualPickerTileCaption>}
         id="visual-picker-3"
         inputProps={{ checked: boolean('Third selected', false) }}
         type="checkbox"

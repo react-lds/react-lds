@@ -9,7 +9,7 @@ export {
   VisualPickerContainer,
   VisualPicker,
   VisualPickerCaption,
+  VisualPickerTileCaption,
   VisualPickerTileIcon,
   VisualPickerTileText,
-  VisualPickerVertical,
 };

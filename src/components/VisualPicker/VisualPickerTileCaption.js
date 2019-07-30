@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const VisualPickerCaption = ({ children, title }) => (
+const VisualPickerTileCaption = ({ children, title }) => (
   <span className="slds-visual-picker__body">
     {title && (
       <span className="slds-text-heading_small">{title}</span>
@@ -10,11 +10,11 @@ const VisualPickerCaption = ({ children, title }) => (
   </span>
 );
 
-VisualPickerCaption.defaultProps = {
+VisualPickerTileCaption.defaultProps = {
   title: null,
 };
 
-VisualPickerCaption.propTypes = {
+VisualPickerTileCaption.propTypes = {
   /**
    * Text content of the caption
    */
@@ -25,4 +25,4 @@ VisualPickerCaption.propTypes = {
   title: PropTypes.string,
 };
 
-export default VisualPickerCaption;
+export default VisualPickerTileCaption;
