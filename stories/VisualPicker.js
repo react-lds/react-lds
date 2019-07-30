@@ -9,6 +9,8 @@ import {
   VisualPickerTileText,
   VisualPickerContainer,
   VisualPickerVertical,
+  VisualPickerLink,
+  Icon,
 } from '../src';
 
 const stories = storiesOf('VisualPicker', module);
@@ -139,4 +141,19 @@ stories
         <VisualPickerTileIcon icon="orders" sprite="standard" />
       </VisualPicker>
     </VisualPickerContainer>
-  ));
+  ))
+  .add('Link', () => (
+    <VisualPickerLink
+      icon={(
+        <Icon
+          sprite="utility"
+          icon="knowledge_base"
+          svgClassName="slds-icon-text-default"
+        />
+      )}
+      title="Share the knowledge"
+    >
+      Harness your team&#x27;s collective know-how with our powerful knowledge base
+    </VisualPickerLink>
+
+  ))
