@@ -29,6 +29,7 @@ export * from './components/Path';
 export * from './components/Pill';
 export * from './components/Popover';
 export * from './components/Progress';
+export * from './components/ScopedNotification';
 export * from './components/SetupAssistant';
 export * from './components/Spinner';
 export * from './components/SplitView';
