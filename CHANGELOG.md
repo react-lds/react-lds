@@ -1,5 +1,12 @@
 # Changelog
 
+## 8.6.0
+
+* Added: `ScopedNotification` component
+* Added: `VisualPicker` component
+* Improved: More flexible `Card` implementation
+* Fixed: Addressed various CVEs by upgrading depedencies
+
 ## 8.5.0
 
 * Added: Added `GroupedCombobox` and `GroupedComboboxContainer` components
