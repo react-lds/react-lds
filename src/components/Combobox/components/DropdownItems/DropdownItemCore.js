@@ -26,8 +26,6 @@ export const DropdownItemCore = (props) => {
     { 'slds-has-focus': isFocus },
   ];
 
-  const ariaProp = isDisabled ? { 'aria-disabled': true } : null;
-
   return (
     <li
       {...rest}
@@ -35,7 +33,7 @@ export const DropdownItemCore = (props) => {
       role="presentation"
     >
       <div
-        {...ariaProp}
+        aria-disabled={isDisabled || null}
         id={id}
         className={cx(optionClasses)}
         onMouseDown={!isDisabled ? onSelect : null}

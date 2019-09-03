@@ -16,7 +16,7 @@ export class AsyncComboboxDemo extends Component {
 
     this.state = {
       isLoading: false,
-      isOpen: false,
+      isOpen: true,
       items: mockSearchResults,
       search: '',
       selection: [],
