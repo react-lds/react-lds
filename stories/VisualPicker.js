@@ -155,5 +155,4 @@ stories
     >
       Harness your team&#x27;s collective know-how with our powerful knowledge base
     </VisualPickerLink>
-
-  ))
+  ));

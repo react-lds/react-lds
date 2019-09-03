@@ -8,6 +8,7 @@ export const DropdownItemCore = (props) => {
     className,
     icon,
     id,
+    isDisabled,
     isFocus,
     isHeader,
     isPresentation,
@@ -25,6 +26,8 @@ export const DropdownItemCore = (props) => {
     { 'slds-has-focus': isFocus },
   ];
 
+  const ariaProp = isDisabled ? { 'aria-disabled': true } : null;
+
   return (
     <li
       {...rest}
@@ -32,9 +35,10 @@ export const DropdownItemCore = (props) => {
       role="presentation"
     >
       <div
+        {...ariaProp}
         id={id}
         className={cx(optionClasses)}
-        onMouseDown={onSelect}
+        onMouseDown={!isDisabled ? onSelect : null}
         role={isHeader || isPresentation ? 'presentation' : 'option'}
       >
         {icon}
@@ -53,6 +57,7 @@ DropdownItemCore.propTypes = {
   className: PropTypes.string,
   icon: PropTypes.node,
   id: PropTypes.string,
+  isDisabled: PropTypes.bool,
   isFocus: PropTypes.bool,
   isHeader: PropTypes.bool,
   isPresentation: PropTypes.bool,
@@ -64,6 +69,7 @@ DropdownItemCore.defaultProps = {
   className: null,
   icon: null,
   id: null,
+  isDisabled: false,
   isFocus: false,
   isHeader: false,
   isPresentation: false,

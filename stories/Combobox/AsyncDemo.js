@@ -3,8 +3,9 @@ import { debounce, without } from 'lodash-es';
 import { BASE_ITEMS } from './constants';
 import { EntityCombobox } from '../../src';
 
-const mockSearchResults = BASE_ITEMS.map(i => ({
-  ...i,
+const mockSearchResults = BASE_ITEMS.map((item, i) => ({
+  ...item,
+  ...i === 2 ? { isDisabled: true } : null,
   icon: { sprite: 'standard', icon: 'groups' },
   meta: <span>Objects • Standard</span>
 }));

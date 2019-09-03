@@ -51,7 +51,7 @@ const CONTACTS = {
       icon: 'contact'
     },
   }
-}
+};
 
 const ITEMS = {
   CONTACTS: [CONTACTS.CAROL, CONTACTS.TONY],

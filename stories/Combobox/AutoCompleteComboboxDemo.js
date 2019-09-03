@@ -3,6 +3,11 @@ import { without } from 'lodash-es';
 import { BASE_ITEMS } from './constants';
 import { AutoCompleteCombobox } from '../../src';
 
+const mockItems = BASE_ITEMS.map((item, i) => ({
+  ...item,
+  ...i === 2 ? { isDisabled: true } : null,
+}));
+
 export class AutoCompleteComboboxDemo extends Component {
   static getDerivedStateFromProps = (props, state) => {
     const { isMultiSelect } = props;
@@ -13,7 +18,7 @@ export class AutoCompleteComboboxDemo extends Component {
 
   state = {
     isOpen: false,
-    items: BASE_ITEMS,
+    items: mockItems,
     selection: [],
     search: '',
   }

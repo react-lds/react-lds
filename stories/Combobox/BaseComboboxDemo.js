@@ -3,6 +3,10 @@ import { without } from 'lodash-es';
 import { BASE_ITEMS } from './constants';
 import { BaseCombobox } from '../../src';
 
+const mockItems = BASE_ITEMS.map((item, i) => ({
+  ...item,
+  ...i === 2 ? { isDisabled: true } : null,
+}));
 
 export class BaseComboboxDemo extends Component {
   static getDerivedStateFromProps = (props, state) => {
@@ -14,7 +18,7 @@ export class BaseComboboxDemo extends Component {
 
   state = {
     isOpen: false,
-    items: BASE_ITEMS,
+    items: mockItems,
     selection: [],
   }
 
