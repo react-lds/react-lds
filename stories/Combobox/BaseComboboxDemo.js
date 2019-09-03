@@ -5,7 +5,7 @@ import { BaseCombobox } from '../../src';
 
 const mockItems = BASE_ITEMS.map((item, i) => ({
   ...item,
-  ...i === 2 ? { isDisabled: true } : null,
+  isDisabled: i === 2,
 }));
 
 export class BaseComboboxDemo extends Component {

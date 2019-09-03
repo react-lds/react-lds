@@ -5,7 +5,7 @@ import { EntityCombobox } from '../../src';
 
 const mockSearchResults = BASE_ITEMS.map((item, i) => ({
   ...item,
-  ...i === 2 ? { isDisabled: true } : null,
+  isDisabled: i === 2,
   icon: { sprite: 'standard', icon: 'groups' },
   meta: <span>Objects • Standard</span>
 }));
@@ -16,7 +16,7 @@ export class AsyncComboboxDemo extends Component {
 
     this.state = {
       isLoading: false,
-      isOpen: true,
+      isOpen: false,
       items: mockSearchResults,
       search: '',
       selection: [],
