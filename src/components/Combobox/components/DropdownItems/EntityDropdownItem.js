@@ -9,6 +9,7 @@ export const EntityDropdownItem = ({
   className,
   highlight,
   icon,
+  isDisabled,
   isMultiSelect,
   isSelected,
   isSelectedAssistiveLabel,
@@ -19,10 +20,15 @@ export const EntityDropdownItem = ({
   const sprite = isSelected ? 'utility' : icon.sprite;
   const isUtilIcon = sprite === 'utility';
 
+  const iconClassNames = cx([
+    { 'slds-icon_disabled': isDisabled },
+    { 'slds-current-color': isUtilIcon },
+  ]);
+
   const iconEl = (
     <span className="slds-media__figure slds-listbox__option-icon">
       <Icon
-        className={isUtilIcon ? 'slds-current-color' : null}
+        className={iconClassNames}
         icon={isSelected ? 'check' : icon.icon}
         sprite={sprite}
         size={isUtilIcon && !isSelected ? 'x-small' : 'small'}
@@ -40,6 +46,7 @@ export const EntityDropdownItem = ({
     <DropdownItemCore
       {...rest}
       className={cx(itemClasses)}
+      isDisabled={isDisabled}
       isSelected={isSelected}
       icon={iconEl}
     >
@@ -65,6 +72,7 @@ EntityDropdownItem.propTypes = {
     icon: PropTypes.string.isRequired,
     sprite: PropTypes.string.isRequired,
   }).isRequired,
+  isDisabled: PropTypes.bool,
   isMultiSelect: PropTypes.bool,
   isSelected: PropTypes.bool,
   isSelectedAssistiveLabel: PropTypes.string,
@@ -75,6 +83,7 @@ EntityDropdownItem.propTypes = {
 EntityDropdownItem.defaultProps = {
   className: null,
   highlight: '',
+  isDisabled: false,
   isMultiSelect: false,
   isSelected: false,
   isSelectedAssistiveLabel: 'Current Selection: ',

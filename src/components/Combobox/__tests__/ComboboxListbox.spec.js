@@ -13,6 +13,7 @@ const items = [
 
 const getCmp = () => shallow(
   <ComboboxListbox
+    isOpen={false}
     label="foo"
     makeSelectHandler={mockFn}
     selectedItems={items}

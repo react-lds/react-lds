@@ -34,4 +34,3 @@ stories
       <IconButton icon="info" sprite="utility" />
     </Tooltip>
   ));
-

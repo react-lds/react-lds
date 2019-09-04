@@ -55,6 +55,11 @@ describe('<DropdownItemCore />', () => {
     mounted.find('.slds-listbox__option').simulate('mouseDown');
     expect(mockFn).toBeCalled();
   });
+
+  it('renders as disabled', () => {
+    const mounted = getCmp({ isDisabled: true });
+    expect(mounted.find('.slds-media').prop('aria-disabled')).toBeTruthy();
+  });
 });
 
 describe('<BaseDropdownItem />', () => {
@@ -107,14 +112,22 @@ describe('<BaseDropdownItem />', () => {
     });
 
     const icon = mounted.find(Icon);
-
     expect(icon.exists()).toBeTruthy();
+    expect(icon.hasClass('slds-icon_disabled')).toBeFalsy();
     expect(icon.prop('icon')).toEqual('check');
   });
 
   it('renders a highlight when supplied', () => {
     const mounted = getCmp({ label: 'A really long label', highlight: 'Long' });
     expect(mounted.find('mark').text()).toEqual('long');
+  });
+
+  it('renders as disabled', () => {
+    const mounted = getCmp({
+      icon: { icon: 'down', sprite: 'utility' },
+      isDisabled: true,
+    });
+    expect(mounted.find(Icon).hasClass('slds-icon_disabled')).toBeTruthy();
   });
 });
 
@@ -144,7 +157,7 @@ describe('<EntityDropdownItem />', () => {
       icon: 'account',
       sprite: 'standard'
     });
-    expect(icon.prop('className')).toBeNull();
+    expect(icon.prop('className')).toEqual('');
   });
 
   it('renders utility icons different from other icons', () => {
@@ -156,6 +169,7 @@ describe('<EntityDropdownItem />', () => {
       isShallow: false,
     });
     const icon = mounted.find(Icon);
+    expect(icon.hasClass('slds-icon_disabled')).toBeFalsy();
     expect(icon.hasClass('slds-current-color')).toBeTruthy();
     expect(icon.prop('size')).toEqual('x-small');
   });
@@ -180,6 +194,17 @@ describe('<EntityDropdownItem />', () => {
     const sampleEl = <span className="sample" />;
     const mounted = getCmp({ props: { meta: sampleEl } });
     expect(mounted.find('.slds-listbox__option-meta_entity').contains(sampleEl)).toBeTruthy();
+  });
+
+  it('renders as disabled', () => {
+    const mounted = getCmp({
+      props: {
+        icon: { icon: 'down', sprite: 'utility' },
+        isDisabled: true,
+      },
+      isShallow: false,
+    });
+    expect(mounted.find(Icon).hasClass('slds-icon_disabled')).toBeTruthy();
   });
 });
 

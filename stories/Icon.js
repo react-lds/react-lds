@@ -57,4 +57,3 @@ stories
       score={select('Score', ['positive', 'negative'], 'positive')}
     />
   ));
-

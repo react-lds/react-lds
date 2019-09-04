@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { Icon } from '../../../Icon';
 import { DropdownItemCore } from './DropdownItemCore';
 import { defaultHighlighter } from '../../utils/helpers';
@@ -9,6 +10,7 @@ export const BaseDropdownItem = (props) => {
     highlight,
     icon,
     id,
+    isDisabled,
     isMultiSelect,
     isSelected,
     isSelectedAssistiveLabel,
@@ -20,9 +22,14 @@ export const BaseDropdownItem = (props) => {
   let iconEl;
 
   if (isSelected || icon) {
+    const iconClassNames = cx([
+      { 'slds-icon_disabled': !!isDisabled },
+      'slds-current-color',
+    ]);
+
     iconEl = (
       <Icon
-        className="slds-current-color"
+        className={iconClassNames}
         icon={isSelected ? 'check' : icon.icon}
         sprite={isSelected ? 'utility' : icon.sprite}
         size="x-small"
@@ -34,6 +41,7 @@ export const BaseDropdownItem = (props) => {
     <DropdownItemCore
       {...rest}
       className="slds-listbox__option_plain"
+      isDisabled={isDisabled}
       isSelected={isSelected}
       icon={(
         <span className="slds-media__figure slds-listbox__option-icon">
@@ -63,6 +71,7 @@ BaseDropdownItem.propTypes = {
     sprite: PropTypes.string.isRequired,
   }),
   id: PropTypes.string.isRequired,
+  isDisabled: PropTypes.bool,
   isMultiSelect: PropTypes.bool,
   isSelected: PropTypes.bool,
   isSelectedAssistiveLabel: PropTypes.string,
@@ -73,6 +82,7 @@ BaseDropdownItem.propTypes = {
 BaseDropdownItem.defaultProps = {
   highlight: '',
   icon: null,
+  isDisabled: false,
   isMultiSelect: false,
   isSelected: false,
   isSelectedAssistiveLabel: 'Current Selection: ',

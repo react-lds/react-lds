@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { action } from '@storybook/addon-actions';
-import { withInfo } from '@storybook/addon-info';
 import {
   array,
   object,
@@ -110,28 +109,25 @@ stories
       </DataTable>
     </div>
   ), {
-    info: `
-      This variant requires you to have a DOM ancestor that sets \`overflow-y: auto|scroll \`. \n
-      To optionally fix the double border for the first item, add the following to your CSS:
-      \`\`\` css
-      // CSS
-      .reactlds-table_stickyheader th {
-        border-bottom: 1px solid rgb(221, 219, 218); // $color-border-separator-alt
-      }
+    info: {
+      text:
+        `
+          This variant requires you to have a DOM ancestor that sets \`overflow-y: auto|scroll\`. \n
+          To optionally fix the double border for the first item, add the following to your CSS:
+          \`\`\` css
+          // CSS
+          .reactlds-table_stickyheader th {
+            border-bottom: 1px solid rgb(221, 219, 218); // $color-border-separator-alt
+          }
 
-      .reactlds-table_stickyheader tbody > tr:first-child > td {
-        border-top: none;
-      }
-      \`\`\`
-    `
+          .reactlds-table_stickyheader tbody > tr:first-child > td {
+            border-top: none;
+          }
+          \`\`\`
+        `
+    }
   })
-  .add('Sortable table', withInfo(`
-    Marking a column **sortable** will make the table header clickable. On click, the
-    data array is sorted by that column. If an **onSort** callback is provided, sorting the
-    data array is left to that callback.
-    If the data array is externally sorted, you can use the **sortBy** and **sortDirection**
-    props to indicate the current sort column and direction.
-  `)(() => (
+  .add('Sortable table', () => (
     <DataTable
       sortBy={text('Sorted by', 'name')}
       sortDirection={select('Sort direction', ['asc', 'desc'])}
@@ -159,7 +155,18 @@ stories
         title="Nationality"
       />
     </DataTable>
-  )))
+  ), {
+    info: {
+      text:
+        `
+          Marking a column **sortable** will make the table header clickable. On click, the
+          data array is sorted by that column. If an **onSort** callback is provided, sorting the
+          data array is left to that callback.
+          If the data array is externally sorted, you can use the **sortBy** and **sortDirection**
+          props to indicate the current sort column and direction.
+        `
+    }
+  })
   .add('Selectable table', () => (
     <StatefulWrapper data={object('Data', sampleData.slice(0, 5))}>
       <DataTable
@@ -183,12 +190,13 @@ stories
     </StatefulWrapper>
   ), {
     info: {
-      text: `
-      Adding a **DataTableSelectColumn** to the columns will add a column of checkboxes
-      to the table.
-      Ticking one of the checkboxes will result in the **onSelect** callback being called
-      with a list of currently selected rows (identified by **rowId**).
-      `
+      text:
+        `
+          Adding a **DataTableSelectColumn** to the columns will add a column of checkboxes
+          to the table.
+          Ticking one of the checkboxes will result in the **onSelect** callback being called
+          with a list of currently selected rows (identified by **rowId**).
+        `
     }
   })
   .add('Actionable table', () => (
