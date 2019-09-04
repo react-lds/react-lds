@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.7.0
+
+* Added: Allow to disable `Listbox` items
+* Changed: Replace `aria-hidden` with HTML5's `hidden` attribute in `Accordions`
+* Fixed: Upgrade `@storybook/addon-info` to fix breaking markdown code blocks in stories
+
 ## 8.6.0
 
 * Added: `ScopedNotification` component
