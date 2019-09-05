@@ -13,6 +13,7 @@ export * from './components/DataTable';
 export * from './components/Datepicker';
 export * from './components/ExpandableSection';
 export * from './components/File';
+export * from './components/FileSelector';
 export * from './components/Form';
 export * from './components/Grid';
 export * from './components/GroupedCombobox';
@@ -39,3 +40,4 @@ export * from './components/Tooltip';
 export * from './components/VerticalNavigation';
 export * from './components/VisualPicker';
 export * from './utils';
+
