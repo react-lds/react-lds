@@ -69,9 +69,9 @@ CardHeader.propTypes = {
    */
   titleProps: PropTypes.object,
   /**
-   * Title text
+   * Title text or element
    */
-  title: PropTypes.element,
+  title: PropTypes.node,
 };
 
 export default CardHeader;
