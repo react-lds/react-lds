@@ -5,6 +5,7 @@ import ButtonIcon from './ButtonIcon';
 
 const Button = React.forwardRef((props, ref) => {
   const {
+    buttonEl,
     children,
     className,
     flavor,
@@ -24,7 +25,10 @@ const Button = React.forwardRef((props, ref) => {
     className,
   );
 
-  const ButtonEl = href ? 'a' : 'button';
+  const ButtonEl = href
+    ? 'a'
+    : buttonEl || 'button';
+
   const position = iconPosition || 'left';
   const content = children || title;
 
@@ -55,6 +59,7 @@ const Button = React.forwardRef((props, ref) => {
 Button.displayName = 'Button';
 
 Button.defaultProps = {
+  buttonEl: null,
   children: null,
   className: null,
   flavor: 'neutral',
@@ -66,6 +71,10 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
+  /**
+   * Custom element (default is `button` or `a` when `href` is present)
+   */
+  buttonEl: PropTypes.string,
   /**
    * Used to set content in advanced use cases
    */
