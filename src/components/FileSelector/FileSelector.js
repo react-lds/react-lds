@@ -16,6 +16,8 @@ const FileSelector = ({
   error,
   fatalError,
   label,
+  minSize,
+  maxSize,
   multiple,
   onDragEnter,
   onDragLeave,
@@ -43,6 +45,8 @@ const FileSelector = ({
           <Dropzone
             accept={accept}
             disabled={!!fatalError}
+            minSize={minSize}
+            maxSize={maxSize}
             multiple={multiple}
             onDrop={onDrop}
             onDragEnter={onDragEnter}
@@ -100,6 +104,7 @@ FileSelector.defaultProps = {
   accept: null,
   error: null,
   fatalError: null,
+  minSize: 0,
   maxSize: null,
   multiple: false,
   onDragEnter: null,
@@ -132,6 +137,10 @@ FileSelector.propTypes = {
    * Top-level label
    */
   label: PropTypes.string.isRequired,
+  /**
+   * Minimum file size (in bytes)
+   */
+  minSize: PropTypes.number,
   /**
    * Maximum file size (in bytes)
    */
