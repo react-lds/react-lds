@@ -1,5 +1,10 @@
 # Changelog
 
+## 8.8.0
+
+* Added: `FileSelector` component
+* Fixed: Relaxed strict `CardHeader.title` prop validation
+
 ## 8.7.0
 
 * Added: Allow to disable `Listbox` items
