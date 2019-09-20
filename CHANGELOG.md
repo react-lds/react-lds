@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.8.1
+
+* Fixed: `FileSelector` issues with clicks in Chrome / Safari
+
 ## 8.8.0
 
 * Added: `FileSelector` component
