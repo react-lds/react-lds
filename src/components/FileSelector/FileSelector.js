@@ -78,7 +78,7 @@ const FileSelector = ({
                 <label
                   className="slds-file-selector__body"
                   htmlFor={id}
-                  // Fixes dialog not working due to default `label<>input` even handling (Safari,Chrome)
+                  // Fixes dialog not working due to default `label<>input` event handling (Safari,Chrome)
                   onClick={preventDefault}
                   id={secondaryLabelId}
                 >
