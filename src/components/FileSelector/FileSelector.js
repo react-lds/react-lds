@@ -9,6 +9,8 @@ import {
 } from '../Form';
 import { Button } from '../Button';
 
+const preventDefault = e => e.preventDefault();
+
 const FileSelector = ({
   accept,
   buttonText,
@@ -76,6 +78,8 @@ const FileSelector = ({
                 <label
                   className="slds-file-selector__body"
                   htmlFor={id}
+                  // Fixes dialog not working due to default `label<>input` even handling (Safari,Chrome)
+                  onClick={preventDefault}
                   id={secondaryLabelId}
                 >
                   <Button
