@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.9.0
+
+* Changed: Add optional title menu action to `ObjectHome`
+
 ## 8.8.1
 
 * Fixed: `FileSelector` issues with clicks in Chrome / Safari
