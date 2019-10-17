@@ -112,6 +112,15 @@ stories
       info={text('Info', '10 items • sorted by name')}
       icon={object('Icon', { icon: 'user', sprite: 'standard' })}
       bottomButtons={bottomButtons}
+      titleMenuAction={(
+        <IconButton
+          border="filled"
+          icon="pin"
+          onClick={Function.prototype}
+          size="small"
+          sprite="utility"
+        />
+      )}
     />
   ))
   .add('ObjectHome without menu', () => (

@@ -7,6 +7,7 @@ import { ControlledMenu } from '../Menu';
 import { IconButton } from '../Button';
 import { MediaObject } from '../MediaObject';
 import { Icon } from '../Icon';
+import { Grid } from '../Grid';
 
 class ObjectHome extends Component {
   static propTypes = {
@@ -51,6 +52,13 @@ class ObjectHome extends Component {
      */
     titleMenu: PropTypes.node,
     /**
+     * optional title menu action that gets displayed beside the header menu.
+     *
+     * TODO The SLDS does not yet provide the specifications for the pin button,
+     * once it does the structure should be updated accordingly.
+     */
+    titleMenuAction: PropTypes.node,
+    /**
      * top Buttons or ButtonGroup(s)
      */
     topButtons: PropTypes.node,
@@ -64,6 +72,7 @@ class ObjectHome extends Component {
     icon: null,
     info: null,
     titleMenu: null,
+    titleMenuAction: null,
     topButtons: null,
   }
 
@@ -93,6 +102,7 @@ class ObjectHome extends Component {
       recordType,
       title,
       titleMenu,
+      titleMenuAction,
       topButtons,
       ...rest
     } = this.props;
@@ -133,26 +143,36 @@ class ObjectHome extends Component {
                   </h1>
                 </div>
                 {titleMenu && (
-                  <ClickOutside
-                    className="slds-page-header__name-switcher"
-                    onClickOutside={this.onClickOutside}
-                    condition={closeOnClickOutside && menuIsOpen}
-                  >
-                    <ControlledMenu
-                      button={(
-                        <IconButton
-                          container
-                          icon="down"
-                          size="small"
-                          sprite="utility"
-                          onClick={this.toggleMenu}
-                        />
-                      )}
-                      isOpen={this.state.menuIsOpen}
+                  <React.Fragment>
+                    <ClickOutside
+                      className="slds-page-header__name-switcher"
+                      onClickOutside={this.onClickOutside}
+                      condition={closeOnClickOutside && menuIsOpen}
                     >
-                      {titleMenu}
-                    </ControlledMenu>
-                  </ClickOutside>
+                      <ControlledMenu
+                        button={(
+                          <IconButton
+                            container
+                            icon="down"
+                            size="small"
+                            sprite="utility"
+                            onClick={this.toggleMenu}
+                          />
+                        )}
+                        isOpen={this.state.menuIsOpen}
+                      >
+                        {titleMenu}
+                      </ControlledMenu>
+                    </ClickOutside>
+                    {titleMenuAction && (
+                      <Grid
+                        className="slds-p-left_xx-small"
+                        verticalAlign="end"
+                      >
+                        {titleMenuAction}
+                      </Grid>
+                    )}
+                  </React.Fragment>
                 )}
               </div>
             </MediaObject>

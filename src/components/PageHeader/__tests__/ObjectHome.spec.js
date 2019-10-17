@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 
 import ObjectHome from '../ObjectHome';
 import MenuItem from '../../Menu/MenuItem';
+import { IconButton } from '../../Button';
 
 describe('<ObjectHome />', () => {
   let mounted;
@@ -12,6 +13,15 @@ describe('<ObjectHome />', () => {
       <ObjectHome
         title="foo"
         titleMenu={<MenuItem>test123</MenuItem>}
+        titleMenuAction={(
+          <IconButton
+            border="filled"
+            icon="pin"
+            onClick={Function.prototype}
+            size="small"
+            sprite="utility"
+          />
+        )}
         recordType="unicornz"
         info="yeah"
         topButtons="button098"
@@ -64,5 +74,9 @@ describe('<ObjectHome />', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('.slds-page-header').hasClass('foo')).toBeTruthy();
     expect(mounted.find('.slds-page-header').prop('data-test')).toEqual('bar');
+  });
+
+  it('renders a pin button besides the header menu', () => {
+    expect(mounted.find(IconButton).at(1).prop('icon')).toEqual('pin');
   });
 });
