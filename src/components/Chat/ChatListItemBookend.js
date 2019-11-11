@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { renderMeta } from './utils';
-import { Icon } from '../Icon';
+import { EventContent } from './Content/EventContent';
 
 const ChatListItemBookend = ({
   isEnd,
@@ -17,14 +16,11 @@ const ChatListItemBookend = ({
 
   return (
     <div className={classNamesBookend}>
-      <Icon
-        className="slds-chat-icon"
+      <EventContent
         icon={isEnd ? 'end_chat' : 'chat'}
-        size="x-small"
-        sprite="utility"
-        svgClassName="slds-icon-text-default"
+        message={message}
+        timestamp={timestamp}
       />
-      {renderMeta(message, timestamp)}
     </div>
   );
 };

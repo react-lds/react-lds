@@ -1,28 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get } from 'lodash-es';
+import { get, uniqueId } from 'lodash-es';
 import cx from 'classnames';
 
-import { uniqueId } from '../../utils';
 import { CHAT_ITEM_TYPES } from './utils';
 import ChatListItem from './ChatListItem';
 
-const Chat = ({ isPastChat, items }) => {
+const Chat = ({
+  className,
+  isPastChat,
+  items,
+}) => {
   const sectionClassNames = cx([
     'slds-chat',
     { 'slds-chat_past': isPastChat },
+    className,
   ]);
 
   return (
     <section role="log" className={sectionClassNames}>
       <ul className="slds-chat-list">
         {items.map((message, i) => {
-          const { author: messageAuthor, messageType } = message;
+          const {
+            author: messageAuthor,
+            type: messageType,
+          } = message;
           let isConsecutive = false;
           let isFirstMessage = false;
 
           const { author: prevAuthor, isStart: prevIsStart } = get(items, [i - 1], {});
-          const { author: nextAuthor, messageType: nextType } = get(items, [i + 1], {});
+          const { author: nextAuthor, type: nextType } = get(items, [i + 1], {});
 
           if (!isPastChat && messageType === nextType && messageAuthor === nextAuthor) {
             isConsecutive = true;
@@ -30,13 +37,15 @@ const Chat = ({ isPastChat, items }) => {
 
           isFirstMessage = prevIsStart || prevAuthor !== messageAuthor;
 
-          const otherProps = {
-            isConsecutive,
-            isFirstMessage,
-            isPastChat,
-          };
-
-          return <ChatListItem key={uniqueId(i, 'chat-list-item-')} {...message} {...otherProps} />;
+          return (
+            <ChatListItem
+              isConsecutive={isConsecutive}
+              isFirstMessage={isFirstMessage}
+              isPastChat={isPastChat}
+              key={uniqueId('chat-list-item-')}
+              {...message}
+            />
+          );
         })}
       </ul>
     </section>
@@ -44,10 +53,12 @@ const Chat = ({ isPastChat, items }) => {
 };
 
 Chat.defaultProps = {
+  className: null,
   isPastChat: false,
 };
 
 Chat.propTypes = {
+  className: PropTypes.string,
   isPastChat: PropTypes.bool,
   items: PropTypes.arrayOf(PropTypes.shape({
     messageType: PropTypes.oneOf(Object.values(CHAT_ITEM_TYPES)),

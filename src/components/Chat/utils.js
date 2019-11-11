@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const CHAT_ITEM_TYPES = {
   EVENT_ERROR: 'event_error',
   EVENT_START: 'event_start',
@@ -12,9 +10,3 @@ export const CHAT_ITEM_TYPES = {
   MESSAGE_TYPING: 'message_typing',
   MESSAGE_UNSUPPORTED_TYPE: 'message_unsupported_type',
 };
-
-/* eslint-disable react/jsx-one-expression-per-line */
-export function renderMeta(message, timestamp) {
-  return <p>{message} &bull; {timestamp}</p>;
-}
-/* eslint-enable react/jsx-one-expression-per-line */

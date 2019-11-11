@@ -37,10 +37,7 @@ const ChatListItem = (props) => {
 
   const renderListItem = () => {
     if (isEvent) return <ChatListItemEvent {...props} isError={isError} />;
-    if (isBookend) {
-      return <ChatListItemBookend {...props} isEnd={isEnd} />;
-    }
-
+    if (isBookend) return <ChatListItemBookend {...props} isEnd={isEnd} />;
     return <ChatListItemMessage {...props} />;
   };
 

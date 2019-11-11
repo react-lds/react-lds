@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { renderMeta } from './utils';
-import { Icon } from '../Icon';
+import { EventContent } from './Content/EventContent';
 
 const ChatListItemEvent = ({
   icon,
@@ -20,16 +19,11 @@ const ChatListItemEvent = ({
   return (
     <div className={eventClassName}>
       <div className="slds-chat-event__body">
-        {icon && (
-          <Icon
-            className="slds-chat-icon"
-            icon={icon}
-            size="x-small"
-            sprite="utility"
-            svgClassName="slds-icon-text-default"
-          />
-        )}
-        {renderMeta(message, timestamp)}
+        <EventContent
+          icon={icon}
+          message={message}
+          timestamp={timestamp}
+        />
       </div>
       {!isError && <div className="slds-chat-event__agent-message">{meta}</div>}
     </div>
