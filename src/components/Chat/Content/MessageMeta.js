@@ -5,6 +5,8 @@ import { Button } from '../../Button';
 import { Grid } from '../../Grid';
 import { Icon } from '../../Icon';
 
+import { Meta } from './Meta';
+
 export const MessageMeta = ({
   author,
   isConsecutive,
@@ -12,35 +14,28 @@ export const MessageMeta = ({
   isPastChat,
   onResend,
   timestamp,
-  translations: {
-    at,
-    resend,
-    said,
-  },
+  translations,
 }) => {
-  /* eslint-disable react/jsx-one-expression-per-line */
-  const renderMessageMeta = () => {
-    const renderedAuthor = isPastChat
-      ? <b>{author}</b>
-      : author;
+  const meta = (
+    <Meta
+      author={author}
+      isPastChat={isPastChat}
+      timestamp={timestamp}
+      translations={translations}
+    />
+  );
 
-    return (
-      <div className="slds-chat-message__meta" aria-label={`${said} ${author} ${at} ${timestamp}`}>
-        {renderedAuthor} &bull; {timestamp}
-      </div>
-    );
-  };
-  /* eslint-enable react/jsx-one-expression-per-line */
+  const labelResend = translations.resend;
 
   if (isDeliveryFailure) {
     return (
       <Grid align="spread">
-        {renderMessageMeta(author, timestamp)}
+        {meta}
         <Button
           className="slds-chat-message__action slds-m-top_xxx-small"
           flavor="none"
           onClick={onResend}
-          title={resend}
+          title={labelResend}
         >
           <Icon
             className="slds-chat-icon"
@@ -48,13 +43,13 @@ export const MessageMeta = ({
             size="xx-small"
             sprite="utility"
           />
-          {resend}
+          {labelResend}
         </Button>
       </Grid>
     );
   }
 
-  return !isConsecutive && renderMessageMeta(author, timestamp);
+  return !isConsecutive && meta;
 };
 
 MessageMeta.propTypes = {
@@ -66,9 +61,6 @@ MessageMeta.propTypes = {
   isConsecutive: PropTypes.bool.isRequired,
   isDeliveryFailure: PropTypes.bool.isRequired,
   isPastChat: PropTypes.bool.isRequired,
-  labelAt: PropTypes.string,
-  labelResend: PropTypes.string,
-  labelSaid: PropTypes.string,
   onResend: PropTypes.func,
   timestamp: PropTypes.string.isRequired,
   translations: PropTypes.shape({

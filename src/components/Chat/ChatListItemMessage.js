@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { MessageContent } from './Content/MessageContent';
+import { MessageContent } from './Content';
 
 const ChatListItemMessage = ({
   author,

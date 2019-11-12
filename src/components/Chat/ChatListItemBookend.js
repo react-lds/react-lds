@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { EventContent } from './Content/EventContent';
+import { EventContent } from './Content';
 
 const ChatListItemBookend = ({
   isEnd,

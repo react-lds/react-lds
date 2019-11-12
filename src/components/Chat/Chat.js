@@ -84,6 +84,7 @@ Chat.propTypes = {
       src: PropTypes.string,
       title: PropTypes.string.isRequired,
     }),
+    avatar: PropTypes.string,
     id: PropTypes.string.isRequired,
     message: PropTypes.node,
     meta: PropTypes.string,
