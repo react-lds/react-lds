@@ -10,12 +10,13 @@ export const MessageMeta = ({
   isConsecutive,
   isDeliveryFailure,
   isPastChat,
-  labelAt,
-  labelResend,
-  labelSaid,
-  meta,
   onResend,
   timestamp,
+  translations: {
+    at,
+    resend,
+    said,
+  },
 }) => {
   /* eslint-disable react/jsx-one-expression-per-line */
   const renderMessageMeta = () => {
@@ -24,7 +25,7 @@ export const MessageMeta = ({
       : author;
 
     return (
-      <div className="slds-chat-message__meta" aria-label={`${labelSaid} ${meta} ${labelAt} ${timestamp}`}>
+      <div className="slds-chat-message__meta" aria-label={`${said} ${author} ${at} ${timestamp}`}>
         {renderedAuthor} &bull; {timestamp}
       </div>
     );
@@ -39,7 +40,7 @@ export const MessageMeta = ({
           className="slds-chat-message__action slds-m-top_xxx-small"
           flavor="none"
           onClick={onResend}
-          title={labelResend}
+          title={resend}
         >
           <Icon
             className="slds-chat-icon"
@@ -47,7 +48,7 @@ export const MessageMeta = ({
             size="xx-small"
             sprite="utility"
           />
-          {labelResend}
+          {resend}
         </Button>
       </Grid>
     );
@@ -57,10 +58,6 @@ export const MessageMeta = ({
 };
 
 MessageMeta.propTypes = {
-  labelAt: 'at',
-  labelResend: 'Resend',
-  labelSaid: 'said',
-  meta: null,
   onResend: Function.prototype,
 };
 
@@ -72,7 +69,11 @@ MessageMeta.propTypes = {
   labelAt: PropTypes.string,
   labelResend: PropTypes.string,
   labelSaid: PropTypes.string,
-  meta: PropTypes.string,
   onResend: PropTypes.func,
   timestamp: PropTypes.string.isRequired,
+  translations: PropTypes.shape({
+    at: PropTypes.string,
+    resend: PropTypes.string,
+    said: PropTypes.string,
+  }).isRequired,
 };

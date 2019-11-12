@@ -1,15 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get, uniqueId } from 'lodash-es';
+import { get } from 'lodash-es';
 import cx from 'classnames';
 
 import { CHAT_ITEM_TYPES } from './utils';
 import ChatListItem from './ChatListItem';
 
+const DEFAULT_TRANSLATIONS = {
+  at: 'at',
+  resend: 'Resend',
+  said: 'said',
+};
+
 const Chat = ({
   className,
   isPastChat,
   items,
+  translations,
 }) => {
   const sectionClassNames = cx([
     'slds-chat',
@@ -17,21 +24,27 @@ const Chat = ({
     className,
   ]);
 
+  const mergedTranslation = {
+    ...DEFAULT_TRANSLATIONS,
+    ...translations,
+  };
+
   return (
     <section role="log" className={sectionClassNames}>
       <ul className="slds-chat-list">
-        {items.map((message, i) => {
+        {items.map((item, i) => {
           const {
             author: messageAuthor,
-            type: messageType,
-          } = message;
+            id,
+            type,
+          } = item;
           let isConsecutive = false;
           let isFirstMessage = false;
 
           const { author: prevAuthor, isStart: prevIsStart } = get(items, [i - 1], {});
           const { author: nextAuthor, type: nextType } = get(items, [i + 1], {});
 
-          if (!isPastChat && messageType === nextType && messageAuthor === nextAuthor) {
+          if (!isPastChat && type === nextType && messageAuthor === nextAuthor) {
             isConsecutive = true;
           }
 
@@ -42,8 +55,9 @@ const Chat = ({
               isConsecutive={isConsecutive}
               isFirstMessage={isFirstMessage}
               isPastChat={isPastChat}
-              key={uniqueId('chat-list-item-')}
-              {...message}
+              key={`chat-list-item-${id}`}
+              translations={mergedTranslation}
+              {...item}
             />
           );
         })}
@@ -55,13 +69,14 @@ const Chat = ({
 Chat.defaultProps = {
   className: null,
   isPastChat: false,
+  translations: DEFAULT_TRANSLATIONS,
 };
 
 Chat.propTypes = {
   className: PropTypes.string,
   isPastChat: PropTypes.bool,
   items: PropTypes.arrayOf(PropTypes.shape({
-    messageType: PropTypes.oneOf(Object.values(CHAT_ITEM_TYPES)),
+    author: PropTypes.string,
     attachment: PropTypes.shape({
       fileType: PropTypes.string.isRequired,
       isLink: PropTypes.bool,
@@ -69,8 +84,18 @@ Chat.propTypes = {
       src: PropTypes.string,
       title: PropTypes.string.isRequired,
     }),
+    id: PropTypes.string.isRequired,
     message: PropTypes.node,
+    meta: PropTypes.string,
+    onResend: PropTypes.func,
+    timestamp: PropTypes.string,
+    type: PropTypes.oneOf(Object.values(CHAT_ITEM_TYPES)),
   })).isRequired,
+  translations: PropTypes.shape({
+    at: PropTypes.string,
+    resend: PropTypes.string,
+    said: PropTypes.string,
+  }),
 };
 
 export default Chat;

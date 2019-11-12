@@ -29,7 +29,6 @@ const ChatListItemMessage = ({
         <MessageContent
           author={author}
           avatar={avatar}
-          isFirstMessage={isFirstMessage}
           isPastChat={isPastChat}
           {...rest}
         />
