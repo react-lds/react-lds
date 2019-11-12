@@ -127,7 +127,7 @@ const advancedItems = [
   },
   {
     id: '13',
-    message: 'I&#x27;m having trouble changing that.',
+    message: 'I\'m having trouble changing that.',
     author: 'Andy Martinez',
     type: CHAT_ITEM_TYPES.MESSAGE_TYPING,
     meta: 'Customer is typing',
