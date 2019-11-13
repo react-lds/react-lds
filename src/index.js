@@ -6,6 +6,7 @@ export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/Card';
 export * from './components/Carousel';
+export * from './components/Chat';
 export * from './components/CheckboxToggle';
 export * from './components/Combobox';
 export * from './components/Table';
