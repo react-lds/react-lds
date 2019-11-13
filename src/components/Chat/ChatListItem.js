@@ -35,15 +35,13 @@ const ChatListItem = (props) => {
     { [`slds-chat-listitem_${getListItemCssClass()}`]: isBookend || !isPastChat },
   ]);
 
-  const renderListItem = () => {
-    if (isEvent) return <ChatListItemEvent {...props} isError={isError} />;
-    if (isBookend) return <ChatListItemBookend {...props} isEnd={isEnd} />;
-    return <ChatListItemMessage {...props} />;
-  };
-
   return (
     <li className={classNamesItem}>
-      {renderListItem()}
+      {(() => {
+        if (isEvent) return <ChatListItemEvent {...props} isError={isError} />;
+        if (isBookend) return <ChatListItemBookend {...props} isEnd={isEnd} />;
+        return <ChatListItemMessage {...props} />;
+      })()}
     </li>
   );
 };
