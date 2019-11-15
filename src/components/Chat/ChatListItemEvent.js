@@ -39,7 +39,7 @@ ChatListItemEvent.propTypes = {
   icon: PropTypes.string,
   isError: PropTypes.bool.isRequired,
   message: PropTypes.node.isRequired,
-  meta: PropTypes.string,
+  meta: PropTypes.node,
   timestamp: PropTypes.string.isRequired,
 };
 
