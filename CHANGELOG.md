@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+* Added: `NameValueList.{List,Name,Value}` utility components
+* Added: `Tile` component
+
 ## 8.9.0
 
 * Changed: Add optional title menu action to `ObjectHome`
