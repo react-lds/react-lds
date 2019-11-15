@@ -110,6 +110,6 @@ MessageContent.propTypes = {
   isConsecutive: PropTypes.bool.isRequired,
   isPastChat: PropTypes.bool.isRequired,
   message: PropTypes.node,
-  meta: PropTypes.string,
+  meta: PropTypes.node,
   type: PropTypes.string.isRequired,
 };
