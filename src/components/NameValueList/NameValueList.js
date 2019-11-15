@@ -56,7 +56,7 @@ NameOrValue.defaultProps = {
 };
 
 NameOrValue.propTypes = {
-  as: PropTypes.string.isRequired,
+  as: PropTypes.oneOf(['dd', 'dt']).isRequired,
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   title: PropTypes.string,
