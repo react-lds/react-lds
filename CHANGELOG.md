@@ -2,8 +2,9 @@
 
 ## Unreleased
 
-* Added: `NameValueList.{List,Name,Value}` utility components
+* Added: `Chat` component
 * Added: `Tile` component
+* Added: `NameValueList.{List,Name,Value}` utility components
 
 ## 8.9.0
 
