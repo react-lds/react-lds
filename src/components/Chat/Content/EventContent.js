@@ -19,18 +19,26 @@ export const EventContent = ({
         svgClassName="slds-icon-text-default"
       />
     )}
-    <p>{message} &bull; {timestamp}</p>
+    <p>
+      {timestamp
+        ? (
+          <React.Fragment>
+            {message} &bull; {timestamp}
+          </React.Fragment>
+        ) : message
+      }
+    </p>
   </React.Fragment>
 );
 /* eslint-enable react/jsx-one-expression-per-line */
 
 EventContent.defaultProps = {
   icon: null,
-  message: null,
+  timestamp: null,
 };
 
 EventContent.propTypes = {
   icon: PropTypes.string,
-  message: PropTypes.node,
-  timestamp: PropTypes.string.isRequired,
+  message: PropTypes.node.isRequired,
+  timestamp: PropTypes.string,
 };

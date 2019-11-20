@@ -103,6 +103,11 @@ const advancedItems = [
     timestamp: now,
   },
   {
+    id: '9',
+    type: CHAT_ITEM_TYPES.EVENT,
+    message: <React.Fragment><b>Custom</b> event</React.Fragment>,
+  },
+  {
     id: '10',
     message: 'Message type is not supported',
     author: 'Andy Martinez',

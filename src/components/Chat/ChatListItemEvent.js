@@ -33,6 +33,7 @@ const ChatListItemEvent = ({
 ChatListItemEvent.defaultProps = {
   icon: null,
   meta: null,
+  timestamp: null,
 };
 
 ChatListItemEvent.propTypes = {
@@ -40,7 +41,7 @@ ChatListItemEvent.propTypes = {
   isError: PropTypes.bool.isRequired,
   message: PropTypes.node.isRequired,
   meta: PropTypes.node,
-  timestamp: PropTypes.string.isRequired,
+  timestamp: PropTypes.string,
 };
 
 export default ChatListItemEvent;
