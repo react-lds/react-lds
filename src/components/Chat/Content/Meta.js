@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 export const Meta = ({
   author,
   isPastChat,
+  meta,
   timestamp,
   translations: {
     at,
@@ -13,17 +14,29 @@ export const Meta = ({
   },
 }) => (
   <div className="slds-chat-message__meta" aria-label={`${said} ${author} ${at} ${timestamp}`}>
-    {isPastChat
-      ? <b>{author}</b>
-      : author
-    } &bull; {timestamp}
+    {meta || (
+      <React.Fragment>
+        {isPastChat
+          ? <b>{author}</b>
+          : author
+        }
+        &bull; {timestamp}
+      </React.Fragment>
+    )}
   </div>
 );
 
+Meta.defaultProps = {
+  author: null,
+  meta: null,
+  timestamp: null,
+};
+
 Meta.propTypes = {
-  author: PropTypes.string.isRequired,
+  author: PropTypes.string,
   isPastChat: PropTypes.bool.isRequired,
-  timestamp: PropTypes.string.isRequired,
+  meta: PropTypes.node,
+  timestamp: PropTypes.string,
   translations: PropTypes.shape({
     at: PropTypes.string,
     said: PropTypes.string,

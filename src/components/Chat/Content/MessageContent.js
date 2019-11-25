@@ -11,6 +11,7 @@ import { MessageStatus } from './MessageStatus';
 export const MessageContent = ({
   attachment,
   author,
+  error,
   isConsecutive,
   isPastChat,
   message,
@@ -88,7 +89,7 @@ export const MessageContent = ({
         }
         {isDeliveryFailure && (
           <div className="slds-chat-message__text_delivery-failure-reason" role="alert">
-            {renderMessageStatus(meta)}
+            {renderMessageStatus(error)}
           </div>
         )}
       </div>
@@ -100,6 +101,7 @@ export const MessageContent = ({
 
 MessageContent.defaultProps = {
   attachment: null,
+  error: null,
   message: null,
   meta: null,
 };
@@ -107,6 +109,7 @@ MessageContent.defaultProps = {
 MessageContent.propTypes = {
   attachment: PropTypes.object,
   author: PropTypes.string.isRequired,
+  error: PropTypes.string,
   isConsecutive: PropTypes.bool.isRequired,
   isPastChat: PropTypes.bool.isRequired,
   message: PropTypes.node,

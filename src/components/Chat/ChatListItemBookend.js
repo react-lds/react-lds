@@ -27,12 +27,13 @@ const ChatListItemBookend = ({
 
 ChatListItemBookend.defaultProps = {
   isEnd: false,
+  timestamp: null,
 };
 
 ChatListItemBookend.propTypes = {
   isEnd: PropTypes.bool,
   message: PropTypes.node.isRequired,
-  timestamp: PropTypes.string.isRequired,
+  timestamp: PropTypes.string,
 };
 
 export default ChatListItemBookend;
