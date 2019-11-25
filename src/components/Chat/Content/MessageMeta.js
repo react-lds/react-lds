@@ -56,7 +56,7 @@ export const MessageMeta = ({
   return !isConsecutive && metaCmp;
 };
 
-MessageMeta.propTypes = {
+MessageMeta.defaultProps = {
   timestamp: null,
   onResend: Function.prototype,
 };
