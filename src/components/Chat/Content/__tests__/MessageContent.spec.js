@@ -14,6 +14,8 @@ describe('<MessageContent />', () => {
   const props = {
     attachment: null,
     author: 'bar',
+    error: 'Error',
+    id: '1',
     isConsecutive: false,
     isPastChat: false,
     message: 'foo',

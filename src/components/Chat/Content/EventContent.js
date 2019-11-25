@@ -34,11 +34,12 @@ export const EventContent = ({
 
 EventContent.defaultProps = {
   icon: null,
+  message: null,
   timestamp: null,
 };
 
 EventContent.propTypes = {
   icon: PropTypes.string,
-  message: PropTypes.node.isRequired,
+  message: PropTypes.node,
   timestamp: PropTypes.string,
 };

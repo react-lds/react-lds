@@ -119,10 +119,12 @@ const advancedItems = [
     author: 'Amber Cann',
     message: 'It might be the cause of the problem',
     type: CHAT_ITEM_TYPES.MESSAGE_DELIVERY_FAILURE,
-    meta: 'Message was not delivered because Andy stopped receiving messages.',
+    error: 'Message was not delivered because Andy stopped receiving messages.',
     timestamp: now,
     labelResend: 'Resend',
-    onResend: Function.prototype,
+    /* eslint-disable no-console */
+    onResend: id => console.log(id),
+    /* eslint-enable no-console */
   },
   {
     id: '12',
@@ -136,6 +138,13 @@ const advancedItems = [
     author: 'Andy Martinez',
     type: CHAT_ITEM_TYPES.MESSAGE_TYPING,
     meta: 'Customer is typing',
+  },
+  {
+    id: '14',
+    message: 'Message with custom meta',
+    author: 'Andy Martinez',
+    type: CHAT_ITEM_TYPES.MESSAGE_OUTBOUND,
+    meta: <React.Fragment>Andy Martinez &bull; <span>9:00</span> &bull; Processing...</React.Fragment>,
   },
 ];
 

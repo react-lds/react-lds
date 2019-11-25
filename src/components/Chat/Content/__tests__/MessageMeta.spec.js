@@ -7,6 +7,7 @@ describe('<MessageMeta />', () => {
   let mounted = null;
   const props = {
     author: 'foo',
+    id: '1',
     isConsecutive: false,
     isDeliveryFailure: false,
     isPastChat: false,

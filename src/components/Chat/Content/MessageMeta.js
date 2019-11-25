@@ -9,32 +9,36 @@ import { Meta } from './Meta';
 
 export const MessageMeta = ({
   author,
+  id,
   isConsecutive,
   isDeliveryFailure,
   isPastChat,
+  meta,
   onResend,
   timestamp,
   translations,
 }) => {
-  const meta = (
+  const metaCmp = (
     <Meta
       author={author}
       isPastChat={isPastChat}
+      meta={meta}
       timestamp={timestamp}
       translations={translations}
     />
   );
 
-  const labelResend = translations.resend;
-
   if (isDeliveryFailure) {
+    const labelResend = translations.resend;
+    const onClick = () => onResend(id);
+
     return (
       <Grid align="spread">
-        {meta}
+        {metaCmp}
         <Button
           className="slds-chat-message__action slds-m-top_xxx-small"
           flavor="none"
-          onClick={onResend}
+          onClick={onClick}
           title={labelResend}
         >
           <Icon
@@ -49,20 +53,22 @@ export const MessageMeta = ({
     );
   }
 
-  return !isConsecutive && meta;
+  return !isConsecutive && metaCmp;
 };
 
-MessageMeta.propTypes = {
+MessageMeta.defaultProps = {
+  timestamp: null,
   onResend: Function.prototype,
 };
 
 MessageMeta.propTypes = {
   author: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   isConsecutive: PropTypes.bool.isRequired,
   isDeliveryFailure: PropTypes.bool.isRequired,
   isPastChat: PropTypes.bool.isRequired,
   onResend: PropTypes.func,
-  timestamp: PropTypes.string.isRequired,
+  timestamp: PropTypes.string,
   translations: PropTypes.shape({
     at: PropTypes.string,
     resend: PropTypes.string,
