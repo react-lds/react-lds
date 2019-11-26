@@ -1,10 +1,12 @@
 # Changelog
 
-## Unreleased
+## 9.0.0
 
 * Added: `Chat` component
 * Added: `Tile` component
 * Added: `NameValueList.{List,Name,Value}` utility components
+* Changed: *POTENTIALLY BREAKING* Updated `core-js` to `3.0`
+* Changed: Upgraded internal tooling
 
 ## 8.9.0
 
