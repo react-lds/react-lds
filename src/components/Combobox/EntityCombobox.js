@@ -137,10 +137,10 @@ export class EntityCombobox extends Component {
     const { renderItemsPrepended, search } = this.props;
     if (search.trim().length < 2) return null;
     return (
-      <React.Fragment>
+      <>
         {renderItemsPrepended && renderItemsPrepended()}
         <SearchIndicatorDropdownItem search={search} />
-      </React.Fragment>
+      </>
     );
   }
 

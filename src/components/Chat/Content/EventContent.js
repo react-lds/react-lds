@@ -9,7 +9,7 @@ export const EventContent = ({
   message,
   timestamp,
 }) => (
-  <React.Fragment>
+  <>
     {icon && (
       <Icon
         className="slds-chat-icon"
@@ -22,13 +22,13 @@ export const EventContent = ({
     <p>
       {timestamp
         ? (
-          <React.Fragment>
+          <>
             {message} &bull; {timestamp}
-          </React.Fragment>
+          </>
         ) : message
       }
     </p>
-  </React.Fragment>
+  </>
 );
 /* eslint-enable react/jsx-one-expression-per-line */
 

@@ -74,6 +74,16 @@ const propTypes = {
 };
 
 class Popover extends Component {
+  static shouldInvertIcon(themeStr) {
+    if (typeof themeStr === 'string') {
+      return themeStr.includes('error')
+        || themeStr.includes('success')
+        || themeStr.includes('info')
+        || themeStr.includes('offline');
+    }
+    return false;
+  }
+
   static propTypes = propTypes
 
   static defaultProps = {
@@ -87,16 +97,6 @@ class Popover extends Component {
     panels: false,
     nubbin: 'bottom-left',
     theme: null,
-  }
-
-  static shouldInvertIcon(themeStr) {
-    if (typeof themeStr === 'string') {
-      return themeStr.includes('error')
-        || themeStr.includes('success')
-        || themeStr.includes('info')
-        || themeStr.includes('offline');
-    }
-    return false;
   }
 
   constructor(props, { cssPrefix }) {

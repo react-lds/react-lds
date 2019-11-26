@@ -15,7 +15,7 @@ export const MessageStatus = ({
   ]);
 
   return (
-    <React.Fragment>
+    <>
       <Icon
         className="slds-chat-icon"
         icon={isUnsupportedType ? 'warning' : 'error'}
@@ -24,7 +24,7 @@ export const MessageStatus = ({
         sprite="utility"
       />
       <span>{message}</span>
-    </React.Fragment>
+    </>
   );
 };
 

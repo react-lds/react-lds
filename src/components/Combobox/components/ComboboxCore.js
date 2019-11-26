@@ -402,10 +402,10 @@ class ComboboxCore extends Component {
     if (!isLoading && !renderItemsAppended) return null;
 
     return (
-      <React.Fragment>
+      <>
         {renderItemsAppended && renderItemsAppended()}
         {isLoading && <LoadingIndicatorDropdownItem />}
-      </React.Fragment>
+      </>
     );
   }
 

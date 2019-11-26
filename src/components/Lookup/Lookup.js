@@ -142,6 +142,10 @@ const propTypes = {
 };
 
 export class LookupRaw extends PureComponent {
+  static filterDisplayItems(src, target, prop = 'id') {
+    return src.filter(o1 => !target.some(o2 => o1[prop] === o2[prop]));
+  }
+
   static propTypes = propTypes;
 
   static defaultProps = {
@@ -172,10 +176,6 @@ export class LookupRaw extends PureComponent {
   static getSprite(objectType = '') {
     if (objectType.startsWith('custom')) { return 'custom'; }
     return 'standard';
-  }
-
-  static filterDisplayItems(src, target, prop = 'id') {
-    return src.filter(o1 => !target.some(o2 => o1[prop] === o2[prop]));
   }
 
   constructor(props, context) {

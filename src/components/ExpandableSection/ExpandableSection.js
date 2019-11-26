@@ -5,14 +5,6 @@ import cx from 'classnames';
 import { Button, ButtonIcon } from '../Button';
 
 class ExpandableSection extends Component {
-  static defaultProps = {
-    className: null,
-    open: null,
-    uncollapsable: false,
-    defaultOpen: false,
-    onToggle: () => {},
-  }
-
   static propTypes = {
     /**
      * children
@@ -46,6 +38,14 @@ class ExpandableSection extends Component {
      * function if component is controlled
      */
     onToggle: PropTypes.func,
+  }
+
+  static defaultProps = {
+    className: null,
+    open: null,
+    uncollapsable: false,
+    defaultOpen: false,
+    onToggle: () => {},
   }
 
   constructor(props) {

@@ -13,7 +13,7 @@ export const MessageFile = ({
   ...rest
 }) => (isLink
   ? (
-    <React.Fragment>
+    <>
       <Icon
         className="slds-chat-icon"
         icon="attachment"
@@ -23,7 +23,7 @@ export const MessageFile = ({
       <a href={src} title={title}>
         {title}
       </a>
-    </React.Fragment>
+    </>
   ) : (
     <div style={{ width: '15rem' }}>
       <File

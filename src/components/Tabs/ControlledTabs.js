@@ -6,13 +6,6 @@ import { getAriaLabel, getTabsClass } from './utils';
 import TabLink from './TabLink';
 
 class ControlledTabs extends PureComponent {
-  static defaultProps = {
-    renderInactiveTabs: false,
-    scoped: false,
-    size: null,
-    styled: false,
-  }
-
   static propTypes = {
     /**
      * Id of the currently active tab
@@ -42,7 +35,14 @@ class ControlledTabs extends PureComponent {
      * Renders Card-like variant
      */
     styled: PropTypes.bool,
-  };
+  }
+
+  static defaultProps = {
+    renderInactiveTabs: false,
+    scoped: false,
+    size: null,
+    styled: false,
+  }
 
   static getPanelState(children) {
     const positionReducer = (acc, curr, i) => ({

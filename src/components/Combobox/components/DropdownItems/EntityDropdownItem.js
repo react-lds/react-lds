@@ -15,7 +15,7 @@ export const EntityDropdownItem = ({
   isSelectedAssistiveLabel,
   label,
   meta,
-  ...rest,
+  ...rest
 }) => {
   const sprite = isSelected ? 'utility' : icon.sprite;
   const isUtilIcon = sprite === 'utility';

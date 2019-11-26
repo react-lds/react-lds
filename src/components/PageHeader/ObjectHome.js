@@ -143,7 +143,7 @@ class ObjectHome extends Component {
                   </h1>
                 </div>
                 {titleMenu && (
-                  <React.Fragment>
+                  <>
                     <ClickOutside
                       className="slds-page-header__name-switcher"
                       onClickOutside={this.onClickOutside}
@@ -172,7 +172,7 @@ class ObjectHome extends Component {
                         {titleMenuAction}
                       </Grid>
                     )}
-                  </React.Fragment>
+                  </>
                 )}
               </div>
             </MediaObject>

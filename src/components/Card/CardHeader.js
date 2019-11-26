@@ -11,7 +11,7 @@ const CardHeader = ({
   titleClassName,
   titleProps,
   title,
-  ...rest,
+  ...rest
 }) => {
   const LinkTag = titleProps.href ? 'a' : 'span';
 

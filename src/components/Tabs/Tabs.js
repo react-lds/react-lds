@@ -3,15 +3,6 @@ import PropTypes from 'prop-types';
 import ControlledTabs from './ControlledTabs';
 
 class Tabs extends Component {
-  static defaultProps = {
-    defaultActiveTab: null,
-    onChangeTab: null,
-    renderInactiveTabs: false,
-    scoped: false,
-    size: null,
-    styled: false,
-  }
-
   static propTypes = {
     /**
      * One or more Tab components
@@ -42,6 +33,15 @@ class Tabs extends Component {
      * Renders Card-like variant
      */
     styled: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    defaultActiveTab: null,
+    onChangeTab: null,
+    renderInactiveTabs: false,
+    scoped: false,
+    size: null,
+    styled: false,
   }
 
   static getFirstChildId = (children) => {
