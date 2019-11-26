@@ -3,13 +3,6 @@ import PropTypes from 'prop-types';
 import ControlledTooltip, { POSITIONS } from './ControlledTooltip';
 
 class Tooltip extends Component {
-  static defaultProps = {
-    className: null,
-    portalSelector: null,
-    position: 'top-start',
-    renderTitle: null,
-  }
-
   static propTypes = {
     /**
      * Will be wrapped with a div referencing the tooltip
@@ -42,6 +35,13 @@ class Tooltip extends Component {
       PropTypes.element,
       PropTypes.string,
     ]).isRequired,
+  }
+
+  static defaultProps = {
+    className: null,
+    portalSelector: null,
+    position: 'top-start',
+    renderTitle: null,
   }
 
   state = { isOpen: false }

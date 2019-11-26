@@ -27,21 +27,21 @@ const Tile = (props) => {
   ]);
 
   const tileContent = (
-    <React.Fragment>
+    <>
       <TitleRow action={action}>
         <Title title={title} titleText={titleText} />
       </TitleRow>
       <div className="slds-tile__detail">
         {children}
       </div>
-    </React.Fragment>
+    </>
   );
 
   if (figure) {
     return (
       <MediaObject
         {...rest}
-        as={as}
+        customTag={as}
         center={false}
         className={tileClasses}
         figureLeft={figure}

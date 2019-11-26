@@ -42,6 +42,8 @@ const propTypes = {
 };
 
 class Accordion extends Component {
+  static propTypes = propTypes;
+
   static defaultProps = {
     className: null,
     styled: false,
@@ -50,8 +52,6 @@ class Accordion extends Component {
     open: null,
     onSectionClick: null,
   }
-
-  static propTypes = propTypes;
 
   constructor(props) {
     super(props);

@@ -15,13 +15,13 @@ export const Meta = ({
 }) => (
   <div className="slds-chat-message__meta" aria-label={`${said} ${author} ${at} ${timestamp}`}>
     {meta || (
-      <React.Fragment>
+      <>
         {isPastChat
           ? <b>{author}</b>
           : author
         }
         &bull; {timestamp}
-      </React.Fragment>
+      </>
     )}
   </div>
 );

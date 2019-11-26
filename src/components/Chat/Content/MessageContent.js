@@ -79,7 +79,7 @@ export const MessageContent = ({
   );
 
   return (
-    <React.Fragment>
+    <>
       {isPastChat && messageMeta}
       <div className={classNamesMessageText}>
         {hasAttachment && <MessageFile {...attachment} />}
@@ -94,7 +94,7 @@ export const MessageContent = ({
         )}
       </div>
       {!isPastChat && messageMeta}
-    </React.Fragment>
+    </>
   );
 };
 /* eslint-enable react/jsx-one-expression-per-line */
