@@ -15,18 +15,15 @@ const CardHeader = ({
 }) => {
   const LinkTag = titleProps.href ? 'a' : 'span';
 
+  // The LDS sets `.slds-truncate` on the span, that does not work in praxis though
   return (
     <Grid {...rest} className={cx(['slds-card__header', className])}>
       <MediaObject className="slds-has-flexi-truncate" figureLeft={icon}>
         {title && (
-          <h2 className="slds-card__header-title">
+          <h2 className="slds-card__header-title slds-truncate">
             <LinkTag
               {...titleProps}
-              className={cx([
-                'slds-card__header-link',
-                'slds-truncate',
-                titleClassName
-              ])}
+              className={cx(['slds-card__header-link', titleClassName])}
             >
               <span>{title}</span>
             </LinkTag>
