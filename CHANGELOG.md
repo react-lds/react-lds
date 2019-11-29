@@ -1,5 +1,11 @@
 # Changelog
 
+## 9.0.1
+
+* Fixed: `CardHeader title` truncation is broken in LDS example. Applied a monkey patch to fix it locally
+* Changed: Added `as` prop in `MediaObject`. This supersedes `customTag` which is now deprecated
+* Changed: Added `stretch` prop in `Button`. This supersedes `flavor: "stretch"` which is now deprecated
+
 ## 9.0.0
 
 * Added: `Chat` component
