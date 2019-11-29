@@ -36,7 +36,7 @@ const VisualPickerLink = ({
     <MediaObject
       {...rest}
       center={false}
-      customTag="a"
+      as="a"
       // eslint-disable-next-line no-script-url
       href={href || 'javascript:void(0)'}
       bodyClassName="slds-border_left slds-p-around_small"

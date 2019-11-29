@@ -41,7 +41,7 @@ const Tile = (props) => {
     return (
       <MediaObject
         {...rest}
-        customTag={as}
+        as={as}
         center={false}
         className={tileClasses}
         figureLeft={figure}

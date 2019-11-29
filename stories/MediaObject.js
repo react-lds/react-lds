@@ -14,7 +14,7 @@ const sampleText = (
 stories
   .add('Default', () => (
     <MediaObject
-      customTag={text('Custom HTML-tag', '') || undefined}
+      as={text('Custom HTML-tag', '') || undefined}
       figureLeft={icon}
       center={boolean('Center?', false)}
       responsive={boolean('Responsive?', true)}
@@ -27,7 +27,7 @@ stories
   ))
   .add('With two icons', () => (
     <MediaObject
-      customTag={text('Custom HTML-tag', '') || undefined}
+      as={text('Custom HTML-tag', '') || undefined}
       figureLeft={icon}
       figureRight={icon}
       center={boolean('Center?', false)}
