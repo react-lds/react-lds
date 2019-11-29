@@ -122,6 +122,9 @@ Button.propTypes = {
    * Optional href, renders as `a` when set
    */
   href: PropTypes.string,
+  /**
+   * Renders a full-width button
+   */
   stretch: PropTypes.bool,
 };
 
