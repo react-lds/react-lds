@@ -60,7 +60,7 @@ describe('<MediaObject />', () => {
   });
 
   it('allows a custom tag to be used', () => {
-    mounted.setProps({ customTag: 'header' });
+    mounted.setProps({ as: 'header' });
     expect(mounted.find('header').length).toBe(1);
   });
 

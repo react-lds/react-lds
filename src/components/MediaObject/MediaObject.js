@@ -8,6 +8,7 @@ const renderFigure = (figure, classes) => (
 
 const MediaObject = (props) => {
   const {
+    as,
     bodyClassName,
     center,
     children,
@@ -24,7 +25,7 @@ const MediaObject = (props) => {
     ...rest
   } = props;
 
-  const Tag = customTag || 'div';
+  const Tag = as || customTag || 'div';
 
   const figureLeftRenderer = renderFigureLeft || renderFigure;
   const figureRightRenderer = renderFigureRight || renderFigure;
@@ -53,6 +54,7 @@ const MediaObject = (props) => {
 };
 
 MediaObject.defaultProps = {
+  as: null,
   bodyClassName: null,
   center: true,
   children: null,
@@ -70,6 +72,10 @@ MediaObject.defaultProps = {
 
 MediaObject.propTypes = {
   /**
+   * Renders a customTag instead of a div
+   */
+  as: PropTypes.string,
+  /**
    * Optional class name which is appended to the body div
    */
   bodyClassName: PropTypes.string,
@@ -82,7 +88,7 @@ MediaObject.propTypes = {
    */
   children: PropTypes.node,
   /**
-   * Renders a customTag instead of a div
+   * [DEPRECATED] Renders a customTag instead of a div
    */
   customTag: PropTypes.string,
   /**
