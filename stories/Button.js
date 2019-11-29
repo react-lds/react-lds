@@ -22,7 +22,6 @@ const buttonFlavors = [
   'outline-brand',
   'success',
   'text-destructive',
-  'stretch',
 ];
 
 const buttonStories = storiesOf('Button', module);
@@ -33,6 +32,7 @@ buttonStories
       onClick={action()}
       disabled={boolean('Disabled', false)}
       flavor={select('Flavor', buttonFlavors, 'neutral') || undefined}
+      stretch={boolean('Full width', false)}
       title={text('Title', 'Hover me')}
     >
       {text('Button Text', 'Click Me')}

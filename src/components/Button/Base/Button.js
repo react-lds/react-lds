@@ -13,6 +13,7 @@ const Button = React.forwardRef((props, ref) => {
     icon,
     iconPosition,
     sprite,
+    stretch,
     title,
     ...rest
   } = props;
@@ -22,6 +23,7 @@ const Button = React.forwardRef((props, ref) => {
   const sldsClasses = cx(
     'slds-button',
     { [`slds-button_${flavor}`]: hasFlavor },
+    { 'slds-button_stretch': stretch && flavor !== 'stretch' },
     className,
   );
 
@@ -67,6 +69,7 @@ Button.defaultProps = {
   icon: null,
   iconPosition: null,
   sprite: null,
+  stretch: false,
   title: null,
 };
 
@@ -102,6 +105,7 @@ Button.propTypes = {
   /**
    * Can be either `neutral`, `brand`, `outline-brand`, `destructive`, `text-destructive`, `success` or `inverse`
    * Default to `neutral`, set to "none" or `null` explicitely to render a plain button
+   * [DEPRECATED] `prop.stretch` should be used instd. of `flavor="stretch"`
    */
   flavor: PropTypes.oneOf([
     'brand',
@@ -118,6 +122,7 @@ Button.propTypes = {
    * Optional href, renders as `a` when set
    */
   href: PropTypes.string,
+  stretch: PropTypes.bool,
 };
 
 export default Button;
