@@ -72,7 +72,7 @@ MediaObject.defaultProps = {
 
 MediaObject.propTypes = {
   /**
-   * Renders a customTag instead of a div
+   * Renders a custom tag instead of a div
    */
   as: PropTypes.string,
   /**
