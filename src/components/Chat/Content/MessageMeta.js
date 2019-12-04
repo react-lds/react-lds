@@ -36,6 +36,7 @@ export const MessageMeta = ({
       <Grid align="spread">
         {metaCmp}
         <Button
+          disabled={!onResend}
           className="slds-chat-message__action slds-m-top_xxx-small"
           flavor="none"
           onClick={onClick}
@@ -58,7 +59,7 @@ export const MessageMeta = ({
 
 MessageMeta.defaultProps = {
   timestamp: null,
-  onResend: Function.prototype,
+  onResend: null,
 };
 
 MessageMeta.propTypes = {
