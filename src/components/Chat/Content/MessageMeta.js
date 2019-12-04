@@ -13,6 +13,7 @@ export const MessageMeta = ({
   isConsecutive,
   isDeliveryFailure,
   isPastChat,
+  isResendDisabled,
   meta,
   onResend,
   timestamp,
@@ -37,6 +38,7 @@ export const MessageMeta = ({
         {metaCmp}
         <Button
           className="slds-chat-message__action slds-m-top_xxx-small"
+          disabled={isResendDisabled}
           flavor="none"
           onClick={onClick}
           title={labelResend}
@@ -67,6 +69,7 @@ MessageMeta.propTypes = {
   isConsecutive: PropTypes.bool.isRequired,
   isDeliveryFailure: PropTypes.bool.isRequired,
   isPastChat: PropTypes.bool.isRequired,
+  isResendDisabled: PropTypes.bool.isRequired,
   onResend: PropTypes.func,
   timestamp: PropTypes.string,
   translations: PropTypes.shape({

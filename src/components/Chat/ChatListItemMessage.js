@@ -9,6 +9,7 @@ const ChatListItemMessage = ({
   avatar,
   isFirstMessage,
   isPastChat,
+  isResendDisabled,
   ...rest
 }) => {
   const hasAvatar = !!avatar;
@@ -30,6 +31,7 @@ const ChatListItemMessage = ({
           author={author}
           avatar={avatar}
           isPastChat={isPastChat}
+          isResendDisabled={isResendDisabled}
           {...rest}
         />
       </div>
@@ -46,6 +48,7 @@ ChatListItemMessage.propTypes = {
   avatar: PropTypes.string,
   isFirstMessage: PropTypes.bool.isRequired,
   isPastChat: PropTypes.bool.isRequired,
+  isResendDisabled: PropTypes.bool.isRequired,
 };
 
 export default ChatListItemMessage;

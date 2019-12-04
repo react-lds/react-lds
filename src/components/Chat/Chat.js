@@ -15,6 +15,7 @@ const DEFAULT_TRANSLATIONS = {
 const Chat = ({
   className,
   isPastChat,
+  isResendDisabled,
   items,
   translations,
 }) => {
@@ -55,6 +56,7 @@ const Chat = ({
               isConsecutive={isConsecutive}
               isFirstMessage={isFirstMessage}
               isPastChat={isPastChat}
+              isResendDisabled={isResendDisabled}
               key={`chat-list-item-${id}`}
               translations={mergedTranslation}
               {...item}
@@ -69,12 +71,14 @@ const Chat = ({
 Chat.defaultProps = {
   className: null,
   isPastChat: false,
+  isResendDisabled: false,
   translations: DEFAULT_TRANSLATIONS,
 };
 
 Chat.propTypes = {
   className: PropTypes.string,
   isPastChat: PropTypes.bool,
+  isResendDisabled: PropTypes.bool,
   items: PropTypes.arrayOf(PropTypes.shape({
     author: PropTypes.string,
     attachment: PropTypes.shape({
