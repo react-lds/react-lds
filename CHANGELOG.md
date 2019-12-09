@@ -1,5 +1,9 @@
 # Changelog
 
+## 9.0.2
+
+* Changed: Disable resend button in Chat when no onResend handler is set for item
+
 ## 9.0.1
 
 * Fixed: `CardHeader title` truncation is broken in LDS example. Applied a monkey patch to fix it locally
