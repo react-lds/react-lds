@@ -34,7 +34,7 @@ const ScopedNotification = (props) => {
       {...rest}
       center
       className={cx(sldsClasses)}
-      figureLeft={renderIcon(theme, 'small')}
+      figureLeft={renderIcon({ theme, size: 'small' })}
       role="status"
     >
       {children}
@@ -58,7 +58,7 @@ ScopedNotification.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Optional func. to render the notification icon. It returns an `<Icon />` by default. Params: `theme, size`
+   * Optional func. to render the notification icon. It returns an `<Icon />` by default. Params: `{ theme, size }`
    */
   renderIcon: PropTypes.func,
   /**
