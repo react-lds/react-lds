@@ -4,10 +4,21 @@ import cx from 'classnames';
 import { Icon } from '../Icon';
 import { MediaObject } from '../MediaObject';
 
+const defaultIconRenderer = (theme, size) => (
+  <Icon
+    icon="info"
+    sprite="utility"
+    size={size}
+    svgClassName={theme === 'dark' ? null : 'slds-icon-text-default'}
+    title="information"
+  />
+);
+
 const ScopedNotification = (props) => {
   const {
     children,
     className,
+    renderIcon,
     theme,
     ...rest
   } = props;
@@ -23,15 +34,7 @@ const ScopedNotification = (props) => {
       {...rest}
       center
       className={cx(sldsClasses)}
-      figureLeft={(
-        <Icon
-          icon="info"
-          sprite="utility"
-          size="small"
-          svgClassName={theme === 'dark' ? null : 'slds-icon-text-default'}
-          title="information"
-        />
-      )}
+      figureLeft={renderIcon(theme, 'small')}
       role="status"
     >
       {children}
@@ -41,6 +44,7 @@ const ScopedNotification = (props) => {
 
 ScopedNotification.defaultProps = {
   className: null,
+  renderIcon: defaultIconRenderer,
   theme: null,
 };
 
@@ -53,6 +57,10 @@ ScopedNotification.propTypes = {
    * Optional className, applied to `slds-scoped-notification`
    */
   className: PropTypes.string,
+  /**
+   * Optional func. to render the notification icon. It returns an `<Icon />` by default. Params: `theme, size`
+   */
+  renderIcon: PropTypes.func,
   /**
    * Notifcation theme. Passing `"base"` and `null` both maps to the default theme
    */
