@@ -4,15 +4,19 @@ import ControlledTabs from '../ControlledTabs';
 import Tab from '../Tab';
 import TabLink from '../TabLink';
 
-const getComponent = (props = {}) => shallow(
+const defaultTabs = [
+  <Tab id="foo" title="foo">Foo</Tab>,
+  <Tab id="bar" title="bar">Bar</Tab>,
+  <Tab id="baz" title="baz" tabTitle="baz">Baz</Tab>,
+];
+
+const getComponent = (props = {}, tabs = defaultTabs) => shallow(
   <ControlledTabs
     activeTab="foo"
     onChangeTab={() => {}}
     {...props}
   >
-    <Tab id="foo" title="foo">Foo</Tab>
-    <Tab id="bar" title="bar">Bar</Tab>
-    <Tab id="baz" title="baz" tabTitle="baz">Baz</Tab>
+    {tabs}
   </ControlledTabs>
 );
 
@@ -23,6 +27,12 @@ describe('<ControlledTabs />', () => {
   it('renders size modifiers', () => {
     const mounted = getComponent({ size: 'large' });
     expect(mounted.find('.slds-tabs_default').hasClass('slds-tabs_large')).toBeTruthy();
+  });
+
+  it('ignores null-tabs', () => {
+    const mounted = getComponent({}, [null, ...defaultTabs, null]);
+    expect(mounted.find(TabLink).length).toEqual(defaultTabs.length);
+    expect(mounted.find(Tab).length).toEqual(defaultTabs.length);
   });
 
   it('renders a link for every tab passed', () => {
