@@ -4,7 +4,8 @@ import cx from 'classnames';
 import { Icon } from '../Icon';
 import { MediaObject } from '../MediaObject';
 
-const defaultIconRenderer = (theme, size) => (
+// eslint-disable-next-line react/prop-types
+const defaultIconRenderer = ({ theme, size }) => (
   <Icon
     icon="info"
     sprite="utility"
