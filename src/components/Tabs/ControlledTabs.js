@@ -44,13 +44,13 @@ class ControlledTabs extends PureComponent {
     styled: false,
   }
 
-  static getPanelState(children) {
+  static getChildrenArray = children => React.Children.toArray(children).filter(child => !!child);
+
+  static getPanelState(childrenArray) {
     const positionReducer = (acc, curr, i) => ({
       ...acc,
       [`${curr.props.id}`]: i,
     });
-
-    const childrenArray = React.Children.toArray(children);
 
     const nextState = {
       positions: childrenArray.reduce(positionReducer, {}),
@@ -63,7 +63,8 @@ class ControlledTabs extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = ControlledTabs.getPanelState(props.children);
+    const childrenArray = ControlledTabs.getChildrenArray(props.children);
+    this.state = ControlledTabs.getPanelState(childrenArray);
     /** refs are used to focus links after keyboard navigation occured */
     this.linkNodes = new Map();
   }
@@ -71,8 +72,8 @@ class ControlledTabs extends PureComponent {
   componentWillReceiveProps({ children: nextChildren }) {
     const { positions } = this.state;
 
-    const nextChildrenArr = React.Children.toArray(nextChildren);
-    const prevChildrenArr = React.Children.toArray(this.children);
+    const nextChildrenArr = ControlledTabs.getChildrenArray(nextChildren);
+    const prevChildrenArr = ControlledTabs.getChildrenArray(this.children);
 
     const isEqualLength = nextChildrenArr.length !== prevChildrenArr.length;
     const nextState = ControlledTabs.getPanelState(nextChildrenArr);
@@ -204,6 +205,7 @@ class ControlledTabs extends PureComponent {
       { 'slds-tabs_card': styled },
       { [`slds-tabs_${size}`]: size }
     ];
+    const childrenArray = ControlledTabs.getChildrenArray(children);
 
     return (
       <div className={cx(sldsClasses)}>
@@ -212,9 +214,9 @@ class ControlledTabs extends PureComponent {
           onBlur={this.onBlur}
           role="tablist"
         >
-          {React.Children.map(children, this.renderLink)}
+          {childrenArray.map(this.renderLink)}
         </ul>
-        {React.Children.map(children, this.renderActiveTab)}
+        {childrenArray.map(this.renderActiveTab)}
       </div>
     );
   }
