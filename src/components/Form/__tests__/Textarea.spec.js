@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 
 import { getUniqueHash } from '../../../utils';
 import Textarea from '../Textarea';
+import FormElement from '../FormElement';
 
 describe('<Textarea />', () => {
   let props = {};
@@ -74,5 +75,10 @@ describe('<Textarea />', () => {
     mounted.setProps({ className: 'foo', 'data-test': 'bar' });
     expect(mounted.find('textarea').hasClass('foo')).toBeTruthy();
     expect(mounted.find('textarea').prop('data-test')).toEqual('bar');
+  });
+
+  it('applies className to `FormElement` for readonly version', () => {
+    mounted.setProps({ className: 'foo', readOnly: true });
+    expect(mounted.find(FormElement).hasClass('foo')).toBeTruthy();
   });
 });

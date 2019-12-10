@@ -54,7 +54,11 @@ const Textarea = (props) => {
   };
 
   return (
-    <FormElement required={required} error={error}>
+    <FormElement
+      className={readOnly ? className : null}
+      required={required}
+      error={error}
+    >
       <FormElementLabel label={label} id={id} required={required} hideLabel={hideLabel} readOnly={readOnly} />
       <FormElementControl className={cx({ 'slds-border_bottom': readOnly })}>
         {renderContent()}
