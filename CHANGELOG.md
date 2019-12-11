@@ -1,5 +1,11 @@
 # Changelog
 
+## 9.0.3
+
+* Changed: Add support for null children in Tabs component
+* Changed: Allow passing renderIcon fn to ScopedNotification
+* Changed: Apply `className` to Textarea when in read-only mode
+
 ## 9.0.2
 
 * Changed: Disable resend button in Chat when no onResend handler is set for item
