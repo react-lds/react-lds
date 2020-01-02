@@ -2,9 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { stepType } from './constants';
-import { Icon } from '../Icon';
-import { MediaObject } from '../MediaObject';
+import { stepType } from '../constants';
+import { Icon } from '../../Icon';
+import { MediaObject } from '../../MediaObject';
 
 const renderFigure = (figure, classes) => (
   <div

@@ -7,6 +7,7 @@ import {
   WelcomeMat,
   WelcomeMatProgress,
 } from '../src';
+import WelcomeMatContent from '../src/components/WelcomeMat/components/WelcomeMatContent';
 
 const stories = storiesOf('WelcomeMat', module);
 
@@ -28,6 +29,11 @@ const actionRenderer = () => (
 
 const closeFn = action('Close');
 const completeFn = action('Complete');
+
+const baseInfo = {
+  text: `\`WelcomeMat\` renders \`WelcomeMatContent\` inside a \`Modal\` wrapper. If you don't need this wrapper, use \`WelcomeMatContent\` directly.`,
+  propTables: [WelcomeMat, WelcomeMatContent],
+};
 
 const getSampleSteps = completeSome => ([
   {
@@ -90,7 +96,7 @@ stories
         )}
       />
     </div>
-  ))
+  ), { info: baseInfo })
   .add('With Completed Steps', () => (
     <div className="demo-modal">
       <WelcomeMat
@@ -108,7 +114,7 @@ stories
         )}
       />
     </div>
-  ))
+  ), { info: baseInfo })
   .add('Info Only', () => (
     <div className="demo-modal">
       <WelcomeMat
@@ -123,7 +129,7 @@ stories
         renderDismiss={dismissRenderer}
       />
     </div>
-  ))
+  ), { info: baseInfo })
   .add('Splash', () => (
     <div className="demo-modal">
       <WelcomeMat
@@ -136,4 +142,4 @@ stories
         renderDismiss={dismissRenderer}
       />
     </div>
-  ));
+  ), { info: baseInfo });

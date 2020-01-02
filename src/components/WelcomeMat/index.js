@@ -1,4 +1,5 @@
 import WelcomeMat from './WelcomeMat';
-import WelcomeMatProgress from './WelcomeMatProgress';
+import WelcomeMatProgress from './components/WelcomeMatProgress';
+import WelcomeMatContent from './components/WelcomeMatContent';
 
-export { WelcomeMat, WelcomeMatProgress };
+export { WelcomeMat, WelcomeMatContent, WelcomeMatProgress };

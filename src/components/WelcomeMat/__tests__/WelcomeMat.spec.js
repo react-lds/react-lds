@@ -1,12 +1,11 @@
 /* eslint-disable function-paren-newline */
 import React from 'react';
 import { shallow } from 'enzyme';
-import WelcomeMat from '../WelcomeMat';
-import { Modal } from '../../Modal';
-import { WelcomeMatStep } from '../WelcomeMatStep';
+import WelcomeMatContent from '../components/WelcomeMatContent';
+import { WelcomeMatStep } from '../components/WelcomeMatStep';
 
 const getComponent = (props = {}) => shallow(
-  <WelcomeMat
+  <WelcomeMatContent
     onClose={jest.fn()}
     id="test-modal"
     description="foo-description"
@@ -42,19 +41,6 @@ const sampleSteps = [
 
 describe('<WelcomeMat />', () => {
   describe('Layout & Content', () => {
-    it('renders a `Modal` and binds `onClose()` actions', () => {
-      const onCloseMock = jest.fn();
-      const cmp = getComponent({
-        id: 'foo-id',
-        isOpen: true,
-        onClose: onCloseMock
-      });
-      const modalEl = cmp.find(Modal);
-      expect(modalEl.prop('onClose')).toEqual(onCloseMock);
-      expect(modalEl.prop('open')).toBeTruthy();
-      expect(modalEl.prop('id')).toEqual('foo-id');
-    });
-
     it('always renders a title', () => {
       const stub = <span>Stub</span>;
       const cmp = getComponent({ id: 'foo-id', title: stub });
