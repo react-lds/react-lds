@@ -151,9 +151,9 @@ Modal.propTypes = {
    */
   open: PropTypes.bool,
   /**
-   * Size of modal. Can be `medium` or `large`
+   * Size variant of modal
    */
-  size: PropTypes.oneOf(['medium', 'large']),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
   /**
    * Tagline. Can be a string or an element
    */

@@ -7,14 +7,18 @@ import { stepType } from './constants';
 import { WelcomeMatStep } from './WelcomeMatStep';
 
 class WelcomeMat extends Component {
-  onComplete(evt) {
+  onComplete = (evt) => {
     const {
-      target: { id: targetId }
+      currentTarget: {
+        dataset: { targetId },
+      },
     } = evt;
 
     const { onCompleteStep, steps } = this.props;
-    const step = steps.find(({ id: stepId }) => stepId === targetId);
-    return onCompleteStep({ id: targetId, step });
+    // `stepId` can be a `number` while targetId will be a `string`, need to cast
+    const step = steps.find(({ id: stepId }) => `${stepId}` === `${targetId}`);
+
+    return onCompleteStep({ id: step.id, step });
   }
 
   render() {
@@ -113,6 +117,7 @@ WelcomeMat.defaultProps = {
   renderAction: null,
   renderDismiss: null,
   renderProgress: null,
+  steps: undefined,
 };
 
 WelcomeMat.propTypes = {
@@ -125,19 +130,20 @@ WelcomeMat.propTypes = {
    */
   id: PropTypes.string.isRequired,
   /**
-   * Controls `isOpen` state of the underlying `Modal`
-   */
-  isOpen: PropTypes.bool,
-  /**
    * When this flag is set, `isComplete` is ignored for steps
    */
   isInfoOnly: PropTypes.bool,
+  /**
+   * Controls `isOpen` state of the underlying `Modal`
+   */
+  isOpen: PropTypes.bool,
   /**
    * Passed to `Modal`
    */
   onClose: PropTypes.func.isRequired,
   /**
-   * Handler injected when rendering steps. Called with `({ id, step })`
+   * Handler injected when rendering steps. Called with `({ id, step })`.
+   * Note: This is also called for completed steps, a handler will need to check for `step.isCompleted`
    */
   onCompleteStep: PropTypes.func,
   /**

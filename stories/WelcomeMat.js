@@ -1,12 +1,20 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { WelcomeMat, Button, Checkbox, WelcomeMatProgress } from '../src';
+import { action } from '@storybook/addon-actions';
+import {
+  Button,
+  Checkbox,
+  WelcomeMat,
+  WelcomeMatProgress,
+} from '../src';
 
 const stories = storiesOf('WelcomeMat', module);
 
 const title = 'The Lightning Experience is here!';
-const description = 'Welcome to Lightning Experience, the modern, beautiful user experience from Salesforce. With a sales-and service-centric mindset, we focused on reinventing the desktop environment to better support your business processes.'
+// eslint-disable-next-line max-len
+const description = 'Welcome to Lightning Experience, the modern, beautiful user experience from Salesforce. With a sales-and service-centric mindset, we focused on reinventing the desktop environment to better support your business processes.';
 
+// eslint-disable-next-line react/prop-types
 const dismissRenderer = ({ id }) => (
   <Checkbox
     id={`${id}-dismiss`}
@@ -18,7 +26,8 @@ const actionRenderer = () => (
   <Button flavor="brand">Learn More</Button>
 );
 
-const closeFn = () => {};
+const closeFn = action('Close');
+const completeFn = action('Complete');
 
 const getSampleSteps = completeSome => ([
   {
@@ -72,6 +81,7 @@ stories
         steps={getSampleSteps(false)}
         title={title}
         onClose={closeFn}
+        onCompleteStep={completeFn}
         description={description}
         renderAction={actionRenderer}
         renderDismiss={dismissRenderer}
@@ -89,6 +99,7 @@ stories
         steps={getSampleSteps(true)}
         title={title}
         onClose={closeFn}
+        onCompleteStep={completeFn}
         description={description}
         renderAction={actionRenderer}
         renderDismiss={dismissRenderer}
@@ -126,4 +137,3 @@ stories
       />
     </div>
   ));
-

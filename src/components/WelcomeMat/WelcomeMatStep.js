@@ -53,9 +53,9 @@ export const WelcomeMatStep = ({
       <MediaObject
         as={isInfoOnly ? 'div' : 'a'}
         className={isInfoOnly ? null : 'slds-box slds-box_link'}
-        href={isInfoOnly ? 'href' : undefined}
+        href={isInfoOnly ? undefined : 'javascript:void(0)'}
         center={false}
-        data-id={id}
+        data-target-id={id}
         onClick={isInfoOnly ? null : onComplete}
         responsive={false}
         renderFigureLeft={renderFigure}
