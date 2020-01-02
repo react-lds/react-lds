@@ -12,7 +12,7 @@ class WelcomeMatContent extends Component {
      */
     description: PropTypes.node.isRequired,
     /**
-     * Identifier for this `WelcomeMat` instance
+     * Identifier for this `WelcomeMatContent` instance
      */
     id: PropTypes.string.isRequired,
     /**
