@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Column, Grid } from '../Grid';
 import { Modal, ModalContent } from '../Modal';
-import { stepType } from './helpers';
+import { stepType } from './constants';
 import { WelcomeMatStep } from './WelcomeMatStep';
 
 class WelcomeMat extends Component {
@@ -33,7 +33,7 @@ class WelcomeMat extends Component {
       ...rest
     } = this.props;
 
-    const isSplash = steps === false;
+    const isSplash = steps == null;
 
     const sldsClasses = [
       'slds-welcome-mat',
@@ -140,6 +140,9 @@ WelcomeMat.propTypes = {
    * Handler injected when rendering steps. Called with `({ id, step })`
    */
   onCompleteStep: PropTypes.func,
+  /**
+   * Renders call-to-action beneath description. Called with `({ onClose, steps })`
+   */
   renderAction: PropTypes.func,
   /**
    * Should render a `Checkbox` or similar. Called with `({ onClose, steps })`
@@ -150,12 +153,9 @@ WelcomeMat.propTypes = {
    */
   renderProgress: PropTypes.func,
   /**
-   * Steps. If set to `false` the "Splash" variant will be rendered
+   * Steps as array. If not set or `undefined/null`, the "Splash" variant will be assumed
    */
-  steps: PropTypes.oneOfType([
-    PropTypes.oneOf([false]),
-    PropTypes.arrayOf(stepType)
-  ]),
+  steps: PropTypes.arrayOf(stepType),
   /**
    * Title element
    */

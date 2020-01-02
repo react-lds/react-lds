@@ -118,7 +118,6 @@ stories
       <WelcomeMat
         id="welcome-mat-splash"
         isOpen
-        steps={false}
         title={title}
         onClose={closeFn}
         description={description}

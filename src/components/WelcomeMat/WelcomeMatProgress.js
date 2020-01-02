@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ProgressBar } from '../Progress';
-import { stepType } from './helpers';
+import { stepType } from './constants';
 
 const WelcomeMatProgress = ({ steps }) => {
   const len = steps.length;
