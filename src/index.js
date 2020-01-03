@@ -42,4 +42,5 @@ export * from './components/Tile';
 export * from './components/Tooltip';
 export * from './components/VerticalNavigation';
 export * from './components/VisualPicker';
+export * from './components/WelcomeMat';
 export * from './utils';
