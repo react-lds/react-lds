@@ -62,6 +62,15 @@ describe('<WelcomeMat />', () => {
         .contains(stub)
       ).toBeTruthy();
     });
+
+    it('renders with custom styles', () => {
+      const customStyle = {
+        color: '#fff'
+      };
+
+      const cmp = getComponent({ customStyle });
+      expect(cmp.find('.slds-welcome-mat__info').prop('style')).toEqual(customStyle);
+    });
   });
 
   describe('Actions & Callbacks', () => {
