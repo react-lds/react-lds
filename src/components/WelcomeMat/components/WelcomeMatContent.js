@@ -8,6 +8,11 @@ import { WelcomeMatStep } from './WelcomeMatStep';
 class WelcomeMatContent extends Component {
   static propTypes = {
     /**
+     * Custom styles applied to `.welcome-mat__info`. Use this to apply custom backgrounds.
+     * Default styles can be found at https://git.io/JvUdU
+     */
+    customStyle: PropTypes.object,
+    /**
      * Description, rendered below `title`. Should return a `p`
      */
     description: PropTypes.node.isRequired,
@@ -51,6 +56,7 @@ class WelcomeMatContent extends Component {
   }
 
   static defaultProps = {
+    customStyle: null,
     isInfoOnly: false,
     onCompleteStep: null,
     renderAction: null,
@@ -75,6 +81,7 @@ class WelcomeMatContent extends Component {
 
   render() {
     const {
+      customStyle,
       description,
       id,
       isInfoOnly,
@@ -101,6 +108,7 @@ class WelcomeMatContent extends Component {
             className="slds-welcome-mat__info"
             omitCol
             sizeOf={isSplash ? '1-1' : '1-2'}
+            style={customStyle}
           >
             <div className="slds-welcome-mat__info-content">
               <h2 id={`${id}-label`} className="slds-welcome-mat__info-title">
