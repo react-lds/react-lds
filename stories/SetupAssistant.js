@@ -21,9 +21,8 @@ stories
         {makeLorem()}
       </SetupAssistantItem>
       <SetupAssistantItem
-        title="Create Profiles for Your Users"
         renderAddon={() => <Button title="Add new item" />}
-        renderOpenContent={() => makeLorem()}
+        title="Create Profiles for Your Users"
       >
         {makeLorem()}
       </SetupAssistantItem>

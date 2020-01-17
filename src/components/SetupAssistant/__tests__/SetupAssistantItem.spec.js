@@ -7,7 +7,7 @@ const getSetupAssistantItem = (props = {}) => mount(<SetupAssistantItem title="I
 
 describe('<SetupAssistantItem />', () => {
   it('accepts a children prop and renders it in an ol', () => {
-    const mounted = getSetupAssistantItem();
+    const mounted = getSetupAssistantItem({ onOpen: () => {} });
     expect(
       mounted
         .find('li.slds-setup-assistant__item > article.slds-setup-assistant__step')
@@ -18,10 +18,17 @@ describe('<SetupAssistantItem />', () => {
 
   it('passes the correct args to renderOpenContent', () => {
     const renderOpenContent = jest.fn();
-    const onOpen = jest.fn();
-
-    getSetupAssistantItem({ isOpen: true, onOpen, renderOpenContent });
-
+    getSetupAssistantItem({ isOpen: true, onOpen: () => {}, renderOpenContent });
     expect(renderOpenContent).toHaveBeenCalledWith({ isOpen: true });
+  });
+
+  it('omits `SummaryDetail` wrapper for basic lists', () => {
+    const mounted = getSetupAssistantItem();
+    expect(
+      mounted
+        .find('li.slds-setup-assistant__item > article.slds-setup-assistant__step')
+        .find(SummaryDetail)
+        .exists()
+    ).toBeFalsy();
   });
 });
