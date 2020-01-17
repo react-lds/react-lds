@@ -10,32 +10,36 @@ const SummaryDetail = ({
   onOpen,
   title,
   renderTitle,
-}) => (
-  <div className={cx('slds-summary-detail', { 'slds-is-open': isOpen })}>
-    {onOpen && (
-      <IconButton
-        onClick={onOpen}
-        className={cx('slds-m-right_x-small', iconButtonClassName)}
-      >
-        <ButtonIcon
-          className="slds-summary-detail__action-icon"
-          icon="switch"
-          sprite="utility"
-        />
-      </IconButton>
-    )}
-    <div>
-      <div className="slds-summary-detail__title">
-        {renderTitle(title)}
-      </div>
-      {children && (
-        <div aria-hidden={!isOpen} className="slds-summary-detail__content">
-          {children({ isOpen })}
-        </div>
+}) => {
+  if (!onOpen) return renderTitle(title);
+
+  return (
+    <div className={cx('slds-summary-detail', { 'slds-is-open': isOpen })}>
+      {onOpen && (
+        <IconButton
+          onClick={onOpen}
+          className={cx('slds-m-right_x-small', iconButtonClassName)}
+        >
+          <ButtonIcon
+            className="slds-summary-detail__action-icon"
+            icon="switch"
+            sprite="utility"
+          />
+        </IconButton>
       )}
+      <div className="slds-container_fluid">
+        <div className="slds-summary-detail__title">
+          {renderTitle(title)}
+        </div>
+        {children && (
+          <div aria-hidden={!isOpen} className="slds-summary-detail__content">
+            {children({ isOpen })}
+          </div>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 SummaryDetail.defaultProps = {
   children: null,

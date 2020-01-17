@@ -18,8 +18,9 @@ describe('<SetupAssistantItem />', () => {
 
   it('passes the correct args to renderOpenContent', () => {
     const renderOpenContent = jest.fn();
+    const onOpen = jest.fn();
 
-    getSetupAssistantItem({ isOpen: true, renderOpenContent });
+    getSetupAssistantItem({ isOpen: true, onOpen, renderOpenContent });
 
     expect(renderOpenContent).toHaveBeenCalledWith({ isOpen: true });
   });
