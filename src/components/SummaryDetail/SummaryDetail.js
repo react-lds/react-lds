@@ -5,11 +5,12 @@ import { ButtonIcon, IconButton } from '../Button';
 
 const SummaryDetail = ({
   children,
-  isOpen,
+  containerClassName,
   iconButtonClassName,
+  isOpen,
   onOpen,
-  title,
   renderTitle,
+  title,
 }) => (
   <div className={cx('slds-summary-detail', { 'slds-is-open': isOpen })}>
     {onOpen && (
@@ -24,7 +25,7 @@ const SummaryDetail = ({
         />
       </IconButton>
     )}
-    <div>
+    <div className={cx(containerClassName)}>
       <div className="slds-summary-detail__title">
         {renderTitle(title)}
       </div>
@@ -39,6 +40,8 @@ const SummaryDetail = ({
 
 SummaryDetail.defaultProps = {
   children: null,
+  containerClassName: null,
+  iconButtonClassName: null,
   isOpen: false,
   onOpen: null,
   renderTitle: title => (
@@ -46,34 +49,37 @@ SummaryDetail.defaultProps = {
       {title}
     </h3>
   ),
-  iconButtonClassName: null,
 };
 
 SummaryDetail.propTypes = {
-  /**
-   * Triggered on open icon and title click
-   */
-  onOpen: PropTypes.func,
-  /**
-   * Whether the content is expanded
-   */
-  isOpen: PropTypes.bool,
   /**
    * Function that renders the content. Takes { isOpen } as arguments
    */
   children: PropTypes.func,
   /**
-   * Title to be used by the renderTitle function
+   * Additional className for container
    */
-  title: PropTypes.string.isRequired,
+  containerClassName: PropTypes.string,
+  /**
+   * Additional className for the expand icon
+   */
+  iconButtonClassName: PropTypes.string,
+  /**
+   * Whether the content is expanded
+   */
+  isOpen: PropTypes.bool,
+  /**
+   * Triggered on open icon and title click
+   */
+  onOpen: PropTypes.func,
   /**
    * Renders custom title markup if provided. Receives title as an argument
    */
   renderTitle: PropTypes.func,
   /**
-   * Additional className for the expand icon
+   * Title to be used by the renderTitle function
    */
-  iconButtonClassName: PropTypes.string,
+  title: PropTypes.string.isRequired,
 };
 
 export default SummaryDetail;

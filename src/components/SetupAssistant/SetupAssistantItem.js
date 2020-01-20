@@ -47,19 +47,24 @@ const SetupAssistantItem = ({
   return (
     <li className={cx('slds-setup-assistant__item', className)} {...rest}>
       <article className="slds-setup-assistant__step">
-        <SummaryDetail
-          isOpen={isOpen}
-          onOpen={onOpen}
-          title={title}
-          renderTitle={renderTitle}
-          iconButtonClassName="slds-m-top_x-small"
-        >
-          {renderOpenContent && (() => (
-            <div className="slds-setup-assistant__step-detail">
-              {renderOpenContent({ isOpen })}
-            </div>
-          ))}
-        </SummaryDetail>
+        {onOpen
+          ? (
+            <SummaryDetail
+              containerClassName="slds-container_fluid"
+              iconButtonClassName="slds-m-top_x-small"
+              isOpen={isOpen}
+              onOpen={onOpen}
+              renderTitle={renderTitle}
+              title={title}
+            >
+              {renderOpenContent && (() => (
+                <div className="slds-setup-assistant__step-detail">
+                  {renderOpenContent({ isOpen })}
+                </div>
+              ))}
+            </SummaryDetail>
+          ) : renderTitle(title)
+        }
       </article>
     </li>
   );

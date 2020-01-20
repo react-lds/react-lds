@@ -14,42 +14,6 @@ const makeLorem = () => (
   </span>
 );
 
-const buildAssistant = ({ isOpen, onOpen } = {}) => (
-  <SetupAssistant>
-    <SetupAssistantItem
-      title="Add Users to Your Org"
-      stepProgress={100}
-      onOpen={onOpen}
-      isOpen={isOpen}
-    >
-      {makeLorem()}
-    </SetupAssistantItem>
-    <SetupAssistantItem
-      title="Create Profiles for Your Users"
-      stepProgress={25}
-      step={2}
-      onOpen={onOpen}
-      isOpen={isOpen}
-      renderAddon={() => <div>4 min</div>}
-      renderOpenContent={() => (
-        <div>
-          Hello
-        </div>
-      )}
-    >
-      {makeLorem()}
-    </SetupAssistantItem>
-    <SetupAssistantItem
-      title="Turn on Tracking for Profiles"
-      step={3}
-      onOpen={onOpen}
-      isOpen={isOpen}
-    >
-      {makeLorem()}
-    </SetupAssistantItem>
-  </SetupAssistant>
-);
-
 stories
   .add('Base', () => (
     <SetupAssistant>
@@ -57,13 +21,8 @@ stories
         {makeLorem()}
       </SetupAssistantItem>
       <SetupAssistantItem
+        renderAddon={() => <Button title="Add new item" />}
         title="Create Profiles for Your Users"
-        renderAddon={() => <div>4 min</div>}
-        renderOpenContent={() => (
-          <div>
-            Hello
-          </div>
-        )}
       >
         {makeLorem()}
       </SetupAssistantItem>
@@ -88,17 +47,14 @@ stories
         onOpen={action()}
         isOpen
         renderAddon={() => <div>4 min</div>}
-        renderOpenContent={() => (
-          <div>
-            Hello
-          </div>
-        )}
+        renderOpenContent={() => makeLorem()}
       >
         {makeLorem()}
       </SetupAssistantItem>
       <SetupAssistantItem
         title="Turn on Tracking for Profiles"
         step={3}
+        renderAddon={() => <Button title="Add new item" />}
       >
         {makeLorem()}
       </SetupAssistantItem>

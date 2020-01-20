@@ -19,6 +19,7 @@
     "build": "yarn build:clean && yarn build:commonjs && yarn build:es",
     "lint": "eslint src",
     "prepublishOnly": "yarn build",
+    "prepush": "yarn lint && yarn test",
     "prestorybook": "rm -rf public && mkdir public && cp -R node_modules/@salesforce-ux/design-system/assets ./public/",
     "start": "yarn storybook",
     "storybook": "yarn run prestorybook; start-storybook -p 6006 -s ./public",
