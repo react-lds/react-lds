@@ -50,11 +50,12 @@ const SetupAssistantItem = ({
         {onOpen
           ? (
             <SummaryDetail
+              containerClassName="slds-container_fluid"
+              iconButtonClassName="slds-m-top_x-small"
               isOpen={isOpen}
               onOpen={onOpen}
-              title={title}
               renderTitle={renderTitle}
-              iconButtonClassName="slds-m-top_x-small"
+              title={title}
             >
               {renderOpenContent && (() => (
                 <div className="slds-setup-assistant__step-detail">
