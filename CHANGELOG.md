@@ -1,5 +1,10 @@
 # Changelog
 
+## 9.1.0
+
+* Added: `WelcomeMat` component
+* Fixed: Fix layout of `SetupAssistant`
+
 ## 9.0.3
 
 * Changed: Add support for null children in Tabs component
