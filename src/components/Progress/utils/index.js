@@ -8,5 +8,5 @@ function fraction(num, min = 0, max = 100) {
 }
 
 export function getClampedProgress(progress, min, max) {
-  return fraction(clamp(progress, min, max), min, max) * 100;
+  return Math.round(fraction(clamp(progress, min, max), min, max) * 100);
 }
