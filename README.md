@@ -28,7 +28,7 @@ const HelloWorld = props => (
 
 ```
 
-Head over to the [Storybook Docs](https://propertybase.github.io/react-lds) to see a list of available components and their usage as well as interactive sample implementations of each component.
+Head over to the [Storybook Docs](https://react-lds.github.io/react-lds) to see a list of available components and their usage as well as interactive sample implementations of each component.
 
 ### ES Modules
 

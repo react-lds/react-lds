@@ -246,7 +246,7 @@ This version is compatible with SLDS 2.5.2 aka `Spring'18` 🌸
 
 ### Modal
 
-[Storybook Docs](https://propertybase.github.io/react-lds/?selectedKind=Modal&selectedStory=Default)
+[Storybook Docs](https://react-lds.github.io/react-lds/?selectedKind=Modal&selectedStory=Default)
 
 Modals have been reimplemented to require less code and support keyboard interactions:
 
@@ -261,7 +261,7 @@ Modals have been reimplemented to require less code and support keyboard interac
 
 ### Tabs
 
-[Storybook Docs](https://propertybase.github.io/react-lds/?selectedKind=Tabs&selectedStory=Default)
+[Storybook Docs](https://react-lds.github.io/react-lds/?selectedKind=Tabs&selectedStory=Default)
 
 Tabs have been reimplented and now support keyboard interactions:
 
@@ -273,7 +273,7 @@ Tabs have been reimplented and now support keyboard interactions:
 
 ### Buttons
 
-[Storybook Docs: Button](https://propertybase.github.io/react-lds/?selectedKind=Button&selectedStory=Default) | [Storybook Docs: IconButton](https://propertybase.github.io/react-lds/?selectedKind=IconButton&selectedStory=Default)
+[Storybook Docs: Button](https://react-lds.github.io/react-lds/?selectedKind=Button&selectedStory=Default) | [Storybook Docs: IconButton](https://react-lds.github.io/react-lds/?selectedKind=IconButton&selectedStory=Default)
 
 Buttons have been reimplemented to have a more consistent and declarative API. New shortcut props and better defaults require less boilerplate code:
 
@@ -287,13 +287,13 @@ Buttons have been reimplemented to have a more consistent and declarative API. N
 
 ### MediaObject
 
-[Storybook Docs](https://propertybase.github.io/react-lds/?selectedKind=MediaObject&selectedStory=Default)
+[Storybook Docs](https://react-lds.github.io/react-lds/?selectedKind=MediaObject&selectedStory=Default)
 
 * Removed `flavor` in favor of `center` and `responsive` props
 
 ### Slider
 
-[Storybook Docs](https://propertybase.github.io/react-lds/?selectedKind=Form&selectedStory=Slider)
+[Storybook Docs](https://react-lds.github.io/react-lds/?selectedKind=Form&selectedStory=Slider)
 
 * `Slider` has been added to support range inputs
 
