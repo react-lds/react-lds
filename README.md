@@ -1,4 +1,4 @@
-# React LDS ![Travis](https://travis-ci.org/propertybase/react-lds.svg?branch=master)
+# React LDS ![Travis](https://travis-ci.org/react-lds/react-lds.svg?branch=master)
 
 `react-lds` provides React components for the [Salesforce Lightning Design System](http://lightningdesignsystem.com/).
 
