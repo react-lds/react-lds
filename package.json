@@ -32,9 +32,11 @@
     "Christian Schultheiss <christian@propertybase.com> (http://www.propertybase.com)",
     "Ben Bieker <ben@propertybase.com> (http://www.propertybase.com)",
     "Philipp Frank <philipp@propertybase.com> (http://www.propertybase.com)",
-    "Felix Spöttel <felix@propertybase.com> (http://www.propertybase.com)",
+    "Felix Spöttel <felix@spoet.tel> (http://felics.me)",
     "Carlo Zottmann <carlo@municode.de> (https://municode.de)",
-    "Bruno Péjac <bruno@propertybase.com> (http://www.propertybase.com)"
+    "Bruno Péjac <bruno@propertybase.com> (http://www.propertybase.com)",
+    "Peter Siegl (https://github.com/PeterSiegl)",
+    "Denis Rodin (https://github.com/quadreex)"
   ],
   "repository": {
     "type": "git",
