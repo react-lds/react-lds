@@ -17,13 +17,13 @@ after_success:
   - bash deploy_docs.sh
 deploy:
   provider: npm
-  email: technik@propertybase.com
+  email: felix@spoet.tel
   api_key:
-    secure: sP+UXvGB+loZizr2bPWGFBRSMB7glim3IBI9QtNDJaKJ0eO1tXSYw7RM6K++l4XV1GslQoGz12JuPBqoHqVStakyQOqTDqoCzHlxZ5+ua2N0Tl8lTsP+59E1W08GguvqWAl8hGTmXniP/OF4ovlqKi+aLB6sd0YDpx3ZuLX6ovG0PK+99LATBJXaluwJlXx3F0d3UHpcwfCG1gDcvCcKeuTardrGF7T/fZ+vIc2lm5q/ixpmvIi4cR8PazLVTSJw6JqVnH49r/LjoOPortaMECo8vlv2SXax9nRl/Fy7d7nr3+fg0ycdzmKFEMjmWcknLfonpFoXvI3ZdDEGrzbzrVT6bAFH5zoyuX1dC1LTpCG/V9YHrmRP87VzJ9uIR9TzVkHkz0x2MeYjLHLLnSkINUlfPQ984dL3u3eyXDQ81mGNkbYDCMO2i+cn/rDKeWH/fjUrFP3E6l6qoWwiTrlOMBr3HKQOy+HKepBeSLjXR0zpvfrPBdiiQyE1o293Kkc26UVDsw13+9tGeSpf7u9p0O4ncmsZykgxiTjBKOfhMq5Wc07FTn8CvT+663IZnVgZmU+mMlALjnTodw7+/cyc7QS6xtgazMG6+75+mEvzxU6PG/wKd1Ac4YZNPdxmKtpVopYLkxMSFyadGbF/5jiCv37gVk3u1TUVWY6UQFkv8AA=
+    secure: "UhS6zdjUpLFsOS5t3TWkgVB8ZZzmbC295TJomfO2wCy92eSurhqvYFp17hIDFXB4R6y9JfcirzPyOp8bFt5mJ0BBFLlKZsqEznmpqZSj8RIv8A0yD6GiRAo2EIbYy/RxXWai0JzHA5CNXU2410SbBudxVB6UFxg3MxWv9qw0tLANt1pTjwr+PtX7Y7mcLkizr6jqg12EGoKDqaYsHE1IibyE6O6BaZxbaBrQdJJlPkHpq5lhDsXMiQZXN61ojmJQ8f5kzjk1shL3mbaolJccesXJbWU3gyDMYmd0SGh5+NSJB4j9vhVD9CbIaiA5b8ER0oamjh2uIEX5ZMQt58/YVmvuwEGLJ0a8/vqz1nHAYehitpQbicDb86X5bSZZWiPF/yL9j76njUPS1UdUjegtGod69iiAoXeam2uI8Io98BTL172t3DrQKF3hzUHtIl+CpHoA5MHkatSgoIZy4bvwfpI5xOjU/T6MBN+pKrtrSoDoH491uSEocOm+NjjOEutajAZBB+9jR7J42yfbeJ3ArRqysDZ9dHL36QVJndaJOy8z0fIdgDloEE55TkJAipJyFbW8a418q2OXwpAigeTQaeYsMExbpXWEF+n8Z71+ubrqRG6mUUzwDOKTbAHZuI+lEFlR15F2iL9RcSCwIAcHLwyVsk9BxwV7x0ul7zXKnmw="
   on:
     tags: true
-    repo: propertybase/react-lds
+    repo: react-lds/react-lds
   skip_cleanup: true
 env:
   global:
-  - GITHUB_REPO: propertybase/react-lds
+  - GITHUB_REPO: react-lds/react-lds

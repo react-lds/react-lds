@@ -5,8 +5,8 @@ set -o errexit -o nounset
 if [ -n "$TRAVIS_TAG" ]
 then
   #  Set Travis as commiter git user
-  git config --global user.email "propertybase-ci@propertybase.com"
-  git config --global user.name "Propertybase CI"
+  git config --global user.email "1682504+fspoettel@users.noreply.github.com"
+  git config --global user.name "Felix Spöttel"
 
   # Build docs
   yarn build:storybook

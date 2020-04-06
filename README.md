@@ -1,4 +1,4 @@
-# React LDS ![Travis](https://travis-ci.org/propertybase/react-lds.svg?branch=master)
+# React LDS ![Travis](https://travis-ci.org/react-lds/react-lds.svg?branch=master)
 
 `react-lds` provides React components for the [Salesforce Lightning Design System](http://lightningdesignsystem.com/).
 
@@ -28,7 +28,7 @@ const HelloWorld = props => (
 
 ```
 
-Head over to the [Storybook Docs](https://propertybase.github.io/react-lds) to see a list of available components and their usage as well as interactive sample implementations of each component.
+Head over to the [Storybook Docs](https://react-lds.github.io/react-lds) to see a list of available components and their usage as well as interactive sample implementations of each component.
 
 ### ES Modules
 
@@ -100,3 +100,5 @@ In your react app: `npm link react-lds`.
 - Adjust version in `package.json`
 - Write `CHANGELOG.md`
 - Merge into master and add a new tag. Travis will do the rest
+
+react-lds started as a [Propertybase](https://www.propertybase.com/) project in 2016 and was maintained by Propertybase between 2016-2020.
