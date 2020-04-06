@@ -100,3 +100,5 @@ In your react app: `npm link react-lds`.
 - Adjust version in `package.json`
 - Write `CHANGELOG.md`
 - Merge into master and add a new tag. Travis will do the rest
+
+react-lds started as a [Propertybase](https://www.propertybase.com/) project in 2016 and was maintained by Propertybase between 2016-2020.
