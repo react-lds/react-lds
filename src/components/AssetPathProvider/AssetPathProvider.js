@@ -23,9 +23,4 @@ class AssetPathProvider extends Component {
   }
 }
 
-AssetPathProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-  path: PropTypes.string.isRequired,
-};
-
 export default AssetPathProvider;
