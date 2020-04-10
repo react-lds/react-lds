@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable react/button-has-type */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
-import { boolean, select } from '@storybook/addon-knobs';
+import { array, boolean, select } from '@storybook/addon-knobs';
 import { ControlledTabs, Tabs, Tab } from '../src';
 
 const stories = storiesOf('Tabs', module);
@@ -10,20 +11,16 @@ const stories = storiesOf('Tabs', module);
 stories
   .add('Default', () => (
     <Tabs
-      defaultActiveTab="tab-3"
+      defaultActiveTab="tab-1"
       styled={boolean('Card Look?', true)}
       scoped={boolean('Scoped?', false)}
       onChangeTab={action('change-tab')}
       renderInactiveTabs={boolean('Render Inactive Tabs (Inspect to see change)', false)}
-      size={select('Size', ['', 'medium', 'large'], '')}
+      size={select('Size', [null, 'medium', 'large'], null)}
     >
-      <Tab id="tab-1" title="Tab 1">Tab One</Tab>
-      <Tab id="tab-2" title="Tab 2">
-        <span>
-          Tab Two with <button>a focusable element.</button>
-        </span>
-      </Tab>
-      <Tab id="tab-3" title="Tab 3">Tab Three</Tab>
+      {array('Tabs', ['tab-1', 'tab-2', 'tab-3']).map(s => (
+        <Tab id={s} title={s} key={s}>{`${s} content`}</Tab>
+      ))}
     </Tabs>
   ))
   .add('Controlled', () => (
