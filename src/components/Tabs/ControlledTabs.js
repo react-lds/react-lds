@@ -163,8 +163,8 @@ class ControlledTabs extends PureComponent {
       <TabLink
         isActive={isActive}
         isFocused={isFocused}
-        key={`${id}-link`}
         id={id}
+        key={`${id}-link`}
         onFocus={this.getOnLinkFocus(id)}
         onKeyUp={this.onLinkKeyUp}
         /* Focus is triggered before click but after mouseDown, using mouseDown to prevent a render-cycle */
