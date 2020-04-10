@@ -163,6 +163,7 @@ class ControlledTabs extends PureComponent {
       <TabLink
         isActive={isActive}
         isFocused={isFocused}
+        key={`${id}-link`}
         id={id}
         onFocus={this.getOnLinkFocus(id)}
         onKeyUp={this.onLinkKeyUp}
