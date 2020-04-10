@@ -1,5 +1,12 @@
 # Changelog
 
+## 9.1.1
+
+> **Note:** This repository has recently been transferred to its own org on Github. Neither maintainers nor licensing have changed.
+
+* Fix rounding of values in `ProgressBar`
+* Fix handling of dynamic tabs in `Tabs` & `ControlledTabs`
+
 ## 9.1.0
 
 * Added: `WelcomeMat` component
