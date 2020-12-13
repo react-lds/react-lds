@@ -16,6 +16,7 @@ export * from './components/ExpandableSection';
 export * from './components/File';
 export * from './components/FileSelector';
 export * from './components/Form';
+export * from './components/GlobalHeader';
 export * from './components/Grid';
 export * from './components/GroupedCombobox';
 export * from './components/Icon';
